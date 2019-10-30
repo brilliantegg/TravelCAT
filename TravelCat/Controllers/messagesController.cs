@@ -1,0 +1,136 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Linq;
+using System.Net;
+using System.Web;
+using System.Web.Mvc;
+using TravelCat.Models;
+
+namespace TravelCat.Controllers
+{
+    public class messagesController : Controller
+    {
+        private dbTravelCat db = new dbTravelCat();
+
+        // GET: messages
+        public ActionResult Index()
+        {
+            var messages = db.messages.Include(m => m.comment).Include(m => m.member);
+            return View(messages.ToList());
+        }
+
+        // GET: messages/Details/5
+        public ActionResult Details(long? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            message message = db.messages.Find(id);
+            if (message == null)
+            {
+                return HttpNotFound();
+            }
+            return View(message);
+        }
+
+        // GET: messages/Create
+        public ActionResult Create()
+        {
+            ViewBag.comment_id = new SelectList(db.comments, "comment_id", "tourism_id");
+            ViewBag.member_id = new SelectList(db.members, "member_id", "member_account");
+            return View();
+        }
+
+        // POST: messages/Create
+        // 若要免於過量張貼攻擊，請啟用想要繫結的特定屬性，如需
+        // 詳細資訊，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "msg_id,msg_time,msg_content,comment_id,member_id")] message message)
+        {
+            if (ModelState.IsValid)
+            {
+                db.messages.Add(message);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.comment_id = new SelectList(db.comments, "comment_id", "tourism_id", message.comment_id);
+            ViewBag.member_id = new SelectList(db.members, "member_id", "member_account", message.member_id);
+            return View(message);
+        }
+
+        // GET: messages/Edit/5
+        public ActionResult Edit(long? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            message message = db.messages.Find(id);
+            if (message == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.comment_id = new SelectList(db.comments, "comment_id", "tourism_id", message.comment_id);
+            ViewBag.member_id = new SelectList(db.members, "member_id", "member_account", message.member_id);
+            return View(message);
+        }
+
+        // POST: messages/Edit/5
+        // 若要免於過量張貼攻擊，請啟用想要繫結的特定屬性，如需
+        // 詳細資訊，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "msg_id,msg_time,msg_content,comment_id,member_id")] message message)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(message).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            ViewBag.comment_id = new SelectList(db.comments, "comment_id", "tourism_id", message.comment_id);
+            ViewBag.member_id = new SelectList(db.members, "member_id", "member_account", message.member_id);
+            return View(message);
+        }
+
+        // GET: messages/Delete/5
+        public ActionResult Delete(long? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            message message = db.messages.Find(id);
+            if (message == null)
+            {
+                return HttpNotFound();
+            }
+            return View(message);
+        }
+
+        // POST: messages/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(long id)
+        {
+            message message = db.messages.Find(id);
+            db.messages.Remove(message);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+    }
+}
