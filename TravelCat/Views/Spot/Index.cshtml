@@ -5,56 +5,65 @@
 }
 
 <h2>景點</h2>
-
 <p>
-    @Html.ActionLink("新增", "Create")
+    關鍵字: @Html.TextBox("id")
+    <input type="submit" value="查詢" />
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.spot_title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.spot_tel)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.spot_intro)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.longitude)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.latitude)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.addition_note)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.city)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.district)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.address_detail)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.open_time)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ticket_info)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.update_date)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.page_status)
-        </th>
-        <th></th>
-    </tr>
+    @Html.ActionLink("新增", "Create", "Spot", null, new { @class = "btn btn-outline-success" })
 
-@foreach (var item in Model) {
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.spot_id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.spot_title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.spot_tel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.spot_intro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.longitude)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.latitude)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.addition_note)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.city)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.district)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.address_detail)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.open_time)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ticket_info)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.update_date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.page_status)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
     <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.spot_id)
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.spot_title)
         </td>
@@ -95,11 +104,11 @@
             @Html.DisplayFor(modelItem => item.page_status)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.spot_id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.spot_id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.spot_id })
+            @Html.ActionLink("Edit", "Edit", new { id = item.spot_id }) |
+            @Html.ActionLink("Details", "Details", new { id = item.spot_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.spot_id })
         </td>
     </tr>
-}
+        }
 
-</table>
+    </table>
