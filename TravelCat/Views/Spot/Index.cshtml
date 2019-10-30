@@ -4,13 +4,14 @@
     ViewBag.Title = "Index";
 }
 
-<h2>景點</h2>
-<p>
-    關鍵字: @Html.TextBox("id")
-    <input type="submit" value="查詢" />
-</p>
-    @Html.ActionLink("新增", "Create", "Spot", null, new { @class = "btn btn-outline-success" })
-
+<h2 class="mt-3 ml-3">景點</h2>
+<div class="spot-header ml-3">
+    <p>
+        關鍵字: @Html.TextBox("id", "", new { @class = " border", @placeholder = "編號,名稱,城市,行政區" })
+        <input class="btn btn-outline-success" type="submit" value="查詢" />
+        @Html.ActionLink("新增", "Create", "Spot", null, new { @class = "btn btn-outline-success" })
+    </p>
+</div>
     <table class="table">
         <tr>
             <th>
