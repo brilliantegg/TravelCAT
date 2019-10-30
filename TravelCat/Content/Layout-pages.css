@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css?family=Noto+Serif+TC:300,400,500,700,900&display=swap');
+
+
+/*CSS reset*/
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-family: 'Noto Serif TC', serif;
+}
+
+/*  Layout外框   開始*/
+html,
+body {
+    height: 100%;
+}
+
+body {
+    background-color: #FFF;
+}
+
+.warp {
+    display: flex;
+}
+
+/*      左側選單樣式      */
+.side-menu {
+    width: 300px;
+    height: 100vh;
+    padding: 80px 0;
+    box-sizing: border-box;
+    background-image: linear-gradient(0deg, #3381b0, #c2196c);
+    box-shadow: 5px 0px 10px hsla(240, 40%, 15%, .6);
+}
+
+    .side-menu .item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+        .side-menu .item li {
+            width: 200px;
+            display:flex;
+            flex-wrap:nowrap;
+        }
+
+            .side-menu .item li a {
+                display:inline-block;
+                width:100%;
+                padding:5px;
+                color: #FFF;
+                font-weight: 500;
+                font-size: 1.3em;
+                text-decoration: none;
+            }
+
+            .side-menu .item li:hover a{
+                color: #7bf;
+            }
+
+.side-menu .item li+ li{
+    border-top: 1px solid rgba(255,255,255,.3);
+}
+
+.side-menu .item li .fa {
+    color: #FFF;
+    font-size: 1.3em;
+    width:20px;
+    margin-right: -1.1em;
+    transform: scale(0);
+    transition: .3s;
+    line-height:41px;
+}
+
+.side-menu .item li:hover .fa {
+    color: #7bf;
+    margin-right: .5em;
+    transform: scale(1);
+}
+
+/*  Layout外框   結束*/
+
+
+ .container-fluid {
+    margin-top: 66px;
+}
