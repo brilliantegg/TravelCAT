@@ -1,17 +1,18 @@
 ﻿@model IEnumerable<TravelCat.Models.spot>
-
+    
 @{
     ViewBag.Title = "Index";
 }
-
+    <link href="~/Content/Backstage/Spots/Spots-index.css" rel="stylesheet" />
 <h2 class="mt-3 ml-3">景點</h2>
 <div class="spot-header ml-3">
-    <p>
-        關鍵字: @Html.TextBox("id", "", new { @class = " border", @placeholder = "編號,名稱,城市,行政區" })
+    @Html.ActionLink("新增景點", "Create", "Spot", null, new { @class = "btn btn-outline-success" })
+    <span class="search">
+        @Html.TextBox("id", "", new { @class = " border ", @placeholder = "編號、名稱、城市、行政區" })
         <input class="btn btn-outline-success" type="submit" value="查詢" />
-        @Html.ActionLink("新增", "Create", "Spot", null, new { @class = "btn btn-outline-success" })
-    </p>
+    </span>
 </div>
+<div class="Tbody">
     <table class="table">
         <tr>
             <th>
@@ -61,55 +62,55 @@
 
         @foreach (var item in Model)
         {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.spot_id)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.spot_title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.spot_tel)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.spot_intro)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.longitude)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.latitude)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.addition_note)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.city)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.district)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.address_detail)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.open_time)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ticket_info)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.update_date)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.page_status)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.spot_id }) |
-            @Html.ActionLink("Details", "Details", new { id = item.spot_id }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.spot_id })
-        </td>
-    </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.spot_id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.spot_title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.spot_tel)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.spot_intro)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.longitude)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.latitude)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.addition_note)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.city)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.district)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.address_detail)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.open_time)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ticket_info)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.update_date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.page_status)
+                </td>
+                <td>
+                    @Html.ActionLink("修改", "Edit", new { id = item.spot_id }) |
+                    @Html.ActionLink("刪除", "Delete", new { id = item.spot_id })
+                </td>
+            </tr>
         }
 
     </table>
+</div>
