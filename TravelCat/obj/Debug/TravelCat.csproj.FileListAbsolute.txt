@@ -78,3 +78,4 @@ D:\TravelCAT\TravelCat\obj\Debug\TravelCat.csproj.CopyComplete
 D:\TravelCAT\TravelCat\obj\Debug\TravelCat.dll
 D:\TravelCAT\TravelCat\obj\Debug\TravelCat.pdb
 D:\TravelCAT\TravelCat\bin\zh-Hant\EntityFramework.SqlServer.resources.dll
+D:\TravelCAT\TravelCat\obj\Debug\TravelCat.csproj.CoreCompileInputs.cache

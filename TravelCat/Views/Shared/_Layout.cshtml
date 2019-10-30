@@ -15,14 +15,14 @@
             旅途貓管理員系統
         </a>
         <div class="nav-item dropdown font-weight-bold">
-            <a class="nav-link text-light dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link text-light dropdown-toggle" href="#" id="navbarDropdownMenuLink" 
+               data-toggle="dropdown">
                 <i class="far fa-user"></i>
                 管理員編號
             </a>
             <div class="dropdown-menu dropdown-menu-right bg-dark border border-secondary"
                  aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item bg-dark text-light mb-1" href="#">設定</a>
+                @Html.ActionLink("設定", "Index", "Admin",null,new{@class="dropdown-item bg-dark text-light mb-1"})
                 <a class="dropdown-item bg-dark text-light" href="#">登出</a>
             </div>
         </div>
@@ -31,6 +31,7 @@
     <div class="warp">
         <div class="side-menu">
             <ul class="item">
+                <li> <i class=" fa fas fa-map-marked-alt"></i>@Html.ActionLink("首頁", "Home", "Admin")</li>
                 <li> <i class=" fa fas fa-map-marked-alt"></i>@Html.ActionLink("景點編輯", "Index", "Spot")</li>
                 <li><i class="fa fas fa-hamburger"></i>@Html.ActionLink("餐廳編輯", "Index", "Restaurants")</li>
                 <li><i class="fa fas fa-building"></i>@Html.ActionLink("飯店編輯", "Index", "Hotels")</li>

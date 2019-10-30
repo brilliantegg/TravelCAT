@@ -16,6 +16,10 @@ namespace TravelCat.Controllers
         {
             return View(db.admins.ToList());
         }
+        public ActionResult Home()
+        {
+            return View();
+        }
 
     }
 }
