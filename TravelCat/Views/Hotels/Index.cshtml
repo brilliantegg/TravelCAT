@@ -71,8 +71,8 @@
         @Html.DisplayFor(modelItem => item.page_status)
     </td>
     <td>
-        @Html.ActionLink("Edit", "Edit", new { id = item.hotel_id }) |
-        @Html.ActionLink("Delete", "Delete", new { id = item.hotel_id }, new { onclick = "return confirm('確定不後悔?')" })
+        @Html.ActionLink("修改", "Edit", new { id = item.hotel_id }) |
+        @Html.ActionLink("刪除", "Delete", new { id = item.hotel_id }, new { onclick = "return confirm('確定不後悔?')" })
     </td>
 </tr>
 }

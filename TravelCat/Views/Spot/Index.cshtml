@@ -27,15 +27,6 @@
                 @Html.DisplayNameFor(model => model.spot_intro)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.longitude)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.latitude)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.addition_note)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.city)
             </th>
             <th>
@@ -49,6 +40,9 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.ticket_info)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.addition_note)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.update_date)
@@ -75,15 +69,6 @@
             @Html.DisplayFor(modelItem => item.spot_intro)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.longitude)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.latitude)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.addition_note)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.city)
         </td>
         <td>
@@ -99,15 +84,17 @@
             @Html.DisplayFor(modelItem => item.ticket_info)
         </td>
         <td>
+            @Html.DisplayFor(modelItem => item.addition_note)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.update_date)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.page_status)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.spot_id }) |
-            @Html.ActionLink("Details", "Details", new { id = item.spot_id }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.spot_id })
+            @Html.ActionLink("修改", "Edit", new { id = item.spot_id }) |
+            @Html.ActionLink("刪除", "Delete", new { id = item.spot_id }, new { onclick = "return confirm('確定不後悔?')" })
         </td>
     </tr>
         }
