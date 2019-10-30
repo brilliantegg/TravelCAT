@@ -1,0 +1,96 @@
+﻿@model IEnumerable<TravelCat.Models.activity>
+
+@{
+    ViewBag.Title = "活動列表";
+}
+
+<h2>活動列表</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.activity_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.activity_title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.activity_tel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.activity_intro)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.city)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.district)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.address_detail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.begin_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.end_date)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.organizer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.page_status)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.activity_id)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.activity_title)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.activity_tel)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.activity_intro)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.city)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.district)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.address_detail)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.begin_date)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.end_date)
+    </td>
+
+    <td>
+        @Html.DisplayFor(modelItem => item.organizer)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.page_status)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.activity_id }) |
+        @Html.ActionLink("Details", "Details", new { id = item.activity_id }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.activity_id }, new { onclick = "return confirm('確定不後悔?')" })
+    </td>
+</tr>
+    }
+
+</table>
