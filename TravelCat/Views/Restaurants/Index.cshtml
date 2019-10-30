@@ -1,16 +1,19 @@
 ﻿@model IEnumerable<TravelCat.Models.restaurant>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "餐廳列表";
 }
 
-<h2>Index</h2>
+<h2>餐廳列表</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("新增餐廳", "Create")
 </p>
 <table class="table">
     <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.restaurant_id)
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.restaurant_title)
         </th>
@@ -45,43 +48,45 @@
     </tr>
 
 @foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.restaurant_title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.restaurant_tel)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.restaurant_intro)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.latitude)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.longitude)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.city)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.district)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.address_detail)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.open_time)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.page_status)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.restaurant_id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.restaurant_id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.restaurant_id }, new { onclick = "return confirm('確定不後悔?')" })
-        </td>
-    </tr>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.restaurant_id)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.restaurant_title)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.restaurant_tel)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.restaurant_intro)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.latitude)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.longitude)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.city)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.district)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.address_detail)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.open_time)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.page_status)
+    </td>
+    <td>
+        @Html.ActionLink("修改", "Edit", new { id = item.restaurant_id }) |
+        @Html.ActionLink("刪除", "Delete", new { id = item.restaurant_id }, new { onclick = "return confirm('確定不後悔?')" })
+    </td>
+</tr>
 }
 
 </table>

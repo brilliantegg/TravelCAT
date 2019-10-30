@@ -4,10 +4,10 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>住宿列表</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("新增住宿", "Create")
 </p>
 <table class="table">
     <tr>
@@ -84,7 +84,6 @@
     </td>
     <td>
         @Html.ActionLink("Edit", "Edit", new { id = item.hotel_id }) |
-        @Html.ActionLink("Details", "Details", new { id = item.hotel_id }) |
         @Html.ActionLink("Delete", "Delete", new { id = item.hotel_id }, new { onclick = "return confirm('確定不後悔?')" })
     </td>
 </tr>

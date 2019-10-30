@@ -1,10 +1,10 @@
 ﻿@model TravelCat.ViewModels.HotelPhotoViewModel
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "修改住宿";
 }
 
-<h2>Edit</h2>
+<h2>修改住宿</h2>
 
 <form method="post" action="@Url.Action("Edit")" enctype="multipart/form-data">
 
@@ -130,7 +130,7 @@
     </form>
 
     <div>
-        @Html.ActionLink("Back to List", "Index")
+        @Html.ActionLink("回到住宿列表", "Index")
     </div>
 
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>

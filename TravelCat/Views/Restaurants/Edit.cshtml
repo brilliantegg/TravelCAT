@@ -1,10 +1,10 @@
 ﻿@model TravelCat.ViewModels.RestaurantPhotoViewModel
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "修改餐廳";
 }
 
-<h2>Edit</h2>
+<h2>修改餐廳</h2>
 
 <form method="post" action="@Url.Action("Edit")" enctype="multipart/form-data">
 
@@ -15,6 +15,16 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.restaurant.restaurant_id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.restaurant.restaurant_id, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input id="restaurant_id" name="restaurant_id" type="text" readonly="readonly" value="@Model.restaurant.restaurant_id" class="form-control" />
+            </div>
+        </div>
+
+
+
 
         <div class="form-group">
             @Html.LabelFor(model => model.restaurant.restaurant_title, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -127,7 +137,7 @@
     </form>
 
     <div>
-        @Html.ActionLink("Back to List", "Index")
+        @Html.ActionLink("回到餐廳列表", "Index")
     </div>
 
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>

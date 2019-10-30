@@ -1,27 +1,27 @@
 ﻿@model TravelCat.ViewModels.SpotPhotoViewModel
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "新增景點";
 }
 
-<h2>Create</h2>
+<h2>新增景點</h2>
 
 
-<form action="/Spots/Create" method="post" enctype="multipart/form-data">
+<form action="/Spot/Create" method="post" enctype="multipart/form-data">
 
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>spot</h4>
+
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
+        @*<div class="form-group">
             @Html.LabelFor(model => model.spot.spot_id, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.spot.spot_id, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.spot.spot_id, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div>*@
 
         <div class="form-group">
             @Html.LabelFor(model => model.spot.spot_title, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -152,7 +152,7 @@
     </form>
 
     <div>
-        @Html.ActionLink("Back to List", "Index")
+        @Html.ActionLink("回到景點列表", "Index")
     </div>
 
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>

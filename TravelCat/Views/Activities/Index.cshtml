@@ -7,7 +7,7 @@
 <h2>活動列表</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("新增活動", "Create")
 </p>
 <table class="table">
     <tr>
@@ -86,9 +86,8 @@
         @Html.DisplayFor(modelItem => item.page_status)
     </td>
     <td>
-        @Html.ActionLink("Edit", "Edit", new { id = item.activity_id }) |
-        @Html.ActionLink("Details", "Details", new { id = item.activity_id }) |
-        @Html.ActionLink("Delete", "Delete", new { id = item.activity_id }, new { onclick = "return confirm('確定不後悔?')" })
+        @Html.ActionLink("修改", "Edit", new { id = item.activity_id }) |
+        @Html.ActionLink("刪除", "Delete", new { id = item.activity_id }, new { onclick = "return confirm('確定不後悔?')" })
     </td>
 </tr>
     }

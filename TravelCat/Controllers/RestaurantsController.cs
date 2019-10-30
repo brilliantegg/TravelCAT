@@ -27,6 +27,9 @@ namespace TravelCat.Controllers
         [HttpPost]
         public ActionResult Create(restaurant restaurant, HttpPostedFileBase tourism_photo)
         {
+            string act_id = db.Database.SqlQuery<string>("Select dbo.GetrestId()").FirstOrDefault();
+            restaurant.restaurant_id = act_id;
+
             string fileName = "";
             if (tourism_photo != null)
             {
