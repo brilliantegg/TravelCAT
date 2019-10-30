@@ -340,3 +340,5 @@ ASALocalRun/
 healthchecksdb
 .vs/TravelCAT/v16/.suo
 *.ide-shm
+.vs/TravelCAT/v16/Server/sqlite3/storage.ide-shm
+.vs/TravelCAT/v16/Server/sqlite3/storage.ide-wal
