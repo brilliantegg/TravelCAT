@@ -344,3 +344,4 @@ healthchecksdb
 .vs/TravelCAT/v16/Server/sqlite3/storage.ide-wal
 .vs/TravelCAT/v16/Server/sqlite3/storage.ide-wal
 *.ide-wal
+.vs/TravelCAT/v16/Server/sqlite3/storage.ide
