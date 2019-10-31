@@ -524,8 +524,8 @@ namespace TravelCat.Models
         [StringLength(80, ErrorMessage = "門票資訊最多30個字")]
         public string ticket_info { get; set; }
         [DisplayName("更新時間")]
-
         public Nullable<System.DateTime> update_date { get; set; }
+
         [DisplayName("頁面狀態")]
         [Required(ErrorMessage = "不可空白")]
         public bool page_status { get; set; }

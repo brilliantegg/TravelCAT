@@ -51,6 +51,8 @@ namespace TravelCat.Controllers
             tp.tourism_photo1 = fileName;
             tp.tourism_id = spot.spot_id;
 
+            spot.update_date = DateTime.Now;
+
             db.spots.Add(spot);
             db.tourism_photo.Add(tp);
             db.SaveChanges();
@@ -89,6 +91,9 @@ namespace TravelCat.Controllers
         [HttpPost]
         public ActionResult Edit(string id,SpotPhotoViewModel spotPhotoViewModel, HttpPostedFileBase tourism_photo, String oldImg)
         {
+
+            //string update_time = DateTime.Now.ToShortDateString() + DateTime.Now.TimeOfDay.ToString();
+            spotPhotoViewModel.spot.update_date = DateTime.Now;
 
             db.Entry(spotPhotoViewModel.spot).State = EntityState.Modified;
             db.SaveChanges();

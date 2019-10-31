@@ -116,7 +116,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.spot.update_date, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.spot.update_date, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DisplayFor(model => model.spot.update_date, new { htmlAttributes = new { @class = "form-control"} })
                 @Html.ValidationMessageFor(model => model.spot.update_date, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -157,9 +157,10 @@
     </div>
     </form>
 
-    <div>
-        @Html.ActionLink("回到景點列表", "Index")
-    </div>
+<div>
+    @Html.ActionLink("回到景點列表", "Index")
+    @Html.ActionLink("刪除", "Delete", new { id = Model.spot.spot_id }, new { onclick = "return confirm('確定不後悔?')" })
+</div>
 
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
     <script src="~/Scripts/jquery.validate.min.js"></script>
