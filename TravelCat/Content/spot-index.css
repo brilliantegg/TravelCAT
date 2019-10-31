@@ -1,0 +1,27 @@
+﻿h2{
+    color: red;
+    font-weight: 700;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #CCC;
+}
+.spot-header{
+    display:flex;
+    justify-content:space-between;
+    padding: 5px 15px;
+}
+    .spot-header .search{
+        display:flex;
+        align-items:center;
+    }
+    .spot-header .search .border{
+        font-size:1.2em;
+        padding-left: 7px;
+        border-radius: 5px;
+        margin-right: 10px;
+    }
+    .table tr td .btn{
+        max-height: 31px;
+    }
+.text-truncate{
+    max-width: 250px;
+}
