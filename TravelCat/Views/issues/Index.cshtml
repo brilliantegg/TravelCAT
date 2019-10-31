@@ -1,0 +1,78 @@
+﻿@model IEnumerable<TravelCat.Models.issue>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+    <h2>網站問題管理</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.admin.admin_account)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.issue_type.issue_name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.member.member_account)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.report_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.issue_content)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.issue_result)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.issue_status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.resolve_date)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.id)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.admin.admin_account)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.issue_type.issue_name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.member.member_account)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.report_date)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.issue_content)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.issue_result)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.issue_status)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.resolve_date)
+    </td>
+    <td>
+        @Html.ActionLink("編輯", "Edit", new {  id=item.id  }) 
+
+    </td>
+</tr>
+}
+
+</table>
