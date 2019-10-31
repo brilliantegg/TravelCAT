@@ -14,16 +14,9 @@ namespace TravelCat.Controllers
         // GET: Spot
         dbTravelCat db = new dbTravelCat();
 
-        public ActionResult Index(string id)
+        public ActionResult Index()
         {
-            var Activitie = from a in db.spots
-                            select a;
-            if (!String.IsNullOrEmpty(id))
-            {
-                Activitie = Activitie.Where(s => s.spot_id.Contains(id) || s.spot_title.Contains(id)
-                || s.city.Contains(id) || s.district.Contains(id));
-            }
-            return View(Activitie);
+            return View(db.spots.ToList());
         }
 
         public ActionResult Create()

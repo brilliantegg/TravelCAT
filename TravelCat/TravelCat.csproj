@@ -1704,11 +1704,13 @@
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-reboot.min.css.map" />
+    <Content Include="images\09.jpg" />
     <Content Include="images\17671-neko-atsume-best-toys-items-goodies-06.png" />
+    <Content Include="images\356_1239_609a3cd2_ic1805nb_ederL.jpg" />
     <Content Include="images\bmo-02.jpg" />
-    <Content Include="images\cat-face-with-wry-smile_1f63c.png" />
     <Content Include="images\hotel\bmo_png_159083.png" />
     <Content Include="images\hotel\CJXH_Japan_Nachi_Nachi-Falls_189118511.jpg" />
+    <Content Include="LoginAdmin.html" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.min.js.map" />
@@ -1808,10 +1810,13 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ActivitiesController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
-    <Compile Include="Controllers\commentsController.cs" />
     <Compile Include="Controllers\HotelsController.cs" />
+<<<<<<< Updated upstream
+=======
+    <Compile Include="Controllers\LoginadminController.cs" />
     <Compile Include="Controllers\membersController.cs" />
     <Compile Include="Controllers\messagesController.cs" />
+>>>>>>> Stashed changes
     <Compile Include="Controllers\RestaurantsController.cs" />
     <Compile Include="Controllers\SpotsController.cs" />
     <Compile Include="Global.asax.cs">
@@ -1870,6 +1875,8 @@
     <Content Include="Views\Spot\Index.cshtml" />
     <Content Include="Views\Spot\Create.cshtml" />
     <Content Include="Views\Spot\Edit.cshtml" />
+<<<<<<< Updated upstream
+=======
     <Content Include="Views\Admin\Home.cshtml" />
     <Content Include="Views\comments\Edit.cshtml" />
     <Content Include="Views\comments\Index.cshtml" />
@@ -1877,6 +1884,8 @@
     <Content Include="Views\members\Index.cshtml" />
     <Content Include="Views\messages\Edit.cshtml" />
     <Content Include="Views\messages\Index.cshtml" />
+    <Content Include="Views\Loginadmin\Index.cshtml" />
+>>>>>>> Stashed changes
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

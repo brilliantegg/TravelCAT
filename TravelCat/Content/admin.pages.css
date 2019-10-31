@@ -1,7 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Noto+Serif+TC:300,400,500,700,900&display=swap');
 
-
-/*CSS reset*/
 * {
     margin: 0;
     padding: 0;
@@ -9,7 +7,6 @@
     font-family: 'Noto Serif TC', serif;
 }
 
-/*  Layout外框   開始*/
 html,
 body {
     height: 100%;
@@ -23,10 +20,9 @@ body {
     display: flex;
 }
 
-/*      左側選單樣式      */
 .side-menu {
     width: 300px;
-    height: 100%;
+    height: 100vh;
     padding: 80px 0;
     box-sizing: border-box;
     background-image: linear-gradient(0deg, #3381b0, #c2196c);
@@ -40,15 +36,13 @@ body {
     }
 
         .side-menu .item li {
+            display:block;
             width: 200px;
-            display:flex;
-            flex-wrap:nowrap;
         }
 
             .side-menu .item li a {
-                display:inline-block;
-                width:100%;
-                padding:5px;
+                padding-right:83px;
+                padding:10px 0;
                 color: #FFF;
                 font-weight: 500;
                 font-size: 1.3em;
@@ -70,7 +64,6 @@ body {
     margin-right: -1.1em;
     transform: scale(0);
     transition: .3s;
-    line-height:41px;
 }
 
 .side-menu .item li:hover .fa {
@@ -78,10 +71,6 @@ body {
     margin-right: .5em;
     transform: scale(1);
 }
-
-/*  Layout外框   結束*/
-
-
  .container-fluid {
     margin-top: 66px;
 }
