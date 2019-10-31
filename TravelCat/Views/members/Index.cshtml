@@ -6,13 +6,15 @@
 
 <h2>Index</h2>
 
-
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
 <table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.member_account)
         </th>
-        
+
         <th>
             @Html.DisplayNameFor(model => model.member_status)
         </th>
@@ -24,14 +26,13 @@
         <td>
             @Html.DisplayFor(modelItem => item.member_account)
         </td>
-        
+
         <td>
             @Html.DisplayFor(modelItem => item.member_status)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.member_id }) 
-          
-         
+            @Html.ActionLink("Edit", "Edit", new { id=item.member_id }) |
+
         </td>
     </tr>
 }
