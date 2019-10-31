@@ -1,93 +1,84 @@
 ﻿@model IEnumerable<TravelCat.Models.activity>
 
 @{
-    ViewBag.Title = "活動列表";
+    ViewBag.Title = "活動";
 }
 
-<h2>活動列表</h2>
+    <link href="~/Content/back-end-index.css" rel="stylesheet" />
+<h2 class="mt-3 ml-3">活動列表</h2>
 
-<p>
-    @Html.ActionLink("新增活動", "Create")
-</p>
+<div class="header ml-3">
+    @Html.ActionLink("新增活動", "Create", "Activities", null, new { @class = "btn btn-secondary" })
+    <div class="search">
+        @Html.TextBox("id", "", new { @class = " border", @placeholder = "編號,名稱,城市,行政區" })
+        <input class="btn btn-secondary" type="submit" value="查詢" />
+    </div>
+</div>
+
 <table class="table">
-    <tr>
-        <th>
+    <tr  class="row ">
+        <th class="col-1"></th>
+        <th class="col-1">
             @Html.DisplayNameFor(model => model.activity_id)
         </th>
-        <th>
+        <th class="col-2 text-truncate">
             @Html.DisplayNameFor(model => model.activity_title)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.activity_tel)
-        </th>
-        <th>
+        <th class="col-2 text-truncate">
             @Html.DisplayNameFor(model => model.activity_intro)
         </th>
-        <th>
+        <th class="col-1">
             @Html.DisplayNameFor(model => model.city)
         </th>
-        <th>
+        <th class="col-1">
             @Html.DisplayNameFor(model => model.district)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.address_detail)
-        </th>
-        <th>
+        <th class="col-1">
             @Html.DisplayNameFor(model => model.begin_date)
         </th>
-        <th>
+        <th class="col-1">
             @Html.DisplayNameFor(model => model.end_date)
         </th>
-
-        <th>
+        <th class="col-1">
             @Html.DisplayNameFor(model => model.organizer)
         </th>
-        <th>
+        <th class="col-1">
             @Html.DisplayNameFor(model => model.page_status)
         </th>
-        <th></th>
     </tr>
 
     @foreach (var item in Model)
     {
-<tr>
-    <td>
+<tr  class="row ">
+    <td class="col-1 text-center">
+        @Html.ActionLink("檢視/修改", "Edit", new { id = item.activity_id }, new { @class = "btn btn-sm btn-outline-primary" })
+    </td>
+    <td class="col-1">
         @Html.DisplayFor(modelItem => item.activity_id)
     </td>
-    <td>
+    <td class="col-2 text-truncate">
         @Html.DisplayFor(modelItem => item.activity_title)
     </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.activity_tel)
-    </td>
-    <td>
+    <td class="col-2 text-truncate">
         @Html.DisplayFor(modelItem => item.activity_intro)
     </td>
-    <td>
+    <td class="col-1">
         @Html.DisplayFor(modelItem => item.city)
     </td>
-    <td>
+    <td class="col-1">
         @Html.DisplayFor(modelItem => item.district)
     </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.address_detail)
-    </td>
-    <td>
+    <td class="col-1">
         @Html.DisplayFor(modelItem => item.begin_date)
     </td>
-    <td>
+    <td class="col-1">
         @Html.DisplayFor(modelItem => item.end_date)
     </td>
-
-    <td>
+    <td class="col-1">
         @Html.DisplayFor(modelItem => item.organizer)
     </td>
-    <td>
+    <td class="col-1">
         @Html.DisplayFor(modelItem => item.page_status)
-    </td>
-    <td>
-        @Html.ActionLink("修改", "Edit", new { id = item.activity_id }) |
-        @Html.ActionLink("刪除", "Delete", new { id = item.activity_id }, new { onclick = "return confirm('確定不後悔?')" })
     </td>
 </tr>
     }

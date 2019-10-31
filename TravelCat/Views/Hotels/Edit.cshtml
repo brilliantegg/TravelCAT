@@ -129,9 +129,10 @@
     </div>
     </form>
 
-    <div>
-        @Html.ActionLink("回到住宿列表", "Index")
-    </div>
+<div>
+    @Html.ActionLink("回到住宿列表", "Index")
+    @Html.ActionLink("刪除", "Delete", new { id = Model.hotel.hotel_id }, new { onclick = "return confirm('確定不後悔?')" })
+</div>
 
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
     <script src="~/Scripts/jquery.validate.min.js"></script>

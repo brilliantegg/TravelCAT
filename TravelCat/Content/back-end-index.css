@@ -4,16 +4,16 @@
     padding-bottom: 5px;
     border-bottom: 1px solid #CCC;
 }
-.spot-header{
-    display:flex;
-    justify-content:space-between;
+.header {
+    display: flex;
+    justify-content: space-between;
     padding: 5px 15px;
 }
-    .spot-header .search{
+    .header .search{
         display:flex;
         align-items:center;
     }
-    .spot-header .search .border{
+    .header .search .border{
         font-size:1.2em;
         padding-left: 7px;
         border-radius: 5px;
@@ -22,6 +22,9 @@
     .table tr td .btn{
         max-height: 31px;
     }
-.text-truncate{
-    max-width: 250px;
+.table{
+    overflow:hidden;
+}
+.text-truncate {
+    max-width: 1000px;
 }
