@@ -91,14 +91,14 @@
             <h1>旅途貓後台登入</h1>
         </div>
         <div class="login">
-            <form>
+            <form class="form-horizontal" method="post" action="Admin/Home">
                 <div class="form-group">
                     <input type="text" class="login-Id" placeholder="請輸入帳號"><br>
                     <input type="password" class="login-Pw" placeholder="請輸入密碼"><br>
                 </div>
                 <div class="from-btn">
                     <button type="submit" class="btn btn-primary">送出</button>
-                    <button type="button" class="btn btn-light">忘記密碼？</button>
+                    <input id="Reset1" type="reset" value="重設" class="btn btn-primary" />
                 </div>
                 
             </form>
