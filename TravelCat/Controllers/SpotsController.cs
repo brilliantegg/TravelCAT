@@ -83,7 +83,7 @@ namespace TravelCat.Controllers
         public ActionResult Edit(string id,SpotPhotoViewModel spotPhotoViewModel, HttpPostedFileBase tourism_photo, String oldImg)
         {
 
-            db.Entry(spotPhotoViewModel).State = EntityState.Modified;
+            db.Entry(spotPhotoViewModel.spot).State = EntityState.Modified;
             db.SaveChanges();
 
             string fileName = "";
