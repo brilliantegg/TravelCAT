@@ -1,0 +1,90 @@
+﻿@model IEnumerable<TravelCat.Models.comment>
+
+@{
+    ViewBag.Title = "管理評論";
+}
+
+<h2>管理評論</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.member.member_account)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tourism_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.comment_title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.comment_content)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.comment_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.comment_photo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.comment_stay_total)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.travel_partner)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.comment_rating)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.travel_month)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.comment_status)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.member.member_account )
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tourism_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.comment_title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.comment_content)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.comment_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.comment_photo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.comment_stay_total)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.travel_partner)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.comment_rating)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.travel_month)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.comment_status)
+        </td>
+        <td>
+            @Html.ActionLink("管理", "Edit", new { id=item.comment_id }) 
+
+        </td>
+    </tr>
+}
+
+</table>

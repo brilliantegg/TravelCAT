@@ -1,0 +1,39 @@
+﻿@model IEnumerable<TravelCat.Models.member>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.member_account)
+        </th>
+        
+        <th>
+            @Html.DisplayNameFor(model => model.member_status)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.member_account)
+        </td>
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.member_status)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.member_id }) 
+          
+         
+        </td>
+    </tr>
+}
+
+</table>

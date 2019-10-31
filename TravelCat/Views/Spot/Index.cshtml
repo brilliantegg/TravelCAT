@@ -4,107 +4,99 @@
     ViewBag.Title = "景點列表";
 }
 
-<h2>景點列表</h2>
+<h2 class="mt-3 ml-3">景點</h2>
+<div class="spot-header ml-3">
+    <p>
+        關鍵字: @Html.TextBox("id", "", new { @class = " border", @placeholder = "編號,名稱,城市,行政區" })
+        <input class="btn btn-outline-success" type="submit" value="查詢" />
+        @Html.ActionLink("新增", "Create", "Spot", null, new { @class = "btn btn-outline-success" })
+    </p>
+</div>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.spot_id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.spot_title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.spot_tel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.spot_intro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.city)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.district)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.address_detail)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.open_time)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ticket_info)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.addition_note)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.update_date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.page_status)
+            </th>
+            <th></th>
+        </tr>
 
-<p>
-    @Html.ActionLink("新增景點", "Create")
-</p>
-<table class="table">
+        @foreach (var item in Model)
+        {
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.spot_id)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.spot_title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.spot_tel)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.spot_intro)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.longitude)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.latitude)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.addition_note)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.city)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.district)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.address_detail)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.open_time)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ticket_info)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.update_date)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.page_status)
-        </th>
-        <th></th>
+        <td>
+            @Html.DisplayFor(modelItem => item.spot_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.spot_title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.spot_tel)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.spot_intro)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.city)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.district)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.address_detail)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.open_time)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ticket_info)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.addition_note)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.update_date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.page_status)
+        </td>
+        <td>
+            @Html.ActionLink("修改", "Edit", new { id = item.spot_id }) |
+            @Html.ActionLink("刪除", "Delete", new { id = item.spot_id }, new { onclick = "return confirm('確定不後悔?')" })
+        </td>
     </tr>
+        }
 
-@foreach (var item in Model) {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.spot_id)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.spot_title)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.spot_tel)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.spot_intro)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.longitude)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.latitude)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.addition_note)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.city)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.district)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.address_detail)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.open_time)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.ticket_info)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.update_date)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.page_status)
-    </td>
-    <td>
-        @Html.ActionLink("修改", "Edit", new { id = item.spot_id }) |
-        @Html.ActionLink("刪除", "Delete", new { id = item.spot_id })
-    </td>
-</tr>
-}
-
-</table>
+    </table>

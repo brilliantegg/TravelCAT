@@ -1,0 +1,48 @@
+﻿@model IEnumerable<TravelCat.Models.message>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>管理留言</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.comment.tourism_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.member.member_account)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.msg_time)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.msg_content)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.comment.tourism_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.member.member_account)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.msg_time)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.msg_content)
+        </td>
+        <td>
+            @Html.ActionLink("管理", "Edit", new { id=item.msg_id }) 
+
+        </td>
+    </tr>
+}
+
+</table>

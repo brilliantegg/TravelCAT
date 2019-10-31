@@ -21,12 +21,6 @@
             @Html.DisplayNameFor(model => model.hotel_tel)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.longitude)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.latitude)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.hotel_intro)
         </th>
         <th>
@@ -59,12 +53,6 @@
         @Html.DisplayFor(modelItem => item.hotel_tel)
     </td>
     <td>
-        @Html.DisplayFor(modelItem => item.longitude)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.latitude)
-    </td>
-    <td>
         @Html.DisplayFor(modelItem => item.hotel_intro)
     </td>
     <td>
@@ -83,8 +71,8 @@
         @Html.DisplayFor(modelItem => item.page_status)
     </td>
     <td>
-        @Html.ActionLink("Edit", "Edit", new { id = item.hotel_id }) |
-        @Html.ActionLink("Delete", "Delete", new { id = item.hotel_id }, new { onclick = "return confirm('確定不後悔?')" })
+        @Html.ActionLink("修改", "Edit", new { id = item.hotel_id }) |
+        @Html.ActionLink("刪除", "Delete", new { id = item.hotel_id }, new { onclick = "return confirm('確定不後悔?')" })
     </td>
 </tr>
 }
