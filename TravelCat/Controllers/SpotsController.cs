@@ -42,6 +42,7 @@ namespace TravelCat.Controllers
             {
                 if (tourism_photo.ContentLength > 0)
                 {
+                    
                     fileName = System.IO.Path.GetFileName(tourism_photo.FileName);
                     tourism_photo.SaveAs(Server.MapPath("~/images/spot/" + fileName));
                 }
