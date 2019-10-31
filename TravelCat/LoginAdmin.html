@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>旅途貓</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC:500,700,900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            font-family: 'Noto Sans TC', sans-serif;
+        }
+
+        body {
+            background-image: url(789.jpg);
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+            background-size: cover;
+        }
+
+        .warp {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .txt {
+            margin-bottom: 1em;
+        }
+
+            .txt h1 {
+                color: #fff;
+                font-weight: 500;
+            }
+
+        .login {
+            width: 300px;
+            padding-bottom: 1.5em;
+            display: flex;
+            justify-content: center;
+            border: 1px solid black;
+            border-radius: 20px;
+            background-color: rgba(255, 255, 255, .3);
+        }
+
+        .form-group {
+            margin-top: 2em;
+        }
+
+        .login .login-Id {
+            margin: 10px 0;
+            width: 240px;
+            border: 1px solid #888;
+            border-radius: 4px;
+            line-height: 2;
+        }
+
+        .login .login-Pw {
+            margin: 10px 0;
+            width: 240px;
+            border: 1px solid #888;
+            border-radius: 4px;
+            line-height: 2;
+        }
+
+        .from-btn {
+            display: flex;
+            justify-content: center;
+            padding-bottom: 1.5em;
+            margin-bottom: 1.5em;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .btn-primary {
+            margin-right: 1em;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="warp">
+        <div class="txt">
+            <h1>旅途貓後台登入</h1>
+        </div>
+        <div class="login">
+            <form>
+                <div class="form-group">
+                    <input type="text" class="login-Id" placeholder="請輸入帳號"><br>
+                    <input type="password" class="login-Pw" placeholder="請輸入密碼"><br>
+                </div>
+                <div class="from-btn">
+                    <button type="submit" class="btn btn-primary">送出</button>
+                    <button type="button" class="btn btn-light">忘記密碼？</button>
+                </div>
+                
+            </form>
+        </div>
+    </div>
+</body>
+</html>
