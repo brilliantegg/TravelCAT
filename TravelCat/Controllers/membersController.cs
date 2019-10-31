@@ -10,7 +10,7 @@ using TravelCat.Models;
 
 namespace TravelCat.Controllers
 {
-    public class members1Controller : Controller
+    public class membersController : Controller
     {
         private dbTravelCat db = new dbTravelCat();
 

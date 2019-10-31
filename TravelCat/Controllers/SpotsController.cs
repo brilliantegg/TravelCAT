@@ -16,14 +16,14 @@ namespace TravelCat.Controllers
 
         public ActionResult Index(string id)
         {
-            var Activitie = from a in db.spots
+            var search = from a in db.spots
                             select a;
             if (!String.IsNullOrEmpty(id))
             {
-                Activitie = Activitie.Where(s => s.spot_id.Contains(id) || s.spot_title.Contains(id)
+                search = search.Where(s => s.spot_id.Contains(id) || s.spot_title.Contains(id)
                 || s.city.Contains(id) || s.district.Contains(id));
             }
-            return View(Activitie);
+            return View(search);
         }
 
         public ActionResult Create()
