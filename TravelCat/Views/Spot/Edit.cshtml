@@ -158,8 +158,8 @@
     </form>
 
 <div>
+    @Html.ActionLink("刪除", "Delete", new { id = Model.spot.spot_id }, new { @class = "btn btn-sm btn-outline-danger", onclick = "return confirm('確定不後悔?')" })
     @Html.ActionLink("回到景點列表", "Index")
-    @Html.ActionLink("刪除", "Delete", new { id = Model.spot.spot_id }, new { onclick = "return confirm('確定不後悔?')" })
 </div>
 
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>

@@ -85,7 +85,8 @@ body {
 /*  Layout¥~®Ø   µ²§ô*/
 
 
- .container-fluid {
+.container-fluid {
     margin-top: 66px;
-    margin-left:240px;
+    margin-left: 240px;
+    min-width: 1200px;
 }
