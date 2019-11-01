@@ -25,6 +25,18 @@ namespace TravelCat.Controllers
 
 
             return View(data);
+        }
+        public ActionResult contentQuery(string id)
+        {
+            var search = from a in db.activities
+                         select a;
+            if (!String.IsNullOrEmpty(id))
+            {
+                search = search.Where(s => s.activity_id.Contains(id) || s.activity_title.Contains(id)
+                || s.city.Contains(id) || s.district.Contains(id));
+            }
+            return View(search);
+
         }                   
 
         public ActionResult Create()
