@@ -21,28 +21,33 @@
         <th>
             @Html.DisplayNameFor(model => model.msg_content)
         </th>
-        <th></th>
+        <th>
+            @Html.DisplayNameFor(model => model.msg_status)
+        </th>
     </tr>
 
 @foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.comment.tourism_id)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.member.member_account)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.msg_time)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.msg_content)
-        </td>
-        <td>
-            @Html.ActionLink("管理", "Edit", new { id=item.msg_id }) 
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.comment.tourism_id)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.member.member_account)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.msg_time)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.msg_content)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.msg_status)
+    </td>
+    <td>
+        @Html.ActionLink("管理", "Edit", new { id = item.msg_id })
 
-        </td>
-    </tr>
+    </td>
+</tr>
 }
 
 </table>

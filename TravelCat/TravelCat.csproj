@@ -1838,6 +1838,7 @@
     <Compile Include="Controllers\ActivitiesController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\commentsController.cs" />
+    <Compile Include="Controllers\destinationsController.cs" />
     <Compile Include="Controllers\HotelsController.cs" />
     <Compile Include="Controllers\issuesController.cs" />
     <Compile Include="Controllers\LoginadminController.cs" />
@@ -1981,6 +1982,7 @@
     <Folder Include="images\activity\" />
     <Folder Include="images\restaurant\" />
     <Folder Include="images\spot\" />
+    <Folder Include="Views\destinations\" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />
