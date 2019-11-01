@@ -1696,6 +1696,7 @@
     <Content Include="Content\fontawesome-free-5.11.2-web\webfonts\fa-regular-400.svg" />
     <Content Include="Content\fontawesome-free-5.11.2-web\webfonts\fa-solid-900.svg" />
     <Content Include="Content\Layout-pages.css" />
+    <Content Include="Content\Login-index.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\spot-index.css" />
@@ -1896,6 +1897,7 @@
     <Content Include="Views\issues\Edit.cshtml" />
     <Content Include="Views\issues\Index.cshtml" />
     <Content Include="Views\Loginadmin\Index.cshtml" />
+    <Content Include="Views\Shared\_Layout 1.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

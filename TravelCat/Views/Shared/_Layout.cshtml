@@ -22,8 +22,8 @@
             </a>
             <div class="dropdown-menu dropdown-menu-right bg-dark border border-secondary"
                  aria-labelledby="navbarDropdownMenuLink">
-                @Html.ActionLink("設定", "Index", "Admin",null,new{@class="dropdown-item bg-dark text-light mb-1"})
-                <a class="dropdown-item bg-dark text-light" href="#">登出</a>
+                @Html.ActionLink("設定", "Index", "Admin", null, new { @class = "dropdown-item bg-dark text-light mb-1" })
+                @Html.ActionLink("登出", "Logout", "Loginadmin", null, new { @class = "dropdown-item bg-dark text-light mb-1" })
             </div>
         </div>
 
