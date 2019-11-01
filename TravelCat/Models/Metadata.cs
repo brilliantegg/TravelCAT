@@ -68,7 +68,7 @@ namespace TravelCat.Models
         [DisplayName("回報日期")]
         [Required(ErrorMessage = "此欄位為必填")]
         [DataType(DataType.DateTime, ErrorMessage = "輸入日期錯誤")]
-        //[DisplayFormat(DataFormatString = "{0:yyyy/mm/dd}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd hh:mm}", ApplyFormatInEditMode = true)]
         public System.DateTime report_date { get; set; }
 
         [DisplayName("回報內容")]
@@ -86,7 +86,9 @@ namespace TravelCat.Models
 
         [DisplayName("處理日期")]
         [DataType(DataType.DateTime, ErrorMessage = "輸入日期錯誤")]
-        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd HH:mm:ss}", ApplyFormatInEditMode = true)]
+
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd hh:mm}", ApplyFormatInEditMode = true)]
+
         public Nullable<System.DateTime> resolve_date { get; set; }
 
     }
@@ -102,7 +104,10 @@ namespace TravelCat.Models
 
         [DisplayName("追蹤日期")]
         [DataType(DataType.DateTime, ErrorMessage = "輸入日期錯誤")]
-        //[DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
+
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd hh:mm}", ApplyFormatInEditMode = true)]
+
+
         public System.DateTime follow_date { get; set; }
     }
 
@@ -204,13 +209,15 @@ namespace TravelCat.Models
         public Nullable<bool> gender { get; set; }
         [DisplayName("生日")]
         [DataType(DataType.DateTime, ErrorMessage = "輸入日期格式有誤")]
-        //[DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd hh:mm}", ApplyFormatInEditMode = true)]
         public System.DateTime birthday { get; set; }
         [DisplayName("暱稱")]
         [Required(ErrorMessage = "此欄位為必填")]
         [StringLength(20, ErrorMessage = "此欄為最多20個字")]
+
         public string nickname { get; set; }
         [DisplayName("加入日期")]
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd hh:mm}", ApplyFormatInEditMode = true)]
         public System.DateTime create_time { get; set; }
         [DisplayName("國家")]
         [Required(ErrorMessage = "此欄位為必填")]
@@ -356,6 +363,7 @@ namespace TravelCat.Models
         [Required]
         public string comment_content { get; set; }
         [DisplayName("評論時間")]
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd hh:mm}", ApplyFormatInEditMode = true)]
         public DateTime comment_date { get; set; }
         [DisplayName("照片")]
         [Required]
@@ -392,6 +400,7 @@ namespace TravelCat.Models
         [Key]
         public long msg_id { get; set; }
         [DisplayName("留言時間")]
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd hh:mm}", ApplyFormatInEditMode = true)]
         public DateTime msg_time { get; set; }
         [DisplayName("留言內容")]
         [Required]
@@ -403,7 +412,8 @@ namespace TravelCat.Models
         [Required]
         [StringLength(7)]
         public string member_id { get; set; }
-
+        [DisplayName("留言狀態")]
+        public Nullable<bool> msg_status { get; set; }
 
     }
     [MetadataType(typeof(Metadata_emoji))]
@@ -524,6 +534,7 @@ namespace TravelCat.Models
         [StringLength(80, ErrorMessage = "門票資訊最多30個字")]
         public string ticket_info { get; set; }
         [DisplayName("更新時間")]
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd hh:mm}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> update_date { get; set; }
 
         [DisplayName("頁面狀態")]
@@ -537,9 +548,16 @@ namespace TravelCat.Models
 
 
 
-
-
-
+    [MetadataType(typeof(metadata_tourism_photo))]
+    public partial class tourism_photo
+    {    }
+    public class metadata_tourism_photo
+    {
+        public long id { get; set; }
+        public string tourism_id { get; set; }
+        [DisplayName("圖片檔案")]
+        public string tourism_photo1 { get; set; }
+    }
 
 
 
