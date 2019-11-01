@@ -28,3 +28,7 @@
 .text-truncate {
     max-width: 1000px;
 }
+.table .text-center a{
+    margin:3px;
+    white-space:nowrap;
+}
