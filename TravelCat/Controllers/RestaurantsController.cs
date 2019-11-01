@@ -6,17 +6,23 @@ using System.Web;
 using System.Web.Mvc;
 using TravelCat.Models;
 using TravelCat.ViewModels;
+using PagedList;
 
 namespace TravelCat.Controllers
 {
     public class RestaurantsController : Controller
     {
         dbTravelCat db = new dbTravelCat();
+        int pageSize = 10;
 
         // GET: Hotels
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            return View(db.restaurants.ToList());
+            int pageNumber = (page ?? 1);
+            var data = db.restaurants.OrderBy(m => m.restaurant_id).ToPagedList(pageNumber, pageSize);
+
+
+            return View(data);
         }
 
         public ActionResult Create()
