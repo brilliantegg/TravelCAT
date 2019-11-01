@@ -1795,6 +1795,7 @@
     <Content Include="Content\fontawesome-free-5.11.2-web\webfonts\fa-solid-900.ttf" />
     <Content Include="Content\fontawesome-free-5.11.2-web\webfonts\fa-solid-900.woff" />
     <Content Include="Content\fontawesome-free-5.11.2-web\webfonts\fa-solid-900.woff2" />
+    <Content Include="WebForm1.aspx" />
     <EntityDeploy Include="Models\TravelCat.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>TravelCat.Designer.cs</LastGenOutput>
@@ -1930,6 +1931,13 @@
     <Compile Include="ViewModels\ActivityPhotoViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\HotelPhotoViewModel.cs" />
+    <Compile Include="WebForm1.aspx.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebForm1.aspx.designer.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />

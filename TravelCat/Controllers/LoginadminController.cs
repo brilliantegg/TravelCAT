@@ -10,7 +10,7 @@ namespace TravelCat.Controllers
 {
     public class LoginadminController : Controller
     {
-        SqlConnection Conn = new SqlConnection(ConfigurationManager.ConnectionStrings["dbTravelCat"].ConnectionString);
+        SqlConnection Conn = new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString);
         // GET: Loginadmin
 
       

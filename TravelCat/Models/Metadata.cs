@@ -86,7 +86,7 @@ namespace TravelCat.Models
 
         [DisplayName("處理日期")]
         [DataType(DataType.DateTime, ErrorMessage = "輸入日期錯誤")]
-        //[DisplayFormat(DataFormatString = "{0:yyyy/mm/dd}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd HH:mm:ss}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> resolve_date { get; set; }
 
     }
@@ -102,7 +102,7 @@ namespace TravelCat.Models
 
         [DisplayName("追蹤日期")]
         [DataType(DataType.DateTime, ErrorMessage = "輸入日期錯誤")]
-        //[DisplayFormat(DataFormatString = "{0:yyyy/mm/dd}", ApplyFormatInEditMode = true)]
+        //[DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
         public System.DateTime follow_date { get; set; }
     }
 
