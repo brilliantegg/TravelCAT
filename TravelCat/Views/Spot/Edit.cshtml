@@ -116,7 +116,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.spot.update_date, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.spot.update_date, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DisplayFor(model => model.spot.update_date, new { htmlAttributes = new { @class = "form-control"} })
                 @Html.ValidationMessageFor(model => model.spot.update_date, "", new { @class = "text-danger" })
             </div>
         </div>

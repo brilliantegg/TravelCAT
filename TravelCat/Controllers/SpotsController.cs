@@ -16,14 +16,14 @@ namespace TravelCat.Controllers
 
         public ActionResult Index(string id)
         {
-            var Activitie = from a in db.spots
+            var search = from a in db.spots
                             select a;
             if (!String.IsNullOrEmpty(id))
             {
-                Activitie = Activitie.Where(s => s.spot_id.Contains(id) || s.spot_title.Contains(id)
+                search = search.Where(s => s.spot_id.Contains(id) || s.spot_title.Contains(id)
                 || s.city.Contains(id) || s.district.Contains(id));
             }
-            return View(Activitie);
+            return View(search);
         }
 
         public ActionResult Create()
@@ -42,6 +42,7 @@ namespace TravelCat.Controllers
             {
                 if (tourism_photo.ContentLength > 0)
                 {
+                    
                     fileName = System.IO.Path.GetFileName(tourism_photo.FileName);
                     tourism_photo.SaveAs(Server.MapPath("~/images/spot/" + fileName));
                 }
@@ -50,6 +51,8 @@ namespace TravelCat.Controllers
             tourism_photo tp = new tourism_photo();
             tp.tourism_photo1 = fileName;
             tp.tourism_id = spot.spot_id;
+
+            spot.update_date = DateTime.Now;
 
             db.spots.Add(spot);
             db.tourism_photo.Add(tp);
@@ -90,7 +93,10 @@ namespace TravelCat.Controllers
         public ActionResult Edit(string id,SpotPhotoViewModel spotPhotoViewModel, HttpPostedFileBase tourism_photo, String oldImg)
         {
 
-            db.Entry(spotPhotoViewModel).State = EntityState.Modified;
+            //string update_time = DateTime.Now.ToShortDateString() + DateTime.Now.TimeOfDay.ToString();
+            spotPhotoViewModel.spot.update_date = DateTime.Now;
+
+            db.Entry(spotPhotoViewModel.spot).State = EntityState.Modified;
             db.SaveChanges();
 
             string fileName = "";

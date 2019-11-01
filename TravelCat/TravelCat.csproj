@@ -1707,10 +1707,12 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-reboot.min.css.map" />
     <Content Include="images\17671-neko-atsume-best-toys-items-goodies-06.png" />
+    <Content Include="images\1810043.jpg" />
     <Content Include="images\bmo-02.jpg" />
     <Content Include="images\cat-face-with-wry-smile_1f63c.png" />
     <Content Include="images\hotel\bmo_png_159083.png" />
     <Content Include="images\hotel\CJXH_Japan_Nachi_Nachi-Falls_189118511.jpg" />
+    <Content Include="LoginAdmin.html" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.min.js.map" />
@@ -1812,6 +1814,8 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\commentsController.cs" />
     <Compile Include="Controllers\HotelsController.cs" />
+    <Compile Include="Controllers\issuesController.cs" />
+    <Compile Include="Controllers\LoginadminController.cs" />
     <Compile Include="Controllers\membersController.cs" />
     <Compile Include="Controllers\messagesController.cs" />
     <Compile Include="Controllers\RestaurantsController.cs" />
@@ -1879,6 +1883,11 @@
     <Content Include="Views\members\Index.cshtml" />
     <Content Include="Views\messages\Edit.cshtml" />
     <Content Include="Views\messages\Index.cshtml" />
+    <Content Include="Views\issues\Create.cshtml" />
+    <Content Include="Views\issues\Delete.cshtml" />
+    <Content Include="Views\issues\Details.cshtml" />
+    <Content Include="Views\issues\Edit.cshtml" />
+    <Content Include="Views\issues\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

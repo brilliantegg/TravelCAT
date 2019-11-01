@@ -90,7 +90,7 @@ namespace TravelCat.Controllers
         public ActionResult Edit(string id, RestaurantPhotoViewModel restaurantPhotoViewModel, HttpPostedFileBase tourism_photo, String oldImg)
         {
 
-            db.Entry(restaurantPhotoViewModel).State = EntityState.Modified;
+            db.Entry(restaurantPhotoViewModel.restaurant).State = EntityState.Modified;
             db.SaveChanges();
 
             string fileName = "";

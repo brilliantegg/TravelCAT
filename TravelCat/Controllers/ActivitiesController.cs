@@ -97,6 +97,8 @@ namespace TravelCat.Controllers
         public ActionResult Edit(string id, ActivityPhotoViewModel activityPhotoViewModel, HttpPostedFileBase tourism_photo, String oldImg)
         {
             //activityPhotoViewModel.activity.activity_id = id;
+
+
             db.Entry(activityPhotoViewModel.activity).State = EntityState.Modified;
             db.SaveChanges();
             
