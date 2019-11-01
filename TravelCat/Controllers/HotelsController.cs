@@ -20,23 +20,23 @@ namespace TravelCat.Controllers
         public ActionResult Index(int? page)
         {
             int pageNumber = (page ?? 1);
-            var data = db.restaurants.OrderBy(m => m.restaurant_id).ToPagedList(pageNumber, pageSize);
+            var data = db.hotels.OrderBy(m => m.hotel_id).ToPagedList(pageNumber, pageSize);
 
 
             return View(data);
         }
-        public ActionResult contentQuery(string id)
-        {
-            var search = from a in db.hotels
-                         select a;
-            if (!String.IsNullOrEmpty(id))
-            {
-                search = search.Where(s => s.hotel_id.Contains(id) || s.hotel_title.Contains(id)
-                || s.city.Contains(id) || s.district.Contains(id));
-            }
-            return View(search);
+        //public ActionResult contentQuery(string id)
+        //{
+        //    var search = from a in db.hotels
+        //                 select a;
+        //    if (!String.IsNullOrEmpty(id))
+        //    {
+        //        search = search.Where(s => s.hotel_id.Contains(id) || s.hotel_title.Contains(id)
+        //        || s.city.Contains(id) || s.district.Contains(id));
+        //    }
+        //    return View(search);
 
-        }
+        //}
 
         public ActionResult Create()
         {
