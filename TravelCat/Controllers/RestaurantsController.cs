@@ -19,7 +19,7 @@ namespace TravelCat.Controllers
         public ActionResult Index(int? page)
         {
             int pageNumber = (page ?? 1);
-            var data = db.restaurants.OrderBy(m => m.restaurant_id).ToPagedList(pageNumber, pageSize);
+            var data = db.restaurant.OrderBy(m => m.restaurant_id).ToPagedList(pageNumber, pageSize);
 
 
             return View(data);
@@ -62,7 +62,7 @@ namespace TravelCat.Controllers
             tp.tourism_photo1 = fileName;
             tp.tourism_id = restaurant.restaurant_id;
 
-            db.restaurants.Add(restaurant);
+            db.restaurant.Add(restaurant);
             db.tourism_photo.Add(tp);
             db.SaveChanges();
 
@@ -72,8 +72,8 @@ namespace TravelCat.Controllers
 
         public ActionResult Delete(string Id)
         {
-            var product = db.restaurants.Where(m => m.restaurant_id == Id).FirstOrDefault();
-            db.restaurants.Remove(product);
+            var product = db.restaurant.Where(m => m.restaurant_id == Id).FirstOrDefault();
+            db.restaurant.Remove(product);
             db.SaveChanges();
 
             var photos = db.tourism_photo.Where(m => m.tourism_id == Id).FirstOrDefault();
@@ -91,7 +91,7 @@ namespace TravelCat.Controllers
         {
             RestaurantPhotoViewModel model = new RestaurantPhotoViewModel()
             {
-                restaurant = db.restaurants.Where(m => m.restaurant_id == id).FirstOrDefault(),
+                restaurant = db.restaurant.Where(m => m.restaurant_id == id).FirstOrDefault(),
                 restaurant_photos = db.tourism_photo.Where(m => m.tourism_id == id).FirstOrDefault()
             };
             return View(model);

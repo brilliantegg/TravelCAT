@@ -20,7 +20,7 @@ namespace TravelCat.Controllers
         public ActionResult Index(int? page)
         {
             int pageNumber = (page ?? 1);
-            var data = db.hotels.OrderBy(m => m.hotel_id).ToPagedList(pageNumber, pageSize);
+            var data = db.hotel.OrderBy(m => m.hotel_id).ToPagedList(pageNumber, pageSize);
 
 
             return View(data);
@@ -63,7 +63,7 @@ namespace TravelCat.Controllers
             tp.tourism_photo1 = fileName;
             tp.tourism_id = hotel.hotel_id;
 
-            db.hotels.Add(hotel);
+            db.hotel.Add(hotel);
             db.tourism_photo.Add(tp);
             db.SaveChanges();
 
@@ -73,8 +73,8 @@ namespace TravelCat.Controllers
 
         public ActionResult Delete(string Id)
         {
-            var product = db.hotels.Where(m => m.hotel_id == Id).FirstOrDefault();
-            db.hotels.Remove(product);
+            var product = db.hotel.Where(m => m.hotel_id == Id).FirstOrDefault();
+            db.hotel.Remove(product);
             db.SaveChanges();
 
             var photos = db.tourism_photo.Where(m => m.tourism_id == Id).FirstOrDefault();
@@ -92,7 +92,7 @@ namespace TravelCat.Controllers
         {
             HotelPhotoViewModel model = new HotelPhotoViewModel()
             {
-                hotel = db.hotels.Where(m => m.hotel_id == id).FirstOrDefault(),
+                hotel = db.hotel.Where(m => m.hotel_id == id).FirstOrDefault(),
                 hotel_photos = db.tourism_photo.Where(m => m.tourism_id == id).FirstOrDefault()
             };
             return View(model);
