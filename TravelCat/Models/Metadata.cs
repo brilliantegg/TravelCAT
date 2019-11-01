@@ -537,9 +537,16 @@ namespace TravelCat.Models
 
 
 
-
-
-
+    [MetadataType(typeof(metadata_tourism_photo))]
+    public partial class tourism_photo
+    {    }
+    public class metadata_tourism_photo
+    {
+        public long id { get; set; }
+        public string tourism_id { get; set; }
+        [DisplayName("圖片檔案")]
+        public string tourism_photo1 { get; set; }
+    }
 
 
 

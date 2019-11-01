@@ -1,0 +1,15 @@
+﻿.row{
+    display:flex;
+    justify-content:center;
+}
+.row .co{
+    width: auto;
+    margin:.5em 0;
+}
+.row .co .txt{
+    font-size: 1.5em;
+    margin-right: 5px;
+}
+.row .co .rounded{
+    width:80%;
+}
