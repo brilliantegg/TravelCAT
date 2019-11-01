@@ -1691,7 +1691,7 @@
     <Content Include="Content\fontawesome-free-5.11.2-web\webfonts\fa-solid-900.svg" />
     <Content Include="Content\Layout-pages.css" />
     <Content Include="Content\Site.css" />
-    <Content Include="Content\spot-index.css" />
+    <Content Include="Content\back-end-index.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
