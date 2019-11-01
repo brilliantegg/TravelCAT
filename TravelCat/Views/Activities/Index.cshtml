@@ -1,86 +1,96 @@
-﻿@model IEnumerable<TravelCat.Models.activity>
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model PagedList.IPagedList<TravelCat.Models.activity>
 
 @{
     ViewBag.Title = "活動";
 }
 
-    <link href="~/Content/back-end-index.css" rel="stylesheet" />
+<link href="~/Content/back-end-index.css" rel="stylesheet" />
 <h2 class="mt-3 ml-3">活動列表</h2>
 
 <div class="header ml-3">
     @Html.ActionLink("新增活動", "Create", "Activities", null, new { @class = "btn btn-secondary" })
     <div class="search">
-        @Html.TextBox("id", "", new { @class = " border", @placeholder = "編號,名稱,城市,行政區" })
-        <input class="btn btn-secondary" type="submit" value="查詢" />
+        <form action="/Activities/ContentQuery" method="post">
+            @Html.TextBox("id", "", new { @class = " border", @placeholder = "編號,名稱,城市,行政區" })
+            <input class="btn btn-secondary" type="submit" value="查詢" />
+        </form>
+
     </div>
 </div>
 
 <table class="table">
-    <tr  class="row ">
+    <tr class="row ">
         <th class="col-1"></th>
         <th class="col-1">
-            @Html.DisplayNameFor(model => model.activity_id)
+            @Html.DisplayNameFor(model => model.First().activity_id)
         </th>
         <th class="col-2 text-truncate">
-            @Html.DisplayNameFor(model => model.activity_title)
+            @Html.DisplayNameFor(model => model.First().activity_title)
         </th>
         <th class="col-2 text-truncate">
-            @Html.DisplayNameFor(model => model.activity_intro)
+            @Html.DisplayNameFor(model => model.First().activity_intro)
         </th>
         <th class="col-1">
-            @Html.DisplayNameFor(model => model.city)
+            @Html.DisplayNameFor(model => model.First().city)
         </th>
         <th class="col-1">
-            @Html.DisplayNameFor(model => model.district)
+            @Html.DisplayNameFor(model => model.First().district)
         </th>
         <th class="col-1">
-            @Html.DisplayNameFor(model => model.begin_date)
+            @Html.DisplayNameFor(model => model.First().begin_date)
         </th>
         <th class="col-1">
-            @Html.DisplayNameFor(model => model.end_date)
+            @Html.DisplayNameFor(model => model.First().end_date)
         </th>
         <th class="col-1">
-            @Html.DisplayNameFor(model => model.organizer)
+            @Html.DisplayNameFor(model => model.First().organizer)
         </th>
         <th class="col-1">
-            @Html.DisplayNameFor(model => model.page_status)
+            @Html.DisplayNameFor(model => model.First().page_status)
         </th>
     </tr>
 
     @foreach (var item in Model)
     {
-<tr  class="row ">
-    <td class="col-1 text-center">
-        @Html.ActionLink("檢視/修改", "Edit", new { id = item.activity_id }, new { @class = "btn btn-sm btn-outline-primary" })
-    </td>
-    <td class="col-1">
-        @Html.DisplayFor(modelItem => item.activity_id)
-    </td>
-    <td class="col-2 text-truncate">
-        @Html.DisplayFor(modelItem => item.activity_title)
-    </td>
-    <td class="col-2 text-truncate">
-        @Html.DisplayFor(modelItem => item.activity_intro)
-    </td>
-    <td class="col-1">
-        @Html.DisplayFor(modelItem => item.city)
-    </td>
-    <td class="col-1">
-        @Html.DisplayFor(modelItem => item.district)
-    </td>
-    <td class="col-1">
-        @Html.DisplayFor(modelItem => item.begin_date)
-    </td>
-    <td class="col-1">
-        @Html.DisplayFor(modelItem => item.end_date)
-    </td>
-    <td class="col-1">
-        @Html.DisplayFor(modelItem => item.organizer)
-    </td>
-    <td class="col-1">
-        @Html.DisplayFor(modelItem => item.page_status)
-    </td>
-</tr>
+        <tr class="row ">
+            <td class="col-1 text-center">
+                @Html.ActionLink("檢視/修改", "Edit", new { id = item.activity_id }, new { @class = "btn btn-sm btn-outline-primary" })
+            </td>
+            <td class="col-1">
+                @Html.DisplayFor(modelItem => item.activity_id)
+            </td>
+            <td class="col-2 text-truncate">
+                @Html.DisplayFor(modelItem => item.activity_title)
+            </td>
+            <td class="col-2 text-truncate">
+                @Html.DisplayFor(modelItem => item.activity_intro)
+            </td>
+            <td class="col-1">
+                @Html.DisplayFor(modelItem => item.city)
+            </td>
+            <td class="col-1">
+                @Html.DisplayFor(modelItem => item.district)
+            </td>
+            <td class="col-1">
+                @Html.DisplayFor(modelItem => item.begin_date)
+            </td>
+            <td class="col-1">
+                @Html.DisplayFor(modelItem => item.end_date)
+            </td>
+            <td class="col-1">
+                @Html.DisplayFor(modelItem => item.organizer)
+            </td>
+            <td class="col-1">
+                @Html.DisplayFor(modelItem => item.page_status)
+            </td>
+        </tr>
     }
 
 </table>
+
+<div class="text-center">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+</div>
+

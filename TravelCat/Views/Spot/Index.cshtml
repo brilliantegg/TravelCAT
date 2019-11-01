@@ -1,23 +1,28 @@
-﻿@model IEnumerable<TravelCat.Models.spot>
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model PagedList.IPagedList<TravelCat.Models.spot>
 
 @{
     ViewBag.Title = "景點列表";
 }
 
-    <link href="~/Content/back-end-index.css" rel="stylesheet" />
+<link href="~/Content/back-end-index.css" rel="stylesheet" />
 <h2 class="mt-3 ml-3">景點</h2>
 <div class="header ml-3">
     @Html.ActionLink("新增景點", "Create", "Spot", null, new { @class = "btn btn-secondary" })
+    <div class="search">
 
-    @using (Html.BeginForm())
-    {
-        <div class="search">
+        @*@Html.TextBox("id", "", new { @class = " border", @placeholder = "編號,名稱,城市,行政區" })
+
+        @Html.ActionLink("查詢", "contentQuery", new { id = "id" }, new{@class="btn btn-default"})*@
+        <form action="/Spots/Index" method="get">
             @Html.TextBox("id", "", new { @class = " border", @placeholder = "編號,名稱,城市,行政區" })
-            <input class="btn  btn-secondary" type="submit" value="查詢" />
-        </div>
-    }
+            <input class="btn btn-secondary" type="submit" value="查詢" />
+        </form>
 
     </div>
+
+</div>
 
 
 
@@ -25,28 +30,28 @@
     <tr class="row ">
         <th class="col-1"></th>
         <th class="col-1">
-            @Html.DisplayNameFor(model => model.spot_id)
+            @Html.DisplayNameFor(model => model.First().spot_id)
         </th>
         <th class="col-2 text-truncate">
-            @Html.DisplayNameFor(model => model.spot_title)
+            @Html.DisplayNameFor(model => model.First().spot_title)
         </th>
         <th class="col-2 text-truncate">
-            @Html.DisplayNameFor(model => model.spot_intro)
+            @Html.DisplayNameFor(model => model.First().spot_intro)
         </th>
         <th class="col-1">
-            @Html.DisplayNameFor(model => model.city)
+            @Html.DisplayNameFor(model => model.First().city)
         </th>
         <th class="col-1">
-            @Html.DisplayNameFor(model => model.district)
+            @Html.DisplayNameFor(model => model.First().district)
         </th>
         <th class="col-1">
-            @Html.DisplayNameFor(model => model.open_time)
+            @Html.DisplayNameFor(model => model.First().open_time)
         </th>
         <th class="col-2">
-            @Html.DisplayNameFor(model => model.update_date)
+            @Html.DisplayNameFor(model => model.First().update_date)
         </th>
         <th class="col-1">
-            @Html.DisplayNameFor(model => model.page_status)
+            @Html.DisplayNameFor(model => model.First().page_status)
         </th>
     </tr>
 
@@ -84,3 +89,8 @@
     }
 
 </table>
+
+<div class="text-center">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+</div>
+

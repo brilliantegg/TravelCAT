@@ -18,7 +18,7 @@ namespace TravelCat.Controllers
         public ActionResult Index()
         {
 
-            var issues = db.issues.Include(i => i.admin).Include(i => i.issue_type).Include(i => i.member);
+            var issues = db.issue.Include(i => i.admin).Include(i => i.issue_type).Include(i => i.member);
             return View(issues.ToList());
         }
 
@@ -31,16 +31,16 @@ namespace TravelCat.Controllers
             }
 
             issue issue = new issue();
-            issue = db.issues.Where(m=>m.id==id).FirstOrDefault();
+            issue = db.issue.Where(m=>m.id==id).FirstOrDefault();
 
             //issue issue. = db.issues.Find(id);
             if (issue == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.admin_id = new SelectList(db.admins, "admin_id", "admin_account", issue.admin_id);
+            ViewBag.admin_id = new SelectList(db.admin, "admin_id", "admin_account", issue.admin_id);
             ViewBag.issue_id = new SelectList(db.issue_type, "issue_id", "issue_name", issue.issue_id);
-            ViewBag.member_id = new SelectList(db.members, "member_id", "member_account", issue.member_id);
+            ViewBag.member_id = new SelectList(db.member, "member_id", "member_account", issue.member_id);
             return View(issue);
         }
 

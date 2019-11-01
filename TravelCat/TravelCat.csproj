@@ -1721,6 +1721,16 @@
     <Content Include="images\hotel\bmo_png_159083.png" />
     <Content Include="images\hotel\CJXH_Japan_Nachi_Nachi-Falls_189118511.jpg" />
     <Content Include="LoginAdmin.html" />
+    <Content Include="Models\TravelCat.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>TravelCat.edmx</DependentUpon>
+      <LastGenOutput>TravelCat.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\TravelCat.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>TravelCat.edmx</DependentUpon>
+      <LastGenOutput>TravelCat.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.min.js.map" />
@@ -1785,6 +1795,13 @@
     <Content Include="Content\fontawesome-free-5.11.2-web\webfonts\fa-solid-900.ttf" />
     <Content Include="Content\fontawesome-free-5.11.2-web\webfonts\fa-solid-900.woff" />
     <Content Include="Content\fontawesome-free-5.11.2-web\webfonts\fa-solid-900.woff2" />
+    <EntityDeploy Include="Models\TravelCat.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>TravelCat.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\TravelCat.edmx.diagram">
+      <DependentUpon>TravelCat.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -1832,31 +1849,85 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\activity.cs" />
+    <Compile Include="Models\activity.cs">
+      <DependentUpon>TravelCat.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\admin.cs">
+      <DependentUpon>TravelCat.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\badge.cs">
+      <DependentUpon>TravelCat.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\badge_details.cs">
+      <DependentUpon>TravelCat.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\collections_detail.cs">
+      <DependentUpon>TravelCat.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\collection_type.cs">
+      <DependentUpon>TravelCat.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\comment.cs">
+      <DependentUpon>TravelCat.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\comment_emoji_details.cs">
+      <DependentUpon>TravelCat.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\emoji.cs">
+      <DependentUpon>TravelCat.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\follow_list.cs">
+      <DependentUpon>TravelCat.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\hotel.cs">
+      <DependentUpon>TravelCat.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\issue.cs">
+      <DependentUpon>TravelCat.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\issue_type.cs">
+      <DependentUpon>TravelCat.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\member.cs">
+      <DependentUpon>TravelCat.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\member_profile.cs">
+      <DependentUpon>TravelCat.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\message.cs">
+      <DependentUpon>TravelCat.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\message_emoji_details.cs">
+      <DependentUpon>TravelCat.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Metadata.cs" />
+    <Compile Include="Models\restaurant.cs">
+      <DependentUpon>TravelCat.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\spot.cs">
+      <DependentUpon>TravelCat.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tourism_photo.cs">
+      <DependentUpon>TravelCat.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TravelCat.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TravelCat.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TravelCat.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TravelCat.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TravelCat.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TravelCat.edmx</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\SpotPhotoViewModel.cs" />
     <Compile Include="ViewModels\RestaurantPhotoViewModel.cs" />
     <Compile Include="ViewModels\ActivityPhotoViewModel.cs" />
-    <Compile Include="Models\admin.cs" />
-    <Compile Include="Models\badge.cs" />
-    <Compile Include="Models\badge_details.cs" />
-    <Compile Include="Models\collections_detail.cs" />
-    <Compile Include="Models\collection_type.cs" />
-    <Compile Include="Models\comment.cs" />
-    <Compile Include="Models\comment_emoji_details.cs" />
-    <Compile Include="Models\dbTravelCat.cs" />
-    <Compile Include="Models\emoji.cs" />
-    <Compile Include="Models\follow_list.cs" />
-    <Compile Include="Models\hotel.cs" />
-    <Compile Include="Models\issue.cs" />
-    <Compile Include="Models\issue_type.cs" />
-    <Compile Include="Models\member.cs" />
-    <Compile Include="Models\member_profile.cs" />
-    <Compile Include="Models\message.cs" />
-    <Compile Include="Models\message_emoji_details.cs" />
-    <Compile Include="Models\Metadata.cs" />
-    <Compile Include="Models\restaurant.cs" />
-    <Compile Include="Models\spot.cs" />
-    <Compile Include="Models\tourism_photo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\HotelPhotoViewModel.cs" />
   </ItemGroup>
@@ -1916,6 +1987,7 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

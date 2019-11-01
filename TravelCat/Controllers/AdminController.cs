@@ -14,7 +14,7 @@ namespace TravelCat.Controllers
         // GET: Admin
         public ActionResult Index()
         {
-            return View(db.admins.ToList());
+            return View(db.admin.ToList());
         }
         public ActionResult Home()
         {

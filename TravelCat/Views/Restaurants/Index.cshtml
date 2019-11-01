@@ -12,10 +12,13 @@
 <div class="header ml-3">
     @Html.ActionLink("新增餐廳", "Create", "Restaurants", null, new { @class = "btn btn-secondary" })
     <div class="search">
-        @Html.TextBox("id", "", new { @class = " border", @placeholder = "編號,名稱,城市,行政區" })
-        <input class="btn btn-secondary" type="submit" value="查詢" />
+        <form action="/Restaurants/ContentQuery" method="post">
+            @Html.TextBox("id", "", new { @class = " border", @placeholder = "編號,名稱,城市,行政區" })
+            <input class="btn btn-secondary" type="submit" value="查詢" />
+        </form>
     </div>
-</div>
+ 
+    </div>
 
 
 <table class="table">

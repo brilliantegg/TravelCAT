@@ -15,17 +15,28 @@ namespace TravelCat.Controllers
     {        
         dbTravelCat db = new dbTravelCat();
         int pageSize = 10;
-
-
+        
         // GET: Activities
         public ActionResult Index(int? page)
         {
             int pageNumber = (page ?? 1);
-            var data = db.restaurants.OrderBy(m => m.restaurant_id).ToPagedList(pageNumber, pageSize);
+            var data = db.activity.OrderBy(m => m.activity_id).ToPagedList(pageNumber, pageSize);
 
 
             return View(data);
-        }                   
+        }
+        //public ActionResult contentQuery(string id)
+        //{
+        //    var search = from a in db.activities
+        //                 select a;
+        //    if (!String.IsNullOrEmpty(id))
+        //    {
+        //        search = search.Where(s => s.activity_id.Contains(id) || s.activity_title.Contains(id)
+        //        || s.city.Contains(id) || s.district.Contains(id));
+        //    }
+        //    return View(search);
+
+        //}                   
 
         public ActionResult Create()
         {
@@ -53,7 +64,7 @@ namespace TravelCat.Controllers
             tp.tourism_photo1 = fileName;
             tp.tourism_id = activity.activity_id;
 
-            db.activities.Add(activity);
+            db.activity.Add(activity);
             db.SaveChanges();
             db.tourism_photo.Add(tp);
             try
@@ -75,8 +86,8 @@ namespace TravelCat.Controllers
 
         public ActionResult Delete(string Id)
         {
-            var product = db.activities.Where(m => m.activity_id == Id).FirstOrDefault();        //找到id等於傳進來的id值的資料
-            db.activities.Remove(product);
+            var product = db.activity.Where(m => m.activity_id == Id).FirstOrDefault();        //找到id等於傳進來的id值的資料
+            db.activity.Remove(product);
             db.SaveChanges();
             //如果要刪檔案
             var photos = db.tourism_photo.Where(m => m.tourism_id == Id).FirstOrDefault();
@@ -93,7 +104,7 @@ namespace TravelCat.Controllers
         public ActionResult Edit(string id)
         {
             ActivityPhotoViewModel model = new ActivityPhotoViewModel() { 
-            activity= db.activities.Where(m => m.activity_id == id).FirstOrDefault(),
+            activity= db.activity.Where(m => m.activity_id == id).FirstOrDefault(),
             activity_photos = db.tourism_photo.Where(m => m.tourism_id == id).FirstOrDefault()
             };
             return View(model);

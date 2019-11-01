@@ -17,7 +17,7 @@ namespace TravelCat.Controllers
         // GET: messages
         public ActionResult Index()
         {
-            var messages = db.messages.Include(m => m.comment).Include(m => m.member);
+            var messages = db.message.Include(m => m.comment).Include(m => m.member);
             return View(messages.ToList());
         }
 
@@ -28,7 +28,7 @@ namespace TravelCat.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            message message = db.messages.Find(id);
+            message message = db.message.Find(id);
             if (message == null)
             {
                 return HttpNotFound();
@@ -39,8 +39,8 @@ namespace TravelCat.Controllers
         // GET: messages/Create
         public ActionResult Create()
         {
-            ViewBag.comment_id = new SelectList(db.comments, "comment_id", "tourism_id");
-            ViewBag.member_id = new SelectList(db.members, "member_id", "member_account");
+            ViewBag.comment_id = new SelectList(db.comment, "comment_id", "tourism_id");
+            ViewBag.member_id = new SelectList(db.member, "member_id", "member_account");
             return View();
         }
 
@@ -53,13 +53,13 @@ namespace TravelCat.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.messages.Add(message);
+                db.message.Add(message);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.comment_id = new SelectList(db.comments, "comment_id", "tourism_id", message.comment_id);
-            ViewBag.member_id = new SelectList(db.members, "member_id", "member_account", message.member_id);
+            ViewBag.comment_id = new SelectList(db.comment, "comment_id", "tourism_id", message.comment_id);
+            ViewBag.member_id = new SelectList(db.member, "member_id", "member_account", message.member_id);
             return View(message);
         }
 
@@ -70,13 +70,13 @@ namespace TravelCat.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            message message = db.messages.Find(id);
+            message message = db.message.Find(id);
             if (message == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.comment_id = new SelectList(db.comments, "comment_id", "tourism_id", message.comment_id);
-            ViewBag.member_id = new SelectList(db.members, "member_id", "member_account", message.member_id);
+            ViewBag.comment_id = new SelectList(db.comment, "comment_id", "tourism_id", message.comment_id);
+            ViewBag.member_id = new SelectList(db.member, "member_id", "member_account", message.member_id);
             return View(message);
         }
 
@@ -93,8 +93,8 @@ namespace TravelCat.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.comment_id = new SelectList(db.comments, "comment_id", "tourism_id", message.comment_id);
-            ViewBag.member_id = new SelectList(db.members, "member_id", "member_account", message.member_id);
+            ViewBag.comment_id = new SelectList(db.comment, "comment_id", "tourism_id", message.comment_id);
+            ViewBag.member_id = new SelectList(db.member, "member_id", "member_account", message.member_id);
             return View(message);
         }
 
@@ -105,7 +105,7 @@ namespace TravelCat.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            message message = db.messages.Find(id);
+            message message = db.message.Find(id);
             if (message == null)
             {
                 return HttpNotFound();
@@ -118,8 +118,8 @@ namespace TravelCat.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(long id)
         {
-            message message = db.messages.Find(id);
-            db.messages.Remove(message);
+            message message = db.message.Find(id);
+            db.message.Remove(message);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
