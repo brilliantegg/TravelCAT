@@ -4,75 +4,75 @@
     ViewBag.Title = "Index";
 }
 
-<h2>住宿列表</h2>
+    <link href="~/Content/back-end-index.css" rel="stylesheet" />
+<h2 class="mt-3 ml-3">飯店</h2>
 
-<p>
-    @Html.ActionLink("新增住宿", "Create")
-</p>
+<div class="header ml-3">
+    @Html.ActionLink("新增飯店", "Create", "Hotels", null, new { @class = "btn btn-secondary" })
+    <div class="search">
+        @Html.TextBox("id", "", new { @class = " border", @placeholder = "編號,名稱,城市,行政區" })
+        <input class="btn btn-secondary" type="submit" value="查詢" />
+    </div>
+</div>
+
+
 <table class="table">
-    <tr>
-        <th>
+    <tr class="row">
+        <th class="col-1"></th>
+        <th class="col-1">
             @Html.DisplayNameFor(model => model.hotel_id)
         </th>
-        <th>
+        <th class="col-2 text-truncate">
             @Html.DisplayNameFor(model => model.hotel_title)
         </th>
-        <th>
+        <th class="col-1">
             @Html.DisplayNameFor(model => model.hotel_tel)
         </th>
-        <th>
+        <th class="col-3 text-truncate">
             @Html.DisplayNameFor(model => model.hotel_intro)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.website)
-        </th>
-        <th>
+        <th class="col-1">
             @Html.DisplayNameFor(model => model.city)
         </th>
-        <th>
+        <th class="col-1">
             @Html.DisplayNameFor(model => model.district)
         </th>
-        <th>
+        <th class="col-1">
             @Html.DisplayNameFor(model => model.address_detail)
         </th>
-        <th>
+        <th class="col-1">
             @Html.DisplayNameFor(model => model.page_status)
         </th>
-        <th></th>
     </tr>
 
 @foreach (var item in Model) {
-<tr>
-    <td>
+<tr class="row">
+    <td class="col-1 text-center">
+        @Html.ActionLink("檢視/修改", "Edit", new { id = item.hotel_id }, new { @class = "btn btn-sm btn-outline-primary" })
+    </td>
+    <td class="col-1">
         @Html.DisplayFor(modelItem => item.hotel_id)
     </td>
-    <td>
+    <td class="col-2 text-truncate">
         @Html.DisplayFor(modelItem => item.hotel_title)
     </td>
-    <td>
+    <td class="col-1">
         @Html.DisplayFor(modelItem => item.hotel_tel)
     </td>
-    <td>
+    <td class="col-3 text-truncate">
         @Html.DisplayFor(modelItem => item.hotel_intro)
     </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.website)
-    </td>
-    <td>
+    <td class="col-1">
         @Html.DisplayFor(modelItem => item.city)
     </td>
-    <td>
+    <td class="col-1">
         @Html.DisplayFor(modelItem => item.district)
     </td>
-    <td>
+    <td class="col-1">
         @Html.DisplayFor(modelItem => item.address_detail)
     </td>
-    <td>
+    <td class="col-1">
         @Html.DisplayFor(modelItem => item.page_status)
-    </td>
-    <td>
-        @Html.ActionLink("修改", "Edit", new { id = item.hotel_id }) |
-        @Html.ActionLink("刪除", "Delete", new { id = item.hotel_id }, new { onclick = "return confirm('確定不後悔?')" })
     </td>
 </tr>
 }
