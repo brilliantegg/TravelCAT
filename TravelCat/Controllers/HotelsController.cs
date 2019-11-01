@@ -15,9 +15,16 @@ namespace TravelCat.Controllers
         dbTravelCat db = new dbTravelCat();
 
         // GET: Hotels
-        public ActionResult Index()
+        public ActionResult Index(string id)
         {
-            return View(db.hotels.ToList());
+            var search = from a in db.hotels
+                            select a;
+            if (!String.IsNullOrEmpty(id))
+            {
+                search = search.Where(s => s.hotel_id.Contains(id) || s.hotel_title.Contains(id)
+                || s.city.Contains(id) || s.district.Contains(id));
+            }
+            return View(search);
         }
 
         public ActionResult Create()
