@@ -22,8 +22,8 @@
             </a>
             <div class="dropdown-menu dropdown-menu-right bg-dark border border-secondary"
                  aria-labelledby="navbarDropdownMenuLink">
-                @Html.ActionLink("設定", "Index", "Admin",null,new{@class="dropdown-item bg-dark text-light mb-1"})
-                <a class="dropdown-item bg-dark text-light" href="#">登出</a>
+                @Html.ActionLink("設定", "Index", "Admin", null, new { @class = "dropdown-item bg-dark text-light mb-1" })
+                @Html.ActionLink("登出", "Logout", "Loginadmin", null, new { @class = "dropdown-item bg-dark text-light mb-1" })
             </div>
         </div>
 
@@ -39,7 +39,7 @@
                 <li><i class="fa far fa-user"></i>@Html.ActionLink("會員管理", "Index", "members")</li>
                 <li><i class="fa far fa-comments"></i>@Html.ActionLink("評論管理", "Index", "comments")</li>
                 <li><i class="fa far fa-comment-dots"></i>@Html.ActionLink("留言管理", "Index", "messages")</li>
-                <li><i class="fa far fa-file-alt"></i>@Html.ActionLink("網站問題管理", "Index", "Activities")</li>
+                <li><i class="fa far fa-file-alt"></i>@Html.ActionLink("網站問題管理", "Index", "issues")</li>
             </ul>
         </div>
 

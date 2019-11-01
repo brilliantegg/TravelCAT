@@ -12,11 +12,13 @@ namespace TravelCat.Controllers
     {
         SqlConnection Conn = new SqlConnection(ConfigurationManager.ConnectionStrings["dbTravelCat"].ConnectionString);
         // GET: Loginadmin
+
+      
         public ActionResult Index()
         {
             return View();
         }
-        [HttpPost]
+        [HttpPost]      
         public ActionResult Index(string id,string pwd)
         {
             string sql = "select * from admin where admin_account=@admin_account and admin_password=@admin_password";
@@ -40,5 +42,12 @@ namespace TravelCat.Controllers
             ViewBag.LoginErr = "帳號或密碼有誤";
             return View();
         }
+
+        public ActionResult Logout()
+        {
+            Session.Clear();
+            return RedirectToAction("Index", "Loginadmin");
+        }
+
     }
 }

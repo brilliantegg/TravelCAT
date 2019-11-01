@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using TravelCat.Models;
 using TravelCat.ViewModels;
+using PagedList;
 
 namespace TravelCat.Controllers
 {
@@ -13,6 +14,7 @@ namespace TravelCat.Controllers
     {
         // GET: Spot
         dbTravelCat db = new dbTravelCat();
+        int pageSize = 10;
 
         public ActionResult Index(string id)
         {
@@ -25,6 +27,8 @@ namespace TravelCat.Controllers
             }
             return View(search);
         }
+
+   
 
         public ActionResult Create()
         {
