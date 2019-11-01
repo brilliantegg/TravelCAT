@@ -17,7 +17,7 @@ namespace TravelCat.Controllers
         // GET: members1
         public ActionResult Index()
         {
-            return View(db.members.ToList());
+            return View(db.member.ToList());
         }
 
         
@@ -29,7 +29,7 @@ namespace TravelCat.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            member member = db.members.Find(id);
+            member member = db.member.Find(id);
             if (member == null)
             {
                 return HttpNotFound();

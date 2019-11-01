@@ -19,7 +19,7 @@ namespace TravelCat.Controllers
         public ActionResult Index(int? page)
         {
             int pageNumber = (page ?? 1);
-            var data = db.spots.OrderBy(m => m.spot_id).ToPagedList(pageNumber, pageSize);
+            var data = db.spot.OrderBy(m => m.spot_id).ToPagedList(pageNumber, pageSize);
                        
             return View(data);                       
         }
@@ -65,7 +65,7 @@ namespace TravelCat.Controllers
 
             spot.update_date = DateTime.Now;
 
-            db.spots.Add(spot);
+            db.spot.Add(spot);
             db.tourism_photo.Add(tp);
             db.SaveChanges();
 
@@ -75,8 +75,8 @@ namespace TravelCat.Controllers
 
         public ActionResult Delete(string Id)
         {
-            var product = db.spots.Where(m => m.spot_id == Id).FirstOrDefault();
-            db.spots.Remove(product);
+            var product = db.spot.Where(m => m.spot_id == Id).FirstOrDefault();
+            db.spot.Remove(product);
             db.SaveChanges();
 
             var photos = db.tourism_photo.Where(m => m.tourism_id == Id).FirstOrDefault();
@@ -94,7 +94,7 @@ namespace TravelCat.Controllers
         {
             SpotPhotoViewModel model = new SpotPhotoViewModel()
             {
-                spot = db.spots.Where(m => m.spot_id == id).FirstOrDefault(),
+                spot = db.spot.Where(m => m.spot_id == id).FirstOrDefault(),
                 spot_photos = db.tourism_photo.Where(m => m.tourism_id == id).FirstOrDefault()
             };
             return View(model);

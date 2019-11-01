@@ -17,7 +17,7 @@ namespace TravelCat.Controllers
         // GET: comments
         public ActionResult Index()
         {
-            var comments = db.comments.Include(c => c.member);
+            var comments = db.comment.Include(c => c.member);
             return View(comments.ToList());
         }
 
@@ -28,12 +28,12 @@ namespace TravelCat.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            comment comment = db.comments.Find(id);
+            comment comment = db.comment.Find(id);
             if (comment == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.member_id = new SelectList(db.members, "member_id", "member_account", comment.member_id);
+            ViewBag.member_id = new SelectList(db.member, "member_id", "member_account", comment.member_id);
             return View(comment);
         }
 

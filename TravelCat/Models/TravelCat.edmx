@@ -1,0 +1,1444 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="TravelCat.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="activity">
+          <Key>
+            <PropertyRef Name="activity_id" />
+          </Key>
+          <Property Name="activity_id" Type="char" MaxLength="7" Nullable="false" />
+          <Property Name="activity_title" Type="nchar" MaxLength="30" Nullable="false" />
+          <Property Name="activity_tel" Type="varchar" MaxLength="20" />
+          <Property Name="activity_intro" Type="ntext" Nullable="false" />
+          <Property Name="longitude" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="latitude" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="city" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="district" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="address_detail" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="end_date" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="begin_date" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="organizer" Type="nvarchar" MaxLength="50" />
+          <Property Name="website" Type="varchar" MaxLength="150" />
+          <Property Name="transport_info" Type="nvarchar" MaxLength="200" />
+          <Property Name="page_status" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="admin">
+          <Key>
+            <PropertyRef Name="admin_id" />
+          </Key>
+          <Property Name="admin_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="admin_account" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="admin_password" Type="varchar" MaxLength="40" Nullable="false" />
+        </EntityType>
+        <EntityType Name="badge">
+          <Key>
+            <PropertyRef Name="badge_id" />
+          </Key>
+          <Property Name="badge_id" Type="int" Nullable="false" />
+          <Property Name="badge_title" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="badge_photo" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="badge_details">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="member_id" />
+            <PropertyRef Name="badge_id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="member_id" Type="char" MaxLength="7" Nullable="false" />
+          <Property Name="badge_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="collection_type">
+          <Key>
+            <PropertyRef Name="collection_type_id" />
+          </Key>
+          <Property Name="collection_type_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="collection_type_title" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="collections_detail">
+          <Key>
+            <PropertyRef Name="collection_id" />
+            <PropertyRef Name="member_id" />
+          </Key>
+          <Property Name="collection_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="member_id" Type="char" MaxLength="7" Nullable="false" />
+          <Property Name="tourism_id" Type="char" MaxLength="7" Nullable="false" />
+          <Property Name="privacy" Type="bit" Nullable="false" />
+          <Property Name="collection_type_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="comment">
+          <Key>
+            <PropertyRef Name="comment_id" />
+          </Key>
+          <Property Name="comment_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tourism_id" Type="char" MaxLength="7" Nullable="false" />
+          <Property Name="comment_title" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="comment_content" Type="ntext" Nullable="false" />
+          <Property Name="comment_date" Type="datetime" Nullable="false" />
+          <Property Name="comment_photo" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="comment_stay_total" Type="int" Nullable="false" />
+          <Property Name="travel_partner" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="comment_rating" Type="smallint" Nullable="false" />
+          <Property Name="travel_month" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="comment_status" Type="bit" Nullable="false" />
+          <Property Name="member_id" Type="char" MaxLength="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="comment_emoji_details">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="member_id" />
+            <PropertyRef Name="comment_id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="member_id" Type="char" MaxLength="7" Nullable="false" />
+          <Property Name="comment_id" Type="bigint" Nullable="false" />
+          <Property Name="emoji_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="emoji">
+          <Key>
+            <PropertyRef Name="emoji_id" />
+          </Key>
+          <Property Name="emoji_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="emoji_title" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="emoji_pic" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="follow_list">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="member_id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="member_id" Type="char" MaxLength="7" Nullable="false" />
+          <Property Name="followed_id" Type="char" MaxLength="7" Nullable="false" />
+          <Property Name="follow_date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="hotel">
+          <Key>
+            <PropertyRef Name="hotel_id" />
+          </Key>
+          <Property Name="hotel_id" Type="char" MaxLength="7" Nullable="false" />
+          <Property Name="hotel_title" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="hotel_tel" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="longitude" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="latitude" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="hotel_intro" Type="ntext" />
+          <Property Name="website" Type="varchar" MaxLength="150" />
+          <Property Name="city" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="district" Type="nvarchar" MaxLength="5" Nullable="false" />
+          <Property Name="address_detail" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="page_status" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="issue">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="member_id" />
+            <PropertyRef Name="admin_id" />
+            <PropertyRef Name="issue_id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="member_id" Type="char" MaxLength="7" Nullable="false" />
+          <Property Name="admin_id" Type="int" Nullable="false" />
+          <Property Name="issue_id" Type="int" Nullable="false" />
+          <Property Name="report_date" Type="datetime" Nullable="false" />
+          <Property Name="issue_content" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="issue_result" Type="nvarchar" MaxLength="1000" />
+          <Property Name="issue_status" Type="nchar" MaxLength="10" />
+          <Property Name="resolve_date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="issue_type">
+          <Key>
+            <PropertyRef Name="issue_id" />
+          </Key>
+          <Property Name="issue_id" Type="int" Nullable="false" />
+          <Property Name="issue_name" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="member">
+          <Key>
+            <PropertyRef Name="member_id" />
+          </Key>
+          <Property Name="member_id" Type="char" MaxLength="7" Nullable="false" />
+          <Property Name="member_account" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="member_password" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="member_status" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="member_profile">
+          <Key>
+            <PropertyRef Name="member_id" />
+            <PropertyRef Name="member_name" />
+          </Key>
+          <Property Name="member_id" Type="char" MaxLength="7" Nullable="false" />
+          <Property Name="member_name" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="gender" Type="bit" />
+          <Property Name="birthday" Type="datetime" Nullable="false" />
+          <Property Name="nickname" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="create_time" Type="datetime" Nullable="false" />
+          <Property Name="nation" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="address_detail" Type="nvarchar" MaxLength="60" />
+          <Property Name="city" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="phone" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="profile_photo" Type="varchar" MaxLength="100" />
+          <Property Name="website_link" Type="varchar" MaxLength="150" />
+          <Property Name="brief_intro" Type="nvarchar" MaxLength="300" />
+          <Property Name="cover_photo" Type="varchar" MaxLength="100" />
+          <Property Name="member_score" Type="int" />
+        </EntityType>
+        <EntityType Name="message">
+          <Key>
+            <PropertyRef Name="msg_id" />
+          </Key>
+          <Property Name="msg_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="msg_time" Type="datetime" Nullable="false" />
+          <Property Name="msg_content" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="comment_id" Type="bigint" Nullable="false" />
+          <Property Name="member_id" Type="char" MaxLength="7" Nullable="false" />
+          <Property Name="msg_status" Type="bit" />
+        </EntityType>
+        <EntityType Name="message_emoji_details">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="member_id" />
+            <PropertyRef Name="msg_id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="member_id" Type="char" MaxLength="7" Nullable="false" />
+          <Property Name="msg_id" Type="bigint" Nullable="false" />
+          <Property Name="emoji_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="restaurant">
+          <Key>
+            <PropertyRef Name="restaurant_id" />
+          </Key>
+          <Property Name="restaurant_id" Type="char" MaxLength="7" Nullable="false" />
+          <Property Name="restaurant_title" Type="nchar" MaxLength="30" Nullable="false" />
+          <Property Name="restaurant_tel" Type="varchar" MaxLength="20" />
+          <Property Name="restaurant_intro" Type="ntext" />
+          <Property Name="latitude" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="longitude" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="city" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="district" Type="nvarchar" MaxLength="5" Nullable="false" />
+          <Property Name="address_detail" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="open_time" Type="nvarchar" MaxLength="80" />
+          <Property Name="page_status" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="spot">
+          <Key>
+            <PropertyRef Name="spot_id" />
+          </Key>
+          <Property Name="spot_id" Type="char" MaxLength="7" Nullable="false" />
+          <Property Name="spot_title" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="spot_tel" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="spot_intro" Type="ntext" />
+          <Property Name="longitude" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="latitude" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="addition_note" Type="nvarchar" MaxLength="150" />
+          <Property Name="city" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="district" Type="nvarchar" MaxLength="5" Nullable="false" />
+          <Property Name="address_detail" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="open_time" Type="nvarchar" MaxLength="80" />
+          <Property Name="ticket_info" Type="nvarchar" MaxLength="30" />
+          <Property Name="update_date" Type="datetime" />
+          <Property Name="page_status" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tourism_photo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tourism_id" Type="char" MaxLength="7" Nullable="false" />
+          <Property Name="tourism_photo" Type="varchar" MaxLength="60" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__badge_det__badge__5441852A">
+          <End Role="badge" Type="Self.badge" Multiplicity="1" />
+          <End Role="badge_details" Type="Self.badge_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="badge">
+              <PropertyRef Name="badge_id" />
+            </Principal>
+            <Dependent Role="badge_details">
+              <PropertyRef Name="badge_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__badge_det__membe__4CA06362">
+          <End Role="member" Type="Self.member" Multiplicity="1" />
+          <End Role="badge_details" Type="Self.badge_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="member">
+              <PropertyRef Name="member_id" />
+            </Principal>
+            <Dependent Role="badge_details">
+              <PropertyRef Name="member_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__collectio__colle__5535A963">
+          <End Role="collection_type" Type="Self.collection_type" Multiplicity="1" />
+          <End Role="collections_detail" Type="Self.collections_detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="collection_type">
+              <PropertyRef Name="collection_type_id" />
+            </Principal>
+            <Dependent Role="collections_detail">
+              <PropertyRef Name="collection_type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__collectio__membe__4E88ABD4">
+          <End Role="member" Type="Self.member" Multiplicity="1" />
+          <End Role="collections_detail" Type="Self.collections_detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="member">
+              <PropertyRef Name="member_id" />
+            </Principal>
+            <Dependent Role="collections_detail">
+              <PropertyRef Name="member_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__comment__member___48CFD27E">
+          <End Role="member" Type="Self.member" Multiplicity="1" />
+          <End Role="comment" Type="Self.comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="member">
+              <PropertyRef Name="member_id" />
+            </Principal>
+            <Dependent Role="comment">
+              <PropertyRef Name="member_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__comment_e__comme__5165187F">
+          <End Role="comment" Type="Self.comment" Multiplicity="1" />
+          <End Role="comment_emoji_details" Type="Self.comment_emoji_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="comment">
+              <PropertyRef Name="comment_id" />
+            </Principal>
+            <Dependent Role="comment_emoji_details">
+              <PropertyRef Name="comment_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__comment_e__emoji__571DF1D5">
+          <End Role="emoji" Type="Self.emoji" Multiplicity="1" />
+          <End Role="comment_emoji_details" Type="Self.comment_emoji_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="emoji">
+              <PropertyRef Name="emoji_id" />
+            </Principal>
+            <Dependent Role="comment_emoji_details">
+              <PropertyRef Name="emoji_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__comment_e__membe__4AB81AF0">
+          <End Role="member" Type="Self.member" Multiplicity="1" />
+          <End Role="comment_emoji_details" Type="Self.comment_emoji_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="member">
+              <PropertyRef Name="member_id" />
+            </Principal>
+            <Dependent Role="comment_emoji_details">
+              <PropertyRef Name="member_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__follow_li__membe__4F7CD00D">
+          <End Role="member" Type="Self.member" Multiplicity="1" />
+          <End Role="follow_list" Type="Self.follow_list" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="member">
+              <PropertyRef Name="member_id" />
+            </Principal>
+            <Dependent Role="follow_list">
+              <PropertyRef Name="member_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__issue__admin_id__534D60F1">
+          <End Role="admin" Type="Self.admin" Multiplicity="1" />
+          <End Role="issue" Type="Self.issue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="admin">
+              <PropertyRef Name="admin_id" />
+            </Principal>
+            <Dependent Role="issue">
+              <PropertyRef Name="admin_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__issue__issue_id__5812160E">
+          <End Role="issue_type" Type="Self.issue_type" Multiplicity="1" />
+          <End Role="issue" Type="Self.issue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="issue_type">
+              <PropertyRef Name="issue_id" />
+            </Principal>
+            <Dependent Role="issue">
+              <PropertyRef Name="issue_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__issue__member_id__4D94879B">
+          <End Role="member" Type="Self.member" Multiplicity="1" />
+          <End Role="issue" Type="Self.issue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="member">
+              <PropertyRef Name="member_id" />
+            </Principal>
+            <Dependent Role="issue">
+              <PropertyRef Name="member_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__member_pr__membe__47DBAE45">
+          <End Role="member" Type="Self.member" Multiplicity="1" />
+          <End Role="member_profile" Type="Self.member_profile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="member">
+              <PropertyRef Name="member_id" />
+            </Principal>
+            <Dependent Role="member_profile">
+              <PropertyRef Name="member_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__message__comment__5070F446">
+          <End Role="comment" Type="Self.comment" Multiplicity="1" />
+          <End Role="message" Type="Self.message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="comment">
+              <PropertyRef Name="comment_id" />
+            </Principal>
+            <Dependent Role="message">
+              <PropertyRef Name="comment_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__message__member___4BAC3F29">
+          <End Role="member" Type="Self.member" Multiplicity="1" />
+          <End Role="message" Type="Self.message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="member">
+              <PropertyRef Name="member_id" />
+            </Principal>
+            <Dependent Role="message">
+              <PropertyRef Name="member_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__message_e__emoji__5629CD9C">
+          <End Role="emoji" Type="Self.emoji" Multiplicity="1" />
+          <End Role="message_emoji_details" Type="Self.message_emoji_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="emoji">
+              <PropertyRef Name="emoji_id" />
+            </Principal>
+            <Dependent Role="message_emoji_details">
+              <PropertyRef Name="emoji_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__message_e__membe__49C3F6B7">
+          <End Role="member" Type="Self.member" Multiplicity="1" />
+          <End Role="message_emoji_details" Type="Self.message_emoji_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="member">
+              <PropertyRef Name="member_id" />
+            </Principal>
+            <Dependent Role="message_emoji_details">
+              <PropertyRef Name="member_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__message_e__msg_i__52593CB8">
+          <End Role="message" Type="Self.message" Multiplicity="1" />
+          <End Role="message_emoji_details" Type="Self.message_emoji_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="message">
+              <PropertyRef Name="msg_id" />
+            </Principal>
+            <Dependent Role="message_emoji_details">
+              <PropertyRef Name="msg_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TravelCatStoreContainer">
+          <EntitySet Name="activity" EntityType="Self.activity" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="admin" EntityType="Self.admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="badge" EntityType="Self.badge" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="badge_details" EntityType="Self.badge_details" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="collection_type" EntityType="Self.collection_type" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="collections_detail" EntityType="Self.collections_detail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="comment" EntityType="Self.comment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="comment_emoji_details" EntityType="Self.comment_emoji_details" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="emoji" EntityType="Self.emoji" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="follow_list" EntityType="Self.follow_list" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="hotel" EntityType="Self.hotel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="issue" EntityType="Self.issue" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="issue_type" EntityType="Self.issue_type" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="member" EntityType="Self.member" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="member_profile" EntityType="Self.member_profile" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="message" EntityType="Self.message" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="message_emoji_details" EntityType="Self.message_emoji_details" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="restaurant" EntityType="Self.restaurant" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="spot" EntityType="Self.spot" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tourism_photo" EntityType="Self.tourism_photo" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__badge_det__badge__5441852A" Association="Self.FK__badge_det__badge__5441852A">
+            <End Role="badge" EntitySet="badge" />
+            <End Role="badge_details" EntitySet="badge_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK__badge_det__membe__4CA06362" Association="Self.FK__badge_det__membe__4CA06362">
+            <End Role="member" EntitySet="member" />
+            <End Role="badge_details" EntitySet="badge_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK__collectio__colle__5535A963" Association="Self.FK__collectio__colle__5535A963">
+            <End Role="collection_type" EntitySet="collection_type" />
+            <End Role="collections_detail" EntitySet="collections_detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK__collectio__membe__4E88ABD4" Association="Self.FK__collectio__membe__4E88ABD4">
+            <End Role="member" EntitySet="member" />
+            <End Role="collections_detail" EntitySet="collections_detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK__comment__member___48CFD27E" Association="Self.FK__comment__member___48CFD27E">
+            <End Role="member" EntitySet="member" />
+            <End Role="comment" EntitySet="comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__comment_e__comme__5165187F" Association="Self.FK__comment_e__comme__5165187F">
+            <End Role="comment" EntitySet="comment" />
+            <End Role="comment_emoji_details" EntitySet="comment_emoji_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK__comment_e__emoji__571DF1D5" Association="Self.FK__comment_e__emoji__571DF1D5">
+            <End Role="emoji" EntitySet="emoji" />
+            <End Role="comment_emoji_details" EntitySet="comment_emoji_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK__comment_e__membe__4AB81AF0" Association="Self.FK__comment_e__membe__4AB81AF0">
+            <End Role="member" EntitySet="member" />
+            <End Role="comment_emoji_details" EntitySet="comment_emoji_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK__follow_li__membe__4F7CD00D" Association="Self.FK__follow_li__membe__4F7CD00D">
+            <End Role="member" EntitySet="member" />
+            <End Role="follow_list" EntitySet="follow_list" />
+          </AssociationSet>
+          <AssociationSet Name="FK__issue__admin_id__534D60F1" Association="Self.FK__issue__admin_id__534D60F1">
+            <End Role="admin" EntitySet="admin" />
+            <End Role="issue" EntitySet="issue" />
+          </AssociationSet>
+          <AssociationSet Name="FK__issue__issue_id__5812160E" Association="Self.FK__issue__issue_id__5812160E">
+            <End Role="issue_type" EntitySet="issue_type" />
+            <End Role="issue" EntitySet="issue" />
+          </AssociationSet>
+          <AssociationSet Name="FK__issue__member_id__4D94879B" Association="Self.FK__issue__member_id__4D94879B">
+            <End Role="member" EntitySet="member" />
+            <End Role="issue" EntitySet="issue" />
+          </AssociationSet>
+          <AssociationSet Name="FK__member_pr__membe__47DBAE45" Association="Self.FK__member_pr__membe__47DBAE45">
+            <End Role="member" EntitySet="member" />
+            <End Role="member_profile" EntitySet="member_profile" />
+          </AssociationSet>
+          <AssociationSet Name="FK__message__comment__5070F446" Association="Self.FK__message__comment__5070F446">
+            <End Role="comment" EntitySet="comment" />
+            <End Role="message" EntitySet="message" />
+          </AssociationSet>
+          <AssociationSet Name="FK__message__member___4BAC3F29" Association="Self.FK__message__member___4BAC3F29">
+            <End Role="member" EntitySet="member" />
+            <End Role="message" EntitySet="message" />
+          </AssociationSet>
+          <AssociationSet Name="FK__message_e__emoji__5629CD9C" Association="Self.FK__message_e__emoji__5629CD9C">
+            <End Role="emoji" EntitySet="emoji" />
+            <End Role="message_emoji_details" EntitySet="message_emoji_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK__message_e__membe__49C3F6B7" Association="Self.FK__message_e__membe__49C3F6B7">
+            <End Role="member" EntitySet="member" />
+            <End Role="message_emoji_details" EntitySet="message_emoji_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK__message_e__msg_i__52593CB8" Association="Self.FK__message_e__msg_i__52593CB8">
+            <End Role="message" EntitySet="message" />
+            <End Role="message_emoji_details" EntitySet="message_emoji_details" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TravelCat" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="activity">
+          <Key>
+            <PropertyRef Name="activity_id" />
+          </Key>
+          <Property Name="activity_id" Type="String" MaxLength="7" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="activity_title" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="activity_tel" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="activity_intro" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="longitude" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="latitude" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="city" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="district" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="address_detail" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="end_date" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="begin_date" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="organizer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="website" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="transport_info" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="page_status" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="admin">
+          <Key>
+            <PropertyRef Name="admin_id" />
+          </Key>
+          <Property Name="admin_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="admin_account" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="admin_password" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="issue" Relationship="Self.FK__issue__admin_id__534D60F1" FromRole="admin" ToRole="issue" />
+        </EntityType>
+        <EntityType Name="badge">
+          <Key>
+            <PropertyRef Name="badge_id" />
+          </Key>
+          <Property Name="badge_id" Type="Int32" Nullable="false" />
+          <Property Name="badge_title" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="badge_photo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="badge_details" Relationship="Self.FK__badge_det__badge__5441852A" FromRole="badge" ToRole="badge_details" />
+        </EntityType>
+        <EntityType Name="badge_details">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="member_id" />
+            <PropertyRef Name="badge_id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="member_id" Type="String" MaxLength="7" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="badge_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="badge" Relationship="Self.FK__badge_det__badge__5441852A" FromRole="badge_details" ToRole="badge" />
+          <NavigationProperty Name="member" Relationship="Self.FK__badge_det__membe__4CA06362" FromRole="badge_details" ToRole="member" />
+        </EntityType>
+        <EntityType Name="collection_type">
+          <Key>
+            <PropertyRef Name="collection_type_id" />
+          </Key>
+          <Property Name="collection_type_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="collection_type_title" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="collections_detail" Relationship="Self.FK__collectio__colle__5535A963" FromRole="collection_type" ToRole="collections_detail" />
+        </EntityType>
+        <EntityType Name="collections_detail">
+          <Key>
+            <PropertyRef Name="collection_id" />
+            <PropertyRef Name="member_id" />
+          </Key>
+          <Property Name="collection_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="member_id" Type="String" MaxLength="7" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="tourism_id" Type="String" MaxLength="7" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="privacy" Type="Boolean" Nullable="false" />
+          <Property Name="collection_type_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="collection_type" Relationship="Self.FK__collectio__colle__5535A963" FromRole="collections_detail" ToRole="collection_type" />
+          <NavigationProperty Name="member" Relationship="Self.FK__collectio__membe__4E88ABD4" FromRole="collections_detail" ToRole="member" />
+        </EntityType>
+        <EntityType Name="comment">
+          <Key>
+            <PropertyRef Name="comment_id" />
+          </Key>
+          <Property Name="comment_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tourism_id" Type="String" MaxLength="7" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="comment_title" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="comment_content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="comment_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="comment_photo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="comment_stay_total" Type="Int32" Nullable="false" />
+          <Property Name="travel_partner" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="comment_rating" Type="Int16" Nullable="false" />
+          <Property Name="travel_month" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="comment_status" Type="Boolean" Nullable="false" />
+          <Property Name="member_id" Type="String" MaxLength="7" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="member" Relationship="Self.FK__comment__member___48CFD27E" FromRole="comment" ToRole="member" />
+          <NavigationProperty Name="comment_emoji_details" Relationship="Self.FK__comment_e__comme__5165187F" FromRole="comment" ToRole="comment_emoji_details" />
+          <NavigationProperty Name="message" Relationship="Self.FK__message__comment__5070F446" FromRole="comment" ToRole="message" />
+        </EntityType>
+        <EntityType Name="comment_emoji_details">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="member_id" />
+            <PropertyRef Name="comment_id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="member_id" Type="String" MaxLength="7" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="comment_id" Type="Int64" Nullable="false" />
+          <Property Name="emoji_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="comment" Relationship="Self.FK__comment_e__comme__5165187F" FromRole="comment_emoji_details" ToRole="comment" />
+          <NavigationProperty Name="emoji" Relationship="Self.FK__comment_e__emoji__571DF1D5" FromRole="comment_emoji_details" ToRole="emoji" />
+          <NavigationProperty Name="member" Relationship="Self.FK__comment_e__membe__4AB81AF0" FromRole="comment_emoji_details" ToRole="member" />
+        </EntityType>
+        <EntityType Name="emoji">
+          <Key>
+            <PropertyRef Name="emoji_id" />
+          </Key>
+          <Property Name="emoji_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="emoji_title" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="emoji_pic" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="comment_emoji_details" Relationship="Self.FK__comment_e__emoji__571DF1D5" FromRole="emoji" ToRole="comment_emoji_details" />
+          <NavigationProperty Name="message_emoji_details" Relationship="Self.FK__message_e__emoji__5629CD9C" FromRole="emoji" ToRole="message_emoji_details" />
+        </EntityType>
+        <EntityType Name="follow_list">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="member_id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="member_id" Type="String" MaxLength="7" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="followed_id" Type="String" MaxLength="7" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="follow_date" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="member" Relationship="Self.FK__follow_li__membe__4F7CD00D" FromRole="follow_list" ToRole="member" />
+        </EntityType>
+        <EntityType Name="hotel">
+          <Key>
+            <PropertyRef Name="hotel_id" />
+          </Key>
+          <Property Name="hotel_id" Type="String" MaxLength="7" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="hotel_title" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="hotel_tel" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="longitude" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="latitude" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="hotel_intro" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="website" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="city" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="district" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="address_detail" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="page_status" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="issue">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="member_id" />
+            <PropertyRef Name="admin_id" />
+            <PropertyRef Name="issue_id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="member_id" Type="String" MaxLength="7" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="admin_id" Type="Int32" Nullable="false" />
+          <Property Name="issue_id" Type="Int32" Nullable="false" />
+          <Property Name="report_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="issue_content" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="issue_result" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="issue_status" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="resolve_date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="admin" Relationship="Self.FK__issue__admin_id__534D60F1" FromRole="issue" ToRole="admin" />
+          <NavigationProperty Name="issue_type" Relationship="Self.FK__issue__issue_id__5812160E" FromRole="issue" ToRole="issue_type" />
+          <NavigationProperty Name="member" Relationship="Self.FK__issue__member_id__4D94879B" FromRole="issue" ToRole="member" />
+        </EntityType>
+        <EntityType Name="issue_type">
+          <Key>
+            <PropertyRef Name="issue_id" />
+          </Key>
+          <Property Name="issue_id" Type="Int32" Nullable="false" />
+          <Property Name="issue_name" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="issue" Relationship="Self.FK__issue__issue_id__5812160E" FromRole="issue_type" ToRole="issue" />
+        </EntityType>
+        <EntityType Name="member">
+          <Key>
+            <PropertyRef Name="member_id" />
+          </Key>
+          <Property Name="member_id" Type="String" MaxLength="7" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="member_account" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="member_password" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="member_status" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="badge_details" Relationship="Self.FK__badge_det__membe__4CA06362" FromRole="member" ToRole="badge_details" />
+          <NavigationProperty Name="collections_detail" Relationship="Self.FK__collectio__membe__4E88ABD4" FromRole="member" ToRole="collections_detail" />
+          <NavigationProperty Name="comment" Relationship="Self.FK__comment__member___48CFD27E" FromRole="member" ToRole="comment" />
+          <NavigationProperty Name="comment_emoji_details" Relationship="Self.FK__comment_e__membe__4AB81AF0" FromRole="member" ToRole="comment_emoji_details" />
+          <NavigationProperty Name="follow_list" Relationship="Self.FK__follow_li__membe__4F7CD00D" FromRole="member" ToRole="follow_list" />
+          <NavigationProperty Name="issue" Relationship="Self.FK__issue__member_id__4D94879B" FromRole="member" ToRole="issue" />
+          <NavigationProperty Name="member_profile" Relationship="Self.FK__member_pr__membe__47DBAE45" FromRole="member" ToRole="member_profile" />
+          <NavigationProperty Name="message" Relationship="Self.FK__message__member___4BAC3F29" FromRole="member" ToRole="message" />
+          <NavigationProperty Name="message_emoji_details" Relationship="Self.FK__message_e__membe__49C3F6B7" FromRole="member" ToRole="message_emoji_details" />
+        </EntityType>
+        <EntityType Name="member_profile">
+          <Key>
+            <PropertyRef Name="member_id" />
+            <PropertyRef Name="member_name" />
+          </Key>
+          <Property Name="member_id" Type="String" MaxLength="7" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="member_name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="gender" Type="Boolean" />
+          <Property Name="birthday" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="nickname" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="create_time" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="nation" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="address_detail" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="city" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="profile_photo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="website_link" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="brief_intro" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="cover_photo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="member_score" Type="Int32" />
+          <NavigationProperty Name="member" Relationship="Self.FK__member_pr__membe__47DBAE45" FromRole="member_profile" ToRole="member" />
+        </EntityType>
+        <EntityType Name="message">
+          <Key>
+            <PropertyRef Name="msg_id" />
+          </Key>
+          <Property Name="msg_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="msg_time" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="msg_content" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="comment_id" Type="Int64" Nullable="false" />
+          <Property Name="member_id" Type="String" MaxLength="7" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="msg_status" Type="Boolean" />
+          <NavigationProperty Name="comment" Relationship="Self.FK__message__comment__5070F446" FromRole="message" ToRole="comment" />
+          <NavigationProperty Name="member" Relationship="Self.FK__message__member___4BAC3F29" FromRole="message" ToRole="member" />
+          <NavigationProperty Name="message_emoji_details" Relationship="Self.FK__message_e__msg_i__52593CB8" FromRole="message" ToRole="message_emoji_details" />
+        </EntityType>
+        <EntityType Name="message_emoji_details">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="member_id" />
+            <PropertyRef Name="msg_id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="member_id" Type="String" MaxLength="7" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="msg_id" Type="Int64" Nullable="false" />
+          <Property Name="emoji_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="emoji" Relationship="Self.FK__message_e__emoji__5629CD9C" FromRole="message_emoji_details" ToRole="emoji" />
+          <NavigationProperty Name="member" Relationship="Self.FK__message_e__membe__49C3F6B7" FromRole="message_emoji_details" ToRole="member" />
+          <NavigationProperty Name="message" Relationship="Self.FK__message_e__msg_i__52593CB8" FromRole="message_emoji_details" ToRole="message" />
+        </EntityType>
+        <EntityType Name="restaurant">
+          <Key>
+            <PropertyRef Name="restaurant_id" />
+          </Key>
+          <Property Name="restaurant_id" Type="String" MaxLength="7" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="restaurant_title" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="restaurant_tel" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="restaurant_intro" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="latitude" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="longitude" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="city" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="district" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="address_detail" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="open_time" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="page_status" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="spot">
+          <Key>
+            <PropertyRef Name="spot_id" />
+          </Key>
+          <Property Name="spot_id" Type="String" MaxLength="7" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="spot_title" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="spot_tel" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="spot_intro" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="longitude" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="latitude" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="addition_note" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="city" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="district" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="address_detail" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="open_time" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="ticket_info" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="update_date" Type="DateTime" Precision="3" />
+          <Property Name="page_status" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tourism_photo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tourism_id" Type="String" MaxLength="7" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="tourism_photo1" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__issue__admin_id__534D60F1">
+          <End Role="admin" Type="Self.admin" Multiplicity="1" />
+          <End Role="issue" Type="Self.issue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="admin">
+              <PropertyRef Name="admin_id" />
+            </Principal>
+            <Dependent Role="issue">
+              <PropertyRef Name="admin_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__badge_det__badge__5441852A">
+          <End Role="badge" Type="Self.badge" Multiplicity="1" />
+          <End Role="badge_details" Type="Self.badge_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="badge">
+              <PropertyRef Name="badge_id" />
+            </Principal>
+            <Dependent Role="badge_details">
+              <PropertyRef Name="badge_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__badge_det__membe__4CA06362">
+          <End Role="member" Type="Self.member" Multiplicity="1" />
+          <End Role="badge_details" Type="Self.badge_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="member">
+              <PropertyRef Name="member_id" />
+            </Principal>
+            <Dependent Role="badge_details">
+              <PropertyRef Name="member_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__collectio__colle__5535A963">
+          <End Role="collection_type" Type="Self.collection_type" Multiplicity="1" />
+          <End Role="collections_detail" Type="Self.collections_detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="collection_type">
+              <PropertyRef Name="collection_type_id" />
+            </Principal>
+            <Dependent Role="collections_detail">
+              <PropertyRef Name="collection_type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__collectio__membe__4E88ABD4">
+          <End Role="member" Type="Self.member" Multiplicity="1" />
+          <End Role="collections_detail" Type="Self.collections_detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="member">
+              <PropertyRef Name="member_id" />
+            </Principal>
+            <Dependent Role="collections_detail">
+              <PropertyRef Name="member_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__comment__member___48CFD27E">
+          <End Role="member" Type="Self.member" Multiplicity="1" />
+          <End Role="comment" Type="Self.comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="member">
+              <PropertyRef Name="member_id" />
+            </Principal>
+            <Dependent Role="comment">
+              <PropertyRef Name="member_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__comment_e__comme__5165187F">
+          <End Role="comment" Type="Self.comment" Multiplicity="1" />
+          <End Role="comment_emoji_details" Type="Self.comment_emoji_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="comment">
+              <PropertyRef Name="comment_id" />
+            </Principal>
+            <Dependent Role="comment_emoji_details">
+              <PropertyRef Name="comment_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__message__comment__5070F446">
+          <End Role="comment" Type="Self.comment" Multiplicity="1" />
+          <End Role="message" Type="Self.message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="comment">
+              <PropertyRef Name="comment_id" />
+            </Principal>
+            <Dependent Role="message">
+              <PropertyRef Name="comment_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__comment_e__emoji__571DF1D5">
+          <End Role="emoji" Type="Self.emoji" Multiplicity="1" />
+          <End Role="comment_emoji_details" Type="Self.comment_emoji_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="emoji">
+              <PropertyRef Name="emoji_id" />
+            </Principal>
+            <Dependent Role="comment_emoji_details">
+              <PropertyRef Name="emoji_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__comment_e__membe__4AB81AF0">
+          <End Role="member" Type="Self.member" Multiplicity="1" />
+          <End Role="comment_emoji_details" Type="Self.comment_emoji_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="member">
+              <PropertyRef Name="member_id" />
+            </Principal>
+            <Dependent Role="comment_emoji_details">
+              <PropertyRef Name="member_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__message_e__emoji__5629CD9C">
+          <End Role="emoji" Type="Self.emoji" Multiplicity="1" />
+          <End Role="message_emoji_details" Type="Self.message_emoji_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="emoji">
+              <PropertyRef Name="emoji_id" />
+            </Principal>
+            <Dependent Role="message_emoji_details">
+              <PropertyRef Name="emoji_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__follow_li__membe__4F7CD00D">
+          <End Role="member" Type="Self.member" Multiplicity="1" />
+          <End Role="follow_list" Type="Self.follow_list" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="member">
+              <PropertyRef Name="member_id" />
+            </Principal>
+            <Dependent Role="follow_list">
+              <PropertyRef Name="member_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__issue__issue_id__5812160E">
+          <End Role="issue_type" Type="Self.issue_type" Multiplicity="1" />
+          <End Role="issue" Type="Self.issue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="issue_type">
+              <PropertyRef Name="issue_id" />
+            </Principal>
+            <Dependent Role="issue">
+              <PropertyRef Name="issue_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__issue__member_id__4D94879B">
+          <End Role="member" Type="Self.member" Multiplicity="1" />
+          <End Role="issue" Type="Self.issue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="member">
+              <PropertyRef Name="member_id" />
+            </Principal>
+            <Dependent Role="issue">
+              <PropertyRef Name="member_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__member_pr__membe__47DBAE45">
+          <End Role="member" Type="Self.member" Multiplicity="1" />
+          <End Role="member_profile" Type="Self.member_profile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="member">
+              <PropertyRef Name="member_id" />
+            </Principal>
+            <Dependent Role="member_profile">
+              <PropertyRef Name="member_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__message__member___4BAC3F29">
+          <End Role="member" Type="Self.member" Multiplicity="1" />
+          <End Role="message" Type="Self.message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="member">
+              <PropertyRef Name="member_id" />
+            </Principal>
+            <Dependent Role="message">
+              <PropertyRef Name="member_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__message_e__membe__49C3F6B7">
+          <End Role="member" Type="Self.member" Multiplicity="1" />
+          <End Role="message_emoji_details" Type="Self.message_emoji_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="member">
+              <PropertyRef Name="member_id" />
+            </Principal>
+            <Dependent Role="message_emoji_details">
+              <PropertyRef Name="member_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__message_e__msg_i__52593CB8">
+          <End Role="message" Type="Self.message" Multiplicity="1" />
+          <End Role="message_emoji_details" Type="Self.message_emoji_details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="message">
+              <PropertyRef Name="msg_id" />
+            </Principal>
+            <Dependent Role="message_emoji_details">
+              <PropertyRef Name="msg_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dbTravelCat" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="activity" EntityType="Self.activity" />
+          <EntitySet Name="admin" EntityType="Self.admin" />
+          <EntitySet Name="badge" EntityType="Self.badge" />
+          <EntitySet Name="badge_details" EntityType="Self.badge_details" />
+          <EntitySet Name="collection_type" EntityType="Self.collection_type" />
+          <EntitySet Name="collections_detail" EntityType="Self.collections_detail" />
+          <EntitySet Name="comment" EntityType="Self.comment" />
+          <EntitySet Name="comment_emoji_details" EntityType="Self.comment_emoji_details" />
+          <EntitySet Name="emoji" EntityType="Self.emoji" />
+          <EntitySet Name="follow_list" EntityType="Self.follow_list" />
+          <EntitySet Name="hotel" EntityType="Self.hotel" />
+          <EntitySet Name="issue" EntityType="Self.issue" />
+          <EntitySet Name="issue_type" EntityType="Self.issue_type" />
+          <EntitySet Name="member" EntityType="Self.member" />
+          <EntitySet Name="member_profile" EntityType="Self.member_profile" />
+          <EntitySet Name="message" EntityType="Self.message" />
+          <EntitySet Name="message_emoji_details" EntityType="Self.message_emoji_details" />
+          <EntitySet Name="restaurant" EntityType="Self.restaurant" />
+          <EntitySet Name="spot" EntityType="Self.spot" />
+          <EntitySet Name="tourism_photo" EntityType="Self.tourism_photo" />
+          <AssociationSet Name="FK__issue__admin_id__534D60F1" Association="Self.FK__issue__admin_id__534D60F1">
+            <End Role="admin" EntitySet="admin" />
+            <End Role="issue" EntitySet="issue" />
+          </AssociationSet>
+          <AssociationSet Name="FK__badge_det__badge__5441852A" Association="Self.FK__badge_det__badge__5441852A">
+            <End Role="badge" EntitySet="badge" />
+            <End Role="badge_details" EntitySet="badge_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK__badge_det__membe__4CA06362" Association="Self.FK__badge_det__membe__4CA06362">
+            <End Role="member" EntitySet="member" />
+            <End Role="badge_details" EntitySet="badge_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK__collectio__colle__5535A963" Association="Self.FK__collectio__colle__5535A963">
+            <End Role="collection_type" EntitySet="collection_type" />
+            <End Role="collections_detail" EntitySet="collections_detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK__collectio__membe__4E88ABD4" Association="Self.FK__collectio__membe__4E88ABD4">
+            <End Role="member" EntitySet="member" />
+            <End Role="collections_detail" EntitySet="collections_detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK__comment__member___48CFD27E" Association="Self.FK__comment__member___48CFD27E">
+            <End Role="member" EntitySet="member" />
+            <End Role="comment" EntitySet="comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__comment_e__comme__5165187F" Association="Self.FK__comment_e__comme__5165187F">
+            <End Role="comment" EntitySet="comment" />
+            <End Role="comment_emoji_details" EntitySet="comment_emoji_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK__message__comment__5070F446" Association="Self.FK__message__comment__5070F446">
+            <End Role="comment" EntitySet="comment" />
+            <End Role="message" EntitySet="message" />
+          </AssociationSet>
+          <AssociationSet Name="FK__comment_e__emoji__571DF1D5" Association="Self.FK__comment_e__emoji__571DF1D5">
+            <End Role="emoji" EntitySet="emoji" />
+            <End Role="comment_emoji_details" EntitySet="comment_emoji_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK__comment_e__membe__4AB81AF0" Association="Self.FK__comment_e__membe__4AB81AF0">
+            <End Role="member" EntitySet="member" />
+            <End Role="comment_emoji_details" EntitySet="comment_emoji_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK__message_e__emoji__5629CD9C" Association="Self.FK__message_e__emoji__5629CD9C">
+            <End Role="emoji" EntitySet="emoji" />
+            <End Role="message_emoji_details" EntitySet="message_emoji_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK__follow_li__membe__4F7CD00D" Association="Self.FK__follow_li__membe__4F7CD00D">
+            <End Role="member" EntitySet="member" />
+            <End Role="follow_list" EntitySet="follow_list" />
+          </AssociationSet>
+          <AssociationSet Name="FK__issue__issue_id__5812160E" Association="Self.FK__issue__issue_id__5812160E">
+            <End Role="issue_type" EntitySet="issue_type" />
+            <End Role="issue" EntitySet="issue" />
+          </AssociationSet>
+          <AssociationSet Name="FK__issue__member_id__4D94879B" Association="Self.FK__issue__member_id__4D94879B">
+            <End Role="member" EntitySet="member" />
+            <End Role="issue" EntitySet="issue" />
+          </AssociationSet>
+          <AssociationSet Name="FK__member_pr__membe__47DBAE45" Association="Self.FK__member_pr__membe__47DBAE45">
+            <End Role="member" EntitySet="member" />
+            <End Role="member_profile" EntitySet="member_profile" />
+          </AssociationSet>
+          <AssociationSet Name="FK__message__member___4BAC3F29" Association="Self.FK__message__member___4BAC3F29">
+            <End Role="member" EntitySet="member" />
+            <End Role="message" EntitySet="message" />
+          </AssociationSet>
+          <AssociationSet Name="FK__message_e__membe__49C3F6B7" Association="Self.FK__message_e__membe__49C3F6B7">
+            <End Role="member" EntitySet="member" />
+            <End Role="message_emoji_details" EntitySet="message_emoji_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK__message_e__msg_i__52593CB8" Association="Self.FK__message_e__msg_i__52593CB8">
+            <End Role="message" EntitySet="message" />
+            <End Role="message_emoji_details" EntitySet="message_emoji_details" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TravelCatStoreContainer" CdmEntityContainer="dbTravelCat">
+          <EntitySetMapping Name="activity">
+            <EntityTypeMapping TypeName="TravelCat.activity">
+              <MappingFragment StoreEntitySet="activity">
+                <ScalarProperty Name="activity_id" ColumnName="activity_id" />
+                <ScalarProperty Name="activity_title" ColumnName="activity_title" />
+                <ScalarProperty Name="activity_tel" ColumnName="activity_tel" />
+                <ScalarProperty Name="activity_intro" ColumnName="activity_intro" />
+                <ScalarProperty Name="longitude" ColumnName="longitude" />
+                <ScalarProperty Name="latitude" ColumnName="latitude" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="district" ColumnName="district" />
+                <ScalarProperty Name="address_detail" ColumnName="address_detail" />
+                <ScalarProperty Name="end_date" ColumnName="end_date" />
+                <ScalarProperty Name="begin_date" ColumnName="begin_date" />
+                <ScalarProperty Name="organizer" ColumnName="organizer" />
+                <ScalarProperty Name="website" ColumnName="website" />
+                <ScalarProperty Name="transport_info" ColumnName="transport_info" />
+                <ScalarProperty Name="page_status" ColumnName="page_status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="admin">
+            <EntityTypeMapping TypeName="TravelCat.admin">
+              <MappingFragment StoreEntitySet="admin">
+                <ScalarProperty Name="admin_id" ColumnName="admin_id" />
+                <ScalarProperty Name="admin_account" ColumnName="admin_account" />
+                <ScalarProperty Name="admin_password" ColumnName="admin_password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="badge">
+            <EntityTypeMapping TypeName="TravelCat.badge">
+              <MappingFragment StoreEntitySet="badge">
+                <ScalarProperty Name="badge_id" ColumnName="badge_id" />
+                <ScalarProperty Name="badge_title" ColumnName="badge_title" />
+                <ScalarProperty Name="badge_photo" ColumnName="badge_photo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="badge_details">
+            <EntityTypeMapping TypeName="TravelCat.badge_details">
+              <MappingFragment StoreEntitySet="badge_details">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="member_id" ColumnName="member_id" />
+                <ScalarProperty Name="badge_id" ColumnName="badge_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="collection_type">
+            <EntityTypeMapping TypeName="TravelCat.collection_type">
+              <MappingFragment StoreEntitySet="collection_type">
+                <ScalarProperty Name="collection_type_id" ColumnName="collection_type_id" />
+                <ScalarProperty Name="collection_type_title" ColumnName="collection_type_title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="collections_detail">
+            <EntityTypeMapping TypeName="TravelCat.collections_detail">
+              <MappingFragment StoreEntitySet="collections_detail">
+                <ScalarProperty Name="collection_id" ColumnName="collection_id" />
+                <ScalarProperty Name="member_id" ColumnName="member_id" />
+                <ScalarProperty Name="tourism_id" ColumnName="tourism_id" />
+                <ScalarProperty Name="privacy" ColumnName="privacy" />
+                <ScalarProperty Name="collection_type_id" ColumnName="collection_type_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="comment">
+            <EntityTypeMapping TypeName="TravelCat.comment">
+              <MappingFragment StoreEntitySet="comment">
+                <ScalarProperty Name="comment_id" ColumnName="comment_id" />
+                <ScalarProperty Name="tourism_id" ColumnName="tourism_id" />
+                <ScalarProperty Name="comment_title" ColumnName="comment_title" />
+                <ScalarProperty Name="comment_content" ColumnName="comment_content" />
+                <ScalarProperty Name="comment_date" ColumnName="comment_date" />
+                <ScalarProperty Name="comment_photo" ColumnName="comment_photo" />
+                <ScalarProperty Name="comment_stay_total" ColumnName="comment_stay_total" />
+                <ScalarProperty Name="travel_partner" ColumnName="travel_partner" />
+                <ScalarProperty Name="comment_rating" ColumnName="comment_rating" />
+                <ScalarProperty Name="travel_month" ColumnName="travel_month" />
+                <ScalarProperty Name="comment_status" ColumnName="comment_status" />
+                <ScalarProperty Name="member_id" ColumnName="member_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="comment_emoji_details">
+            <EntityTypeMapping TypeName="TravelCat.comment_emoji_details">
+              <MappingFragment StoreEntitySet="comment_emoji_details">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="member_id" ColumnName="member_id" />
+                <ScalarProperty Name="comment_id" ColumnName="comment_id" />
+                <ScalarProperty Name="emoji_id" ColumnName="emoji_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="emoji">
+            <EntityTypeMapping TypeName="TravelCat.emoji">
+              <MappingFragment StoreEntitySet="emoji">
+                <ScalarProperty Name="emoji_id" ColumnName="emoji_id" />
+                <ScalarProperty Name="emoji_title" ColumnName="emoji_title" />
+                <ScalarProperty Name="emoji_pic" ColumnName="emoji_pic" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="follow_list">
+            <EntityTypeMapping TypeName="TravelCat.follow_list">
+              <MappingFragment StoreEntitySet="follow_list">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="member_id" ColumnName="member_id" />
+                <ScalarProperty Name="followed_id" ColumnName="followed_id" />
+                <ScalarProperty Name="follow_date" ColumnName="follow_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="hotel">
+            <EntityTypeMapping TypeName="TravelCat.hotel">
+              <MappingFragment StoreEntitySet="hotel">
+                <ScalarProperty Name="hotel_id" ColumnName="hotel_id" />
+                <ScalarProperty Name="hotel_title" ColumnName="hotel_title" />
+                <ScalarProperty Name="hotel_tel" ColumnName="hotel_tel" />
+                <ScalarProperty Name="longitude" ColumnName="longitude" />
+                <ScalarProperty Name="latitude" ColumnName="latitude" />
+                <ScalarProperty Name="hotel_intro" ColumnName="hotel_intro" />
+                <ScalarProperty Name="website" ColumnName="website" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="district" ColumnName="district" />
+                <ScalarProperty Name="address_detail" ColumnName="address_detail" />
+                <ScalarProperty Name="page_status" ColumnName="page_status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="issue">
+            <EntityTypeMapping TypeName="TravelCat.issue">
+              <MappingFragment StoreEntitySet="issue">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="member_id" ColumnName="member_id" />
+                <ScalarProperty Name="admin_id" ColumnName="admin_id" />
+                <ScalarProperty Name="issue_id" ColumnName="issue_id" />
+                <ScalarProperty Name="report_date" ColumnName="report_date" />
+                <ScalarProperty Name="issue_content" ColumnName="issue_content" />
+                <ScalarProperty Name="issue_result" ColumnName="issue_result" />
+                <ScalarProperty Name="issue_status" ColumnName="issue_status" />
+                <ScalarProperty Name="resolve_date" ColumnName="resolve_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="issue_type">
+            <EntityTypeMapping TypeName="TravelCat.issue_type">
+              <MappingFragment StoreEntitySet="issue_type">
+                <ScalarProperty Name="issue_id" ColumnName="issue_id" />
+                <ScalarProperty Name="issue_name" ColumnName="issue_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="member">
+            <EntityTypeMapping TypeName="TravelCat.member">
+              <MappingFragment StoreEntitySet="member">
+                <ScalarProperty Name="member_id" ColumnName="member_id" />
+                <ScalarProperty Name="member_account" ColumnName="member_account" />
+                <ScalarProperty Name="member_password" ColumnName="member_password" />
+                <ScalarProperty Name="member_status" ColumnName="member_status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="member_profile">
+            <EntityTypeMapping TypeName="TravelCat.member_profile">
+              <MappingFragment StoreEntitySet="member_profile">
+                <ScalarProperty Name="member_id" ColumnName="member_id" />
+                <ScalarProperty Name="member_name" ColumnName="member_name" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="birthday" ColumnName="birthday" />
+                <ScalarProperty Name="nickname" ColumnName="nickname" />
+                <ScalarProperty Name="create_time" ColumnName="create_time" />
+                <ScalarProperty Name="nation" ColumnName="nation" />
+                <ScalarProperty Name="address_detail" ColumnName="address_detail" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="profile_photo" ColumnName="profile_photo" />
+                <ScalarProperty Name="website_link" ColumnName="website_link" />
+                <ScalarProperty Name="brief_intro" ColumnName="brief_intro" />
+                <ScalarProperty Name="cover_photo" ColumnName="cover_photo" />
+                <ScalarProperty Name="member_score" ColumnName="member_score" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="message">
+            <EntityTypeMapping TypeName="TravelCat.message">
+              <MappingFragment StoreEntitySet="message">
+                <ScalarProperty Name="msg_id" ColumnName="msg_id" />
+                <ScalarProperty Name="msg_time" ColumnName="msg_time" />
+                <ScalarProperty Name="msg_content" ColumnName="msg_content" />
+                <ScalarProperty Name="comment_id" ColumnName="comment_id" />
+                <ScalarProperty Name="member_id" ColumnName="member_id" />
+                <ScalarProperty Name="msg_status" ColumnName="msg_status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="message_emoji_details">
+            <EntityTypeMapping TypeName="TravelCat.message_emoji_details">
+              <MappingFragment StoreEntitySet="message_emoji_details">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="member_id" ColumnName="member_id" />
+                <ScalarProperty Name="msg_id" ColumnName="msg_id" />
+                <ScalarProperty Name="emoji_id" ColumnName="emoji_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="restaurant">
+            <EntityTypeMapping TypeName="TravelCat.restaurant">
+              <MappingFragment StoreEntitySet="restaurant">
+                <ScalarProperty Name="restaurant_id" ColumnName="restaurant_id" />
+                <ScalarProperty Name="restaurant_title" ColumnName="restaurant_title" />
+                <ScalarProperty Name="restaurant_tel" ColumnName="restaurant_tel" />
+                <ScalarProperty Name="restaurant_intro" ColumnName="restaurant_intro" />
+                <ScalarProperty Name="latitude" ColumnName="latitude" />
+                <ScalarProperty Name="longitude" ColumnName="longitude" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="district" ColumnName="district" />
+                <ScalarProperty Name="address_detail" ColumnName="address_detail" />
+                <ScalarProperty Name="open_time" ColumnName="open_time" />
+                <ScalarProperty Name="page_status" ColumnName="page_status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="spot">
+            <EntityTypeMapping TypeName="TravelCat.spot">
+              <MappingFragment StoreEntitySet="spot">
+                <ScalarProperty Name="spot_id" ColumnName="spot_id" />
+                <ScalarProperty Name="spot_title" ColumnName="spot_title" />
+                <ScalarProperty Name="spot_tel" ColumnName="spot_tel" />
+                <ScalarProperty Name="spot_intro" ColumnName="spot_intro" />
+                <ScalarProperty Name="longitude" ColumnName="longitude" />
+                <ScalarProperty Name="latitude" ColumnName="latitude" />
+                <ScalarProperty Name="addition_note" ColumnName="addition_note" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="district" ColumnName="district" />
+                <ScalarProperty Name="address_detail" ColumnName="address_detail" />
+                <ScalarProperty Name="open_time" ColumnName="open_time" />
+                <ScalarProperty Name="ticket_info" ColumnName="ticket_info" />
+                <ScalarProperty Name="update_date" ColumnName="update_date" />
+                <ScalarProperty Name="page_status" ColumnName="page_status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tourism_photo">
+            <EntityTypeMapping TypeName="TravelCat.tourism_photo">
+              <MappingFragment StoreEntitySet="tourism_photo">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="tourism_id" ColumnName="tourism_id" />
+                <ScalarProperty Name="tourism_photo1" ColumnName="tourism_photo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="無" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
