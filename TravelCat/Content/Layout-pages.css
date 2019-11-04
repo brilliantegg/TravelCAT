@@ -25,69 +25,96 @@ body {
 
 /*      左側選單樣式      */
 .side-menu {
+    position: relative;
     width: 240px;
     height: 100%;
     padding: 80px 0;
     box-sizing: border-box;
     background-image: linear-gradient(0deg, #3381b0, #c2196c);
     box-shadow: 5px 0px 10px hsla(240, 40%, 15%, .6);
-    position:fixed;
-    left:0;
-    top:0;
+    position: fixed;
+    left: 0;
+    top: 0;
     z-index: 100;
+    transform: translateX(-100%);
+    transition: .3s;
 }
-
-    .side-menu .item {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+    .side-menu label {
+        position: absolute;
+        width: 40px;
+        height: 80px;
+        background-color: #000;
+        color: #fff;
+        right: -40px;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        line-height: 80px;
+        text-align: center;
+        font-size: 30px;
+        border-radius: 0 10px 10px 0;
+        cursor: pointer;
     }
 
-        .side-menu .item li {
-            width: 200px;
-            display:flex;
-            flex-wrap:nowrap;
+#side-menu-switch:checked + .side-menu {
+    transform: translateX(0);
+}
+
+    #side-menu-switch:checked + .side-menu label .fa {
+        transform: scaleX(-1);
+    }
+
+.side-menu .item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+    .side-menu .item li {
+        width: 200px;
+        display: flex;
+        flex-wrap: nowrap;
+    }
+
+        .side-menu .item li a {
+            display: inline-block;
+            width: 100%;
+            padding: 5px;
+            color: #FFF;
+            font-weight: 500;
+            font-size: 1.3em;
+            text-decoration: none;
         }
 
-            .side-menu .item li a {
-                display:inline-block;
-                width:100%;
-                padding:5px;
-                color: #FFF;
-                font-weight: 500;
-                font-size: 1.3em;
-                text-decoration: none;
-            }
+        .side-menu .item li:hover a {
+            color: #7bf;
+        }
 
-            .side-menu .item li:hover a{
-                color: #7bf;
-            }
+        .side-menu .item li + li {
+            border-top: 1px solid rgba(255,255,255,.3);
+        }
 
-.side-menu .item li+ li{
-    border-top: 1px solid rgba(255,255,255,.3);
-}
+        .side-menu .item li .fa {
+            color: #FFF;
+            font-size: 1.3em;
+            width: 20px;
+            margin-right: -1.1em;
+            transform: scale(0);
+            transition: .3s;
+            line-height: 41px;
+        }
 
-.side-menu .item li .fa {
-    color: #FFF;
-    font-size: 1.3em;
-    width:20px;
-    margin-right: -1.1em;
-    transform: scale(0);
-    transition: .3s;
-    line-height:41px;
-}
-
-.side-menu .item li:hover .fa {
-    color: #7bf;
-    margin-right: .5em;
-    transform: scale(1);
-}
+        .side-menu .item li:hover .fa {
+            color: #7bf;
+            margin-right: .5em;
+            transform: scale(1);
+        }
 
 /*  Layout外框   結束*/
 
 
 .container-fluid {
     margin-top: 66px;
-    margin-left: 240px;
+    padding: 0 280px;
     min-width: 1200px;
 }
