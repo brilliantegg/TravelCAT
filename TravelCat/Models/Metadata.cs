@@ -130,16 +130,16 @@ namespace TravelCat.Models
         public string activity_title { get; set; }
 
         [DisplayName("電話")]
-        [StringLength(20)]
+        [StringLength(50)]
         public string activity_tel { get; set; }
 
         [DisplayName("活動簡介")]
         [Column(TypeName = "ntext")]
-        [Required]
+        //[Required]
         public string activity_intro { get; set; }
 
         [DisplayName("經度")]
-        [Required]
+        //[Required]
         [StringLength(25)]
         public string longitude { get; set; }
 
@@ -149,27 +149,27 @@ namespace TravelCat.Models
         public string latitude { get; set; }
 
         [DisplayName("所在城市")]
-        [Required]
+        //[Required]
         [StringLength(10)]
         public string city { get; set; }
 
         [DisplayName("行政區")]
-        [Required]
+        //[Required]
         [StringLength(10)]
         public string district { get; set; }
 
         [DisplayName("地址")]
-        [Required]
-        [StringLength(60)]
+        //[Required]
+        [StringLength(100)]
         public string address_detail { get; set; }
 
         [DisplayName("結束時間")]
-        [Required]
+        //[Required]
         [StringLength(30)]
         public string end_date { get; set; }
 
         [DisplayName("開始時間")]
-        [Required]
+        //[Required]
         [StringLength(30)]
         public string begin_date { get; set; }
 
@@ -178,11 +178,11 @@ namespace TravelCat.Models
         public string organizer { get; set; }
 
         [DisplayName("活動網站")]
-        [StringLength(150)]
+        [StringLength(300)]
         public string website { get; set; }
 
         [DisplayName("交通資訊")]
-        [StringLength(200)]
+        [StringLength(300)]
         public string transport_info { get; set; }
 
         [DisplayName("頁面狀態")]
@@ -298,17 +298,17 @@ namespace TravelCat.Models
         public string hotel_title { get; set; }
 
         [DisplayName("電話")]
-        [Required(ErrorMessage = "請輸入電話")]
-        [StringLength(20, ErrorMessage = "名稱最多20字")]
+        //[Required(ErrorMessage = "請輸入電話")]
+        [StringLength(50, ErrorMessage = "名稱最多50字")]
         public string hotel_tel { get; set; }
 
         [DisplayName("經度")]
-        [Required(ErrorMessage = "請輸入座標緯度")]
+        //[Required(ErrorMessage = "請輸入座標緯度")]
         [StringLength(25, ErrorMessage = "名稱最多25字")]
         public string longitude { get; set; }
 
         [DisplayName("緯度")]
-        [Required(ErrorMessage = "請輸入座標經度")]
+        //[Required(ErrorMessage = "請輸入座標經度")]
         [StringLength(25, ErrorMessage = "名稱最多25字")]
         public string latitude { get; set; }
 
@@ -316,26 +316,26 @@ namespace TravelCat.Models
         public string hotel_intro { get; set; }
 
         [DisplayName("飯店網站")]
-        [StringLength(150, ErrorMessage = "網址最多150字")]
+        [StringLength(300, ErrorMessage = "網址最多300字")]
         public string website { get; set; }
 
         [DisplayName("所在地縣市")]
-        [Required(ErrorMessage = "請輸入所在地縣市")]
+        //[Required(ErrorMessage = "請輸入所在地縣市")]
         [StringLength(10, ErrorMessage = "名稱最多10字")]
         public string city { get; set; }
 
         [DisplayName("區域名稱")]
-        [Required(ErrorMessage = "請輸入所在地區域")]
+        //[Required(ErrorMessage = "請輸入所在地區域")]
         [StringLength(5, ErrorMessage = "名稱最多5字")]
         public string district { get; set; }
 
         [DisplayName("詳細地址")]
-        [Required(ErrorMessage = "請輸入地址")]
-        [StringLength(60, ErrorMessage = "名稱最多60字")]
+        //[Required(ErrorMessage = "請輸入地址")]
+        [StringLength(100, ErrorMessage = "名稱最多10字")]
         public string address_detail { get; set; }
 
         [DisplayName("頁面狀態")]
-        [Required(ErrorMessage = "請輸入0或1")]
+        //[Required(ErrorMessage = "請輸入0或1")]
         public bool page_status { get; set; }
     }
     [MetadataType(typeof(Metadata_comment))]
