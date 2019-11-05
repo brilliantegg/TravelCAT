@@ -11,17 +11,17 @@
           </Key>
           <Property Name="activity_id" Type="char" MaxLength="7" Nullable="false" />
           <Property Name="activity_title" Type="nchar" MaxLength="30" Nullable="false" />
-          <Property Name="activity_tel" Type="varchar" MaxLength="20" />
-          <Property Name="activity_intro" Type="ntext" Nullable="false" />
-          <Property Name="longitude" Type="varchar" MaxLength="25" Nullable="false" />
-          <Property Name="latitude" Type="varchar" MaxLength="25" Nullable="false" />
-          <Property Name="city" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="district" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="address_detail" Type="nvarchar" MaxLength="60" Nullable="false" />
-          <Property Name="end_date" Type="varchar" MaxLength="30" Nullable="false" />
-          <Property Name="begin_date" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="activity_tel" Type="varchar" MaxLength="50" />
+          <Property Name="activity_intro" Type="ntext" />
+          <Property Name="longitude" Type="varchar" MaxLength="25" />
+          <Property Name="latitude" Type="varchar" MaxLength="25" />
+          <Property Name="city" Type="nvarchar" MaxLength="10" />
+          <Property Name="district" Type="nvarchar" MaxLength="10" />
+          <Property Name="address_detail" Type="nvarchar" MaxLength="100" />
+          <Property Name="end_date" Type="varchar" MaxLength="30" />
+          <Property Name="begin_date" Type="varchar" MaxLength="30" />
           <Property Name="organizer" Type="nvarchar" MaxLength="50" />
-          <Property Name="website" Type="varchar" MaxLength="150" />
+          <Property Name="website" Type="varchar" MaxLength="300" />
           <Property Name="transport_info" Type="nvarchar" MaxLength="200" />
           <Property Name="page_status" Type="bit" Nullable="false" />
         </EntityType>
@@ -121,14 +121,14 @@
           </Key>
           <Property Name="hotel_id" Type="char" MaxLength="7" Nullable="false" />
           <Property Name="hotel_title" Type="nvarchar" MaxLength="30" Nullable="false" />
-          <Property Name="hotel_tel" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="longitude" Type="varchar" MaxLength="25" Nullable="false" />
-          <Property Name="latitude" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="hotel_tel" Type="varchar" MaxLength="50" />
+          <Property Name="longitude" Type="varchar" MaxLength="25" />
+          <Property Name="latitude" Type="varchar" MaxLength="25" />
           <Property Name="hotel_intro" Type="ntext" />
-          <Property Name="website" Type="varchar" MaxLength="150" />
-          <Property Name="city" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="district" Type="nvarchar" MaxLength="5" Nullable="false" />
-          <Property Name="address_detail" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="website" Type="varchar" MaxLength="300" />
+          <Property Name="city" Type="nvarchar" MaxLength="10" />
+          <Property Name="district" Type="nvarchar" MaxLength="5" />
+          <Property Name="address_detail" Type="nvarchar" MaxLength="100" />
           <Property Name="page_status" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="issue">
@@ -214,13 +214,13 @@
           </Key>
           <Property Name="restaurant_id" Type="char" MaxLength="7" Nullable="false" />
           <Property Name="restaurant_title" Type="nchar" MaxLength="30" Nullable="false" />
-          <Property Name="restaurant_tel" Type="varchar" MaxLength="20" />
+          <Property Name="restaurant_tel" Type="varchar" MaxLength="50" />
           <Property Name="restaurant_intro" Type="ntext" />
-          <Property Name="latitude" Type="varchar" MaxLength="25" Nullable="false" />
-          <Property Name="longitude" Type="varchar" MaxLength="25" Nullable="false" />
-          <Property Name="city" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="district" Type="nvarchar" MaxLength="5" Nullable="false" />
-          <Property Name="address_detail" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="latitude" Type="varchar" MaxLength="25" />
+          <Property Name="longitude" Type="varchar" MaxLength="25" />
+          <Property Name="city" Type="nvarchar" MaxLength="10" />
+          <Property Name="district" Type="nvarchar" MaxLength="5" />
+          <Property Name="address_detail" Type="nvarchar" MaxLength="100" />
           <Property Name="open_time" Type="nvarchar" MaxLength="80" />
           <Property Name="page_status" Type="bit" Nullable="false" />
         </EntityType>
@@ -230,14 +230,14 @@
           </Key>
           <Property Name="spot_id" Type="char" MaxLength="7" Nullable="false" />
           <Property Name="spot_title" Type="nvarchar" MaxLength="30" Nullable="false" />
-          <Property Name="spot_tel" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="spot_tel" Type="varchar" MaxLength="50" />
           <Property Name="spot_intro" Type="ntext" />
-          <Property Name="longitude" Type="varchar" MaxLength="25" Nullable="false" />
-          <Property Name="latitude" Type="varchar" MaxLength="25" Nullable="false" />
-          <Property Name="addition_note" Type="nvarchar" MaxLength="150" />
-          <Property Name="city" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="district" Type="nvarchar" MaxLength="5" Nullable="false" />
-          <Property Name="address_detail" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="longitude" Type="varchar" MaxLength="25" />
+          <Property Name="latitude" Type="varchar" MaxLength="25" />
+          <Property Name="addition_note" Type="nvarchar" MaxLength="250" />
+          <Property Name="city" Type="nvarchar" MaxLength="10" />
+          <Property Name="district" Type="nvarchar" MaxLength="5" />
+          <Property Name="address_detail" Type="nvarchar" MaxLength="100" />
           <Property Name="open_time" Type="nvarchar" MaxLength="80" />
           <Property Name="ticket_info" Type="nvarchar" MaxLength="30" />
           <Property Name="update_date" Type="datetime" />
@@ -571,17 +571,17 @@
           </Key>
           <Property Name="activity_id" Type="String" MaxLength="7" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="activity_title" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="activity_tel" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="activity_intro" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="longitude" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="latitude" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="city" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="district" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="address_detail" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="end_date" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="begin_date" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="activity_tel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="activity_intro" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="longitude" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="latitude" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="city" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="district" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="address_detail" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="end_date" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="begin_date" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="organizer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="website" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="website" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
           <Property Name="transport_info" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="page_status" Type="Boolean" Nullable="false" />
         </EntityType>
@@ -697,14 +697,14 @@
           </Key>
           <Property Name="hotel_id" Type="String" MaxLength="7" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="hotel_title" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="hotel_tel" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="longitude" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="latitude" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="hotel_tel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="longitude" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="latitude" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="hotel_intro" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="website" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="city" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="district" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="address_detail" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="website" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="city" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="district" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="address_detail" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="page_status" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="issue">
@@ -810,13 +810,13 @@
           </Key>
           <Property Name="restaurant_id" Type="String" MaxLength="7" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="restaurant_title" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="restaurant_tel" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="restaurant_tel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="restaurant_intro" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="latitude" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="longitude" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="city" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="district" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="address_detail" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="latitude" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="longitude" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="city" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="district" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="address_detail" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="open_time" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
           <Property Name="page_status" Type="Boolean" Nullable="false" />
         </EntityType>
@@ -826,14 +826,14 @@
           </Key>
           <Property Name="spot_id" Type="String" MaxLength="7" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="spot_title" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="spot_tel" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="spot_tel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="spot_intro" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="longitude" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="latitude" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="addition_note" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="city" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="district" Type="String" MaxLength="5" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="address_detail" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="longitude" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="latitude" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="addition_note" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="city" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="district" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="address_detail" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="open_time" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
           <Property Name="ticket_info" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="update_date" Type="DateTime" Precision="3" />
