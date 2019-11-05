@@ -16,28 +16,35 @@ namespace TravelCat.Controllers
         dbTravelCat db = new dbTravelCat();
         int pageSize = 10;
 
-        public ActionResult Index(int? page)
+        public ActionResult Index(string id,int? page)
         {
-            int pageNumber = (page ?? 1);
+            int pageNumber = (page ?? 1);            
+            if (!String.IsNullOrEmpty(id))
+            {
+                 var search = db.spot.Where(s => s.spot_id.Contains(id) || s.spot_title.Contains(id)
+                || s.city.Contains(id) || s.district.Contains(id)).ToList().ToPagedList(pageNumber, pageSize); 
+                return View(search);
+            }
+
             var data = db.spot.OrderBy(m => m.spot_id).ToPagedList(pageNumber, pageSize);
-                       
-            return View(data);                       
+
+            return View(data);
         }
         //public ActionResult contentQuery(string id)
         //{
         //    var search = from a in db.spots
         //                    select a;
-        //    if (!String.IsNullOrEmpty(id))
-        //    {
-        //        search = search.Where(s => s.spot_id.Contains(id) || s.spot_title.Contains(id)
-        //        || s.city.Contains(id) || s.district.Contains(id));
-        //    }
-        //    return View(search);
-        //}
+            //if (!String.IsNullOrEmpty(id))
+            //{
+            //    search = search.Where(s => s.spot_id.Contains(id) || s.spot_title.Contains(id)
+            //    || s.city.Contains(id) || s.district.Contains(id));
+            //}
+    //    return View(search);
+    //}
 
-   
 
-        public ActionResult Create()
+
+    public ActionResult Create()
         {
             return View();
         }
