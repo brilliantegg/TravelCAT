@@ -83,6 +83,7 @@ namespace TravelCat.Controllers
                     if (rt[i].Picture1 != "")
                     {
                         tourism_photo tp = new tourism_photo();
+                        tp.id = db.Database.SqlQuery<int>("Select count(*) from dbo.activity").FirstOrDefault();
                         tp.tourism_id = items.activity_id;
                         tp.tourism_photo1 = rt[i].Picture1;
                         db.tourism_photo.Add(tp);
@@ -90,6 +91,7 @@ namespace TravelCat.Controllers
                     if (rt[i].Picture2 != "")
                     {
                         tourism_photo tp = new tourism_photo();
+                        tp.id = db.Database.SqlQuery<int>("Select count(*) from dbo.activity").FirstOrDefault();
                         tp.tourism_id = items.activity_id;
                         tp.tourism_photo1 = rt[i].Picture2;
                         db.tourism_photo.Add(tp);
@@ -97,6 +99,7 @@ namespace TravelCat.Controllers
                     if (rt[i].Picture3 != "")
                     {
                         tourism_photo tp = new tourism_photo();
+                        tp.id=db.Database.SqlQuery<int>("Select count(*) from dbo.activity").FirstOrDefault();
                         tp.tourism_id = items.activity_id;
                         tp.tourism_photo1 = rt[i].Picture3;
                         db.tourism_photo.Add(tp);
