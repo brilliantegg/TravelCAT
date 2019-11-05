@@ -1808,6 +1808,8 @@
     </Content>
     <Content Include="hotel_C_f.json" />
     <Content Include="activity_C_f.json" />
+    <Content Include="restaurant_C_f.json" />
+    <Content Include="spot_C_f.json" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -1846,8 +1848,8 @@
     <Compile Include="Controllers\commentsController.cs" />
     <Compile Include="Controllers\destinationsController.cs" />
     <Compile Include="Controllers\HotelsController.cs" />
-    <Compile Include="Controllers\import_htController.cs" />
-    <Compile Include="Controllers\Import_acController.cs" />
+    <Compile Include="Controllers\import_rtController.cs" />
+    <Compile Include="Controllers\Import_spController.cs" />
     <Compile Include="Controllers\issuesController.cs" />
     <Compile Include="Controllers\LoginadminController.cs" />
     <Compile Include="Controllers\membersController.cs" />
