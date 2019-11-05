@@ -7,7 +7,7 @@
 }
 
 <link href="~/Content/back-end-index.css" rel="stylesheet" />
-<h2 class="mt-3 ml-3">活動列表</h2>
+<h2 class="mt-3 text-center">活動列表</h2>
 
 <div class="header ml-3">
     @Html.ActionLink("新增活動", "Create", "Activities", null, new { @class = "btn btn-secondary" })
@@ -26,7 +26,7 @@
         <th class="col-1">
             @Html.DisplayNameFor(model => model.First().activity_id)
         </th>
-        <th class="col-3 text-truncate">
+        <th class="col-4 text-truncate">
             @Html.DisplayNameFor(model => model.First().activity_title)
         </th>
         <th class="col-1">
@@ -35,13 +35,7 @@
         <th class="col-1">
             @Html.DisplayNameFor(model => model.First().district)
         </th>
-        <th class="col-1">
-            @Html.DisplayNameFor(model => model.First().begin_date)
-        </th>
-        <th class="col-1">
-            @Html.DisplayNameFor(model => model.First().end_date)
-        </th>
-        <th class="col-2 text-truncate">
+        <th class="col-3 text-truncate">
             @Html.DisplayNameFor(model => model.First().organizer)
         </th>
         <th class="col-1">
@@ -58,7 +52,7 @@
             <td class="col-1">
                 @Html.DisplayFor(modelItem => item.activity_id)
             </td>
-            <td class="col-3 text-truncate">
+            <td class="col-4 text-truncate">
                 @Html.DisplayFor(modelItem => item.activity_title)
             </td>
             <td class="col-1">
@@ -67,13 +61,7 @@
             <td class="col-1">
                 @Html.DisplayFor(modelItem => item.district)
             </td>
-            <td class="col-1">
-                @Html.DisplayFor(modelItem => item.begin_date)
-            </td>
-            <td class="col-1">
-                @Html.DisplayFor(modelItem => item.end_date)
-            </td>
-            <td class="col-2 text-truncate">
+            <td class="col-3 text-truncate">
                 @Html.DisplayFor(modelItem => item.organizer)
             </td>
             <td class="col-1">
