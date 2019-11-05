@@ -26,11 +26,8 @@
         <th class="col-1">
             @Html.DisplayNameFor(model => model.First().activity_id)
         </th>
-        <th class="col-2 text-truncate">
+        <th class="col-3 text-truncate">
             @Html.DisplayNameFor(model => model.First().activity_title)
-        </th>
-        <th class="col-2 text-truncate">
-            @Html.DisplayNameFor(model => model.First().activity_intro)
         </th>
         <th class="col-1">
             @Html.DisplayNameFor(model => model.First().city)
@@ -44,7 +41,7 @@
         <th class="col-1">
             @Html.DisplayNameFor(model => model.First().end_date)
         </th>
-        <th class="col-1">
+        <th class="col-2 text-truncate">
             @Html.DisplayNameFor(model => model.First().organizer)
         </th>
         <th class="col-1">
@@ -61,11 +58,8 @@
             <td class="col-1">
                 @Html.DisplayFor(modelItem => item.activity_id)
             </td>
-            <td class="col-2 text-truncate">
+            <td class="col-3 text-truncate">
                 @Html.DisplayFor(modelItem => item.activity_title)
-            </td>
-            <td class="col-2 text-truncate">
-                @Html.DisplayFor(modelItem => item.activity_intro)
             </td>
             <td class="col-1">
                 @Html.DisplayFor(modelItem => item.city)
@@ -79,7 +73,7 @@
             <td class="col-1">
                 @Html.DisplayFor(modelItem => item.end_date)
             </td>
-            <td class="col-1">
+            <td class="col-2 text-truncate">
                 @Html.DisplayFor(modelItem => item.organizer)
             </td>
             <td class="col-1">

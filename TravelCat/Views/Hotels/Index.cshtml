@@ -29,7 +29,7 @@
         <th class="col-2 text-truncate">
             @Html.DisplayNameFor(model => model.First().hotel_title)
         </th>
-        <th class="col-1">
+        <th class="col-2 text-truncate">
             @Html.DisplayNameFor(model => model.First().hotel_tel)
         </th>
         <th class="col-3 text-truncate">
@@ -40,9 +40,6 @@
         </th>
         <th class="col-1">
             @Html.DisplayNameFor(model => model.First().district)
-        </th>
-        <th class="col-1">
-            @Html.DisplayNameFor(model => model.First().address_detail)
         </th>
         <th class="col-1">
             @Html.DisplayNameFor(model => model.First().page_status)
@@ -61,7 +58,7 @@
             <td class="col-2 text-truncate">
                 @Html.DisplayFor(modelItem => item.hotel_title)
             </td>
-            <td class="col-1">
+            <td class="col-2 text-truncate">
                 @Html.DisplayFor(modelItem => item.hotel_tel)
             </td>
             <td class="col-3 text-truncate">
@@ -72,9 +69,6 @@
             </td>
             <td class="col-1">
                 @Html.DisplayFor(modelItem => item.district)
-            </td>
-            <td class="col-1">
-                @Html.DisplayFor(modelItem => item.address_detail)
             </td>
             <td class="col-1">
                 @Html.DisplayFor(modelItem => item.page_status)
