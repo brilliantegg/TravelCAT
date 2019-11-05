@@ -17,11 +17,17 @@ namespace TravelCat.Controllers
         int pageSize = 10;
 
         // GET: Hotels
-        public ActionResult Index(int? page)
+        public ActionResult Index(string id,int? page)
         {
             int pageNumber = (page ?? 1);
-            var data = db.hotel.OrderBy(m => m.hotel_id).ToPagedList(pageNumber, pageSize);
+            if (!String.IsNullOrEmpty(id))
+            {
+                var search = db.hotel.Where(s => s.hotel_id.Contains(id) || s.hotel_title.Contains(id)
+               || s.city.Contains(id) || s.district.Contains(id)).ToList().ToPagedList(pageNumber, pageSize);
+                return View(search);
+            }
 
+            var data = db.hotel.OrderBy(m => m.hotel_id).ToPagedList(pageNumber, pageSize);
 
             return View(data);
         }
