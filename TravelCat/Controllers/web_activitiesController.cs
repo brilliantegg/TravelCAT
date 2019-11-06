@@ -41,8 +41,8 @@ namespace TravelCat.Controllers
             }
             ViewBag.id = id;
             return View(model);
-        }    
+        }
 
-     
+
     }
 }

@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,7 +8,7 @@ namespace TravelCat.ViewModels
 {
     public class destinationsViewModel
     {
-        public  restaurant restaurant { get; set; }
+        public restaurant restaurant { get; set; }
         public hotel hotel { get; set; }
         public activity activity { get; set; }
         public spot spot { get; set; }

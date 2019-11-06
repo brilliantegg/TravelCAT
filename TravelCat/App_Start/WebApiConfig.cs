@@ -7,13 +7,11 @@ namespace TravelCat
 {
     public static class WebApiConfig
     {
-
-
         public static void Register(HttpConfiguration config)
         {
-            System.Web.Http.GlobalConfiguration.Configuration.Formatters.XmlFormatter.SupportedMediaTypes.Clear();
+            // Web API 設定和服務
 
-
+            // Web API 路由
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(

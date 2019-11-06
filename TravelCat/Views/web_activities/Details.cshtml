@@ -105,6 +105,14 @@
         </div>
         @*googlemap*@
         <div id="map"></div>
+        @*single_comment*@
+        <div class="single_comment">
+            @Html.DisplayFor(model => model.comment.member_id)
+            @Html.DisplayFor(model => model.comment.comment_date)
+            @Html.DisplayFor(model => model.comment.comment_photo)
+            @Html.DisplayFor(model => model.comment.comment_title)
+            @Html.DisplayFor(model => model.comment.comment_content)
+        </div>
 
         @*新增評論*@
 
@@ -127,10 +135,7 @@
             </div>
         </div>
 
-    </div>
-</div>
-<script>
-
+    <script>
     //GOOGLEMAP API
     var map;
     function initMap() {
@@ -158,54 +163,55 @@
         }
         x[slideIndex - 1].style.display = "block";
     }
-</script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDI5ENsN0IG8O1y-Y8r3KeJMrDhVawVdYc&callback=initMap"
-        async defer></script>
-@*<div id="list"></div>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script>
-        $.ajax({
-            type: "Get",
-            url: "http://localhost:54678/api/comments1",
-            success: function (data) {
-                console.log(data);
-                data.forEach(function (item) {
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDI5ENsN0IG8O1y-Y8r3KeJMrDhVawVdYc&callback=initMap"
+            async defer></script>
+    @*<div id="list"></div>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script>
+            $.ajax({
+                type: "Get",
+                url: "http://localhost:54678/api/comments1",
+                success: function (data) {
+                    console.log(data);
+                    data.forEach(function (item) {
 
-                    $('#list').append(
-                        `
-                    <div class="media mt-2" >
-                    <img src="https://randomuser.me/api/portraits/women/60.jpg" width="74" height="74" class="mr-3 ml-3" alt="...">
-                    <div class="media-body" >
-                        <h5 >${item.member.member_account}</h5><span>${item.comment_date}</span>
-                        <br>
-                        <img src="https://www.fodors.com/assets/destinations/711600/cityscape-amasra-black-sea-coast-turkey_980x650.jpg" width="300" height="200"/>
-                        <h3>${item.comment_title}</h3>
-                        <p>${item.comment_content}</P>
+                        $('#list').append(
+                            `
+                        <div class="media mt-2" >
+                        <img src="https://randomuser.me/api/portraits/women/60.jpg" width="74" height="74" class="mr-3 ml-3" alt="...">
+                        <div class="media-body" >
+                            <h5 >${item.member.member_account}</h5><span>${item.comment_date}</span>
+                            <br>
+                            <img src="https://www.fodors.com/assets/destinations/711600/cityscape-amasra-black-sea-coast-turkey_980x650.jpg" width="300" height="200"/>
+                            <h3>${item.comment_title}</h3>
+                            <p>${item.comment_content}</P>
+
+                            </div>
+                        </div>
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <label class="btn btn-secondary ">
+                                <input type="radio" name="options" id="option1" autocomplete="off" checked> <i class="far fa-thumbs-up"></i>按讚
+                            </label>
 
                         </div>
-                    </div>
-                                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                        <label class="btn btn-secondary ">
-                            <input type="radio" name="options" id="option1" autocomplete="off" checked> <i class="far fa-thumbs-up"></i>按讚
-                        </label>
+                            `
+                        );
+                    });
 
-                    </div>
-                        `
-                    );
-                });
-
-            }
-
-        });
-        //新增
-        $('#btnAdd').click(function () {
-            console.log($('#form1').serialize());
-            $.ajax({
-                type: "Post",
-                url: "http://localhost:54678/api/comments1",
-                data: $('#form1').serialize()
+                }
 
             });
+            //新增
+            $('#btnAdd').click(function () {
+                console.log($('#form1').serialize());
+                $.ajax({
+                    type: "Post",
+                    url: "http://localhost:54678/api/comments1",
+                    data: $('#form1').serialize()
 
-        });
-    </script>*@
+                });
+
+            });
+        </script>*@
+</div>
