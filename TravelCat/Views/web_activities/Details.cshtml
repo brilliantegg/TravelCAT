@@ -1,0 +1,199 @@
+﻿<link href="~/Content/destinations.css" rel="stylesheet" />
+@model TravelCat.ViewModels.destinationsViewModel
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout 1.cshtml";
+}
+
+<div class=" justify-content-center align-items-center">
+
+
+    <h2 class="text-center">@Html.DisplayFor(model => model.activity.activity_title)</h2>
+    <form method="post">
+        <input type="submit" name="add_to_bucket_list" class="add_to_bucket_list" value="add_to_bucket_list" />
+    </form>
+
+    <div class="w3-content w3-display-container">
+
+        <div class="w3-display-container mySlides">
+            <img src="https://www.blacktomato.com/wp-content/uploads/2016/02/Amazing-Amalfi-coast.jpg" style="width:100%">
+            <div class="gallery_caption ">
+                French Alps
+            </div>
+        </div>
+
+        <div class="w3-display-container mySlides">
+            <img src="https://www.blacktomato.com/wp-content/uploads/2016/02/Amalfi-coast_Shutterstock-9.jpg" style="width:100%">
+            <div class="gallery_caption ">
+                Northern Lights
+            </div>
+        </div>
+
+        <div class="w3-display-container mySlides">
+            <img src="https://www.blacktomato.com/wp-content/uploads/2016/02/Positano-italy.jpg" style="width:100%">
+            <div class="gallery_caption ">
+                Beautiful Mountains
+            </div>
+        </div>
+
+        <div class="w3-display-container mySlides">
+            <img src="https://www.blacktomato.com/wp-content/uploads/2016/02/The-view-from-the-balcony-.jpg" style="width:100%">
+            <div class="gallery_caption ">
+                The Rain Forest
+            </div>
+        </div>
+
+        <div class="w3-display-container mySlides">
+            <img src="https://www.blacktomato.com/wp-content/uploads/2016/02/Praiano_666279370.jpg" style="width:100%">
+            <div class="gallery_caption ">
+                Mountains!
+            </div>
+        </div>
+
+        <button class="button-display-left " onclick="plusDivs(-1)">&#10094;</button>
+        <button class="button-display-right " onclick="plusDivs(1)">&#10095;</button>
+
+    </div>
+    <div>
+
+        <hr />
+        <div class="container">
+            <div class="row ">
+                <div class="col-3">
+                    @Html.DisplayNameFor(model => model.activity.activity_tel)
+                    <br />
+                    @Html.DisplayFor(model => model.activity.activity_tel)
+                </div>
+                <div class="col-3">
+                    @Html.DisplayNameFor(model => model.activity.activity_intro)
+                    <br />
+                    @Html.DisplayFor(model => model.activity.activity_intro)
+                </div>
+                <div class="col-3">
+                    @Html.DisplayNameFor(model => model.activity.address_detail)
+                    <br />
+                    @Html.DisplayFor(model => model.activity.city)
+                    <br />
+                    @Html.DisplayFor(model => model.activity.district)
+                    <br />
+                    @Html.DisplayFor(model => model.activity.address_detail)
+                </div>
+                <div class="col-3">
+                    @Html.DisplayNameFor(model => model.activity.begin_date)
+                    @Html.DisplayFor(model => model.activity.begin_date)
+                    <br />
+                    @Html.DisplayNameFor(model => model.activity.end_date)
+                    @Html.DisplayFor(model => model.activity.end_date)
+                </div>
+                <div class="col-3">
+                    @Html.DisplayNameFor(model => model.activity.organizer)
+                    <br />
+                    @Html.DisplayFor(model => model.activity.organizer)
+                </div>
+                <div class="col-3">
+                    @Html.DisplayNameFor(model => model.activity.website)
+                    <br />
+                    @Html.DisplayFor(model => model.activity.website)
+                </div>
+                <div class="col-3">
+                    @Html.DisplayNameFor(model => model.activity.transport_info)
+                    <br />
+                    @Html.DisplayFor(model => model.activity.transport_info)
+                </div>
+            </div>
+
+
+
+        </div>
+        @*googlemap*@
+        <div id="map"></div>
+        @*single_comment*@
+    <div class="single_comment">
+        @Html.DisplayFor(model => model.comment.member_id)
+        @Html.DisplayFor(model => model.comment.comment_date)
+        @Html.DisplayFor(model => model.comment.comment_photo)
+        @Html.DisplayFor(model => model.comment.comment_title)
+        @Html.DisplayFor(model => model.comment.comment_content)
+    </div>
+
+    </div>
+
+<script>
+    //GOOGLEMAP API
+    var map;
+    function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: { lat:@Html.DisplayFor(model => model.activity.longitude)
+                   ,  lng: @Html.DisplayFor(model => model.activity.latitude) },
+            zoom: 8
+        });
+    }
+    //SLIDE_SHOW
+    var slideIndex = 1;
+    showDivs(slideIndex);
+
+    function plusDivs(n) {
+        showDivs(slideIndex += n);
+    }
+
+    function showDivs(n) {
+        var i;
+        var x = document.getElementsByClassName("mySlides");
+        if (n > x.length) { slideIndex = 1 }
+        if (n < 1) { slideIndex = x.length }
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        x[slideIndex - 1].style.display = "block";
+    }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDI5ENsN0IG8O1y-Y8r3KeJMrDhVawVdYc&callback=initMap"
+        async defer></script>
+@*<div id="list"></div>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script>
+        $.ajax({
+            type: "Get",
+            url: "http://localhost:54678/api/comments1",
+            success: function (data) {
+                console.log(data);
+                data.forEach(function (item) {
+
+                    $('#list').append(
+                        `
+                    <div class="media mt-2" >
+                    <img src="https://randomuser.me/api/portraits/women/60.jpg" width="74" height="74" class="mr-3 ml-3" alt="...">
+                    <div class="media-body" >
+                        <h5 >${item.member.member_account}</h5><span>${item.comment_date}</span>
+                        <br>
+                        <img src="https://www.fodors.com/assets/destinations/711600/cityscape-amasra-black-sea-coast-turkey_980x650.jpg" width="300" height="200"/>
+                        <h3>${item.comment_title}</h3>
+                        <p>${item.comment_content}</P>
+
+                        </div>
+                    </div>
+                                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <label class="btn btn-secondary ">
+                            <input type="radio" name="options" id="option1" autocomplete="off" checked> <i class="far fa-thumbs-up"></i>按讚
+                        </label>
+
+                    </div>
+                        `
+                    );
+                });
+
+            }
+
+        });
+        //新增
+        $('#btnAdd').click(function () {
+            console.log($('#form1').serialize());
+            $.ajax({
+                type: "Post",
+                url: "http://localhost:54678/api/comments1",
+                data: $('#form1').serialize()
+
+            });
+
+        });
+    </script>*@

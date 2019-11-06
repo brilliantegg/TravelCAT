@@ -113,6 +113,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\destinations.css" />
     <Content Include="Content\fontawesome-free-5.11.2-web\css\all.css" />
     <Content Include="Content\fontawesome-free-5.11.2-web\css\all.min.css" />
     <Content Include="Content\fontawesome-free-5.11.2-web\css\brands.css" />
@@ -1846,6 +1847,7 @@
     <Compile Include="Controllers\messagesController.cs" />
     <Compile Include="Controllers\RestaurantsController.cs" />
     <Compile Include="Controllers\SpotsController.cs" />
+    <Compile Include="Controllers\web_activitiesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1926,6 +1928,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TravelCat.edmx</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\destinationsViewModel.cs" />
     <Compile Include="ViewModels\SpotPhotoViewModel.cs" />
     <Compile Include="ViewModels\RestaurantPhotoViewModel.cs" />
     <Compile Include="ViewModels\ActivityPhotoViewModel.cs" />
@@ -1970,6 +1973,8 @@
     <Content Include="Views\issues\Index.cshtml" />
     <Content Include="Views\Loginadmin\Index.cshtml" />
     <Content Include="Views\Shared\_Layout 1.cshtml" />
+    <Content Include="Views\web_activities\Details.cshtml" />
+    <Content Include="Views\web_activities\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1983,6 +1988,7 @@
     <Folder Include="images\restaurant\" />
     <Folder Include="images\spot\" />
     <Folder Include="Views\destinations\" />
+    <Folder Include="Views\import_a\" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />
