@@ -28,5 +28,6 @@ namespace TravelCat.Models
         public string ticket_info { get; set; }
         public Nullable<System.DateTime> update_date { get; set; }
         public bool page_status { get; set; }
+        public string travelling_info { get; set; }
     }
 }

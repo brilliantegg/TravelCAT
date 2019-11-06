@@ -38,30 +38,31 @@
         <th class="col-3 text-truncate">
             @Html.DisplayNameFor(model => model.msg_content)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.msg_status)
+        </th>
     </tr>
 
 @foreach (var item in Model) {
-<tr class="row">
-    <td class="col-1 text-center">
-        @Html.ActionLink("管理", "Edit", new { id = item.msg_id },new { @class = "btn btn-sm btn-outline-primary" })
-    </td>
-    <td class="col-1">
+<tr>
+    <td>
         @Html.DisplayFor(modelItem => item.comment.tourism_id)
     </td>
-    <td class="col-2">
+    <td>
         @Html.DisplayFor(modelItem => item.member.member_account)
     </td>
-    <td class="col-1">
-        @Html.DisplayFor(modelItem => item.comment_id)
-    </td>
-    <td class="col-1">
-        @Html.DisplayFor(modelItem => item.msg_id)
-    </td>
-    <td class="col-3">
+    <td>
         @Html.DisplayFor(modelItem => item.msg_time)
     </td>
-    <td class="col-3 text-truncate">
+    <td>
         @Html.DisplayFor(modelItem => item.msg_content)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.msg_status)
+    </td>
+    <td>
+        @Html.ActionLink("管理", "Edit", new { id = item.msg_id })
+
     </td>
 </tr>
 }

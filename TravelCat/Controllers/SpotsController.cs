@@ -104,6 +104,14 @@ namespace TravelCat.Controllers
                 spot = db.spot.Where(m => m.spot_id == id).FirstOrDefault(),
                 spot_photos = db.tourism_photo.Where(m => m.tourism_id == id).FirstOrDefault()
             };
+
+            if (Convert.IsDBNull(model.spot_photos))
+            {
+                model.spot_photos.tourism_id = null;
+                model.spot_photos.tourism_photo1 = null;
+            }
+                
+
             return View(model);
         }
 

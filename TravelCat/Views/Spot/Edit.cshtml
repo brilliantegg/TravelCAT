@@ -110,14 +110,13 @@
                 </div>
             </div>
 
-            <!--門票資訊-->
-            <div class="row">
-                <div class="co col-6">
-                    @Html.LabelFor(model => model.spot.ticket_info, htmlAttributes: new { @class = "txt" })
-                    @Html.EditorFor(model => model.spot.ticket_info, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.spot.ticket_info, "", new { @class = "text-danger" })
-                    </div>
-                </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.spot.update_date, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.spot.update_date, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.spot.update_date, "", new { @class = "text-danger" })
+            </div>
+        </div>
 
             <!--簡介-->
             <div class="row">
@@ -128,13 +127,24 @@
                 </div>
                 </div>
 
-                <!--備註-->
-            <div class="row">
-                <div class="co col-6">
-                    @Html.LabelFor(model => model.spot.addition_note, htmlAttributes: new { @class = "txt" })
-                    @Html.TextAreaFor(model => model.spot.addition_note, new { @class = "form-control" ,rows="5" })
-                    @Html.ValidationMessageFor(model => model.spot.addition_note, "", new { @class = "text-danger" })
-                </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">圖片</label>
+            <div class="col-md-10">
+                <input id="tourism_photo" name="tourism_photo" type="file" class="form-control" />
+
+                @if (Model.spot_photos.tourism_photo1==null)
+                {
+                    <h3>原無圖片</h3>
+                }
+                else
+                {
+                    <span>原圖：</span><img src="/images/spot/@Model.spot_photos.tourism_photo1" width="150" />
+                    <input id="oldImg" name="oldImg" type="hidden" value="@Model.spot_photos.tourism_photo1" />
+                 }
+
+                
+
+                @Html.ValidationMessageFor(model => model.spot_photos.tourism_photo1, "", new { @class = "text-danger" })
             </div>
 
                 <div class="row">
