@@ -8,14 +8,17 @@ using System.Web.Http;
 
 namespace TravelCat
 {
+
     public class MvcApplication : System.Web.HttpApplication
     {
-        protected void Application_Start()
+
+        protected void Application_Start(object sender, EventArgs e)
         {
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             GlobalConfiguration.Configuration.Formatters.XmlFormatter.SupportedMediaTypes.Clear();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
         }
+
     }
 }
