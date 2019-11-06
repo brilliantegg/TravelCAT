@@ -31,7 +31,9 @@
           </Key>
           <Property Name="admin_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="admin_account" Type="varchar" MaxLength="15" Nullable="false" />
-          <Property Name="admin_password" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="admin_password" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="admin_email" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="emailConfirmed" Type="bit" />
         </EntityType>
         <EntityType Name="badge">
           <Key>
@@ -179,6 +181,7 @@
           <Property Name="address_detail" Type="nvarchar" MaxLength="60" />
           <Property Name="city" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="email" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="emailConfirmed" Type="bit" />
           <Property Name="phone" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="profile_photo" Type="varchar" MaxLength="100" />
           <Property Name="website_link" Type="varchar" MaxLength="150" />
@@ -592,8 +595,10 @@
           </Key>
           <Property Name="admin_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="admin_account" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="admin_password" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="admin_password" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="issue" Relationship="Self.FK__issue__admin_id__534D60F1" FromRole="admin" ToRole="issue" />
+          <Property Name="admin_email" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="emailConfirmed" Type="Boolean" />
         </EntityType>
         <EntityType Name="badge">
           <Key>
@@ -776,6 +781,7 @@
           <Property Name="cover_photo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="member_score" Type="Int32" />
           <NavigationProperty Name="member" Relationship="Self.FK__member_pr__membe__47DBAE45" FromRole="member_profile" ToRole="member" />
+          <Property Name="emailConfirmed" Type="Boolean" />
         </EntityType>
         <EntityType Name="message">
           <Key>
@@ -1189,6 +1195,8 @@
           <EntitySetMapping Name="admin">
             <EntityTypeMapping TypeName="TravelCat.admin">
               <MappingFragment StoreEntitySet="admin">
+                <ScalarProperty Name="emailConfirmed" ColumnName="emailConfirmed" />
+                <ScalarProperty Name="admin_email" ColumnName="admin_email" />
                 <ScalarProperty Name="admin_id" ColumnName="admin_id" />
                 <ScalarProperty Name="admin_account" ColumnName="admin_account" />
                 <ScalarProperty Name="admin_password" ColumnName="admin_password" />
@@ -1332,6 +1340,7 @@
           <EntitySetMapping Name="member_profile">
             <EntityTypeMapping TypeName="TravelCat.member_profile">
               <MappingFragment StoreEntitySet="member_profile">
+                <ScalarProperty Name="emailConfirmed" ColumnName="emailConfirmed" />
                 <ScalarProperty Name="member_id" ColumnName="member_id" />
                 <ScalarProperty Name="member_name" ColumnName="member_name" />
                 <ScalarProperty Name="gender" ColumnName="gender" />
