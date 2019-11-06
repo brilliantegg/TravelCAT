@@ -10,9 +10,7 @@ namespace TravelCat.Controllers
 {
     public class LoginadminController : Controller
     {
-
         SqlConnection Conn = new SqlConnection("data source=MCSDD10823; initial catalog = traval_cat_v1; integrated security = True; multipleactiveresultsets=True;application name = EntityFramework & quot");
-
         // GET: Loginadmin
 
       

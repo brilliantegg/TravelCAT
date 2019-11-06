@@ -7,7 +7,7 @@
 <h2>管理員</h2>
 
 <p>
-    @Html.ActionLink("新增管理員", "Create")
+    @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
     <tr>
@@ -16,12 +16,6 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.admin_password)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.admin_email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.emailConfirmed)
         </th>
         <th></th>
     </tr>
@@ -35,15 +29,9 @@
             @Html.DisplayFor(modelItem => item.admin_password)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.admin_email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.emailConfirmed)
-        </td>
-        <td>
-            @Html.ActionLink("修改", "Edit", new { id=item.admin_id },new { @class="btn btn-primary"}) |
-            @*@Html.ActionLink("Details", "Details", new { id=item.admin_id }) |*@
-            @Html.ActionLink("刪除", "Delete", new { id=item.admin_id },new { @class="btn btn-danger",onclick="return confirm('確定要刪嗎?')"})
+            @Html.ActionLink("Edit", "Edit", new { id=item.admin_id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.admin_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.admin_id })
         </td>
     </tr>
 }

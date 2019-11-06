@@ -30,7 +30,6 @@ namespace TravelCat.Models
         public string brief_intro { get; set; }
         public string cover_photo { get; set; }
         public Nullable<int> member_score { get; set; }
-        public Nullable<bool> emailConfirmed { get; set; }
     
         public virtual member member { get; set; }
     }

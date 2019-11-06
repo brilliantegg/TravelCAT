@@ -23,8 +23,6 @@ namespace TravelCat.Models
         public int admin_id { get; set; }
         public string admin_account { get; set; }
         public string admin_password { get; set; }
-        public string admin_email { get; set; }
-        public Nullable<bool> emailConfirmed { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<issue> issue { get; set; }
