@@ -48,7 +48,7 @@ namespace TravelCat.Controllers
         // 詳細資訊，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "comment_id,tourism_id,comment_title,comment_content,comment_date,comment_photo,comment_stay_total,travel_partner,comment_rating,travel_month,comment_status,member_id")] comment comment)
+        public ActionResult Create([Bind(Include = "comment_id,tourism_id,comment_title,comment_content,comment_date,comment_photo,comment_stay_total,travel_partner,comment_rating,travel_month,comment_status,member_id")] comment comment,string id)
         {
             string[] travel_Partner = { "伴侶旅行", "家庭 (含年幼孩童)", "家庭 (含青少年)", "朋友", "商務", "單獨旅行", "其他生物" };
 
@@ -60,7 +60,7 @@ namespace TravelCat.Controllers
                 return RedirectToRoute(new { controller = "web_activities", action = "Details", id = comment.tourism_id });
 
             }
-
+            ViewBag.id = id;
             ViewBag.member_id = new SelectList(db.member, "member_id", "member_account", comment.member_id);
             return View(comment);
         }

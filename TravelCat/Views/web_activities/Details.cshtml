@@ -107,10 +107,11 @@
         <div id="map"></div>
 
         @*新增評論*@
-        @Html.ActionLink("新增評論", "Create", "web_comments")
-        <form name="form1" action="/web_comments/Create" method="post">
+
+        @Html.ActionLink("新增評論", "Create", "web_comments", new { id = ViewBag.id }, null)
+        @*<form name="form1" action="/web_comments/Create/" method="post">
             <input type="submit" value="新增評論submit" />
-        </form>
+        </form>*@
 
         <div class="comments container">
             <div class="single_comment">
