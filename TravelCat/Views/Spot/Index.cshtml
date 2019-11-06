@@ -7,7 +7,7 @@
 }
 
 <link href="~/Content/back-end-index.css" rel="stylesheet" />
-<h2 class="mt-3 ml-3 text-center">景點</h2>
+<h2 class="mt-3 text-center">景點</h2>
 <div class="header ml-3">
     @Html.ActionLink("新增景點", "Create", "Spot", null, new { @class = "btn btn-secondary" })
     <div class="search">
@@ -32,7 +32,7 @@
             @Html.DisplayNameFor(model => model.First().spot_title)
         </th>
         <th class="col-2 text-truncate">
-            @Html.DisplayNameFor(model => model.First().spot_intro)
+            @Html.DisplayNameFor(model => model.First().spot_tel)
         </th>
         <th class="col-1">
             @Html.DisplayNameFor(model => model.First().city)
@@ -40,7 +40,7 @@
         <th class="col-1">
             @Html.DisplayNameFor(model => model.First().district)
         </th>
-        <th class="col-1">
+        <th class="col-1 text-truncate">
             @Html.DisplayNameFor(model => model.First().open_time)
         </th>
         <th class="col-2">
@@ -64,7 +64,7 @@
                 @Html.DisplayFor(modelItem => item.spot_title)
             </td>
             <td class="col-2 text-truncate">
-                @Html.DisplayFor(modelItem => item.spot_intro)
+                @Html.DisplayFor(modelItem => item.spot_tel)
             </td>
             <td class="col-1">
                 @Html.DisplayFor(modelItem => item.city)
@@ -72,7 +72,7 @@
             <td class="col-1">
                 @Html.DisplayFor(modelItem => item.district)
             </td>
-            <td class="col-1">
+            <td class="col-1 text-truncate">
                 @Html.DisplayFor(modelItem => item.open_time)
             </td>
             <td class="col-2">
