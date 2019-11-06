@@ -1,0 +1,42 @@
+﻿﻿body {
+}
+/* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+#map {
+    height: 400px;
+    width: 100%;
+}
+/* Optional: Makes the sample page fill the window. */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.mySlides {
+    display: none;
+}
+
+.mySlides {
+    position: relative;
+}
+
+.button-display-left {
+    position: relative;
+    bottom: 300px;
+    left: 0px
+}
+
+.button-display-right {
+    position: relative;
+    bottom: 300px;
+    right: 0px
+}
+
+.gallery_caption {
+    text-align: center;
+}
+
+.add_to_bucket_list {
+    float: right;
+}
