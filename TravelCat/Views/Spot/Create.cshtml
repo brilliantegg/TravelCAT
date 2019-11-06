@@ -115,7 +115,7 @@
         <div class="row">
             <div class="co col-6">
                 @Html.LabelFor(model => model.spot.spot_intro, htmlAttributes: new { @class = "txt" })
-                <textarea rows="5"  name="spot_intro" class="textbox"></textarea>
+                @Html.TextAreaFor(model => model.spot.spot_intro, new { @class = "form-control", rows = "5" })
                 @Html.ValidationMessageFor(model => model.spot.spot_intro, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -124,7 +124,7 @@
         <div class="row ">
             <div class="co col-6">
                 @Html.LabelFor(model => model.spot.addition_note, htmlAttributes: new { @class = "txt" })
-                <textarea rows="5" name="addition_note" class="textbox" ></textarea>
+                @Html.TextAreaFor(model => model.spot.addition_note, new { @class = "form-control", rows = "5" })
                 @Html.ValidationMessageFor(model => model.spot.addition_note, "", new { @class = "text-danger" })
             </div>
         </div>
