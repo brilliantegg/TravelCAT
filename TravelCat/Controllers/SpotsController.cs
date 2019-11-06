@@ -16,33 +16,22 @@ namespace TravelCat.Controllers
         dbTravelCat db = new dbTravelCat();
         int pageSize = 10;
 
-        public ActionResult Index(string id,int? page)
-        {
-            int pageNumber = (page ?? 1);            
+        public ActionResult Index(string id=null,int page=1)
+        {            
+            ViewBag.id = id;
+            //int pageNumber = (page ?? 1);
+            
             if (!String.IsNullOrEmpty(id))
             {
-                 var search = db.spot.Where(s => s.spot_id.Contains(id) || s.spot_title.Contains(id)
-                || s.city.Contains(id) || s.district.Contains(id)).ToList().ToPagedList(pageNumber, pageSize); 
-                return View(search);
+                var search = db.spot.Where(s => s.spot_id.Contains(id) || s.spot_title.Contains(id)
+               || s.city.Contains(id) || s.district.Contains(id));
+                return View(search.OrderBy(m=>m.spot_id).ToPagedList(page, pageSize));
             }
-
-            var data = db.spot.OrderBy(m => m.spot_id).ToPagedList(pageNumber, pageSize);
-
-            return View(data);
+            else { 
+            var data = db.spot.OrderBy(m => m.spot_id);
+            return View(data.ToPagedList(page, pageSize));
+            }                   
         }
-        //public ActionResult contentQuery(string id)
-        //{
-        //    var search = from a in db.spots
-        //                    select a;
-            //if (!String.IsNullOrEmpty(id))
-            //{
-            //    search = search.Where(s => s.spot_id.Contains(id) || s.spot_title.Contains(id)
-            //    || s.city.Contains(id) || s.district.Contains(id));
-            //}
-    //    return View(search);
-    //}
-
-
 
     public ActionResult Create()
         {
@@ -102,8 +91,9 @@ namespace TravelCat.Controllers
             SpotPhotoViewModel model = new SpotPhotoViewModel()
             {
                 spot = db.spot.Where(m => m.spot_id == id).FirstOrDefault(),
-                spot_photos = db.tourism_photo.Where(m => m.tourism_id == id).FirstOrDefault()
+                spot_photos = db.tourism_photo.Where(m => m.tourism_id == id).FirstOrDefault(),
             };
+            
             return View(model);
         }
 
@@ -122,7 +112,9 @@ namespace TravelCat.Controllers
             {
                 if (tourism_photo.ContentLength > 0)
                 {
-                    System.IO.File.Delete(Server.MapPath("~/images/spot/" + oldImg));
+                    if (spotPhotoViewModel.spot_photos!=null){
+                        System.IO.File.Delete(Server.MapPath("~/images/spot/" + oldImg));
+                    }
                     fileName = System.IO.Path.GetFileName(tourism_photo.FileName);      //取得檔案的檔名(主檔名+副檔名)
                     tourism_photo.SaveAs(Server.MapPath("~/images/spot/" + fileName));      //將檔案存到該資料夾
                 }
@@ -131,12 +123,26 @@ namespace TravelCat.Controllers
             {
                 fileName = oldImg;
             }
-            var tp1 = db.tourism_photo.Where(m => m.tourism_id == id).FirstOrDefault();
 
-            tp1.tourism_photo1 = fileName;
-            db.SaveChanges();
+
+            if (spotPhotoViewModel.spot_photos == null)
+            {
+                tourism_photo tp = new tourism_photo();
+                tp.tourism_photo1 = fileName;
+                tp.tourism_id = spotPhotoViewModel.spot.spot_id;
+                db.tourism_photo.Add(tp);
+            }
+            else
+            {
+                var tp1 = db.tourism_photo.Where(m => m.tourism_id == id).FirstOrDefault();
+                tp1.tourism_photo1 = fileName;
+            }
+
+                db.SaveChanges();
 
             return RedirectToAction("Index");
         }
     }
 }
+
+

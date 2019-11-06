@@ -23,8 +23,6 @@
             </div>
         </div>
 
-
-
         <div class="form-group">
             @Html.LabelFor(model => model.spot.spot_title, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -44,7 +42,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.spot.spot_intro, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.spot.spot_intro, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.TextAreaFor(model => model.spot.spot_intro, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.spot.spot_intro, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -116,7 +114,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.spot.update_date, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DisplayFor(model => model.spot.update_date, new { htmlAttributes = new { @class = "form-control"} })
+                @Html.DisplayFor(model => model.spot.update_date, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.spot.update_date, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -135,15 +133,37 @@
             <label class="control-label col-md-2">圖片</label>
             <div class="col-md-10">
                 <input id="tourism_photo" name="tourism_photo" type="file" class="form-control" />
-                @if (Model.spot_photos.tourism_photo1 != null)
+                @{ 
+                    try
+                    {
+                        if (Model.spot_photos == null)
+                        {
+                        <h3>原無圖片</h3>
+                        }
+                        else
+                        {
+                        <span>原圖：</span><img src="/images/spot/@Model.spot_photos.tourism_photo1" width="150" />
+                        <input id="oldImg" name="oldImg" type="hidden" value="@Model.spot_photos.tourism_photo1" />
+                        }
+                    }
+                    catch (NullReferenceException)
+                    {
+                    <h3>原無圖片</h3>
+                        }
+                    }
+
+                @*@if (Model.spot_photos == null)
                 {
-                    @:原圖：<img src="/images/spot/@Model.spot_photos.tourism_photo1" width="150" />
+                    <h3>原無圖片</h3>
                 }
                 else
                 {
-                    <h3>原無圖示</h3>
-                }
-                <input id="oldImg" name="oldImg" type="hidden" value="@Model.spot_photos.tourism_photo1" />
+                    <span>原圖：</span><img src="/images/spot/@Model.spot_photos.tourism_photo1" width="150" />
+                    <input id="oldImg" name="oldImg" type="hidden" value="@Model.spot_photos.tourism_photo1" />
+                }*@
+
+
+
                 @Html.ValidationMessageFor(model => model.spot_photos.tourism_photo1, "", new { @class = "text-danger" })
             </div>
         </div>
