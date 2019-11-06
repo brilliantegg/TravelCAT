@@ -90,7 +90,7 @@
 
 </table>
 
-<div class="text-center">
-    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
-</div>
+
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page,@class="navigation example" }))
+
 
