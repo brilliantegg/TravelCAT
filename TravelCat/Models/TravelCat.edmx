@@ -10,7 +10,7 @@
             <PropertyRef Name="activity_id" />
           </Key>
           <Property Name="activity_id" Type="char" MaxLength="7" Nullable="false" />
-          <Property Name="activity_title" Type="nchar" MaxLength="30" Nullable="false" />
+          <Property Name="activity_title" Type="nchar" MaxLength="100" Nullable="false" />
           <Property Name="activity_tel" Type="varchar" MaxLength="50" />
           <Property Name="activity_intro" Type="ntext" />
           <Property Name="longitude" Type="varchar" MaxLength="25" />
@@ -22,7 +22,7 @@
           <Property Name="begin_date" Type="varchar" MaxLength="30" />
           <Property Name="organizer" Type="nvarchar" MaxLength="50" />
           <Property Name="website" Type="varchar" MaxLength="300" />
-          <Property Name="transport_info" Type="nvarchar" MaxLength="200" />
+          <Property Name="transport_info" Type="nvarchar" MaxLength="1000" />
           <Property Name="page_status" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="admin">
@@ -31,7 +31,9 @@
           </Key>
           <Property Name="admin_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="admin_account" Type="varchar" MaxLength="15" Nullable="false" />
-          <Property Name="admin_password" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="admin_password" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="admin_email" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="emailConfirmed" Type="bit" />
         </EntityType>
         <EntityType Name="badge">
           <Key>
@@ -179,6 +181,7 @@
           <Property Name="address_detail" Type="nvarchar" MaxLength="60" />
           <Property Name="city" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="email" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="emailConfirmed" Type="bit" />
           <Property Name="phone" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="profile_photo" Type="varchar" MaxLength="100" />
           <Property Name="website_link" Type="varchar" MaxLength="150" />
@@ -213,7 +216,7 @@
             <PropertyRef Name="restaurant_id" />
           </Key>
           <Property Name="restaurant_id" Type="char" MaxLength="7" Nullable="false" />
-          <Property Name="restaurant_title" Type="nchar" MaxLength="30" Nullable="false" />
+          <Property Name="restaurant_title" Type="nchar" MaxLength="50" Nullable="false" />
           <Property Name="restaurant_tel" Type="varchar" MaxLength="50" />
           <Property Name="restaurant_intro" Type="ntext" />
           <Property Name="latitude" Type="varchar" MaxLength="25" />
@@ -221,7 +224,7 @@
           <Property Name="city" Type="nvarchar" MaxLength="10" />
           <Property Name="district" Type="nvarchar" MaxLength="5" />
           <Property Name="address_detail" Type="nvarchar" MaxLength="100" />
-          <Property Name="open_time" Type="nvarchar" MaxLength="80" />
+          <Property Name="open_time" Type="nvarchar" MaxLength="150" />
           <Property Name="page_status" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="spot">
@@ -229,8 +232,8 @@
             <PropertyRef Name="spot_id" />
           </Key>
           <Property Name="spot_id" Type="char" MaxLength="7" Nullable="false" />
-          <Property Name="spot_title" Type="nvarchar" MaxLength="30" Nullable="false" />
-          <Property Name="spot_tel" Type="varchar" MaxLength="50" />
+          <Property Name="spot_title" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="spot_tel" Type="varchar" MaxLength="100" />
           <Property Name="spot_intro" Type="ntext" />
           <Property Name="longitude" Type="varchar" MaxLength="25" />
           <Property Name="latitude" Type="varchar" MaxLength="25" />
@@ -238,9 +241,10 @@
           <Property Name="city" Type="nvarchar" MaxLength="10" />
           <Property Name="district" Type="nvarchar" MaxLength="5" />
           <Property Name="address_detail" Type="nvarchar" MaxLength="100" />
-          <Property Name="open_time" Type="nvarchar" MaxLength="80" />
-          <Property Name="ticket_info" Type="nvarchar" MaxLength="30" />
+          <Property Name="open_time" Type="nvarchar" MaxLength="500" />
+          <Property Name="ticket_info" Type="nvarchar" MaxLength="100" />
           <Property Name="update_date" Type="datetime" />
+          <Property Name="travelling_info" Type="nchar" MaxLength="1000" />
           <Property Name="page_status" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="tourism_photo">
@@ -249,7 +253,7 @@
           </Key>
           <Property Name="id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="tourism_id" Type="char" MaxLength="7" Nullable="false" />
-          <Property Name="tourism_photo" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="tourism_photo" Type="varchar" MaxLength="300" Nullable="false" />
         </EntityType>
         <Association Name="FK__badge_det__badge__5441852A">
           <End Role="badge" Type="Self.badge" Multiplicity="1" />
@@ -570,7 +574,7 @@
             <PropertyRef Name="activity_id" />
           </Key>
           <Property Name="activity_id" Type="String" MaxLength="7" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="activity_title" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="activity_title" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="activity_tel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="activity_intro" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="longitude" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
@@ -582,7 +586,7 @@
           <Property Name="begin_date" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="organizer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="website" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
-          <Property Name="transport_info" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="transport_info" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="page_status" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="admin">
@@ -591,8 +595,10 @@
           </Key>
           <Property Name="admin_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="admin_account" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="admin_password" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="admin_password" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="issue" Relationship="Self.FK__issue__admin_id__534D60F1" FromRole="admin" ToRole="issue" />
+          <Property Name="admin_email" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="emailConfirmed" Type="Boolean" />
         </EntityType>
         <EntityType Name="badge">
           <Key>
@@ -775,6 +781,7 @@
           <Property Name="cover_photo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="member_score" Type="Int32" />
           <NavigationProperty Name="member" Relationship="Self.FK__member_pr__membe__47DBAE45" FromRole="member_profile" ToRole="member" />
+          <Property Name="emailConfirmed" Type="Boolean" />
         </EntityType>
         <EntityType Name="message">
           <Key>
@@ -809,7 +816,7 @@
             <PropertyRef Name="restaurant_id" />
           </Key>
           <Property Name="restaurant_id" Type="String" MaxLength="7" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="restaurant_title" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="restaurant_title" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="restaurant_tel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="restaurant_intro" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="latitude" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
@@ -817,7 +824,7 @@
           <Property Name="city" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="district" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
           <Property Name="address_detail" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="open_time" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="open_time" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="page_status" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="spot">
@@ -825,8 +832,8 @@
             <PropertyRef Name="spot_id" />
           </Key>
           <Property Name="spot_id" Type="String" MaxLength="7" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="spot_title" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="spot_tel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="spot_title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="spot_tel" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="spot_intro" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="longitude" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="latitude" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
@@ -834,10 +841,11 @@
           <Property Name="city" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="district" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
           <Property Name="address_detail" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="open_time" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
-          <Property Name="ticket_info" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="open_time" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ticket_info" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="update_date" Type="DateTime" Precision="3" />
           <Property Name="page_status" Type="Boolean" Nullable="false" />
+          <Property Name="travelling_info" Type="String" MaxLength="1000" FixedLength="true" Unicode="true" />
         </EntityType>
         <EntityType Name="tourism_photo">
           <Key>
@@ -845,7 +853,7 @@
           </Key>
           <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="tourism_id" Type="String" MaxLength="7" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="tourism_photo1" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="tourism_photo1" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
         <Association Name="FK__issue__admin_id__534D60F1">
           <End Role="admin" Type="Self.admin" Multiplicity="1" />
@@ -1187,6 +1195,8 @@
           <EntitySetMapping Name="admin">
             <EntityTypeMapping TypeName="TravelCat.admin">
               <MappingFragment StoreEntitySet="admin">
+                <ScalarProperty Name="emailConfirmed" ColumnName="emailConfirmed" />
+                <ScalarProperty Name="admin_email" ColumnName="admin_email" />
                 <ScalarProperty Name="admin_id" ColumnName="admin_id" />
                 <ScalarProperty Name="admin_account" ColumnName="admin_account" />
                 <ScalarProperty Name="admin_password" ColumnName="admin_password" />
@@ -1330,6 +1340,7 @@
           <EntitySetMapping Name="member_profile">
             <EntityTypeMapping TypeName="TravelCat.member_profile">
               <MappingFragment StoreEntitySet="member_profile">
+                <ScalarProperty Name="emailConfirmed" ColumnName="emailConfirmed" />
                 <ScalarProperty Name="member_id" ColumnName="member_id" />
                 <ScalarProperty Name="member_name" ColumnName="member_name" />
                 <ScalarProperty Name="gender" ColumnName="gender" />
@@ -1391,6 +1402,7 @@
           <EntitySetMapping Name="spot">
             <EntityTypeMapping TypeName="TravelCat.spot">
               <MappingFragment StoreEntitySet="spot">
+                <ScalarProperty Name="travelling_info" ColumnName="travelling_info" />
                 <ScalarProperty Name="spot_id" ColumnName="spot_id" />
                 <ScalarProperty Name="spot_title" ColumnName="spot_title" />
                 <ScalarProperty Name="spot_tel" ColumnName="spot_tel" />

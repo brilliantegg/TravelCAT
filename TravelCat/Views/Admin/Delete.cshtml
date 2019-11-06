@@ -1,0 +1,56 @@
+﻿@model TravelCat.Models.admin
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>admin</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.admin_account)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.admin_account)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.admin_password)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.admin_password)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.admin_email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.admin_email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.emailConfirmed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.emailConfirmed)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-danger" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

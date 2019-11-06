@@ -21,6 +21,15 @@ namespace TravelCat.Models
         [Required(ErrorMessage = "此欄位為必填")]
         [StringLength(40, ErrorMessage = "最多40個字")]
         public string admin_password { get; set; }
+
+        [DisplayName("信箱")]
+        [Required(ErrorMessage = "此欄位為必填")]
+        [StringLength(60, ErrorMessage = "此欄為最多60個字")]
+        [EmailAddress(ErrorMessage = "只允許輸入Email格式")]
+        public string admin_email { get; set; }
+
+        [DisplayName("驗證狀態")]
+        public Nullable<bool> emailConfirmed { get; set; }
     }
 
     [MetadataType(typeof(Metadata_member))]
@@ -230,9 +239,10 @@ namespace TravelCat.Models
         [Required(ErrorMessage = "此欄位為必填")]
         [StringLength(30, ErrorMessage = "此欄為最多30個字")]
         public string city { get; set; }
-        [DisplayName("Email")]
+        [DisplayName("信箱")]
         [Required(ErrorMessage = "此欄位為必填")]
         [StringLength(60, ErrorMessage = "此欄為最多60個字")]
+        [EmailAddress(ErrorMessage = "只允許輸入Email格式")]
         public string email { get; set; }
         [DisplayName("行動電話")]
         [Required(ErrorMessage = "此欄位為必填")]

@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_Layout 1.cshtml";
 }
 
-<div class="warp">
+<div class="warp container">
     <div class="txt">
         <h1>旅途貓後台登入</h1>
     </div>
@@ -13,14 +13,8 @@
         <form id="login" class="form-horizontal" method="post" action="@Url.Action("Index")">
             <div class="form-group">
                 <input id="id" name="id" type="text" class="login-Id" placeholder="請輸入帳號"><br />
-                <div>
-
-                </div>
-
-                <input id="pwd" name="pwd" type="password" class="login-Pw" placeholder="請輸入密碼"><br />
-                <div>
-
-                </div>
+            
+                <input id="pwd" name="pwd" type="password" class="login-Pw" placeholder="請輸入密碼"><br />               
             </div>
 
             <div class="from-btn">
