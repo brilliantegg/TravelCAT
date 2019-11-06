@@ -86,6 +86,7 @@
 
 </table>
 
+<!--分頁-->
 <div class="text-center">
     @Html.PagedListPager(Model, page => Url.Action("Index", new { page,id=ViewBag.id}))
 </div>

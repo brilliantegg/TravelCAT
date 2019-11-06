@@ -4,113 +4,123 @@
     ViewBag.Title = "修改餐廳";
 }
 
-<h2>修改餐廳</h2>
+    <link href="~/Content/back-end-Create.css" rel="stylesheet" />
+<h2 class="ml-3 mt-3 text-danger text-center">修改餐廳</h2>
 
 <form method="post" action="@Url.Action("Edit")" enctype="multipart/form-data">
 
         @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>restaurant</h4>
+
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.restaurant.restaurant_id)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.restaurant.restaurant_id, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+        <!--頁面狀態-->
+        <div class="row">
+            <div class="co col-6">
+                @Html.LabelFor(model => model.restaurant.page_status, htmlAttributes: new { @class = "txt" })
+                <span class="checkbox ml-3">
+                    @Html.EditorFor(model => model.restaurant.page_status)
+                    @Html.ValidationMessageFor(model => model.restaurant.page_status, "", new { @class = "text-danger" })
+                </span>
+            </div>
+        </div>
+
+        <!--編號-->
+        <div class="row">
+            <div class="co col-6">
+                @Html.LabelFor(model => model.restaurant.restaurant_id, htmlAttributes: new { @class = "txt" })
                 <input id="restaurant_id" name="restaurant_id" type="text" readonly="readonly" value="@Model.restaurant.restaurant_id" class="form-control" />
             </div>
         </div>
 
-
-
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.restaurant.restaurant_title, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+        <!--名稱-->
+        <div class="row">
+            <div class="co col-6">
+                @Html.LabelFor(model => model.restaurant.restaurant_title, htmlAttributes: new { @class = "txt" })
                 @Html.EditorFor(model => model.restaurant.restaurant_title, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.restaurant.restaurant_title, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.restaurant.restaurant_tel, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+        <!--電話-->
+        <div class="row">
+            <div class="co col-6">
+                @Html.LabelFor(model => model.restaurant.restaurant_tel, htmlAttributes: new { @class = "txt" })
                 @Html.EditorFor(model => model.restaurant.restaurant_tel, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.restaurant.restaurant_tel, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.restaurant.restaurant_intro, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.restaurant.restaurant_intro, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.restaurant.restaurant_intro, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.restaurant.latitude, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.restaurant.latitude, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.restaurant.latitude, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.restaurant.longitude, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+        <!--經度-->
+        <div class="row">
+            <div class="co col-6">
+                @Html.LabelFor(model => model.restaurant.longitude, htmlAttributes: new { @class = "txt" })
                 @Html.EditorFor(model => model.restaurant.longitude, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.restaurant.longitude, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.restaurant.city, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+        <!--緯度-->
+        <div class="row">
+            <div class="co col-6">
+                @Html.LabelFor(model => model.restaurant.latitude, htmlAttributes: new { @class = "txt" })
+                @Html.EditorFor(model => model.restaurant.latitude, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.restaurant.latitude, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <!--城市-->
+        <div class="row">
+            <div class="co col-6">
+                @Html.LabelFor(model => model.restaurant.city, htmlAttributes: new { @class = "txt" })
                 @Html.EditorFor(model => model.restaurant.city, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.restaurant.city, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.restaurant.district, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+        <!--行政區-->
+        <div class="row">
+            <div class="co col-6">
+                @Html.LabelFor(model => model.restaurant.district, htmlAttributes: new { @class = "txt" })
                 @Html.EditorFor(model => model.restaurant.district, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.restaurant.district, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.restaurant.address_detail, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+        <!--街道地址-->
+        <div class="row">
+            <div class="co col-6">
+                @Html.LabelFor(model => model.restaurant.address_detail, htmlAttributes: new { @class = "txt" })
                 @Html.EditorFor(model => model.restaurant.address_detail, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.restaurant.address_detail, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.restaurant.open_time, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+        <!--營業時間-->
+        <div class="row">
+            <div class="co col-6">
+                @Html.LabelFor(model => model.restaurant.open_time, htmlAttributes: new { @class = "txt" })
                 @Html.EditorFor(model => model.restaurant.open_time, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.restaurant.open_time, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.restaurant.page_status, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.restaurant.page_status)
-                    @Html.ValidationMessageFor(model => model.restaurant.page_status, "", new { @class = "text-danger" })
-                </div>
+        <!--簡介-->
+        <div class="row">
+            <div class="co col-6">
+                @Html.LabelFor(model => model.restaurant.restaurant_intro, htmlAttributes: new { @class = "txt" })
+                @Html.TextAreaFor(model => model.restaurant.restaurant_intro, new { @class = "form-control", rows = "5" })
+                @Html.ValidationMessageFor(model => model.restaurant.restaurant_intro, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            <label class="control-label col-md-2">圖片</label>
-            <div class="col-md-10">
+        <!--新增圖片-->
+        <div class="row">
+            <div class="co col-6">
+                <label class="txt">圖片</label>
                 <input id="tourism_photo" name="tourism_photo" type="file" class="form-control" />
                 @if (Model.restaurant_photos.tourism_photo1 != null)
                 {
@@ -127,19 +137,23 @@
 
 
 
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+        <!--下方按鈕-->
+        <div class="row text-center footer">
+            <div class="col-1">
+                <input type="submit" value="存檔" class="btn btn-primary" />
+            </div>
+            <div class="col-1">
+                @Html.ActionLink("刪除", "Delete", new { id = Model.restaurant.restaurant_id }, new { @class = "btn btn-danger", onclick = "return confirm('確定不後悔?')" })
+            </div>
+            <div class="col-2">
+                @Html.ActionLink("回到餐廳列表", "Index", null, new { @class = "btn btn-primary" })
             </div>
         </div>
+
     </div>
     </form>
 
-<div>
-    @Html.ActionLink("刪除", "Delete", new { id = Model.restaurant.restaurant_id }, new { @class = "btn btn-sm btn-outline-danger", onclick = "return confirm('確定不後悔?')" })
-    @Html.ActionLink("回到餐廳列表", "Index")
-</div>
+
 
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
     <script src="~/Scripts/jquery.validate.min.js"></script>

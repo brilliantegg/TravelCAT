@@ -4,7 +4,8 @@
     ViewBag.Title = "修改活動";
 }
 
-<h2>修改活動</h2>
+<link href="~/Content/back-end-Create.css" rel="stylesheet" />
+<h2 class="ml-3 mt-3 text-danger text-center">修改活動</h2>
 
 
 <form method="post" action="@Url.Action("Edit")" enctype="multipart/form-data">
@@ -12,135 +13,151 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>activity</h4>
+
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.activity.activity_id)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.activity.activity_id, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+        <!--頁面狀態-->
+        <div class="row">
+            <div class="co col-6">
+                @Html.LabelFor(model => model.activity.page_status, htmlAttributes: new { @class = "txt" })
+                <span class="checkbox ml-3">
+                    @Html.EditorFor(model => model.activity.page_status)
+                    @Html.ValidationMessageFor(model => model.activity.page_status, "", new { @class = "text-danger" })
+                </span>
+            </div>
+        </div>
+
+        <!--編號-->
+        <div class="row">
+            <div class="co col-6">
+                @Html.LabelFor(model => model.activity.activity_id, htmlAttributes: new { @class = "txt" })
                 <input id="activity_id" name="activity_id" type="text" readonly="readonly" value="@Model.activity.activity_id" class="form-control" />
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.activity.activity_title, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+        <!--名稱-->
+        <div class="row">
+            <div class="co col-6">
+                @Html.LabelFor(model => model.activity.activity_title, htmlAttributes: new { @class = "txt" })
                 @Html.EditorFor(model => model.activity.activity_title, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.activity.activity_title, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.activity.activity_tel, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+        <!--電話-->
+        <div class="row">
+            <div class="co col-6">
+                @Html.LabelFor(model => model.activity.activity_tel, htmlAttributes: new { @class = "txt" })
                 @Html.EditorFor(model => model.activity.activity_tel, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.activity.activity_tel, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.activity.activity_intro, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.activity.activity_intro, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.activity.activity_intro, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.activity.longitude, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+        <!--經度-->
+        <div class="row">
+            <div class="co col-6">
+                @Html.LabelFor(model => model.activity.longitude, htmlAttributes: new { @class = "txt" })
                 @Html.EditorFor(model => model.activity.longitude, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.activity.longitude, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.activity.latitude, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+        <!--緯度-->
+        <div class="row">
+            <div class="co col-6">
+                @Html.LabelFor(model => model.activity.latitude, htmlAttributes: new { @class = "txt" })
                 @Html.EditorFor(model => model.activity.latitude, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.activity.latitude, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.activity.city, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+        <!--城市-->
+        <div class="row">
+            <div class="co col-6">
+                @Html.LabelFor(model => model.activity.city, htmlAttributes: new { @class = "txt" })
                 @Html.EditorFor(model => model.activity.city, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.activity.city, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.activity.district, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+        <!--行政區-->
+        <div class="row">
+            <div class="co col-6">
+                @Html.LabelFor(model => model.activity.district, htmlAttributes: new { @class = "txt" })
                 @Html.EditorFor(model => model.activity.district, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.activity.district, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.activity.address_detail, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+        <!--街道地址-->
+        <div class="row">
+            <div class="co col-6">
+                @Html.LabelFor(model => model.activity.address_detail, htmlAttributes: new { @class = "txt" })
                 @Html.EditorFor(model => model.activity.address_detail, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.activity.address_detail, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.activity.end_date, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.activity.end_date, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.activity.end_date, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.activity.begin_date, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+        <!--開始時間-->
+        <div class="row">
+            <div class="co col-6">
+                @Html.LabelFor(model => model.activity.begin_date, htmlAttributes: new { @class = "txt" })
                 @Html.EditorFor(model => model.activity.begin_date, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.activity.begin_date, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.activity.organizer, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+        <!--結束時間-->
+        <div class="row">
+            <div class="co col-6">
+                @Html.LabelFor(model => model.activity.end_date, htmlAttributes: new { @class = "txt" })
+                @Html.EditorFor(model => model.activity.end_date, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.activity.end_date, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <!--主辦單位-->
+        <div class="row">
+            <div class="co col-6">
+                @Html.LabelFor(model => model.activity.organizer, htmlAttributes: new { @class = "txt" })
                 @Html.EditorFor(model => model.activity.organizer, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.activity.organizer, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.activity.website, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+        <!--活動網址-->
+        <div class="row">
+            <div class="co col-6">
+                @Html.LabelFor(model => model.activity.website, htmlAttributes: new { @class = "txt" })
                 @Html.EditorFor(model => model.activity.website, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.activity.website, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.activity.transport_info, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+        <!--交通資訊-->
+        <div class="row">
+            <div class="co col-6">
+                @Html.LabelFor(model => model.activity.transport_info, htmlAttributes: new { @class = "txt" })
                 @Html.EditorFor(model => model.activity.transport_info, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.activity.transport_info, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.activity.page_status, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.activity.page_status)
-                    @Html.ValidationMessageFor(model => model.activity.page_status, "", new { @class = "text-danger" })
-                </div>
+        <!--簡介-->
+        <div class="row">
+            <div class="co col-6">
+                @Html.LabelFor(model => model.activity.activity_intro, htmlAttributes: new { @class = "txt" })
+                @Html.TextAreaFor(model => model.activity.activity_intro, new { @class = "form-control", rows = "5" })
+                @Html.ValidationMessageFor(model => model.activity.activity_intro, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            <label class="control-label col-md-2">圖片</label>
-            <div class="col-md-10">
+        <!--新增圖片-->
+        <div class="row">
+            <div class="co col-6">
+                <label class="txt">圖片</label>
                 <input id="tourism_photo" name="tourism_photo" type="file" class="form-control" />
                 @if (Model.activity_photos.tourism_photo1 != null)
                 {
@@ -155,19 +172,24 @@
             </div>
         </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+        <!--下方按鈕-->
+        <div class="row text-center footer">
+            <div class="col-1">
+                <input type="submit" value="存檔" class="btn btn-primary" />
+            </div>
+            <div class="col-1">
+                @Html.ActionLink("刪除", "Delete", new { id = Model.activity.activity_id }, new { @class = "btn btn-danger", onclick = "return confirm('確定不後悔?')" })
+            </div>
+            <div class="col-2">
+                @Html.ActionLink("回到活動列表", "Index", null, new { @class = "btn btn-primary" })
             </div>
         </div>
+
+
     </div>
 </form>
 
-<div>
-    @Html.ActionLink("回到活動列表", "Index")
-    @Html.ActionLink("刪除", "Delete", new { id =Model.activity.activity_id }, new { onclick = "return confirm('確定不後悔?')" })
-</div>
 
-    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
-    <script src="~/Scripts/jquery.validate.min.js"></script>
-    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

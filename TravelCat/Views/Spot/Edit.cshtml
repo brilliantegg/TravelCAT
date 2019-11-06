@@ -17,24 +17,22 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.spot.spot_id)
 
-
-        <!--編號-->
-    <div class="row">
-        <div class="co col-6">
-            @Html.LabelFor(model => model.spot.spot_id, htmlAttributes: new { @class = "control-label col-md-2" })
-                <input id="spot_id" name="spot_id" type="text" readonly="readonly" value="@Model.spot.spot_id" class="form-control" />
-        </div>
-    </div>
-
-
         <!--頁面狀態-->
         <div class="row">
             <div class="co col-6">
                 @Html.LabelFor(model => model.spot.page_status, htmlAttributes: new { @class = "txt" })
-                <span class="checkbox">
+                <span class="checkbox ml-3">
                     @Html.EditorFor(model => model.spot.page_status)
                     @Html.ValidationMessageFor(model => model.spot.page_status, "", new { @class = "text-danger" })
                 </span>
+            </div>
+        </div>
+
+        <!--編號-->
+        <div class="row">
+            <div class="co col-6">
+                @Html.LabelFor(model => model.spot.spot_id, htmlAttributes: new { @class = "txt" })
+                <input id="spot_id" name="spot_id" type="text" readonly="readonly" value="@Model.spot.spot_id" class="form-control" />
             </div>
         </div>
 
@@ -71,112 +69,112 @@
                 @Html.LabelFor(model => model.spot.latitude, htmlAttributes: new { @class = "txt" })
                 @Html.EditorFor(model => model.spot.latitude, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.spot.latitude, "", new { @class = "text-danger" })
-                </div>
             </div>
+        </div>
 
-            <!--城市-->
+        <!--城市-->
         <div class="row">
             <div class="co col-6">
                 @Html.LabelFor(model => model.spot.city, htmlAttributes: new { @class = "txt" })
                 @Html.EditorFor(model => model.spot.city, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.spot.city, "", new { @class = "text-danger" })
-                </div>
             </div>
+        </div>
 
-            <!--行政區-->
+        <!--行政區-->
         <div class="row">
             <div class="co col-6">
                 @Html.LabelFor(model => model.spot.district, htmlAttributes: new { @class = "txt" })
                 @Html.EditorFor(model => model.spot.district, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.spot.district, "", new { @class = "text-danger" })
-                </div>
             </div>
+        </div>
 
-            <!--詳細地址-->
+        <!--詳細地址-->
         <div class="row">
             <div class="co col-6">
                 @Html.LabelFor(model => model.spot.address_detail, htmlAttributes: new { @class = "txt" })
                 @Html.EditorFor(model => model.spot.address_detail, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.spot.address_detail, "", new { @class = "text-danger" })
-                </div>
             </div>
+        </div>
 
-            <!--營業時間-->
+        <!--營業時間-->
         <div class="row">
             <div class="co col-6">
                 @Html.LabelFor(model => model.spot.open_time, htmlAttributes: new { @class = "txt" })
                 @Html.EditorFor(model => model.spot.open_time, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.spot.open_time, "", new { @class = "text-danger" })
-                </div>
             </div>
+        </div>
 
-            <!--門票資訊-->
-            <div class="row">
-                <div class="co col-6">
-                    @Html.LabelFor(model => model.spot.ticket_info, htmlAttributes: new { @class = "txt" })
-                    @Html.EditorFor(model => model.spot.ticket_info, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.spot.ticket_info, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-            <!--簡介-->
-            <div class="row">
-                <div class="co col-6">
-                    @Html.LabelFor(model => model.spot.spot_intro, htmlAttributes: new { @class = "txt" })
-                    @Html.TextAreaFor(model => model.spot.spot_intro, new { @class = "form-control" ,rows="5" })
-                    @Html.ValidationMessageFor(model => model.spot.spot_intro, "", new { @class = "text-danger" })
-                </div>
-                </div>
-
-                <!--備註-->
-            <div class="row">
-                <div class="co col-6">
-                    @Html.LabelFor(model => model.spot.addition_note, htmlAttributes: new { @class = "txt" })
-                    @Html.TextAreaFor(model => model.spot.addition_note, new { @class = "form-control" ,rows="5" })
-                    @Html.ValidationMessageFor(model => model.spot.addition_note, "", new { @class = "text-danger" })
-                </div>
+        <!--門票資訊-->
+        <div class="row">
+            <div class="co col-6">
+                @Html.LabelFor(model => model.spot.ticket_info, htmlAttributes: new { @class = "txt" })
+                @Html.EditorFor(model => model.spot.ticket_info, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.spot.ticket_info, "", new { @class = "text-danger" })
             </div>
+        </div>
 
-                <div class="row">
-                    <div class="co col-6">
-                        <label class="">圖片</label>
-                        <input id="tourism_photo" name="tourism_photo" type="file" class="form-control" />
-                 @{ 
+        <!--簡介-->
+        <div class="row">
+            <div class="co col-6">
+                @Html.LabelFor(model => model.spot.spot_intro, htmlAttributes: new { @class = "txt" })
+                @Html.TextAreaFor(model => model.spot.spot_intro, new { @class = "form-control", rows = "5" })
+                @Html.ValidationMessageFor(model => model.spot.spot_intro, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <!--備註-->
+        <div class="row">
+            <div class="co col-6">
+                @Html.LabelFor(model => model.spot.addition_note, htmlAttributes: new { @class = "txt" })
+                @Html.TextAreaFor(model => model.spot.addition_note, new { @class = "form-control", rows = "5" })
+                @Html.ValidationMessageFor(model => model.spot.addition_note, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="co col-6">
+                <label class="">圖片</label>
+                <input id="tourism_photo" name="tourism_photo" type="file" class="form-control" />
+                @{
                     try
                     {
                         if (Model.spot_photos == null)
                         {
-                        <h3>原無圖片</h3>
+                            <h3>原無圖片</h3>
                         }
                         else
                         {
-                        <span>原圖：</span><img src="/images/spot/@Model.spot_photos.tourism_photo1" width="150" />
-                        <input id="oldImg" name="oldImg" type="hidden" value="@Model.spot_photos.tourism_photo1" />
+                            <span>原圖：</span><img src="/images/spot/@Model.spot_photos.tourism_photo1" width="150" />
+                            <input id="oldImg" name="oldImg" type="hidden" value="@Model.spot_photos.tourism_photo1" />
                         }
                     }
                     catch (NullReferenceException)
                     {
-                    <h3>原無圖片</h3>
-                        }
+                        <h3>原無圖片</h3>
                     }
-                        @Html.ValidationMessageFor(model => model.spot_photos.tourism_photo1, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
-                <!--下方按鈕-->
-                <div class="row text-center footer">
-                    <div class="col-1">
-                        <input type="submit" value="Save" class="btn btn-primary" />
-                    </div>
-                    <div class="col-1">
-                        @Html.ActionLink("刪除", "Delete", new { id = Model.spot.spot_id }, new { @class = "btn btn-danger", onclick = "return confirm('確定不後悔?')" })
-                    </div>
-                    <div class="col-2">
-                        @Html.ActionLink("回到景點列表", "Index", null, new { @class = "btn btn-primary" })
-                    </div>
-                    
-                </div>
+                }
+                @Html.ValidationMessageFor(model => model.spot_photos.tourism_photo1, "", new { @class = "text-danger" })
             </div>
+        </div>
+
+        <!--下方按鈕-->
+        <div class="row text-center footer">
+            <div class="col-1">
+                <input type="submit" value="存檔" class="btn btn-primary" />
+            </div>
+            <div class="col-1">
+                @Html.ActionLink("刪除", "Delete", new { id = Model.spot.spot_id }, new { @class = "btn btn-danger", onclick = "return confirm('確定不後悔?')" })
+            </div>
+            <div class="col-2">
+                @Html.ActionLink("回到景點列表", "Index", null, new { @class = "btn btn-primary" })
+            </div>
+
+        </div>
+    </div>
 </form>
 
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
