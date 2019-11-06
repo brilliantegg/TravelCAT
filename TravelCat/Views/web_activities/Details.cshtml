@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout 1.cshtml";
+    
 }
 
 <div class=" justify-content-center align-items-center">
@@ -101,24 +102,34 @@
                     @Html.DisplayFor(model => model.activity.transport_info)
                 </div>
             </div>
-
-
-
         </div>
         @*googlemap*@
         <div id="map"></div>
-        @*single_comment*@
-    <div class="single_comment">
-        @Html.DisplayFor(model => model.comment.member_id)
-        @Html.DisplayFor(model => model.comment.comment_date)
-        @Html.DisplayFor(model => model.comment.comment_photo)
-        @Html.DisplayFor(model => model.comment.comment_title)
-        @Html.DisplayFor(model => model.comment.comment_content)
-    </div>
+
+        @*新增評論*@
+        @Html.ActionLink("新增評論", "Create", "web_comments")
+        <form name="form1" action="/web_comments/Create" method="post">
+            <input type="submit" value="新增評論submit" />
+        </form>
+
+        <div class="comments container">
+            <div class="single_comment">
+                @Html.DisplayFor(model => model.comment.member_id)
+                <br />
+                @Html.DisplayFor(model => model.comment.comment_date)
+                <br />
+                @Html.DisplayFor(model => model.comment.comment_photo)
+                <img src="https://www.blacktomato.com/wp-content/uploads/2018/03/Boats-in-Zanzibar.jpg" alt="" style="width:100%" />
+                <h4>@Html.DisplayFor(model => model.comment.comment_title)</h4>
+                <br />
+                @Html.DisplayFor(model => model.comment.comment_content)
+            </div>
+        </div>
 
     </div>
-
+</div>
 <script>
+
     //GOOGLEMAP API
     var map;
     function initMap() {

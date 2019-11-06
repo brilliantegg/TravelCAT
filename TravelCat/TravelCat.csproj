@@ -1848,6 +1848,7 @@
     <Compile Include="Controllers\RestaurantsController.cs" />
     <Compile Include="Controllers\SpotsController.cs" />
     <Compile Include="Controllers\web_activitiesController.cs" />
+    <Compile Include="Controllers\web_commentsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1975,6 +1976,11 @@
     <Content Include="Views\Shared\_Layout 1.cshtml" />
     <Content Include="Views\web_activities\Details.cshtml" />
     <Content Include="Views\web_activities\Index.cshtml" />
+    <Content Include="Views\web_comments\Create.cshtml" />
+    <Content Include="Views\web_comments\Delete.cshtml" />
+    <Content Include="Views\web_comments\Details.cshtml" />
+    <Content Include="Views\web_comments\Edit.cshtml" />
+    <Content Include="Views\web_comments\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
