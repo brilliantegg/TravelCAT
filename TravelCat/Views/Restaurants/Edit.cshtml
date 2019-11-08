@@ -108,30 +108,47 @@
             </div>
         </div>
 
-        <div class="form-group">
-            <label class="control-label col-md-2">圖片</label>
-            <div class="col-md-10">
-                <input id="tourism_photo" name="tourism_photo" type="file" class="form-control" />
-                @if (Model.restaurant_photos.tourism_photo1 != null)
-                {
-                    @:原圖：<img src="/images/restaurant/@Model.restaurant_photos.tourism_photo1" width="150" />
-                }
-                else
-                {
-                    <h3>原無圖示</h3>
-                }
-                <input id="oldImg" name="oldImg" type="hidden" value="@Model.restaurant_photos.tourism_photo1" />
-                @Html.ValidationMessageFor(model => model.restaurant_photos.tourism_photo1, "", new { @class = "text-danger" })
+
+        <div class="row">
+            <div class="co col-6">
+                <label class="">圖片</label>
+               
+                <div class="row">
+                    @{ var photo = Model.restaurant_photos.Where(m => m.tourism_id == Model.restaurant.restaurant_id).ToList();
+                        for(int i = 0; i < 3; i++) {
+                                        <div class="col-md-4">
+                                            @if (i>photo.Count-1)
+                                            {
+                                                <h3>no image</h3>
+                                            }
+                                            else
+                                            {
+                                                <img src="/images/restaurant/@photo[i].tourism_photo1" width="150" />
+                                                <input id="oldImg" name="oldImg" type="text" value="@photo[i].tourism_photo1" />
+                                            }
+                                            <input id="tourism_photo" name="tourism_photo" type="file" class="form-control" />
+                                            @Html.ValidationMessageFor(model => model.restaurant_photos[i].tourism_photo1, "", new { @class = "text-danger" })
+                                        </div>
+                        }
+                    }
+                </div>
             </div>
         </div>
 
 
 
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+        <!--下方按鈕-->
+        <div class="row text-center footer">
+            <div class="col-1">
+                <input type="submit" value="Save" class="btn btn-primary" />
             </div>
+            <div class="col-1">
+                @Html.ActionLink("刪除", "Delete", new { id = Model.restaurant.restaurant_id }, new { @class = "btn btn-danger", onclick = "return confirm('確定不後悔?')" })
+            </div>
+            <div class="col-2">
+                @Html.ActionLink("回到景點列表", "Index", new { page=Session["pg"]}, new { @class = "btn btn-primary" })
+            </div>
+
         </div>
     </div>
     </form>

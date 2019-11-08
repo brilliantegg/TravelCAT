@@ -148,7 +148,7 @@
                 <input type="submit" value="新增" class="btn btn-primary" />
             </div>
             <div class="col-2">
-                @Html.ActionLink("回到景點列表", "Index", new { page=ViewBag.page, id = ViewBag.id  }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("回到景點列表", "Index", new { page=Session["pg"]}, new { @class = "btn btn-primary" })
             </div>
         </div>
     </div>
