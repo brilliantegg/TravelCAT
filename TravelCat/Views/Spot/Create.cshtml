@@ -132,9 +132,13 @@
         <!--新增圖片-->
         <div class=" row">
             <div class="co col-6">
-                @Html.LabelFor(model => model.spot_photos.tourism_photo1, htmlAttributes: new { @class = "txt" })
+                @Html.LabelFor(model => model.spot_photos[0].tourism_photo1, htmlAttributes: new { @class = "txt" })
                 <input id="tourism_photo" name="tourism_photo" type="file" class="form-control" />
-                @Html.ValidationMessageFor(model => model.spot_photos.tourism_photo1, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.spot_photos[0].tourism_photo1, "", new { @class = "text-danger" })
+                <input id="tourism_photo" name="tourism_photo" type="file" class="form-control" />
+                @Html.ValidationMessageFor(model => model.spot_photos[1].tourism_photo1, "", new { @class = "text-danger" })
+                <input id="tourism_photo" name="tourism_photo" type="file" class="form-control" />
+                @Html.ValidationMessageFor(model => model.spot_photos[2].tourism_photo1, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -144,7 +148,7 @@
                 <input type="submit" value="新增" class="btn btn-primary" />
             </div>
             <div class="col-2">
-                @Html.ActionLink("回到景點列表", "Index", null, new { @class = "btn btn-primary" })
+                @Html.ActionLink("回到景點列表", "Index", new { page=ViewBag.page, id = ViewBag.id  }, new { @class = "btn btn-primary" })
             </div>
         </div>
     </div>
