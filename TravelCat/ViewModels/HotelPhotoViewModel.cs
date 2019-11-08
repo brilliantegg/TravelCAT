@@ -9,6 +9,6 @@ namespace TravelCat.ViewModels
     public class HotelPhotoViewModel
     {
         public hotel hotel { get; set; }
-        public tourism_photo hotel_photos { get; set; }
+        public List<tourism_photo> hotel_photos { get; set; }
     }
 }
