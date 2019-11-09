@@ -17,32 +17,24 @@ namespace TravelCat.Controllers
         int pageSize = 10;
 
         // GET: Hotels
-        public ActionResult Index(string id,int? page)
+        public ActionResult Index(string id = null, int page = 1)
         {
-            int pageNumber = (page ?? 1);
+            ViewBag.id = id;
+            Session["pg"]=page;
+            //int pageNumber = (page ?? 1);
+
             if (!String.IsNullOrEmpty(id))
             {
                 var search = db.hotel.Where(s => s.hotel_id.Contains(id) || s.hotel_title.Contains(id)
-               || s.city.Contains(id) || s.district.Contains(id)).ToList().ToPagedList(pageNumber, pageSize);
-                return View(search);
+               || s.city.Contains(id) || s.district.Contains(id));
+                return View(search.OrderBy(m => m.hotel_id).ToPagedList(page, pageSize));
             }
-
-            var data = db.hotel.OrderBy(m => m.hotel_id).ToPagedList(pageNumber, pageSize);
-
-            return View(data);
+            else
+            {
+                var data = db.spot.OrderBy(m => m.spot_id);
+                return View(data.ToPagedList(page, pageSize));
+            }
         }
-        //public ActionResult contentQuery(string id)
-        //{
-        //    var search = from a in db.hotels
-        //                 select a;
-        //    if (!String.IsNullOrEmpty(id))
-        //    {
-        //        search = search.Where(s => s.hotel_id.Contains(id) || s.hotel_title.Contains(id)
-        //        || s.city.Contains(id) || s.district.Contains(id));
-        //    }
-        //    return View(search);
-
-        //}
 
         public ActionResult Create()
         {
@@ -50,31 +42,34 @@ namespace TravelCat.Controllers
         }
 
         [HttpPost]    
-        public ActionResult Create(hotel hotel, HttpPostedFileBase tourism_photo)     
+        public ActionResult Create(hotel hotel, HttpPostedFileBase[] tourism_photo)     
         {
             string h_id = db.Database.SqlQuery<string>("Select dbo.GethotelId()").FirstOrDefault();
             hotel.hotel_id = h_id;
 
+            //圖片
             string fileName = "";
-            if (tourism_photo != null)
+            for (int i = 0; i < tourism_photo.Length; i++)
             {
-                if (tourism_photo.ContentLength > 0)
+                HttpPostedFileBase f = tourism_photo[i];
+                if (f != null)
                 {
-                    fileName = System.IO.Path.GetFileName(tourism_photo.FileName);      
-                    tourism_photo.SaveAs(Server.MapPath("~/images/hotel/" + fileName));    
+                    if (f.ContentLength > 0)
+                    {
+                        fileName = hotel.hotel_id + "_" +DateTime.Now.ToString().Replace("/", "").Replace(":", "").Replace(" ", "") + (i + 1).ToString() + ".jpg";
+                        f.SaveAs(Server.MapPath("~/images/hotel/" + fileName));
+                        tourism_photo tp = new tourism_photo();
+                        tp.tourism_photo1 = fileName;
+                        tp.tourism_id = hotel.hotel_id;
+                        db.tourism_photo.Add(tp);
+                    }
                 }
             }
-
-            tourism_photo tp = new tourism_photo();
-            tp.tourism_photo1 = fileName;
-            tp.tourism_id = hotel.hotel_id;
-
             db.hotel.Add(hotel);
-            db.tourism_photo.Add(tp);
             db.SaveChanges();
 
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index",new { page=Session["pg"] });
         }
 
         public ActionResult Delete(string Id)
@@ -83,54 +78,70 @@ namespace TravelCat.Controllers
             db.hotel.Remove(product);
             db.SaveChanges();
 
-            var photos = db.tourism_photo.Where(m => m.tourism_id == Id).FirstOrDefault();
-            string fileName = photos.tourism_photo1;
-            if (fileName != "")
+            var photos = db.tourism_photo.Where(m => m.tourism_id == Id).ToList();
+            for (int i = 0; i < photos.Count; i++)
             {
-                System.IO.File.Delete(Server.MapPath("~/images/hotel/" + fileName));
+                string fileName = photos[i].tourism_photo1;
+                if (fileName != "")
+                {
+                    System.IO.File.Delete(Server.MapPath("~/images/hotel/" + fileName));
+                }
+                db.tourism_photo.Remove(photos[i]);
+                db.SaveChanges();
             }
-            db.tourism_photo.Remove(photos);
-            db.SaveChanges();
-
-            return RedirectToAction("Index");
+            return RedirectToAction("Index",new { page=Session["pg"] });
         }
         public ActionResult Edit(string id)
         {
             HotelPhotoViewModel model = new HotelPhotoViewModel()
             {
                 hotel = db.hotel.Where(m => m.hotel_id == id).FirstOrDefault(),
-                hotel_photos = db.tourism_photo.Where(m => m.tourism_id == id).FirstOrDefault()
+                hotel_photos = db.tourism_photo.Where(m => m.tourism_id == id).ToList()
             };
             return View(model);
         }
 
         [HttpPost]
-        public ActionResult Edit(string id, HotelPhotoViewModel hotelPhotoViewModel, HttpPostedFileBase tourism_photo, String oldImg)
+        public ActionResult Edit(string id, HotelPhotoViewModel hotelPhotoViewModel, HttpPostedFileBase[] tourism_photo, String oldImg)
         {
 
             db.Entry(hotelPhotoViewModel.hotel).State = EntityState.Modified;
             db.SaveChanges();
 
+            //圖片
             string fileName = "";
-            if (tourism_photo != null)
+            var tp1 = db.tourism_photo.Where(m => m.tourism_id == id).ToList();
+
+            for (int i = 0; i < 3; i++)
             {
-                if (tourism_photo.ContentLength > 0)
+                if (tourism_photo[i] != null)
                 {
-                    System.IO.File.Delete(Server.MapPath("~/images/hotel/" + oldImg));
-                    fileName = System.IO.Path.GetFileName(tourism_photo.FileName);      //取得檔案的檔名(主檔名+副檔名)
-                    tourism_photo.SaveAs(Server.MapPath("~/images/hotel/" + fileName));      //將檔案存到該資料夾
+                    //如果有新增檔案到input
+                    if (tourism_photo[i].ContentLength > 0)
+                    {
+                        //改名
+                        fileName = hotelPhotoViewModel.hotel.hotel_id + "_" + DateTime.Now.ToString().Replace("/", "").Replace(":", "").Replace(" ", "") + (i + 1).ToString() + ".jpg";
+                        if (i < tp1.Count)  //如果原有紀錄
+                        {
+                            //刪掉原檔案
+                            System.IO.File.Delete(Server.MapPath("~/images/hotel/" + tp1[i].tourism_photo1));
+                            tourism_photo[i].SaveAs(Server.MapPath("~/images/hotel/" + fileName));      //將檔案存到該資料夾
+                            //改掉資料庫檔案
+                            tp1[i].tourism_photo1 = fileName;
+                        }
+                        else //如果原本沒有
+                        {
+                            tourism_photo tp = new tourism_photo();
+                            tp.tourism_photo1 = fileName;
+                            tourism_photo[i].SaveAs(Server.MapPath("~/images/hotel/" + fileName));
+                            tp.tourism_id = hotelPhotoViewModel.hotel.hotel_id;
+                            db.tourism_photo.Add(tp);
+                        }
+                    }
                 }
             }
-            else
-            {
-                fileName = oldImg;
-            }
-            var tp1 = db.tourism_photo.Where(m => m.tourism_id == id).FirstOrDefault();
-
-            tp1.tourism_photo1 = fileName;
             db.SaveChanges();
-
-            return RedirectToAction("Index");
+            return RedirectToAction("Index",new { page=Session["pg"] });
         }
     }
 }
