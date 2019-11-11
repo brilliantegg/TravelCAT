@@ -39,7 +39,7 @@
           <Key>
             <PropertyRef Name="badge_id" />
           </Key>
-          <Property Name="badge_id" Type="int" Nullable="false" />
+          <Property Name="badge_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="badge_title" Type="nvarchar" MaxLength="15" Nullable="false" />
           <Property Name="badge_photo" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
@@ -163,7 +163,7 @@
           </Key>
           <Property Name="member_id" Type="char" MaxLength="7" Nullable="false" />
           <Property Name="member_account" Type="varchar" MaxLength="15" Nullable="false" />
-          <Property Name="member_password" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="member_password" Type="varchar" MaxLength="60" Nullable="false" />
           <Property Name="member_status" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="member_profile">
@@ -199,6 +199,7 @@
           <Property Name="comment_id" Type="bigint" Nullable="false" />
           <Property Name="member_id" Type="char" MaxLength="7" Nullable="false" />
           <Property Name="msg_status" Type="bit" />
+          <Property Name="tourism_id" Type="char" MaxLength="7" />
         </EntityType>
         <EntityType Name="message_emoji_details">
           <Key>
@@ -747,7 +748,7 @@
           </Key>
           <Property Name="member_id" Type="String" MaxLength="7" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="member_account" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="member_password" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="member_password" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="member_status" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="badge_details" Relationship="Self.FK__badge_det__membe__4CA06362" FromRole="member" ToRole="badge_details" />
           <NavigationProperty Name="collections_detail" Relationship="Self.FK__collectio__membe__4E88ABD4" FromRole="member" ToRole="collections_detail" />
@@ -796,6 +797,7 @@
           <NavigationProperty Name="comment" Relationship="Self.FK__message__comment__5070F446" FromRole="message" ToRole="comment" />
           <NavigationProperty Name="member" Relationship="Self.FK__message__member___4BAC3F29" FromRole="message" ToRole="member" />
           <NavigationProperty Name="message_emoji_details" Relationship="Self.FK__message_e__msg_i__52593CB8" FromRole="message" ToRole="message_emoji_details" />
+          <Property Name="tourism_id" Type="String" MaxLength="7" FixedLength="true" Unicode="false" />
         </EntityType>
         <EntityType Name="message_emoji_details">
           <Key>
@@ -1363,6 +1365,7 @@
           <EntitySetMapping Name="message">
             <EntityTypeMapping TypeName="TravelCat.message">
               <MappingFragment StoreEntitySet="message">
+                <ScalarProperty Name="tourism_id" ColumnName="tourism_id" />
                 <ScalarProperty Name="msg_id" ColumnName="msg_id" />
                 <ScalarProperty Name="msg_time" ColumnName="msg_time" />
                 <ScalarProperty Name="msg_content" ColumnName="msg_content" />

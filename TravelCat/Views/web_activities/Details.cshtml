@@ -9,7 +9,7 @@
 <div class=" justify-content-center align-items-center">
 
 
-    <h2 class="text-center">@Html.DisplayFor(model => model.activity.activity_title)</h2>
+    <h2 class="text-center">@Model.activity.activity_title</h2>
     <form method="post">
         <input type="submit" name="add_to_bucket_list" class="add_to_bucket_list" value="add_to_bucket_list" />
     </form>
@@ -56,84 +56,117 @@
 
     </div>
     <div>
-
-        <hr />
-        <div class="container">
-            <div class="row ">
-                <div class="col-3">
-                    @Html.DisplayNameFor(model => model.activity.activity_tel)
-                    <br />
-                    @Html.DisplayFor(model => model.activity.activity_tel)
-                </div>
-                <div class="col-3">
-                    @Html.DisplayNameFor(model => model.activity.activity_intro)
-                    <br />
-                    @Html.DisplayFor(model => model.activity.activity_intro)
-                </div>
-                <div class="col-3">
-                    @Html.DisplayNameFor(model => model.activity.address_detail)
-                    <br />
-                    @Html.DisplayFor(model => model.activity.city)
-                    <br />
-                    @Html.DisplayFor(model => model.activity.district)
-                    <br />
-                    @Html.DisplayFor(model => model.activity.address_detail)
-                </div>
-                <div class="col-3">
-                    @Html.DisplayNameFor(model => model.activity.begin_date)
-                    @Html.DisplayFor(model => model.activity.begin_date)
-                    <br />
-                    @Html.DisplayNameFor(model => model.activity.end_date)
-                    @Html.DisplayFor(model => model.activity.end_date)
-                </div>
-                <div class="col-3">
-                    @Html.DisplayNameFor(model => model.activity.organizer)
-                    <br />
-                    @Html.DisplayFor(model => model.activity.organizer)
-                </div>
-                <div class="col-3">
-                    @Html.DisplayNameFor(model => model.activity.website)
-                    <br />
-                    @Html.DisplayFor(model => model.activity.website)
-                </div>
-                <div class="col-3">
-                    @Html.DisplayNameFor(model => model.activity.transport_info)
-                    <br />
-                    @Html.DisplayFor(model => model.activity.transport_info)
-                </div>
+    </div>
+    <hr />
+    <div class="container">
+        <div class="row ">
+            <div class="col-3">
+                @Html.DisplayNameFor(model => model.activity.activity_tel)
+                <br />
+                @Html.DisplayFor(model => model.activity.activity_tel)
+            </div>
+            <div class="col-3">
+                @Html.DisplayNameFor(model => model.activity.activity_intro)
+                <br />
+                @Html.DisplayFor(model => model.activity.activity_intro)
+            </div>
+            <div class="col-3">
+                @Html.DisplayNameFor(model => model.activity.address_detail)
+                <br />
+                @Html.DisplayFor(model => model.activity.city)
+                <br />
+                @Html.DisplayFor(model => model.activity.district)
+                <br />
+                @Html.DisplayFor(model => model.activity.address_detail)
+            </div>
+            <div class="col-3">
+                @Html.DisplayNameFor(model => model.activity.begin_date)
+                @Html.DisplayFor(model => model.activity.begin_date)
+                <br />
+                @Html.DisplayNameFor(model => model.activity.end_date)
+                @Html.DisplayFor(model => model.activity.end_date)
+            </div>
+            <div class="col-3">
+                @Html.DisplayNameFor(model => model.activity.organizer)
+                <br />
+                @Html.DisplayFor(model => model.activity.organizer)
+            </div>
+            <div class="col-3">
+                @Html.DisplayNameFor(model => model.activity.website)
+                <br />
+                @Html.DisplayFor(model => model.activity.website)
+            </div>
+            <div class="col-3">
+                @Html.DisplayNameFor(model => model.activity.transport_info)
+                <br />
+                @Html.DisplayFor(model => model.activity.transport_info)
             </div>
         </div>
-        @*googlemap*@
-        <div id="map"></div>
-        @*single_comment*@
-        <div class="single_comment">
-            @Html.DisplayFor(model => model.comment.member_id)
-            @Html.DisplayFor(model => model.comment.comment_date)
-            @Html.DisplayFor(model => model.comment.comment_photo)
-            @Html.DisplayFor(model => model.comment.comment_title)
-            @Html.DisplayFor(model => model.comment.comment_content)
-        </div>
+    </div>
+    @*googlemap*@
+    <div id="map"></div>
 
-        @*新增評論*@
 
-        @Html.ActionLink("新增評論", "Create", "web_comments", new { id = ViewBag.id }, null)
-        @*<form name="form1" action="/web_comments/Create/" method="post">
-            <input type="submit" value="新增評論submit" />
-        </form>*@
+    @*新增評論*@
+    <form action="/web_comments/Create" Method="GET">
+        <input type="hidden" name="tourismID" value=@Html.DisplayFor(model => model.activity.activity_id) />
 
-        <div class="comments container">
-            <div class="single_comment">
-                @Html.DisplayFor(model => model.comment.member_id)
+        <button type="submit">新增評論</button>
+    </form>
+    @*@Html.ActionLink("action新增評論", "Create", "web_comments", new { id = ViewBag.id }, null)*@
+
+    @*single_comment*@
+
+<div class="comments_lists container">
+    @foreach (var item in Model.comment)
+    {
+    <div class="single_comment">
+
+        @item.member.member_id
+
+        <br />
+        @item.comment_date
+
+        <br />
+        
+
+        <img src="/images/comment/@item.comment_photo" alt="" style="width:100%" />
+        <h4>@item.comment_title </h4>
+        <br />
+        @item.comment_content
+    <div class="message_list">
+        @foreach (var msgItem in item.message)
+        {
+            <div class="single_message">
+
+
+                @msgItem.member_id
                 <br />
-                @Html.DisplayFor(model => model.comment.comment_date)
+                @msgItem.msg_time
                 <br />
-                @Html.DisplayFor(model => model.comment.comment_photo)
-                <img src="https://www.blacktomato.com/wp-content/uploads/2018/03/Boats-in-Zanzibar.jpg" alt="" style="width:100%" />
-                <h4>@Html.DisplayFor(model => model.comment.comment_title)</h4>
-                <br />
-                @Html.DisplayFor(model => model.comment.comment_content)
+                @msgItem.msg_content
+
             </div>
+        }
+    </div>
+        <div class="add_message">
+            <form action="/web_activities/createMessage" method="post">
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="comment_id" value="@item.comment_id" />
+                <input type="hidden" name="msg_time" value="@ViewBag.getTime" />
+                <input type="hidden" name="member_id" value="M000001" />
+                <input type="hidden" name="msg_status" value="True" />
+                <input type="hidden" name="tourism_id" value="@item.tourism_id" />
+                <textarea id="msg_content" rows="2" cols="20" name="msg_content"></textarea>
+                <br />
+                <input id="Submit1" type="submit" value="submit" />
+            </form>
+
         </div>
+    </div>
+    }
+
+</div>
 
     <script>
     //GOOGLEMAP API

@@ -20,7 +20,7 @@
         <EntityTypeShape EntityType="TravelCat.issue_type" Width="1.5" PointX="3.75" PointY="4.875" IsExpanded="true" />
         <EntityTypeShape EntityType="TravelCat.member" Width="1.5" PointX="0.75" PointY="11.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TravelCat.member_profile" Width="1.5" PointX="3" PointY="24.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="TravelCat.message" Width="1.5" PointX="8.25" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TravelCat.message" Width="1.875" PointX="8.25" PointY="13" IsExpanded="true" />
         <EntityTypeShape EntityType="TravelCat.message_emoji_details" Width="1.5" PointX="10.5" PointY="12.625" IsExpanded="true" />
         <EntityTypeShape EntityType="TravelCat.restaurant" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TravelCat.spot" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />

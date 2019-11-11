@@ -24,6 +24,7 @@ namespace TravelCat.Controllers
         // GET: web_comments/Details/5
         public ActionResult Details(long? id)
         {
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -37,31 +38,40 @@ namespace TravelCat.Controllers
         }
 
         // GET: web_comments/Create
-        public ActionResult Create()
+        public ActionResult Create(string tourismID )
         {
-            ViewBag.member_id = new SelectList(db.member, "member_id", "member_account");
+            ViewBag.tourismID = tourismID;
+            ViewBag.getTime = DateTime.Now.ToString("yyyy/MM/dd");
+
             return View();
         }
 
         // POST: web_comments/Create
-        // 若要免於過量張貼攻擊，請啟用想要繫結的特定屬性，如需
-        // 詳細資訊，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "comment_id,tourism_id,comment_title,comment_content,comment_date,comment_photo,comment_stay_total,travel_partner,comment_rating,travel_month,comment_status,member_id")] comment comment,string id)
+        public ActionResult Create([Bind(Include = "comment_id,tourism_id,comment_title,comment_content,comment_date,comment_photo,comment_stay_total,travel_partner,comment_rating,travel_month,comment_status,member_id")] comment comment, HttpPostedFileBase comment_photo)
         {
-            string[] travel_Partner = { "伴侶旅行", "家庭 (含年幼孩童)", "家庭 (含青少年)", "朋友", "商務", "單獨旅行", "其他生物" };
-
-            ViewBag.travelPartner = travel_Partner;
+            //處理圖檔上傳
+            string fileName = "";
+            if (comment_photo != null)
+            {
+                if (comment_photo.ContentLength > 0)
+                {
+                    fileName = System.IO.Path.GetFileName(comment_photo.FileName);      //取得檔案的檔名(主檔名+副檔名)
+                    comment_photo.SaveAs(Server.MapPath("~/images/comment/" + fileName));      //將檔案存到該資料夾
+                }
+            }
+            //end
             if (ModelState.IsValid)
             {
+                comment.comment_photo = fileName;
                 db.comment.Add(comment);
                 db.SaveChanges();
                 return RedirectToRoute(new { controller = "web_activities", action = "Details", id = comment.tourism_id });
 
             }
-            ViewBag.id = id;
-            ViewBag.member_id = new SelectList(db.member, "member_id", "member_account", comment.member_id);
+
             return View(comment);
         }
 

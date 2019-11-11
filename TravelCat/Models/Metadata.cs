@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -365,7 +366,7 @@ namespace TravelCat.Models
         public string tourism_id { get; set; }
         [DisplayName("評論標題")]
         [Required]
-        [StringLength(20)]
+        [StringLength(50)]
         public string comment_title { get; set; }
         [DisplayName("評論內容")]
         [Column(TypeName = "ntext")]
@@ -408,21 +409,35 @@ namespace TravelCat.Models
         [DisplayName("留言編號")]
         [Key]
         public long msg_id { get; set; }
+
         [DisplayName("留言時間")]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd hh:mm}", ApplyFormatInEditMode = true)]
         public DateTime msg_time { get; set; }
+
         [DisplayName("留言內容")]
         [Required]
         [StringLength(1000)]
         public string msg_content { get; set; }
+
         [DisplayName("評論編號")]
         public long comment_id { get; set; }
+
         [DisplayName("會員編號")]
         [Required]
         [StringLength(7)]
         public string member_id { get; set; }
+
         [DisplayName("留言狀態")]
         public Nullable<bool> msg_status { get; set; }
+        [DisplayName("觀光編號")]
+        public string tourism_id { get; set; }
+        [JsonIgnore]
+        public virtual comment comment { get; set; }
+        [JsonIgnore]
+        public virtual member member { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [JsonIgnore]
+        public virtual ICollection<message_emoji_details> message_emoji_details { get; set; }
 
     }
     [MetadataType(typeof(Metadata_emoji))]
