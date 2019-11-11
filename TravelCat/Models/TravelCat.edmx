@@ -77,7 +77,7 @@
           </Key>
           <Property Name="comment_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="tourism_id" Type="char" MaxLength="7" Nullable="false" />
-          <Property Name="comment_title" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="comment_title" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="comment_content" Type="ntext" Nullable="false" />
           <Property Name="comment_date" Type="datetime" Nullable="false" />
           <Property Name="comment_photo" Type="varchar" MaxLength="100" Nullable="false" />
@@ -649,7 +649,7 @@
           </Key>
           <Property Name="comment_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="tourism_id" Type="String" MaxLength="7" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="comment_title" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="comment_title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="comment_content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="comment_date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="comment_photo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />

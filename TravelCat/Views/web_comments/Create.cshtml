@@ -56,26 +56,29 @@
         </div>
         <!--旅伴-->
         <div class="form-group">
-            
+
             @Html.LabelFor(model => model.travel_partner, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
+                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                    <label class="btn btn-primary travel_partner active">
+                        <input type="radio" name="travel_partner" id="option1" autocomplete="off" checked value="蜜月"> 蜜月
+                    </label>
+                    <label class="btn btn-warning travel_partner">
+                        <input type="radio" name="travel_partner" id="option2" autocomplete="off" value="伴侶"> 伴侶
+                    </label>
+                    <label class="btn btn-secondary travel_partner">
+                        <input type="radio" name="travel_partner" id="option3" autocomplete="off" value="家庭"> 家庭
+                    </label>
+                    <label class="btn btn-warning travel_partner">
+                        <input type="radio" name="travel_partner" id="option4" autocomplete="off" value="朋友"> 朋友
+                    </label>
+                    <label class="btn btn-info travel_partner">
+                        <input type="radio" name="travel_partner" id="option5" autocomplete="off" value="商務"> 商務
+                    </label>
+                </div>
 
-                @Html.RadioButton("travel_partner", "蜜月", true)
-                <label class="control-label " for="travel_partner">蜜月</label>
-                @Html.RadioButton("travel_partner", "伴侶", true)
-                <label class="control-label " for="travel_partner">伴侶</label>
-                @Html.RadioButton("travel_partner", "家庭", true)
-            <label class="control-label " for="travel_partner">家庭</label>
-                @Html.RadioButton("travel_partner", "朋友", true)
-            <label class="control-label " for="travel_partner">朋友</label>
-                @Html.RadioButton("travel_partner", "商務", true)
-            <label class="control-label " for="travel_partner">商務</label>
-                @Html.RadioButton("travel_partner", "單獨旅行", true)
-            <label class="control-label " for="travel_partner">單獨旅行</label>
-                @Html.RadioButton("travel_partner", "商務", true)
-            <label class="control-label " for="travel_partner">商務</label>
-                @* @Html.CheckBoxFor("radio",(IEnumerable<SelectListItem>)ViewBag.travelPartner)*@
-                @*@Html.ListBoxFor("travelPartner",ViewBag.travelPartner)*@
+
+
             </div>
             @Html.ValidationMessageFor(model => model.travel_partner, "", new { @class = "text-danger" })
         </div>
@@ -97,14 +100,23 @@
     <div class="form-group">
         @Html.LabelFor(model => model.travel_month, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @*@Html.DropDownList("travel_month")*@
-
-            @Html.RadioButton("travel_month", "1", true)1
-            @Html.RadioButton("travel_month", "2", true)2
-            @Html.RadioButton("travel_month", "3", true)3
-            @Html.RadioButton("travel_month", "4", true)4
-            @Html.RadioButton("travel_month", "5", true)5
-            @Html.ValidationMessageFor(model => model.comment_rating, "", new { @class = "text-danger" })
+            
+            <select id="Select1" name="travel_month">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+                <option>11</option>
+                <option>12</option>
+            </select>
+           
+           
             @Html.ValidationMessageFor(model => model.travel_month, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -121,12 +133,23 @@
         </div>
     </div>
 
-    </form>
+</form>
 
-    <div>
-        @Html.ActionLink("Back to List", "Index")
-    </div>
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
 
-    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
-    <script src="~/Scripts/jquery.validate.min.js"></script>
-    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<!--bootstrap-->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script>
+    $(function () {
+        $(".travel_partner").click(function () {
+            $("this").button('toggle');
+        });
+    });
+</script>

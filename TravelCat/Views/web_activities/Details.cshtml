@@ -9,147 +9,270 @@
 <div class=" justify-content-center align-items-center">
 
 
-    <h2 class="text-center">@Model.activity.activity_title</h2>
-    <form method="post">
-        <input type="submit" name="add_to_bucket_list" class="add_to_bucket_list" value="add_to_bucket_list" />
-    </form>
 
-    <div class="w3-content w3-display-container">
+    <header>
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            </ol>
 
-        <div class="w3-display-container mySlides">
-            <img src="https://www.blacktomato.com/wp-content/uploads/2016/02/Amazing-Amalfi-coast.jpg" style="width:100%">
-            <div class="gallery_caption ">
-                French Alps
+            <div class="carousel-inner">
+                <div class="carousel-item header-carousel-item bg-cover active " style="background-image:url( https://www.blacktomato.com/wp-content/uploads/2016/02/Amalfi-coast_Shutterstock-9.jpg)">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>@Model.activity.activity_title</h5>
+
+                    </div>
+                </div>
+                <div class="carousel-item header-carousel-item bg-cover " style="background-image:url(https://www.blacktomato.com/wp-content/uploads/2016/02/Positano-italy.jpg)">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>@Model.activity.activity_title</h5>
+
+                    </div>
+                </div>
+                <div class="carousel-item header-carousel-item bg-cover " style="background-image:url(https://www.blacktomato.com/wp-content/uploads/2016/02/Amazing-Amalfi-coast.jpg)">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>@Model.activity.activity_title</h5>
+
+                    </div>
+                </div>
+
             </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
         </div>
+    </header>
 
-        <div class="w3-display-container mySlides">
-            <img src="https://www.blacktomato.com/wp-content/uploads/2016/02/Amalfi-coast_Shutterstock-9.jpg" style="width:100%">
-            <div class="gallery_caption ">
-                Northern Lights
-            </div>
-        </div>
+    <section class="bg-white py-5  text-center">
+        <div class="container col-md-10 ">
 
-        <div class="w3-display-container mySlides">
-            <img src="https://www.blacktomato.com/wp-content/uploads/2016/02/Positano-italy.jpg" style="width:100%">
-            <div class="gallery_caption ">
-                Beautiful Mountains
-            </div>
-        </div>
 
-        <div class="w3-display-container mySlides">
-            <img src="https://www.blacktomato.com/wp-content/uploads/2016/02/The-view-from-the-balcony-.jpg" style="width:100%">
-            <div class="gallery_caption ">
-                The Rain Forest
-            </div>
-        </div>
-
-        <div class="w3-display-container mySlides">
-            <img src="https://www.blacktomato.com/wp-content/uploads/2016/02/Praiano_666279370.jpg" style="width:100%">
-            <div class="gallery_caption ">
-                Mountains!
-            </div>
-        </div>
-
-        <button class="button-display-left " onclick="plusDivs(-1)">&#10094;</button>
-        <button class="button-display-right " onclick="plusDivs(1)">&#10095;</button>
-
-    </div>
-    <div>
-    </div>
-    <hr />
-    <div class="container">
-        <div class="row ">
-            <div class="col-3">
-                @Html.DisplayNameFor(model => model.activity.activity_tel)
-                <br />
-                @Html.DisplayFor(model => model.activity.activity_tel)
-            </div>
-            <div class="col-3">
+            <form method="post">
+                <input type="submit" name="add_to_bucket_list" class="add_to_bucket_list" value="加入收藏" />
+            </form>
+            <h2>
                 @Html.DisplayNameFor(model => model.activity.activity_intro)
-                <br />
+
+            </h2>
+
+            <span>
                 @Html.DisplayFor(model => model.activity.activity_intro)
-            </div>
-            <div class="col-3">
-                @Html.DisplayNameFor(model => model.activity.address_detail)
-                <br />
-                @Html.DisplayFor(model => model.activity.city)
-                <br />
-                @Html.DisplayFor(model => model.activity.district)
-                <br />
-                @Html.DisplayFor(model => model.activity.address_detail)
-            </div>
-            <div class="col-3">
-                @Html.DisplayNameFor(model => model.activity.begin_date)
-                @Html.DisplayFor(model => model.activity.begin_date)
-                <br />
-                @Html.DisplayNameFor(model => model.activity.end_date)
-                @Html.DisplayFor(model => model.activity.end_date)
-            </div>
-            <div class="col-3">
-                @Html.DisplayNameFor(model => model.activity.organizer)
-                <br />
-                @Html.DisplayFor(model => model.activity.organizer)
-            </div>
-            <div class="col-3">
-                @Html.DisplayNameFor(model => model.activity.website)
-                <br />
-                @Html.DisplayFor(model => model.activity.website)
-            </div>
-            <div class="col-3">
-                @Html.DisplayNameFor(model => model.activity.transport_info)
-                <br />
-                @Html.DisplayFor(model => model.activity.transport_info)
+            </span>
+
+
+        </div>
+    </section>
+    <section class="bg-info py-4 text-white">
+        <div class="container  col-md-10">
+            <div class="row">
+
+                <div class="col-md-4 ">
+                    <div class="ROW">
+                        <ul>
+                            <li>
+                                <h2>
+                                    @Html.DisplayNameFor(model => model.activity.activity_tel)
+                                </h2>
+
+                                <span>
+                                    @Html.DisplayFor(model => model.activity.activity_tel)
+                                </span>
+
+                            </li>
+
+                            <li>
+                                <h2>
+                                    @Html.DisplayNameFor(model => model.activity.address_detail)
+
+                                </h2>
+
+                                <span>
+                                    @Html.DisplayFor(model => model.activity.city)
+                                </span>
+
+                            </li>
+                            <li>
+                                <h2>
+                                    @Html.DisplayFor(model => model.activity.district)
+
+                                </h2>
+
+                                <span>
+                                    @Html.DisplayFor(model => model.activity.address_detail)
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4 ">
+
+                    <ul>
+                        <li>
+                            <h2>
+                                @Html.DisplayNameFor(model => model.activity.begin_date)
+                            </h2>
+
+                            <span>
+                                @Html.DisplayFor(model => model.activity.begin_date)
+                            </span>
+
+                        </li>
+                        <li>
+                            <h2>
+                                @Html.DisplayNameFor(model => model.activity.end_date)
+                            </h2>
+
+                            <span>
+                                @Html.DisplayFor(model => model.activity.end_date)
+                            </span>
+
+                        </li>
+                        <li>
+                            <h2>
+                                @Html.DisplayNameFor(model => model.activity.organizer)
+                            </h2>
+
+                            <span>
+                                @Html.DisplayFor(model => model.activity.organizer)
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-4 ">
+
+                    <ul>
+                        <li>
+                            <h2>
+                                @Html.DisplayNameFor(model => model.activity.website)
+                            </h2>
+                            <span>
+                                @Html.DisplayFor(model => model.activity.website)
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+
+
             </div>
         </div>
-    </div>
+    </section>
+
     @*googlemap*@
-    <div id="map"></div>
+    <section class="container-fluid py-5 bg-light text-white mapbg" style="position:relative ;">
+        <div class="row">
+            <div class="col-md-6 bg-cover"
+                 style="position:absolute;top:0px;bottom:0px" ; id="map"></div>
+            <div class="container">
+                <div class="row  justify-content-end text-md-dark">
+                    <div class="col-md-6 text-center" style="height:auto">
+                        <h2>
+                            @Html.DisplayNameFor(model => model.activity.transport_info)
+
+                        </h2>
+
+                        <span>
+                            @Html.DisplayFor(model => model.activity.transport_info)
+                        </span>
+
+
+                        <br />
+                        
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </section>
 
 
     @*新增評論*@
     <form action="/web_comments/Create" Method="GET">
         <input type="hidden" name="tourismID" value=@Html.DisplayFor(model => model.activity.activity_id) />
 
-        <button type="submit">新增評論</button>
+        <button type="submit" class="btn btn-outline-info mb-5  mt-3 " f>新增評論</button>
     </form>
     @*@Html.ActionLink("action新增評論", "Create", "web_comments", new { id = ViewBag.id }, null)*@
 
     @*single_comment*@
 
-<div class="comments_lists container">
+    @*single_comment*@
     @foreach (var item in Model.comment)
     {
-    <div class="single_comment">
+    <div class="comments_lists container">
+        <div class="card mt-3">
+            <h2 class="card-header">@item.comment_title</h2>
+        <div class="media mt-3">
+            <img src="https://randomuser.me/api/portraits/women/82.jpg" width="74" height="74" class="mr-3 ml-3" alt="...">
 
-        @item.member.member_id
+            <div class="media-body col-12">
+                <h5 class="mt-0 ">@item.member_id</h5> <h5 class="mt-0 "> @item.comment_date</h5>
 
-        <br />
-        @item.comment_date
+                <div class="row  mt-2 mb-5 ">
+                    <div>
+                        <img src="/images/comment/@item.comment_photo" class="img-fluid" />
+                    </div>
 
-        <br />
-        
+                </div>
+                <div>
+                    @item.comment_content
+                </div>
+                <div class="mb-3 mt-3">
+                    <i class="far fa-thumbs-up  "></i><span><a href="#">3人按讚</a></span><span class="ml-2"><a href="#"><i class="far fa-list-alt"></i>3則留言</a></span>
+                </div>
+            </div>
+        </div>
+        </div>
+        <div class="btn-group  mb-2 btn-block" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-secondary"><i class="far fa-thumbs-up mr-1"></i>按讚</button>
+            <button type="button" id="Lbtn" class="btn btn-secondary"><i class="far fa-list-alt mr-1"></i>留言</button>
+            <button type="button" class="btn btn-secondary"><i class="fas fa-share-square mr-1"></i>分享</button>
+         </div>
 
-        <img src="/images/comment/@item.comment_photo" alt="" style="width:100%" />
-        <h4>@item.comment_title </h4>
-        <br />
-        @item.comment_content
-    <div class="message_list">
+
+        <div class="message_list ">
+        <h5 class="card-header">留言區</h5>
         @foreach (var msgItem in item.message)
         {
-            <div class="single_message">
+            <div id="box1" class=" single_message">
 
 
-                @msgItem.member_id
-                <br />
-                @msgItem.msg_time
-                <br />
-                @msgItem.msg_content
+                <div class="media mt-3">
+
+                    <img src="https://randomuser.me/api/portraits/lego/1.jpg" width="74" height="74" class="mr-3 ml-3" alt="...">
+                    <div class="media-body">
+                        <h5 class="mt-0">
+
+                            @msgItem.member_id
+                        </h5>
+                        <h5 class="mt-0">
+
+                            @msgItem.msg_time
+                        </h5>
+                        <div>
+                            @msgItem.msg_content
+                        </div>
+                        <div class="mb-3 mt-3">
+                            <i class="far fa-thumbs-up  "></i><span><a href="#">3人按讚</a></span><span class="ml-2"><a href="#"><i class="far fa-list-alt"></i>3則留言</a></span>
+                        </div>
+                    </div>
+                    <div class="btn-group btn-group-toggle " data-toggle="buttons">
+                        <label class="btn btn-secondary ">
+                            <input type="radio" name="options" id="option1" autocomplete="off" checked> <i class="far fa-thumbs-up"></i>按讚
+                        </label>
+                    </div>
+                </div>
 
             </div>
         }
-    </div>
-        <div class="add_message">
+        <div class="add_message single_message">
             <form action="/web_activities/createMessage" method="post">
                 @Html.AntiForgeryToken()
                 <input type="hidden" name="comment_id" value="@item.comment_id" />
@@ -157,16 +280,15 @@
                 <input type="hidden" name="member_id" value="M000001" />
                 <input type="hidden" name="msg_status" value="True" />
                 <input type="hidden" name="tourism_id" value="@item.tourism_id" />
-                <textarea id="msg_content" rows="2" cols="20" name="msg_content"></textarea>
+                <textarea id="msg_content" rows="2" cols="20" name="msg_content" placeholder="想說說甚麼..."></textarea>
                 <br />
                 <input id="Submit1" type="submit" value="submit" />
             </form>
 
+            </div>
         </div>
-    </div>
+     </div>
     }
-
-</div>
 
     <script>
     //GOOGLEMAP API
@@ -178,73 +300,13 @@
             zoom: 8
         });
     }
-    //SLIDE_SHOW
-    var slideIndex = 1;
-    showDivs(slideIndex);
 
-    function plusDivs(n) {
-        showDivs(slideIndex += n);
-    }
 
-    function showDivs(n) {
-        var i;
-        var x = document.getElementsByClassName("mySlides");
-        if (n > x.length) { slideIndex = 1 }
-        if (n < 1) { slideIndex = x.length }
-        for (i = 0; i < x.length; i++) {
-            x[i].style.display = "none";
-        }
-        x[slideIndex - 1].style.display = "block";
-    }
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDI5ENsN0IG8O1y-Y8r3KeJMrDhVawVdYc&callback=initMap"
             async defer></script>
-    @*<div id="list"></div>
-        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-        <script>
-            $.ajax({
-                type: "Get",
-                url: "http://localhost:54678/api/comments1",
-                success: function (data) {
-                    console.log(data);
-                    data.forEach(function (item) {
 
-                        $('#list').append(
-                            `
-                        <div class="media mt-2" >
-                        <img src="https://randomuser.me/api/portraits/women/60.jpg" width="74" height="74" class="mr-3 ml-3" alt="...">
-                        <div class="media-body" >
-                            <h5 >${item.member.member_account}</h5><span>${item.comment_date}</span>
-                            <br>
-                            <img src="https://www.fodors.com/assets/destinations/711600/cityscape-amasra-black-sea-coast-turkey_980x650.jpg" width="300" height="200"/>
-                            <h3>${item.comment_title}</h3>
-                            <p>${item.comment_content}</P>
-
-                            </div>
-                        </div>
-                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                            <label class="btn btn-secondary ">
-                                <input type="radio" name="options" id="option1" autocomplete="off" checked> <i class="far fa-thumbs-up"></i>按讚
-                            </label>
-
-                        </div>
-                            `
-                        );
-                    });
-
-                }
-
-            });
-            //新增
-            $('#btnAdd').click(function () {
-                console.log($('#form1').serialize());
-                $.ajax({
-                    type: "Post",
-                    url: "http://localhost:54678/api/comments1",
-                    data: $('#form1').serialize()
-
-                });
-
-            });
-        </script>*@
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 </div>

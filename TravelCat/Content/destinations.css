@@ -1,5 +1,5 @@
-﻿﻿body {
-    font-family:'Microsoft JhengHei'
+﻿body {
+    font-family: arial,"Microsoft JhengHei","微軟正黑體",sans-serif ;
 }
 /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
@@ -14,25 +14,6 @@ html, body {
     padding: 0;
 }
 
-.mySlides {
-    display: none;
-}
-
-.mySlides {
-    position: relative;
-}
-
-.button-display-left {
-    position: relative;
-    bottom: 300px;
-    left: 0px
-}
-
-.button-display-right {
-    position: relative;
-    bottom: 300px;
-    right: 0px
-}
 
 .gallery_caption {
     text-align: center;
@@ -41,6 +22,7 @@ html, body {
 .add_to_bucket_list {
     float: right;
 }
+
 .single_comment {
     min-height: 440px;
     text-align: left;
@@ -52,10 +34,40 @@ html, body {
     box-shadow: 1px 1px 0px #c2c2c2;
     border-radius: 3px;
     cursor: pointer;
-    width: 60%;
+    width: 100%;
     margin: auto;
     position: relative;
 }
+
 .single_message {
     border: 1px solid #d6d6d6;
+
+}
+/*形象網站*/
+
+.btn {
+    border-width: 3px;
+}
+
+.header-carousel-item {
+    height: 450px;
+}
+
+.bg-cover {
+    background-size: cover;
+    background-position: center center;
+}
+
+.carousel-caption {
+    background: rgba(0%,0%,0%,0.6);
+}
+
+.mapbg {
+    height: 400px;
+}
+
+@media (min-width: 768px) {
+    .text-md-dark {
+        color: darkblue;
+    }
 }

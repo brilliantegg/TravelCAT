@@ -452,6 +452,19 @@ namespace TravelCat.Models
         public string emoji_pic { get; set; }
 
     }
+    [MetadataType(typeof(Metadata_comment_emoji_details))]
+    public partial class comment_emoji_details
+    { }
+    public partial class Metadata_comment_emoji_details
+    {
+        [JsonIgnore]
+        public virtual comment comment { get; set; }
+        [JsonIgnore]
+        public virtual emoji emoji { get; set; }
+        [JsonIgnore]
+        public virtual member member { get; set; }
+
+    }
     [MetadataType(typeof(Metadata_restaurant))]
     public partial class restaurant
     { }

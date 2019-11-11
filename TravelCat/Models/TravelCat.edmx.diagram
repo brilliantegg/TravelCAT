@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="748ece3b9bad4b869f18878562e726dd" Name="Diagram1" ZoomLevel="91">
+      <Diagram DiagramId="748ece3b9bad4b869f18878562e726dd" Name="Diagram1" ZoomLevel="77">
         <EntityTypeShape EntityType="TravelCat.activity" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TravelCat.admin" Width="1.5" PointX="3.75" PointY="7.375" IsExpanded="true" />
         <EntityTypeShape EntityType="TravelCat.badge" Width="1.5" PointX="0.75" PointY="8.625" IsExpanded="true" />
