@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using TravelCat.Models;
 using TravelCat.ViewModels;
 using PagedList;
+using System.IO;
 
 namespace TravelCat.Controllers
 {
@@ -53,7 +54,8 @@ namespace TravelCat.Controllers
                 {
                     if (f.ContentLength > 0)
                     {
-                        fileName = restaurant.restaurant_id + "_"+DateTime.Now.ToString().Replace("/", "").Replace(":", "").Replace(" ", "") + (i + 1).ToString() + ".jpg";
+                        string t = tourism_photo[i].FileName;
+                        fileName = restaurant.restaurant_id + "_"+DateTime.Now.ToString().Replace("/", "").Replace(":", "").Replace(" ", "") + (i + 1).ToString() + Path.GetExtension(t);
                         f.SaveAs(Server.MapPath("~/images/restaurant/" + fileName));
                         tourism_photo tp = new tourism_photo();
                         tp.tourism_photo1 = fileName;
@@ -118,7 +120,8 @@ namespace TravelCat.Controllers
                     if (tourism_photo[i].ContentLength > 0)
                     {
                         //改名
-                        fileName = restaurantPhotoViewModel.restaurant.restaurant_id + "_" + DateTime.Now.ToString().Replace("/", "").Replace(":", "").Replace(" ", "") + (i + 1).ToString() + ".jpg";
+                        string t = tourism_photo[i].FileName;
+                        fileName = restaurantPhotoViewModel.restaurant.restaurant_id + "_" + DateTime.Now.ToString().Replace("/", "").Replace(":", "").Replace(" ", "") + (i + 1).ToString() + Path.GetExtension(t);
                         if (i < tp1.Count)  //如果原有紀錄
                         {
                             //刪掉原檔案
