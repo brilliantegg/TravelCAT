@@ -8,11 +8,11 @@ namespace TravelCat.ViewModels
 {
     public class WebIndexViewModel
     {
-        public activity activity { get; set; }
-        public hotel hotel { get; set; }
-        public restaurant restaurant { get; set; }
-        public spot spot { get; set; }
+        public List<activity> activity { get; set; }
+        public List<hotel> hotel { get; set; }
+        public List<restaurant> restaurant { get; set; }
+        public List<spot> spot { get; set; }
         public member member { get; set; }
-        public comment comment { get; set; }
+        public List<comment> comment { get; set; }
     }
 }

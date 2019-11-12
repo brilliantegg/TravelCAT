@@ -1,0 +1,38 @@
+﻿@model IEnumerable<TravelCat.Models.badge>
+
+@{
+    ViewBag.Title = "徽章管理頁面";
+}
+
+<h2>徽章管理頁面</h2>
+
+<p>
+    @Html.ActionLink("新增徽章", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.badge_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.badge_title)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.badge_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.badge_title)
+        </td>
+        <td>
+            @Html.ActionLink("編輯", "Edit", new { id=item.badge_id }) |
+            @Html.ActionLink("刪除", "Delete", new { id=item.badge_id })
+        </td>
+    </tr>
+}
+
+</table>

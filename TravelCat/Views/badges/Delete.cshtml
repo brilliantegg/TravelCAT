@@ -1,0 +1,39 @@
+﻿@model TravelCat.Models.badge
+
+@{
+    ViewBag.Title = "徽章刪除頁面";
+}
+
+<h2>刪除</h2>
+
+<h3>ㄋ確定要刪除這筆資料ㄇ?</h3>
+<div>    
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.badge_title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.badge_title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.badge_photo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.badge_photo)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="刪除" class="btn border-danger text-danger" /> |
+            @Html.ActionLink("返回列表", "Index","",  new { @class = "btn text-primary border-primary" } )
+        </div>
+    }
+</div>
