@@ -31,7 +31,7 @@ namespace TravelCat.Controllers
             }
             else
             {
-                var data = db.spot.OrderBy(m => m.spot_id);
+                var data = db.hotel.OrderBy(m => m.hotel_id);
                 return View(data.ToPagedList(page, pageSize));
             }
         }
