@@ -19,7 +19,8 @@ namespace TravelCat.Models
 
         [DisplayName("密碼")]
         [Required(ErrorMessage = "此欄位為必填")]
-        [StringLength(40, ErrorMessage = "最多40個字")]
+        [StringLength(60, ErrorMessage = "最多60個字")]
+        [DataType(DataType.Password)]
         public string admin_password { get; set; }
 
         [DisplayName("信箱")]
@@ -43,7 +44,8 @@ namespace TravelCat.Models
 
         [DisplayName("密碼")]
         [Required(ErrorMessage = "此欄位為必填")]
-        [StringLength(40, ErrorMessage = "最多40個字")]
+        [StringLength(60, ErrorMessage = "最多60個字")]
+        [DataType(DataType.Password)]
         public string member_password { get; set; }
 
         [DisplayName("會員狀態")]
@@ -65,7 +67,7 @@ namespace TravelCat.Models
     public partial class issue { }
     public class Metadata_issue
     {
-        [DisplayName("會員編號")]
+        [DisplayName("會員編號")]       
         public string member_id { get; set; }
 
         [DisplayName("管理員編號")]

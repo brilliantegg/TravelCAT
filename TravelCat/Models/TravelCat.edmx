@@ -163,7 +163,7 @@
           </Key>
           <Property Name="member_id" Type="char" MaxLength="7" Nullable="false" />
           <Property Name="member_account" Type="varchar" MaxLength="15" Nullable="false" />
-          <Property Name="member_password" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="member_password" Type="varchar" MaxLength="60" Nullable="false" />
           <Property Name="member_status" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="member_profile">
@@ -747,7 +747,7 @@
           </Key>
           <Property Name="member_id" Type="String" MaxLength="7" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="member_account" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="member_password" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="member_password" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="member_status" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="badge_details" Relationship="Self.FK__badge_det__membe__4CA06362" FromRole="member" ToRole="badge_details" />
           <NavigationProperty Name="collections_detail" Relationship="Self.FK__collectio__membe__4E88ABD4" FromRole="member" ToRole="collections_detail" />
