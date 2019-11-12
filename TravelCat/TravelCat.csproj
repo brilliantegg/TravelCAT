@@ -1902,17 +1902,20 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\ActivitiesController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\badgesController.cs" />
     <Compile Include="Controllers\commentsController.cs" />
     <Compile Include="Controllers\destinationsController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HotelsController.cs" />
-    <Compile Include="Controllers\import_htController.cs" />
-    <Compile Include="Controllers\Import_acController.cs" />
     <Compile Include="Controllers\issuesController.cs" />
     <Compile Include="Controllers\LoginadminController.cs" />
     <Compile Include="Controllers\membersController.cs" />
     <Compile Include="Controllers\messagesController.cs" />
     <Compile Include="Controllers\RestaurantsController.cs" />
     <Compile Include="Controllers\SpotsController.cs" />
+
+    <Compile Include="Controllers\web_activitiesController.cs" />
+
     <Compile Include="email\email.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -1994,11 +1997,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TravelCat.edmx</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\destinationsViewModel.cs" />
     <Compile Include="ViewModels\SpotPhotoViewModel.cs" />
     <Compile Include="ViewModels\RestaurantPhotoViewModel.cs" />
     <Compile Include="ViewModels\ActivityPhotoViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\HotelPhotoViewModel.cs" />
+    <Compile Include="ViewModels\WebIndexViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -2043,6 +2048,13 @@
     <Content Include="Views\Admin\Edit.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\Home.cshtml" />
+
+    <Content Include="Views\badges\Create.cshtml" />
+    <Content Include="Views\badges\Delete.cshtml" />
+    <Content Include="Views\badges\Edit.cshtml" />
+    <Content Include="Views\badges\Index.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -2053,6 +2065,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="images\activity\" />
+    <Folder Include="images\badges\" />
     <Folder Include="images\restaurant\" />
     <Folder Include="images\spot\" />
     <Folder Include="Views\Default\" />

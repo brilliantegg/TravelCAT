@@ -4,128 +4,135 @@
     ViewBag.Title = "Create";
 }
 
-<h2>新增住宿</h2>
+<link href="~/Content/back-end-Create.css" rel="stylesheet" />
+<h2 class="ml-3 mt-3 text-danger text-center">新增飯店</h2>
 
 <form action="/Hotels/Create" method="post" enctype="multipart/form-data">
 
-        @Html.AntiForgeryToken()
+    @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>hotel</h4>
+
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.hotel.hotel_id, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.hotel.hotel_id, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.hotel.hotel_id, "", new { @class = "text-danger" })
+        <!--頁面狀態-->
+        <div class="row">
+            <div class="co col-6">
+                @Html.LabelFor(model => model.hotel.page_status, htmlAttributes: new { @class = "txt" })
+                <span class="checkbox ml-3">
+                    @Html.EditorFor(model => model.hotel.page_status)
+                    @Html.ValidationMessageFor(model => model.hotel.page_status, "", new { @class = "text-danger" })
+                </span>
             </div>
-        </div>*@
+        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.hotel.hotel_title, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+        <!--名稱-->
+        <div class="row">
+            <div class="co col-6">
+                @Html.LabelFor(model => model.hotel.hotel_title, htmlAttributes: new { @class = "txt" })
                 @Html.EditorFor(model => model.hotel.hotel_title, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.hotel.hotel_title, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.hotel.hotel_tel, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+        <!--電話-->
+        <div class="row">
+            <div class="co col-6">
+                @Html.LabelFor(model => model.hotel.hotel_tel, htmlAttributes: new { @class = "txt" })
                 @Html.EditorFor(model => model.hotel.hotel_tel, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.hotel.hotel_tel, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.hotel.longitude, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+        <!--經度-->
+        <div class="row">
+            <div class="co col-6">
+                @Html.LabelFor(model => model.hotel.longitude, htmlAttributes: new { @class = "txt" })
                 @Html.EditorFor(model => model.hotel.longitude, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.hotel.longitude, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.hotel.latitude, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+        <!--緯度-->
+        <div class="row">
+            <div class="co col-6">
+                @Html.LabelFor(model => model.hotel.latitude, htmlAttributes: new { @class = "txt" })
                 @Html.EditorFor(model => model.hotel.latitude, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.hotel.latitude, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.hotel.hotel_intro, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.hotel.hotel_intro, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.hotel.hotel_intro, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.hotel.website, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+        <!--飯店網址-->
+        <div class="row">
+            <div class="co col-6">
+                @Html.LabelFor(model => model.hotel.website, htmlAttributes: new { @class = "txt" })
                 @Html.EditorFor(model => model.hotel.website, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.hotel.website, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.hotel.city, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+        <!--城市-->
+        <div class="row">
+            <div class="co col-6">
+                @Html.LabelFor(model => model.hotel.city, htmlAttributes: new { @class = "txt" })
                 @Html.EditorFor(model => model.hotel.city, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.hotel.city, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.hotel.district, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+        <!--行政區-->
+        <div class="row">
+            <div class="co col-6">
+                @Html.LabelFor(model => model.hotel.district, htmlAttributes: new { @class = "txt" })
                 @Html.EditorFor(model => model.hotel.district, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.hotel.district, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.hotel.address_detail, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+        <!--街道地址-->
+        <div class="row">
+            <div class="co col-6">
+                @Html.LabelFor(model => model.hotel.address_detail, htmlAttributes: new { @class = "txt" })
                 @Html.EditorFor(model => model.hotel.address_detail, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.hotel.address_detail, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.hotel.page_status, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.hotel.page_status)
-                    @Html.ValidationMessageFor(model => model.hotel.page_status, "", new { @class = "text-danger" })
-                </div>
+        <!--簡介-->
+        <div class="row">
+            <div class="co col-6">
+                @Html.LabelFor(model => model.hotel.hotel_intro, htmlAttributes: new { @class = "txt" })
+                @Html.TextAreaFor(model => model.hotel.hotel_intro, new { @class = "form-control", rows = "5" })
+                @Html.ValidationMessageFor(model => model.hotel.hotel_intro, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.hotel_photos.tourism_photo1, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+        <!--新增圖片-->
+        <div class="row">
+            <div class="co col-6">
+                @Html.LabelFor(model => model.hotel_photos[0].tourism_photo1, htmlAttributes: new { @class = "txt" })
                 <input id="tourism_photo" name="tourism_photo" type="file" class="form-control" />
-                @Html.ValidationMessageFor(model => model.hotel_photos.tourism_photo1, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.hotel_photos[0].tourism_photo1, "", new { @class = "text-danger" })
+                <input id="tourism_photo" name="tourism_photo" type="file" class="form-control" />
+                @Html.ValidationMessageFor(model => model.hotel_photos[1].tourism_photo1, "", new { @class = "text-danger" })
+                <input id="tourism_photo" name="tourism_photo" type="file" class="form-control" />
+                @Html.ValidationMessageFor(model => model.hotel_photos[2].tourism_photo1, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+        <div class="row footer">
+            <div class="col-1">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+            <div class="col-2">
+                @Html.ActionLink("回到住宿列表", "Index",new { page=Session["pg"]}, new { @class = "btn btn-primary" })
             </div>
         </div>
     </div>
 </form>
 
-    <div>
-        @Html.ActionLink("回到住宿列表", "Index")
-    </div>
 
-    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
-    <script src="~/Scripts/jquery.validate.min.js"></script>
-    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

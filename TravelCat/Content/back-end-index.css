@@ -12,6 +12,7 @@
     .header .search{
         display:flex;
         align-items:center;
+        margin-bottom:5px;
     }
     .header .search .border{
         font-size:1.2em;

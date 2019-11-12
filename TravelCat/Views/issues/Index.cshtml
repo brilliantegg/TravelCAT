@@ -4,73 +4,71 @@
     ViewBag.Title = "Index";
 }
 
-    <h2>網站問題管理</h2>
+    <link href="~/Content/back-end-index.css" rel="stylesheet" />
+    <h2 class="mt-3 text-center">網站問題管理</h2>
+
+    <div class="header ml-3">
+        @*@Html.TextBox("id", "", new { @class = " border", @placeholder = "編號,名稱,城市,行政區" })
+        @Html.ActionLink("查詢", "contentQuery", new { id = "id" }, new{@class="btn btn-default"})*@
+        <div class="mr-1"></div>
+        <form action="/Spot/Index" method="get" class="search">
+            @Html.TextBox("id", "", new { @class = " border", @placeholder = "編號,名稱,城市,行政區" })
+            <input class="btn btn-secondary" type="submit" value="查詢" />
+        </form>
+    </div>
 
 
 <table class="table">
-    <tr>
-        <th>
+    <tr class="row">
+        <th class="col-1"></th>
+        <th class="col-1">
             @Html.DisplayNameFor(model => model.id)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.admin.admin_account)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.issue_type.issue_name)
-        </th>
-        <th>
+        <th class="col-2 text-truncate">
             @Html.DisplayNameFor(model => model.member.member_account)
         </th>
-        <th>
+        <th class="col-2">
+            @Html.DisplayNameFor(model => model.issue_type.issue_name)
+        </th>
+        <th class="col-2">
             @Html.DisplayNameFor(model => model.report_date)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.issue_content)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.issue_result)
-        </th>
-        <th>
+        <th class="col-1">
             @Html.DisplayNameFor(model => model.issue_status)
         </th>
-        <th>
+        <th class="col-1">
+            @Html.DisplayNameFor(model => model.issue_result)
+        </th>
+        <th class="col-2">
             @Html.DisplayNameFor(model => model.resolve_date)
         </th>
-        <th></th>
     </tr>
 
 @foreach (var item in Model) {
-<tr>
-    <td>
+<tr class="row">
+    <td class="col-1 text-center">
+        @Html.ActionLink("管理", "Edit", new { id = item.id },new { @class = "btn btn-sm btn-outline-primary" })
+    </td>
+    <td class="col-1">
         @Html.DisplayFor(modelItem => item.id)
     </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.admin.admin_account)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.issue_type.issue_name)
-    </td>
-    <td>
+    <td class="col-2 text-truncate">
         @Html.DisplayFor(modelItem => item.member.member_account)
     </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.report_date)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.issue_content)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.issue_result)
-    </td>
-    <td>
+    <td class="col-2">
         @Html.DisplayFor(modelItem => item.issue_type.issue_name)
     </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.resolve_date)
+    <td class="col-2">
+        @Html.DisplayFor(modelItem => item.report_date)
     </td>
-    <td>
-        @Html.ActionLink("編輯", "Edit", new {  id=item.id  }) 
-
+    <td class="col-1">
+        @Html.DisplayFor(modelItem => item.issue_type.issue_name)
+    </td>
+    <td class="col-1">
+        @Html.DisplayFor(modelItem => item.issue_result)
+    </td>
+    <td class="col-2">
+        @Html.DisplayFor(modelItem => item.resolve_date)
     </td>
 </tr>
 }
