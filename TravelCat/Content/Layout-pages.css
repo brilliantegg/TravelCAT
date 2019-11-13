@@ -55,9 +55,7 @@ body {
         border-radius: 0 10px 10px 0;
         cursor: pointer;
     }
-    #side-menu-switch{
-        display: none;
-    }
+
 #side-menu-switch:checked + .side-menu {
     transform: translateX(0);
 }

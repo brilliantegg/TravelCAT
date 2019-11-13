@@ -19,7 +19,8 @@ namespace TravelCat.Models
 
         [DisplayName("密碼")]
         [Required(ErrorMessage = "此欄位為必填")]
-        [StringLength(40, ErrorMessage = "最多40個字")]
+        [StringLength(60, ErrorMessage = "最多60個字")]
+        [DataType(DataType.Password)]
         public string admin_password { get; set; }
 
         [DisplayName("信箱")]
@@ -43,7 +44,8 @@ namespace TravelCat.Models
 
         [DisplayName("密碼")]
         [Required(ErrorMessage = "此欄位為必填")]
-        [StringLength(40, ErrorMessage = "最多40個字")]
+        [StringLength(60, ErrorMessage = "最多60個字")]
+        [DataType(DataType.Password)]
         public string member_password { get; set; }
 
         [DisplayName("會員狀態")]
@@ -65,7 +67,7 @@ namespace TravelCat.Models
     public partial class issue { }
     public class Metadata_issue
     {
-        [DisplayName("會員編號")]
+        [DisplayName("會員編號")]       
         public string member_id { get; set; }
 
         [DisplayName("管理員編號")]
@@ -134,11 +136,12 @@ namespace TravelCat.Models
         [Key]
         [Required]
         [StringLength(7)]
+        [RegularExpression("[A-Z][0-9]{6}", ErrorMessage = "格式有誤")]
         public string activity_id { get; set; }
 
         [DisplayName("標題")]
         [Required]
-        [StringLength(100)]
+        [StringLength(30)]
         public string activity_title { get; set; }
 
         [DisplayName("電話")]
@@ -194,7 +197,7 @@ namespace TravelCat.Models
         public string website { get; set; }
 
         [DisplayName("交通資訊")]
-        [StringLength(1000)]
+        [StringLength(300)]
         public string transport_info { get; set; }
 
         [DisplayName("頁面狀態")]
@@ -450,14 +453,14 @@ namespace TravelCat.Models
         public string restaurant_id { get; set; }
         [DisplayName("名稱")]
         [Required(ErrorMessage = "不可空白")]
-        [StringLength(50, ErrorMessage = "名稱最多50個字")]
+        [StringLength(30, ErrorMessage = "名稱最多30個字")]
         public string restaurant_title { get; set; }
         [DisplayName("電話")]
-        [StringLength(50, ErrorMessage = "電話最多50碼")]
+        [StringLength(20, ErrorMessage = "電話最多20碼")]
         public string restaurant_tel { get; set; }
         [DisplayName("簡介")]
         [Column(TypeName = "ntext")]
-        //[Required]
+        [Required]
         public string restaurant_intro { get; set; }
         [DisplayName("經度")]
         [Required(ErrorMessage = "不可空白")]
@@ -468,23 +471,23 @@ namespace TravelCat.Models
         [StringLength(25, ErrorMessage = "緯度最多25碼")]
         public string longitude { get; set; }
         [DisplayName("城市")]
-        //[Required(ErrorMessage = "不可空白")]
+        [Required(ErrorMessage = "不可空白")]
         [StringLength(10, ErrorMessage = "字數最多10個字")]
 
         public string city { get; set; }
         [DisplayName("行政區")]
-        //[Required(ErrorMessage = "不可空白")]
+        [Required(ErrorMessage = "不可空白")]
         [StringLength(5, ErrorMessage = "最多5碼")]
         public string district { get; set; }
         [DisplayName("街道地址")]
-        //[Required(ErrorMessage = "不可空白")]
-        [StringLength(100, ErrorMessage = "街道地址最多100個字")]
+        [Required(ErrorMessage = "不可空白")]
+        [StringLength(60, ErrorMessage = "街道地址最多60個字")]
         public string address_detail { get; set; }
         [DisplayName("營業時間")]
-        [StringLength(150, ErrorMessage = "營業時間最多150個字")]
+        [StringLength(80, ErrorMessage = "營業時間最多80個字")]
         public string open_time { get; set; }
         [DisplayName("頁面狀態")]
-        //[Required(ErrorMessage = "不可空白")]
+        [Required(ErrorMessage = "不可空白")]
         public bool page_status { get; set; }
     }
     [MetadataType(typeof(Metadata_spot))]
@@ -500,14 +503,14 @@ namespace TravelCat.Models
         public string spot_id { get; set; }
         [DisplayName("名稱")]
         [Required(ErrorMessage = "不可空白")]
-        [StringLength(50, ErrorMessage = "名稱最多50個字")]
+        [StringLength(30, ErrorMessage = "名稱最多30個字")]
         public string spot_title { get; set; }
         [DisplayName("電話")]
-        [StringLength(100, ErrorMessage = "電話最多100碼")]
+        [StringLength(20, ErrorMessage = "電話最多20碼")]
         public string spot_tel { get; set; }
         [DisplayName("簡介")]
         [Column(TypeName = "ntext")]
-        //[Required]
+        [Required]
 
         public string spot_intro { get; set; }
         [DisplayName("經度")]
@@ -522,25 +525,25 @@ namespace TravelCat.Models
 
         public string addition_note { get; set; }
         [DisplayName("城市")]
-        //[Required(ErrorMessage = "不可空白")]
+        [Required(ErrorMessage = "不可空白")]
         [StringLength(10, ErrorMessage = "字數最多10個字")]
         public string city { get; set; }
         [DisplayName("行政區")]
-        //[Required(ErrorMessage = "不可空白")]
+        [Required(ErrorMessage = "不可空白")]
         [StringLength(5, ErrorMessage = "最多5碼")]
         public string district { get; set; }
         [DisplayName("街道地址")]
-        //[Required(ErrorMessage = "不可空白")]
-        [StringLength(100, ErrorMessage = "街道地址最多100個字")]
+        [Required(ErrorMessage = "不可空白")]
+        [StringLength(60, ErrorMessage = "街道地址最多60個字")]
         public string address_detail { get; set; }
 
         [DisplayName("營業時間")]
-        [StringLength(500, ErrorMessage = "營業時間最多500個字")]
+        [StringLength(80, ErrorMessage = "營業時間最多80個字")]
 
         public string open_time { get; set; }
         [DisplayName("門票資訊")]
 
-        [StringLength(100, ErrorMessage = "門票資訊最多100個字")]
+        [StringLength(80, ErrorMessage = "門票資訊最多30個字")]
         public string ticket_info { get; set; }
         [DisplayName("更新時間")]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd hh:mm}", ApplyFormatInEditMode = true)]

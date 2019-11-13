@@ -1906,7 +1906,9 @@
     <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Controllers\RestaurantsController.cs" />
     <Compile Include="Controllers\SpotsController.cs" />
+
     <Compile Include="Controllers\web_activitiesController.cs" />
+
     <Compile Include="email\email.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -2030,6 +2032,7 @@
     <Content Include="Views\Admin\Edit.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\Home.cshtml" />
+
     <Content Include="Views\badges\Create.cshtml" />
     <Content Include="Views\badges\Delete.cshtml" />
     <Content Include="Views\badges\Edit.cshtml" />

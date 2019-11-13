@@ -2,6 +2,15 @@
 
 @{
     ViewBag.Title = "Details";
+    var account = "";
+    if(Session["id"] == null || string.IsNullOrWhiteSpace(Session["id"].ToString()))
+    {
+        Response.Redirect("~/Loginadmin/Index");
+    }
+    else
+    {
+        account = Session["id"].ToString();
+    }
 }
 
 <h2>Details</h2>
