@@ -26,6 +26,7 @@ namespace TravelCat.Models
         public long comment_id { get; set; }
         public string member_id { get; set; }
         public Nullable<bool> msg_status { get; set; }
+        public string tourism_id { get; set; }
     
         public virtual comment comment { get; set; }
         public virtual member member { get; set; }

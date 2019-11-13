@@ -39,7 +39,7 @@
           <Key>
             <PropertyRef Name="badge_id" />
           </Key>
-          <Property Name="badge_id" Type="int" Nullable="false" />
+          <Property Name="badge_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="badge_title" Type="nvarchar" MaxLength="15" Nullable="false" />
           <Property Name="badge_photo" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
@@ -77,7 +77,7 @@
           </Key>
           <Property Name="comment_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="tourism_id" Type="char" MaxLength="7" Nullable="false" />
-          <Property Name="comment_title" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="comment_title" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="comment_content" Type="ntext" Nullable="false" />
           <Property Name="comment_date" Type="datetime" Nullable="false" />
           <Property Name="comment_photo" Type="varchar" MaxLength="100" Nullable="false" />
@@ -178,8 +178,8 @@
           <Property Name="nickname" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="create_time" Type="datetime" Nullable="false" />
           <Property Name="nation" Type="nvarchar" MaxLength="30" Nullable="false" />
-          <Property Name="address_detail" Type="nvarchar" MaxLength="60" />
           <Property Name="city" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="address_detail" Type="nvarchar" MaxLength="60" />
           <Property Name="email" Type="varchar" MaxLength="60" Nullable="false" />
           <Property Name="emailConfirmed" Type="bit" />
           <Property Name="phone" Type="varchar" MaxLength="10" Nullable="false" />
@@ -199,6 +199,7 @@
           <Property Name="comment_id" Type="bigint" Nullable="false" />
           <Property Name="member_id" Type="char" MaxLength="7" Nullable="false" />
           <Property Name="msg_status" Type="bit" />
+          <Property Name="tourism_id" Type="char" MaxLength="7" />
         </EntityType>
         <EntityType Name="message_emoji_details">
           <Key>
@@ -648,7 +649,7 @@
           </Key>
           <Property Name="comment_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="tourism_id" Type="String" MaxLength="7" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="comment_title" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="comment_title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="comment_content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="comment_date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="comment_photo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
@@ -796,6 +797,7 @@
           <NavigationProperty Name="comment" Relationship="Self.FK__message__comment__5070F446" FromRole="message" ToRole="comment" />
           <NavigationProperty Name="member" Relationship="Self.FK__message__member___4BAC3F29" FromRole="message" ToRole="member" />
           <NavigationProperty Name="message_emoji_details" Relationship="Self.FK__message_e__msg_i__52593CB8" FromRole="message" ToRole="message_emoji_details" />
+          <Property Name="tourism_id" Type="String" MaxLength="7" FixedLength="true" Unicode="false" />
         </EntityType>
         <EntityType Name="message_emoji_details">
           <Key>
@@ -1363,6 +1365,7 @@
           <EntitySetMapping Name="message">
             <EntityTypeMapping TypeName="TravelCat.message">
               <MappingFragment StoreEntitySet="message">
+                <ScalarProperty Name="tourism_id" ColumnName="tourism_id" />
                 <ScalarProperty Name="msg_id" ColumnName="msg_id" />
                 <ScalarProperty Name="msg_time" ColumnName="msg_time" />
                 <ScalarProperty Name="msg_content" ColumnName="msg_content" />
