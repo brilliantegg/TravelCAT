@@ -1906,9 +1906,7 @@
     <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Controllers\RestaurantsController.cs" />
     <Compile Include="Controllers\SpotsController.cs" />
-
     <Compile Include="Controllers\web_activitiesController.cs" />
-
     <Compile Include="email\email.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -2032,7 +2030,6 @@
     <Content Include="Views\Admin\Edit.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\Home.cshtml" />
-
     <Content Include="Views\badges\Create.cshtml" />
     <Content Include="Views\badges\Delete.cshtml" />
     <Content Include="Views\badges\Edit.cshtml" />
@@ -2071,6 +2068,7 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
+    <Content Include="Views\Register\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -2082,12 +2080,12 @@
     <Folder Include="App_Data\" />
     <Folder Include="images\activity\" />
     <Folder Include="images\badges\" />
+    <Folder Include="images\member\" />
     <Folder Include="images\restaurant\" />
     <Folder Include="images\spot\" />
     <Folder Include="Views\Default\" />
     <Folder Include="Views\destinations\" />
     <Folder Include="Views\import_a\" />
-    <Folder Include="Views\Register\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

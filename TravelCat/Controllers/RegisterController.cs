@@ -25,6 +25,9 @@ namespace TravelCat.Controllers
         {
             string mem_id = db.Database.SqlQuery<string>("Select dbo.GetmemberId()").FirstOrDefault();
             memberViewModels.member.member_id = mem_id;
+            memberViewModels.profile.member_id = mem_id;
+            memberViewModels.profile.member_score = 0;
+            memberViewModels.profile.create_time = DateTime.Now;
 
             string fileName = "";
             if (photo!= null)
@@ -38,11 +41,12 @@ namespace TravelCat.Controllers
                 }
             }
 
-           
+            db.member.Add(memberViewModels.member);
+            db.member_profile.Add(memberViewModels.profile);
             db.SaveChanges();
 
 
-            return View();
+            return RedirectToAction("Index","Home");
         }
     }
 }
