@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -18,7 +19,7 @@ namespace TravelCat.Controllers
         public ActionResult Index()
         {
             var comment = db.comment.Include(c => c.member);
-            return View(comment.ToList());
+            return View();
         }
 
         // GET: web_comments/Details/5
@@ -50,22 +51,25 @@ namespace TravelCat.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "comment_id,tourism_id,comment_title,comment_content,comment_date,comment_photo,comment_stay_total,travel_partner,comment_rating,travel_month,comment_status,member_id")] comment comment, HttpPostedFileBase comment_photo)
+        public ActionResult Create(comment comment, HttpPostedFileBase comment_photo)
         {
             //處理圖檔上傳
             string fileName = "";
+            string rename_filename = "";
             if (comment_photo != null)
             {
                 if (comment_photo.ContentLength > 0)
                 {
+
                     fileName = System.IO.Path.GetFileName(comment_photo.FileName);      //取得檔案的檔名(主檔名+副檔名)
-                    comment_photo.SaveAs(Server.MapPath("~/images/comment/" + fileName));      //將檔案存到該資料夾
+                    rename_filename = comment.comment_id + "_" + DateTime.Now.ToString().Replace("/", "").Replace(":", "").Replace(" ", "") + Path.GetExtension(fileName);
+                    comment_photo.SaveAs(Server.MapPath("~/images/comment/" + rename_filename));      //將檔案存到該資料夾
                 }
             }
             //end
             if (ModelState.IsValid)
             {
-                comment.comment_photo = fileName;
+                comment.comment_photo = rename_filename;
                 db.comment.Add(comment);
                 db.SaveChanges();
                 return RedirectToRoute(new { controller = "web_activities", action = "Details", id = comment.tourism_id });
@@ -92,11 +96,10 @@ namespace TravelCat.Controllers
         }
 
         // POST: web_comments/Edit/5
-        // 若要免於過量張貼攻擊，請啟用想要繫結的特定屬性，如需
-        // 詳細資訊，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "comment_id,tourism_id,comment_title,comment_content,comment_date,comment_photo,comment_stay_total,travel_partner,comment_rating,travel_month,comment_status,member_id")] comment comment)
+        public ActionResult Edit(comment comment)
         {
             if (ModelState.IsValid)
             {
@@ -131,7 +134,7 @@ namespace TravelCat.Controllers
             comment comment = db.comment.Find(id);
             db.comment.Remove(comment);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToRoute(new { controller = "web_activities", action = "Details", id = comment.tourism_id });
         }
 
         protected override void Dispose(bool disposing)
@@ -141,6 +144,22 @@ namespace TravelCat.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        //_ partial view
+        [ChildActionOnly]
+        public ActionResult _PhotoGallery(int number = 0)
+        {
+            List<comment> comment;
+            if (number == 0)
+            {
+                comment = db.comment.OrderByDescending(p => p.comment_date).ThenByDescending(p => p.comment_id).ToList();
+
+            }
+            else
+            {
+                comment = db.comment.OrderByDescending(p => p.comment_date).ThenByDescending(p => p.comment_id).Take(number).ToList();
+            }
+                return PartialView(comment);
         }
     }
 }

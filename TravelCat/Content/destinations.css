@@ -13,8 +13,6 @@ html, body {
     margin: 0;
     padding: 0;
 }
-
-
 .gallery_caption {
     text-align: center;
 }
@@ -22,33 +20,27 @@ html, body {
 .add_to_bucket_list {
     float: right;
 }
-
-.single_comment {
+.single_comments {
     min-height: 440px;
     text-align: left;
     background: #ffffff;
-    background: #fff;
     transition: opacity 0.35s ease-in;
-    border: 1px solid #d6d6d6;
     border: 1px solid #d6d6d6;
     box-shadow: 1px 1px 0px #c2c2c2;
     border-radius: 3px;
     cursor: pointer;
-    width: 100%;
-    margin: auto;
+    width: 60%;
+    margin: 50px ;
     position: relative;
+    padding:10px
 }
-
 .single_message {
     border: 1px solid #d6d6d6;
 
 }
-/*形象網站*/
-
 .btn {
     border-width: 3px;
 }
-
 .header-carousel-item {
     height: 450px;
 }
@@ -57,17 +49,35 @@ html, body {
     background-size: cover;
     background-position: center center;
 }
-
 .carousel-caption {
-    background: rgba(0%,0%,0%,0.6);
+    background: rgba(255,255,255,0.3);
 }
 
 .mapbg {
     height: 400px;
 }
+.emoji img {
+    height: 26px;
+    width: 26px;
+}
+.add_message {
+    padding: 10px;
+}
 
+.add_message textarea {
+    width: 95%;
+    height: 150px;
+    max-width: 98%;
+    padding: 10px;
+    margin: auto;
+    text-align: left;
+}
+.comment_emoji_detail img+span{
+    padding-right:30px
+}
 @media (min-width: 768px) {
     .text-md-dark {
         color: darkblue;
     }
 }
+
