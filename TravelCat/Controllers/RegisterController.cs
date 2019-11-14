@@ -21,6 +21,7 @@ namespace TravelCat.Controllers
             return View();
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Index(MemberViewModels memberViewModels,HttpPostedFileBase photo)
         {
             string mem_id = db.Database.SqlQuery<string>("Select dbo.GetmemberId()").FirstOrDefault();
@@ -28,6 +29,21 @@ namespace TravelCat.Controllers
             memberViewModels.profile.member_id = mem_id;
             memberViewModels.profile.member_score = 0;
             memberViewModels.profile.create_time = DateTime.Now;
+
+            byte[] password = System.Text.Encoding.UTF8.GetBytes(memberViewModels.member.member_password);
+            byte[] hash = new System.Security.Cryptography.SHA256Managed().ComputeHash(password);
+            string hashpassword = Convert.ToBase64String(hash);
+            memberViewModels.member.member_password = hashpassword;
+
+            GmailSender gs = new GmailSender();
+            gs.account = "travelcat.service@gmail.com";
+            gs.password = "lqleyzcbmrmttloe";
+            gs.sender = "旅途貓 <travelcat.service@gmail.com>";
+            gs.receiver = $"{memberViewModels.profile.email}";
+            gs.subject = "旅途貓驗證";
+            gs.messageBody = "恭喜註冊成功";
+            gs.IsHtml = false;
+            gs.Send();
 
             string fileName = "";
             if (photo!= null)
@@ -40,6 +56,8 @@ namespace TravelCat.Controllers
                     memberViewModels.profile.profile_photo = fileName;
                 }
             }
+
+
 
             db.member.Add(memberViewModels.member);
             db.member_profile.Add(memberViewModels.profile);

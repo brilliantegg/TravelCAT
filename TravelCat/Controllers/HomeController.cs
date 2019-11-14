@@ -12,6 +12,7 @@ namespace TravelCat.Controllers
     {
         dbTravelCat db = new dbTravelCat();
 
+
         // GET: Home
         public ActionResult Index(string account)
         {
