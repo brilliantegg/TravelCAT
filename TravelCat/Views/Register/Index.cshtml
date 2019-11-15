@@ -25,7 +25,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.member.member_password, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.member.member_password, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.PasswordFor(model => model.member.member_password, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.member.member_password, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -42,8 +42,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.profile.gender, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.RadioButtonFor(model => model.profile.gender, "0", new { htmlAttributes = new { @class = "form-control" } })<span>男</span>
-                @Html.RadioButtonFor(model => model.profile.gender, "1", new { htmlAttributes = new { @class = "form-control" } })<span>女</span>
+                @Html.RadioButtonFor(model => model.profile.gender, true, new { htmlAttributes = new { @class = "form-control" } })<span>男</span>
+                @Html.RadioButtonFor(model => model.profile.gender,false, new { htmlAttributes = new { @class = "form-control" } })<span>女</span>
                 @Html.ValidationMessageFor(model => model.profile.gender, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -133,6 +133,6 @@
     @Html.ActionLink("Back to List", "Index")
 </div>
 
-<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

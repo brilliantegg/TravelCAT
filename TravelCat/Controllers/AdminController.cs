@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNet.Identity;
-using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using TravelCat.Models;
@@ -61,16 +61,16 @@ namespace TravelCat.Controllers
         {     
             if (ModelState.IsValid)
             {                
-
                 byte[] password = System.Text.Encoding.UTF8.GetBytes(admin.admin_password);
                 byte[] hash = new System.Security.Cryptography.SHA256Managed().ComputeHash(password);
                 string hashpassword = Convert.ToBase64String(hash);
                 admin.admin_password = hashpassword;
 
+
                 GmailSender gs = new GmailSender();
                 gs.account = "travelcat.service@gmail.com";
                 gs.password = "lqleyzcbmrmttloe";
-                gs.sender = "旅途貓 <travelcat.service@gmail.com>";
+                gs.sender = "旅途貓 <travelcat.service@gmail.com>";             
                 gs.receiver = $"{admin.admin_email}";
                 gs.subject = "旅途貓驗證";
                 gs.messageBody = "恭喜註冊成功";
@@ -116,13 +116,14 @@ namespace TravelCat.Controllers
                 admin.admin_password = hashpassword;
 
 
+
                 GmailSender gs = new GmailSender();
                 gs.account = "travelcat.service@gmail.com";
                 gs.password = "lqleyzcbmrmttloe";
                 gs.sender = "旅途貓 <travelcat.service@gmail.com>";
                 gs.receiver = $"{admin.admin_email}";
                 gs.subject = "旅途貓驗證";
-                gs.messageBody = "恭喜註冊成功";
+                gs.messageBody = "恭喜驗證成功";
                 gs.IsHtml = false;
                 gs.Send();
 
