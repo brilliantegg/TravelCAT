@@ -1890,7 +1890,9 @@
     <Content Include="Views\Activities\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ActivitiesController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
@@ -1945,6 +1947,7 @@
     <Compile Include="Models\hotel.cs">
       <DependentUpon>TravelCat.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\issue.cs">
       <DependentUpon>TravelCat.tt</DependentUpon>
     </Compile>
@@ -1988,6 +1991,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TravelCat.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\destinationsViewModel.cs" />
     <Compile Include="ViewModels\MemberViewModels.cs" />
     <Compile Include="ViewModels\SpotPhotoViewModel.cs" />
@@ -2069,6 +2073,8 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Register\Index.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Home\test.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
