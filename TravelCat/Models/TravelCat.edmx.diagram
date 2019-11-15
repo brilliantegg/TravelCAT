@@ -19,7 +19,6 @@
         <EntityTypeShape EntityType="TravelCat.issue" Width="1.5" PointX="6" PointY="7.875" IsExpanded="true" />
         <EntityTypeShape EntityType="TravelCat.issue_type" Width="1.5" PointX="3.75" PointY="4.875" IsExpanded="true" />
         <EntityTypeShape EntityType="TravelCat.member" Width="1.5" PointX="0.75" PointY="11.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TravelCat.member_profile" Width="1.5" PointX="3" PointY="24.625" IsExpanded="true" />
         <EntityTypeShape EntityType="TravelCat.message" Width="1.5" PointX="8.25" PointY="13.125" IsExpanded="true" />
         <EntityTypeShape EntityType="TravelCat.message_emoji_details" Width="1.5" PointX="10.5" PointY="12.625" IsExpanded="true" />
         <EntityTypeShape EntityType="TravelCat.restaurant" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
@@ -39,10 +38,11 @@
         <AssociationConnector Association="TravelCat.FK__follow_li__membe__4F7CD00D" ManuallyRouted="false" />
         <AssociationConnector Association="TravelCat.FK__issue__issue_id__5812160E" ManuallyRouted="false" />
         <AssociationConnector Association="TravelCat.FK__issue__member_id__4D94879B" ManuallyRouted="false" />
-        <AssociationConnector Association="TravelCat.FK__member_pr__membe__47DBAE45" ManuallyRouted="false" />
         <AssociationConnector Association="TravelCat.FK__message__member___4BAC3F29" ManuallyRouted="false" />
         <AssociationConnector Association="TravelCat.FK__message_e__membe__49C3F6B7" ManuallyRouted="false" />
         <AssociationConnector Association="TravelCat.FK__message_e__msg_i__52593CB8" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="TravelCat.member_profile" Width="1.5" PointX="3" PointY="24.25" />
+        <AssociationConnector Association="TravelCat.FK__member_pr__membe__47DBAE45" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

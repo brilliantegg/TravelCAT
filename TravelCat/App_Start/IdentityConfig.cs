@@ -12,6 +12,12 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using TravelCat.Models;
 
+//1115
+//using SendGrid;
+//using System.Net;
+//using System.Configuration;
+//using System.Diagnostics;
+
 namespace TravelCat
 {
     public class EmailService : IIdentityMessageService
