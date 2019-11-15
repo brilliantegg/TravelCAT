@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -73,22 +74,17 @@ namespace TravelCat.Controllers
         [HttpPost]
         // POST: api/api_comment_emoji_details
         [ResponseType(typeof(comment_emoji_details))]
-        public IHttpActionResult Postcomment_emoji_details(dynamic Json)
+        public IHttpActionResult Postcomment_emoji_details(comment_emoji_details comment_emoji_details)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            comment_emoji_details emoji = JsonConvert.DeserializeObject<comment_emoji_details>(Json);
-            comment_emoji_details a = new comment_emoji_details();
-            a.comment_id = emoji.comment_id;
-            a.member_id = emoji.member_id;
-            a.emoji_id = emoji.emoji_id;
 
-            db.comment_emoji_details.Add(a);
+            db.comment_emoji_details.Add(comment_emoji_details);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = emoji.id }, emoji);
+            return CreatedAtRoute("DefaultApi", new { id = comment_emoji_details.id }, comment_emoji_details);
         }
 
         // DELETE: api/api_comment_emoji_details/5

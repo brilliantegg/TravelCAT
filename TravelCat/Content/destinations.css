@@ -30,9 +30,9 @@ html, body {
     border-radius: 3px;
     cursor: pointer;
     width: 60%;
-    margin: 50px ;
+    margin: 50px;
     position: relative;
-    padding:10px
+    padding: 10px
 }
 .single_message {
     border: 1px solid #d6d6d6;
@@ -94,4 +94,17 @@ html, body {
     white-space: nowrap;
     overflow: hidden;
     color: #D56A16; /*前景星星顏色*/
+}
+.filter_comment {
+    text-align: left;
+    background: #ffffff;
+    transition: opacity 0.35s ease-in;
+    border: 1px solid #d6d6d6;
+    box-shadow: 1px 1px 0px #c2c2c2;
+    border-radius: 3px;
+    cursor: pointer;
+    width: 60%;
+    margin: 50px;
+    position: relative;
+    padding: 10px
 }

@@ -41,10 +41,11 @@
             </a>
         </div>
     </header>
-
+    <!--加入收藏-->
     <section class="bg-white py-5  text-center">
         <div class="container col-md-10 ">
             <form method="post">
+                <input id="Hidden1" type="hidden" value=""/>
                 <input type="submit" name="add_to_bucket_list" class="add_to_bucket_list" value="加入收藏" />
             </form>
 
@@ -155,13 +156,90 @@
     </section>
 
 
-    @*新增評論*@
-    <div class="new_comment text-center">
-        <form action="/web_comments/Create" Method="GET">
-            <input type="hidden" name="tourismID" value=@Model.activity.activity_id />
-            <button type="submit" class="btn btn-outline-info mb-5  mt-3 " f>新增評論</button>
-        </form>
-    </div>
+
+    <!--篩選評論-->
+    <section>
+        <div class="">
+
+            <div class="filter_comment row ">
+
+                <div class="col-4">
+                    <h4>旅客評等</h4><br />
+                    <input id="Checkbox1" type="checkbox" />很棒 <br />
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <input id="Checkbox1" type="checkbox" />非常好 <br />
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <input id="Checkbox1" type="checkbox" />一般 <br />
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <input id="Checkbox1" type="checkbox" />差 <br />
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <input id="Checkbox1" type="checkbox" />糟透了<br />
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <h4>旅客類型</h4><br />
+                    <input id="Checkbox1" type="checkbox" />家庭出遊 <br />
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <input id="Checkbox1" type="checkbox" />伴侶旅行 <br />
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <input id="Checkbox1" type="checkbox" />單獨旅行<br />
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <input id="Checkbox1" type="checkbox" />商務<br />
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <input id="Checkbox1" type="checkbox" />好友旅行<br />
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <h4>月份</h4><br />
+                    <input id="Checkbox1" type="checkbox" /> 3 月到 5 月<br />
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <input id="Checkbox1" type="checkbox" /> 6 月到 8 月<br />
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <input id="Checkbox1" type="checkbox" /> 9 月到 11 月<br />
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <input id="Checkbox1" type="checkbox" /> 12 月到 2 月<br />
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+                <!--新增評論-->
+                <div class="new_comment text-center">
+                    <form action="/web_comments/Create" Method="GET">
+                        <input type="hidden" name="tourismID" value=@Model.activity.activity_id />
+                        <button type="submit" class="btn btn-outline-info mb-5  mt-3 " f>新增評論</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+    </section>
 
     <!--評論列表-->
 
@@ -171,20 +249,23 @@
 
         <div class="single_comments container">
             <i class="fas fa-wrench btn"></i>
+
             <div class="card mt-3">
-                <h2 class="card-header">@item.comment_title</h2>
+                
                 <input id="comment_id" type="hidden" value=@item.comment_id />
 
                 <div class="media mt-3">
                     <img src="https://randomuser.me/api/portraits/women/82.jpg" width="74" height="74" class="mr-3 ml-3" alt="...">
                     <div class="media-body col-12">
                         <h5 class="mt-0 ">@item.member.member_profile.nickname</h5>
+                        <h5 class="mt-0 ">@item.member.member_profile.city</h5>
                         <h5 class="mt-0 "> @item.comment_date</h5>
                         <div class="row  mt-2 mb-5 ">
                             <div>
                                 <img src="/images/comment/@item.comment_photo" class="img-fluid" />
                             </div>
                         </div>
+                        <h2 class="">@item.comment_title</h2>
                         <div>
                             @item.comment_content
                         </div>
@@ -194,12 +275,12 @@
 
                         </div>
                         <hr />
-                        <div class="btn-group btn-group-toggle mb-3 mt-3  comment_emoji_detail emoji " data-toggle="buttons">
-                            <img class="comment_emoji_heart" src="~/images/emoji/talk.svg" data-value="@item.comment_emoji_details.Where(m => m.emoji_id == 1).Count()" comment_id="@item.comment_id" emoji_id="1" />
+                        <div class="btn-group btn-group-toggle mb-3 mt-3  comment_emoji_detail emoji " data-toggle="buttons" >
+                            <img class="comment_emoji_heart" src="~/images/emoji/talk.svg" data-value="@item.comment_emoji_details.Where(m => m.emoji_id == 1).Count()" comment_id="@item.comment_id" emoji_id="1" disabled=""/>
                             <span class="comment_emoji_heart_num">@item.comment_emoji_details.Where(m => m.emoji_id == 1).Count() </span>
-                            <img class="comment_emoji_heart" src="~/images/emoji/unicorn.svg" data-value="@item.comment_emoji_details.Where(m => m.emoji_id == 2).Count() " comment_id="@item.comment_id" emoji_id="2" />
+                            <img class="comment_emoji_heart" src="~/images/emoji/unicorn.svg" data-value="@item.comment_emoji_details.Where(m => m.emoji_id == 2).Count() " comment_id="@item.comment_id" emoji_id="2" disabled=""/>
                             <span class="comment_emoji_unicorn_num">@item.comment_emoji_details.Where(m => m.emoji_id == 2).Count()</span>
-                            <img class="comment_emoji_heart" src="~/images/emoji/emoji-one-bookmark-040f92162fa88c379d9d4e04bc5c192b1eb0b080d109dfaf3c9b1a60a1aeef0a.png" data-value="@item.comment_emoji_details.Where(m => m.emoji_id == 3).Count()" comment_id="@item.comment_id" emoji_id="3" />
+                            <img class="comment_emoji_heart" src="~/images/emoji/emoji-one-bookmark-040f92162fa88c379d9d4e04bc5c192b1eb0b080d109dfaf3c9b1a60a1aeef0a.png" data-value="@item.comment_emoji_details.Where(m => m.emoji_id == 3).Count()" comment_id="@item.comment_id" emoji_id="3" disabled=""/>
                             <span class="comment_emoji_bookmark_num">@item.comment_emoji_details.Where(m => m.emoji_id == 3).Count()</span>
                         </div>
                     </div>
@@ -282,13 +363,17 @@
 <script>
 
     $(".comment_emoji_detail").click(function (e) {
-
+        if (e.target.getAttribute('disabled') == true) {
+           $(e.target).attr("disabled", false);
+            return;
+        } else
+        $(e.target).attr("disabled", true); 
         let value = parseInt(e.target.getAttribute('data-value'))
-        console.log(e.target)
         let plusValue = value + 1
         let minusValue = value - 1
         let comment_id = e.target.getAttribute('comment_id')
         let emoji_id = e.target.getAttribute('emoji_id')
+        
         $(event.target).next().text(plusValue);
         $.ajax({
             type: 'POST',
@@ -299,8 +384,12 @@
                 "comment_id": comment_id,
                 "emoji_id": emoji_id,
             }),
-            success: function (data, status) { }
+            success: function (data, status) {
+
+
+            }
         });
+
     });
 
 
