@@ -62,5 +62,6 @@ namespace TravelCat.Controllers
 
             return RedirectToRoute(new { controller = "web_activities", action = "Details", id = message.tourism_id });
         }
+        
     }
 }
