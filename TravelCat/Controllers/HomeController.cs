@@ -66,8 +66,8 @@ namespace TravelCat.Controllers
               new Claim(ClaimTypes.Name,username),
 
               //// optionally you could add roles if any
-              //new Claim(ClaimTypes.Role, "RoleName"),
-              //new Claim(ClaimTypes.Role, "AnotherRole"),
+              new Claim(ClaimTypes.Role, "UnConfirmedUser"),
+              new Claim(ClaimTypes.Role, "BlockedUser"),
 
                   },
                   DefaultAuthenticationTypes.ApplicationCookie);

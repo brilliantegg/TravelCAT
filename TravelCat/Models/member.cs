@@ -23,7 +23,6 @@ namespace TravelCat.Models
             this.comment_emoji_details = new HashSet<comment_emoji_details>();
             this.follow_list = new HashSet<follow_list>();
             this.issue = new HashSet<issue>();
-            this.member_profile = new HashSet<member_profile>();
             this.message = new HashSet<message>();
             this.message_emoji_details = new HashSet<message_emoji_details>();
         }
@@ -46,10 +45,9 @@ namespace TravelCat.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<issue> issue { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<member_profile> member_profile { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<message> message { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<message_emoji_details> message_emoji_details { get; set; }
+        public virtual member_profile member_profile { get; set; }
     }
 }
