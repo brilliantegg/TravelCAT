@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using TravelCat.Models;
@@ -24,6 +25,7 @@ namespace TravelCat.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Index(MemberViewModels memberViewModels,HttpPostedFileBase photo)
         {
+           
             string mem_id = db.Database.SqlQuery<string>("Select dbo.GetmemberId()").FirstOrDefault();
             memberViewModels.member.member_id = mem_id;
             memberViewModels.profile.member_id = mem_id;
@@ -34,6 +36,7 @@ namespace TravelCat.Controllers
             byte[] hash = new System.Security.Cryptography.SHA256Managed().ComputeHash(password);
             string hashpassword = Convert.ToBase64String(hash);
             memberViewModels.member.member_password = hashpassword;
+
 
             GmailSender gs = new GmailSender();
             gs.account = "travelcat.service@gmail.com";
@@ -65,6 +68,13 @@ namespace TravelCat.Controllers
 
 
             return RedirectToAction("Index","Home");
+        }
+
+        public ActionResult emailConfirmed()
+        {
+
+
+            return View();
         }
     }
 }

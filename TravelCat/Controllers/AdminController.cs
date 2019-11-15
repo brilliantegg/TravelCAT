@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -56,16 +58,14 @@ namespace TravelCat.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "admin_id,admin_account,admin_password,admin_email,emailConfirmed")] admin admin)
-        {
-
+        {     
             if (ModelState.IsValid)
-            {
+            {                
+
                 byte[] password = System.Text.Encoding.UTF8.GetBytes(admin.admin_password);
                 byte[] hash = new System.Security.Cryptography.SHA256Managed().ComputeHash(password);
                 string hashpassword = Convert.ToBase64String(hash);
                 admin.admin_password = hashpassword;
-
-
 
                 GmailSender gs = new GmailSender();
                 gs.account = "travelcat.service@gmail.com";
