@@ -9,7 +9,6 @@
 
 namespace TravelCat.Models
 {
-    using Microsoft.AspNet.Identity.EntityFramework;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
@@ -19,10 +18,6 @@ namespace TravelCat.Models
         public dbTravelCat()
             : base("name=dbTravelCat")
         {
-        }
-        public static dbTravelCat Create()
-        {
-            return new dbTravelCat();
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

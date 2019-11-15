@@ -196,10 +196,10 @@
                         <hr />
                         <div class="btn-group btn-group-toggle mb-3 mt-3  comment_emoji_detail emoji " data-toggle="buttons">
                             <img class="comment_emoji_heart" src="~/images/emoji/talk.svg" data-value="@item.comment_emoji_details.Where(m => m.emoji_id == 1).Count()" comment_id="@item.comment_id" emoji_id="1" />
-                            <span class="comment_emoji_heart_num" >@item.comment_emoji_details.Where(m => m.emoji_id == 1).Count() </span>
-                            <img class="comment_emoji_heart" src="~/images/emoji/unicorn.svg" data-value="@item.comment_emoji_details.Where(m => m.emoji_id == 2).Count() " comment_id="@item.comment_id" emoji_id="2"/>
+                            <span class="comment_emoji_heart_num">@item.comment_emoji_details.Where(m => m.emoji_id == 1).Count() </span>
+                            <img class="comment_emoji_heart" src="~/images/emoji/unicorn.svg" data-value="@item.comment_emoji_details.Where(m => m.emoji_id == 2).Count() " comment_id="@item.comment_id" emoji_id="2" />
                             <span class="comment_emoji_unicorn_num">@item.comment_emoji_details.Where(m => m.emoji_id == 2).Count()</span>
-                            <img class="comment_emoji_heart" src="~/images/emoji/emoji-one-bookmark-040f92162fa88c379d9d4e04bc5c192b1eb0b080d109dfaf3c9b1a60a1aeef0a.png" data-value="@item.comment_emoji_details.Where(m => m.emoji_id == 3).Count()" comment_id="@item.comment_id" emoji_id="3"/>
+                            <img class="comment_emoji_heart" src="~/images/emoji/emoji-one-bookmark-040f92162fa88c379d9d4e04bc5c192b1eb0b080d109dfaf3c9b1a60a1aeef0a.png" data-value="@item.comment_emoji_details.Where(m => m.emoji_id == 3).Count()" comment_id="@item.comment_id" emoji_id="3" />
                             <span class="comment_emoji_bookmark_num">@item.comment_emoji_details.Where(m => m.emoji_id == 3).Count()</span>
                         </div>
                     </div>
@@ -274,10 +274,10 @@
      var a = '123';
 
 </script>
-<script src="~/Scripts/jquery-3.3.1.min.js"></script>
-@*<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>*@
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/bootstrap.bundle.min.js"></script>
 
 <script>
 
@@ -291,17 +291,17 @@
         let emoji_id = e.target.getAttribute('emoji_id')
         $(event.target).next().text(plusValue);
         $.ajax({
-                type: 'POST',
-                url: 'http://localhost:54678/api/api_comment_emoji_details',
-                contentType: 'application/json',
-                data: JSON.stringify({
-                    "member_id": "M000001",
-                    "comment_id": comment_id,
-                    "emoji_id":emoji_id,
-                }),
-                success: function (data, status) {}
-                });
+            type: 'POST',
+            url: 'http://localhost:54678/api/api_comment_emoji_details',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                "member_id": "M000001",
+                "comment_id": comment_id,
+                "emoji_id": emoji_id,
+            }),
+            success: function (data, status) { }
+        });
     });
-    
+
 
 </script>

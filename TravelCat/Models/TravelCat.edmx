@@ -173,13 +173,13 @@
           <Property Name="member_id" Type="char" MaxLength="7" Nullable="false" />
           <Property Name="member_name" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="gender" Type="bit" />
-          <Property Name="birthday" Type="datetime" Nullable="false" />
-          <Property Name="nickname" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="create_time" Type="datetime" Nullable="false" />
-          <Property Name="nation" Type="nvarchar" MaxLength="30" Nullable="false" />
-          <Property Name="city" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="birthday" Type="datetime" />
+          <Property Name="nickname" Type="nvarchar" MaxLength="20" />
+          <Property Name="create_time" Type="datetime" />
+          <Property Name="nation" Type="nvarchar" MaxLength="30" />
+          <Property Name="city" Type="nvarchar" MaxLength="30" />
           <Property Name="address_detail" Type="nvarchar" MaxLength="60" />
-          <Property Name="email" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="60" />
           <Property Name="emailConfirmed" Type="bit" />
           <Property Name="phone" Type="varchar" MaxLength="10" />
           <Property Name="profile_photo" Type="varchar" MaxLength="100" />
