@@ -2,13 +2,22 @@
 
 @{
     ViewBag.Title = "Delete";
+    var account = "";
+    if(Session["id"] == null || string.IsNullOrWhiteSpace(Session["id"].ToString()))
+    {
+        Response.Redirect("~/Loginadmin/Index");
+    }
+    else
+    {
+        account = Session["id"].ToString();
+    }
 }
 
-<h2>Delete</h2>
+<h2>確定要刪除嗎?</h2>
 
-<h3>Are you sure you want to delete this?</h3>
+
 <div>
-    <h4>admin</h4>
+    
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -19,13 +28,13 @@
             @Html.DisplayFor(model => model.admin_account)
         </dd>
 
-        <dt>
+        @*<dt>
             @Html.DisplayNameFor(model => model.admin_password)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.admin_password)
-        </dd>
+        </dd>*@
 
         <dt>
             @Html.DisplayNameFor(model => model.admin_email)
@@ -49,8 +58,8 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-danger" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <input type="submit" value="刪除" class="btn btn-danger" /> |
+            @Html.ActionLink("返回", "Index")
         </div>
     }
 </div>

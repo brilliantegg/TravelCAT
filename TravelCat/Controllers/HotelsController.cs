@@ -18,6 +18,7 @@ namespace TravelCat.Controllers
         int pageSize = 10;
 
         // GET: Hotels
+
         public ActionResult Index(string id = null, int page = 1)
         {
             ViewBag.id = id;
@@ -35,6 +36,7 @@ namespace TravelCat.Controllers
                 var data = db.hotel.OrderBy(m => m.hotel_id);
                 return View(data.ToPagedList(page, pageSize));
             }
+
         }
 
         public ActionResult Create()

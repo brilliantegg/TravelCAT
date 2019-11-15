@@ -17,6 +17,7 @@ namespace TravelCat.Controllers
         dbTravelCat db = new dbTravelCat();
         int pageSize = 10;
 
+
         public ActionResult Index(string id = null, int page = 1)
         {
             ViewBag.id = id;
@@ -35,6 +36,7 @@ namespace TravelCat.Controllers
                 return View(data.ToPagedList(page, pageSize));
             }
         }
+
 
         public ActionResult Create()
         {
@@ -99,7 +101,9 @@ namespace TravelCat.Controllers
             SpotPhotoViewModel model = new SpotPhotoViewModel()
             {
                 spot = db.spot.Where(m => m.spot_id == id).FirstOrDefault(),
+
                 spot_photos = db.tourism_photo.Where(m => m.tourism_id == id).ToList(),
+
             };
             return View(model);
         }
@@ -120,6 +124,7 @@ namespace TravelCat.Controllers
             {
                 if (tourism_photo[i] != null)
                 {
+
                     //如果有新增檔案到input
                     if (tourism_photo[i].ContentLength > 0)
                     {
@@ -159,8 +164,7 @@ namespace TravelCat.Controllers
             }
             db.SaveChanges();
             return RedirectToAction("Index",new { page = Session["pg"] });
+
         }
     }
 }
-
-

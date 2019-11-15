@@ -10,17 +10,25 @@ using TravelCat.Models;
 
 namespace TravelCat.Controllers
 {
+    //[Authorize]
     public class AdminController : Controller
     {
         private dbTravelCat db = new dbTravelCat();
 
         // GET: Admin
+
+        public ActionResult Home()
+        {
+            return View();
+        }
+
         public ActionResult Index()
         {
             return View(db.admin.ToList());
         }
 
         // GET: Admin/Details/5
+
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -36,6 +44,7 @@ namespace TravelCat.Controllers
         }
 
         // GET: Admin/Create
+
         public ActionResult Create()
         {
             return View();
@@ -48,16 +57,23 @@ namespace TravelCat.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "admin_id,admin_account,admin_password,admin_email,emailConfirmed")] admin admin)
         {
+
             if (ModelState.IsValid)
             {
+                byte[] password = System.Text.Encoding.UTF8.GetBytes(admin.admin_password);
+                byte[] hash = new System.Security.Cryptography.SHA256Managed().ComputeHash(password);
+                string hashpassword = Convert.ToBase64String(hash);
+                admin.admin_password = hashpassword;
 
-                GmailSender gs = new GmailSender();              
+
+
+                GmailSender gs = new GmailSender();
                 gs.account = "travelcat.service@gmail.com";
                 gs.password = "lqleyzcbmrmttloe";
                 gs.sender = "旅途貓 <travelcat.service@gmail.com>";
                 gs.receiver = $"{admin.admin_email}";
                 gs.subject = "旅途貓驗證";
-                gs.messageBody = "123456";
+                gs.messageBody = "恭喜註冊成功";
                 gs.IsHtml = false;
                 gs.Send();
 
@@ -70,6 +86,7 @@ namespace TravelCat.Controllers
         }
 
         // GET: Admin/Edit/5
+
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -93,43 +110,60 @@ namespace TravelCat.Controllers
         {
             if (ModelState.IsValid)
             {
+                byte[] password = System.Text.Encoding.UTF8.GetBytes(admin.admin_password);
+                byte[] hash = new System.Security.Cryptography.SHA256Managed().ComputeHash(password);
+                string hashpassword = Convert.ToBase64String(hash);
+                admin.admin_password = hashpassword;
+
+
+                GmailSender gs = new GmailSender();
+                gs.account = "travelcat.service@gmail.com";
+                gs.password = "lqleyzcbmrmttloe";
+                gs.sender = "旅途貓 <travelcat.service@gmail.com>";
+                gs.receiver = $"{admin.admin_email}";
+                gs.subject = "旅途貓驗證";
+                gs.messageBody = "恭喜註冊成功";
+                gs.IsHtml = false;
+                gs.Send();
+
                 db.Entry(admin).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
+
+
+
             }
             return View(admin);
         }
 
         // GET: Admin/Delete/5
+
         public ActionResult Delete(int? id)
         {
-            //if (id == null)
-            //{
-            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            //}
-            //admin admin = db.admin.Find(id);
-            //if (admin == null)
-            //{
-            //    return HttpNotFound();
-            //}
-            //return View(admin);
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            admin admin = db.admin.Find(id);
+            if (admin == null)
+            {
+                return HttpNotFound();
+            }
 
+            return View(admin);
+        }
+
+        //POST: Admin/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
             admin admin = db.admin.Find(id);
             db.admin.Remove(admin);
             db.SaveChanges();
+
             return RedirectToAction("Index");
         }
-
-        // POST: Admin/Delete/5
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult DeleteConfirmed(int id)
-        //{
-        //    admin admin = db.admin.Find(id);
-        //    db.admin.Remove(admin);
-        //    db.SaveChanges();
-        //    return RedirectToAction("Index");
-        //}
 
         protected override void Dispose(bool disposing)
         {
@@ -140,9 +174,6 @@ namespace TravelCat.Controllers
             base.Dispose(disposing);
         }
 
-        public ActionResult Home()
-        {
-            return View();
-        }
+
     }
 }

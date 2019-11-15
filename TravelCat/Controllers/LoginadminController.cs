@@ -5,9 +5,11 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Configuration;
+using System.Web.Security;
 
 namespace TravelCat.Controllers
 {
+    
     public class LoginadminController : Controller
     {
 
@@ -15,16 +17,23 @@ namespace TravelCat.Controllers
 
         // GET: Loginadmin
 
-      
+
         public ActionResult Index()
         {
             return View();
         }
-        [HttpPost]      
-        public ActionResult Index(string id,string pwd)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Index(string id, string pwd)
         {
-            string sql = "select * from admin where admin_account=@admin_account and admin_password=@admin_password";
-            SqlCommand cmd = new SqlCommand(sql, Conn);
+            string sql = "select * from admin where admin_account=@admin_account and admin_password=@admin_password";//連線到資料庫
+            SqlCommand cmd = new SqlCommand(sql, Conn);//寫進資料庫
+
+            byte[] password = System.Text.Encoding.UTF8.GetBytes(pwd);
+            byte[] hash = new System.Security.Cryptography.SHA256Managed().ComputeHash(password);
+            string hashpassword = Convert.ToBase64String(hash);
+            pwd = hashpassword;
+
             cmd.Parameters.AddWithValue("@admin_account", id);
             cmd.Parameters.AddWithValue("@admin_password", pwd);
             SqlDataReader rd;
@@ -34,12 +43,14 @@ namespace TravelCat.Controllers
 
             if (rd.Read())
             {
-                Session["id"] = rd["admin_password"].ToString();
+               
+                Session["id"] = rd["admin_account"].ToString();
 
                 Conn.Close();
+
                 return RedirectToAction("Home", "Admin");
             }
-
+            
             Conn.Close();
             ViewBag.LoginErr = "帳號或密碼有誤";
             return View();

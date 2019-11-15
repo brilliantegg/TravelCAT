@@ -2,6 +2,15 @@
 
 @{
     ViewBag.Title = "Index";
+    var account = "";
+    if(Session["id"] == null || string.IsNullOrWhiteSpace(Session["id"].ToString()))
+    {
+        Response.Redirect("~/Loginadmin/Index");
+    }
+    else
+    {
+        account = Session["id"].ToString();
+    }
 }
 
 <h2>管理員</h2>
@@ -14,9 +23,9 @@
         <th>
             @Html.DisplayNameFor(model => model.admin_account)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.admin_password)
-        </th>
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.admin_email)
         </th>
@@ -31,9 +40,9 @@
         <td>
             @Html.DisplayFor(modelItem => item.admin_account)
         </td>
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.admin_password)
-        </td>
+        </td>*@
         <td>
             @Html.DisplayFor(modelItem => item.admin_email)
         </td>
@@ -43,7 +52,7 @@
         <td>
             @Html.ActionLink("修改", "Edit", new { id=item.admin_id },new { @class="btn btn-primary"}) |
             @*@Html.ActionLink("Details", "Details", new { id=item.admin_id }) |*@
-            @Html.ActionLink("刪除", "Delete", new { id=item.admin_id },new { @class="btn btn-danger",onclick="return confirm('確定要刪嗎?')"})
+            @Html.ActionLink("刪除", "Delete", new { id=item.admin_id },new { @class="btn btn-danger"})
         </td>
     </tr>
 }

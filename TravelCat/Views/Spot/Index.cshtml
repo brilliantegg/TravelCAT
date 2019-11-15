@@ -11,8 +11,12 @@
 <div class="header ml-3">
     @Html.ActionLink("新增景點", "Create", "Spot", null, new { @class = "btn btn-secondary" })
     <div class="search">
-        <form action="/Spot/Index" method="get">
-            @Html.TextBox("id","", new { @class = " border", @placeholder = "編號,名稱,城市,行政區" })
+
+        @*@Html.TextBox("id", "", new { @class = " border", @placeholder = "編號,名稱,城市,行政區" })
+
+        @Html.ActionLink("查詢", "contentQuery", new { id = "id" }, new{@class="btn btn-default"})*@
+        <form action="/Spots/Index" method="get">
+            @Html.TextBox("id", "", new { @class = " border", @placeholder = "編號,名稱,城市,行政區" })
             <input class="btn btn-secondary" type="submit" value="查詢" />
         </form>
 
@@ -87,6 +91,6 @@
 </table>
 
 <div class="text-center">
-    @Html.PagedListPager(Model, page => Url.Action("Index", new { page,id=ViewBag.id}))
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
 </div>
 

@@ -2,6 +2,15 @@
 
 @{
     ViewBag.Title = "Edit";
+    var account = "";
+    if(Session["id"] == null || string.IsNullOrWhiteSpace(Session["id"].ToString()))
+    {
+        Response.Redirect("~/Loginadmin/Index");
+    }
+    else
+    {
+        account = Session["id"].ToString();
+    }
 }
 
 <h2>修改資料</h2>
@@ -27,7 +36,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.admin_password, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.admin_password, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.PasswordFor(model => model.admin_password, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.admin_password, "", new { @class = "text-danger" })
             </div>
         </div>
