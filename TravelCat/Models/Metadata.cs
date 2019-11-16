@@ -202,7 +202,7 @@ namespace TravelCat.Models
     public class Metadata_member_profile
     {
         [DisplayName("會員編號")]
-        [Required(ErrorMessage = "此欄位為必填")]
+        //[Required(ErrorMessage = "此欄位為必填")]
         public string member_id { get; set; }
 
         [DisplayName("會員姓名")]
@@ -273,7 +273,7 @@ namespace TravelCat.Models
         public string cover_photo { get; set; }
 
         [DisplayName("積分")]
-        [Required(ErrorMessage = "此欄位為必填")]
+        //[Required(ErrorMessage = "此欄位(積分)為必填")]
         public Nullable<int> member_score { get; set; }
     }
 
