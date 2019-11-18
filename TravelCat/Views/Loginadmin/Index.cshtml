@@ -1,4 +1,5 @@
 ﻿<link href="~/Content/Login-index.css" rel="stylesheet" />
+@model TravelCat.Models.admin
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout 1.cshtml";
@@ -11,27 +12,29 @@
 
     <div class="login">
         <form id="login" class="form-horizontal" method="post" action="@Url.Action("Index")">
+            @Html.AntiForgeryToken()
+
             <div class="form-group">
                 <input id="id" name="id" type="text" class="login-Id" placeholder="請輸入帳號"><br />
-            
-                <input id="pwd" name="pwd" type="password" class="login-Pw" placeholder="請輸入密碼"><br />               
+
+                <input id="pwd" name="pwd" type="password" class="login-Pw" placeholder="請輸入密碼"><br />
+     
             </div>
 
             <div class="from-btn">
                 <input id="Submit1" type="submit" value="登入" class="btn btn-primary" />
-                <input id="Reset1" type="reset" value="重設" class="btn btn-primary" />
+                <input id="Reset1" type="reset" value="清除" class="btn btn-primary" />
+                <input id="Button1" type="button" value="忘記密碼" class="btn btn-info" />
             </div>
 
         </form>
 
     </div>
-    <h3 class="text-danger">@ViewBag.LoginErr</h3>
+    <h4 class="text-danger">@ViewBag.LoginErr</h4>
 </div>
 
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 <script src="~/Scripts/bootstrap.min.js"></script>
-
-
 
 
 

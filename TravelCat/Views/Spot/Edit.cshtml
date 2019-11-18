@@ -27,6 +27,7 @@
         </div>
 
 
+
         <!--頁面狀態-->
         <div class="row">
             <div class="co col-6">
@@ -50,6 +51,7 @@
         <div class="row">
             <div class="co col-6">
                 @Html.LabelFor(model => model.spot.spot_title, htmlAttributes: new { @class = "txt" })
+
                 @Html.EditorFor(model => model.spot.spot_title, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.spot.spot_title, "", new { @class = "text-danger" })
             </div>
@@ -63,6 +65,7 @@
                 @Html.ValidationMessageFor(model => model.spot.spot_tel, "", new { @class = "text-danger" })
             </div>
         </div>
+
 
         <!--經度-->
         <div class="row">
@@ -127,12 +130,14 @@
             </div>
         </div>
 
+
         <!--簡介-->
         <div class="row">
             <div class="co col-6">
                 @Html.LabelFor(model => model.spot.spot_intro, htmlAttributes: new { @class = "txt" })
                 @Html.TextAreaFor(model => model.spot.spot_intro, new { @class = "form-control", rows = "5" })
                 @Html.ValidationMessageFor(model => model.spot.spot_intro, "", new { @class = "text-danger" })
+
             </div>
         </div>
 
@@ -144,6 +149,7 @@
                 @Html.ValidationMessageFor(model => model.spot.addition_note, "", new { @class = "text-danger" })
             </div>
         </div>
+
 
         <div class="row">
             <div class="co col-6">
@@ -168,6 +174,7 @@
                         }
                     }
                 </div>
+
             </div>
         </div>
 

@@ -39,7 +39,7 @@
           <Key>
             <PropertyRef Name="badge_id" />
           </Key>
-          <Property Name="badge_id" Type="int" Nullable="false" />
+          <Property Name="badge_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="badge_title" Type="nvarchar" MaxLength="15" Nullable="false" />
           <Property Name="badge_photo" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
@@ -77,7 +77,7 @@
           </Key>
           <Property Name="comment_id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="tourism_id" Type="char" MaxLength="7" Nullable="false" />
-          <Property Name="comment_title" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="comment_title" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="comment_content" Type="ntext" Nullable="false" />
           <Property Name="comment_date" Type="datetime" Nullable="false" />
           <Property Name="comment_photo" Type="varchar" MaxLength="100" Nullable="false" />
@@ -163,26 +163,25 @@
           </Key>
           <Property Name="member_id" Type="char" MaxLength="7" Nullable="false" />
           <Property Name="member_account" Type="varchar" MaxLength="15" Nullable="false" />
-          <Property Name="member_password" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="member_password" Type="varchar" MaxLength="60" Nullable="false" />
           <Property Name="member_status" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="member_profile">
           <Key>
             <PropertyRef Name="member_id" />
-            <PropertyRef Name="member_name" />
           </Key>
           <Property Name="member_id" Type="char" MaxLength="7" Nullable="false" />
           <Property Name="member_name" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="gender" Type="bit" />
-          <Property Name="birthday" Type="datetime" Nullable="false" />
-          <Property Name="nickname" Type="nvarchar" MaxLength="20" Nullable="false" />
-          <Property Name="create_time" Type="datetime" Nullable="false" />
-          <Property Name="nation" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="birthday" Type="datetime" />
+          <Property Name="nickname" Type="nvarchar" MaxLength="20" />
+          <Property Name="create_time" Type="datetime" />
+          <Property Name="nation" Type="nvarchar" MaxLength="30" />
+          <Property Name="city" Type="nvarchar" MaxLength="30" />
           <Property Name="address_detail" Type="nvarchar" MaxLength="60" />
-          <Property Name="city" Type="nvarchar" MaxLength="30" Nullable="false" />
-          <Property Name="email" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="60" />
           <Property Name="emailConfirmed" Type="bit" />
-          <Property Name="phone" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="phone" Type="varchar" MaxLength="10" />
           <Property Name="profile_photo" Type="varchar" MaxLength="100" />
           <Property Name="website_link" Type="varchar" MaxLength="150" />
           <Property Name="brief_intro" Type="nvarchar" MaxLength="300" />
@@ -199,6 +198,7 @@
           <Property Name="comment_id" Type="bigint" Nullable="false" />
           <Property Name="member_id" Type="char" MaxLength="7" Nullable="false" />
           <Property Name="msg_status" Type="bit" />
+          <Property Name="tourism_id" Type="char" MaxLength="7" />
         </EntityType>
         <EntityType Name="message_emoji_details">
           <Key>
@@ -401,7 +401,7 @@
         </Association>
         <Association Name="FK__member_pr__membe__47DBAE45">
           <End Role="member" Type="Self.member" Multiplicity="1" />
-          <End Role="member_profile" Type="Self.member_profile" Multiplicity="*" />
+          <End Role="member_profile" Type="Self.member_profile" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="member">
               <PropertyRef Name="member_id" />
@@ -648,7 +648,7 @@
           </Key>
           <Property Name="comment_id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="tourism_id" Type="String" MaxLength="7" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="comment_title" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="comment_title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="comment_content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="comment_date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="comment_photo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
@@ -747,7 +747,7 @@
           </Key>
           <Property Name="member_id" Type="String" MaxLength="7" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="member_account" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="member_password" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="member_password" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="member_status" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="badge_details" Relationship="Self.FK__badge_det__membe__4CA06362" FromRole="member" ToRole="badge_details" />
           <NavigationProperty Name="collections_detail" Relationship="Self.FK__collectio__membe__4E88ABD4" FromRole="member" ToRole="collections_detail" />
@@ -755,33 +755,9 @@
           <NavigationProperty Name="comment_emoji_details" Relationship="Self.FK__comment_e__membe__4AB81AF0" FromRole="member" ToRole="comment_emoji_details" />
           <NavigationProperty Name="follow_list" Relationship="Self.FK__follow_li__membe__4F7CD00D" FromRole="member" ToRole="follow_list" />
           <NavigationProperty Name="issue" Relationship="Self.FK__issue__member_id__4D94879B" FromRole="member" ToRole="issue" />
-          <NavigationProperty Name="member_profile" Relationship="Self.FK__member_pr__membe__47DBAE45" FromRole="member" ToRole="member_profile" />
           <NavigationProperty Name="message" Relationship="Self.FK__message__member___4BAC3F29" FromRole="member" ToRole="message" />
           <NavigationProperty Name="message_emoji_details" Relationship="Self.FK__message_e__membe__49C3F6B7" FromRole="member" ToRole="message_emoji_details" />
-        </EntityType>
-        <EntityType Name="member_profile">
-          <Key>
-            <PropertyRef Name="member_id" />
-            <PropertyRef Name="member_name" />
-          </Key>
-          <Property Name="member_id" Type="String" MaxLength="7" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="member_name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="gender" Type="Boolean" />
-          <Property Name="birthday" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="nickname" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="create_time" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="nation" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="address_detail" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
-          <Property Name="city" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="email" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="profile_photo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="website_link" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="brief_intro" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
-          <Property Name="cover_photo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="member_score" Type="Int32" />
-          <NavigationProperty Name="member" Relationship="Self.FK__member_pr__membe__47DBAE45" FromRole="member_profile" ToRole="member" />
-          <Property Name="emailConfirmed" Type="Boolean" />
+          <NavigationProperty Name="member_profile" Relationship="TravelCat.FK__member_pr__membe__47DBAE45" FromRole="member" ToRole="member_profile" />
         </EntityType>
         <EntityType Name="message">
           <Key>
@@ -796,6 +772,7 @@
           <NavigationProperty Name="comment" Relationship="Self.FK__message__comment__5070F446" FromRole="message" ToRole="comment" />
           <NavigationProperty Name="member" Relationship="Self.FK__message__member___4BAC3F29" FromRole="message" ToRole="member" />
           <NavigationProperty Name="message_emoji_details" Relationship="Self.FK__message_e__msg_i__52593CB8" FromRole="message" ToRole="message_emoji_details" />
+          <Property Name="tourism_id" Type="String" MaxLength="7" FixedLength="true" Unicode="false" />
         </EntityType>
         <EntityType Name="message_emoji_details">
           <Key>
@@ -1023,18 +1000,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__member_pr__membe__47DBAE45">
-          <End Role="member" Type="Self.member" Multiplicity="1" />
-          <End Role="member_profile" Type="Self.member_profile" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="member">
-              <PropertyRef Name="member_id" />
-            </Principal>
-            <Dependent Role="member_profile">
-              <PropertyRef Name="member_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__message__member___4BAC3F29">
           <End Role="member" Type="Self.member" Multiplicity="1" />
           <End Role="message" Type="Self.message" Multiplicity="*" />
@@ -1086,7 +1051,6 @@
           <EntitySet Name="issue" EntityType="Self.issue" />
           <EntitySet Name="issue_type" EntityType="Self.issue_type" />
           <EntitySet Name="member" EntityType="Self.member" />
-          <EntitySet Name="member_profile" EntityType="Self.member_profile" />
           <EntitySet Name="message" EntityType="Self.message" />
           <EntitySet Name="message_emoji_details" EntityType="Self.message_emoji_details" />
           <EntitySet Name="restaurant" EntityType="Self.restaurant" />
@@ -1148,10 +1112,6 @@
             <End Role="member" EntitySet="member" />
             <End Role="issue" EntitySet="issue" />
           </AssociationSet>
-          <AssociationSet Name="FK__member_pr__membe__47DBAE45" Association="Self.FK__member_pr__membe__47DBAE45">
-            <End Role="member" EntitySet="member" />
-            <End Role="member_profile" EntitySet="member_profile" />
-          </AssociationSet>
           <AssociationSet Name="FK__message__member___4BAC3F29" Association="Self.FK__message__member___4BAC3F29">
             <End Role="member" EntitySet="member" />
             <End Role="message" EntitySet="message" />
@@ -1164,7 +1124,47 @@
             <End Role="message" EntitySet="message" />
             <End Role="message_emoji_details" EntitySet="message_emoji_details" />
           </AssociationSet>
+          <EntitySet Name="member_profile" EntityType="TravelCat.member_profile" />
+          <AssociationSet Name="FK__member_pr__membe__47DBAE45" Association="TravelCat.FK__member_pr__membe__47DBAE45">
+            <End Role="member" EntitySet="member" />
+            <End Role="member_profile" EntitySet="member_profile" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="member_profile">
+          <Key>
+            <PropertyRef Name="member_id" />
+          </Key>
+          <Property Name="member_id" Type="String" Nullable="false" MaxLength="7" FixedLength="true" Unicode="false" />
+          <Property Name="member_name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="gender" Type="Boolean" />
+          <Property Name="birthday" Type="DateTime" Precision="3" />
+          <Property Name="nickname" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="create_time" Type="DateTime" Precision="3" />
+          <Property Name="nation" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="city" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="address_detail" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="emailConfirmed" Type="Boolean" />
+          <Property Name="phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="profile_photo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="website_link" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="brief_intro" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="cover_photo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="member_score" Type="Int32" />
+          <NavigationProperty Name="member" Relationship="TravelCat.FK__member_pr__membe__47DBAE45" FromRole="member_profile" ToRole="member" />
+        </EntityType>
+        <Association Name="FK__member_pr__membe__47DBAE45">
+          <End Type="TravelCat.member" Role="member" Multiplicity="1" />
+          <End Type="TravelCat.member_profile" Role="member_profile" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="member">
+              <PropertyRef Name="member_id" />
+            </Principal>
+            <Dependent Role="member_profile">
+              <PropertyRef Name="member_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1337,32 +1337,10 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="member_profile">
-            <EntityTypeMapping TypeName="TravelCat.member_profile">
-              <MappingFragment StoreEntitySet="member_profile">
-                <ScalarProperty Name="emailConfirmed" ColumnName="emailConfirmed" />
-                <ScalarProperty Name="member_id" ColumnName="member_id" />
-                <ScalarProperty Name="member_name" ColumnName="member_name" />
-                <ScalarProperty Name="gender" ColumnName="gender" />
-                <ScalarProperty Name="birthday" ColumnName="birthday" />
-                <ScalarProperty Name="nickname" ColumnName="nickname" />
-                <ScalarProperty Name="create_time" ColumnName="create_time" />
-                <ScalarProperty Name="nation" ColumnName="nation" />
-                <ScalarProperty Name="address_detail" ColumnName="address_detail" />
-                <ScalarProperty Name="city" ColumnName="city" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="phone" ColumnName="phone" />
-                <ScalarProperty Name="profile_photo" ColumnName="profile_photo" />
-                <ScalarProperty Name="website_link" ColumnName="website_link" />
-                <ScalarProperty Name="brief_intro" ColumnName="brief_intro" />
-                <ScalarProperty Name="cover_photo" ColumnName="cover_photo" />
-                <ScalarProperty Name="member_score" ColumnName="member_score" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="message">
             <EntityTypeMapping TypeName="TravelCat.message">
               <MappingFragment StoreEntitySet="message">
+                <ScalarProperty Name="tourism_id" ColumnName="tourism_id" />
                 <ScalarProperty Name="msg_id" ColumnName="msg_id" />
                 <ScalarProperty Name="msg_time" ColumnName="msg_time" />
                 <ScalarProperty Name="msg_content" ColumnName="msg_content" />
@@ -1426,6 +1404,29 @@
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="tourism_id" ColumnName="tourism_id" />
                 <ScalarProperty Name="tourism_photo1" ColumnName="tourism_photo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="member_profile">
+            <EntityTypeMapping TypeName="TravelCat.member_profile">
+              <MappingFragment StoreEntitySet="member_profile">
+                <ScalarProperty Name="member_score" ColumnName="member_score" />
+                <ScalarProperty Name="cover_photo" ColumnName="cover_photo" />
+                <ScalarProperty Name="brief_intro" ColumnName="brief_intro" />
+                <ScalarProperty Name="website_link" ColumnName="website_link" />
+                <ScalarProperty Name="profile_photo" ColumnName="profile_photo" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="emailConfirmed" ColumnName="emailConfirmed" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="address_detail" ColumnName="address_detail" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="nation" ColumnName="nation" />
+                <ScalarProperty Name="create_time" ColumnName="create_time" />
+                <ScalarProperty Name="nickname" ColumnName="nickname" />
+                <ScalarProperty Name="birthday" ColumnName="birthday" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="member_name" ColumnName="member_name" />
+                <ScalarProperty Name="member_id" ColumnName="member_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

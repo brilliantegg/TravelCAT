@@ -17,20 +17,20 @@ namespace TravelCat.Models
         public string member_id { get; set; }
         public string member_name { get; set; }
         public Nullable<bool> gender { get; set; }
-        public System.DateTime birthday { get; set; }
+        public Nullable<System.DateTime> birthday { get; set; }
         public string nickname { get; set; }
-        public System.DateTime create_time { get; set; }
+        public Nullable<System.DateTime> create_time { get; set; }
         public string nation { get; set; }
-        public string address_detail { get; set; }
         public string city { get; set; }
+        public string address_detail { get; set; }
         public string email { get; set; }
+        public Nullable<bool> emailConfirmed { get; set; }
         public string phone { get; set; }
         public string profile_photo { get; set; }
         public string website_link { get; set; }
         public string brief_intro { get; set; }
         public string cover_photo { get; set; }
         public Nullable<int> member_score { get; set; }
-        public Nullable<bool> emailConfirmed { get; set; }
     
         public virtual member member { get; set; }
     }

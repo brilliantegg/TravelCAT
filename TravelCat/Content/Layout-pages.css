@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Noto+Serif+TC:300,400,500,700,900&display=swap');
 
-
 /*CSS reset*/
 * {
     margin: 0;
@@ -55,9 +54,7 @@ body {
         border-radius: 0 10px 10px 0;
         cursor: pointer;
     }
-    #side-menu-switch{
-        display: none;
-    }
+
 #side-menu-switch:checked + .side-menu {
     transform: translateX(0);
 }

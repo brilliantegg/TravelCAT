@@ -1,0 +1,24 @@
+﻿@model TravelCat.Models.member
+
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2>會員登入</h2>
+<div class="card col-4 align-self-md-center">
+    <form id="login" method="post" action="@Url.Action("Login")">
+        <div class="form-inline mt-3">
+            @Html.LabelFor(model => model.member_account)
+            <input id="username" name="username" type="text" class="form-control ml-2" />
+            @Html.ValidationMessageFor(model => model.member_account, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-inline mt-3">
+            @Html.LabelFor(model => model.member_password)
+            <input id="password" name="password" type="password" class="form-control ml-2" />
+            @Html.ValidationMessageFor(model => model.member_password, "", new { @class = "text-danger" })
+        </div>
+        <input id="Submit1" type="submit" value="submit" class="btn btn-info mt-3 mb-3" />
+    </form>
+</div>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+
