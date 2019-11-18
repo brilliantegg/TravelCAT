@@ -56,9 +56,10 @@ html, body {
 .mapbg {
     height: 400px;
 }
-.emoji img {
+.icon {
     height: 26px;
     width: 26px;
+    border-radius: 50px;
 }
 .add_message {
     padding: 10px;
@@ -107,4 +108,12 @@ html, body {
     margin: 50px;
     position: relative;
     padding: 10px
+}
+
+.member_avatar {
+    border-radius: 50px;
+}
+.click_button {
+    border: 1px solid rgba(0%,0%,100%,0.4);
+    
 }

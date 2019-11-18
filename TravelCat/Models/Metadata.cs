@@ -69,6 +69,7 @@ namespace TravelCat.Models
     public partial class issue { }
     public class Metadata_issue
     {
+
         [DisplayName("會員編號")]
         public string member_id { get; set; }
 
@@ -100,8 +101,14 @@ namespace TravelCat.Models
         [DisplayName("處理日期")]
         [DataType(DataType.DateTime, ErrorMessage = "輸入日期錯誤")]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd hh:mm}", ApplyFormatInEditMode = true)]
-        public Nullable<System.DateTime> resolve_date { get; set; }
 
+        public Nullable<System.DateTime> resolve_date { get; set; }
+        [JsonIgnore]
+        public virtual admin admin { get; set; }
+        [JsonIgnore]
+        public virtual issue_type issue_type { get; set; }
+        [JsonIgnore]
+        public virtual member member { get; set; }
     }
 
     [MetadataType(typeof(Metadata_follow_list))]
@@ -307,7 +314,16 @@ namespace TravelCat.Models
         [StringLength(20, ErrorMessage = "名稱最多20個字")]
         public string collection_type_title { get; set; }
     }
-
+    [MetadataType(typeof(Metadata_collections_detail))]
+    public partial class collections_detail
+    { }
+    public partial class Metadata_collections_detail
+    {
+        [JsonIgnore]
+        public virtual collection_type collection_type { get; set; }
+        [JsonIgnore]
+        public virtual member member { get; set; }
+    }
     [MetadataType(typeof(Metadata_hotel))]
     public partial class hotel
     { }

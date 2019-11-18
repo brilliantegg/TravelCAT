@@ -86,7 +86,7 @@ namespace TravelCat.Controllers
 
             return CreatedAtRoute("DefaultApi", new { id = comment_emoji_details.id }, comment_emoji_details);
         }
-
+        [HttpDelete]
         // DELETE: api/api_comment_emoji_details/5
         [ResponseType(typeof(comment_emoji_details))]
         public IHttpActionResult Deletecomment_emoji_details(long id)
@@ -116,5 +116,6 @@ namespace TravelCat.Controllers
         {
             return db.comment_emoji_details.Count(e => e.id == id) > 0;
         }
+        
     }
 }
