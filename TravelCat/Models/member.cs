@@ -44,10 +44,10 @@ namespace TravelCat.Models
         public virtual ICollection<follow_list> follow_list { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<issue> issue { get; set; }
+        public virtual member_profile member_profile { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<message> message { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<message_emoji_details> message_emoji_details { get; set; }
-        public virtual member_profile member_profile { get; set; }
     }
 }
