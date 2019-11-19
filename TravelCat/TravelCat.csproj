@@ -1865,17 +1865,6 @@
     <Content Include="Content\fontawesome-free-5.11.2-web\webfonts\fa-solid-900.ttf" />
     <Content Include="Content\fontawesome-free-5.11.2-web\webfonts\fa-solid-900.woff" />
     <Content Include="Content\fontawesome-free-5.11.2-web\webfonts\fa-solid-900.woff2" />
-    <EntityDeploy Include="Models\TravelCat.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>TravelCat.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\TravelCat.edmx.diagram">
-      <DependentUpon>TravelCat.edmx</DependentUpon>
-    </Content>
-    <Content Include="hotel_C_f.json" />
-    <Content Include="activity_C_f.json" />
-    <Content Include="Scripts\bootstrap.bundle.js" />
-    <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
@@ -1886,16 +1875,17 @@
     <Content Include="Scripts\esm\popper.js.map" />
     <Content Include="Scripts\esm\popper-utils.min.js.map" />
     <Content Include="Scripts\esm\popper-utils.js.map" />
-    <Content Include="Scripts\bootstrap.min.js.map" />
-    <Content Include="Scripts\bootstrap.js.map" />
-    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
-    <Content Include="Scripts\bootstrap.bundle.js.map" />
-    <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-reboot.min.css.map" />
-    <Content Include="Content\bootstrap-reboot.css.map" />
-    <Content Include="Content\bootstrap-grid.min.css.map" />
-    <Content Include="Content\bootstrap-grid.css.map" />
+    <EntityDeploy Include="Models\TravelCat.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>TravelCat.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\TravelCat.edmx.diagram">
+      <DependentUpon>TravelCat.edmx</DependentUpon>
+    </Content>
+    <Content Include="activity_C_f.json" />
+    <Content Include="hotel_C_f.json" />
+    <Content Include="restaurant_C_f.json" />
+    <Content Include="spot_C_f.json" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -1937,6 +1927,7 @@
     <Compile Include="Controllers\destinationsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HotelsController.cs" />
+    <Compile Include="Controllers\Import_acController.cs" />
     <Compile Include="Controllers\issuesController.cs" />
     <Compile Include="Controllers\LoginadminController.cs" />
     <Compile Include="Controllers\membersController.cs" />

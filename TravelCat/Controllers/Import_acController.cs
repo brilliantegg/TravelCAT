@@ -62,7 +62,7 @@ namespace TravelCat.Controllers
                 var json = r.ReadToEnd();
                 List<Rootobject> rt = JsonConvert.DeserializeObject<List<Rootobject>>(json);
 
-                for (int i = 0; i < rt.Count; i++)
+                for (int i =0 ; i < rt.Count; i++)
                 {
                     activity items = new activity();
                     items.activity_id = db.Database.SqlQuery<string>("Select dbo.GetactivityId()").FirstOrDefault();
@@ -80,21 +80,58 @@ namespace TravelCat.Controllers
                     items.organizer = rt[i].Org;
                     items.transport_info = rt[i].Travellinginfo;
 
-                    if (rt[i].Picture1 != "")
+                    //if (rt[i].Picture1 != "")
+                    //{
+                    //    tourism_photo tp = new tourism_photo();
+                    //    tp.tourism_id = items.activity_id;
+                    //    tp.tourism_photo1 = rt[i].Picture1;
+                    //    db.tourism_photo.Add(tp);
+                    //}
+                    //if (rt[i].Picture2 != "")
+                    //{
+                    //    tourism_photo tp = new tourism_photo();
+                    //    tp.tourism_id = items.activity_id;
+                    //    tp.tourism_photo1 = rt[i].Picture2;
+                    //    db.tourism_photo.Add(tp);
+                    //}
+                    //if (rt[i].Picture3 != "")
+                    //{
+                    //    tourism_photo tp = new tourism_photo();
+                    //    tp.tourism_id = items.activity_id;
+                    //    tp.tourism_photo1 = rt[i].Picture3;
+                    //    db.tourism_photo.Add(tp);
+                    //}
+
+                    //db.activity.Add(items);
+                    //try
+                    //{
+                    //    db.SaveChanges();
+                    //}
+                    //catch (DbEntityValidationException ex)
+                    //{
+                    //    var entityError = ex.EntityValidationErrors.SelectMany(x => x.ValidationErrors).Select(x => x.ErrorMessage);
+                    //    var getFullMessage = string.Join("; ", entityError);
+                    //    var exceptionMessage = string.Concat(ex.Message, "errors are: ", getFullMessage);
+                    //    //NLog
+                    //    Console.WriteLine(exceptionMessage.ToString());
+
+                    //}
+
+                    if (String.IsNullOrEmpty(rt[i].Picture1) != true)
                     {
                         tourism_photo tp = new tourism_photo();
                         tp.tourism_id = items.activity_id;
                         tp.tourism_photo1 = rt[i].Picture1;
                         db.tourism_photo.Add(tp);
                     }
-                    if (rt[i].Picture2 != "")
+                    if (String.IsNullOrEmpty(rt[i].Picture2) != true)
                     {
                         tourism_photo tp = new tourism_photo();
                         tp.tourism_id = items.activity_id;
                         tp.tourism_photo1 = rt[i].Picture2;
                         db.tourism_photo.Add(tp);
                     }
-                    if (rt[i].Picture3 != "")
+                    if (String.IsNullOrEmpty(rt[i].Picture3) != true)
                     {
                         tourism_photo tp = new tourism_photo();
                         tp.tourism_id = items.activity_id;
@@ -103,20 +140,7 @@ namespace TravelCat.Controllers
                     }
 
                     db.activity.Add(items);
-                    try
-                    {
-                        db.SaveChanges();
-                    }
-                    catch (DbEntityValidationException ex)
-                    {
-                        var entityError = ex.EntityValidationErrors.SelectMany(x => x.ValidationErrors).Select(x => x.ErrorMessage);
-                        var getFullMessage = string.Join("; ", entityError);
-                        var exceptionMessage = string.Concat(ex.Message, "errors are: ", getFullMessage);
-                        //NLog
-                        Console.WriteLine(exceptionMessage.ToString());
-
-                    }
-
+                    db.SaveChanges();
 
                 }
 

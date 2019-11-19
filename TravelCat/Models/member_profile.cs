@@ -19,7 +19,7 @@ namespace TravelCat.Models
         public Nullable<bool> gender { get; set; }
         public Nullable<System.DateTime> birthday { get; set; }
         public string nickname { get; set; }
-        public Nullable<System.DateTime> create_time { get; set; }
+        public System.DateTime create_time { get; set; }
         public string nation { get; set; }
         public string city { get; set; }
         public string address_detail { get; set; }
