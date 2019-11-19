@@ -39,11 +39,11 @@ namespace TravelCat.Models
         public virtual DbSet<issue> issue { get; set; }
         public virtual DbSet<issue_type> issue_type { get; set; }
         public virtual DbSet<member> member { get; set; }
+        public virtual DbSet<member_profile> member_profile { get; set; }
         public virtual DbSet<message> message { get; set; }
         public virtual DbSet<message_emoji_details> message_emoji_details { get; set; }
         public virtual DbSet<restaurant> restaurant { get; set; }
         public virtual DbSet<spot> spot { get; set; }
         public virtual DbSet<tourism_photo> tourism_photo { get; set; }
-        public virtual DbSet<member_profile> member_profile { get; set; }
     }
 }
