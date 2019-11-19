@@ -25,8 +25,10 @@
         <div class="form-group">
             @Html.LabelFor(model => model.member_password, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
+
                 @Html.EditorFor(model => model.member_password, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.member_password, "", new { @class = "text-danger" })
+
             </div>
         </div>
 
@@ -41,9 +43,11 @@
         <div class="form-group">
             @Html.LabelFor(model => model.member_profile.gender, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
+
                 @Html.RadioButtonFor(model => model.member_profile.gender, false, new { htmlAttributes = new { @class = "form-control" } })<span>男</span>
                 @Html.RadioButtonFor(model => model.member_profile.gender, true, new { htmlAttributes = new { @class = "form-control" } })<span>女</span>
                 @Html.ValidationMessageFor(model => model.member_profile.gender, "", new { @class = "text-danger" })
+
             </div>
         </div>
 
@@ -119,6 +123,6 @@
     @Html.ActionLink("Back to List", "Index")
 </div>
 
-<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

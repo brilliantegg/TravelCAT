@@ -55,10 +55,11 @@ namespace TravelCat.Controllers
         [HttpPost]
         public ActionResult Login(string username, string password)
         {
-            byte[] password1 = System.Text.Encoding.UTF8.GetBytes(password);
-            byte[] hash = new System.Security.Cryptography.SHA256Managed().ComputeHash(password1);
+            byte[] pwd = System.Text.Encoding.UTF8.GetBytes(password);
+            byte[] hash = new System.Security.Cryptography.SHA256Managed().ComputeHash(pwd);
             string hashpassword = Convert.ToBase64String(hash);
             password = hashpassword;
+
             if (new UserManager().IsValid(username, password))
             {
 
@@ -71,8 +72,8 @@ namespace TravelCat.Controllers
               new Claim(ClaimTypes.Name,username),
 
               //// optionally you could add roles if any
-              new Claim(ClaimTypes.Role, "UnConfirmedUser"),
-              new Claim(ClaimTypes.Role, "BlockedUser"),
+              //new Claim(ClaimTypes.Role, "UnConfirmedUser"),
+              //new Claim(ClaimTypes.Role, "BlockedUser"),
 
                   },
                   DefaultAuthenticationTypes.ApplicationCookie);

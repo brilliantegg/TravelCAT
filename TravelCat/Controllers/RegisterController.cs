@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Windows.Forms;
@@ -23,8 +25,10 @@ namespace TravelCat.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
+
         public ActionResult Index(member model, HttpPostedFileBase photo)
         {
+
             string mem_id = db.Database.SqlQuery<string>("Select dbo.GetmemberId()").FirstOrDefault();
             model.member_id = mem_id;
             model.member_profile.member_id = mem_id;
@@ -35,6 +39,7 @@ namespace TravelCat.Controllers
             byte[] hash = new System.Security.Cryptography.SHA256Managed().ComputeHash(password);
             string hashpassword = Convert.ToBase64String(hash);
             model.member_password = hashpassword;
+
 
             string fileName = "";
             if (photo != null)
@@ -86,6 +91,8 @@ namespace TravelCat.Controllers
                 DialogResult ans = MessageBox.Show("請先註冊會員!", "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Question);
                 return RedirectToAction("Index", "Register");
             }
+
         }
+
     }
 }
