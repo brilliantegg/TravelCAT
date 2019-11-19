@@ -3,17 +3,33 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - 旅途貓後台</title>
+    <title>@ViewBag.Title - 旅途貓</title>
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="fontawesome-free-5.11.2-web/css/all.css">
 
 </head>
 <body>
-  
+    <header>
+        <div class="header">
+            <div class="header-bar">
+                <a href="#" class="logo">
+                    <img src="cat-face-with-wry-smile_1f63c.png" alt="" width="50px">
+                    旅途貓
+                </a>
+                <div class="search">
+                    <input type="text" class="search-txt">
+                    <i class="fas fa-search"></i>
+                    <a href="#" class="memberId"><i class="far fa-user"></i> 會員編號</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <footer class="footer"></footer>
 
 
-    @Url.Action("Home", "Admin")
+
     @RenderBody()
-
     <script src="~/Scripts/modernizr-2.8.3.js"></script>
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
