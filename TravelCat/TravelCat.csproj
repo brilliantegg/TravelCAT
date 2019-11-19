@@ -1904,7 +1904,6 @@
     <Compile Include="Controllers\destinationsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HotelsController.cs" />
-    <Compile Include="Controllers\Import_acController.cs" />
     <Compile Include="Controllers\issuesController.cs" />
     <Compile Include="Controllers\LoginadminController.cs" />
     <Compile Include="Controllers\membersController.cs" />
@@ -2095,7 +2094,6 @@
     <Folder Include="images\spot\" />
     <Folder Include="Views\Default\" />
     <Folder Include="Views\destinations\" />
-    <Folder Include="Views\import_a\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
