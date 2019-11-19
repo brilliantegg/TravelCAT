@@ -1847,15 +1847,6 @@
     <Content Include="Content\fontawesome-free-5.11.2-web\webfonts\fa-solid-900.ttf" />
     <Content Include="Content\fontawesome-free-5.11.2-web\webfonts\fa-solid-900.woff" />
     <Content Include="Content\fontawesome-free-5.11.2-web\webfonts\fa-solid-900.woff2" />
-    <EntityDeploy Include="Models\TravelCat.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>TravelCat.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\TravelCat.edmx.diagram">
-      <DependentUpon>TravelCat.edmx</DependentUpon>
-    </Content>
-    <Content Include="hotel_C_f.json" />
-    <Content Include="activity_C_f.json" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
@@ -1866,6 +1857,17 @@
     <Content Include="Scripts\esm\popper.js.map" />
     <Content Include="Scripts\esm\popper-utils.min.js.map" />
     <Content Include="Scripts\esm\popper-utils.js.map" />
+    <EntityDeploy Include="Models\TravelCat.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>TravelCat.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\TravelCat.edmx.diagram">
+      <DependentUpon>TravelCat.edmx</DependentUpon>
+    </Content>
+    <Content Include="activity_C_f.json" />
+    <Content Include="hotel_C_f.json" />
+    <Content Include="restaurant_C_f.json" />
+    <Content Include="spot_C_f.json" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -2096,7 +2098,6 @@
     <Folder Include="images\spot\" />
     <Folder Include="Views\Default\" />
     <Folder Include="Views\destinations\" />
-    <Folder Include="Views\import_a\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

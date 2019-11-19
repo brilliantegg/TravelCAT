@@ -55,8 +55,13 @@ namespace TravelCat.Controllers
         [HttpPost]
         public ActionResult Login(string username, string password)
         {
+            byte[] password1 = System.Text.Encoding.UTF8.GetBytes(password);
+            byte[] hash = new System.Security.Cryptography.SHA256Managed().ComputeHash(password1);
+            string hashpassword = Convert.ToBase64String(hash);
+            password = hashpassword;
             if (new UserManager().IsValid(username, password))
             {
+
                 var ident = new ClaimsIdentity(
                   new[] { 
               // adding following 2 claim just for supporting default antiforgery provider
@@ -84,6 +89,7 @@ namespace TravelCat.Controllers
         {
             var ctx = Request.GetOwinContext();
             var authManager = ctx.Authentication;
+            Session.Clear();
 
             authManager.SignOut("ApplicationCookie");
             return RedirectToAction("Index", "Home");
@@ -91,6 +97,9 @@ namespace TravelCat.Controllers
         [Authorize]
         public ActionResult test()
         {
+            string user = User.Identity.GetUserName();
+            var member = db.member.Where(m => m.member_account == user).FirstOrDefault();
+            Session["memberID"] = member.member_id.ToString();
             ViewBag.Data = DateTime.Now.ToString();
             return View();
         }
