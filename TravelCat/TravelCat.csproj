@@ -1764,6 +1764,7 @@
     <Content Include="Content\fontawesome-free-5.11.2-web\webfonts\fa-solid-900.svg" />
     <Content Include="Content\Layout-pages.css" />
     <Content Include="Content\Login-index.css" />
+    <Content Include="Content\MemberIndex.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\back-end-index.css" />
@@ -1937,6 +1938,7 @@
     <Compile Include="Controllers\SpotsController.cs" />
     <Compile Include="Controllers\web_activitiesController.cs" />
     <Compile Include="Controllers\web_commentsController.cs" />
+    <Compile Include="Controllers\web_Member_IndexController.cs" />
     <Compile Include="email\email.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -2022,6 +2024,7 @@
     <Compile Include="Models\travelPartner.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\destinationsViewModel.cs" />
+    <Compile Include="ViewModels\MemberIndexViewModels.cs" />
     <Compile Include="ViewModels\MemberViewModels.cs" />
     <Compile Include="ViewModels\SpotPhotoViewModel.cs" />
     <Compile Include="ViewModels\RestaurantPhotoViewModel.cs" />
@@ -2112,6 +2115,7 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\web_Member_Index\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

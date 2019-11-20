@@ -1,0 +1,22 @@
+﻿body {
+}
+.breadcrumb {
+    background: none;
+}
+
+.text-catcolor {
+    color: #00cc99 !important;
+}
+
+.box2 {
+    background: #ffffff;
+    width: 100%;
+    height: 50px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #e5e5e5;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    background-color: darkturquoise;
+}

@@ -6,10 +6,10 @@ using TravelCat.Models;
 
 namespace TravelCat.ViewModels
 {
-    public class MemberIndex
+    public class MemberIndexViewModels
     {
         public member member { get; set; }
-        public member_profile profile { get; set; }
+        public member_profile member_profile { get; set; }
 
         public List<badge_details> badge_details { get; set; }
 
