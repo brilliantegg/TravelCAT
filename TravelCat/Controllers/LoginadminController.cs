@@ -13,7 +13,7 @@ namespace TravelCat.Controllers
     public class LoginadminController : Controller
     {
 
-        SqlConnection Conn = new SqlConnection("data source=MCSDD10823; initial catalog = traval_cat_v1; integrated security = True; multipleactiveresultsets=True;application name = EntityFramework & quot");
+        SqlConnection Conn = new SqlConnection("data source=MCSDD108214;initial catalog=travel_cat_v1;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework&quot");//連線到資料庫
 
         // GET: Loginadmin
 
@@ -26,7 +26,7 @@ namespace TravelCat.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Index(string id, string pwd)
         {
-            string sql = "select * from admin where admin_account=@admin_account and admin_password=@admin_password";//連線到資料庫
+            string sql = "select * from admin where admin_account=@admin_account and admin_password=@admin_password";
             SqlCommand cmd = new SqlCommand(sql, Conn);//寫進資料庫
 
             byte[] password = System.Text.Encoding.UTF8.GetBytes(pwd);
@@ -41,13 +41,11 @@ namespace TravelCat.Controllers
             Conn.Open();
             rd = cmd.ExecuteReader();
 
-            if (rd.Read())
+            if (rd.Read()) //如果有讀到就做
             {
                
                 Session["id"] = rd["admin_account"].ToString();
-
                 Conn.Close();
-
                 return RedirectToAction("Home", "Admin");
             }
             

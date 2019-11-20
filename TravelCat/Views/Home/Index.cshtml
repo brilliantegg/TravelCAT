@@ -1,12 +1,13 @@
-﻿@model TravelCat.ViewModels.WebIndexViewModel
+﻿@using Microsoft.AspNet.Identity
+@model TravelCat.ViewModels.WebIndexViewModel
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Index";    
 }
 
 <h2>Index</h2>
 <div class="container">
-    @*<p>@Model.member.member_account，您好</p>*@
+    <p>@User.Identity.GetUserName()/@Session["memberID"]，您好</p>
     @*<div class="row">
             <h2>活動</h2>
             <div class="co-4">@Model.activity[0].activity_title</div>
