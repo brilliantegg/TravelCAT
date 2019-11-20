@@ -32,10 +32,18 @@
         <div class="row">
             <div class="co col-6">
                 @Html.LabelFor(model => model.spot.page_status, htmlAttributes: new { @class = "txt" })
-                <span class="checkbox">
+                <span class="checkbox ml-3">
                     @Html.EditorFor(model => model.spot.page_status)
                     @Html.ValidationMessageFor(model => model.spot.page_status, "", new { @class = "text-danger" })
                 </span>
+            </div>
+        </div>
+
+        <!--編號-->
+        <div class="row">
+            <div class="co col-6">
+                @Html.LabelFor(model => model.spot.spot_id, htmlAttributes: new { @class = "txt" })
+                <input id="spot_id" name="spot_id" type="text" readonly="readonly" value="@Model.spot.spot_id" class="form-control" />
             </div>
         </div>
 

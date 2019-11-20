@@ -4,7 +4,8 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>管理留言</h2>
+    <link href="~/Content/back-end-Create.css" rel="stylesheet" />
+<h2 class="ml-3 mt-3 text-danger text-center">管理留言</h2>
 
 
 @using (Html.BeginForm())
@@ -12,59 +13,79 @@
     @Html.AntiForgeryToken()
     
 <div class="form-horizontal">
-    <h4>message</h4>
+
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     @Html.HiddenFor(model => model.msg_id)
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.comment_id, "comment_id", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
+
+    <!--留言狀態-->
+    <div class="row">
+        <div class="co col-6">
+            @Html.LabelFor(model => model.msg_status,"留言狀態", htmlAttributes: new { @class = "txt" })
+            <span class="checkbox ml-3">
+                @Html.EditorFor(model => model.msg_status)
+            </span>
+        </div>
+    </div>
+
+    <!--留言編號-->
+    <div class="row">
+        <div class="co col-6">
+            @Html.LabelFor(model => model.comment_id, "評論編號", htmlAttributes: new { @class = "txt" })
             @Html.EditorFor(model => model.comment_id, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
         </div>
     </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.member_id, "member_id", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
+    <!--留言編號-->
+    <div class="row">
+        <div class="co col-6">
+            @Html.LabelFor(model => model.msg_id, "留言編號", htmlAttributes: new { @class = "txt" })
+            @Html.EditorFor(model => model.msg_id, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+        </div>
+    </div>
 
+    <!--會員編號-->
+    <div class="row">
+        <div class="co col-6">
+            @Html.LabelFor(model => model.member_id, "會員編號", htmlAttributes: new { @class = "txt" })
             @Html.EditorFor(model => model.member_id, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
         </div>
     </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.msg_time, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
+    <!--留言時間-->
+    <div class="row">
+        <div class="co col-6">
+            @Html.LabelFor(model => model.msg_time, htmlAttributes: new { @class = "txt" })
             @Html.EditorFor(model => model.msg_time, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-
         </div>
     </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.msg_content, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.msg_content, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+    <!--留言內容-->
+    <div class="row">
+        <div class="co col-6">
+            @Html.LabelFor(model => model.msg_content, htmlAttributes: new { @class = "txt" })
+            @Html.TextAreaFor(model => model.msg_content, new { @class = "form-control", rows = "5", @readonly = "readonly" })
         </div>
     </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.msg_status, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.msg_status, new { htmlAttributes = new { @class = "form-control"} })
+
+
+
+    <!--下方按鈕-->
+    <div class="row text-center footer">
+        <div class="col-1">
+            <input type="submit" value="存檔" class="btn btn-primary" />
+        </div>
+        <div class="col-2">
+            @Html.ActionLink("返回列表", "Index", null, new { @class = "btn btn-primary" })
         </div>
     </div>
 
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Save" class="btn btn-default" />
-        </div>
-    </div>
+
 </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>

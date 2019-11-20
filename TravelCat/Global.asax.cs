@@ -14,7 +14,6 @@ namespace TravelCat
         {
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
-            GlobalConfiguration.Configuration.Formatters.XmlFormatter.SupportedMediaTypes.Clear();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
         }
     }

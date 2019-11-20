@@ -2,12 +2,11 @@
 @model TravelCat.ViewModels.WebIndexViewModel
 
 @{
-    ViewBag.Title = "Index";    
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/web-Layout.cshtml";
 }
 
-<h2>Index</h2>
 <div class="container">
-    <p>@User.Identity.GetUserName()/@Session["memberID"]，您好</p>
     @*<div class="row">
             <h2>活動</h2>
             <div class="co-4">@Model.activity[0].activity_title</div>
