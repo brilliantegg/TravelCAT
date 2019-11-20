@@ -3,54 +3,59 @@
 @{
     ViewBag.Title = "Edit";
 }
-
-<h2>Edit</h2>
+    <link href="~/Content/back-end-Create.css" rel="stylesheet" />
+<h2 class="ml-3 mt-3 text-danger text-center">會員管理</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     
-    <div class="form-horizontal">
-        <h4>member</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.member_id)
+<div class="form-horizontal">
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.member_account, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.member_account, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.member_account, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.member_id)
 
-        <input type="hidden" id="member_password" name="member_password" value="@Model.member_password"/>
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.member_password, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.member_password, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.member_password, "", new { @class = "text-danger" })
-            </div>
-        </div>*@
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.member_status, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.member_status)
-                    @Html.ValidationMessageFor(model => model.member_status, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
+    <!--帳號狀態-->
+    <div class="row">
+        <div class="co col-6">
+            @Html.LabelFor(model => model.member_status, htmlAttributes: new { @class = "txt" })
+            <span class="checkbox ml-3">
+                @Html.EditorFor(model => model.member_status)
+                @Html.ValidationMessageFor(model => model.member_status, "", new { @class = "text-danger" })
+            </span>
         </div>
     </div>
+
+
+    <!--會員編號-->
+    <div class="row">
+        <div class="co col-6">
+            @Html.LabelFor(model => model.member_id, "會員編號", htmlAttributes: new { @class = "txt" })
+            <input id="member_id" name="member_id" type="text" readonly="readonly" value="@Model.member_id" class="form-control" />
+        </div>
+    </div>
+
+    <!--帳號-->
+    <div class="row">
+        <div class="co col-6">
+            @Html.LabelFor(model => model.member_account, htmlAttributes: new { @class = "txt" })
+            <input id="member_account" name="member_account" type="text" readonly="readonly" value="@Model.member_account" class="form-control" />
+        </div>
+    </div>
+
+    <input type="hidden" id="member_password" name="member_password" value="@Model.member_password" />
+
+
+    <div class="row text-center footer">
+        <div class="col-1">
+            <input type="submit" value="存檔" class="btn btn-primary" />
+        </div>
+        <div class="col-2">
+            @Html.ActionLink("返回列表", "Index", null, new { @class = "btn btn-primary" })
+        </div>
+    </div>
+</div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+
