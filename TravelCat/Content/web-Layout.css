@@ -1,0 +1,177 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.header {
+    background-color: #FFF;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    -webkit-box-shadow: 0px 2px 2px #CCC;
+    box-shadow: 0px 2px 2px #CCC;
+}
+
+    .header .header-bar {
+        width: 960px;
+        margin: 0 auto;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        padding: .5rem 0;
+    }
+
+        .header .header-bar .logo {
+            font-size: 2rem;
+            text-decoration: none;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            color: #000;
+            font-weight: 700;
+        }
+
+            .header .header-bar .logo img {
+                margin-right: .5rem;
+            }
+
+    .header .search {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+    }
+
+        .header .search .search-txt {
+            border: 1px solid #CCC;
+            border-right: none;
+            font-size: 1rem;
+            padding: .25rem;
+            border-radius: 5px 0px 0px 5px;
+            outline: none;
+        }
+
+        .header .search .fas {
+            display: inline-block;
+            width: 34px;
+            height: 34px;
+            background-color: #FFF;
+            border: 1px solid #CCC;
+            border-radius: 0px 5px 5px 0px;
+            border-left: none;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+        }
+
+            .header .search .fas:hover {
+                background-color: #24E3AF;
+                color: #FFF;
+                cursor: pointer;
+            }
+
+        .header .search .memberId {
+            margin-left: 1.5rem;
+            text-decoration: none;
+            color: #000;
+            font-weight: 700;
+        }
+
+            .header .search .memberId:hover {
+                color: #24E3AF;
+            }
+
+.top-bar {
+    margin-top: 66px;
+}
+
+    .top-bar .pic {
+        margin: 0 auto;
+        width: 100%;
+        height: 350px;
+        overflow: hidden;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+    }
+
+    .top-bar .body-menu {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        margin: 0px 30%;
+        border: 1px solid #CCC;
+        border-right: none;
+        position: relative;
+        top: -2rem;
+    }
+
+        .top-bar .body-menu li {
+            background-color: #fff;
+            width: 25%;
+            border-right: 1px solid #CCC;
+        }
+
+            .top-bar .body-menu li a {
+                text-decoration: none;
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                -webkit-box-pack: center;
+                -ms-flex-pack: center;
+                justify-content: center;
+                padding: 1.5rem 0;
+                text-align: center;
+                font-size: 1.25rem;
+                color: #16ac84;
+            }
+
+                .top-bar .body-menu li a:hover {
+                    color: #128566;
+                }
+
+.footer {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    margin-top: 8rem;
+    width: 100%;
+    height: 200px;
+    background-color: #24E3AF;
+    color: #000;
+    font-weight: 900;
+}
