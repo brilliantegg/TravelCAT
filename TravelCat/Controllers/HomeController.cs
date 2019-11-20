@@ -19,8 +19,17 @@ namespace TravelCat.Controllers
 
 
         // GET: Home
+        [AllowAnonymous]
         public ActionResult Index(string account)
         {
+            //抓會員帳號
+            if (Request.IsAuthenticated)
+            {
+                string user = User.Identity.GetUserName();
+                var member = db.member.Where(m => m.member_account == user).FirstOrDefault();
+                Session["memberID"] = member.member_id.ToString();
+            }
+
             WebIndexViewModel model = new WebIndexViewModel()
             {
                 activity = db.activity.OrderBy(m => Guid.NewGuid()).ToList(),
@@ -62,13 +71,11 @@ namespace TravelCat.Controllers
 
             if (new UserManager().IsValid(username, password))
             {
-
                 var ident = new ClaimsIdentity(
                   new[] { 
               // adding following 2 claim just for supporting default antiforgery provider
               new Claim(ClaimTypes.NameIdentifier, username),
               new Claim("http://schemas.microsoft.com/accesscontrolservice/2010/07/claims/identityprovider", "ASP.NET Identity", "http://www.w3.org/2001/XMLSchema#string"),
-
               new Claim(ClaimTypes.Name,username),
 
               //// optionally you could add roles if any
@@ -76,17 +83,20 @@ namespace TravelCat.Controllers
               //new Claim(ClaimTypes.Role, "BlockedUser"),
 
                   },
-                  DefaultAuthenticationTypes.ApplicationCookie);
+                  DefaultAuthenticationTypes.ApplicationCookie);                               
 
                 HttpContext.GetOwinContext().Authentication.SignIn(
                    new AuthenticationProperties { IsPersistent = false }, ident);
-                return RedirectToAction("test"); // auth succeed 
+
+
+                return RedirectToAction("Index"); // auth succeed 
             }
+
             // invalid username or password
             ModelState.AddModelError("", "invalid username or password");
             return View();
         }
-        public ActionResult LogOut() 
+        public ActionResult LogOut()
         {
             var ctx = Request.GetOwinContext();
             var authManager = ctx.Authentication;
@@ -95,15 +105,15 @@ namespace TravelCat.Controllers
             authManager.SignOut("ApplicationCookie");
             return RedirectToAction("Index", "Home");
         }
-        [Authorize]
-        public ActionResult test()
-        {
-            string user = User.Identity.GetUserName();
-            var member = db.member.Where(m => m.member_account == user).FirstOrDefault();
-            Session["memberID"] = member.member_id.ToString();
-            ViewBag.Data = DateTime.Now.ToString();
-            return View();
-        }
+        //[Authorize]
+        //public ActionResult test()
+        //{
+        //    string user = User.Identity.GetUserName();
+        //    var member = db.member.Where(m => m.member_account == user).FirstOrDefault();
+        //    Session["memberID"] = member.member_id.ToString();
+        //    ViewBag.Data = DateTime.Now.ToString();
+        //    return View();
+        //}
 
 
 
