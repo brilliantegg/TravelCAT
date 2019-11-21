@@ -10,6 +10,7 @@
     top: 0;
     left: 0;
     right: 0;
+    z-index: 100;
 }
 
     .header .header-bar {
@@ -52,7 +53,7 @@
     }
 
         .header .memberId:hover {
-            color: #24E3AF;
+            color: #128566;
         }
 
 
@@ -66,6 +67,7 @@
     top: 0px;
     left: 0;
     right: 0;
+    z-index: 100;
 }
 
     .top-bar .body-menu {
