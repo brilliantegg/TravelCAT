@@ -24,7 +24,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <TypeScriptToolsVersion>3.6</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
     <WebGreaseLibPath>..\packages\WebGrease.1.5.2\lib</WebGreaseLibPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -35,6 +35,19 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <TypeScriptTarget>ES3</TypeScriptTarget>
+    <TypeScriptJSXEmit>React</TypeScriptJSXEmit>
+    <TypeScriptModuleKind>AMD</TypeScriptModuleKind>
+    <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
+    <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
+    <TypeScriptRemoveComments>False</TypeScriptRemoveComments>
+    <TypeScriptOutFile />
+    <TypeScriptOutDir />
+    <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
+    <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
+    <TypeScriptSourceMap>True</TypeScriptSourceMap>
+    <TypeScriptMapRoot />
+    <TypeScriptSourceRoot />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -169,7 +182,6 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -222,6 +234,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\destinations.css" />
     <Content Include="Content\fontawesome-free-5.11.2-web\css\all.css" />
     <Content Include="Content\fontawesome-free-5.11.2-web\css\all.min.css" />
     <Content Include="Content\fontawesome-free-5.11.2-web\css\brands.css" />
@@ -1806,9 +1819,11 @@
     <Content Include="Content\fontawesome-free-5.11.2-web\webfonts\fa-solid-900.svg" />
     <Content Include="Content\Layout-pages.css" />
     <Content Include="Content\Login-index.css" />
+    <Content Include="Content\MemberIndex.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\back-end-index.css" />
+    <Content Include="Content\web-Layout.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -1821,8 +1836,30 @@
     <Content Include="images\1810043.jpg" />
     <Content Include="images\bmo-02.jpg" />
     <Content Include="images\cat-face-with-wry-smile_1f63c.png" />
+    <Content Include="images\comment\0_20191113下午102604.jpg" />
+    <Content Include="images\comment\0_20191113下午102911.jpg" />
+    <Content Include="images\comment\0_20191113下午103953.jpg" />
+    <Content Include="images\comment\0_20191115下午043738.jpg" />
+    <Content Include="images\comment\2.jpg" />
+    <Content Include="images\comment\bey.jpg" />
+    <Content Include="images\comment\Block_of_Diamond - 複製.png" />
+    <Content Include="images\comment\Block_of_Diamond.png" />
+    <Content Include="images\comment\deer.jpg" />
+    <Content Include="images\comment\Koala.jpg" />
+    <Content Include="images\comment\Mount Rainier.jpg" />
+    <Content Include="images\comment\pEEWeul.jpg" />
+    <Content Include="images\emoji\ellipsis.svg" />
+    <Content Include="images\emoji\emoji-one-bookmark-040f92162fa88c379d9d4e04bc5c192b1eb0b080d109dfaf3c9b1a60a1aeef0a.png" />
+    <Content Include="images\emoji\good.svg" />
+    <Content Include="images\emoji\share.svg" />
+    <Content Include="images\emoji\talk.svg" />
+    <Content Include="images\emoji\unicorn.svg" />
+    <Content Include="images\favicon-20191112111833525.ico" />
     <Content Include="images\hotel\bmo_png_159083.png" />
     <Content Include="images\hotel\CJXH_Japan_Nachi_Nachi-Falls_189118511.jpg" />
+    <Content Include="images\member\M000003_20191120下午043719.jpg" />
+    <Content Include="images\member\M000008_20191113下午033725.png.png" />
+    <Content Include="images\member\M000011_20191115下午020605.jpg.jpg" />
     <Content Include="LoginAdmin.html" />
     <Content Include="Models\TravelCat.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -1953,6 +1990,10 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ActivitiesController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\api_collections_detailController.cs" />
+    <Compile Include="Controllers\api_comment_emoji_detailsController.cs" />
+    <Compile Include="Controllers\api_issuesController.cs" />
+    <Compile Include="Controllers\api_messagesController.cs" />
     <Compile Include="Controllers\badgesController.cs" />
     <Compile Include="Controllers\commentsController.cs" />
     <Compile Include="Controllers\destinationsController.cs" />
@@ -1968,6 +2009,8 @@
     <Compile Include="Controllers\RestaurantsController.cs" />
     <Compile Include="Controllers\SpotsController.cs" />
     <Compile Include="Controllers\web_activitiesController.cs" />
+    <Compile Include="Controllers\web_commentsController.cs" />
+    <Compile Include="Controllers\web_Member_IndexController.cs" />
     <Compile Include="email\email.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -2050,8 +2093,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TravelCat.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\TravelCat1.cs" />
+    <Compile Include="Models\travelPartner.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\destinationsViewModel.cs" />
+    <Compile Include="ViewModels\MemberIndexViewModels.cs" />
     <Compile Include="ViewModels\MemberViewModels.cs" />
     <Compile Include="ViewModels\SpotPhotoViewModel.cs" />
     <Compile Include="ViewModels\RestaurantPhotoViewModel.cs" />
@@ -2123,6 +2169,18 @@
     <Content Include="Views\Register\Index.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\test.cshtml" />
+    <Content Include="Views\web_Member_Index\Index.cshtml" />
+    <None Include="packages.config" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.4.1.min.map" />
+    <Content Include="Scripts\umd\popper.min.js.map" />
+    <Content Include="Scripts\umd\popper.js.map" />
+    <Content Include="Scripts\umd\popper-utils.min.js.map" />
+    <Content Include="Scripts\umd\popper-utils.js.map" />
+    <Content Include="Scripts\popper.min.js.map" />
+    <Content Include="Scripts\popper.js.map" />
+    <Content Include="Scripts\popper-utils.min.js.map" />
+    <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Shared\web-Layout.cshtml" />
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
@@ -2146,7 +2204,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="images\activity\" />
     <Folder Include="images\badges\" />
-    <Folder Include="images\member\" />
     <Folder Include="images\restaurant\" />
     <Folder Include="images\spot\" />
     <Folder Include="Views\Default\" />

@@ -1,14 +1,12 @@
 ﻿@model TravelCat.Models.member
-
 @{
-    ViewBag.Title = "會員註冊";
+    ViewBag.Title = "EditMemberProfile";
     Layout = "~/Views/Shared/web-Layout.cshtml";
 }
 
-<h2>會員註冊</h2>
+<h2>EditMemberProfile</h2>
 
-
-@using (Html.BeginForm("Index", "Register", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("EditMemberProfile", "web_Member_Index", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
@@ -106,7 +104,6 @@
             @Html.LabelFor(model => model.member_profile.profile_photo, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <input name="photo" id="photo" type="file" class="form-control" />
-                <img src="~/images/member/@Model.member_profile.profile_photo" class="member_avatar align-self-start my-3 mx-3 img-circle：border-radius:100%  rounded-circle" alt="@Model.member_profile.profile_photo">
                 @Html.ValidationMessageFor(model => model.member_profile.profile_photo, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -115,38 +112,8 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="送出" class="btn btn-primary" data-toggle="modal" data-target="#mymodal" />
+                <input type="submit" value="Create" class="btn btn-default" />
             </div>
         </div>
-
-        @*<div class="modal fade" id="mymodal">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">註冊完成</h4>
-                        <button type="button" class="close" data-dismiss="modal">
-                            <span>&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <p>請至信箱收取驗證信</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" data-dismiss="modal" class="btn btn-danger">關閉</button>
-                    </div>
-                </div>
-            </div>
-        </div>*@
-
     </div>
 }
-
-
-
-<div>
-    @Html.ActionLink("回首頁", "Index")
-</div>
-
-<script src="~/Scripts/jquery-3.4.1.min.js"></script>
-<script src="~/Scripts/jquery.validate.min.js"></script>
-<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

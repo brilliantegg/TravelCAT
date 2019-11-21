@@ -42,7 +42,7 @@ namespace TravelCat.Controllers
         // 詳細資訊，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "comment_id,tourism_id,comment_title,comment_content,comment_date,comment_photo,comment_stay_total,travel_partner,comment_rating,travel_month,comment_status,member_id")] comment comment)
+        public ActionResult Edit( comment comment)
         {
             if (ModelState.IsValid)
             {
