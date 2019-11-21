@@ -3,10 +3,11 @@
 
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/web-Layout.cshtml";
+    Layout = "~/Views/Shared/web-Layout.cshtml";    
 }
 
 <div class="container">
+    <p>@Session["memberID"]/您好</p>
     @*<div class="row">
             <h2>活動</h2>
             <div class="co-4">@Model.activity[0].activity_title</div>
