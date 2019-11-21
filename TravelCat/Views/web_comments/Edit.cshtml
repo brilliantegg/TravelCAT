@@ -2,10 +2,10 @@
 
 @{
     ViewBag.Title = "Edit";
-    Layout = "~/Views/Shared/_Layout 1.cshtml";
+    Layout = "~/Views/Shared/web-Layout.cshtml";
 }
 
-<h2>Edit</h2>
+<h2>編輯評論</h2>
 
 
 
@@ -42,9 +42,8 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.comment_date, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.comment_date, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.HiddenFor(model => model.comment_date, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.comment_date, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -94,10 +93,9 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.comment_status, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <div class="checkbox">
-                    @Html.EditorFor(model => model.comment_status)
+                    @Html.HiddenFor(model => model.comment_status)
                     @Html.ValidationMessageFor(model => model.comment_status, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -112,25 +110,14 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Save" class="btn btn-outline-dark" />
             </div>
         </div>
     </div>
-    }
+    
     </form>
-        <div>
-            @Html.ActionLink("Back to List", "Index")
-        </div>
+
 
         <script src="~/Scripts/jquery-3.3.1.min.js"></script>
         <script src="~/Scripts/jquery.validate.min.js"></script>
         <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
-
-
-        <script>
-            // Add the following code if you want the name of the file appear on select
-            $(".custom-file-input").on("change", function () {
-                var fileName = $(this).val().split("\\").pop();
-                $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-            });
-        </script>

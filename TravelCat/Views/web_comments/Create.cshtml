@@ -2,12 +2,12 @@
 @using Microsoft.AspNet.Identity
 @{
     ViewBag.Title = "Create";
-    Layout = "~/Views/Shared/_Layout 1.cshtml";
+    Layout = "~/Views/Shared/web-Layout.cshtml";
 
 }
 
 
-<h2>新增評論, @User.Identity.GetUserName() ,@Session["memberID"]</h2>
+<h2>新增評論</h2>
 
 
 
@@ -62,13 +62,13 @@
             @Html.LabelFor(model => model.travel_partner, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                    <label class="btn btn-primary travel_partner active">
+                    <label class="btn btn-info travel_partner active">
                         <input type="radio" name="travel_partner" id="option1" autocomplete="off" checked value="蜜月"> 蜜月
                     </label>
                     <label class="btn btn-warning travel_partner">
                         <input type="radio" name="travel_partner" id="option2" autocomplete="off" value="伴侶"> 伴侶
                     </label>
-                    <label class="btn btn-secondary travel_partner">
+                    <label class="btn btn-info travel_partner">
                         <input type="radio" name="travel_partner" id="option3" autocomplete="off" value="家庭"> 家庭
                     </label>
                     <label class="btn btn-warning travel_partner">
@@ -98,10 +98,10 @@
             @Html.ValidationMessageFor(model => model.comment_rating, "", new { @class = "text-danger" })
         </div>
 
-        <div class="ratings">
+        @*<div class="ratings">
             <div class="empty-stars">★★★★★</div>
             <div class="full-stars" style="width:100%">★★★★★</div>
-        </div>
+        </div>*@
     </div>
 
     <div class="form-group">
@@ -141,15 +141,13 @@
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-default" />
+            <input type="submit" value="Create" class="btn btn-outline-dark" />
         </div>
     </div>
 
 </form>
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+
 
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>

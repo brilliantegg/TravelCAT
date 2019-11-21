@@ -3,6 +3,9 @@
     padding: 0;
     list-style: none;
 }
+body {
+    margin-top: 100px
+}
 /*表頭*/
 .header {
     background-color: #e4e5e6;

@@ -43,22 +43,25 @@
         </div>
     </header>
 
-    <!--加入收藏-->
+    <!--景點資料-->
     <section class="bg-white py-5  text-center">
         <div class="container col-md-10 ">
+            <!--加入收藏-->
             <form method="post">
                 <input id="Hidden1" type="hidden" value="" />
                 <input type="submit" name="add_to_bucket_list" class="add_to_bucket_list" value="加入收藏" />
             </form>
-
             <h2>
                 @Html.DisplayNameFor(model => model.activity.activity_intro)
             </h2>
-            <span>
+            <p class="intro">
                 @Html.DisplayFor(model => model.activity.activity_intro)
-            </span>
+            </p>
+            <i class="fas fa-angle-double-down readmore"></i>
         </div>
     </section>
+
+
     <section class="bg-white py-4 ">
         <div class="container  col-md-10">
             <div class="row">
@@ -69,9 +72,18 @@
                                 <h4>
                                     @Html.DisplayNameFor(model => model.activity.activity_tel)
                                 </h4>
-                                <span>
-                                    @Html.DisplayFor(model => model.activity.activity_tel)
-                                </span>
+                                
+                                    @if (@Html.DisplayFor(model => model.activity.activity_tel) == null)
+                                    {
+                                        <span>無</span>
+                                    }
+                                    else
+                                    {
+                                    <span>
+                                        @Html.DisplayFor(model => model.activity.activity_tel)
+                                    </span>
+                                    }
+                                                               
                             </li>
                             <li>
                                 <h4>
@@ -138,7 +150,7 @@
     </section>
 
     @*googlemap*@
-    <section class="container-fluid py-5 bg-light text-white mapbg" style="position:relative ;">
+    <section class="container-fluid py-5 bg-light mapbg" style="position:relative ;">
         <div class="row">
             <div class="col-md-6 bg-cover" style="position:absolute;top:0px;bottom:0px" id="map"></div>
             <div class="container">
@@ -260,7 +272,7 @@
                 <input id="comment_id" type="hidden" value=@item.comment_id />
 
                 <div class="media mt-3">
-                    <img src="https://randomuser.me/api/portraits/women/82.jpg" width="74" height="74" class="mr-3 ml-3 member_avatar" alt="...">
+                    <img src="~/images/member/@item.member.member_profile.profile_photo" width="74" height="74" class="mr-3 ml-3 member_avatar" alt="...">
                     <div class="media-body col-12">
                         <h5 class="mt-0 ">@item.member.member_profile.nickname</h5>
                         <h5 class="mt-0 ">@item.member.member_profile.city</h5>
@@ -277,7 +289,7 @@
                         <div class="text-right">
                             @Html.ActionLink("編輯", "Edit", "web_comments", new { id = @item.comment_id }, null)
                             @*@Html.ActionLink("刪除", "Delete", "web_comments", new { id = @item.comment_id }, null)*@
-                            @Html.ActionLink("刪除", "Delete", "web_comments", new { id = @item.comment_id }, new { @class = "btn btn-danger", onclick = "return confirm('確定不後悔?')" })
+                            @Html.ActionLink("刪除", "Delete", "web_comments", new { id = @item.comment_id }, new { @class = "", onclick = "return confirm('此功能尚未完成!!!')" })
                         </div>
                         <hr />
                         <div class="d-flex btn-group btn-group-toggle mb-3 mt-3  " data-toggle="buttons">
@@ -339,18 +351,11 @@
             <div class="message_list card ">
 
 
-                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                    顯示留言<span class="badge badge-light">4</span>
-                </button>
-
-                <div class="collapse" id="collapseExample">
-
-
                     @foreach (var msgItem in item.message)
                     {
                         <div id="box1" class=" single_message py-3">
                             <div class="media mt-3">
-                                <img src="https://randomuser.me/api/portraits/lego/1.jpg" width="74" height="74" class="mr-3 ml-3" alt="...">
+                                <img src="~/images/member/@msgItem.member.member_profile.profile_photo" width="74" height="74" class="mr-3 ml-3 member_avatar" alt="...">
                                 <div class="media-body">
                                     <h5 class="mt-0">
                                         @msgItem.member_id
@@ -363,14 +368,14 @@
                                     </div>
                                     <hr />
                                     <div class="emoji">
-                                        <img id="icon msg_emoji_heart" src="~/images/emoji/talk.svg" />
+                                        <img class="icon msg_emoji_heart" src="~/images/emoji/talk.png" />
                                         <span class="msg_emoji_heart">@msgItem.message_emoji_details.Where(m => m.emoji_id == 1).Count() </span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     }
-                </div>
+
                 <div class="add_message single_message">
                     <form action="/web_activities/createMessage" method="post">
                         @Html.AntiForgeryToken()
@@ -423,6 +428,11 @@
 @section scripts {
 
     <script>
+        //顯示文章
+        $(".readMore").click(function () {
+            $(".intro").addClass('showMore');
+        })
+        
 
         $(".comment_emoji_detail").click(function (e) {
             let value = parseInt(e.target.getAttribute('data-value'))
