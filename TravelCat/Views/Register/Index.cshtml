@@ -108,19 +108,41 @@
                 @Html.ValidationMessageFor(model => model.member_profile.profile_photo, "", new { @class = "text-danger" })
             </div>
         </div>
-        @Html.HiddenFor(model=>model.member_profile.member_id)
-        @Html.HiddenFor(model=>model.member_profile.member_score)
+        @Html.HiddenFor(model => model.member_profile.member_id)
+        @Html.HiddenFor(model => model.member_profile.member_score)
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="送出" class="btn btn-primary" data-toggle="modal" data-target="#mymodal" />
             </div>
         </div>
+
+        @*<div class="modal fade" id="mymodal">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">註冊完成</h4>
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span>&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>請至信箱收取驗證信</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" data-dismiss="modal" class="btn btn-danger">關閉</button>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+
     </div>
 }
 
+
+
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("回首頁", "Index")
 </div>
 
 <script src="~/Scripts/jquery-3.4.1.min.js"></script>
