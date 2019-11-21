@@ -9,6 +9,6 @@ namespace TravelCat.ViewModels
     public class MemberViewModels
     {
         public member member { get; set; }
-        public member_profile profile { get; set; }
+        public member_profile member_profile { get; set; }
     }
 }

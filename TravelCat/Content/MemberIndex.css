@@ -1,4 +1,5 @@
 ﻿body {
+    font-family:'Microsoft JhengHei';
 }
 .breadcrumb {
     background: none;
@@ -19,4 +20,14 @@
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
     background-color: darkturquoise;
+}
+
+.member_avatar{
+    width:150px;
+    height:150px;
+}
+
+.user_profile_header{
+    border:1px solid navy;
+
 }
