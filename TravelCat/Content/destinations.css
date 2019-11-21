@@ -57,9 +57,10 @@ html, body {
     height: 400px;
 }
 .icon {
-    height: 26px;
-    width: 26px;
+    height: 30px;
+    width: 30px;
     border-radius: 50px;
+    padding:5px
 }
 .add_message {
     padding: 10px;

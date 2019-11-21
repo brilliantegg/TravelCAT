@@ -1,11 +1,13 @@
 ﻿@model TravelCat.Models.comment
-
+@using Microsoft.AspNet.Identity
 @{
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/_Layout 1.cshtml";
+
 }
 
-<h2>新增評論</h2>
+
+<h2>新增評論, @User.Identity.GetUserName() ,@Session["memberID"]</h2>
 
 
 
@@ -36,7 +38,7 @@
             </div>
         </div>
         <!--發表時間 進入表單的時間 並非送出表單的時間-->
-        <input type="hidden" id="comment_date" name="comment_date" value="@ViewBag.getTime" />
+        <input type="hidden" id="comment_date" name="comment_date" value="@DateTime.Now.ToString("yyyy/MM/dd")" />
 
         <!--上傳圖片-->
         <div class="form-group">
@@ -134,7 +136,7 @@
     <input type="hidden" id="comment_status" name="comment_status" value="true" />
 
     <!--會員ID-->
-    <input type="hidden" id="member_id" name="member_id" value="M000004" />
+    <input type="hidden" id="member_id" name="member_id" value="@Session["memberID"]" />
 
 
     <div class="form-group">

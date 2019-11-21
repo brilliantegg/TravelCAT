@@ -8,10 +8,10 @@
 <h2>Edit</h2>
 
 
-@using (Html.BeginForm())
-{
+
+<form action="/web_comments/Edit" method="post" enctype="multipart/form-data">
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
 
         <hr />
@@ -19,9 +19,8 @@
         @Html.HiddenFor(model => model.comment_id)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.tourism_id, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.tourism_id, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.HiddenFor(model => model.tourism_id, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.tourism_id, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -53,7 +52,11 @@
         <div class="form-group">
             @Html.LabelFor(model => model.comment_photo, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.comment_photo, new { htmlAttributes = new { @class = "form-control" } })
+                <img src="~/images/comment/@Model.comment_photo" width="500" />
+
+                <input type="file" id="input" name="comment_photo">
+
+
                 @Html.ValidationMessageFor(model => model.comment_photo, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -101,9 +104,8 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.member_id, "member_id", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.member_id)
+                @Html.HiddenFor(model => model.member_id)
                 @Html.ValidationMessageFor(model => model.member_id, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -114,12 +116,21 @@
             </div>
         </div>
     </div>
-}
+    }
+    </form>
+        <div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+        <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+        <script src="~/Scripts/jquery.validate.min.js"></script>
+        <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 
-<script src="~/Scripts/jquery-3.3.1.min.js"></script>
-<script src="~/Scripts/jquery.validate.min.js"></script>
-<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+        <script>
+            // Add the following code if you want the name of the file appear on select
+            $(".custom-file-input").on("change", function () {
+                var fileName = $(this).val().split("\\").pop();
+                $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+            });
+        </script>
