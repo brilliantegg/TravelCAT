@@ -42,7 +42,7 @@ namespace TravelCat.Controllers
         public ActionResult Create(string tourismID )
         {
             ViewBag.tourismID = tourismID;
-            ViewBag.getTime = DateTime.Now.ToString("yyyy/MM/dd");
+            
 
             return View();
         }
@@ -99,15 +99,32 @@ namespace TravelCat.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(comment comment)
+        public ActionResult Edit(comment comment, HttpPostedFileBase comment_photo)
         {
+           String id = comment.tourism_id;
+            //處理圖檔上傳
+            string fileName = "";
+            string rename_filename = "";
+            if (comment_photo != null)
+            {
+                if (comment_photo.ContentLength > 0)
+                {
+
+                    fileName = System.IO.Path.GetFileName(comment_photo.FileName);      //取得檔案的檔名(主檔名+副檔名)
+                    rename_filename = comment.comment_id + "_" + DateTime.Now.ToString().Replace("/", "").Replace(":", "").Replace(" ", "") + Path.GetExtension(fileName);
+                    comment_photo.SaveAs(Server.MapPath("~/images/comment/" + rename_filename));      //將檔案存到該資料夾
+                    
+                }
+            }
+            //end                      
             if (ModelState.IsValid)
             {
+                comment.comment_photo = rename_filename;
                 db.Entry(comment).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "web_activities",new { id= id });                
             }
-            ViewBag.member_id = new SelectList(db.member, "member_id", "member_account", comment.member_id);
+            
             return View(comment);
         }
 
@@ -119,23 +136,20 @@ namespace TravelCat.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             comment comment = db.comment.Find(id);
+            comment_emoji_details emoji = db.comment_emoji_details.Find(id);
             if (comment == null)
             {
                 return HttpNotFound();
             }
-            return View(comment);
-        }
-
-        // POST: web_comments/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(long id)
-        {
-            comment comment = db.comment.Find(id);
+            db.comment_emoji_details.Remove(emoji);
             db.comment.Remove(comment);
+
             db.SaveChanges();
             return RedirectToRoute(new { controller = "web_activities", action = "Details", id = comment.tourism_id });
+
         }
+
+
 
         protected override void Dispose(bool disposing)
         {
