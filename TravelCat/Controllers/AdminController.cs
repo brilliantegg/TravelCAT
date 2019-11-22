@@ -1,14 +1,11 @@
-﻿using Microsoft.AspNet.Identity;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using System.Windows.Forms;
 using TravelCat.Models;
 
 namespace TravelCat.Controllers
@@ -60,23 +57,23 @@ namespace TravelCat.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "admin_id,admin_account,admin_password,admin_email,emailConfirmed")] admin admin)
         {
-            var callbackUrl = Url.Action("Confirm", "Admin", new { account = admin.admin_account }, protocol: Request.Url.Scheme);
+
             if (ModelState.IsValid)
-            {                
+            {
                 byte[] password = System.Text.Encoding.UTF8.GetBytes(admin.admin_password);
                 byte[] hash = new System.Security.Cryptography.SHA256Managed().ComputeHash(password);
                 string hashpassword = Convert.ToBase64String(hash);
                 admin.admin_password = hashpassword;
 
-                admin.emailConfirmed = false;
+
 
                 GmailSender gs = new GmailSender();
                 gs.account = "travelcat.service@gmail.com";
                 gs.password = "lqleyzcbmrmttloe";
-                gs.sender = "旅途貓 <travelcat.service@gmail.com>";             
+                gs.sender = "旅途貓 <travelcat.service@gmail.com>";
                 gs.receiver = $"{admin.admin_email}";
                 gs.subject = "旅途貓驗證";
-                gs.messageBody = "恭喜註冊成功，請點此連結"+callbackUrl;
+                gs.messageBody = "恭喜註冊成功";
                 gs.IsHtml = false;
                 gs.Send();
 
@@ -87,29 +84,6 @@ namespace TravelCat.Controllers
 
             return View(admin);
         }
-
-        public ActionResult Confirm(string account)
-        {
-            var check = db.admin.Where(m => m.admin_account == account).FirstOrDefault();
-            if (check != null)
-            {
-                DialogResult ans = MessageBox.Show("註冊已完成", "信箱已確認", MessageBoxButtons.OK, MessageBoxIcon.Question);
-                if (ans == DialogResult.OK)
-                {
-                    check.emailConfirmed = true;
-                    db.SaveChanges();
-                    return RedirectToAction("Index", "Admin");
-                }
-                return View("重新整理");
-            }
-            else
-            {
-                DialogResult ans = MessageBox.Show("請先註冊會員!", "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Question);
-                return RedirectToAction("Create", "Admin");
-            }
-
-        }
-
 
         // GET: Admin/Edit/5
 
@@ -142,14 +116,13 @@ namespace TravelCat.Controllers
                 admin.admin_password = hashpassword;
 
 
-
                 GmailSender gs = new GmailSender();
                 gs.account = "travelcat.service@gmail.com";
                 gs.password = "lqleyzcbmrmttloe";
                 gs.sender = "旅途貓 <travelcat.service@gmail.com>";
                 gs.receiver = $"{admin.admin_email}";
                 gs.subject = "旅途貓驗證";
-                gs.messageBody = "恭喜驗證成功";
+                gs.messageBody = "恭喜註冊成功";
                 gs.IsHtml = false;
                 gs.Send();
 

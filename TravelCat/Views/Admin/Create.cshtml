@@ -1,6 +1,17 @@
 ﻿@model TravelCat.Models.admin
 
-
+@{
+    ViewBag.Title = "Create";
+    var account = "";
+    if(Session["id"] == null || string.IsNullOrWhiteSpace(Session["id"].ToString()))
+    {
+        Response.Redirect("~/Loginadmin/Index");
+    }
+    else
+    {
+        account = Session["id"].ToString();
+    }
+}
 
 <h2>新增管理員</h2>
 
@@ -35,7 +46,6 @@
             </div>
         </div>
 
-        @*@Html.HiddenFor(model=>model.emailConfirmed)*@
         @*<div class="form-group">
                 @Html.LabelFor(model => model.emailConfirmed, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -58,6 +68,6 @@
     @Html.ActionLink("返回", "Index")
 </div>
 
-<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

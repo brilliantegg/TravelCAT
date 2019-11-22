@@ -2,507 +2,199 @@
 @model TravelCat.ViewModels.destinationsViewModel
 @{
     ViewBag.Title = "Details";
-    Layout = "~/Views/Shared/web-Layout.cshtml";
-
+    Layout = "~/Views/Shared/_Layout 1.cshtml";
 }
 
-
 <div class=" justify-content-center align-items-center">
-    <header>
-        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-            <ol class="carousel-indicators">
-                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-            </ol>
-            <div class="carousel-inner">
-                <div class="carousel-item header-carousel-item bg-cover active " style="background-image:url( https://www.blacktomato.com/wp-content/uploads/2016/02/Amalfi-coast_Shutterstock-9.jpg)">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5>@Model.activity.activity_title</h5>
-                    </div>
-                </div>
-                <div class="carousel-item header-carousel-item bg-cover " style="background-image:url(https://www.blacktomato.com/wp-content/uploads/2016/02/Positano-italy.jpg)">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5>@Model.activity.activity_title</h5>
-                    </div>
-                </div>
-                <div class="carousel-item header-carousel-item bg-cover " style="background-image:url(https://www.blacktomato.com/wp-content/uploads/2016/02/Amazing-Amalfi-coast.jpg)">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5>@Model.activity.activity_title</h5>
-                    </div>
-                </div>
-            </div>
-            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
-        </div>
-    </header>
-
-    <!--景點資料-->
-    <section class="bg-white py-5  text-center">
-        <div class="container col-md-10 ">
-            <!--加入收藏-->
-            <form method="post">
-                <input id="Hidden1" type="hidden" value="" />
-                <input type="submit" name="add_to_bucket_list" class="add_to_bucket_list" value="加入收藏" />
-            </form>
-            <h2>
-                @Html.DisplayNameFor(model => model.activity.activity_intro)
-            </h2>
-            <p class="intro">
-                @Html.DisplayFor(model => model.activity.activity_intro)
-            </p>
-            <i class="fas fa-angle-double-down readmore"></i>
-        </div>
-    </section>
 
 
-    <section class="bg-white py-4 ">
-        <div class="container  col-md-10">
-            <div class="row">
-                <div class="col-md-4 ">
-                    <div class="ROW">
-                        <ul>
-                            <li>
-                                <h4>
-                                    @Html.DisplayNameFor(model => model.activity.activity_tel)
-                                </h4>
-                                
-                                    @if (@Html.DisplayFor(model => model.activity.activity_tel) == null)
-                                    {
-                                        <span>無</span>
-                                    }
-                                    else
-                                    {
-                                    <span>
-                                        @Html.DisplayFor(model => model.activity.activity_tel)
-                                    </span>
-                                    }
-                                                               
-                            </li>
-                            <li>
-                                <h4>
-                                    @Html.DisplayNameFor(model => model.activity.address_detail)
-                                </h4>
-                                <span>
-                                    @Html.DisplayFor(model => model.activity.city)
-                                </span>
-                            </li>
-                            <li>
-                                <h4>
-                                    @Html.DisplayFor(model => model.activity.district)
-                                </h4>
-                                <span>
-                                    @Html.DisplayFor(model => model.activity.address_detail)
-                                </span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-4 ">
-                    <ul>
-                        <li>
-                            <h4>
-                                @Html.DisplayNameFor(model => model.activity.begin_date)
-                            </h4>
-                            <span>
-                                @Html.DisplayFor(model => model.activity.begin_date)
-                            </span>
-                        </li>
-                        <li>
-                            <h4>
-                                @Html.DisplayNameFor(model => model.activity.end_date)
-                            </h4>
-                            <span>
-                                @Html.DisplayFor(model => model.activity.end_date)
-                            </span>
+    <h2 class="text-center">@Html.DisplayFor(model => model.activity.activity_title)</h2>
+    <form method="post">
+        <input type="submit" name="add_to_bucket_list" class="add_to_bucket_list" value="add_to_bucket_list" />
+    </form>
 
-                        </li>
-                        <li>
-                            <h4>
-                                @Html.DisplayNameFor(model => model.activity.organizer)
-                            </h4>
-                            <span>
-                                @Html.DisplayFor(model => model.activity.organizer)
-                            </span>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-md-4 ">
-                    <ul>
-                        <li>
-                            <h4>
-                                @Html.DisplayNameFor(model => model.activity.website)
-                            </h4>
-                            <span>
-                                @Html.DisplayFor(model => model.activity.website)
-                            </span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
+    <div class="w3-content w3-display-container">
 
-    @*googlemap*@
-    <section class="container-fluid py-5 bg-light mapbg" style="position:relative ;">
-        <div class="row">
-            <div class="col-md-6 bg-cover" style="position:absolute;top:0px;bottom:0px" id="map"></div>
-            <div class="container">
-                <div class="row  justify-content-end text-md-dark">
-                    <div class="col-md-6 text-center" style="height:auto">
-                        <h2>
-                            @Html.DisplayNameFor(model => model.activity.transport_info)
-                        </h2>
-                        <span>
-                            @Html.DisplayFor(model => model.activity.transport_info)
-                        </span>
-                        <br />
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-
-    <!--篩選評論-->
-    <section>
-        <div class="">
-
-            <div class="filter_comment row ">
-
-                <div class="col-4">
-                    <h4>旅客評等</h4><br />
-                    <input id="Checkbox1" type="checkbox" />很棒 <br />
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <input id="Checkbox1" type="checkbox" />非常好 <br />
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <input id="Checkbox1" type="checkbox" />一般 <br />
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <input id="Checkbox1" type="checkbox" />差 <br />
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <input id="Checkbox1" type="checkbox" />糟透了<br />
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                </div>
-                <div class="col-4">
-                    <h4>旅客類型</h4><br />
-                    <input id="Checkbox1" type="checkbox" />家庭出遊 <br />
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <input id="Checkbox1" type="checkbox" />伴侶旅行 <br />
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <input id="Checkbox1" type="checkbox" />單獨旅行<br />
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <input id="Checkbox1" type="checkbox" />商務<br />
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <input id="Checkbox1" type="checkbox" />好友旅行<br />
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                </div>
-                <div class="col-4">
-                    <h4>月份</h4><br />
-                    <input id="Checkbox1" type="checkbox" /> 3 月到 5 月<br />
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <input id="Checkbox1" type="checkbox" /> 6 月到 8 月<br />
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <input id="Checkbox1" type="checkbox" /> 9 月到 11 月<br />
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <input id="Checkbox1" type="checkbox" /> 12 月到 2 月<br />
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                </div>
-                <!--新增評論-->
-                <div class="new_comment text-center">
-                    <form action="/web_comments/Create" Method="GET">
-                        <input type="hidden" name="tourismID" value=@Model.activity.activity_id />
-                        <input type="hidden" name="mem_id" value="" />
-                        <button type="submit" class="btn btn-outline-info mb-5  mt-3 " f>新增評論</button>
-                    </form>
-                </div>
+        <div class="w3-display-container mySlides">
+            <img src="https://www.blacktomato.com/wp-content/uploads/2016/02/Amazing-Amalfi-coast.jpg" style="width:100%">
+            <div class="gallery_caption ">
+                French Alps
             </div>
         </div>
 
-
-    </section>
-
-    <!--評論列表-->
-
-    @foreach (var item in Model.comment)
-    {
-        <button type="button" class="btn btn-default" aria-label="Left Align">
-            <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
-        </button>
-
-        <div class="single_comments container">
-
-
-            <div class="card mt-3">
-
-                <input id="comment_id" type="hidden" value=@item.comment_id />
-
-                <div class="media mt-3">
-                    <img src="~/images/member/@item.member.member_profile.profile_photo" width="74" height="74" class="mr-3 ml-3 member_avatar" alt="...">
-                    <div class="media-body col-12">
-                        <h5 class="mt-0 ">@item.member.member_profile.nickname</h5>
-                        <h5 class="mt-0 ">@item.member.member_profile.city</h5>
-                        <h5 class="mt-0 "> @item.comment_date</h5>
-                        <div class="row  mt-2 mb-5 ">
-                            <div>
-                                <img src="/images/comment/@item.comment_photo" class="img-fluid" />
-                            </div>
-                        </div>
-                        <h2 class="">@item.comment_title</h2>
-                        <div>
-                            @item.comment_content
-                        </div>
-                        <div class="text-right">
-                            @Html.ActionLink("編輯", "Edit", "web_comments", new { id = @item.comment_id }, null)
-                            @*@Html.ActionLink("刪除", "Delete", "web_comments", new { id = @item.comment_id }, null)*@
-                            @Html.ActionLink("刪除", "Delete", "web_comments", new { id = @item.comment_id }, new { @class = "", onclick = "return confirm('此功能尚未完成!!!')" })
-                        </div>
-                        <hr />
-                        <div class="d-flex btn-group btn-group-toggle mb-3 mt-3  " data-toggle="buttons">
-                            <div class="comment_emoji_detail emoji">
-                                <img class="icon comment_emoji_heart" src="~/images/emoji/talk.png" data-value="@item.comment_emoji_details.Where(m => m.emoji_id == 1).Count()" comment_id="@item.comment_id" emoji_id="1" />
-                                <span class="comment_emoji_heart_num">@item.comment_emoji_details.Where(m => m.emoji_id == 1).Count() </span>
-                                <img class="icon comment_emoji_unicorn" src="~/images/emoji/unicorn.svg" data-value="@item.comment_emoji_details.Where(m => m.emoji_id == 2).Count() " comment_id="@item.comment_id" emoji_id="2" />
-                                <span class="comment_emoji_unicorn_num">@item.comment_emoji_details.Where(m => m.emoji_id == 2).Count()</span>
-                                <img class="icon comment_emoji_good" src="~/images/emoji/good.svg" data-value="@item.comment_emoji_details.Where(m => m.emoji_id == 3).Count()" comment_id="@item.comment_id" emoji_id="3" />
-                                <span class="comment_emoji_good_num">@item.comment_emoji_details.Where(m => m.emoji_id == 3).Count()</span>
-                            </div>
-
-
-                            <div class=" text-right ">
-
-                                <div class="">
-                                    <a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <img class="icon" src="~/images/emoji/ellipsis.svg" />
-                                    </a>
-
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                        <a class="dropdown-item" href="#">分享到 facebook</a>
-                                        <a class="dropdown-item" href="#">分享到 line</a>
-                                        <a class="dropdown-item" href="#">分享到 google</a>
-                                        <a class="dropdown-item report_comment" href="#"></a>
-                                        <!-- Button trigger modal -->
-                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalScrollable">
-                                            檢舉此評論
-                                        </button>
-                                        @*<div class="fb-share-button dropdown-item" data-href="http://localhost:54678/web_activities/Details/A000001" data-layout="button" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A54678%2Fweb_activities%2FDetails%2FA000001&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">分享</a></div>*@
-                                    </div>
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-scrollable" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalScrollableTitle">檢舉評論</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <textarea id="report_content" name="report_content" rows="20" cols="20" placeholder="請附上有問題的網址，以及違規評論內容"></textarea>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="submit" class="btn btn-primary submit_issue" data-dismiss="modal">提交表單</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--單則留言-->
-            <div class="message_list card ">
-
-
-                    @foreach (var msgItem in item.message)
-                    {
-                        <div id="box1" class=" single_message py-3">
-                            <div class="media mt-3">
-                                <img src="~/images/member/@msgItem.member.member_profile.profile_photo" width="74" height="74" class="mr-3 ml-3 member_avatar" alt="...">
-                                <div class="media-body">
-                                    <h5 class="mt-0">
-                                        @msgItem.member_id
-                                    </h5>
-                                    <h5 class="mt-0">
-                                        @msgItem.msg_time
-                                    </h5>
-                                    <div>
-                                        @msgItem.msg_content
-                                    </div>
-                                    <hr />
-                                    <div class="emoji">
-                                        <img class="icon msg_emoji_heart" src="~/images/emoji/talk.png" />
-                                        <span class="msg_emoji_heart">@msgItem.message_emoji_details.Where(m => m.emoji_id == 1).Count() </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    }
-
-                <div class="add_message single_message">
-                    <form action="/web_activities/createMessage" method="post">
-                        @Html.AntiForgeryToken()
-                        <input type="hidden" name="comment_id" value="@item.comment_id" />
-                        <input type="hidden" name="msg_time" value="@ViewBag.getTime" />
-                        <input type="hidden" name="member_id" value="M000001" />
-                        <input type="hidden" name="msg_status" value="True" />
-                        <input type="hidden" name="tourism_id" value="@item.tourism_id" />
-                        <textarea id="msg_content" rows="2" cols="20" name="msg_content" placeholder="想說說甚麼..."></textarea>
-                        <br />
-                        <div class="add_message_Submit_area text-right">
-                            <input id="add_message_Submit" class="btn btn-info" type="submit" value="submit" />
-                        </div>
-                    </form>
-                </div>
+        <div class="w3-display-container mySlides">
+            <img src="https://www.blacktomato.com/wp-content/uploads/2016/02/Amalfi-coast_Shutterstock-9.jpg" style="width:100%">
+            <div class="gallery_caption ">
+                Northern Lights
             </div>
         </div>
 
-    }
-</div>
-<div id="fb-root"></div>
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v5.0"></script>
+        <div class="w3-display-container mySlides">
+            <img src="https://www.blacktomato.com/wp-content/uploads/2016/02/Positano-italy.jpg" style="width:100%">
+            <div class="gallery_caption ">
+                Beautiful Mountains
+            </div>
+        </div>
 
-<script>
-    window.fbAsyncInit = function () {
-        FB.init({
-            appId: '562137197876777',
-            autoLogAppEvents: true,
-            xfbml: true,
-            version: 'v5.0'
-        });
-    };
-</script>
-<script async defer src="https://connect.facebook.net/en_US/sdk.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAbQxjXC0otfo4YjWBXOOzuVnvAAHMsFs8&callback=initMap" async defer></script>
+        <div class="w3-display-container mySlides">
+            <img src="https://www.blacktomato.com/wp-content/uploads/2016/02/The-view-from-the-balcony-.jpg" style="width:100%">
+            <div class="gallery_caption ">
+                The Rain Forest
+            </div>
+        </div>
+
+        <div class="w3-display-container mySlides">
+            <img src="https://www.blacktomato.com/wp-content/uploads/2016/02/Praiano_666279370.jpg" style="width:100%">
+            <div class="gallery_caption ">
+                Mountains!
+            </div>
+        </div>
+
+        <button class="button-display-left " onclick="plusDivs(-1)">&#10094;</button>
+        <button class="button-display-right " onclick="plusDivs(1)">&#10095;</button>
+
+    </div>
+    <div>
+
+        <hr />
+        <div class="container">
+            <div class="row ">
+                <div class="col-3">
+                    @Html.DisplayNameFor(model => model.activity.activity_tel)
+                    <br />
+                    @Html.DisplayFor(model => model.activity.activity_tel)
+                </div>
+                <div class="col-3">
+                    @Html.DisplayNameFor(model => model.activity.activity_intro)
+                    <br />
+                    @Html.DisplayFor(model => model.activity.activity_intro)
+                </div>
+                <div class="col-3">
+                    @Html.DisplayNameFor(model => model.activity.address_detail)
+                    <br />
+                    @Html.DisplayFor(model => model.activity.city)
+                    <br />
+                    @Html.DisplayFor(model => model.activity.district)
+                    <br />
+                    @Html.DisplayFor(model => model.activity.address_detail)
+                </div>
+                <div class="col-3">
+                    @Html.DisplayNameFor(model => model.activity.begin_date)
+                    @Html.DisplayFor(model => model.activity.begin_date)
+                    <br />
+                    @Html.DisplayNameFor(model => model.activity.end_date)
+                    @Html.DisplayFor(model => model.activity.end_date)
+                </div>
+                <div class="col-3">
+                    @Html.DisplayNameFor(model => model.activity.organizer)
+                    <br />
+                    @Html.DisplayFor(model => model.activity.organizer)
+                </div>
+                <div class="col-3">
+                    @Html.DisplayNameFor(model => model.activity.website)
+                    <br />
+                    @Html.DisplayFor(model => model.activity.website)
+                </div>
+                <div class="col-3">
+                    @Html.DisplayNameFor(model => model.activity.transport_info)
+                    <br />
+                    @Html.DisplayFor(model => model.activity.transport_info)
+                </div>
+            </div>
 
 
-<script>
+
+        </div>
+        @*googlemap*@
+        <div id="map"></div>
+        @*single_comment*@
+        <div class="single_comment">
+            @Html.DisplayFor(model => model.comment.member_id)
+            @Html.DisplayFor(model => model.comment.comment_date)
+            @Html.DisplayFor(model => model.comment.comment_photo)
+            @Html.DisplayFor(model => model.comment.comment_title)
+            @Html.DisplayFor(model => model.comment.comment_content)
+        </div>
+
+    </div>
+
+    <script>
+    //GOOGLEMAP API
     var map;
     function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
-            center: { lat: @Model.activity.latitude, lng:@Model.activity.longitude  },
-            zoom: 17
+            center: { lat:@Html.DisplayFor(model => model.activity.longitude)
+                   ,  lng: @Html.DisplayFor(model => model.activity.latitude) },
+            zoom: 8
         });
     }
-     var a = '123';
+    //SLIDE_SHOW
+    var slideIndex = 1;
+    showDivs(slideIndex);
 
-</script>
+    function plusDivs(n) {
+        showDivs(slideIndex += n);
+    }
 
-@section scripts {
-
-    <script>
-        //顯示文章
-        $(".readMore").click(function () {
-            $(".intro").addClass('showMore');
-        })
-        
-
-        $(".comment_emoji_detail").click(function (e) {
-            let value = parseInt(e.target.getAttribute('data-value'))
-            let plusValue = value + 1
-            let comment_id = e.target.getAttribute('comment_id')
-            let emoji_id = e.target.getAttribute('emoji_id')
-
-            if ($(e.target).attr('disabled') == 'disabled') {
-                $(e.target).attr('disabled', false);
-                $(e.target).removeClass('click_button');
-                $(event.target).next().text(value);
-                $.ajax({
-                    type: 'Delete',
-                    url: 'http://localhost:54678/api/api_comment_emoji_details',
-                    contentType: 'application/json',
-                    data: JSON.stringify({
-                        "id": "77",
-                    }),
-                    success: function (data, status) {
-
-
-                    }
-                });
-                return;
-            } else
-                $(e.target).attr('disabled', true);
-            $(e.target).addClass('click_button')
-            $(event.target).next().text(plusValue);
-            $.ajax({
-                type: 'POST',
-                url: 'http://localhost:54678/api/api_comment_emoji_details',
-                contentType: 'application/json',
-                data: JSON.stringify({
-                    "member_id": "M000001",
-                    "comment_id": comment_id,
-                    "emoji_id": emoji_id,
-                }),
-                success: function (data, status) {
-
-
-                }
-            });
-
-        });
-        $(".submit_issue").click(function (e) {
-            let today = $.now();
-            let content = $('input[name="report_content"]').val();
-
-            report_content
-            $.ajax({
-                type: 'POST',
-                url: 'http://localhost:54678/api/api_issues',
-                contentType: 'application/json',
-                data: JSON.stringify({
-                    "member_id": "M000001",
-                    "admin_id": 1,
-                    "issue_id": 3,
-                    "report_date": today,
-                    "issue_content": content,
-                    "issue_result": null,
-                    "issue_status": 0,
-                    "resolve_date": null,
-                }),
-                success: function (data, status) {
-
-
-                }
-            });
-        })
-
+    function showDivs(n) {
+        var i;
+        var x = document.getElementsByClassName("mySlides");
+        if (n > x.length) { slideIndex = 1 }
+        if (n < 1) { slideIndex = x.length }
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        x[slideIndex - 1].style.display = "block";
+    }
     </script>
-}
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDI5ENsN0IG8O1y-Y8r3KeJMrDhVawVdYc&callback=initMap"
+            async defer></script>
+    @*<div id="list"></div>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script>
+            $.ajax({
+                type: "Get",
+                url: "http://localhost:54678/api/comments1",
+                success: function (data) {
+                    console.log(data);
+                    data.forEach(function (item) {
 
+                        $('#list').append(
+                            `
+                        <div class="media mt-2" >
+                        <img src="https://randomuser.me/api/portraits/women/60.jpg" width="74" height="74" class="mr-3 ml-3" alt="...">
+                        <div class="media-body" >
+                            <h5 >${item.member.member_account}</h5><span>${item.comment_date}</span>
+                            <br>
+                            <img src="https://www.fodors.com/assets/destinations/711600/cityscape-amasra-black-sea-coast-turkey_980x650.jpg" width="300" height="200"/>
+                            <h3>${item.comment_title}</h3>
+                            <p>${item.comment_content}</P>
+
+                            </div>
+                        </div>
+                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <label class="btn btn-secondary ">
+                                <input type="radio" name="options" id="option1" autocomplete="off" checked> <i class="far fa-thumbs-up"></i>按讚
+                            </label>
+
+                        </div>
+                            `
+                        );
+                    });
+
+                }
+
+            });
+            //新增
+            $('#btnAdd').click(function () {
+                console.log($('#form1').serialize());
+                $.ajax({
+                    type: "Post",
+                    url: "http://localhost:54678/api/comments1",
+                    data: $('#form1').serialize()
+
+                });
+
+            });
+        </script>*@
+</div>
