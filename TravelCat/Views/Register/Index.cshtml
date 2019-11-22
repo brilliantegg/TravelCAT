@@ -106,7 +106,7 @@
             @Html.LabelFor(model => model.member_profile.profile_photo, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <input name="photo" id="photo" type="file" class="form-control" />
-                <img src="~/images/member/@Model.member_profile.profile_photo" class="member_avatar align-self-start my-3 mx-3 img-circle：border-radius:100%  rounded-circle" alt="@Model.member_profile.profile_photo">
+                @*<img src="~/images/member/@Model.member_profile.profile_photo" class="member_avatar align-self-start my-3 mx-3 img-circle：border-radius:100%  rounded-circle" alt="@Model.member_profile.profile_photo">*@
                 @Html.ValidationMessageFor(model => model.member_profile.profile_photo, "", new { @class = "text-danger" })
             </div>
         </div>

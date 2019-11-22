@@ -55,6 +55,7 @@ namespace TravelCat.Controllers
             }
             
             var callbackUrl = Url.Action("Confirm", "Register", new { account = model.member_account, id = mem_id }, protocol: Request.Url.Scheme);
+
             if (ModelState.IsValid)
             {
                 GmailSender gs = new GmailSender();
@@ -70,10 +71,19 @@ namespace TravelCat.Controllers
                 db.member.Add(model);
                 db.member_profile.Add(model.member_profile);
                 db.SaveChanges();
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("ConfirmView", "Register",new { account = model.member_account});
             }
             return View(model);
         }
+        public ActionResult ConfirmView(string account)
+        {
+            var uesr1 = db.member.Where(m => m.member_account == account).FirstOrDefault();
+            string memderacc = uesr1.member_account;
+            ViewBag.account = memderacc;
+
+            return View();
+        }
+
         public ActionResult Confirm(string account, string id)
         {
             var check = db.member.Where(m => m.member_id == id && m.member_account == account).FirstOrDefault();

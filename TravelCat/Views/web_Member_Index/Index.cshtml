@@ -1,6 +1,7 @@
 ﻿<link href="~/Content/MemberIndex.css" rel="stylesheet" />
 @model TravelCat.ViewModels.MemberIndexViewModels
-@{ ViewBag.Title = "member_index";
+@{ 
+    ViewBag.Title = "member_index";
     Layout = "~/Views/Shared/web-Layout.cshtml";
 }
 
@@ -52,13 +53,11 @@
                 <div>簡介</div>
                 <div>
                     <ul>
-
                         <li>會員暱稱:<span>@Model.member_profile.nickname</span></li>
                         <li>國家:<span>@Model.member_profile.nation</span></li>
                         <li>城市:<span>@Model.member_profile.city</span></li>
                         <li>網站:<span>@Model.member_profile.website_link</span></li>
-
-
+                        <li>信箱驗證狀態:<span>@Model.member_profile.emailConfirmed</span></li>                   
                     </ul>
 
                 </div>

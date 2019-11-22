@@ -69,8 +69,8 @@ namespace TravelCat.Controllers
                 admin.admin_password = hashpassword;
                 admin.emailConfirmed = false;
 
-                var callbackUrl = Url.Action("Confirm", "Admin", new { account = admin.admin_account }, protocol: Request.Url.Scheme);
 
+                var callbackUrl = Url.Action("Confirm", "Admin", new { account = admin.admin_account }, protocol: Request.Url.Scheme);
                 GmailSender gs = new GmailSender();
                 gs.account = "travelcat.service@gmail.com";
                 gs.password = "lqleyzcbmrmttloe";
