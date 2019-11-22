@@ -2,10 +2,12 @@
 
 @{
     ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/web-Layout.cshtml";
 }
 
-<h2>會員登入</h2>
-<div class="card col-4 align-self-md-center">
+
+<div class="login_panel card col-4 align-self-md-center container">
+    <h2>會員登入</h2>
     <form id="login" method="post" action="@Url.Action("Login")">
         <div class="form-inline mt-3">
             @Html.LabelFor(model => model.member_account)
