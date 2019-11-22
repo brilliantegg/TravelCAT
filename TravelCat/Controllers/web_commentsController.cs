@@ -136,15 +136,34 @@ namespace TravelCat.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             comment comment = db.comment.Find(id);
-            comment_emoji_details emoji = db.comment_emoji_details.Find(id);
+
+            List<comment_emoji_details> emojis = db.comment_emoji_details.Where(m=>m.comment_id==id).ToList();
+
+            List<message>messages = db.message.Where(m => m.comment_id == id).ToList();
+
+            List<message_emoji_details> mEmojis = db.message_emoji_details.Where(m => m.message.msg_id == id).ToList();
+
+
+            mEmojis.ForEach(m => db.message_emoji_details.Remove(m));
+            db.SaveChanges();
+            messages.ForEach(m => db.message.Remove(m));
+            db.SaveChanges();
+            emojis.ForEach(m => db.comment_emoji_details.Remove(m));
+            db.SaveChanges();
+            db.comment.Remove(comment);
+            db.SaveChanges();
+
             if (comment == null)
             {
                 return HttpNotFound();
             }
-            db.comment_emoji_details.Remove(emoji);
-            db.comment.Remove(comment);
+            //for(int i = 0; i< emojis.Count; i++)
+            //{
+            //    db.comment_emoji_details.Remove(emojis[i]);
+            //    db.SaveChanges();
+            //}            
+            
 
-            db.SaveChanges();
             return RedirectToRoute(new { controller = "web_activities", action = "Details", id = comment.tourism_id });
 
         }
