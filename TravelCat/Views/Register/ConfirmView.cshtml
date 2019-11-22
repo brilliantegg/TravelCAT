@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewBag.Title = "ConfirmView";
+    Layout = "~/Views/Shared/web-Layout.cshtml";
+}
+
+<div class="container mt-5 mt-5 " style="height:700px">
+    <div class="row justify-content-center border align-items-center">
+        <div class="col-md-12">
+            <h1>歡迎 @ViewBag.account</h1>
+            <h3 class="mt-4">感謝您註冊旅途貓網站，請至您的信箱收取驗證信件</h3>
+        </div>
+        @Html.ActionLink("返回首頁", "Index", "Home")
+
+    </div>
+        
+</div>
+

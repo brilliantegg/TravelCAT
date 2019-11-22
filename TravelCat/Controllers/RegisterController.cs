@@ -34,6 +34,7 @@ namespace TravelCat.Controllers
             model.member_profile.member_id = mem_id;
             model.member_profile.member_score = 0;
             model.member_profile.create_time = DateTime.Now;
+            model.member_profile.emailConfirmed = false;
 
             byte[] password = System.Text.Encoding.UTF8.GetBytes(model.member_password);
             byte[] hash = new System.Security.Cryptography.SHA256Managed().ComputeHash(password);
@@ -52,7 +53,9 @@ namespace TravelCat.Controllers
                     model.member_profile.profile_photo = fileName;
                 }
             }
+            
             var callbackUrl = Url.Action("Confirm", "Register", new { account = model.member_account, id = mem_id }, protocol: Request.Url.Scheme);
+
             if (ModelState.IsValid)
             {
                 GmailSender gs = new GmailSender();
@@ -61,17 +64,26 @@ namespace TravelCat.Controllers
                 gs.sender = "旅途貓 <travelcat.service@gmail.com>";
                 gs.receiver = $"{model.member_profile.email}";
                 gs.subject = "旅途貓驗證";
-                gs.messageBody = "恭喜註冊成功"+callbackUrl;
-                gs.IsHtml = false;
+                gs.messageBody = "恭喜註冊成功<br><a href=" + callbackUrl + ">請點此連結</a>";
+                gs.IsHtml = true;
                 gs.Send();
 
                 db.member.Add(model);
                 db.member_profile.Add(model.member_profile);
                 db.SaveChanges();
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("ConfirmView", "Register",new { account = model.member_account});
             }
             return View(model);
         }
+        public ActionResult ConfirmView(string account)
+        {
+            var uesr1 = db.member.Where(m => m.member_account == account).FirstOrDefault();
+            string memderacc = uesr1.member_account;
+            ViewBag.account = memderacc;
+
+            return View();
+        }
+
         public ActionResult Confirm(string account, string id)
         {
             var check = db.member.Where(m => m.member_id == id && m.member_account == account).FirstOrDefault();
@@ -87,7 +99,7 @@ namespace TravelCat.Controllers
                 return View("重新整理");
             }
             else
-            {
+            {                
                 DialogResult ans = MessageBox.Show("請先註冊會員!", "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Question);
                 return RedirectToAction("Index", "Register");
             }
