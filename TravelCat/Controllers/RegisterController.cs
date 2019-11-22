@@ -63,8 +63,8 @@ namespace TravelCat.Controllers
                 gs.sender = "旅途貓 <travelcat.service@gmail.com>";
                 gs.receiver = $"{model.member_profile.email}";
                 gs.subject = "旅途貓驗證";
-                gs.messageBody = "恭喜註冊成功，請點此連結" + callbackUrl;
-                gs.IsHtml = false;
+                gs.messageBody = "恭喜註冊成功<br><a href=" + callbackUrl + ">請點此連結</a>";
+                gs.IsHtml = true;
                 gs.Send();
 
                 db.member.Add(model);

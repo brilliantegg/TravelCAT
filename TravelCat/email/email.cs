@@ -21,7 +21,7 @@ namespace TravelCat
             this.subject = subject;
             this.IsHtml = IsHtml;
         }
-        public GmailSender(string account, string password, MailMessage MailMessage, bool IsHtml = false)
+        public GmailSender(string account, string password, MailMessage MailMessage, bool IsHtml)
         {
             this.account = account;
             this.password = password;
