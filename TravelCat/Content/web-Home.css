@@ -48,12 +48,6 @@
         }
 
         /*card*/
-        .container .row .col-12 .tab-content {
-
-        }
-        .container .row .col-12 .tab-pane{
-         
-        }
         .container .row .col-12 .tab-content .tab-pane .card {
             display: inline-block;
             width: 24%;
@@ -78,6 +72,7 @@
                 text-overflow: ellipsis;
             }
             .container .row .col-12 .tab-content .tab-pane .card .card-text {
+                height: 72px;
                 overflow: hidden;
                 white-space: nowrap;
                 text-overflow: ellipsis;

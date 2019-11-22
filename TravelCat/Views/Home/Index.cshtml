@@ -64,194 +64,77 @@
                 <div class="tab-pane fade show active" id="list-spot" role="tabpanel" aria-labelledby="list-home-list">
 
                     <!--景點card-->
-                    <div class="card">
-                        <img src="~/images/dribbbe_bmo-01.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">@Model.spot[0].spot_title</h5>
-                            <p class="card-text">@Model.spot[0].spot_intro</p>
-                            <a href="#" class="btn btn-primary btn-sm">more</a>
+                    @for (int i = 0; i < 8; i++)
+                    {
+                        <div class="card">
+                            <img src="~/images/dribbbe_bmo-01.png" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">@Model.spot[i].spot_title</h5>
+                                <p class="card-text">@Model.spot[i].spot_intro</p>
+                                <p class="card-city" style="color: #128566; font-weight: 900; padding-top: 5px;">@Model.spot[i].city</p>
+                                <a href="#" class="btn btn-primary btn-sm">more</a>
+                            </div>
                         </div>
+                    }
                     </div>
-
-                    <div class="card">
-                        <img src="~/images/dribbbe_bmo-01.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">@Model.spot[1].spot_title</h5>
-                            <p class="card-text">@Model.spot[1].spot_intro</p>
-                            <a href="#" class="btn btn-primary btn-sm">more</a>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <img src="~/images/dribbbe_bmo-01.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">@Model.spot[2].spot_title</h5>
-                            <p class="card-text">@Model.spot[2].spot_intro</p>
-                            <a href="#" class="btn btn-primary btn-sm">more</a>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <img src="~/images/dribbbe_bmo-01.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">@Model.spot[3].spot_title</h5>
-                            <p class="card-text">@Model.spot[3].spot_intro</p>
-                            <a href="#" class="btn btn-primary btn-sm">more</a>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <img src="~/images/dribbbe_bmo-01.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">@Model.spot[4].spot_title</h5>
-                            <p class="card-text">@Model.spot[4].spot_intro</p>
-                            <a href="#" class="btn btn-primary btn-sm">more</a>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <img src="~/images/dribbbe_bmo-01.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">@Model.spot[5].spot_title</h5>
-                            <p class="card-text">@Model.spot[5].spot_intro</p>
-                            <a href="#" class="btn btn-primary btn-sm">more</a>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <img src="~/images/dribbbe_bmo-01.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">@Model.spot[6].spot_title</h5>
-                            <p class="card-text">@Model.spot[6].spot_intro</p>
-                            <a href="#" class="btn btn-primary btn-sm">more</a>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <img src="~/images/dribbbe_bmo-01.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">@Model.spot[7].spot_title</h5>
-                            <p class="card-text">@Model.spot[7].spot_intro</p>
-                            <a href="#" class="btn btn-primary btn-sm">more</a>
-                        </div>
-                    </div>
-                </div>
 
                 <!--活動-->
                 <div class="tab-pane fade" id="list-activities" role="tabpanel" aria-labelledby="list-profile-list">
 
                     <!--Card-->
-                    <div class="card">
-                        <img src="~/images/dribbbe_bmo-01.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">@Model.activity[0].activity_title</h5>
-                            <p class="card-text">@Model.activity[0].activity_intro</p>
-                            <a href="#" class="btn btn-primary btn-sm">more</a>
+                    @for (int i = 0; i < 8; i++)
+                    {
+                        <div class="card">
+                            <img src="~/images/dribbbe_bmo-01.png" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">@Model.activity[i].activity_title</h5>
+                                <p class="card-text">@Model.activity[i].activity_intro</p>
+                                <p class="card-city" style="color: #128566; font-weight: 900; padding-top: 5px;">@Model.spot[i].city</p>
+                                <a href="#" class="btn btn-primary btn-sm">more</a>
+                            </div>
                         </div>
+                    }
                     </div>
-
-                    <div class="card">
-                        <img src="~/images/dribbbe_bmo-01.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">@Model.activity[8].activity_title</h5>
-                            <p class="card-text">@Model.activity[8].activity_intro</p>
-                            <a href="#" class="btn btn-primary btn-sm">more</a>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <img src="~/images/dribbbe_bmo-01.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">@Model.activity[2].activity_title</h5>
-                            <p class="card-text">@Model.activity[2].activity_intro</p>
-                            <a href="#" class="btn btn-primary btn-sm">more</a>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <img src="~/images/dribbbe_bmo-01.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">@Model.activity[3].activity_title</h5>
-                            <p class="card-text">@Model.activity[3].activity_intro</p>
-                            <a href="#" class="btn btn-primary btn-sm">more</a>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <img src="~/images/dribbbe_bmo-01.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">@Model.activity[4].activity_title</h5>
-                            <p class="card-text">@Model.activity[4].activity_intro</p>
-                            <a href="#" class="btn btn-primary btn-sm">more</a>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <img src="~/images/dribbbe_bmo-01.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">@Model.activity[5].activity_title</h5>
-                            <p class="card-text">@Model.activity[5].activity_intro</p>
-                            <a href="#" class="btn btn-primary btn-sm">more</a>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <img src="~/images/dribbbe_bmo-01.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">@Model.activity[6].activity_title</h5>
-                            <p class="card-text">@Model.activity[6].activity_intro</p>
-                            <a href="#" class="btn btn-primary btn-sm">more</a>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <img src="~/images/dribbbe_bmo-01.png" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">@Model.activity[9].activity_title</h5>
-                            <p class="card-text">@Model.activity[9].activity_intro</p>
-                            <a href="#" class="btn btn-primary btn-sm">more</a>
-                        </div>
-                    </div>
-
-
-                </div>
 
                 <!--飯店-->
-                <div class="tab-pane fade" id="list-hotel" role="tabpanel" aria-labelledby="list-messages-list">飯店</div>
+                <div class="tab-pane fade" id="list-hotel" role="tabpanel" aria-labelledby="list-messages-list">
+
+                    <!--Card-->
+                    @for (int i = 0; i < 8; i++)
+                    {
+                        <div class="card">
+                            <img src="~/images/dribbbe_bmo-01.png" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">@Model.hotel[i].hotel_title</h5>
+                                <p class="card-text">@Model.hotel[i].hotel_intro</p>
+                                <p class="card-city" style="color: #128566; font-weight: 900; padding-top: 5px;">@Model.spot[i].city</p>
+                                <a href="#" class="btn btn-primary btn-sm">more</a>
+                            </div>
+                        </div>
+                    }
+                    </div>
 
                 <!--餐廳-->
-                <div class="tab-pane fade" id="list-restaurant" role="tabpanel" aria-labelledby="list-settings-list">餐廳</div>
+                <div class="tab-pane fade" id="list-restaurant" role="tabpanel" aria-labelledby="list-settings-list">
+
+                    <!--Card-->
+                    @for (int i = 0; i < 8; i++)
+                    {
+                        <div class="card">
+                            <img src="~/images/dribbbe_bmo-01.png" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">@Model.restaurant[i].restaurant_title</h5>
+                                <p class="card-text">@Model.restaurant[i].restaurant_intro</p>
+                                <p class="card-city" style="color: #128566; font-weight: 900; padding-top: 5px;">@Model.spot[i].city</p>
+                                <a href="#" class="btn btn-primary btn-sm">more</a>
+                            </div>
+                        </div>
+                    }
+                    </div>
+
+
             </div>
         </div>
     </div>
-    @*<div class="row">
-            <h2>活動</h2>
-            <div class="co-4">@Model.activity[0].activity_title</div>
-            <div class="col-4">@Model.activity[1].activity_title</div>
-            <div class="col-4">@Model.activity[2].activity_title</div>
-        </div>
-        <div class="row">
-            <h2>住宿</h2>
-            <div class="col-4">@Model.hotel[0].hotel_title</div>
-            <div class="col-4">@Model.hotel[1].hotel_title</div>
-            <div class="col-4">@Model.hotel[2].hotel_title</div>
-        </div>
-        <div class="row">
-            <h2>餐廳</h2>
-            <div class="col-4">@Model.restaurant[0].restaurant_title</div>
-            <div class="col-4">@Model.restaurant[1].restaurant_title</div>
-            <div class="col-4">@Model.restaurant[2].restaurant_title</div>
-        </div>
-        <div class="row">
-            <h2>景點</h2>
-            <div class="col-4">@Model.spot[0].spot_title</div>
-            <div class="col-4">@Model.spot[1].spot_title</div>
-            <div class="col-md-4">@Model.spot[2].spot_title</div>
-        </div>
-        <div class="row">
-            <h2>評論</h2>
-            <div class="col-4">@Model.comment[0].comment_title</div>
-            <div class="col-4">@Model.comment[1].comment_title</div>
-            <div class="col-4">@Model.comment[2].comment_title</div>
-        </div>*@
+    
 </div>

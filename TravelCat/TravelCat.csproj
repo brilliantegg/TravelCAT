@@ -1756,6 +1756,7 @@
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\back-end-index.css" />
+    <Content Include="Content\web-Home.css" />
     <Content Include="Content\web-Layout.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -1773,10 +1774,15 @@
     <Content Include="Content\bootstrap-reboot.min.css.map" />
     <Content Include="images\17671-neko-atsume-best-toys-items-goodies-06.png" />
     <Content Include="images\1810043.jpg" />
+    <Content Include="images\bled-1899264_1920.jpg" />
     <Content Include="images\bmo-02.jpg" />
+    <Content Include="images\buildings-1846728_1920.jpg" />
     <Content Include="images\cat-face-with-wry-smile_1f63c.png" />
+    <Content Include="images\dribbbe_bmo-01.png" />
     <Content Include="images\hotel\bmo_png_159083.png" />
     <Content Include="images\hotel\CJXH_Japan_Nachi_Nachi-Falls_189118511.jpg" />
+    <Content Include="images\taiwan-2696156_1920.jpg" />
+    <Content Include="images\yehliu-geopark-257886_1920.jpg" />
     <Content Include="LoginAdmin.html" />
     <Content Include="Models\TravelCat.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
