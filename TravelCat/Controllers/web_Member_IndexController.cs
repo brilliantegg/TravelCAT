@@ -9,6 +9,7 @@ using TravelCat.ViewModels;
 
 namespace TravelCat.Controllers
 {
+    [Authorize]
     public class web_Member_IndexController : Controller
     {
         dbTravelCat db = new dbTravelCat();
