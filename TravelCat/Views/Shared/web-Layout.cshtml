@@ -29,11 +29,11 @@
                 </a>
                 @if (Request.IsAuthenticated)
                 {
-                <div>
-                    @Html.ActionLink(@User.Identity.GetUserName(), "Index", "web_Member_Index", new { id = mem_id }, new { @class = " far fa-user memberId" })
+                    <div>
+                        @Html.ActionLink(@User.Identity.GetUserName(), "Index", "web_Member_Index", new { id = mem_id }, new { @class = " far fa-user memberId" })
 
-                    @Html.ActionLink("登出", "LogOut", "Home", null, new { @class = " text-dark" })
-                </div>
+                        @Html.ActionLink("登出", "LogOut", "Home", null, new { @class = " text-dark" })
+                    </div>
 
 
                 }
@@ -45,7 +45,7 @@
                     </div>
                 }
 
-            </div>
+            </div>           
         </div>
     </header>
     <div class="top-bar">

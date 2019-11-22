@@ -51,9 +51,10 @@
             @Html.DisplayFor(modelItem => item.emailConfirmed)
         </td>
         <td>
-            @Html.ActionLink("修改", "Edit", new { id=item.admin_id },new { @class="btn btn-primary"}) |
+            @Html.ActionLink("修改", "Edit", new { id = item.admin_id }, new { @class = "btn btn-primary" }) |
             @*@Html.ActionLink("Details", "Details", new { id=item.admin_id }) |*@
-            @Html.ActionLink("刪除", "Delete", new { id=item.admin_id },new { @class="btn btn-danger"})
+            @Html.ActionLink("刪除", "Delete", new { id = item.admin_id }, new { @class = "btn btn-danger" }) |
+            @Html.ActionLink("修改密碼", "Edit1", new { id = item.admin_id }, new { @class = "btn btn-primary" })
         </td>
     </tr>
 }

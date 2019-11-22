@@ -73,12 +73,14 @@ namespace TravelCat.Controllers
 
             if (new UserManager().IsValid(username, password))
             {
+                var mem = db.member.Where(m => m.member_account == username).FirstOrDefault();
                 var ident = new ClaimsIdentity(
                   new[] { 
               // adding following 2 claim just for supporting default antiforgery provider
               new Claim(ClaimTypes.NameIdentifier, username),
               new Claim("http://schemas.microsoft.com/accesscontrolservice/2010/07/claims/identityprovider", "ASP.NET Identity", "http://www.w3.org/2001/XMLSchema#string"),
               new Claim(ClaimTypes.Name,username),
+              new Claim("memID",mem.member_id,ClaimValueTypes.String)
                //// optionally you could add roles if any
               //new Claim(ClaimTypes.Role, "UnConfirmedUser"),
               //new Claim(ClaimTypes.Role, "BlockedUser"),
