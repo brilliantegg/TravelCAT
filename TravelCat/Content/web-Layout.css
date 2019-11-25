@@ -4,6 +4,9 @@
     list-style: none;
     font-family: 'Microsoft JhengHei';
 }
+body {
+    margin-top: 116px
+}
 /*表頭*/
 .header {
     background-color: #e4e5e6;

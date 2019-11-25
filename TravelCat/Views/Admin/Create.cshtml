@@ -1,9 +1,9 @@
 ﻿@model TravelCat.Models.admin
 
-@{
+@*@{
     ViewBag.Title = "Create";
     var account = "";
-    if(Session["id"] == null || string.IsNullOrWhiteSpace(Session["id"].ToString()))
+    if (Session["id"] == null || string.IsNullOrWhiteSpace(Session["id"].ToString()))
     {
         Response.Redirect("~/Loginadmin/Index");
     }
@@ -11,7 +11,7 @@
     {
         account = Session["id"].ToString();
     }
-}
+}*@
 
 <h2>新增管理員</h2>
 
