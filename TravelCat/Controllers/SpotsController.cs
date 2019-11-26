@@ -11,7 +11,7 @@ using System.IO;
 
 namespace TravelCat.Controllers
 {
-    public class SpotController : Controller
+    public class SpotsController : Controller
     {
         // GET: Spot
         dbTravelCat db = new dbTravelCat();

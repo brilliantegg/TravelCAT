@@ -1,15 +1,25 @@
 ﻿@using Microsoft.AspNet.Identity
-@if (Request.IsAuthenticated) 
-{
-    <p>@User.Identity.GetUserName()</p>
-}
+
 @{
     ViewBag.Title = "test";
     Layout = "~/Views/Shared/web-Layout.cshtml";
 }
 
-<h2>test</h2>
-<h1>@ViewBag.Data / @Session["memberID"]</h1>
+    <div class="container">
+        <h2>@User.Identity.GetUserName()，您好!</h2>
+        <h1>@ViewBag.Data / @Session["memberID"]</h1>
 
-@Html.ActionLink("登出","LogOut")
+        @if (User.IsInRole("Confirmed"))
+        {
+            <p>現在將跳轉首頁</p>
+        }
+        else if (User.IsInRole("UnConfirmed"))
+        {
+            <p>請去驗證信箱</p>
+        }
+        else
+        {
+            <p>您已被停權</p>
+        }
 
+    </div>
