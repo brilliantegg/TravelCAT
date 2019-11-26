@@ -6,6 +6,7 @@
 }
 body {
     margin-top: 116px
+    
 }
 /*表頭*/
 .header {
@@ -135,6 +136,7 @@ body {
 
             .top-bar .body-menu li a:hover {
                 color: #128566;
+                text-decoration: none;
             }
 
 
@@ -145,6 +147,8 @@ body {
 
 /*表尾*/
 .footer {
+    position:relative;
+    bottom: 0;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
