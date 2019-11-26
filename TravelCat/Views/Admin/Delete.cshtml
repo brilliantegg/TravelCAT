@@ -2,22 +2,22 @@
 
 @{
     ViewBag.Title = "Delete";
-    var account = "";
-    if(Session["id"] == null || string.IsNullOrWhiteSpace(Session["id"].ToString()))
-    {
-        Response.Redirect("~/Loginadmin/Index");
-    }
-    else
-    {
-        account = Session["id"].ToString();
-    }
+    //var account = "";
+    //if(Session["id"] == null || string.IsNullOrWhiteSpace(Session["id"].ToString()))
+    //{
+    //    Response.Redirect("~/Loginadmin/Index");
+    //}
+    //else
+    //{
+    //    account = Session["id"].ToString();
+    //}
 }
 
 <h2>確定要刪除嗎?</h2>
 
 
 <div>
-    
+
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -28,13 +28,6 @@
             @Html.DisplayFor(model => model.admin_account)
         </dd>
 
-        @*<dt>
-            @Html.DisplayNameFor(model => model.admin_password)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.admin_password)
-        </dd>*@
 
         <dt>
             @Html.DisplayNameFor(model => model.admin_email)
@@ -54,12 +47,13 @@
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="刪除" class="btn btn-danger" /> |
-            @Html.ActionLink("返回", "Index")
+            @Html.ActionLink("返回", "Index", "", new { @class = "btn btn-info" })|
+            <input type="submit" value="刪除" class="btn btn-danger" onclick="return confirm('確定要刪除嗎?')" />
         </div>
     }
 </div>

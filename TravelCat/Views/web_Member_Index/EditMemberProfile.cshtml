@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/web-Layout.cshtml";
 }
 
-<h2>EditMemberProfile</h2>
+<h2>個人資料</h2>
 
 @using (Html.BeginForm("EditMemberProfile", "web_Member_Index", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
@@ -18,16 +18,6 @@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.member_account, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.member_account, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.member_password, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-
-                @Html.EditorFor(model => model.member_password, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.member_password, "", new { @class = "text-danger" })
-
             </div>
         </div>
 
@@ -112,7 +102,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="修改" class="btn btn-primary" />
             </div>
         </div>
     </div>

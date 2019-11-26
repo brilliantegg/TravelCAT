@@ -1,0 +1,75 @@
+﻿@model TravelCat.Models.admin
+
+@{
+    ViewBag.Title = "Editpwd";
+}
+
+<h2>修改密碼</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.admin_id)
+        
+        <div class="form-group">
+            <label class="col-form-label">原密碼</label>
+            <div class="col-md-10">
+                <input type="password" name="oldpassword" class="form-control" />
+                @Html.ValidationMessageFor(model => model.admin_password, "", new { @class = "text-danger" })
+            </div>
+            <span class="text-danger">@ViewBag.Err</span>
+        </div>
+
+        <div class="form-group">
+            <label class="col-form-label">新密碼</label>
+            <div class="col-md-10">
+                <input id="Password1" type="password" name="newpassword" class="form-control" />
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-form-label">確認密碼</label>
+            <div class="col-md-10">
+                <input id="Password2" type="password" class="form-control" />
+
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input id="submit1" type="submit" value="修改" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("返回", "Index")
+</div>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script>
+    $('#submit1').click(function () {
+        var psd1 = $('#Password1').val();
+        var psd2 = $('#Password2').val();
+
+        if (psd2 != psd1) {
+            alert("兩次輸入的密碼不一致！");
+            return false;
+        }
+        else if (psd1 == "" || psd2 == "") {
+            alert("請輸入新密碼！");
+            return false;
+        }
+        else
+            return true;
+    });
+</script>

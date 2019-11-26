@@ -40,5 +40,11 @@ namespace TravelCat.Controllers
             }
             return View(member);
         }
+
+
+        public ActionResult Editpassword()
+        {
+            return View();
+        }
     }
 }

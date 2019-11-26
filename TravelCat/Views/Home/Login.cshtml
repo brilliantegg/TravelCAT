@@ -19,8 +19,11 @@
             <input id="password" name="password" type="password" class="form-control ml-2" />
             @Html.ValidationMessageFor(model => model.member_password, "", new { @class = "text-danger" })
         </div>
-        <input id="Submit1" type="submit" value="submit" class="btn btn-info mt-3 mb-3" />
+        <input id="Submit1" type="submit" value="送出" class="btn btn-info mt-3 mb-3" />
+        <input id="Reset1" type="reset" value="清除" class="btn btn-info mt-3 mb-3" />
+        <input id="Button1" type="button" value="忘記密碼" class="btn btn-info mt-3 mb-3"/>
     </form>
+    
 </div>
 <script src="~/Scripts/jquery.validate.min.js"></script>
 
