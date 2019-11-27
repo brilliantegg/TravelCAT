@@ -10,6 +10,7 @@ using TravelCat.ViewModels;
 
 namespace TravelCat.Controllers
 {
+    [Authorize(Roles ="Confirmed,Unconfirmed")]
     public class web_Member_IndexController : Controller
     {
         dbTravelCat db = new dbTravelCat();

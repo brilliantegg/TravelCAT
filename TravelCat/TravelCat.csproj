@@ -1999,6 +1999,7 @@
     <Compile Include="Controllers\messagesController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Controllers\RestaurantsController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\SpotsController.cs" />
     <Compile Include="Controllers\web_activitiesController.cs" />
     <Compile Include="Controllers\web_commentsController.cs" />
@@ -2091,6 +2092,7 @@
     <Compile Include="ViewModels\destinationsViewModel.cs" />
     <Compile Include="ViewModels\MemberIndexViewModels.cs" />
     <Compile Include="ViewModels\MemberViewModels.cs" />
+    <Compile Include="ViewModels\SearchViewModel.cs" />
     <Compile Include="ViewModels\SpotPhotoViewModel.cs" />
     <Compile Include="ViewModels\RestaurantPhotoViewModel.cs" />
     <Compile Include="ViewModels\ActivityPhotoViewModel.cs" />
@@ -2108,9 +2110,9 @@
     <Content Include="Views\Restaurants\Index.cshtml" />
     <Content Include="Views\Restaurants\Create.cshtml" />
     <Content Include="Views\Restaurants\Edit.cshtml" />
-    <Content Include="Views\Spot\Index.cshtml" />
-    <Content Include="Views\Spot\Create.cshtml" />
-    <Content Include="Views\Spot\Edit.cshtml" />
+    <Content Include="Views\Spots\Index.cshtml" />
+    <Content Include="Views\Spots\Create.cshtml" />
+    <Content Include="Views\Spots\Edit.cshtml" />
     <Content Include="Views\comments\Edit.cshtml" />
     <Content Include="Views\comments\Index.cshtml" />
     <Content Include="Views\members\Edit.cshtml" />
@@ -2195,6 +2197,8 @@
     <Content Include="Views\web_comments\Index.cshtml" />
     <Content Include="Views\web_comments\_PhotoGallery.cshtml" />
     <Content Include="Views\web_Member_Index\Editpassword.cshtml" />
+    <Content Include="Views\Search\Index.cshtml" />
+    <Content Include="Views\Home\_test.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -2208,6 +2212,7 @@
     <Folder Include="images\badges\" />
     <Folder Include="images\restaurant\" />
     <Folder Include="images\spot\" />
+    <Folder Include="Views\CustomAuthorizeAttribute\" />
     <Folder Include="Views\Default\" />
     <Folder Include="Views\destinations\" />
   </ItemGroup>

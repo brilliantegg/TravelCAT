@@ -1,0 +1,38 @@
+﻿
+body {
+    margin-top: 130px
+}
+
+.btn {
+    border-width: 3px;
+}
+
+.header-carousel-item {
+    height: 450px;
+}
+
+.bg-cover {
+    background-size: cover;
+    background-position: center center;
+}
+
+.carousel-caption {
+    background: rgba(0%,0%,0%,0.6);
+}
+
+
+
+.btn-group, .btn-group-vertical {
+    position: relative;
+    display: block;
+    flex-direction: column;
+    vertical-align: middle;
+    margin-right: 10px;
+    margin-bottom: 5px;
+}
+
+.search_bar {
+    width: 50px
+}
+
+
