@@ -34,7 +34,7 @@
             <h2 class="mt-3">@Model.member_profile.nickname</h2>
 
             @Html.ActionLink("編輯個人資料", "EditMemberProfile", "web_Member_Index", new { id = Model.member.member_id }, new { @class = "btn btn-outline-info" })<br />
-            @Html.ActionLink("修改密碼","Editpassword","web_Member_Index",new { @class = "btn btn-outline-info mt-2" })
+            @Html.ActionLink("修改密碼","Editpassword","web_Member_Index", new { id = Model.member.member_id },new { @class = "btn btn-outline-info mt-2" })
             <div class="row mt-5">
                 <div class="col-md-1 ">
                     <p>評論數 <a>5</a></p>

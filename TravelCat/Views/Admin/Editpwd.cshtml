@@ -15,12 +15,12 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.admin_id)
-        
+
         <div class="form-group">
             <label class="col-form-label">原密碼</label>
             <div class="col-md-10">
-                <input type="password" name="oldpassword" class="form-control" />
-                @Html.ValidationMessageFor(model => model.admin_password, "", new { @class = "text-danger" })
+                <input id="oldpassword" type="password" name="oldpassword" class="form-control" />
+
             </div>
             <span class="text-danger">@ViewBag.Err</span>
         </div>
@@ -58,17 +58,27 @@
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 <script>
     $('#submit1').click(function () {
-        var psd1 = $('#Password1').val();
-        var psd2 = $('#Password2').val();
+        var psd1 = $('#oldpassword').val();
+        var psd2 = $('#Password1').val();
+        var psd3 = $('#Password2').val();
 
-        if (psd2 != psd1) {
-            alert("兩次輸入的密碼不一致！");
+        if (psd1 == "") {
+            alert("請輸入原密碼！");
             return false;
         }
-        else if (psd1 == "" || psd2 == "") {
+        if (psd2 == "") {
             alert("請輸入新密碼！");
             return false;
         }
+        else if (psd3 == "") {
+            alert("請輸入確認密碼！");
+            return false;
+        }
+        else if (psd2 != psd3) {
+            alert("兩次輸入的密碼不一致！");
+            return false;
+        }
+
         else
             return true;
     });
