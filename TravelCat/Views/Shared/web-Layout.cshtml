@@ -23,7 +23,6 @@
                 {
                     <div>
                         @Html.ActionLink(@User.Identity.GetUserName(), "Index", "web_Member_Index", new { id = Session["memberID"]  }, new { @class = " far fa-user memberId" })
-
                         @Html.ActionLink("登出", "LogOut", "Home", null, new { @class = " text-dark" })
                     </div>
 

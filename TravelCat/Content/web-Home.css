@@ -55,8 +55,12 @@
             margin-top: 20px;
             position: relative;
             box-shadow: 2px 2px 4px #CCC;
+            transition: .3s;
         }
-            .container .row .col-12 .tab-content .tab-pane .card img{
+            .container .row .col-12 .tab-content .tab-pane .card:hover{
+                transform: translateY(-10px);
+            }
+            .container .row .col-12 .tab-content .tab-pane .card img {
                 width: 80%;
                 margin: 0px 10%;
                 margin-top: 10px;
