@@ -1,0 +1,107 @@
+﻿<link href="~/Content/destinations.css" rel="stylesheet" />
+@model TravelCat.ViewModels.destinationsViewModel
+
+@using (Ajax.BeginForm("_CommentsForDestination", new { tourismID = ViewBag.tourismID }, new AjaxOptions { UpdateTargetId = "comments-tool", HttpMethod = "Post" }))
+{
+
+    <div>
+        @foreach (var item in Model.comment)
+        {
+            if (item.comment_status)
+            {
+
+
+                <button type="button" class="btn btn-default" aria-label="Left Align">
+                    <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
+                </button>
+
+                <div class="single_comments container">
+
+
+                    <div class="card mt-3">
+
+                        <input id="comment_id" type="hidden" value=@item.comment_id />
+
+                        <div class="media mt-3">
+                            <img src="~/images/member/@item.member.member_profile.profile_photo" width="74" height="74" class="mr-3 ml-3 member_avatar" alt="...">
+                            <div class="media-body col-12">
+                                <h5 class="mt-0 ">@item.member.member_profile.nickname</h5>
+                                <h5 class="mt-0 ">@item.member.member_profile.city</h5>
+                                <h5 class="mt-0 "> @item.comment_date</h5>
+                                <div class="row  mt-2 mb-5 ">
+                                    <div>
+                                        <img src="/images/comment/@item.comment_photo" class="img-fluid" />
+                                    </div>
+                                </div>
+                                <h2 class="">@item.comment_title</h2>
+                                <div>
+                                    @Html.Raw(@item.comment_content.ToString().Replace("\n", "<br>"))
+                                </div>
+                                <div>
+                                    
+                                </div>
+
+                                <hr />
+                                <div class="d-flex btn-group btn-group-toggle mb-3 mt-3  " data-toggle="buttons">
+                                    <div class="comment_emoji_detail emoji">
+                                        <img class="icon comment_emoji_heart" src="~/images/emoji/talk.png" data-value="@item.comment_emoji_details.Where(m => m.emoji_id == 1).Count()" comment_id="@item.comment_id" emoji_id="1" />
+                                        <span class="comment_emoji_heart_num">@item.comment_emoji_details.Where(m => m.emoji_id == 1).Count() </span>
+                                        <img class="icon comment_emoji_unicorn" src="~/images/emoji/unicorn.svg" data-value="@item.comment_emoji_details.Where(m => m.emoji_id == 2).Count() " comment_id="@item.comment_id" emoji_id="2" />
+                                        <span class="comment_emoji_unicorn_num">@item.comment_emoji_details.Where(m => m.emoji_id == 2).Count()</span>
+                                        <img class="icon comment_emoji_good" src="~/images/emoji/good.svg" data-value="@item.comment_emoji_details.Where(m => m.emoji_id == 3).Count()" comment_id="@item.comment_id" emoji_id="3" />
+                                        <span class="comment_emoji_good_num">@item.comment_emoji_details.Where(m => m.emoji_id == 3).Count()</span>
+                                    </div>
+
+
+                                    <div class=" text-right ">
+
+                                        <div class="">
+                                            <a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <img class="icon" src="~/images/emoji/ellipsis.svg" />
+                                            </a>
+
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                <a class="dropdown-item" href="#">分享到 facebook</a>
+                                                <a class="dropdown-item" href="#">分享到 line</a>
+                                                <a class="dropdown-item" href="#">分享到 google</a>
+                                                <a class="dropdown-item report_comment" href="#"></a>
+                                                <!-- Button trigger modal -->
+                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalScrollable">
+                                                    檢舉此評論
+                                                </button>
+                                                @*<div class="fb-share-button dropdown-item" data-href="http://localhost:54678/web_activities/Details/A000001" data-layout="button" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A54678%2Fweb_activities%2FDetails%2FA000001&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">分享</a></div>*@
+                                            </div>
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-scrollable" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalScrollableTitle">檢舉評論</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <textarea id="report_content" name="report_content" rows="20" cols="20" placeholder="請附上有問題的網址，以及違規評論內容"></textarea>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button id="btnTest" type="submit" class="btn btn-primary submit_issue" data-dismiss="modal">提交表單</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            }
+        }
+
+    </div>
+}
+

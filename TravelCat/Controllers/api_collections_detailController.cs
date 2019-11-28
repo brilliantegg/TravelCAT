@@ -69,8 +69,9 @@ namespace TravelCat.Controllers
 
             return StatusCode(HttpStatusCode.NoContent);
         }
-
         // POST: api/api_collections_detail
+        [HttpPost]
+  
         [ResponseType(typeof(collections_detail))]
         public IHttpActionResult Postcollections_detail(collections_detail collections_detail)
         {

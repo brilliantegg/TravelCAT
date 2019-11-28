@@ -210,6 +210,8 @@
                             <h5 class="card-title">@Model.activity[9].activity_title</h5>
                             <p class="card-text">@Model.activity[9].activity_intro</p>
                             <a href="#" class="btn btn-primary btn-sm">more</a>
+                            @Html.ActionLink("more", "Details", "web_activities", new { id = @Model.activity[9].activity_id }, new { @class = "btn btn-primary btn-sm" })
+
                         </div>
                     </div>
 
@@ -224,34 +226,6 @@
             </div>
         </div>
     </div>
-    @*<div class="row">
-            <h2>活動</h2>
-            <div class="co-4">@Model.activity[0].activity_title</div>
-            <div class="col-4">@Model.activity[1].activity_title</div>
-            <div class="col-4">@Model.activity[2].activity_title</div>
-        </div>
-        <div class="row">
-            <h2>住宿</h2>
-            <div class="col-4">@Model.hotel[0].hotel_title</div>
-            <div class="col-4">@Model.hotel[1].hotel_title</div>
-            <div class="col-4">@Model.hotel[2].hotel_title</div>
-        </div>
-        <div class="row">
-            <h2>餐廳</h2>
-            <div class="col-4">@Model.restaurant[0].restaurant_title</div>
-            <div class="col-4">@Model.restaurant[1].restaurant_title</div>
-            <div class="col-4">@Model.restaurant[2].restaurant_title</div>
-        </div>
-        <div class="row">
-            <h2>景點</h2>
-            <div class="col-4">@Model.spot[0].spot_title</div>
-            <div class="col-4">@Model.spot[1].spot_title</div>
-            <div class="col-md-4">@Model.spot[2].spot_title</div>
-        </div>
-        <div class="row">
-            <h2>評論</h2>
-            <div class="col-4">@Model.comment[0].comment_title</div>
-            <div class="col-4">@Model.comment[1].comment_title</div>
-            <div class="col-4">@Model.comment[2].comment_title</div>
-        </div>*@
+    <!--評論-->
+    @Html.Action("_CommentsForDestination", "CommentsWeb")
 </div>

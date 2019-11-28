@@ -1,26 +1,17 @@
 ﻿@model TravelCat.Models.comment
 
-@{
-    ViewBag.Title = "Edit";
-    Layout = "~/Views/Shared/web-Layout.cshtml";
-}
-
-<h2>編輯評論</h2>
-
-
-
-<form action="/web_comments/Edit" method="post" enctype="multipart/form-data">
+@using (Html.BeginForm()) 
+{
     @Html.AntiForgeryToken()
-
+    
     <div class="form-horizontal">
-
+        <h4>comment</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.comment_id)
-
         <div class="form-group">
+            @Html.LabelFor(model => model.tourism_id, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.HiddenFor(model => model.tourism_id, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.tourism_id, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.tourism_id, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -42,8 +33,9 @@
         </div>
 
         <div class="form-group">
+            @Html.LabelFor(model => model.comment_date, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.HiddenFor(model => model.comment_date, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.comment_date, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.comment_date, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -51,11 +43,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.comment_photo, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <img src="~/images/comment/@Model.comment_photo" width="500" />
-
-                <input type="file" id="input" name="comment_photo">
-
-
+                @Html.EditorFor(model => model.comment_photo, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.comment_photo, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -93,30 +81,31 @@
         </div>
 
         <div class="form-group">
+            @Html.LabelFor(model => model.comment_status, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <div class="checkbox">
-                    @Html.HiddenFor(model => model.comment_status)
+                    @Html.EditorFor(model => model.comment_status)
                     @Html.ValidationMessageFor(model => model.comment_status, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
 
         <div class="form-group">
+            @Html.LabelFor(model => model.member_id, "member_id", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.HiddenFor(model => model.member_id)
+                @Html.DropDownList("member_id", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.member_id, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-outline-dark" />
+                <input type="submit" value="Create" class="btn btn-default" />
             </div>
         </div>
     </div>
-    
-    </form>
+}
 
-
-        <script src="~/Scripts/jquery.validate.min.js"></script>
-        <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

@@ -39,10 +39,10 @@ namespace TravelCat.Controllers
         }
 
         // GET: web_comments/Create
-        public ActionResult Create(string tourismID )
+        public ActionResult Create(string tourismID)
         {
             ViewBag.tourismID = tourismID;
-            
+
 
             return View();
         }
@@ -63,12 +63,14 @@ namespace TravelCat.Controllers
 
                     fileName = System.IO.Path.GetFileName(comment_photo.FileName);      //取得檔案的檔名(主檔名+副檔名)
                     rename_filename = comment.comment_id + "_" + DateTime.Now.ToString().Replace("/", "").Replace(":", "").Replace(" ", "") + Path.GetExtension(fileName);
-                    comment_photo.SaveAs(Server.MapPath("~/images/comment/" + rename_filename));      //將檔案存到該資料夾
+
                 }
             }
             //end
             if (ModelState.IsValid)
             {
+                comment_photo.SaveAs(Server.MapPath("~/images/comment/" + rename_filename));      //將檔案存到該資料夾
+                comment.comment_date = DateTime.Now;
                 comment.comment_photo = rename_filename;
                 db.comment.Add(comment);
                 db.SaveChanges();
@@ -101,7 +103,7 @@ namespace TravelCat.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(comment comment, HttpPostedFileBase comment_photo)
         {
-           String id = comment.tourism_id;
+            String id = comment.tourism_id;
             //處理圖檔上傳
             string fileName = "";
             string rename_filename = "";
@@ -113,7 +115,7 @@ namespace TravelCat.Controllers
                     fileName = System.IO.Path.GetFileName(comment_photo.FileName);      //取得檔案的檔名(主檔名+副檔名)
                     rename_filename = comment.comment_id + "_" + DateTime.Now.ToString().Replace("/", "").Replace(":", "").Replace(" ", "") + Path.GetExtension(fileName);
                     comment_photo.SaveAs(Server.MapPath("~/images/comment/" + rename_filename));      //將檔案存到該資料夾
-                    
+
                 }
             }
             //end                      
@@ -122,9 +124,9 @@ namespace TravelCat.Controllers
                 comment.comment_photo = rename_filename;
                 db.Entry(comment).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Details", "web_activities",new { id= id });                
+                return RedirectToAction("Details", "web_activities", new { id = id });
             }
-            
+
             return View(comment);
         }
 
@@ -137,9 +139,9 @@ namespace TravelCat.Controllers
             }
             comment comment = db.comment.Find(id);
 
-            List<comment_emoji_details> emojis = db.comment_emoji_details.Where(m=>m.comment_id==id).ToList();
+            List<comment_emoji_details> emojis = db.comment_emoji_details.Where(m => m.comment_id == id).ToList();
 
-            List<message>messages = db.message.Where(m => m.comment_id == id).ToList();
+            List<message> messages = db.message.Where(m => m.comment_id == id).ToList();
 
             List<message_emoji_details> mEmojis = db.message_emoji_details.Where(m => m.message.msg_id == id).ToList();
 
@@ -162,7 +164,7 @@ namespace TravelCat.Controllers
             //    db.comment_emoji_details.Remove(emojis[i]);
             //    db.SaveChanges();
             //}            
-            
+
 
             return RedirectToRoute(new { controller = "web_activities", action = "Details", id = comment.tourism_id });
 
@@ -192,7 +194,8 @@ namespace TravelCat.Controllers
             {
                 comment = db.comment.OrderByDescending(p => p.comment_date).ThenByDescending(p => p.comment_id).Take(number).ToList();
             }
-                return PartialView(comment);
+            return PartialView(comment);
         }
+
     }
 }

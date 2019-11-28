@@ -24,7 +24,7 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.comment_title, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-5">
                 @Html.EditorFor(model => model.comment_title, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.comment_title, "", new { @class = "text-danger" })
             </div>
@@ -32,18 +32,18 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.comment_content, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-5">
                 @Html.EditorFor(model => model.comment_content, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.comment_content, "", new { @class = "text-danger" })
             </div>
         </div>
-        <!--發表時間 進入表單的時間 並非送出表單的時間-->
+        <!--發表時間 -->
         <input type="hidden" id="comment_date" name="comment_date" value="@DateTime.Now.ToString("yyyy/MM/dd")" />
 
         <!--上傳圖片-->
         <div class="form-group">
             @Html.LabelFor(model => model.comment_photo, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-5">
                 <input id="comment_photo" name="comment_photo" type="file" class="form-control" />
                 @Html.ValidationMessageFor(model => model.comment_photo, "", new { @class = "text-danger" })
             </div>
@@ -51,8 +51,16 @@
         <!--停留時間-->
         <div class="form-group">
             @Html.LabelFor(model => model.comment_stay_total, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.comment_stay_total, new { htmlAttributes = new { @class = "form-control" } })
+            <div class="col-md-5">
+                    <div class="input-group mb-3">
+                        <select class="custom-select" id="comment_stay_total" name="comment_stay_total">
+                            <option selected>Choose...</option>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>3小時以上</option>
+                        </select>
+                    </div>
                 @Html.ValidationMessageFor(model => model.comment_stay_total, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -60,7 +68,7 @@
         <div class="form-group">
 
             @Html.LabelFor(model => model.travel_partner, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-5">
                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
                     <label class="btn btn-info travel_partner active">
                         <input type="radio" name="travel_partner" id="option1" autocomplete="off" checked value="蜜月"> 蜜月
@@ -78,9 +86,6 @@
                         <input type="radio" name="travel_partner" id="option5" autocomplete="off" value="商務"> 商務
                     </label>
                 </div>
-
-
-
             </div>
             @Html.ValidationMessageFor(model => model.travel_partner, "", new { @class = "text-danger" })
         </div>
@@ -88,8 +93,7 @@
 
     <div class="form-group">
         @Html.LabelFor(model => model.comment_rating, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-
+        <div class="col-md-5">
             @Html.RadioButton("comment_rating", "1", true)1
             @Html.RadioButton("comment_rating", "2", true)2
             @Html.RadioButton("comment_rating", "3", true)3
@@ -106,12 +110,9 @@
 
     <div class="form-group">
         @Html.LabelFor(model => model.travel_month, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
+        <div class="col-md-5">
 
             <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <label class="input-group-text" for="inputGroupSelect01">Options</label>
-                </div>
                 <select class="custom-select" id="inputGroupSelect01" name="travel_month">
                     <option selected>Choose...</option>
                     <option>1</option>

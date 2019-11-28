@@ -23,6 +23,7 @@ namespace TravelCat.Controllers
                 member_profile = db.member_profile.Find(id),
 
             };
+            ViewBag.memberId = id;
             return View(model);
         }
         public ActionResult EditMemberProfile (string id)

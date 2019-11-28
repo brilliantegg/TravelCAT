@@ -1,9 +1,21 @@
 ﻿<link href="~/Content/destinations.css" rel="stylesheet" />
+@using Microsoft.AspNet.Identity
 @model TravelCat.ViewModels.destinationsViewModel
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/web-Layout.cshtml";
 
+    string memberId;
+    if (Session["memberID"] == null || string.IsNullOrWhiteSpace(Session["memberID"].ToString()))
+    {
+        memberId = "null";
+    }
+    else
+    {
+        memberId = Session["memberID"].ToString();
+    }
+    //string userName = @User.Identity.GetUserName().ToString();
+    //string memId = Model.member.Where(m=>m.member_account==userName).FirstOrDefault();
 }
 
 
@@ -47,10 +59,18 @@
     <section class="bg-white py-5  text-center">
         <div class="container col-md-10 ">
             <!--加入收藏-->
-            <form method="post">
-                <input id="Hidden1" type="hidden" value="" />
-                <input type="submit" name="add_to_bucket_list" class="add_to_bucket_list" value="加入收藏" />
+
+            <form action="/api/api_collections_detail" method="post">
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="member_id" value="@Session["memberID"]" />
+                <input type="hidden" name="tourism_id" value="@ViewBag.id" />
+                <input type="hidden" name="privacy" value="true" />
+                <input type="hidden" name="collection_type_id" value="1" />
+                <br />
+                <input type="submit" name="add_to_bucket_list" class="add_to_bucket_list btn btn-outline-info" value="加入收藏" />
             </form>
+
+
             <h2>
                 @Html.DisplayNameFor(model => model.activity.activity_intro)
             </h2>
@@ -72,18 +92,18 @@
                                 <h4>
                                     @Html.DisplayNameFor(model => model.activity.activity_tel)
                                 </h4>
-                                
-                                    @if (@Html.DisplayFor(model => model.activity.activity_tel) == null)
-                                    {
-                                        <span>無</span>
-                                    }
-                                    else
-                                    {
+
+                                @if (String.IsNullOrEmpty(@Model.activity.activity_tel))
+                                {
+                                    <span>無</span>
+                                }
+                                else
+                                {
                                     <span>
                                         @Html.DisplayFor(model => model.activity.activity_tel)
                                     </span>
-                                    }
-                                                               
+                                }
+
                             </li>
                             <li>
                                 <h4>
@@ -97,9 +117,16 @@
                                 <h4>
                                     @Html.DisplayFor(model => model.activity.district)
                                 </h4>
-                                <span>
-                                    @Html.DisplayFor(model => model.activity.address_detail)
-                                </span>
+                                @if (String.IsNullOrEmpty(@Model.activity.address_detail))
+                                {
+                                    <span>無</span>
+                                }
+                                else
+                                {
+                                    <span>
+                                        @Html.DisplayFor(model => model.activity.address_detail)
+                                    </span>
+                                }
                             </li>
                         </ul>
                     </div>
@@ -139,9 +166,18 @@
                             <h4>
                                 @Html.DisplayNameFor(model => model.activity.website)
                             </h4>
-                            <span>
-                                @Html.DisplayFor(model => model.activity.website)
-                            </span>
+
+
+                            @if (String.IsNullOrEmpty(@Model.activity.website))
+                            {
+                                <span>無</span>
+                            }
+                            else
+                            {
+                                <span>
+                                    @Html.DisplayFor(model => model.activity.website)
+                                </span>
+                            }
                         </li>
                     </ul>
                 </div>
@@ -159,9 +195,17 @@
                         <h2>
                             @Html.DisplayNameFor(model => model.activity.transport_info)
                         </h2>
-                        <span>
-                            @Html.DisplayFor(model => model.activity.transport_info)
-                        </span>
+                        @if (String.IsNullOrEmpty(@Model.activity.website))
+                        {
+                            <span>無</span>
+                        }
+                        else
+                        {
+                            <span>
+                                @Html.DisplayFor(model => model.activity.transport_info)
+                            </span>
+                        }
+
                         <br />
                     </div>
                 </div>
@@ -202,23 +246,23 @@
                 </div>
                 <div class="col-4">
                     <h4>旅客類型</h4><br />
-                    <input id="Checkbox1" type="checkbox" />家庭出遊 <br />
+                    <input id="Checkbox1" type="checkbox" />蜜月 <br />
                     <div class="progress">
                         <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
-                    <input id="Checkbox1" type="checkbox" />伴侶旅行 <br />
+                    <input id="Checkbox1" type="checkbox" />伴侶 <br />
                     <div class="progress">
                         <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
-                    <input id="Checkbox1" type="checkbox" />單獨旅行<br />
+                    <input id="Checkbox1" type="checkbox" />家庭<br />
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <input id="Checkbox1" type="checkbox" />朋友<br />
                     <div class="progress">
                         <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                     <input id="Checkbox1" type="checkbox" />商務<br />
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <input id="Checkbox1" type="checkbox" />好友旅行<br />
                     <div class="progress">
                         <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
@@ -242,113 +286,120 @@
                         <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                 </div>
-                <!--新增評論-->
-                <div class="new_comment text-center">
-                    <form action="/web_comments/Create" Method="GET">
-                        <input type="hidden" name="tourismID" value=@Model.activity.activity_id />
-                        <input type="hidden" name="mem_id" value="" />
-                        <button type="submit" class="btn btn-outline-info mb-5  mt-3 " f>新增評論</button>
-                    </form>
-                </div>
+                <input id="Submit_filter" type="submit" value="送出篩選" class="btn btn-outline-info" />
             </div>
         </div>
-
-
     </section>
 
     <!--評論列表-->
+    <!--新增評論-->
+    <div class="new_comment container">
+        <form action="/web_comments/Create" Method="GET">
+            <input type="hidden" name="tourismID" value=@Model.activity.activity_id />
+            <input type="hidden" name="mem_id" value="@Session["memberID"]" />
+            <button type="submit" class="add_comment btn btn-outline-info mb-5  mt-3 ">新增評論</button>
+        </form>
+    </div>
 
     @foreach (var item in Model.comment)
     {
-        <button type="button" class="btn btn-default" aria-label="Left Align">
-            <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
-        </button>
-
-        <div class="single_comments container">
+        if (item.comment_status)
+        {
 
 
-            <div class="card mt-3">
+            <button type="button" class="btn btn-default" aria-label="Left Align">
+                <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
+            </button>
 
-                <input id="comment_id" type="hidden" value=@item.comment_id />
+            <div class="single_comments container">
 
-                <div class="media mt-3">
-                    <img src="~/images/member/@item.member.member_profile.profile_photo" width="74" height="74" class="mr-3 ml-3 member_avatar" alt="...">
-                    <div class="media-body col-12">
-                        <h5 class="mt-0 ">@item.member.member_profile.nickname</h5>
-                        <h5 class="mt-0 ">@item.member.member_profile.city</h5>
-                        <h5 class="mt-0 "> @item.comment_date</h5>
-                        <div class="row  mt-2 mb-5 ">
+
+                <div class="card mt-3">
+
+                    <input id="comment_id" type="hidden" value=@item.comment_id />
+
+                    <div class="media mt-3">
+                        <img src="~/images/member/@item.member.member_profile.profile_photo" width="74" height="74" class="mr-3 ml-3 member_avatar" alt="...">
+                        <div class="media-body col-12">
+                            <h5 class="mt-0 ">@item.member.member_profile.nickname</h5>
+                            <h5 class="mt-0 ">@item.member.member_profile.city</h5>
+                            <h5 class="mt-0 "> @item.comment_date</h5>
+                            <div class="row  mt-2 mb-5 ">
+                                <div>
+                                    <img src="/images/comment/@item.comment_photo" class="img-fluid" />
+                                </div>
+                            </div>
+                            <h2 class="">@item.comment_title</h2>
                             <div>
-                                <img src="/images/comment/@item.comment_photo" class="img-fluid" />
-                            </div>
-                        </div>
-                        <h2 class="">@item.comment_title</h2>
-                        <div>
-                            @item.comment_content
-                        </div>
-                        <div class="text-right">
-                            @Html.ActionLink("編輯", "Edit", "web_comments", new { id = @item.comment_id }, null)
-                            @*@Html.ActionLink("刪除", "Delete", "web_comments", new { id = @item.comment_id }, null)*@
-                            @Html.ActionLink("刪除", "Delete", "web_comments", new { id = @item.comment_id }, new { @class = "", onclick = "return confirm('此功能尚未完成!!!')" })
-                        </div>
-                        <hr />
-                        <div class="d-flex btn-group btn-group-toggle mb-3 mt-3  " data-toggle="buttons">
-                            <div class="comment_emoji_detail emoji">
-                                <img class="icon comment_emoji_heart" src="~/images/emoji/talk.png" data-value="@item.comment_emoji_details.Where(m => m.emoji_id == 1).Count()" comment_id="@item.comment_id" emoji_id="1" />
-                                <span class="comment_emoji_heart_num">@item.comment_emoji_details.Where(m => m.emoji_id == 1).Count() </span>
-                                <img class="icon comment_emoji_unicorn" src="~/images/emoji/unicorn.svg" data-value="@item.comment_emoji_details.Where(m => m.emoji_id == 2).Count() " comment_id="@item.comment_id" emoji_id="2" />
-                                <span class="comment_emoji_unicorn_num">@item.comment_emoji_details.Where(m => m.emoji_id == 2).Count()</span>
-                                <img class="icon comment_emoji_good" src="~/images/emoji/good.svg" data-value="@item.comment_emoji_details.Where(m => m.emoji_id == 3).Count()" comment_id="@item.comment_id" emoji_id="3" />
-                                <span class="comment_emoji_good_num">@item.comment_emoji_details.Where(m => m.emoji_id == 3).Count()</span>
+                                @Html.Raw(@item.comment_content.ToString().Replace("\n", "<br>"))
                             </div>
 
+                            @if (Request.IsAuthenticated)
+                            {
+                                <div class="text-right">
+                                    @Html.ActionLink("編輯", "Edit", "web_comments", new { id = @item.comment_id }, null)
+                                    @Html.ActionLink("刪除", "Delete", "web_comments", new { id = @item.comment_id }, new { @class = "", onclick = "return confirm('確認要刪除?')" })
+                                </div>
+                            }
 
-                            <div class=" text-right ">
+                            <hr />
+                            <div class="d-flex btn-group btn-group-toggle mb-3 mt-3  " data-toggle="buttons">
+                                <div class="comment_emoji_detail emoji">
+                                    <img class="icon comment_emoji_heart" src="~/images/emoji/talk.png" data-value="@item.comment_emoji_details.Where(m => m.emoji_id == 1).Count()" comment_id="@item.comment_id" emoji_id="1" />
+                                    <span class="comment_emoji_heart_num">@item.comment_emoji_details.Where(m => m.emoji_id == 1).Count() </span>
+                                    <img class="icon comment_emoji_unicorn" src="~/images/emoji/unicorn.svg" data-value="@item.comment_emoji_details.Where(m => m.emoji_id == 2).Count() " comment_id="@item.comment_id" emoji_id="2" />
+                                    <span class="comment_emoji_unicorn_num">@item.comment_emoji_details.Where(m => m.emoji_id == 2).Count()</span>
+                                    <img class="icon comment_emoji_good" src="~/images/emoji/good.svg" data-value="@item.comment_emoji_details.Where(m => m.emoji_id == 3).Count()" comment_id="@item.comment_id" emoji_id="3" />
+                                    <span class="comment_emoji_good_num">@item.comment_emoji_details.Where(m => m.emoji_id == 3).Count()</span>
+                                </div>
 
-                                <div class="">
-                                    <a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <img class="icon" src="~/images/emoji/ellipsis.svg" />
-                                    </a>
 
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                        <a class="dropdown-item" href="#">分享到 facebook</a>
-                                        <a class="dropdown-item" href="#">分享到 line</a>
-                                        <a class="dropdown-item" href="#">分享到 google</a>
-                                        <a class="dropdown-item report_comment" href="#"></a>
-                                        <!-- Button trigger modal -->
-                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalScrollable">
-                                            檢舉此評論
-                                        </button>
-                                        @*<div class="fb-share-button dropdown-item" data-href="http://localhost:54678/web_activities/Details/A000001" data-layout="button" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A54678%2Fweb_activities%2FDetails%2FA000001&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">分享</a></div>*@
-                                    </div>
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-scrollable" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalScrollableTitle">檢舉評論</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <textarea id="report_content" name="report_content" rows="20" cols="20" placeholder="請附上有問題的網址，以及違規評論內容"></textarea>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="submit" class="btn btn-primary submit_issue" data-dismiss="modal">提交表單</button>
+                                <div class=" text-right ">
+
+                                    <div class="">
+                                        <a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <img class="icon" src="~/images/emoji/ellipsis.svg" />
+                                        </a>
+
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                            <a class="dropdown-item" href="#">分享到 facebook</a>
+                                            <a class="dropdown-item" href="#">分享到 line</a>
+                                            <a class="dropdown-item" href="#">分享到 google</a>
+                                            <a class="dropdown-item report_comment" href="#"></a>
+                                            <!-- Button trigger modal -->
+                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalScrollable">
+                                                檢舉此評論
+                                            </button>
+                                            @*<div class="fb-share-button dropdown-item" data-href="http://localhost:54678/web_activities/Details/A000001" data-layout="button" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A54678%2Fweb_activities%2FDetails%2FA000001&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">分享</a></div>*@
+                                        </div>
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-scrollable" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalScrollableTitle">檢舉評論</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <textarea id="report_content" name="report_content" rows="20" cols="20" placeholder="請附上有問題的網址，以及違規評論內容"></textarea>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button id="btnTest" type="submit" class="btn btn-primary submit_issue" data-dismiss="modal">提交表單</button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <!--單則留言-->
-            <div class="message_list card ">
+                <!--單則留言-->
+                <div class="message_list card ">
 
 
                     @foreach (var msgItem in item.message)
@@ -358,7 +409,7 @@
                                 <img src="~/images/member/@msgItem.member.member_profile.profile_photo" width="74" height="74" class="mr-3 ml-3 member_avatar" alt="...">
                                 <div class="media-body">
                                     <h5 class="mt-0">
-                                        @msgItem.member_id
+                                        @msgItem.member.member_profile.nickname
                                     </h5>
                                     <h5 class="mt-0">
                                         @msgItem.msg_time
@@ -375,25 +426,29 @@
                             </div>
                         </div>
                     }
-
-                <div class="add_message single_message">
-                    <form action="/web_activities/createMessage" method="post">
-                        @Html.AntiForgeryToken()
-                        <input type="hidden" name="comment_id" value="@item.comment_id" />
-                        <input type="hidden" name="msg_time" value="@ViewBag.getTime" />
-                        <input type="hidden" name="member_id" value="M000001" />
-                        <input type="hidden" name="msg_status" value="True" />
-                        <input type="hidden" name="tourism_id" value="@item.tourism_id" />
-                        <textarea id="msg_content" rows="2" cols="20" name="msg_content" placeholder="想說說甚麼..."></textarea>
-                        <br />
-                        <div class="add_message_Submit_area text-right">
-                            <input id="add_message_Submit" class="btn btn-info" type="submit" value="submit" />
+                    <!--回覆留言-->
+                    @if (Request.IsAuthenticated)
+                    {
+                        <div class="add_message single_message">
+                            <form action="/web_activities/createMessage" method="post">
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="comment_id" value="@item.comment_id" />
+                                <input type="hidden" name="msg_time" value="@ViewBag.getTime" />
+                                <input type="hidden" name="member_id" value="@Session["memberID"]" />
+                                <input type="hidden" name="msg_status" value="True" />
+                                <input type="hidden" name="tourism_id" value="@item.tourism_id" />
+                                <textarea id="msg_content" rows="2" cols="20" name="msg_content" placeholder="想說說甚麼..."></textarea>
+                                <br />
+                                <div class="add_message_Submit_area text-right">
+                                    <input id="add_message_Submit" class="btn btn-info" type="submit" value="submit" />
+                                </div>
+                            </form>
                         </div>
-                    </form>
+                    }
+
                 </div>
             </div>
-        </div>
-
+        }
     }
 </div>
 <div id="fb-root"></div>
@@ -424,17 +479,36 @@
      var a = '123';
 
 </script>
-
 @section scripts {
 
     <script>
+        var id ;
+        var tourismId = "@ViewBag.id";
+
+        if ("@Session["memberID"]" =="") {
+            id = null
+
+        } else {
+
+            id = "@Session["memberID"]"
+
+        }
+            console.log(id)
+            console.log(tourismId)
+
         //顯示文章
-        $(".readMore").click(function () {
-            $(".intro").addClass('showMore');
+        $(".readmore").click(function () {
+            $(".intro").toggleClass('showMore');
+
         })
-        
+
 
         $(".comment_emoji_detail").click(function (e) {
+            if (id == null) {
+                event.stopPropagation();
+                alert('請先登入:)');
+                return false;
+            }
             let value = parseInt(e.target.getAttribute('data-value'))
             let plusValue = value + 1
             let comment_id = e.target.getAttribute('comment_id')
@@ -446,10 +520,13 @@
                 $(event.target).next().text(value);
                 $.ajax({
                     type: 'Delete',
-                    url: 'http://localhost:54678/api/api_comment_emoji_details',
+                    url: "http://localhost:54678/api/api_comment_emoji_details",
                     contentType: 'application/json',
                     data: JSON.stringify({
-                        "id": "77",
+                        "member_id": id,
+                        "comment_id": comment_id,
+                        "emoji_id": emoji_id,
+                        "tourism_id":tourismId
                     }),
                     success: function (data, status) {
 
@@ -458,17 +535,18 @@
                 });
                 return;
             } else
-                $(e.target).attr('disabled', true);
+            $(e.target).attr('disabled', true);
             $(e.target).addClass('click_button')
             $(event.target).next().text(plusValue);
             $.ajax({
                 type: 'POST',
-                url: 'http://localhost:54678/api/api_comment_emoji_details',
+                url: "http://localhost:54678/api/api_comment_emoji_details",
                 contentType: 'application/json',
                 data: JSON.stringify({
-                    "member_id": "M000001",
+                    "member_id": id,
                     "comment_id": comment_id,
                     "emoji_id": emoji_id,
+                    "tourism_id":tourismId
                 }),
                 success: function (data, status) {
 
@@ -477,32 +555,64 @@
             });
 
         });
-        $(".submit_issue").click(function (e) {
-            let today = $.now();
-            let content = $('input[name="report_content"]').val();
+        $("#btnTest").click(function (e) {
+            if (id == null) {
+                event.stopPropagation();
+                alert('請先登入:)');
+                return false;
+            }
+            sendReport()
+        });
+        function sendReport() {
 
-            report_content
             $.ajax({
                 type: 'POST',
-                url: 'http://localhost:54678/api/api_issues',
+                url: `http://localhost:54678/api/api_issues?memberId=${id}&issueContent=${$('#report_content').val()}`,
+                success: function (data, status) {
+                    alert("提交成功!")
+                }
+            });
+            $('#report_content').val("")
+        }
+        $(".add_to_bucket_list").click(function (e) {
+            if (id == null) {
+                event.stopPropagation();
+                alert('請先登入:)');
+                return false;
+            }
+            $.ajax({
+                type: 'POST',
+                url: "http://localhost:54678/api/api_collections_detail",
                 contentType: 'application/json',
                 data: JSON.stringify({
-                    "member_id": "M000001",
-                    "admin_id": 1,
-                    "issue_id": 3,
-                    "report_date": today,
-                    "issue_content": content,
-                    "issue_result": null,
-                    "issue_status": 0,
-                    "resolve_date": null,
+                    "member_id": id,
+                    "comment_id": comment_id,
+                    "emoji_id": emoji_id,
+                    "tourism_id":tourismId
                 }),
                 success: function (data, status) {
 
 
                 }
             });
-        })
+                <form action="/api/api_collections_detail" method="post">
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="member_id" value="@Session["memberID"]" />
+                <input type="hidden" name="tourism_id" value="@ViewBag.id" />
+                <input type="hidden" name="privacy" value="true" />
+                <input type="hidden" name="collection_type_id" value="1" />
+                <br />
+                <input type="submit" name="add_to_bucket_list" class="add_to_bucket_list btn btn-outline-info" value="加入收藏" />
+            </form>
 
+        });
+        $(".add_comment").click(function (e) {
+            if (id == null) {
+                event.stopPropagation();
+                alert('請先登入:)');
+                return false;
+            }
+        })
     </script>
 }
 

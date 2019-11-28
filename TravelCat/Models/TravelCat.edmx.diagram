@@ -10,9 +10,9 @@
         <EntityTypeShape EntityType="travel_cat_v1Model.badge" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
         <EntityTypeShape EntityType="travel_cat_v1Model.badge_details" Width="1.5" PointX="3" PointY="10.625" IsExpanded="true" />
         <EntityTypeShape EntityType="travel_cat_v1Model.collection_type" Width="1.5" PointX="3.75" PointY="20.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="travel_cat_v1Model.collections_detail" Width="1.5" PointX="6" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="travel_cat_v1Model.collections_detail" Width="1.5" PointX="6" PointY="12.375" IsExpanded="true" />
         <EntityTypeShape EntityType="travel_cat_v1Model.comment" Width="1.5" PointX="3" PointY="13.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="travel_cat_v1Model.comment_emoji_details" Width="1.5" PointX="5.25" PointY="15.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="travel_cat_v1Model.comment_emoji_details" Width="1.5" PointX="6" PointY="15.5" IsExpanded="true" />
         <EntityTypeShape EntityType="travel_cat_v1Model.emoji" Width="1.5" PointX="8.25" PointY="10" IsExpanded="true" />
         <EntityTypeShape EntityType="travel_cat_v1Model.follow_list" Width="1.5" PointX="3" PointY="18.125" IsExpanded="true" />
         <EntityTypeShape EntityType="travel_cat_v1Model.hotel" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
