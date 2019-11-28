@@ -26,12 +26,12 @@ namespace TravelCat.Controllers
             {
                 string user = User.Identity.GetUserName();
                 member member = db.member.Where(m => m.member_account == user).FirstOrDefault();
-                   
-                HttpCookie cookie = new HttpCookie("memID");
-                cookie.Value= member.member_id.ToString();
-                cookie.Expires = DateTime.Now.AddMinutes(120);
-                Response.Cookies.Add(cookie);
-                Session["memberID"] = cookie.Value.ToString();
+
+                //HttpCookie cookie = new HttpCookie("memID");
+                //cookie.Value = member.member_id.ToString();
+                //cookie.Expires = DateTime.Now.AddMinutes(120);
+                //Response.Cookies.Add(cookie);
+                Session["memberID"] = member.member_id;
             }
             WebIndexViewModel model = new WebIndexViewModel()
             {
@@ -74,23 +74,39 @@ namespace TravelCat.Controllers
             if (new UserManager().IsValid(username, password))
             {
                 var mem = db.member.Where(m => m.member_account == username).FirstOrDefault();
+                string role = "";
+                if (mem.member_profile.emailConfirmed == true)
+                {
+                    if (mem.member_status==false)
+                    {
+                        role = "Confirmed";
+                    }
+                    else
+                    {
+                        role = "Blocked";
+                    }
+                }
+                else
+                {
+                    role = "UnConfirmed";
+                }
+
                 var ident = new ClaimsIdentity(
                   new[] { 
               // adding following 2 claim just for supporting default antiforgery provider
               new Claim(ClaimTypes.NameIdentifier, username),
               new Claim("http://schemas.microsoft.com/accesscontrolservice/2010/07/claims/identityprovider", "ASP.NET Identity", "http://www.w3.org/2001/XMLSchema#string"),
               new Claim(ClaimTypes.Name,username),
-              new Claim("memID",mem.member_id,ClaimValueTypes.String)
+              new Claim("memID",mem.member_id,ClaimValueTypes.String),
                //// optionally you could add roles if any
-              //new Claim(ClaimTypes.Role, "UnConfirmedUser"),
-              //new Claim(ClaimTypes.Role, "BlockedUser"),
+              new Claim(ClaimTypes.Role, role)
                   },
-                  DefaultAuthenticationTypes.ApplicationCookie);                               
+                  DefaultAuthenticationTypes.ApplicationCookie);
 
                 HttpContext.GetOwinContext().Authentication.SignIn(
                    new AuthenticationProperties { IsPersistent = false }, ident);
 
-                return RedirectToAction("Index"); // auth succeed 
+                return RedirectToAction("test"); // auth succeed 
             }
 
             // invalid username or password
@@ -101,21 +117,21 @@ namespace TravelCat.Controllers
         {
             var ctx = Request.GetOwinContext();
             var authManager = ctx.Authentication;
-            Response.Cookies["memID"].Expires = DateTime.Now.AddDays(-1);            
+            //Response.Cookies["memID"].Expires = DateTime.Now.AddDays(-1);
             Session.Clear();
 
             authManager.SignOut("ApplicationCookie");
             return RedirectToAction("Index", "Home");
         }
-        //[Authorize]
-        //public ActionResult test()
-        //{
-        //    string user = User.Identity.GetUserName();
-        //    var member = db.member.Where(m => m.member_account == user).FirstOrDefault();
-        //    Session["memberID"] = member.member_id.ToString();
-        //    ViewBag.Data = DateTime.Now.ToString();
-        //    return View();
-        //}
+        [Authorize]
+        public ActionResult _test()
+        {
+            string user = User.Identity.GetUserName();
+            var member = db.member.Where(m => m.member_account == user).FirstOrDefault();
+            Session["memberID"] = member.member_id.ToString();
+            ViewBag.Data = DateTime.Now.ToString();
+            return View();
+        }
 
 
 

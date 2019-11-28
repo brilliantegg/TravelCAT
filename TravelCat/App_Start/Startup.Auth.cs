@@ -65,6 +65,9 @@ namespace TravelCat
             //    ClientId = "825136787292-na73l1gh5nne7mf4gtn58e6aeqiogk7k.apps.googleusercontent.com",
             //    ClientSecret = "bFZb2P0_81jW9uzG66iC74eQ"
             //});
+
+            //增加角色的OwinContext
+            //app.CreatePerOwinContext<ApplicationRoleManager>(ApplicationRoleManager.Create);
         }
     }
 }
