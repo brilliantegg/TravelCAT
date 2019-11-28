@@ -21,6 +21,7 @@
 
 .jumbotron {
     margin-bottom: 0px;
+    z-index:1
 }
 
 .listyle {
@@ -37,6 +38,7 @@
     background-color: #16AC84;
     color: white;
     font-weight: bolder;
+    position:relative
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
@@ -55,4 +57,10 @@ a {
     background-color: transparent;
     font-size: 20Px;
     font-weight: bolder;
+}
+.profile_avatar {
+    top: -100px;
+    left: 60px;
+    z-index: 999;
+    position: absolute;
 }
