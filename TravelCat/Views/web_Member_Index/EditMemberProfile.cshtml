@@ -7,17 +7,19 @@
 <div class="container">
     <h2>個人資料</h2>
 
-    @using (Html.BeginForm("EditMemberProfile", "web_Member_Index", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
 
         <div class="form-horizontal">
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.member_profile.member_id)
+
             <div class="form-group">
                 @Html.LabelFor(model => model.member_account, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.member_account, new { htmlAttributes = new { @class = "form-control" } })
+                    <input id="newacc" type="text" value="@Model.member_account" name="newacc" class="form-control" />
                     @Html.ValidationMessageFor(model => model.member_account, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -25,26 +27,30 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.member_profile.member_name, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.member_profile.member_name, new { htmlAttributes = new { @class = "form-control" } })
+                    <input id="newname" type="text" value="@Model.member_profile.member_name" name="newname" class="form-control" />
                     @Html.ValidationMessageFor(model => model.member_profile.member_name, "", new { @class = "text-danger" })
                 </div>
             </div>
 
+            @*尚未解決*@
             <div class="form-group">
                 @Html.LabelFor(model => model.member_profile.gender, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-
-                    @Html.RadioButtonFor(model => model.member_profile.gender, false, new { htmlAttributes = new { @class = "form-control" } })<span>男</span>
-                    @Html.RadioButtonFor(model => model.member_profile.gender, true, new { htmlAttributes = new { @class = "form-control" } })<span>女</span>
+                    @*@Html.RadioButtonFor(model => model.member_profile.gender, false, new { htmlAttributes = new { @class = "form-control" } })<span>男</span>*@
+                    @*@Html.RadioButtonFor(model => model.member_profile.gender, true, new { htmlAttributes = new { @class = "form-control" } })<span>女</span>*@
+                    <select name="newgender" class="form-control">
+                        <option value="true">男</option>
+                        <option value="false">女</option>
+                    </select>
                     @Html.ValidationMessageFor(model => model.member_profile.gender, "", new { @class = "text-danger" })
-
                 </div>
             </div>
 
             <div class="form-group">
                 @Html.LabelFor(model => model.member_profile.birthday, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.TextBoxFor(model => model.member_profile.birthday, new { @type = "date", @class = "form-control datepicker" })
+                    @*@Html.TextBoxFor(model => model.member_profile.birthday, new { @type = "date", @class = "form-control datepicker" })*@
+                    <input id="newbirthday"  type="date" value="@Model.member_profile.birthday" name="newbirthday" class="form-control" />
                     @Html.ValidationMessageFor(model => model.member_profile.birthday, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -52,54 +58,48 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.member_profile.nickname, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.member_profile.nickname, new { htmlAttributes = new { @class = "form-control" } })
+                    @*@Html.EditorFor(model => model.member_profile.nickname, new { htmlAttributes = new { @class = "form-control" } })*@
+                    <input id="newnickname" type="text" value="@Model.member_profile.nickname" name="newnickname" class="form-control" />
                     @Html.ValidationMessageFor(model => model.member_profile.nickname, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="form-group">
                 @Html.LabelFor(model => model.member_profile.nation, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.member_profile.nation, new { htmlAttributes = new { @class = "form-control" } })
+                    <input id="newnation" type="text" value="@Model.member_profile.nation" name="newnation" class="form-control" />
                     @Html.ValidationMessageFor(model => model.member_profile.nation, "", new { @class = "text-danger" })
-                </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.member_profile.address_detail, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.member_profile.address_detail, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.member_profile.address_detail, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="form-group">
                 @Html.LabelFor(model => model.member_profile.city, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.member_profile.city, new { htmlAttributes = new { @class = "form-control" } })
+                    <input id="newcity" type="text" value="@Model.member_profile.city" name="newcity" class="form-control" />
                     @Html.ValidationMessageFor(model => model.member_profile.city, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="form-group">
-                @Html.LabelFor(model => model.member_profile.email, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.member_profile.address_detail, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.member_profile.email, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.member_profile.email, "", new { @class = "text-danger" })
+                    <input id="newaddress_detail" type="text" value="@Model.member_profile.address_detail" name="newaddress_detail" class="form-control" />
+                    @Html.ValidationMessageFor(model => model.member_profile.address_detail, "", new { @class = "text-danger" })
                 </div>
             </div>
+
             <div class="form-group">
                 @Html.LabelFor(model => model.member_profile.phone, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.member_profile.phone, new { htmlAttributes = new { @class = "form-control" } })
+                    <input id="newphone" type="text" value="@Model.member_profile.phone" name="newphone" class="form-control" />
                     @Html.ValidationMessageFor(model => model.member_profile.phone, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="form-group">
                 @Html.LabelFor(model => model.member_profile.profile_photo, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    <input name="photo" id="photo" type="file" class="form-control" />
+                    <input name="photo" id="photo" type="file" value="@Model.member_profile.profile_photo" class="form-control" />
                     @Html.ValidationMessageFor(model => model.member_profile.profile_photo, "", new { @class = "text-danger" })
                 </div>
             </div>
-            @Html.HiddenFor(model => model.member_profile.member_id)
-            @Html.HiddenFor(model => model.member_profile.member_score)
+
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
@@ -113,3 +113,6 @@
         @Html.ActionLink("返回", "Index", new { id = Model.member_id })
     </div>
 </div>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

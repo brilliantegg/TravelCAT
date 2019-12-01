@@ -58,12 +58,12 @@
                         <li>國家:<span>@Model.member_profile.nation</span></li>
                         <li>城市:<span>@Model.member_profile.city</span></li>
                         <li>網站:<span>@Model.member_profile.website_link</span></li>
-                        <li>信箱驗證狀態:<span>@Model.member_profile.emailConfirmed</span></li>                   
+                        <li>信箱驗證狀態:<span>@Model.member_profile.emailConfirmed</span></li>
                     </ul>
 
                 </div>
 
-
+                @Html.ActionLink("更改信箱", "Editemail", "web_Member_Index", new { id = Model.member.member_id }, new { @class = "btn btn-outline-info" })
                 <button type="button" class="btn btn-outline-info my-1" data-toggle="modal" data-target="#exampleModalCenter">
                     +  新增您目前所在城市
                 </button>

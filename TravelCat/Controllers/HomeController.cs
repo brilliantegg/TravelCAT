@@ -125,7 +125,7 @@ namespace TravelCat.Controllers
             return RedirectToAction("Index", "Home");
         }
         [Authorize]
-        public ActionResult _test()
+        public ActionResult test()
         {
             string user = User.Identity.GetUserName();
             var member = db.member.Where(m => m.member_account == user).FirstOrDefault();

@@ -223,7 +223,7 @@ namespace TravelCat.Models
         [DisplayName("生日")]
         [DataType(DataType.DateTime, ErrorMessage = "輸入日期格式有誤")]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
-        public System.DateTime birthday { get; set; }
+        public Nullable<System.DateTime> birthday { get; set; }
 
         [DisplayName("暱稱")]
         [Required(ErrorMessage = "此欄位為必填")]

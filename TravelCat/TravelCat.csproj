@@ -2199,6 +2199,8 @@
     <Content Include="Views\web_Member_Index\Editpassword.cshtml" />
     <Content Include="Views\Search\Index.cshtml" />
     <Content Include="Views\Home\_test.cshtml" />
+    <Content Include="Views\web_Member_Index\ConfirmView.cshtml" />
+    <Content Include="Views\web_Member_Index\Editemail.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
