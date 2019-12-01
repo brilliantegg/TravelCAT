@@ -22,7 +22,8 @@ namespace TravelCat.Controllers
                 member = db.member.Find(id),
                 member_profile = db.member_profile.Find(id),
                 comment = db.comment.OrderByDescending(m=>m.comment_id).ToList(),
-                follow_list = db.follow_list.ToList()
+                follow_list = db.follow_list.ToList(),
+                collections_detail = db.collections_detail.Where(m=>m.member_id==id).ToList()
             };
             ViewBag.memberId = id;
             return View(model);

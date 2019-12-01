@@ -239,7 +239,7 @@
                     <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">追蹤評論</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">徽章牆</a>
+                    <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">我的珍藏</a>
                 </li>
 
             </ul>
@@ -249,7 +249,15 @@
 
                 <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">@Html.Action("_CommentsFromMember", "CommentsWeb",new {memId=@Model.member.member_id })</div>
 
-                <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">789</div>
+                <!--我的收藏-->
+                <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+                    @foreach (var item in Model.collections_detail)
+                    {
+                        <div>@item.tourism_id</div>
+
+                    }
+
+                </div>
 
             </div>
 
