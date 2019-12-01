@@ -30,7 +30,7 @@
                 @if (Request.IsAuthenticated)
                 {
                     <div>
-                        @Html.ActionLink(@User.Identity.GetUserName(), "Index", "web_Member_Index", new { id = mem_id}, new { @class = " far fa-user memberId" })
+                        @Html.ActionLink(@User.Identity.GetUserName(), "Index", "web_Member_Index", new { id = mem_id }, new { @class = " far fa-user memberId" })
 
                         @Html.ActionLink("登出", "LogOut", "Home", null, new { @class = " text-dark" })
                     </div>
@@ -61,11 +61,13 @@
         </ul>
     </div>
 
+
+
+
     <script src="~/Scripts/jquery-3.4.1.js"></script>
     <script src="~/Scripts/modernizr-2.8.3.js"></script>
     <script src="~/Scripts/bootstrap.bundle.js"></script>
     <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
-
     @RenderBody()
     @RenderSection("scripts", required: false)
     @*<footer class="footer">行動商務第2組專題</footer>*@

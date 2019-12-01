@@ -73,17 +73,18 @@ namespace TravelCat.Controllers
         [HttpPost]
   
         [ResponseType(typeof(collections_detail))]
-        public IHttpActionResult Postcollections_detail(collections_detail collections_detail)
+        public IHttpActionResult Postcollections_detail(string member_id, string tourism_id, int collection_type_id)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            collections_detail collect = new collections_detail();
+            collect.member_id = member_id;
+            collect.tourism_id = tourism_id;
+            collect.privacy = true;
+            collect.collection_type_id = collection_type_id;
 
-            db.collections_detail.Add(collections_detail);
+            db.collections_detail.Add(collect);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = collections_detail.collection_id }, collections_detail);
+            return Ok(collect);
         }
 
         // DELETE: api/api_collections_detail/5

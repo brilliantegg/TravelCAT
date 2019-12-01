@@ -1,4 +1,5 @@
-﻿<link href="~/Content/destinations.css" rel="stylesheet" />
+﻿
+<link href="~/Content/destinations.css" rel="stylesheet" />
 @model TravelCat.ViewModels.destinationsViewModel
 
 @using (Ajax.BeginForm("Destination", new { tourismID = ViewBag.tourismID }, new AjaxOptions { UpdateTargetId = "comments-tool", HttpMethod = "Post" }))
@@ -17,7 +18,7 @@
 
                 <div class="single_comments container">
 
-                    <!--評論內容-->
+
                     <div class="card mt-3">
 
                         <input id="comment_id" type="hidden" value=@item.comment_id />
@@ -37,12 +38,11 @@
                                 <div>
                                     @Html.Raw(@item.comment_content.ToString().Replace("\n", "<br>"))
                                 </div>
-                                <a href="">@Model.activity.activity_title</a>                             
+                                <div>
 
-
+                                </div>
 
                                 <hr />
-                                <!--按讚數-->
                                 <div class="d-flex btn-group btn-group-toggle mb-3 mt-3  " data-toggle="buttons">
                                     <div class="comment_emoji_detail emoji">
                                         <img class="icon comment_emoji_heart" src="~/images/emoji/talk.png" data-value="@item.comment_emoji_details.Where(m => m.emoji_id == 1).Count()" comment_id="@item.comment_id" emoji_id="1" />

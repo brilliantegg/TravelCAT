@@ -12,34 +12,55 @@ namespace TravelCat.Controllers
     {
         private dbTravelCat db = new dbTravelCat();
         // GET: CommentsWeb
-        public PartialViewResult _CommentsForDestination()
+        public PartialViewResult _CommentsForDestination(string tourismId,string action)
+        {
+            destinationsViewModel model = new destinationsViewModel();
+            switch (action)
+            {
+                case "top_destination":
+                    model = new destinationsViewModel()
+                    {
+                        activity = db.activity.Where(m => m.activity_id == tourismId).FirstOrDefault(),
+                        comment = db.comment.Where(m => m.tourism_id == tourismId).ToList(),
+                        message = db.message.Where(m => m.tourism_id == tourismId).ToList(),
+                        comment_emoji_details = db.comment_emoji_details.ToList(),
+                        message_emoji_details = db.message_emoji_details.ToList(),
+                        member_profile = db.member_profile.ToList(),
+                        member = db.member.ToList(),
+                    };
+                    break;
+                case "top_comment":
+                    Console.WriteLine("Case 2");
+                    break;
+                case "newest_comment":
+                    Console.WriteLine("Case 2");
+                    break;
+                case "newest_destination":
+                    Console.WriteLine("Case 2");
+                    break;
+                default:
+
+                    break;
+            }
+
+            return PartialView(model);
+        }
+
+        
+        public PartialViewResult _CommentsFromMember(string memId)
         {
             destinationsViewModel model = new destinationsViewModel()
             {
 
-                comment = db.comment.ToList(),
-                message = db.message.ToList(),
+                comment = db.comment.Where(m => m.member_id == memId).ToList(),
+                message = db.message.Where(m => m.member_id == memId).ToList(),
                 comment_emoji_details = db.comment_emoji_details.ToList(),
                 message_emoji_details = db.message_emoji_details.ToList(),
-                member_profile = db.member_profile.ToList(),
-                member = db.member.ToList(),
+                member_profile = db.member_profile.Where(m => m.member_id == memId).ToList(),
+                member = db.member.Where(m => m.member_id == memId).ToList(),
             };
             return PartialView(model);
         }
-        //public PartialViewResult _CommentsForDestination(string memId)
-        //{
-        //    destinationsViewModel model = new destinationsViewModel()
-        //    {
-
-        //        comment = db.comment.Where(m=>m.member_id== memId).ToList(),
-        //        message = db.message.Where(m => m.member_id == memId).ToList(),
-        //        comment_emoji_details = db.comment_emoji_details.ToList(),
-        //        message_emoji_details = db.message_emoji_details.ToList(),
-        //        member_profile = db.member_profile.Where(m => m.member_id == memId).ToList(),
-        //        member = db.member.Where(m => m.member_id == memId).ToList(),
-        //    };
-        //    return PartialView(model);
-        //}
         public PartialViewResult _CreateComment(string tourismID)
         {
             comment newComment = new comment();

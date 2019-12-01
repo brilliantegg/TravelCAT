@@ -101,28 +101,33 @@ namespace TravelCat.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(comment comment, HttpPostedFileBase comment_photo)
+        public ActionResult Edit(comment comment, HttpPostedFileBase comment_photo, string oldImg)
         {
+            db.Entry(comment).State = EntityState.Modified;
+            db.SaveChanges();
             String id = comment.tourism_id;
             //處理圖檔上傳
             string fileName = "";
             string rename_filename = "";
+            
             if (comment_photo != null)
             {
                 if (comment_photo.ContentLength > 0)
                 {
-
+                    System.IO.File.Delete(Server.MapPath("~/images/comment/" + oldImg));
                     fileName = System.IO.Path.GetFileName(comment_photo.FileName);      //取得檔案的檔名(主檔名+副檔名)
                     rename_filename = comment.comment_id + "_" + DateTime.Now.ToString().Replace("/", "").Replace(":", "").Replace(" ", "") + Path.GetExtension(fileName);
                     comment_photo.SaveAs(Server.MapPath("~/images/comment/" + rename_filename));      //將檔案存到該資料夾
-
+                    comment.comment_photo = rename_filename;
                 }
+            }
+            else
+            {
+                comment.comment_photo = oldImg;
             }
             //end                      
             if (ModelState.IsValid)
-            {
-                comment.comment_photo = rename_filename;
-                db.Entry(comment).State = EntityState.Modified;
+            {               
                 db.SaveChanges();
                 return RedirectToAction("Details", "web_activities", new { id = id });
             }

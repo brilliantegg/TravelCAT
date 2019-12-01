@@ -1,7 +1,4 @@
-﻿.breadcrumb {
-    background: none;
-}
-
+﻿
 .text-catcolor {
     color: #00cc99 !important;
 }
@@ -38,7 +35,9 @@
     background-color: #16AC84;
     color: white;
     font-weight: bolder;
-    position:relative
+    position:relative;
+    height:700px;
+    padding:100px
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
@@ -58,6 +57,12 @@ a {
     font-size: 20Px;
     font-weight: bolder;
 }
+a:hover {
+    color: darkorange;
+    
+}
+
+
 .profile_avatar {
     top: -100px;
     left: 60px;

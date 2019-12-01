@@ -21,7 +21,8 @@ namespace TravelCat.Controllers
             {
                 member = db.member.Find(id),
                 member_profile = db.member_profile.Find(id),
-
+                comment = db.comment.OrderByDescending(m=>m.comment_id).ToList(),
+                follow_list = db.follow_list.ToList()
             };
             ViewBag.memberId = id;
             return View(model);
@@ -41,6 +42,18 @@ namespace TravelCat.Controllers
                 return HttpNotFound();
             }
             return View(member);
+        }
+        [HttpPost]
+        public string getfollowed(string member_id,string followed_id)
+        {
+            string response = "done";
+            follow_list follower = new follow_list();
+            follower.follow_date = DateTime.Now;
+            follower.member_id = member_id;
+            follower.followed_id = followed_id;
+            db.follow_list.Add(follower);
+            db.SaveChanges();
+            return response;
         }
     }
 }

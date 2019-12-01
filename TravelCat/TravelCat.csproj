@@ -1821,6 +1821,7 @@
     <Content Include="Content\Login-index.css" />
     <Content Include="Content\MemberIndex.css" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="Content\Searchindex.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\back-end-index.css" />
     <Content Include="Content\web-Home.css" />
@@ -2209,6 +2210,7 @@
     <Content Include="Views\CommentsWeb\_CommentsForDestination.cshtml" />
     <Content Include="Views\Search\Index.cshtml" />
     <Content Include="Views\Home\_test.cshtml" />
+    <Content Include="Views\CommentsWeb\_CommentsFromMember.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

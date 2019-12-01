@@ -4,18 +4,20 @@
 @{
     ViewBag.Title = "member_index";
     Layout = "~/Views/Shared/web-Layout.cshtml";
+    string memberId;
+    if (Session["memberID"] == null || string.IsNullOrWhiteSpace(Session["memberID"].ToString()))
+    {
+        memberId = "null";
+    }
+    else
+    {
+        memberId = Session["memberID"].ToString();
+    }
 }
 
 
 
 <div class="jumbotron jumbotron-fluid text-catcolor  bg-cover" style="background-image:url( http://localhost:54678/images/badges/03_16x9.jpg)">
-    <!--<div class="container text-center text-white ">
-        <h1 class="display-4  ">背景照片</h1>
-        <a href="#"><p class="lead"><i class="far fa-images mr-3"></i>新增背景照片.</p></a>
-    </div>-->
-
-</div>
-<div class="box1">
 
 </div>
 
@@ -25,21 +27,21 @@
 
 
     <div class="row ">
-        <div class="col-3 border-info  position-relative intro px-0">
-            <div class="profile_avatar " >
+        <div class="intro col-3 px-0">
+            <div class="profile_avatar">
                 <img src="~/images/member/@Model.member_profile.profile_photo" class="align-self-start my-3 mx-3 img-circle：border-radius:100%  rounded-circle " style="width:150px;height:150px" alt="...">
-
             </div>
-
             <br>
             <br>
-
-
             <h2 class="mt-3 text-center">@Model.member_profile.nickname</h2>
-
+            <!--追蹤會員-->
+            @if (@memberId != @Model.member.member_id){
+                <button class="follwered_btn btn btn-outline-dark" value="@Model.member.member_id">+ follow</button>
+            }
+            
             <br>
 
-            <div class="text-left">
+            <div class="text-center">
                 <div style="height:auto">
 
                     <div>
@@ -51,7 +53,12 @@
                             <li>
                                 網站:<span><a href="@Model.member_profile.website_link"><i class="far fa-address-card"></i></a></span>
                             </li>
-                            <li>信箱驗證狀態:<span>@Model.member_profile.emailConfirmed</span></li>
+                            <li>
+                                信箱驗證狀態:@if (@Model.member_profile.emailConfirmed == true)
+                                {<span>已認證</span> }
+                                else
+                                {<span>尚未認證</span>}
+                            </li>
                         </ul>
                     </div>
 
@@ -71,10 +78,10 @@
                     <div>
                         <ul class="listyle">
                             <li>會員狀態</li>
-                            <li>評論數 5</li>
-                            <li>追蹤者 5</li>
-                            <li>關注中 5</li>
-
+                            <li>評論數 @Model.comment.Where(m => m.member_id == @Model.member.member_id).Count()</li>
+                            <li>追蹤者 @Model.follow_list.Where(m => m.followed_id == @Model.member.member_id).Count()</li>
+                            <li>關注中 @Model.follow_list.Where(m => m.member_id == @Model.member.member_id).Count()</li>
+                            <li>加入時間 @Model.member_profile.create_time</li>
                         </ul>
                     </div>
 
@@ -83,7 +90,8 @@
                         + 變更個人資料
                     </button>
                 </div>
-
+            </div>
+        </div>
                 <!-- Modal -->
                 <div class="modal fade text-white" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -219,9 +227,9 @@
 
 
 
-            </div>
 
-        </div>
+
+
         <div class="col-9 mt-2" style="height:300px ">
             <ul class="nav nav-pills mb-3 " id="pills-tab" role="tablist">
                 <li class="nav-item ">
@@ -235,10 +243,11 @@
                 </li>
 
             </ul>
+            <!--會員評論-->
             <div class="tab-content" id="pills-tabContent">
-                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">@Html.Action("_CommentsForDestination", "CommentsWeb") </div>
+                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">@Html.Action("_CommentsFromMember", "CommentsWeb",new {memId=@Model.member.member_id }) </div>
 
-                <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">@Html.Action("_CommentsForDestination", "CommentsWeb")</div>
+                <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">@Html.Action("_CommentsFromMember", "CommentsWeb",new {memId=@Model.member.member_id })</div>
 
                 <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">789</div>
 
@@ -252,3 +261,23 @@
     </div>
 
 </div>
+
+
+<script>
+        $(".follwered_btn").click(function(){
+            getfollowed();
+        });
+        function getfollowed() {
+        $.post("@Url.Action("getfollowed","web_Member_Index")",
+            {
+                member_id: "@memberId",
+                followed_id: $(".follwered_btn").val()
+            })
+            .done(function () {
+                alert( `跟蹤成功` );
+            })
+            .fail(function() {
+                alert( `跟蹤失敗` );
+            })
+        }
+</script>
