@@ -34,8 +34,6 @@
 
                         @Html.ActionLink("登出", "LogOut", "Home", null, new { @class = " text-dark" })
                     </div>
-
-
                 }
                 else
                 {
@@ -44,7 +42,6 @@
                         @Html.ActionLink("註冊", "Index", "Register")
                     </div>
                 }
-
             </div>
         </div>
     </header>
@@ -64,19 +61,16 @@
         </ul>
     </div>
 
-    @RenderBody()
 
 
 
-
-
-
-    <footer class="footer">行動商務第2組專題</footer>
     <script src="~/Scripts/jquery-3.4.1.js"></script>
     <script src="~/Scripts/modernizr-2.8.3.js"></script>
     <script src="~/Scripts/bootstrap.bundle.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    @RenderBody()
     @RenderSection("scripts", required: false)
-
+    @*<footer class="footer">行動商務第2組專題</footer>*@
 </body>
 </html>
 

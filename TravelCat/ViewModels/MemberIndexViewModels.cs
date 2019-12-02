@@ -17,6 +17,8 @@ namespace TravelCat.ViewModels
 
         public List<follow_list> follow_list { get; set; }
 
+        public List<collections_detail> collections_detail { get; set; }
+
 
     }
 }

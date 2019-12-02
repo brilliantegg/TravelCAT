@@ -9,10 +9,8 @@
         <EntityTypeShape EntityType="travel_cat_v1Model.admin" Width="1.5" PointX="3.75" PointY="7.5" IsExpanded="true" />
         <EntityTypeShape EntityType="travel_cat_v1Model.badge" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
         <EntityTypeShape EntityType="travel_cat_v1Model.badge_details" Width="1.5" PointX="3" PointY="10.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="travel_cat_v1Model.collection_type" Width="1.5" PointX="3.75" PointY="20.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="travel_cat_v1Model.collections_detail" Width="1.5" PointX="6" PointY="12.5" IsExpanded="true" />
         <EntityTypeShape EntityType="travel_cat_v1Model.comment" Width="1.5" PointX="3" PointY="13.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="travel_cat_v1Model.comment_emoji_details" Width="1.5" PointX="5.25" PointY="15.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="travel_cat_v1Model.comment_emoji_details" Width="1.5" PointX="6" PointY="15.5" IsExpanded="true" />
         <EntityTypeShape EntityType="travel_cat_v1Model.emoji" Width="1.5" PointX="8.25" PointY="10" IsExpanded="true" />
         <EntityTypeShape EntityType="travel_cat_v1Model.follow_list" Width="1.5" PointX="3" PointY="18.125" IsExpanded="true" />
         <EntityTypeShape EntityType="travel_cat_v1Model.hotel" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
@@ -28,8 +26,6 @@
         <AssociationConnector Association="travel_cat_v1Model.FK__issue__admin_id__534D60F1" ManuallyRouted="false" />
         <AssociationConnector Association="travel_cat_v1Model.FK__badge_det__badge__5441852A" ManuallyRouted="false" />
         <AssociationConnector Association="travel_cat_v1Model.FK__badge_det__membe__4CA06362" ManuallyRouted="false" />
-        <AssociationConnector Association="travel_cat_v1Model.FK__collectio__colle__5535A963" ManuallyRouted="false" />
-        <AssociationConnector Association="travel_cat_v1Model.FK__collectio__membe__4E88ABD4" ManuallyRouted="false" />
         <AssociationConnector Association="travel_cat_v1Model.FK__comment__member___48CFD27E" ManuallyRouted="false" />
         <AssociationConnector Association="travel_cat_v1Model.FK__comment_e__comme__5165187F" ManuallyRouted="false" />
         <AssociationConnector Association="travel_cat_v1Model.FK__message__comment__5070F446" ManuallyRouted="false" />
@@ -43,6 +39,10 @@
         <AssociationConnector Association="travel_cat_v1Model.FK__message__member___4BAC3F29" ManuallyRouted="false" />
         <AssociationConnector Association="travel_cat_v1Model.FK__message_e__membe__49C3F6B7" ManuallyRouted="false" />
         <AssociationConnector Association="travel_cat_v1Model.FK__message_e__msg_i__52593CB8" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="travel_cat_v1Model.collection_type" Width="1.5" PointX="6.75" PointY="18.875" />
+        <EntityTypeShape EntityType="travel_cat_v1Model.collections_detail" Width="1.5" PointX="9" PointY="17.5" />
+        <AssociationConnector Association="travel_cat_v1Model.FK__collectio__colle__5535A963" />
+        <AssociationConnector Association="travel_cat_v1Model.FK__collectio__membe__4E88ABD4" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

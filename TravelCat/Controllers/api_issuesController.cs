@@ -72,13 +72,14 @@ namespace TravelCat.Controllers
         [HttpPost]
         // POST: api/api_issues
         [ResponseType(typeof(issue))]
-        public IHttpActionResult Postissue(issue issue)
+        public IHttpActionResult Post(string memberId,string issueContent)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
+            issue issue = new issue();
+            issue.member_id = memberId;
+            issue.issue_content = issueContent;
+            issue.admin_id = 1;
+            issue.issue_id = 3;
+            issue.report_date = DateTime.Now;
             db.issue.Add(issue);
             db.SaveChanges();
 

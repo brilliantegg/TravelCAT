@@ -18,6 +18,7 @@ namespace TravelCat.Models
         public string member_id { get; set; }
         public long msg_id { get; set; }
         public int emoji_id { get; set; }
+        public string tourism_id { get; set; }
     
         public virtual emoji emoji { get; set; }
         public virtual member member { get; set; }
