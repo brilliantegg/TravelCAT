@@ -43,7 +43,7 @@ namespace TravelCat.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditMemberProfile(string id, string newacc, string newname, bool newgender,DateTime newbirthday, string newnickname, string newnation, string newcity, string newaddress_detail, string newphone, HttpPostedFileBase photo)
+        public ActionResult EditMemberProfile(string id, string newacc, string newname, bool newgender, DateTime newbirthday, string newnickname, string newnation, string newcity, string newaddress_detail, string newphone, HttpPostedFileBase photo)
         {
             member member = db.member.Find(id);
 
@@ -55,6 +55,7 @@ namespace TravelCat.Controllers
                 member.member_profile.birthday = newbirthday;
                 member.member_profile.nickname = newnickname;
                 member.member_profile.nation = newnation;
+                member.member_profile.city = newcity;
                 member.member_profile.address_detail = newaddress_detail;
                 member.member_profile.phone = newphone;
 
@@ -64,7 +65,8 @@ namespace TravelCat.Controllers
                     if (photo.ContentLength > 0)
                     {
                         string t = photo.FileName;
-                        fileName = member + "_" + DateTime.Now.ToString().Replace("/", "").Replace(":", "").Replace(" ", "") + Path.GetExtension(t);
+                        fileName = member.member_profile.member_id + "_" + DateTime.Now.ToString().Replace("/", "").Replace(":", "").Replace(" ", "") + Path.GetExtension(t);
+                        System.IO.File.Delete(Server.MapPath("~/images/member/" + member.member_profile.profile_photo));
                         photo.SaveAs(Server.MapPath("~/images/member/" + fileName));
                         member.member_profile.profile_photo = fileName;
                     }

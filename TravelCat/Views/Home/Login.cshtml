@@ -16,14 +16,23 @@
         </div>
         <div class="form-inline mt-3">
             @Html.LabelFor(model => model.member_password)
-            <input id="password" name="password" type="password" class="form-control ml-2" />
+            <input id="password" name="password" type="password" class="form-control ml-2" /><br />
+            <label><input type="checkbox" id="show_password" />顯示密碼</label>
             @Html.ValidationMessageFor(model => model.member_password, "", new { @class = "text-danger" })
         </div>
         <input id="Submit1" type="submit" value="送出" class="btn btn-info mt-3 mb-3" />
         <input id="Reset1" type="reset" value="清除" class="btn btn-info mt-3 mb-3" />
-        <input id="Button1" type="button" value="忘記密碼" class="btn btn-info mt-3 mb-3"/>
+        <input id="Button1" type="button" value="忘記密碼" class="btn btn-info mt-3 mb-3" />
     </form>
-    
+
 </div>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script>
+    $('#show_password').click(function () {
+
+    });
+
+</script>
 
