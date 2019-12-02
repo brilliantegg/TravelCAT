@@ -124,11 +124,11 @@ namespace TravelCat.Controllers
             return RedirectToAction("Index", "Home");
         }
         [Authorize]
-        public ActionResult _test()
+        public ActionResult test()
         {
             string user = User.Identity.GetUserName();
             var member = db.member.Where(m => m.member_account == user).FirstOrDefault();
-            Session["memberID"] = member.member_id.ToString();
+            //Session["memberID"] = member.member_id.ToString();
             ViewBag.Data = DateTime.Now.ToString();
             return View();
         }

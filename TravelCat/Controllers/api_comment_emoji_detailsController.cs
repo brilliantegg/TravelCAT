@@ -89,18 +89,14 @@ namespace TravelCat.Controllers
         [HttpDelete]
         // DELETE: api/api_comment_emoji_details/5
         [ResponseType(typeof(comment_emoji_details))]
-        public IHttpActionResult Deletecomment_emoji_details(long id)
+        public IHttpActionResult Deletecomment_emoji_details(comment_emoji_details details)
         {
-            comment_emoji_details comment_emoji_details = db.comment_emoji_details.Find(id);
-            if (comment_emoji_details == null)
-            {
-                return NotFound();
-            }
+            var emoji = db.comment_emoji_details.Where(m => m.comment_id == details.comment_id && m.member_id == details.member_id && m.emoji_id == details.emoji_id && m.tourism_id == details.tourism_id).FirstOrDefault();
 
-            db.comment_emoji_details.Remove(comment_emoji_details);
+            db.comment_emoji_details.Remove(emoji);
             db.SaveChanges();
 
-            return Ok(comment_emoji_details);
+            return Ok(emoji);
         }
 
         protected override void Dispose(bool disposing)

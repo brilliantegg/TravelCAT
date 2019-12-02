@@ -1,10 +1,4 @@
-﻿body {
-    font-family:'Microsoft JhengHei';
-}
-.breadcrumb {
-    background: none;
-}
-
+﻿
 .text-catcolor {
     color: #00cc99 !important;
 }
@@ -22,12 +16,56 @@
     background-color: darkturquoise;
 }
 
-.member_avatar{
-    width:150px;
-    height:150px;
+.jumbotron {
+    margin-bottom: 0px;
+    z-index:1
 }
 
-.user_profile_header{
-    border:1px solid navy;
+.listyle {
+    list-style: none;
+}
 
+    .listyle li:first-child {
+        color: #844200;
+        margin-bottom: 5px;
+        font-size: 20px;
+    }
+
+.intro {
+    background-color: #16AC84;
+    color: white;
+    font-weight: bolder;
+    position:relative;
+    height:700px;
+    padding:100px
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    background-color: #16AC84;
+}
+
+.bg-cover {
+    background-size: cover;
+    background-position: center center;
+    height: 360px;
+}
+
+a {
+    color: #844200;
+    text-decoration: none;
+    background-color: transparent;
+    font-size: 20Px;
+    font-weight: bolder;
+}
+a:hover {
+    color: darkorange;
+    
+}
+
+
+.profile_avatar {
+    top: -100px;
+    left: 60px;
+    z-index: 999;
+    position: absolute;
 }

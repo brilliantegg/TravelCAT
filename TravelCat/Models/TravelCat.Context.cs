@@ -29,8 +29,6 @@ namespace TravelCat.Models
         public virtual DbSet<admin> admin { get; set; }
         public virtual DbSet<badge> badge { get; set; }
         public virtual DbSet<badge_details> badge_details { get; set; }
-        public virtual DbSet<collection_type> collection_type { get; set; }
-        public virtual DbSet<collections_detail> collections_detail { get; set; }
         public virtual DbSet<comment> comment { get; set; }
         public virtual DbSet<comment_emoji_details> comment_emoji_details { get; set; }
         public virtual DbSet<emoji> emoji { get; set; }
@@ -45,5 +43,7 @@ namespace TravelCat.Models
         public virtual DbSet<restaurant> restaurant { get; set; }
         public virtual DbSet<spot> spot { get; set; }
         public virtual DbSet<tourism_photo> tourism_photo { get; set; }
+        public virtual DbSet<collection_type> collection_type { get; set; }
+        public virtual DbSet<collections_detail> collections_detail { get; set; }
     }
 }

@@ -67,7 +67,7 @@ html, body {
     padding: 10px;
 }
 
-.add_message textarea {
+.msg_content {
     width: 95%;
     height: 150px;
     max-width: 98%;
