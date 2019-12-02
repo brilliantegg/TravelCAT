@@ -176,6 +176,9 @@
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Text.Encodings.Web, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.4.5.0\lib\netstandard2.0\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -221,6 +224,15 @@
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="WebGrease, Version=1.5.2.14234, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="X.PagedList, Version=7.9.0.0, Culture=neutral, PublicKeyToken=00b6c4f97602e5e8, processorArchitecture=MSIL">
+      <HintPath>..\packages\X.PagedList.7.9.0\lib\net461\X.PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="X.PagedList.Mvc, Version=7.9.1.0, Culture=neutral, PublicKeyToken=c6e0b5b21f916f4f, processorArchitecture=MSIL">
+      <HintPath>..\packages\X.PagedList.Mvc.7.9.1\lib\net461\X.PagedList.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="X.PagedList.Web.Common, Version=7.9.1.0, Culture=neutral, PublicKeyToken=00b6c4f97602e5e8, processorArchitecture=MSIL">
+      <HintPath>..\packages\X.PagedList.Web.Common.7.9.1\lib\net461\X.PagedList.Web.Common.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -1821,8 +1833,10 @@
     <Content Include="Content\Login-index.css" />
     <Content Include="Content\MemberIndex.css" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="Content\Searchindex.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\back-end-index.css" />
+    <Content Include="Content\web-Home.css" />
     <Content Include="Content\web-Layout.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -1834,6 +1848,13 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="images\17671-neko-atsume-best-toys-items-goodies-06.png" />
     <Content Include="images\1810043.jpg" />
+    <Content Include="images\badges\03_16x9.jpg" />
+    <Content Include="images\badges\100000_comments.png" />
+    <Content Include="images\badges\1000_invites.png" />
+    <Content Include="images\badges\13.png" />
+    <Content Include="images\badges\25000_plurks.png" />
+    <Content Include="images\badges\50000_fans.png" />
+    <Content Include="images\badges\9.png" />
     <Content Include="images\bmo-02.jpg" />
     <Content Include="images\cat-face-with-wry-smile_1f63c.png" />
     <Content Include="images\comment\0_20191121下午021629.jpg" />
@@ -1953,6 +1974,8 @@
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -1986,6 +2009,7 @@
     <Compile Include="Controllers\api_messagesController.cs" />
     <Compile Include="Controllers\badgesController.cs" />
     <Compile Include="Controllers\commentsController.cs" />
+    <Compile Include="Controllers\CommentsWebController.cs" />
     <Compile Include="Controllers\destinationsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HotelsController.cs" />
@@ -2202,6 +2226,19 @@
     <Content Include="Views\web_Member_Index\ConfirmView.cshtml" />
     <Content Include="Views\web_Member_Index\Editemail.cshtml" />
     <Content Include="Views\web_Member_Index\EditMemberProfile1.cshtml" />
+    <Content Include="Views\web_Member_Index\EditMemberProfile.cshtml" />
+    <Content Include="Views\CommentsWeb\_CreateComment.cshtml" />
+    <Content Include="Views\CommentsWeb\_CommentsForDestination.cshtml" />
+    <Content Include="Views\Search\Index.cshtml" />
+    <Content Include="Views\Home\_test.cshtml" />
+    <Content Include="Views\web_comments\Create.cshtml" />
+    <Content Include="Views\web_comments\Delete.cshtml" />
+    <Content Include="Views\web_comments\Details.cshtml" />
+    <Content Include="Views\web_comments\Edit.cshtml" />
+    <Content Include="Views\web_comments\Index.cshtml" />
+    <Content Include="Views\web_comments\_PhotoGallery.cshtml" />
+    <Content Include="Views\Search\_Activity.cshtml" />
+    <Content Include="Views\CommentsWeb\_CommentsFromMember.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -2212,7 +2249,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="images\activity\" />
-    <Folder Include="images\badges\" />
     <Folder Include="images\restaurant\" />
     <Folder Include="images\spot\" />
     <Folder Include="Views\CustomAuthorizeAttribute\" />

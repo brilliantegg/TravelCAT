@@ -410,7 +410,6 @@ namespace TravelCat.Models
         public DateTime comment_date { get; set; }
 
         [DisplayName("照片")]
-        [Required(ErrorMessage = "此欄位為必填")]
         [StringLength(100, ErrorMessage = "名稱最多100個字")]
         public string comment_photo { get; set; }
 

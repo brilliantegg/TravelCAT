@@ -47,13 +47,17 @@
                 @Html.ValidationMessageFor(model => model.comment_date, "", new { @class = "text-danger" })
             </div>
         </div>
-
+        <!--圖片-->
         <div class="form-group">
             @Html.LabelFor(model => model.comment_photo, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <img src="~/images/comment/@Model.comment_photo" width="500" />
-
-                <input type="file" id="input" name="comment_photo">
+                <label class="btn btn-info">
+                    <input type="file" id="imgInp" name="comment_photo" style="display:none;">
+                    <i class="fa fa-photo"></i> 上傳圖片
+                </label>
+                <br />
+                <img id="preview_img" src="~/images/comment/@Model.comment_photo" width="500" />
+                <input id="oldImg" name="oldImg" type="hidden" value="@Model.comment_photo" />
 
 
                 @Html.ValidationMessageFor(model => model.comment_photo, "", new { @class = "text-danger" })
@@ -114,10 +118,32 @@
             </div>
         </div>
     </div>
-    
-    </form>
+
+</form>
 
 
-        <script src="~/Scripts/jquery-3.3.1.min.js"></script>
-        <script src="~/Scripts/jquery.validate.min.js"></script>
-        <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+
+@section scripts {
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script>
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $("#preview_img").attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        $("#imgInp").change(function () {
+            //當檔案改變後，做一些事
+            readURL(this);   // this代表<input id="imgInp">
+        });
+
+    </script>
+
+
+}
