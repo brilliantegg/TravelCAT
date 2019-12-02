@@ -105,7 +105,6 @@ namespace TravelCat.Controllers
 
                 HttpContext.GetOwinContext().Authentication.SignIn(
                    new AuthenticationProperties { IsPersistent = false }, ident);
-
                 return RedirectToAction("test"); // auth succeed 
             }
 
@@ -128,7 +127,7 @@ namespace TravelCat.Controllers
         {
             string user = User.Identity.GetUserName();
             var member = db.member.Where(m => m.member_account == user).FirstOrDefault();
-            //Session["memberID"] = member.member_id.ToString();
+            Session["memberID"] = member.member_id.ToString();
             ViewBag.Data = DateTime.Now.ToString();
             return View();
         }

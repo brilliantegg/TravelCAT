@@ -22,6 +22,7 @@ html, body {
     float: right;
 }
 .single_comments {
+    max-width: 690px;
     min-height: 440px;
     text-align: left;
     background: #ffffff;
@@ -30,14 +31,26 @@ html, body {
     box-shadow: 1px 1px 0px #c2c2c2;
     border-radius: 3px;
     cursor: pointer;
-    width: 60%;
     margin: 50px;
     position: relative;
-    padding: 10px
+
+}
+.comment_photo img {
+
+    display: block
+}
+
+textarea {
+    border: 0;
+    overflow-y: auto; /* IE */
+    resize: none; /* Firefox, Chrome */
+    width:98%;
+}
+textarea:focus {
+    outline: 0; /* Chrome */
 }
 .single_message {
     border: 1px solid #d6d6d6;
-
 }
 .btn {
     border-width: 3px;
@@ -66,11 +79,11 @@ html, body {
 .add_message {
     padding: 10px;
 }
-
+.single_message{
+    margin:10px
+}
 .msg_content {
-    width: 95%;
-    height: 150px;
-    max-width: 98%;
+    height: 50px;
     padding: 10px;
     margin: auto;
     text-align: left;
@@ -95,6 +108,10 @@ html, body {
 
 .member_avatar {
     border-radius: 50px;
+    width: 50px;
+    height: 50px;
+    margin-right: 20px;
+    margin-bottom: 5px;
 }
 .click_button {
     border: 1px solid rgba(0%,0%,100%,0.4);
@@ -111,4 +128,29 @@ html, body {
 }
 .showMore {
     -webkit-line-clamp: 100
+}
+.member_detail {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    justify-content: space-between;
+}
+.commemt_content {
+    padding: 20px
+}
+.emoji_panel {
+    padding: 10px ;
+
+}
+.create_time{
+    color:gray
+}
+.member_name {
+    align-self: center;
+    font-weight: 700;
+}
+
+
+.new_comment{
+
 }

@@ -229,11 +229,11 @@
     <!--評論-->
     <div>
         <h2>熱門評論</h2>
-        @Html.Action("_CommentsForDestination", "CommentsWeb", new { tourismId = @Model.activity[0].activity_id, action ="top_destination" })
+        @Html.Action("_CommentsForDestination", "CommentsWeb", new { tourismId = "A000001" })
     </div>
     <div>
         <h2>最新評論</h2>
-        @Html.Action("_CommentsForDestination", "CommentsWeb", new { tourismId = @Model.activity[0].activity_id, action ="top_destination" })
+        
     </div>
 
 </div>

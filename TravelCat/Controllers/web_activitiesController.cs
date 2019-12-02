@@ -43,7 +43,7 @@ namespace TravelCat.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.id = id;
+            ViewBag.id = id;    
             return View(model);
         }
 
