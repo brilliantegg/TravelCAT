@@ -21,7 +21,8 @@
                             城市:
                         </h4>
                         <select id="city" name="city" class="col-10 offset-1 btn-light mb-4 border-bottom px-2 py-2">
-                            <option value="北部地區" disabled>北部地區</option>
+                            <option value="" disabled selected>請選擇</option>
+                            <option value="" disabled>北部地區</option>
                             <option value="台北市">台北市</option>
                             <option value="新北市">新北市</option>
                             <option value="基隆市">基隆市</option>
@@ -29,22 +30,22 @@
                             <option value="新竹市">新竹市</option>
                             <option value="新竹縣">新竹縣</option>
                             <option value="苗栗縣">苗栗縣</option>
-                            <option value="中部地區" disabled>中部地區</option>
+                            <option value="" disabled>中部地區</option>
                             <option value="台中市">台中市</option>
                             <option value="彰化縣">彰化縣</option>
                             <option value="南投縣">南投縣</option>
-                            <option value="南部地區" disabled>南部地區</option>
+                            <option value="" disabled>南部地區</option>
                             <option value="雲林縣">雲林縣</option>
                             <option value="嘉義市">嘉義市</option>
                             <option value="嘉義縣">嘉義縣</option>
                             <option value="台南市">台南市</option>
                             <option value="高雄市">高雄市</option>
                             <option value="屏東縣">屏東縣</option>
-                            <option value="東部地區" disabled>東部地區</option>
+                            <option value="" disabled>東部地區</option>
                             <option value="宜蘭縣">宜蘭縣</option>
                             <option value="花蓮縣">花蓮縣</option>
                             <option value="台東縣">台東縣</option>
-                            <option value="離島地區" disabled>離島地區</option>
+                            <option value="" disabled>離島地區</option>
                             <option value="澎湖縣">澎湖縣</option>
                             <option value="金門縣">金門縣</option>
                             <option value="連江縣">連江縣</option>
@@ -57,6 +58,7 @@
                             旅客評分:
                         </h4>
                         <select id="comment_rating" name="comment_rating" class="col-10 offset-1  btn-light mb-4 border-bottom px-2 py-2">
+                            <option value="" disabled selected>請選擇</option>
                             <option value="1">大於1分</option>
                             <option value="2">大於2分</option>
                             <option value="3">大於3分</option>
@@ -71,6 +73,7 @@
                             停留時間:
                         </h4>
                         <select id="comment_stay_total" name="comment_stay_total" class="col-10 offset-1  btn-light mb-4 border-bottom px-2 py-2">
+                            <option value="" disabled selected>請選擇</option>
                             <option value="1">一小時以內</option>
                             <option value="2">一到兩小時</option>
                             <option value="3">兩到三小時</option>
@@ -86,22 +89,22 @@
                         <div class="row ">
                             <div class="btn-group btn-group-toggle mb-4 offset-2" data-toggle="buttons">
                                 <label class="btn  btn-light active  col-md-10 mb-1">
-                                    <input type="checkbox" name="travel_partner" id="travel_partner1" autocomplete="off" value="蜜月" checked> 蜜月
+                                    <input type="radio" name="travel_partner" id="travel_partner1" autocomplete="off" value="蜜月"> 蜜月
                                 </label>
 
                                 <label class="btn  btn-light col-md-10 mb-1">
-                                    <input type="checkbox" name="travel_partner" id="travel_partner2" autocomplete="off" value="伴侶">伴侶
+                                    <input type="radio" name="travel_partner" id="travel_partner2" autocomplete="off" value="伴侶">伴侶
                                 </label>
 
                                 <label class="btn  btn-light col-md-10 mb-1">
-                                    <input type="checkbox" name="travel_partner" id="travel_partner3" autocomplete="off" value="家庭">家庭
+                                    <input type="radio" name="travel_partner" id="travel_partner3" autocomplete="off" value="家庭">家庭
                                 </label>
 
                                 <label class="btn  btn-light col-md-10 mb-1">
-                                    <input type="checkbox" name="travel_partner" id="travel_partner4" autocomplete="off" value="朋友">朋友
+                                    <input type="radio" name="travel_partner" id="travel_partner4" autocomplete="off" value="朋友">朋友
                                 </label>
                                 <label class="btn  btn-light col-md-10 mb-1">
-                                    <input type="checkbox" name="travel_partner" id="travel_partne5" autocomplete="off" value="商務">商務
+                                    <input type="radio" name="travel_partner" id="travel_partne5" autocomplete="off" value="商務">商務
                                 </label>
 
 
@@ -118,19 +121,19 @@
                         <div class="row ">
                             <div class="btn-group btn-group-toggle mb-4 offset-2 " data-toggle="buttons">
                                 <label class="btn  btn-light active  col-md-10 mb-1">
-                                    <input type="checkbox" name="travel_month" id="travel_month1" autocomplete="off" value="1-3月" checked> 1-3月
+                                    <input type="radio" name="travel_month" id="travel_month1" autocomplete="off" value="1-3月"> 1-3月
                                 </label>
 
                                 <label class="btn  btn-light col-md-10 mb-1">
-                                    <input type="checkbox" name="travel_month" id="travel_month2" autocomplete="off" value="4-6月">4-6月
+                                    <input type="radio" name="travel_month" id="travel_month2" autocomplete="off" value="4-6月">4-6月
                                 </label>
 
                                 <label class="btn  btn-light col-md-10 mb-1">
-                                    <input type="checkbox" name="travel_month" id="travel_month3" autocomplete="off" value="7-9月">7-9月
+                                    <input type="radio" name="travel_month" id="travel_month3" autocomplete="off" value="7-9月">7-9月
                                 </label>
 
                                 <label class="btn  btn-light col-md-10 mb-1">
-                                    <input type="checkbox" name="travel_month" id="travel_month4" autocomplete="off" value="10-12月">10-12月
+                                    <input type="radio" name="travel_month" id="travel_month4" autocomplete="off" value="10-12月">10-12月
                                 </label>
 
 
@@ -149,7 +152,10 @@
     </div>
   
     <div class="col-md-9 mb-2 ">
-        <div><h2 class="font-weight-bold ">@ViewBag.q 的搜尋結果</h2></div>
+        <div>
+        <h2 class="font-weight-bold ">@ViewBag.q 的搜尋結果</h2>
+        <h5>條件：@ViewBag.city</h5>
+        </div>
 
         <div class="text-right  border-bottom ">
             <h4>
