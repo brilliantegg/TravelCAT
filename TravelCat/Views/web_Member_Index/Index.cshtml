@@ -251,12 +251,18 @@
 
                 <!--我的收藏-->
                 <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
-                    @foreach (var item in Model.collections_detail)
-                    {
-                        <div>@item.tourism_id</div>
+                    <div class="row">
+                        @foreach (var item in Model.collections_detail)
+                        {
 
-                    }
-
+                            <div class="card col-4" >
+                                <img class="card-img-top img-fluid" src="~/images/activity/A001069_20191118下午0456093.jpg" alt="Card image cap" >
+                                <div class="card-body">
+                                    <p class="card-text">@item.tourism_id</p>
+                                </div>
+                            </div>
+                        }
+                    </div>
                 </div>
 
             </div>
