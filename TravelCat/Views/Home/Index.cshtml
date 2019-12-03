@@ -49,7 +49,7 @@
     </h3>
 
     <!--下方篩選-->
-    <div class="row">
+    <div class="row mb-5">
         <div class="col-12">
             <div class="list-group" id="list-tab" role="tablist">
                 <a class="active" id="list-home-list" data-toggle="list" href="#list-spot" role="tab" aria-controls="home">精選景點</a>
@@ -77,7 +77,7 @@
                             </div>
                         </div>
                     }
-                    </div>
+                </div>
 
                 <!--活動-->
                 <div class="tab-pane fade" id="list-activities" role="tabpanel" aria-labelledby="list-profile-list">
@@ -91,11 +91,11 @@
                                 <h5 class="card-title">@Model.activity[i].activity_title</h5>
                                 <p class="card-text">@Model.activity[i].activity_intro</p>
                                 <p class="card-city" style="color: #128566; font-weight: 900; padding-top: 5px;">@Model.spot[i].city</p>
-                                @Html.ActionLink("more", "Details", "web_activities", new { id = @Model.activity[i].activity_id },new { @class="btn btn-primary btn-sm"})
+                                @Html.ActionLink("more", "Details", "web_activities", new { id = @Model.activity[i].activity_id }, new { @class = "btn btn-primary btn-sm" })
                             </div>
                         </div>
                     }
-                    </div>
+                </div>
 
                 <!--飯店-->
                 <div class="tab-pane fade" id="list-hotel" role="tabpanel" aria-labelledby="list-messages-list">
@@ -113,7 +113,7 @@
                             </div>
                         </div>
                     }
-                    </div>
+                </div>
 
                 <!--餐廳-->
                 <div class="tab-pane fade" id="list-restaurant" role="tabpanel" aria-labelledby="list-settings-list">
@@ -131,11 +131,117 @@
                             </div>
                         </div>
                     }
-                    </div>
+                </div>
 
 
             </div>
         </div>
     </div>
-    
+
+    <!--banner2-->
+    <div class="secbanner">
+        <p class="txt">
+            放假了<br>
+            <span class="mt-5">我好想出去玩！</span><br>
+    </div>
+</div>
+
+<!--留言展示-->
+<div class="container mb-5 mt-5 Card-group">
+    <div class="comment-main row">
+
+        <div class="comment mb-3 col-12">
+
+            <!--留言卡-->
+            <div class="card card-lg">
+                <div class="card-body">
+                    <div class="card-title mem">聰明蛋</div>
+                    <div class="mem-comment">畢業於台灣第一學府－國立台灣大學，精通多國語言，連續四年獲得學生最高榮譽－書卷獎，打破創校以來最佳紀錄。外貌全身皆有細短絨毛，皮黃，身高可達29尺，生有鐵皮，長有獠牙，生性暴躁，口大可吞人，一次可進食數萬人類！平時穴居洞中，捕食路過之旅人，一年下山一次，每次下山皆造成當地大範圍傷害。傳聞此獸喜歡一種名為bmo的玩物，常為了此物與各方妖怪打鬥。</div>
+                    <a href="#" class="btn btn-primary btn-sm">前去觀看</a>
+                </div>
+            </div>
+                <!--介紹卡-->
+                <div class="card card-sm">
+                    <div class="card-body">
+                        @Html.ActionLink(@Model.activity[100].activity_title, "Details", "web_activities", new { id = @Model.activity[100].activity_id }, null)
+                        <img src="~/images/bmo-02.jpg" class="mb-4">
+                        <div class="like">
+                            <i class="far fa-thumbs-up">999</i>
+                            <i class="far fa-comment ml-5">123</i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        <div class="comment col-12">
+
+            <!--介紹卡-->
+            <div class="card card-sm">
+                <div class="card-body">
+                    @Html.ActionLink(@Model.activity[200].activity_title, "Details", "web_activities", new { id = @Model.activity[200].activity_id }, null)
+                    <img src="~/images/bmo-02.jpg" class="mb-4">
+                    <div class="like">
+                        <i class="far fa-thumbs-up">666</i>
+                        <i class="far fa-comment ml-5">878</i>
+                    </div>
+                </div>
+            </div>
+
+            <!--留言卡-->
+            <div class="card card-lg">
+                <div class="card-body">
+                    <div class="card-title mem">可達鴨</div>
+                    <div class="mem-comment">可達鴨是有鴨子外貌特徵的寶可夢。牠的身體是黃色的，牠的眼睛裡有極小的瞳孔。牠的嘴巴是扁狀的，頭上有三條黑色的呆毛，四肢短壯，酷似河童。牠有短小的尾巴和有蹼的腳掌。</div>
+                    <a href="#" class="btn btn-primary btn-sm">前去觀看</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="item ">
+        <div class="card ">
+            <div class="card-body timeline" >
+                <h2 class="mb-2">如何出遊不遇雷呢?</h2>
+                <ul>
+                    <li>
+                        <a href="#">
+                            <h6>Stp1</h6>
+                            <p>打開旅途貓，點選類型!</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <h6>Stp2</h6>
+                            <p>搜尋地點</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <h6>Stp3</h6>
+                            <p>瀏覽喜歡的景點!</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <h6>Stp4</h6>
+                            <p>觀看真實評論</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <h6>Stp5</h6>
+                            <p>多方參考並規劃</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <h6>Stp6</h6>
+                            <p>快樂出遊~!</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>

@@ -3,18 +3,22 @@
     height: 70vh;
     z-index: 1;
 }
+
     .carousel .carousel-inner .carousel-item {
         height: 70vh;
     }
+
         .carousel .carousel-inner .carousel-item img {
             position: relative;
             top: 50%;
             transform: translateY(-50%);
         }
 
-.container{
+.container {
     margin-top: 3vh;
+    margin: 0 auto;
 }
+
     .container h3 {
         text-align: center;
         color: #16ac84;
@@ -25,74 +29,287 @@
         border-bottom: 1px solid;
     }
     /*切換選單樣式*/
-    .container .row{
-        margin-top: 2vh;
+
+    .container .row .col-12 .list-group {
+        flex-direction: row;
+        justify-content: center;
     }
-.container .row  .col-12 .list-group{
-    flex-direction:  row;
-    justify-content: center;
-}
-    .container .row .col-12 .list-group a {
-        padding: .25rem  0px;
-        margin: 0px 1.25rem;
-        font-size: 1.25rem;
-        text-decoration: none;
-        color: #16ac84;
-        font-weight: 900;
-    }
-        .container .row .col-12 .list-group a:hover {
-            color: #128566;
+
+        .container .row .col-12 .list-group a {
+            padding: .25rem 0px;
+            margin: 0px 1.25rem;
+            font-size: 1.25rem;
+            text-decoration: none;
+            color: #16ac84;
+            font-weight: 900;
         }
+
+            .container .row .col-12 .list-group a:hover {
+                color: #128566;
+            }
+
         .container .row .col-12 .list-group .active {
             border-bottom: 2px solid #128566;
         }
 
-        /*card*/
-        .container .row .col-12 .tab-content .tab-pane .card {
-            display: inline-block;
-            width: 24%;
-            margin-left: .5%;
-            margin-top: 20px;
-            position: relative;
-            box-shadow: 2px 2px 4px #CCC;
-            transition: .3s;
+    /*card*/
+    .container .row .col-12 .tab-content .tab-pane .card {
+        display: inline-block;
+        width: 24%;
+        margin-left: .5%;
+        margin-top: 20px;
+        position: relative;
+        box-shadow: 2px 2px 4px #CCC;
+        transition: .3s;
+    }
+
+        .container .row .col-12 .tab-content .tab-pane .card:hover {
+            transform: translateY(-10px);
         }
-            .container .row .col-12 .tab-content .tab-pane .card:hover{
-                transform: translateY(-10px);
+
+        .container .row .col-12 .tab-content .tab-pane .card img {
+            width: 80%;
+            margin: 0px 10%;
+            margin-top: 10px;
+        }
+
+        .container .row .col-12 .tab-content .tab-pane .card .card-body {
+            height: 200px;
+        }
+
+            .container .row .col-12 .tab-content .tab-pane .card .card-body .card-title {
+                text-align: center;
+                color: red;
+                text-decoration: none;
+                font-weight: 900;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
-            .container .row .col-12 .tab-content .tab-pane .card img {
-                width: 80%;
-                margin: 0px 10%;
-                margin-top: 10px;
+
+        .container .row .col-12 .tab-content .tab-pane .card .card-text {
+            height: 72px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            white-space: normal;
+            vertical-align: bottom;
+        }
+
+        .container .row .col-12 .tab-content .tab-pane .card .card-body .btn {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background-color: #16ac84;
+        }
+
+            .container .row .col-12 .tab-content .tab-pane .card .card-body .btn:hover {
+                background-color: #128566;
             }
-            .container .row .col-12 .tab-content .tab-pane .card .card-body {
-                height: 200px;
+
+    .container .secbanner {
+        background-image: url('../images/people-2590616_1920.jpg');
+        background-size: cover;
+        width: 100%;
+        height: 600px;
+        position: relative;
+    }
+
+        .container .secbanner .txt {
+            background: linear-gradient(45deg, #5fdbba, #096e54);
+            -webkit-background-clip: text;
+            color: transparent;
+            line-height: 2.5;
+            letter-spacing: 5px;
+            font-weight: 700;
+            font-size: 1.3rem;
+            writing-mode: vertical-lr;
+            position: absolute;
+            top: 25px;
+            left: 180px;
+        }
+
+
+
+
+.Card-group {
+    display: flex;
+    justify-content: space-between;
+}
+
+.container .comment-main {
+    width: 70%;
+}
+
+    .container .comment-main .comment {
+        display: flex;
+        justify-content: space-between;
+    }
+
+        .container .comment-main .comment .card-lg {
+            position: relative;
+            width: 63%;
+        }
+            .container .comment-main .comment .card-lg .card-body .card-title{
+                font-size: 1.5rem;
+                font-weight: 700;
+                color: red;
+                padding-bottom: 20px;
+                border-bottom: 1px solid #CCC;
             }
-                .container .row .col-12 .tab-content .tab-pane .card .card-body .card-title {
-                    color: red;
-                    text-decoration: none;
-                    font-weight: 900;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                }
-            .container .row .col-12 .tab-content .tab-pane .card .card-text {
-                height: 72px;
+            .container .comment-main .comment .card-lg .card-body .mem-comment {
+                line-height: 1.8;
+                letter-spacing: 2px;
                 overflow: hidden;
                 white-space: nowrap;
                 text-overflow: ellipsis;
                 display: -webkit-box;
-                -webkit-line-clamp: 3;
+                -webkit-line-clamp: 7;
                 -webkit-box-orient: vertical;
                 white-space: normal;
-                vertical-align: bottom;
             }
-            .container .row .col-12 .tab-content .tab-pane .card .card-body .btn {
-                position: absolute;
-                bottom: 20px;
-                right: 20px;
+            .container .comment-main .comment .card-lg .card-body .btn {
+                color: #FFF;
                 background-color: #16ac84;
+                position: absolute;
+                bottom: 10px;
+                right: 20px;
             }
-                .container .row .col-12 .tab-content .tab-pane .card .card-body .btn:hover {
+                .container .comment-main .comment .card-lg .card-body .btn:hover {
                     background-color: #128566;
                 }
+
+                .container .comment-main .comment .card-sm {
+                    width: 35%;
+                    height: 342px;
+                }
+
+            .container .comment-main .comment .card-sm .card-body {
+                text-align: center;
+            }
+
+                .container .comment-main .comment .card-sm .card-body a {
+                    text-decoration: none;
+                    font-weight: 900;
+                    color: #16ac84;
+                    display: flex;
+                    height: 69px;
+                }
+                    .container .comment-main .comment .card-sm .card-body a:hover {
+                        color: #096e54;
+                    }
+
+                .container .comment-main .comment .card-sm .card-body img {
+                    width: 100%;
+                    background-size: cover;
+                }
+
+        .container .comment-main .comment .card-sm .card-body .like {
+            color: #096e54;
+            font-weight: 700;
+            cursor: default;
+        }
+
+.container .item {
+    width: 32%;
+}
+
+    .container .item .card {
+        height: 700px;
+        border: none;
+    }
+        .container .item .card .card-body{
+            padding-top: 0px;
+        }
+        .container .item .card .card-body ul {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .container .item .card .card-body ul li {
+            width: 50%;
+            box-sizing: border-box;
+            padding: 50px 0;
+            position: relative;
+        }
+        .container .item .card .card-body li:nth-child(odd) {
+            padding-right: 30px;
+        }
+        .container .item .card .card-body li:nth-child(even) {
+            padding-left: 30px;
+            transform: translateY(50%);
+        }
+        .container .item .card .card-body li:nth-child(odd)::after {
+            content: '';
+            position: absolute;
+            z-index: 1;
+            width: 1px;
+            top: 0;
+            height: 100%;
+            background-color: #ccc;
+            right: 0;
+        }
+        .container .item .card .card-body li:last-child::after{
+            height: 50%;
+        }
+        .container .item .card .card-body li::before{
+            content: '';
+            position: absolute;
+            z-index: 2;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #aaa;
+        }
+        .container .item .card .card-body li:nth-child(odd)::before{
+            right: -4px;
+        }
+        .container .item .card .card-body li:nth-child(even)::before{
+            left: -4px;
+        }
+            .container .item .card .card-body h2 {
+                color: #096e54;
+                font-weight: 900;
+                text-align: center;
+            }
+            .container .item .card .card-body h6 {
+                color: #096e54;
+                font-size: 1.2rem;
+                font-weight: 700;
+            }
+            .container .item .card .card-body p {
+                color: #16ac84;
+                font-weight: 500;
+            }
+            .container .item .card .card-body a {
+                display: block;
+                text-decoration: none;
+                background-color: #fff;
+                border: 1px solid #aaa;
+                box-sizing: border-box;
+                padding: 5px;
+                border-radius: 10px;
+                box-shadow: 3px 3px 5px #888;
+                cursor: default;
+            }
+        .container .item .card .card-body h6::after {
+            content: '';
+            position: absolute;
+            height: 1px;
+            width: 30px;
+            background-color: #aaa;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+        }
+        .container .item .card .card-body li:nth-child(odd) h6::after{
+            right: 0;
+        }
+        .container .item .card .card-body li:nth-child(even) h6::after{
+            left: 0;
+        }
