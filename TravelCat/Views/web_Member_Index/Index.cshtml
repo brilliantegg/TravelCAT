@@ -7,7 +7,7 @@
     string memberId;
     if (Session["memberID"] == null || string.IsNullOrWhiteSpace(Session["memberID"].ToString()))
     {
-        memberId = "null";
+        memberId = null;
     }
     else
     {
@@ -15,320 +15,169 @@
     }
 }
 
-
-
-    <li class="breadcrumb-item"><a href="#" class="text-catcolor">首頁</a></li>
-    <li class="breadcrumb-item"><a href="#" class="text-catcolor">景點</a></li>
-    <li class="breadcrumb-item"><a href="#" class="text-catcolor">自由廣場</a></li>
-    <li class="breadcrumb-item active" aria-current="page">評論</li>
-</ol>
 <div class="jumbotron jumbotron-fluid text-catcolor">
-    <div class="container text-center text-info  ">
-        <h1 class="display-4  ">背景照片</h1>
-        <a href="#"><p class="lead"><i class="far fa-images mr-3"></i>新增背景照片.</p></a>
-    </div>
-<div class="jumbotron jumbotron-fluid text-catcolor  bg-cover" style="background-image:url( http://localhost:54678/images/badges/03_16x9.jpg)">
 
 </div>
 
-
-
 <div class=" container">
+    <div class="user_profile_header col-12">
+        <div class="d-flex row justify-content-between">
+            <div class="profile_avatar d-flex row">
+                @if (@Model.member_profile.profile_photo != null)
+                {
+                    <img src="~/images/member/@Model.member_profile.profile_photo"   alt="...">
+                }
+                else
+                {
+                    <img src="~/images/member/avatar.png"  alt="...">
+                }
 
+                <div class="member_header">
+                    <div class="personal_info">
+                        <h2 class="">@Model.member_profile.nickname</h2>
+                        <p class="brief">@Model.member_profile.brief_intro</p>
 
-<div class=" container">
-    <div class="user_profile_header media">
-
-        <img src="~/images/member/@Model.member_profile.profile_photo" class="member_avatar align-self-start my-3 mx-3 img-circle：border-radius:100%  rounded-circle" alt="@Model.member_profile.profile_photo">
-
-
-        <div class="media-body">
-            <h2 class="mt-3">@Model.member_profile.nickname</h2>
-
-            @Html.ActionLink("編輯個人資料", "EditMemberProfile", "web_Member_Index", new { id = Model.member.member_id }, new { @class = "btn btn-outline-info" })<br />
-            @Html.ActionLink("修改密碼", "Editpassword", "web_Member_Index", new { id = Model.member.member_id }, new { @class = "btn btn-outline-info mt-2" })
-            <div class="row mt-5">
-                <div class="col-md-1 ">
-                    <p>評論數 <a>5</a></p>
-                </div>
-                <div class="col-md-1">
-                    <p>追蹤者 <a>5</a></p>
-                </div>
-                <div class="col-md-1">
-                    <p>關注中 <a>5</a></p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row ">
-        <div class="col-3 border-info mt-2 bg-light" style="background-color:azure">
-            <div class="text-left" style="height:50px ;border:inherit">
-                <div>簡介</div>
-                <div>
-                    <ul>
-                        <li>會員暱稱:<span>@Model.member_profile.nickname</span></li>
-                        <li>國家:<span>@Model.member_profile.nation</span></li>
-                        <li>城市:<span>@Model.member_profile.city</span></li>
-                        <li>網站:<span>@Model.member_profile.website_link</span></li>
-                        <li>信箱驗證狀態:<span>@Model.member_profile.emailConfirmed</span></li>
-                    </ul>
-    <div class="row ">
-        <div class="intro col-3 px-0">
-            <div class="profile_avatar">
-                <img src="~/images/member/@Model.member_profile.profile_photo" class="align-self-start my-3 mx-3 img-circle：border-radius:100%  rounded-circle " style="width:150px;height:150px" alt="...">
-            </div>
-            <br>
-            <br>
-            <h2 class="mt-3 text-center">@Model.member_profile.nickname</h2>
-            <!--追蹤會員-->
-            @if (@memberId != @Model.member.member_id){
-                <button class="follwered_btn btn btn-outline-dark" value="@Model.member.member_id">+ follow</button>
-            }
-            
-            <br>
-
-            <div class="text-center">
-                <div style="height:auto">
-
-                    <div>
-                        <ul class="listyle">
-                            <li>簡介</li>
-                            <li>會員暱稱:<span>@Model.member_profile.nickname</span></li>
-                            <li>國家:<span>@Model.member_profile.nation</span></li>
-                            <li>城市:<span>@Model.member_profile.city</span></li>
-                            <li>
-                                網站:<span><a href="@Model.member_profile.website_link"><i class="far fa-address-card"></i></a></span>
-                            </li>
-                            <li>
-                                信箱驗證狀態:@if (@Model.member_profile.emailConfirmed == true)
-                                {<span>已認證</span> }
-                                else
-                                {<span>尚未認證</span>}
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div>
-                        <ul class="listyle">
-                            <li>徽章牆</li>
-                            <li>
-                                <img src="http://localhost:54678/images/badges/9.png" />
-                                <img src="http://localhost:54678/images/badges/1000_invites.png" />
-                                <img src="http://localhost:54678/images/badges/100000_comments.png" />
-                                <img src="http://localhost:54678/images/badges/50000_fans.png" />
-                            </li>
-
-                        </ul>
-                    </div>
-
-                @Html.ActionLink("更改信箱", "Editemail", "web_Member_Index", new { id = Model.member.member_id }, new { @class = "btn btn-outline-info" })
-                <button type="button" class="btn btn-outline-info my-1" data-toggle="modal" data-target="#exampleModalCenter">
-                    +  新增您目前所在城市
-                </button>
-                <button type="button" class="btn btn-outline-info  my-1" data-toggle="modal" data-target="#exampleModalCenter2">
-                    + 新增一個網站
-                </button>
-                <button type="button" class="btn btn-outline-info  my-1" data-toggle="modal" data-target="#exampleModalCenter3">
-                    + 介紹一下您自己
-                </button>
-                    <div>
-                        <ul class="listyle">
-                            <li>會員狀態</li>
-                            <li>評論數 @Model.comment.Where(m => m.member_id == @Model.member.member_id).Count()</li>
-                            <li>追蹤者 @Model.follow_list.Where(m => m.followed_id == @Model.member.member_id).Count()</li>
-                            <li>關注中 @Model.follow_list.Where(m => m.member_id == @Model.member.member_id).Count()</li>
-                            <li>加入時間 @Model.member_profile.create_time</li>
-                        </ul>
-                    </div>
-
-
-                    <button type="button" class="btn  btn-block text-white text-center " data-toggle="modal" data-target="#exampleModalCenter" style="background-color:#00cc99;">
-                        + 變更個人資料
-                    </button>
-                </div>
-            </div>
-        </div>
-                <!-- Modal -->
-                <div class="modal fade text-white" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content " style="background-color:#16AC84">
-                            <div class="modal-header" style="background-color:#00cc99">
-                                <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body  ">
-                                <div class="row">
-                                    <div class="col-md-5 mr-1">
-                                        <a href="#">
-                                            <div style="width:100%;background-color:#00cc99;border-radius:100%;height:176.66px;position:relative;">
-                                                <div style="position:relative;top:0%;left:0% " class="text-white ">
-                                                    <img src="https://randomuser.me/api/portraits/men/94.jpg" class="w-100 h-100" style="border-radius:100% ; ">
-
-                                                    <div style="position:absolute;bottom:30%;left:30% " class="text-white ">
-                                                        <i class="far fa-images"></i>
-                                                        <span class="lead">變更照片.</span>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div class="col-md-10">
-                                        <label for="exampleFormControlTextarea1">
-                                            暱稱
-                                        </label>
-                                        <br />
-                                        <input id="Text1" type="text" class="w-100" />
-                                        <br />
-                                        <label for="exampleFormControlTextarea1">你的國家是?</label>
-                                        <br />
-
-
-                                        <select id="test1" name="test1 " class="col-10  btn-light mb-4 border-bottom px-2 py-2">
-                                            <option value="北部地區" disabled>北部地區</option>
-                                            <option value="台北市">台北市</option>
-                                            <option value="新北市">新北市</option>
-                                            <option value="基隆市">基隆市</option>
-                                            <option value="桃園市">桃園市</option>
-                                            <option value="新竹市">新竹市</option>
-                                            <option value="新竹縣">新竹縣</option>
-                                            <option value="苗栗縣">苗栗縣</option>
-                                            <option value="中部地區" disabled>中部地區</option>
-                                            <option value="台中市">台中市</option>
-                                            <option value="彰化縣">彰化縣</option>
-                                            <option value="南投縣">南投縣</option>
-                                            <option value="南部地區" disabled>南部地區</option>
-                                            <option value="雲林縣">雲林縣</option>
-                                            <option value="嘉義市">嘉義市</option>
-                                            <option value="嘉義縣">嘉義縣</option>
-                                            <option value="台南市">台南市</option>
-                                            <option value="高雄市">高雄市</option>
-                                            <option value="屏東縣">屏東縣</option>
-                                            <option value="東部地區" disabled>東部地區</option>
-                                            <option value="宜蘭縣">宜蘭縣</option>
-                                            <option value="花蓮縣">花蓮縣</option>
-                                            <option value="台東縣">台東縣</option>
-                                            <option value="離島地區" disabled>離島地區</option>
-                                            <option value="澎湖縣">澎湖縣</option>
-                                            <option value="金門縣">金門縣</option>
-                                            <option value="連江縣">連江縣</option>
-
-                                        </select>
-
-
-
-                                        <label for="exampleFormControlTextarea1">
-                                            詳細地址
-                                        </label>
-                                        <br />
-                                        <input id="Text1" type="text" class="w-100" />
-
-
-                                    </div>
-
-
-                                </div>
-                            </div>
-                            <div class="modal-footer" style="background-color:#00cc99">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Save changes</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-
-                <div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                123456789
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Save changes</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal fade" id="exampleModalCenter3" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                ...
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Save changes</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-
-
-
-
-
-        <div class="col-9 mt-2" style="height:300px ">
-            <ul class="nav nav-pills mb-3 " id="pills-tab" role="tablist">
-                <li class="nav-item ">
-                    <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">個人評論</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">追蹤評論</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">我的珍藏</a>
-                </li>
-
-            </ul>
-            <!--會員評論-->
-            <div class="tab-content" id="pills-tabContent">
-                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">@Html.Action("_CommentsFromMember", "CommentsWeb",new {memId=@Model.member.member_id }) </div>
-
-                <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">@Html.Action("_CommentsFromMember", "CommentsWeb",new {memId=@Model.member.member_id })</div>
-
-                <!--我的收藏-->
-                <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
-                    <div class="row">
-                        @foreach (var item in Model.collections_detail)
+                        <!--編輯會員 or 追蹤會員-->
+                        @if (@memberId == @Model.member.member_id)
                         {
-
-                            <div class="card col-4" >
-                                <img class="card-img-top img-fluid" src="~/images/activity/A001069_20191118下午0456093.jpg" alt="Card image cap" >
-                                <div class="card-body">
-                                    <p class="card-text">@item.tourism_id</p>
-                                </div>
-                            </div>
+                            <button type="button" class="btn  btn-outline-dark " data-toggle="modal" data-target="#exampleModalCenter">
+                                + 編輯資料
+                            </button>
+                        }
+                        @if (@memberId != null && @memberId != @Model.member.member_id)
+                        {
+                            <button class="follwered_btn btn btn-outline-dark" value="@Model.member.member_id">+ follow</button>
                         }
                     </div>
                 </div>
 
             </div>
+            <div class="member_location">
 
+                <ul class="">
+                    <li><span>location</span></li>
+                    <li><span>@Model.member_profile.city</span></li>
+                    <li><span>website</span></li>
+                    <li><a href="@Model.member_profile.website_link"><i class="far fa-id-card"></i></a></li>
+
+                </ul>
+
+            </div>
         </div>
 
-
-
-
     </div>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    @Html.ActionLink("編輯個人資料", "EditMemberProfile", "web_Member_Index", new { id = Model.member.member_id }, new { @class = "btn btn-outline-info" })<br />
+                    @Html.ActionLink("修改密碼", "Editpassword", "web_Member_Index", new { id = Model.member.member_id }, new { @class = "btn btn-outline-info mt-2" })
+                    @Html.ActionLink("更改信箱", "Editemail", "web_Member_Index", new { id = Model.member.member_id }, new { @class = "btn btn-outline-info" })
+                    <span>信箱驗證狀態:</span>
+                    @if (@Model.member_profile.emailConfirmed == true)
+                    {<span>已認證</span> }
+                    else
+                    {<span>尚未認證</span>}
+                </div>
+            </div>
+        </div>
+    </div>
+
+                    <div class="row ">
+                        <div class="intro col-3 px-0">
+                            <div class="text-left ">
+                                <div style="height:auto">
+                                    <div>
+                                        <ul class="listyle">
+                                            <li>徽章牆</li>
+                                            <li>
+                                                分數 @{
+                                                    var comeent_num = Model.comment.Where(m => m.member_id == @Model.member.member_id).Count();
+                                                    var follow_num = @Model.follow_list.Where(m => m.member_id == @Model.member.member_id).Count();
+                                                    var score = comeent_num * 5 + follow_num * 5;
+                                                }
+                                                @score
+                                            </li>
+                                            <li>
+                                                @if (score > 10)
+                                                {
+                                                    <img src="http://localhost:54678/images/badges/9.png" />
+                                                }
+                                                else if (score > 20)
+                                                {
+                                                    <img src="http://localhost:54678/images/badges/1000_invites.png" />
+                                                }
+                                                else if (score > 30)
+                                                {
+                                                    <img src="http://localhost:54678/images/badges/100000_comments.png" />
+                                                }
+                                                else if (score > 40)
+                                                {
+                                                    <img src="http://localhost:54678/images/badges/50000_fans.png" />
+                                                }
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <ul class="listyle">
+                                            <li>評論數 @Model.comment.Where(m => m.member_id == @Model.member.member_id).Count()</li>
+                                            <li>追蹤者 @Model.follow_list.Where(m => m.followed_id == @Model.member.member_id).Count()</li>
+                                            <li>關注中 @Model.follow_list.Where(m => m.member_id == @Model.member.member_id).Count() </li>
+                                            <li>加入時間 @Model.member_profile.create_time.ToString("yyyy MM dd")</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-9 mt-2" style="height:300px ">
+                            <ul class="nav nav-pills mb-3 " id="pills-tab" role="tablist">
+                                <li class="nav-item ">
+                                    <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">個人評論</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">追蹤評論</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">我的珍藏</a>
+                                </li>
+
+                            </ul>
+                            <!--會員評論-->
+                            <div class="tab-content" id="pills-tabContent">
+                                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">@Html.Action("_CommentsFromMember", "CommentsWeb", new { memId = @Model.member.member_id }) </div>
+
+                                <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">@Html.Action("_CommentsFromMember", "CommentsWeb", new { memId = @Model.member.member_id })</div>
+
+                                <!--我的收藏-->
+                                <div class=" tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+                                    <div class="row">
+                                        @foreach (var item in Model.collections_detail)
+                                        {
+
+                                            <div class=" card col-4 collection_card">
+                                                <img class="card-img-top img-fluid" src="~/images/activity/A001069_20191118下午0456093.jpg" alt="Card image cap">
+                                                <div class="card-body">
+                                                    <p class="card-text">@item.tourism_id</p>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
 
 </div>
 

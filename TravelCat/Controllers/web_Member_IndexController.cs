@@ -207,7 +207,8 @@ namespace TravelCat.Controllers
             {
                 DialogResult ans = MessageBox.Show("驗證有誤!", "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Question);
                 return View();
-            }
+            };
+        }
 
         [HttpPost]
         public string getfollowed(string member_id,string followed_id)

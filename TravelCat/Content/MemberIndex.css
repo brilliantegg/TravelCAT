@@ -1,4 +1,6 @@
-﻿
+﻿body {
+    margin-top: 200px
+}
 .text-catcolor {
     color: #00cc99 !important;
 }
@@ -32,8 +34,8 @@
     }
 
 .intro {
-    background-color: #16AC84;
-    color: white;
+
+
     font-weight: bolder;
     position:relative;
     height:700px;
@@ -63,9 +65,33 @@ a:hover {
 }
 
 
-.profile_avatar {
-    top: -100px;
-    left: 60px;
-    z-index: 999;
-    position: absolute;
+.profile_avatar img {
+    margin: 10px 50px;
+    width: 200px;
+    height: 200px;
+    background: #f80;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.user_profile_header {
+    padding:50px;
+    height: 300px;
+    border: 2px solid #e00071;
+    box-shadow: 5px 6px 0px #e00071;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    position: relative;
+    overflow: hidden;
+
+    max-width: 92%;
+    margin: 30px auto 20px;
+    background: #fff;
+
+    border-radius: 3px;
+}
+.brief{
+    font:italic
+}
+.collection_card {
+    padding-left: 0;
+    padding-right: 0;
 }
