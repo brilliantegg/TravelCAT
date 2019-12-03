@@ -1,14 +1,11 @@
-﻿using Microsoft.AspNet.Identity;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using System.Windows.Forms;
 using TravelCat.Models;
 
 namespace TravelCat.Controllers
@@ -88,29 +85,6 @@ namespace TravelCat.Controllers
 
             return View(admin);
         }
-
-        public ActionResult Confirm(string account)
-        {
-            var check = db.admin.Where(m => m.admin_account == account).FirstOrDefault();
-            if (check != null)
-            {
-                DialogResult ans = MessageBox.Show("註冊已完成", "信箱已確認", MessageBoxButtons.OK, MessageBoxIcon.Question);
-                if (ans == DialogResult.OK)
-                {
-                    check.emailConfirmed = true;
-                    db.SaveChanges();
-                    return RedirectToAction("Index", "Admin");
-                }
-                return View("重新整理");
-            }
-            else
-            {
-                DialogResult ans = MessageBox.Show("請先註冊會員!", "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Question);
-                return RedirectToAction("Create", "Admin");
-            }
-
-        }
-
 
         // GET: Admin/Edit/5
 

@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -69,7 +68,6 @@ namespace TravelCat.Models
     public partial class issue { }
     public class Metadata_issue
     {
-
         [DisplayName("會員編號")]
         public string member_id { get; set; }
 
@@ -101,14 +99,8 @@ namespace TravelCat.Models
         [DisplayName("處理日期")]
         [DataType(DataType.DateTime, ErrorMessage = "輸入日期錯誤")]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd hh:mm}", ApplyFormatInEditMode = true)]
-
         public Nullable<System.DateTime> resolve_date { get; set; }
-        [JsonIgnore]
-        public virtual admin admin { get; set; }
-        [JsonIgnore]
-        public virtual issue_type issue_type { get; set; }
-        [JsonIgnore]
-        public virtual member member { get; set; }
+
     }
 
     [MetadataType(typeof(Metadata_follow_list))]
@@ -314,16 +306,7 @@ namespace TravelCat.Models
         [StringLength(20, ErrorMessage = "名稱最多20個字")]
         public string collection_type_title { get; set; }
     }
-    [MetadataType(typeof(Metadata_collections_detail))]
-    public partial class collections_detail
-    { }
-    public partial class Metadata_collections_detail
-    {
-        [JsonIgnore]
-        public virtual collection_type collection_type { get; set; }
-        [JsonIgnore]
-        public virtual member member { get; set; }
-    }
+
     [MetadataType(typeof(Metadata_hotel))]
     public partial class hotel
     { }
@@ -396,8 +379,8 @@ namespace TravelCat.Models
         public string tourism_id { get; set; }
 
         [DisplayName("評論標題")]
-        [Required]
-        [StringLength(50)]
+        [Required(ErrorMessage = "此欄位為必填")]
+        [StringLength(20, ErrorMessage = "名稱最多20個字")]
         public string comment_title { get; set; }
 
         [DisplayName("評論內容")]
@@ -467,15 +450,6 @@ namespace TravelCat.Models
 
         [DisplayName("留言狀態")]
         public Nullable<bool> msg_status { get; set; }
-        [DisplayName("觀光編號")]
-        public string tourism_id { get; set; }
-        [JsonIgnore]
-        public virtual comment comment { get; set; }
-        [JsonIgnore]
-        public virtual member member { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        [JsonIgnore]
-        public virtual ICollection<message_emoji_details> message_emoji_details { get; set; }
 
     }
     [MetadataType(typeof(Metadata_emoji))]
@@ -489,19 +463,6 @@ namespace TravelCat.Models
 
         [DisplayName("表情圖案")]
         public string emoji_pic { get; set; }
-
-    }
-    [MetadataType(typeof(Metadata_comment_emoji_details))]
-    public partial class comment_emoji_details
-    { }
-    public partial class Metadata_comment_emoji_details
-    {
-        [JsonIgnore]
-        public virtual comment comment { get; set; }
-        [JsonIgnore]
-        public virtual emoji emoji { get; set; }
-        [JsonIgnore]
-        public virtual member member { get; set; }
 
     }
     [MetadataType(typeof(Metadata_restaurant))]

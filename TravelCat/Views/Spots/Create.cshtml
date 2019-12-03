@@ -73,7 +73,6 @@
             <div class="co col-6">
                 @Html.LabelFor(model => model.spot.city, htmlAttributes: new { @class = "txt" })
                 @Html.EditorFor(model => model.spot.city, new { htmlAttributes = new { @class = "form-control" } })
-
                 @Html.ValidationMessageFor(model => model.spot.city, "", new { @class = "text-danger" })
             </div>
         </div>

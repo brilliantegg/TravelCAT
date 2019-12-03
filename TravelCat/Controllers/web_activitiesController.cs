@@ -24,7 +24,7 @@ namespace TravelCat.Controllers
         // GET: web_activities/Details/5
         public ActionResult Details(string id)
         {
-            ViewBag.getTime = DateTime.Now.ToString("yyyy/MM/dd");
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -43,7 +43,7 @@ namespace TravelCat.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.id = id;
+
             return View(model);
         }
 
