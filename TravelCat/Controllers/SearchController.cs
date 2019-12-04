@@ -136,27 +136,58 @@ namespace TravelCat.Controllers
                         }
                     }
                 }
-                //if (travel_month != null)
-                //{
-                //    for (int i = 0; i < model.activity.Count; i++)
-                //    {
-                //        bool activity_exist = false;
-                //        model.comment = db.comment.Where(s => s.tourism_id == model.activity[i].activity_id).ToList();
-                //        for (int j = 0; j < model.comment.Count; j++)   //找對於單個活動的所有評論內是否有含搜尋選項
-                //        {
-                //            var result = model.comment.Where(s => s.travel_month.Contains(travel_month[j])).FirstOrDefault();
-                //            if (result != null)
-                //            {
-                //                activity_exist = true;  //只要有一項就代表活動符合資格
-                //            }
-                //        }
-                //        if (!activity_exist)
-                //        {
-                //            model.activity.RemoveAt(i);     //不符合資格的移除
-                //            i = i - 1;
-                //        }
-                //    }
-                //}
+                //搜尋月份
+                if (travel_month != null)
+                {
+                    string id;
+                    string[] month = { };
+                    switch (travel_month)
+                    {
+                        case "3to5":
+                            month[0] = "3";
+                            month[1] = "4";
+                            month[2] = "5";
+                            break;
+                        case "6to8":
+                            month[0] = "6";
+                            month[1] = "7";
+                            month[2] = "8";
+                            break;
+                        case "9to11":
+                            month[0] = "9";
+                            month[1] = "10";
+                            month[2] = "11";
+                            break;
+                        case "12to2":
+                            month[0] = "12";
+                            month[1] = "1";
+                            month[2] = "2";
+                            break;
+                    }
+                    for (int i = 0; i < model.activity.Count; i++)
+                    {
+                        bool activity_exist = false;
+                        id = model.activity[i].activity_id;
+                        model.comment = db.comment.Where(s => s.tourism_id == id).ToList();
+                        for (int j = 0; j < model.comment.Count; j++)   //某個活動內的某個留言
+                        {
+                            for (int x = 0; x < month.Length; x++) //找這個留言內有沒有我們要的月份
+                            {
+                                int result = model.comment.Where(s => s.travel_month == month[x]).Count();
+                                if (result != 0)
+                                {
+                                    activity_exist = true;  //只要有一項就代表活動符合資格
+                                }
+                            }
+                        }
+                        if (!activity_exist)
+                        {
+                            model.activity.RemoveAt(i);     //不符合資格的移除
+                            i = i - 1;
+                        }
+                    }
+                }
+
             }
             return View(model);
             //return View(model.activity.OrderBy(m => m.activity_id).ToPagedList(page, pageSize));
