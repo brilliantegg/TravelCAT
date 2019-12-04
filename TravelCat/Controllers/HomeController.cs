@@ -106,10 +106,10 @@ namespace TravelCat.Controllers
 
                 HttpContext.GetOwinContext().Authentication.SignIn(
                    new AuthenticationProperties { IsPersistent = false }, ident);
-
                 return RedirectToAction("test"); // auth succeed 
             }
             // invalid username or password
+
             ModelState.AddModelError("", "invalid username or password");
             return View();
         }

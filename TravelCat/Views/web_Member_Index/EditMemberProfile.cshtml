@@ -1,0 +1,160 @@
+﻿@model TravelCat.Models.member
+@{
+    ViewBag.Title = "EditMemberProfile";
+    Layout = "~/Views/Shared/web-Layout.cshtml";
+}
+
+<div class="container">
+
+    @using (Html.BeginForm("EditMemberProfile", "web_Member_Index", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h2>個人資料</h2>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.member_profile.member_id)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.member_account, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <input id="newacc" value="@Model.member_account" name="newacc" class="form-control" />
+                    @Html.ValidationMessageFor(model => model.member_account, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.member_profile.member_name, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <input id="newname" type="text" value="@Model.member_profile.member_name" name="newname" class="form-control" />
+                    @Html.ValidationMessageFor(model => model.member_profile.member_name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.member_profile.gender, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <select name="newgender" class="form-control">
+                        <option value="true" @(Model.member_profile.gender == true ? "selected" : "")>男</option>
+                        <option value="false" @(Model.member_profile.gender == true ? "" : "selected")>女</option>
+                    </select>
+                    @Html.ValidationMessageFor(model => model.member_profile.gender, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.member_profile.birthday, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <input id="newbirthday" type="date" name="newbirthday" value="@Model.member_profile.birthday" class="form-control" />
+                    @Html.ValidationMessageFor(model => model.member_profile.birthday, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.member_profile.nickname, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <input id="newnickname" type="text" value="@Model.member_profile.nickname" name="newnickname" class="form-control" />
+                    @Html.ValidationMessageFor(model => model.member_profile.nickname, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.member_profile.nation, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <select id="newnation" name="newnation" class="form-control">
+                        <option value="台灣">台灣</option>
+                    </select>
+                  
+                    @Html.ValidationMessageFor(model => model.member_profile.nation, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.member_profile.city, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <select id="newcity" name="newcity" value="@Model.member_profile.city" class="form-control">
+                        <option value="北部地區" disabled>北部地區</option>
+                        <option value="台北市">台北市</option>
+                        <option value="新北市">新北市</option>
+                        <option value="基隆市">基隆市</option>
+                        <option value="桃園市">桃園市</option>
+                        <option value="新竹市">新竹市</option>
+                        <option value="新竹縣">新竹縣</option>
+                        <option value="苗栗縣">苗栗縣</option>
+                        <option value="中部地區" disabled>中部地區</option>
+                        <option value="台中市">台中市</option>
+                        <option value="彰化縣">彰化縣</option>
+                        <option value="南投縣">南投縣</option>
+                        <option value="南部地區" disabled>南部地區</option>
+                        <option value="雲林縣">雲林縣</option>
+                        <option value="嘉義市">嘉義市</option>
+                        <option value="嘉義縣">嘉義縣</option>
+                        <option value="台南市">台南市</option>
+                        <option value="高雄市">高雄市</option>
+                        <option value="屏東縣">屏東縣</option>
+                        <option value="東部地區" disabled>東部地區</option>
+                        <option value="宜蘭縣">宜蘭縣</option>
+                        <option value="花蓮縣">花蓮縣</option>
+                        <option value="台東縣">台東縣</option>
+                        <option value="離島地區" disabled>離島地區</option>
+                        <option value="澎湖縣">澎湖縣</option>
+                        <option value="金門縣">金門縣</option>
+                        <option value="連江縣">連江縣</option>
+                    </select>
+                    @Html.ValidationMessageFor(model => model.member_profile.city, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.member_profile.address_detail, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <input id="newaddress_detail" type="text" value="@Model.member_profile.address_detail" name="newaddress_detail" class="form-control" />
+                    @Html.ValidationMessageFor(model => model.member_profile.address_detail, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.member_profile.phone, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <input id="newphone" type="text" value="@Model.member_profile.phone" name="newphone" class="form-control" />
+                    @Html.ValidationMessageFor(model => model.member_profile.phone, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.member_profile.profile_photo, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+
+                    @if (Model.member_profile.profile_photo != null)
+                    {
+                        <img src="/images/member/@Model.member_profile.profile_photo" width="150" />
+                    }
+                    else
+                    {
+                        <h3>無圖示</h3>
+                    }
+                    <input name="photo" id="photo" type="file" class="form-control" />
+
+                    @Html.ValidationMessageFor(model => model.member_profile.profile_photo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="修改" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        @Html.ActionLink("返回", "Index", new { id = Model.member_id })
+    </div>
+</div>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+<script>
+
+
+</script>

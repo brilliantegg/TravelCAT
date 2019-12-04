@@ -62,7 +62,8 @@ namespace TravelCat.Controllers
                 gs.messageBody = "恭喜註冊成功<br><a href=" + callbackUrl + ">請點此連結</a>";
                 gs.IsHtml = true;
                 gs.Send();
-
+                
+                
                 db.member.Add(model);
                 db.member_profile.Add(model.member_profile);
                 db.SaveChanges();

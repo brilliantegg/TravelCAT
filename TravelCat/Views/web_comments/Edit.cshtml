@@ -5,122 +5,122 @@
     Layout = "~/Views/Shared/web-Layout.cshtml";
 }
 
-<h2>編輯評論</h2>
 
 
+    <div class="container">
+        <h2>編輯評論</h2>
+        <form action="/web_comments/Edit" method="post" enctype="multipart/form-data">
+            @Html.AntiForgeryToken()
 
-<form action="/web_comments/Edit" method="post" enctype="multipart/form-data">
-    @Html.AntiForgeryToken()
+            <div class="form-horizontal">
 
-    <div class="form-horizontal">
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.comment_id)
 
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.comment_id)
+                <div class="form-group">
+                    <div class="col-md-10">
+                        @Html.HiddenFor(model => model.tourism_id, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.tourism_id, "", new { @class = "text-danger" })
+                    </div>
+                </div>
 
-        <div class="form-group">
-            <div class="col-md-10">
-                @Html.HiddenFor(model => model.tourism_id, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.tourism_id, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.comment_title, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.comment_title, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.comment_title, "", new { @class = "text-danger" })
+                    </div>
+                </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.comment_title, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.comment_title, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.comment_title, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.comment_content, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.comment_content, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.comment_content, "", new { @class = "text-danger" })
+                    </div>
+                </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.comment_content, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.comment_content, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.comment_content, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-10">
-                @Html.HiddenFor(model => model.comment_date, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.comment_date, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <!--圖片-->
-        <div class="form-group">
-            @Html.LabelFor(model => model.comment_photo, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <label class="btn btn-info">
-                    <input type="file" id="imgInp" name="comment_photo" style="display:none;">
-                    <i class="fa fa-photo"></i> 上傳圖片
-                </label>
-                <br />
-                <img id="preview_img" src="~/images/comment/@Model.comment_photo" width="500" />
-                <input id="oldImg" name="oldImg" type="hidden" value="@Model.comment_photo" />
+                <div class="form-group">
+                    <div class="col-md-10">
+                        @Html.HiddenFor(model => model.comment_date, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.comment_date, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <!--圖片-->
+                <div class="form-group">
+                    @Html.LabelFor(model => model.comment_photo, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <label class="btn btn-info">
+                            <input type="file" id="imgInp" name="comment_photo" style="display:none;">
+                            <i class="fa fa-photo"></i> 上傳圖片
+                        </label>
+                        <br />
+                        <img id="preview_img" src="~/images/comment/@Model.comment_photo" width="500" />
+                        <input id="oldImg" name="oldImg" type="hidden" value="@Model.comment_photo" />
 
 
-                @Html.ValidationMessageFor(model => model.comment_photo, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                        @Html.ValidationMessageFor(model => model.comment_photo, "", new { @class = "text-danger" })
+                    </div>
+                </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.comment_stay_total, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.comment_stay_total, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.comment_stay_total, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.comment_stay_total, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.comment_stay_total, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.comment_stay_total, "", new { @class = "text-danger" })
+                    </div>
+                </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.travel_partner, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.travel_partner, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.travel_partner, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.travel_partner, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.travel_partner, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.travel_partner, "", new { @class = "text-danger" })
+                    </div>
+                </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.comment_rating, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.comment_rating, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.comment_rating, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.comment_rating, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.comment_rating, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.comment_rating, "", new { @class = "text-danger" })
+                    </div>
+                </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.travel_month, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.travel_month, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.travel_month, "", new { @class = "text-danger" })
-            </div>
-        </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.travel_month, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.travel_month, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.travel_month, "", new { @class = "text-danger" })
+                    </div>
+                </div>
 
-        <div class="form-group">
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.HiddenFor(model => model.comment_status)
-                    @Html.ValidationMessageFor(model => model.comment_status, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <div class="checkbox">
+                            @Html.HiddenFor(model => model.comment_status)
+                            @Html.ValidationMessageFor(model => model.comment_status, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-10">
+                        @Html.HiddenFor(model => model.member_id)
+                        @Html.ValidationMessageFor(model => model.member_id, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Save" class="btn btn-outline-dark" />
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            <div class="col-md-10">
-                @Html.HiddenFor(model => model.member_id)
-                @Html.ValidationMessageFor(model => model.member_id, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-outline-dark" />
-            </div>
-        </div>
+        </form>
     </div>
-
-</form>
-
 
 
 

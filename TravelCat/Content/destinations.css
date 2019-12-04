@@ -1,4 +1,6 @@
-﻿﻿body {
+﻿body {
+    font-family: arial,"Microsoft JhengHei","微軟正黑體",sans-serif;
+
 }
 /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
@@ -12,19 +14,60 @@ html, body {
     margin: 0;
     padding: 0;
 }
+.gallery_caption {
+    text-align: center;
+}
 
-.mySlides {
-    display: none;
+.add_to_bucket_list {
+    float: right;
+}
+.single_comments {
+    max-width: 690px;
+    min-height: 440px;
+    text-align: left;
+    background: #ffffff;
+    transition: opacity 0.35s ease-in;
+    border: 1px solid #d6d6d6;
+    box-shadow: 1px 1px 0px #c2c2c2;
+    border-radius: 3px;
+    cursor: pointer;
+    margin: 50px;
+    position: relative;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.comment_photo img {
+
+    display: block
+}
+
+textarea {
+    border: 0;
+    overflow-y: auto; /* IE */
+    resize: none; /* Firefox, Chrome */
+    width:98%;
+}
+textarea:focus {
+    outline: 0; /* Chrome */
+}
+.single_message {
+    border: 1px solid #d6d6d6;
+}
+.btn {
+    border-width: 3px;
+}
+.header-carousel-item {
+    height: 450px;
 }
 
 .mySlides {
     position: relative;
 }
-
+.single_message{
+    margin:10px
+}
 .msg_content {
-    width: 95%;
-    height: 150px;
-    max-width: 98%;
+    height: 50px;
     padding: 10px;
     margin: auto;
     text-align: left;
@@ -39,10 +82,48 @@ html, body {
     right: 0px
 }
 
-.gallery_caption {
-    text-align: center;
+.member_avatar {
+    width: 50px;
+    height: 50px;
+    margin-right: 20px;
+    margin-bottom: 5px;
+    background: #f80;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.click_button {
+    border: 1px solid rgba(0%,0%,100%,0.4);
+    
 }
 
 .add_to_bucket_list {
     float: right;
+}
+.showMore {
+    -webkit-line-clamp: 100
+}
+.member_detail {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    justify-content: space-between;
+}
+.commemt_content {
+    padding: 20px
+}
+.emoji_panel {
+    padding: 10px ;
+
+}
+.create_time{
+    color:gray
+}
+.member_name {
+    align-self: center;
+    font-weight: 700;
+}
+
+
+.new_comment{
+
 }

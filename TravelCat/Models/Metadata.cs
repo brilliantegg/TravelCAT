@@ -215,7 +215,7 @@ namespace TravelCat.Models
         [DisplayName("生日")]
         [DataType(DataType.DateTime, ErrorMessage = "輸入日期格式有誤")]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
-        public System.DateTime birthday { get; set; }
+        public Nullable<System.DateTime> birthday { get; set; }
 
         [DisplayName("暱稱")]
         [Required(ErrorMessage = "此欄位為必填")]
@@ -389,7 +389,7 @@ namespace TravelCat.Models
         public string comment_content { get; set; }
 
         [DisplayName("評論時間")]
-        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd hh:mm}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}", ApplyFormatInEditMode = true)]
         public DateTime comment_date { get; set; }
 
         [DisplayName("照片")]

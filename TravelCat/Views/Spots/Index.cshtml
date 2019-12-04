@@ -15,7 +15,7 @@
         @*@Html.TextBox("id", "", new { @class = " border", @placeholder = "編號,名稱,城市,行政區" })
 
         @Html.ActionLink("查詢", "contentQuery", new { id = "id" }, new{@class="btn btn-default"})*@
-        <form action="/Spots/Index" method="get">
+        <form action="@Url.Action("Index","Spot")" method="get">
             @Html.TextBox("id", "", new { @class = " border", @placeholder = "編號,名稱,城市,行政區" })
             <input class="btn btn-secondary" type="submit" value="查詢" />
         </form>
