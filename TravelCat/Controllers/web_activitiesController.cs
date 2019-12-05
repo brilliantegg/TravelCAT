@@ -38,12 +38,13 @@ namespace TravelCat.Controllers
                 message_emoji_details = db.message_emoji_details.ToList(),
                 member_profile = db.member_profile.ToList(),
                 member = db.member.ToList(),
+                collections_detail = db.collections_detail.Where(m => m.tourism_id == id).ToList(),
             };
             if (model == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.id = id;    
+            ViewBag.tourismId = id;    
             return View(model);
         }
 

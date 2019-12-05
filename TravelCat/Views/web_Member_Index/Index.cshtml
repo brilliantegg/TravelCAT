@@ -18,54 +18,55 @@
 <div class="jumbotron jumbotron-fluid text-catcolor">
 
 </div>
+<div class="user_profile_header col-8 offset-2">
+    <div class="d-flex row justify-content-between">
+        <div class="profile_avatar d-flex row">
+            @if (@Model.member_profile.profile_photo != null)
+            {
+                <img src="~/images/member/@Model.member_profile.profile_photo" alt="...">
+            }
+            else
+            {
+                <img src="~/images/member/avatar.png" alt="...">
+            }
 
-<div class=" container">
-    <div class="user_profile_header col-12">
-        <div class="d-flex row justify-content-between">
-            <div class="profile_avatar d-flex row">
-                @if (@Model.member_profile.profile_photo != null)
-                {
-                    <img src="~/images/member/@Model.member_profile.profile_photo"   alt="...">
-                }
-                else
-                {
-                    <img src="~/images/member/avatar.png"  alt="...">
-                }
+            <div class="member_header">
+                <div class="personal_info">
+                    <h2 class="">@Model.member_profile.nickname</h2>
+                    <p class="brief">@Model.member_profile.brief_intro</p>
 
-                <div class="member_header">
-                    <div class="personal_info">
-                        <h2 class="">@Model.member_profile.nickname</h2>
-                        <p class="brief">@Model.member_profile.brief_intro</p>
+                    <!--編輯會員 or 追蹤會員-->
+                    @if (@memberId == @Model.member.member_id)
+                    {
+                        <button type="button" class="btn  btn-outline-dark " data-toggle="modal" data-target="#exampleModalCenter">
+                            + 編輯資料
+                        </button>
+                    }
+                    @if (@memberId != null && @memberId != @Model.member.member_id)
+                    {
+                        <button class="follwered_btn btn btn-outline-dark" value="@Model.member.member_id">+ follow</button>
+                    }
 
-                        <!--編輯會員 or 追蹤會員-->
-                        @if (@memberId == @Model.member.member_id)
-                        {
-                            <button type="button" class="btn  btn-outline-dark " data-toggle="modal" data-target="#exampleModalCenter">
-                                + 編輯資料
-                            </button>
-                        }
-                        @if (@memberId != null && @memberId != @Model.member.member_id)
-                        {
-                            <button class="follwered_btn btn btn-outline-dark" value="@Model.member.member_id">+ follow</button>
-                        }
-                    </div>
                 </div>
-
             </div>
-            <div class="member_location">
 
-                <ul class="">
-                    <li><span>location</span></li>
-                    <li><span>@Model.member_profile.city</span></li>
-                    <li><span>website</span></li>
-                    <li><a href="@Model.member_profile.website_link"><i class="far fa-id-card"></i></a></li>
-
-                </ul>
-
-            </div>
         </div>
+        <div class="member_location">
 
+            <ul class="">
+                <li><span>location</span></li>
+                <li><span>@Model.member_profile.city</span></li>
+                <li><span>website</span></li>
+                <li><a href="@Model.member_profile.website_link"><i class="far fa-id-card"></i></a></li>
+
+            </ul>
+
+        </div>
     </div>
+
+</div>
+<div class=" container">
+    
     <!-- Modal -->
     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -164,7 +165,11 @@
                                             <div class=" card col-4 collection_card">
                                                 <img class="card-img-top img-fluid" src="~/images/activity/A001069_20191118下午0456093.jpg" alt="Card image cap">
                                                 <div class="card-body">
-                                                    <p class="card-text">@item.tourism_id</p>
+                                                    <p class="card-text">
+                                                        @Model.activity.Where(m => m.activity_id == @item.tourism_id).FirstOrDefault().activity_title
+                                                    </p>
+
+                                                        
                                                 </div>
                                             </div>
                                         }

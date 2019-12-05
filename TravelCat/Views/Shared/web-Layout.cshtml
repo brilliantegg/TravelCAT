@@ -27,7 +27,8 @@
                     <img src="~/images/cat-face-with-wry-smile_1f63c.png " width="50" />
                     旅途貓
                 </a>
-                @if (Request.IsAuthenticated)
+
+                @if (Request.IsAuthenticated && Session["memberID"] != null)
                 {
                     <div>
                         @Html.ActionLink(@User.Identity.GetUserName(), "Index", "web_Member_Index", new { id = mem_id }, new { @class = " far fa-user memberId" })
@@ -39,7 +40,7 @@
                 {
                     <div>
                         @Html.ActionLink("登入", "LogIn", "Home", null, new { @class = " far fa-user " })
-                        @Html.ActionLink("註冊", "Index", "Register",null, new { @class = " far" })
+                        @Html.ActionLink("註冊", "Index", "Register", null, new { @class = " far" })
                     </div>
                 }
             </div>

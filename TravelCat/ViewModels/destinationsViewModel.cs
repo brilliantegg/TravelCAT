@@ -19,5 +19,7 @@ namespace TravelCat.ViewModels
         public List<message_emoji_details> message_emoji_details { get; set; }
         public List<comment_emoji_details> comment_emoji_details { get; set; }
         public List<emoji> emoji { get; set; }
+
+        public List<collections_detail> collections_detail { get; set; }
     }
 }
