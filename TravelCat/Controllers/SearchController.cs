@@ -305,7 +305,7 @@ namespace TravelCat.Controllers
         //網軍來惹
         public ActionResult generate_comment()
         {
-            List<activity> activity = db.activity.OrderBy(m => Guid.NewGuid()).ToList();
+            List<spot> spots = db.spot.OrderBy(m => Guid.NewGuid()).ToList();
             //string id = "";
             string[] title = { "巴澤航空12/13首航 起降時間皆紅眼","好想吃杏子豬排","組員叫我當水軍","日本高中生訪總統府 總統現身問喝珍奶沒",
                                         "單親媽背幼兒賣地瓜 努力賺錢爭取女兒","芳子好變態","花蓮女盜採砂石累犯 徒手搬逾600公斤","水氣與氣溫配合 氣象專家：高山初雪機率高"};
@@ -316,7 +316,7 @@ namespace TravelCat.Controllers
                                                 "一名有盜採砂石前科的程姓女子，昨天在花蓮溪口北岸徒手搬運石頭被海巡人員查獲，程嫌供稱要填補牆壁，經秤重約搬運620公斤，訊後依竊盜罪移送花蓮地檢署偵辦。東部分署第一二岸巡隊今天表示，司法小隊昨天下午在花蓮溪口北岸發現一輛形跡可疑的黑色箱型車，疑似盜採砂石，並通報第九巡防區指揮部支援。經盤查發現程嫌車上裝有粉扁石，盜採量約620公斤隨即進行筆錄。第一二岸巡隊表示，程嫌為台東人，現居花蓮，民國103年也曾因盜採砂石遭該隊查獲，昨天下午獨自在岸邊徒手撿拾，約1小時就撿拾620公斤的粉扁石，訊時供稱要填補家中牆壁使用。第一二岸巡隊表示，岸際砂石為國有財產，未經許可不得任意撿拾，將持續取締不法，若民眾發現任何不法情事，可透過海巡署「118」服務專線通報。",
                                                 "日本愛媛縣松山市城南高校學生赴台灣教育旅行，今天進入總統府參觀，導覽人員正持總統蔡英文人形立牌解說，蔡總統突然現身，問大家「喝珍珠奶茶了沒？」引起學生雀躍驚呼。日本放送協會（NHK）報導，愛媛縣松山市的松山城南高校學生約60人正在台灣進行教育旅行，行程之一就是造訪位於台北市的總統府。今天在總統府正門玄關大廳，接待人員手持蔡總統的人形立牌做解說之際，蔡總統突然出現在大廳。蔡總統一出現就用日語「大家好」打招呼，之後用中文說：「我是總統蔡英文，這是我的辦公室。」後來蔡總統問：「這次有來吃珍珠奶茶嗎？」報導說，這座總統府有百年歷史，在日本統治台灣時代建造，也是日本學生教育旅行的代表性參觀景點之一。總統府的部分區域開放給一般民眾參觀，但蔡總統本人現身訪客參觀區實屬罕見，所以蔡總統一現身，這群高中生不禁發出驚訝聲。見到蔡總統本人的日本高中生有人說：「沒想到總統本人會出現」，有人說：「以為就是一般參觀，就快結束了，沒想到會見到（總統）」。有女高中生覺得蔡總統看起來很親切，另有女高中生很高興的說：「蔡總統的手握起來好溫暖喔，我不能洗手。」"};
             string[] date = { "2010-07-26", "2016-01-07", "2013-03-08", "2015-11-30", "2018-08-23", "2019-12-05" };
-            string[] photo = { "asd.jpg", "02_work.jpg", "images.jpg", "01_cats.jpg", "sddefault.jpg", "10_gym.png" };
+            string[] photo = { "01_ash.png", "02_candy_crush.jpg", "03_goodboy.jpg", "G4wXXRk.gif", "12_goodguy.png", "01_sleep.jpg" };
             string[] memberID = { "M000001", "M000002", "M000003", "M000004", "M000005" };
             string[] partner = { "蜜月", "伴侶", "朋友", "商務", "家庭" };
 
@@ -327,7 +327,7 @@ namespace TravelCat.Controllers
                 comment cmt = new comment();
                 DateTime parsedDate = DateTime.Parse(date[random.Next(0, 6)]);
 
-                cmt.tourism_id = activity[i].activity_id;
+                cmt.tourism_id = spots[i].spot_id;
                 cmt.comment_title = title[random.Next(0, 8)];
                 cmt.comment_content = content[random.Next(0, 6)];
                 cmt.comment_date = parsedDate;
