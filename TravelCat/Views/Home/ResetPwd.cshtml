@@ -1,35 +1,25 @@
 ﻿@model TravelCat.Models.member
 
 @{
-    ViewBag.Title = "Editpassword";
+    ViewBag.Title = "ResetPwd";
     Layout = "~/Views/Shared/web-Layout.cshtml";
 }
-<div class="container">
-    <h2>修改密碼</h2>
 
+<div class="container">
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
 
         <div class="form-horizontal">
-
+            <h2>重設密碼</h2>
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             @Html.HiddenFor(model => model.member_id)
 
             <div class="form-group">
-                <label class="col-form-label">原密碼</label>
-                <div class="col-md-10">
-                    <input id="oldpassword" type="password" name="oldpassword" class="form-control" />
-                </div>
-                <span class="text-danger">@ViewBag.Err</span>
-            </div>
-
-            <div class="form-group">
                 <label class="col-form-label">新密碼</label>
                 <div class="col-md-10">
                     <input id="Password1" type="password" name="newpassword" class="form-control" />
-
                 </div>
             </div>
 
@@ -37,55 +27,41 @@
                 <label class="col-form-label">確認密碼</label>
                 <div class="col-md-10">
                     <input id="Password2" type="password" class="form-control" />
-
                 </div>
             </div>
-
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input id="submit1" type="submit" value="修改" class="btn btn-primary" />
+                    <input id="submit" type="submit" value="更改密碼" class="btn btn-primary" />
                 </div>
             </div>
         </div>
-
     }
 
-    <div>
-        @Html.ActionLink("返回", "Index",new { id = Model.member_id })
-    </div>
 </div>
-
 <script src="~/Scripts/jquery-3.4.1.min.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 <script>
-    $('#submit1').click(function () {
-        var psd1 = $('#oldpassword').val();
-        var psd2 = $('#Password1').val();
-        var psd3 = $('#Password2').val();
+    $('#submit').click(function () {
+        var psd1 = $('#Password1').val();
+        var psd2 = $('#Password2').val();
 
         if (psd1 == "") {
-            alert("請輸入原密碼！");
-            return false;
-        }
-        if (psd2 == "") {
             alert("請輸入新密碼！");
             return false;
         }
-        else if (psd3 == "") {
+        if (psd2 == "") {
             alert("請輸入確認密碼！");
             return false;
         }
-        else if (psd2 != psd3) {
+        else if (psd1 != psd2) {
             alert("兩次輸入的密碼不一致！");
             return false;
         }
         else
-            alert("更改密碼成功，請記得用新密碼登入");
+            alert("密碼更改成功，按下確定至登入頁面");
             return true;
     });
-
+    
 </script>
-
-

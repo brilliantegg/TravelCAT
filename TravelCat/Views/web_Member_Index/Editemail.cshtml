@@ -20,14 +20,14 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.email, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    <input id="Text1" type="text" value="@Model.email" name="newemail" class="form-control" />
+                    <input id="newemail" type="text" value="@Model.email" name="newemail" class="form-control" />
                     @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="修改" class="btn btn-primary" />
+                    <input id="submit" type="submit" value="修改" class="btn btn-primary" />
                 </div>
             </div>
         </div>
@@ -40,3 +40,15 @@
 <script src="~/Scripts/jquery-3.4.1.min.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script>
+    $('#submit').click(function () {
+        if ($('#newemail').val() == "") {
+            alert("請輸入信箱");
+            return false;
+        }
+        else {
+            alert("您的信箱更改成功，請至您的信箱收取驗證信");
+            return true;
+        }
+    });
+</script>

@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewBag.Title = "ForgetView";
+    Layout = "~/Views/Shared/web-Layout.cshtml";
+}
+
+<div class="container" style="height:700px">
+    <div class="justify-content-center mt-5">
+        <div class="col-md-12">
+            <h3>@ViewBag.account 您好</h3>
+        </div>
+        <div class="col-md-12">
+            <h4 class="mt-4">我們已寄了一封信到您的信箱，向您說明如何重設密碼，請記得檢查您的信箱。</h4>
+        </div>
+        <div class="col-md-12">
+            <h4 class="mt-4">您的電子信箱：@ViewBag.accemail</h4>
+        </div>
+
+    </div>
+    <div class="col-md-12 mt-4">
+        @Html.ActionLink("回到登入頁", "Login", "Home")
+    </div>
+</div>
+
