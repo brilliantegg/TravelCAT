@@ -1,5 +1,10 @@
-﻿@model TravelCat.ViewModels.SearchViewModel
-@{ Layout = "";}
+﻿@*@using X.PagedList.Mvc;
+    @using X.PagedList;*@
+@model TravelCat.ViewModels.SearchViewModel
+@*<link href="/Content/PagedList.css" rel="stylesheet" type="text/css" />*@
+
+@*@{ Layout = "~/Views/Shared/web-Layout.cshtml";}*@
+
 
 <div class="row">
     <div class="col-md-3 mb-2 border-right">
@@ -145,11 +150,11 @@
             </div>
         </form>
     </div>
-
+  
     <div class="col-md-9 mb-2 ">
         <div>
-            <h2 class="font-weight-bold ">@ViewBag.q 的搜尋結果</h2>
-            <h5>條件：@ViewBag.city</h5>
+        <h2 class="font-weight-bold ">@ViewBag.q 的搜尋結果</h2>
+        <h5>條件：@ViewBag.city</h5>
         </div>
 
         <div class="text-right  border-bottom ">
@@ -339,3 +344,5 @@
 
     </div>
 </div>
+
+@*@Html.PagedListPager((IPagedList)ViewBag.OnePageOfProducts, page => Url.Action("Index", new { page }))*@

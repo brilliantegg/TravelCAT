@@ -20,7 +20,9 @@
                 </div>
             </form>
         </header>
-@Html.Action("_Activity","Search",new { q=ViewBag.q})
+        <div>
+            @Html.Action("_Activity", "Search", new { q = ViewBag.q })
+        </div>
     </div>
 </section>
 
