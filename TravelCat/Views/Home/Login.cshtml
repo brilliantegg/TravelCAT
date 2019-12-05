@@ -9,29 +9,44 @@
     <form id="login" method="post" action="@Url.Action("Login")">
         <div class="form-inline mt-3">
             @Html.LabelFor(model => model.member_account)
-            <input id="username" name="username" type="text" class="form-control ml-2" />
+            <input id="username" name="username" type="text" required="required" class="form-control ml-2" />
             @Html.ValidationMessageFor(model => model.member_account, "", new { @class = "text-danger" })
         </div>
         <div class="form-inline mt-3">
             @Html.LabelFor(model => model.member_password)
-            <input id="password" name="password" type="password" class="form-control ml-2" /><br />
-            <label><input type="checkbox" id="show_password" />顯示密碼</label>
+            <input id="password" name="password" type="password" required="required" class="form-control ml-2" />
             @Html.ValidationMessageFor(model => model.member_password, "", new { @class = "text-danger" })
         </div>
+        <div>
+            <h5 class="text-danger mt-2">@ViewBag.LoginErr</h5>
+        </div>
+        <div>
+            <input type="checkbox" id="show_password" />顯示密碼<br />
+            <a href="@Url.Action("ForgetPwd","Home")" class="text-info text-right">忘記密碼?</a>
+        </div>
+       
+
         <input id="Submit1" type="submit" value="送出" class="btn btn-info mt-3 mb-3" />
         <input id="Reset1" type="reset" value="清除" class="btn btn-info mt-3 mb-3" />
-        <input id="Button1" type="button" value="忘記密碼" class="btn btn-info mt-3 mb-3" />
     </form>
 
 </div>
 @section scripts {
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script>
-    $('#show_password').click(function () {
+        $('#show_password').click(function () {
+            if ($('#password').attr("type") == "password")
+            {
+                $('#password').attr("type", "text");
+            }
+            else
+            {
+                $('#password').attr("type", "password");
+            }
+        });
+      
 
-    });
-
-</script>
+    </script>
 }
 
 

@@ -25,7 +25,7 @@ namespace TravelCat.Controllers
             {
                 member = db.member.Find(id),
                 member_profile = db.member_profile.Find(id),
-                comment = db.comment.OrderByDescending(m=>m.comment_id).ToList(),
+                comment = db.comment.OrderByDescending(m => m.comment_id).ToList(),
                 follow_list = db.follow_list.ToList(),
                 collections_detail = db.collections_detail.Where(m=>m.member_id==id).ToList(),
                 activity =db.activity.ToList(),
@@ -51,36 +51,30 @@ namespace TravelCat.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditMemberProfile(string id, string newacc, string newname, bool newgender, DateTime newbirthday, string newnickname, string newnation, string newcity, string newaddress_detail, string newphone, HttpPostedFileBase photo)
+        public ActionResult EditMemberProfile(string id, string newnickname, string newnation, string newcity, string newaddress_detail, string newphone, HttpPostedFileBase photo)
         {
             member member = db.member.Find(id);
 
+            member.member_profile.nickname = newnickname;
+            member.member_profile.nation = newnation;
+            member.member_profile.city = newcity;
+            member.member_profile.address_detail = newaddress_detail;
+            member.member_profile.phone = newphone;
+
+            string fileName = "";
+            if (photo != null)
+            {
+                if (photo.ContentLength > 0)
+                {
+                    string t = photo.FileName;
+                    fileName = member.member_profile.member_id + "_" + DateTime.Now.ToString().Replace("/", "").Replace(":", "").Replace(" ", "") + Path.GetExtension(t);
+                    System.IO.File.Delete(Server.MapPath("~/images/member/" + member.member_profile.profile_photo));
+                    photo.SaveAs(Server.MapPath("~/images/member/" + fileName));
+                    member.member_profile.profile_photo = fileName;
+                }
+            }
             if (ModelState.IsValid)
             {
-                member.member_account = newacc;
-                member.member_profile.member_name = newname;
-                member.member_profile.gender = newgender;
-                member.member_profile.birthday = newbirthday;
-                member.member_profile.nickname = newnickname;
-                member.member_profile.nation = newnation;
-                member.member_profile.city = newcity;
-                member.member_profile.address_detail = newaddress_detail;
-                member.member_profile.phone = newphone;
-
-                string fileName = "";
-                if (photo != null)
-                {
-                    if (photo.ContentLength > 0)
-                    {
-                        string t = photo.FileName;
-                        fileName = member.member_profile.member_id + "_" + DateTime.Now.ToString().Replace("/", "").Replace(":", "").Replace(" ", "") + Path.GetExtension(t);
-                        System.IO.File.Delete(Server.MapPath("~/images/member/" + member.member_profile.profile_photo));
-                        photo.SaveAs(Server.MapPath("~/images/member/" + fileName));
-                        member.member_profile.profile_photo = fileName;
-                    }
-                }
-
-                db.Entry(member).State = EntityState.Modified;
                 db.Entry(member.member_profile).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index", "web_Member_Index", new { id = member.member_id });
@@ -171,35 +165,26 @@ namespace TravelCat.Controllers
                 gs.password = "lqleyzcbmrmttloe";
                 gs.sender = "旅途貓 <travelcat.service@gmail.com>";
                 gs.receiver = $"{member.email}";
-                gs.subject = "旅途貓驗證";
-                gs.messageBody = "恭喜註冊成功<br><a href=" + callbackUrl + ">請點此連結</a>";
+                gs.subject = "更改信箱";
+                gs.messageBody = "更改完成，點選連結驗證您的信箱<br><a href=" + callbackUrl + ">請點此連結</a>";
                 gs.IsHtml = true;
                 gs.Send();
 
                 db.Entry(member).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("ConfirmView", "web_Member_Index", new { id = member.member_id });
+                return RedirectToAction("Index", "web_Member_Index", new { id = member.member_id });
 
             }
             return View(member);
         }
-        //更改完後的頁面
-        public ActionResult ConfirmView(string id)
-        {
-            member meb = db.member.Find(id);
-            string memderacc = meb.member_account;
-            ViewBag.account = memderacc;
-
-            return View(meb);
-        }
-        //驗證信箱
+      
         public ActionResult Confirm(string account)
         {
             var check = db.member_profile.Where(m => m.member_id == account).FirstOrDefault();
 
             if (check != null)
             {
-                DialogResult ans = MessageBox.Show("註冊已完成", "信箱已確認", MessageBoxButtons.OK, MessageBoxIcon.Question);
+                DialogResult ans = MessageBox.Show("更改信箱完成", "信箱已確認", MessageBoxButtons.OK, MessageBoxIcon.Question);
                 if (ans == DialogResult.OK)
                 {
                     check.emailConfirmed = true;
@@ -212,11 +197,10 @@ namespace TravelCat.Controllers
             {
                 DialogResult ans = MessageBox.Show("驗證有誤!", "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Question);
                 return View();
-            };
+            }
         }
-
         [HttpPost]
-        public string getfollowed(string member_id,string followed_id)
+        public string getfollowed(string member_id, string followed_id)
         {
             string response = "done";
             follow_list follower = new follow_list();

@@ -174,7 +174,7 @@
           <Property Name="member_id" Type="char" MaxLength="7" Nullable="false" />
           <Property Name="member_name" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="gender" Type="bit" />
-          <Property Name="birthday" Type="date" />
+          <Property Name="birthday" Type="datetime" />
           <Property Name="nickname" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="create_time" Type="datetime" Nullable="false" />
           <Property Name="nation" Type="nvarchar" MaxLength="30" Nullable="false" />
@@ -748,7 +748,7 @@
           <Property Name="member_id" Type="String" MaxLength="7" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="member_name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="gender" Type="Boolean" />
-          <Property Name="birthday" Type="DateTime" Precision="0" />
+          <Property Name="birthday" Type="DateTime" Precision="3" />
           <Property Name="nickname" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="create_time" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="nation" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />

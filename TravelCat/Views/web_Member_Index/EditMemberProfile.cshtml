@@ -19,7 +19,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.member_account, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    <input id="newacc" value="@Model.member_account" name="newacc" class="form-control" />
+                    <input id="newacc" value="@Model.member_account" name="newacc" class="form-control" readonly />
                     @Html.ValidationMessageFor(model => model.member_account, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -27,7 +27,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.member_profile.member_name, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    <input id="newname" type="text" value="@Model.member_profile.member_name" name="newname" class="form-control" />
+                    <input id="newname" value="@Model.member_profile.member_name" class="form-control" readonly />
                     @Html.ValidationMessageFor(model => model.member_profile.member_name, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -36,10 +36,15 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.member_profile.gender, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    <select name="newgender" class="form-control">
-                        <option value="true" @(Model.member_profile.gender == true ? "selected" : "")>男</option>
-                        <option value="false" @(Model.member_profile.gender == true ? "" : "selected")>女</option>
-                    </select>
+                    @if (Model.member_profile.gender == true)
+                    {
+                        <input id="gender" value="男" class="form-control" readonly />
+                    }
+                    else if (Model.member_profile.gender == false)
+                    {
+                        <input id="gender" value="女" class="form-control" readonly />
+                    }
+
                     @Html.ValidationMessageFor(model => model.member_profile.gender, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -47,7 +52,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.member_profile.birthday, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    <input id="newbirthday" type="date" name="newbirthday" value="@Model.member_profile.birthday" class="form-control" />
+                    <input id="newbirthday" name="newbirthday" value="@Model.member_profile.birthday.Value.ToString("yyyy-MM-dd")" class="form-control" readonly />
                     @Html.ValidationMessageFor(model => model.member_profile.birthday, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -64,8 +69,10 @@
                 <div class="col-md-10">
                     <select id="newnation" name="newnation" class="form-control">
                         <option value="台灣">台灣</option>
+                        <option value="其他國家">其他國家</option>
+
                     </select>
-                  
+
                     @Html.ValidationMessageFor(model => model.member_profile.nation, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -100,6 +107,7 @@
                         <option value="澎湖縣">澎湖縣</option>
                         <option value="金門縣">金門縣</option>
                         <option value="連江縣">連江縣</option>
+                        <option value="其他城市">其他城市</option>
                     </select>
                     @Html.ValidationMessageFor(model => model.member_profile.city, "", new { @class = "text-danger" })
                 </div>
@@ -155,6 +163,8 @@
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 
 <script>
+    $('#newnation option[value=@Model.member_profile.nation]').attr('selected', 'selected');
+    $('#newcity option[value=@Model.member_profile.city]').attr('selected', 'selected');
 
 
 </script>

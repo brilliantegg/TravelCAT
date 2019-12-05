@@ -3,6 +3,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Security.Claims;
@@ -77,7 +78,7 @@ namespace TravelCat.Controllers
                 string role = "";
                 if (mem.member_profile.emailConfirmed == true)
                 {
-                    if (mem.member_status==false)
+                    if (mem.member_status == false)
                     {
                         role = "Confirmed";
                     }
@@ -108,9 +109,8 @@ namespace TravelCat.Controllers
                    new AuthenticationProperties { IsPersistent = false }, ident);
                 return RedirectToAction("test"); // auth succeed 
             }
-            // invalid username or password
 
-            ModelState.AddModelError("", "invalid username or password");
+            ViewBag.LoginErr = "帳號或密碼錯誤";
             return View();
         }
         public ActionResult LogOut() 
@@ -133,13 +133,93 @@ namespace TravelCat.Controllers
             return View();
         }
 
+        //忘記密碼
+        public ActionResult ForgetPwd()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ForgetPwd(string account, string email)
+        {
+            var acc = db.member.Where(m => m.member_account == account).FirstOrDefault();
 
+            if (acc != null)
+            {
 
+                if (acc.member_account == account && acc.member_profile.email == email)
+                {
 
+                    var callbackUrl = Url.Action("ResetPwd", "Home", new { id = acc.member_id }, protocol: Request.Url.Scheme);
 
+                    GmailSender gs = new GmailSender();
+                    gs.account = "travelcat.service@gmail.com";
+                    gs.password = "lqleyzcbmrmttloe";
+                    gs.sender = "旅途貓 <travelcat.service@gmail.com>";
+                    gs.receiver = $"{acc.member_profile.email}";
+                    gs.subject = "忘記密碼";
+                    gs.messageBody = "如果要重置您的密碼<br><br><a href=" + callbackUrl + ">請點此連結</a><br><br>如果您沒有要重置密碼，請忽略此消息。";
+                    gs.IsHtml = true;
+                    gs.Send();
 
+                    return RedirectToAction("ForgetView", "Home", new { account = acc.member_account });
 
+                }
 
+            }
+
+            ViewBag.PwdErr = "您輸入的帳號或信箱錯誤";
+            return View();
+        }
+        //忘記密碼完後的頁面 
+        public ActionResult ForgetView(string account)
+        {
+            var acc = db.member.Where(m => m.member_account == account).FirstOrDefault();
+            string memderacc = acc.member_account;
+            string email1 = acc.member_profile.email;
+            ViewBag.account = memderacc;
+            ViewBag.accemail = email1;
+
+            return View(acc);
+        }
+
+        //重置密碼
+        public ActionResult ResetPwd(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            member member = db.member.Find(id);
+
+            if (member == null)
+            {
+                return HttpNotFound();
+            }
+            return View(member);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ResetPwd(string id, string newpassword)
+        {
+            member member = db.member.Find(id);
+
+            byte[] password = System.Text.Encoding.UTF8.GetBytes(newpassword);
+            byte[] hash = new System.Security.Cryptography.SHA256Managed().ComputeHash(password);
+            string hashpassword = Convert.ToBase64String(hash);
+
+            member.member_password = hashpassword;
+
+            if (ModelState.IsValid)
+            {
+                db.Entry(member).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Login", "Home");
+            }
+
+            return View();
+        }
 
     }
 }
