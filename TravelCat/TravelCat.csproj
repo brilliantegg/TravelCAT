@@ -1817,6 +1817,12 @@
     <Content Include="images\comment\0_20191122上午083850.jpg" />
     <Content Include="images\culture-village-2356862_1920.jpg" />
     <Content Include="images\dribbbe_bmo-01.png" />
+    <Content Include="images\emoji\more %281%29.png" />
+    <Content Include="images\emoji\more.png" />
+    <Content Include="images\emoji\star %281%29.png" />
+    <Content Include="images\emoji\star %282%29.png" />
+    <Content Include="images\emoji\star.png" />
+    <Content Include="images\emoji\sweet-potato.png" />
     <Content Include="images\hotel-1111199_1920.jpg" />
     <Content Include="images\hotel-1749602_1920.jpg" />
     <Content Include="images\hotel\bmo_png_159083.png" />
@@ -1974,6 +1980,7 @@
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\SpotsController.cs" />
     <Compile Include="Controllers\web_activitiesController.cs" />
+    <Compile Include="Controllers\web_commentsController.cs" />
     <Compile Include="Controllers\web_Member_IndexController.cs" />
     <Compile Include="email\email.cs" />
     <Compile Include="Global.asax.cs">
@@ -2191,7 +2198,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="images\activity\" />
-    <Folder Include="images\badges\" />
     <Folder Include="images\member\" />
     <Folder Include="images\restaurant\" />
     <Folder Include="images\spot\" />

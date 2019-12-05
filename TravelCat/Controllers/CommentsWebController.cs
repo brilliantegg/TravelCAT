@@ -30,7 +30,7 @@ namespace TravelCat.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public PartialViewResult _CommentsForDestination(string tourismId,message message)
+        public PartialViewResult _CommentsForDestination(string tourismId, message message)
         {
             message.msg_time = DateTime.Now;
             db.message.Add(message);
@@ -87,7 +87,7 @@ namespace TravelCat.Controllers
             return PartialView("_CreateComment");
         }
         [HttpPost]
-        public PartialViewResult _CreateMsg(string tourismID,message message)
+        public PartialViewResult _CreateMsg(string tourismID, message message)
         {
             comment newComment = new comment();
             newComment.tourism_id = tourismID;

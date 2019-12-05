@@ -101,15 +101,58 @@ namespace TravelCat.Controllers
                         }
                     }
                 }
-                //if (!String.IsNullOrEmpty(comment_stay_total))
-                //{
-                //    for (int i = 0; i < model.activity.Count; i++)
-                //    {
-                //        //找每個活動的平均時間
-                //        double stay_avg = db.comment.Where(s => s.tourism_id == model.activity[i].activity_id).ToList().Average(r => r.comment_stay_total);
-                //        if
-                //    }
-                //}
+                //找平均時間
+                if (!String.IsNullOrEmpty(comment_stay_total))
+                {
+                    string id;
+
+                    for (int i = 0; i < model.activity.Count; i++)
+                    {
+                        id = model.activity[i].activity_id;
+                        int cmt_count = db.comment.Where(s => s.tourism_id == id).Count();
+                        if (cmt_count == 0)
+                        {
+                            model.activity.RemoveAt(i);
+                            i = i - 1;
+                        }
+                        else
+                        {
+                            //找每個活動的平均評分
+                            double time_avg = db.comment.Where(s => s.tourism_id == id).Average(r => r.comment_rating);
+                            switch (comment_stay_total)
+                            {
+                                case "under1":
+                                    if (time_avg > 1)
+                                    {
+                                        model.activity.RemoveAt(i);
+                                        i = i - 1;
+                                    }
+                                    break;
+                                case "1to2":
+                                    if (time_avg < 1 || time_avg > 2)
+                                    {
+                                        model.activity.RemoveAt(i);
+                                        i = i - 1;
+                                    }
+                                    break;
+                                case "2to3":
+                                    if (time_avg < 2 || time_avg > 3)
+                                    {
+                                        model.activity.RemoveAt(i);
+                                        i = i - 1;
+                                    }
+                                    break;
+                                case "above3":
+                                    if (time_avg < 3)
+                                    {
+                                        model.activity.RemoveAt(i);
+                                        i = i - 1;
+                                    }
+                                    break;
+                            }
+                        }
+                    }
+                }
                 if (travel_partner != null)
                 {
                     string id;
@@ -140,7 +183,7 @@ namespace TravelCat.Controllers
                 if (travel_month != null)
                 {
                     string id;
-                    string[] month = { };
+                    string[] month = new string[3];
                     switch (travel_month)
                     {
                         case "3to5":
@@ -190,6 +233,7 @@ namespace TravelCat.Controllers
 
             }
             return View(model);
+            //排序條件還沒寫
             //return View(model.activity.OrderBy(m => m.activity_id).ToPagedList(page, pageSize));
         }
 
@@ -245,5 +289,67 @@ namespace TravelCat.Controllers
         //        return View();
         //    }
         //}
+
+
+
+
+
+
+
+
+
+
+
+
+
+        //網軍來惹
+        public ActionResult generate_comment()
+        {
+            List<activity> activity = db.activity.OrderBy(m => Guid.NewGuid()).ToList();
+            //string id = "";
+            string[] title = { "巴澤航空12/13首航 起降時間皆紅眼","好想吃杏子豬排","組員叫我當水軍","日本高中生訪總統府 總統現身問喝珍奶沒",
+                                        "單親媽背幼兒賣地瓜 努力賺錢爭取女兒","芳子好變態","花蓮女盜採砂石累犯 徒手搬逾600公斤","水氣與氣溫配合 氣象專家：高山初雪機率高"};
+            string[] content = { "氣象專家吳德榮說，由於水氣與氣溫的配合，今天下午起到明天3000公尺以上高山，發生「初雪」的機率高。中央氣象局指出，今天持續受到東北季風及南方雲系影響，全台各地都容易下雨，尤其是北部及東北部降雨時間較長，感受上較為濕冷，有局部大雨或豪雨發生機率。國立中央大學大氣科學系兼任副教授吳德榮也在「三立準氣象．老大洩天機」專欄表示，最新歐洲中期預報中心（ECMWF）模式模擬顯示，環境「垂直風切」持續將颱風北冕的水氣往台灣輸送。他表示，今、明（5、6日）兩天厚實雲層籠罩全台，除了迎風面的北台灣及中南部山區有較多的降雨，冬季很少降雨的中南部平地，也有降雨。吳德榮說，明天下午起另一波更強冷空氣開始南下，氣溫逐漸下降，各地將更為「濕冷」；應注意防雨及保暖。另外，吳德榮指出，今天下午起至明天3000公尺以上高山，由於水氣與氣溫的配合，發生「初雪」的機率高。吳德榮也說，最新模式模擬顯示，週六（7日）乾冷空氣持續南下，清晨仍濕冷、白天漸轉乾冷；週六晚、週日清晨氣溫降至最低，預期將達到「大陸冷氣團」的定義，空曠平地因晴朗、輻射冷卻加成，最低氣溫將降至攝氏10、11度，要注意保暖。吳德榮表示，週日白天起至下週二（10日）冷空氣逐漸減弱，天氣晴朗穩定，週日仍偏冷，週日晚、下週一晨氣溫仍很低；下週一、二氣溫明顯回升、日夜溫差大，下週二晚起另一東北季風影響，迎風面天氣轉變。",
+                                                "基隆一名單親媽媽離婚後獨自扶養2名兒子，女兒則在寄養家庭，為了照顧1歲半小兒子，最近在中船路擺攤賣地瓜，收入雖不多，但她說，「我要努力賺錢，讓女兒能回到身邊」。育有3名子女的34歲林姓女子，去年4月離婚後，就讀小學六年級的大兒子和1歲半小兒子由她照顧，女兒則在寄養家庭。林女一直想自食其力，無奈小兒子頭蓋骨癒合較慢，恐有發育遲緩問題，龐大的生活壓力及小孩醫療支出，加上求職碰壁，只能尋求外界協助。林女迫於無奈有時必須領取物資生活，曾在排隊時有人對她訕笑，一度讓她灰心喪志，在臉書（Facebook）網友鼓勵下，10月間向人安基金會基隆平安站報名「給魚給竿，拉人一把」烤地瓜謀生方案，她說，「為了孩子，我要努力工作，不僅要證明自己能謀生，更想爭取讓女兒回到身邊」。",
+                                                "印尼巴澤航空將開航台灣，根據巴澤航空向民航局申請的首航時間是12月13日，在台灣起飛及降落的時間都是深夜紅眼時段。民航局說，巴澤航空是一般傳統航空公司，並非低成本航空，目前申請12月13日起，每天一班往返桃園國際機場與印尼首都雅加達。根據巴澤航空向民航局提報的資料，使用737-900ER飛機飛航，可載運180人，包括12個商務艙及168個經濟艙座位，下午4時30分從雅加達起飛，晚上11時到桃園國際機場，地面停留約1小時，深夜12時再從桃園機場起飛，清晨4時30分回到雅加達。巴澤航空是印尼獅子航空集團旗下的航空公司，獅子航空集團下的馬印航空及泰獅航都已開航台灣。",
+                                                "日本共同社報導，與蔡總統握手的16歲學生加藤大和對媒體說：「總統突然來了，我真的嚇了一跳。第一次到台灣，這成了最好的回憶。」日本時事社報導，私立松山城南高中2年級學生60人、老師5人今天在台北的總統府與蔡總統一起拍紀念照、握手，大約10分鐘時間，展開了一場台日交流。在交流之際，起源於台灣、目前在日本大受歡迎的珍珠奶茶話題也出現。這群高中生到台灣進行為期4天的訪問，除了參觀總統府之外，也與台灣的高中學校進行交流，還體驗製作小籠包。報導說，近年來，由於台灣治安良好，民調也顯示台日關係友好，台灣成為日本高中很喜歡前往進行修學（教育）旅行的地方。報導引用日本文部科學省（相當於教育部）最新調查顯示，2017年度赴台灣修學旅行的日本高中多達332所，排名第一，赴美者有208校，排名第二）。另外，根據日本全國修學旅行研究協會的統計資料，2016年度日本海外修學旅行高中842所，學生總數14萬5944人，其中赴台灣的高中有262所，人數4萬1878人，約占總數1/4。2017年度日本海外修學旅行高中895所，學生總數15萬6413人。其中赴台灣修學旅行高中325所，人數5萬3940人，占整體34%排名首位。總統府提供的資料則顯示，日本學校（含高中、大學）參訪總統府的學校及人數逐年倍增，2017年一共有7團133人，2018年16團578人，2019年至11月為止已達24團1499人。",
+                                                "一名有盜採砂石前科的程姓女子，昨天在花蓮溪口北岸徒手搬運石頭被海巡人員查獲，程嫌供稱要填補牆壁，經秤重約搬運620公斤，訊後依竊盜罪移送花蓮地檢署偵辦。東部分署第一二岸巡隊今天表示，司法小隊昨天下午在花蓮溪口北岸發現一輛形跡可疑的黑色箱型車，疑似盜採砂石，並通報第九巡防區指揮部支援。經盤查發現程嫌車上裝有粉扁石，盜採量約620公斤隨即進行筆錄。第一二岸巡隊表示，程嫌為台東人，現居花蓮，民國103年也曾因盜採砂石遭該隊查獲，昨天下午獨自在岸邊徒手撿拾，約1小時就撿拾620公斤的粉扁石，訊時供稱要填補家中牆壁使用。第一二岸巡隊表示，岸際砂石為國有財產，未經許可不得任意撿拾，將持續取締不法，若民眾發現任何不法情事，可透過海巡署「118」服務專線通報。",
+                                                "日本愛媛縣松山市城南高校學生赴台灣教育旅行，今天進入總統府參觀，導覽人員正持總統蔡英文人形立牌解說，蔡總統突然現身，問大家「喝珍珠奶茶了沒？」引起學生雀躍驚呼。日本放送協會（NHK）報導，愛媛縣松山市的松山城南高校學生約60人正在台灣進行教育旅行，行程之一就是造訪位於台北市的總統府。今天在總統府正門玄關大廳，接待人員手持蔡總統的人形立牌做解說之際，蔡總統突然出現在大廳。蔡總統一出現就用日語「大家好」打招呼，之後用中文說：「我是總統蔡英文，這是我的辦公室。」後來蔡總統問：「這次有來吃珍珠奶茶嗎？」報導說，這座總統府有百年歷史，在日本統治台灣時代建造，也是日本學生教育旅行的代表性參觀景點之一。總統府的部分區域開放給一般民眾參觀，但蔡總統本人現身訪客參觀區實屬罕見，所以蔡總統一現身，這群高中生不禁發出驚訝聲。見到蔡總統本人的日本高中生有人說：「沒想到總統本人會出現」，有人說：「以為就是一般參觀，就快結束了，沒想到會見到（總統）」。有女高中生覺得蔡總統看起來很親切，另有女高中生很高興的說：「蔡總統的手握起來好溫暖喔，我不能洗手。」"};
+            string[] date = { "2010-07-26", "2016-01-07", "2013-03-08", "2015-11-30", "2018-08-23", "2019-12-05" };
+            string[] photo = { "asd.jpg", "02_work.jpg", "images.jpg", "01_cats.jpg", "sddefault.jpg", "10_gym.png" };
+            string[] memberID = { "M000001", "M000002", "M000003", "M000004", "M000005" };
+            string[] partner = { "蜜月", "伴侶", "朋友", "商務", "家庭" };
+
+            Random random = new Random();
+
+            for (int i = 0; i < 100; i++)
+            {
+                comment cmt = new comment();
+                DateTime parsedDate = DateTime.Parse(date[random.Next(0, 6)]);
+
+                cmt.tourism_id = activity[i].activity_id;
+                cmt.comment_title = title[random.Next(0, 8)];
+                cmt.comment_content = content[random.Next(0, 6)];
+                cmt.comment_date = parsedDate;
+                cmt.comment_photo = photo[random.Next(0, 6)];
+                cmt.comment_stay_total = random.Next(1, 5);
+                cmt.comment_rating = Convert.ToInt16(random.Next(1, 6));
+                cmt.travel_month = random.Next(1, 13).ToString();
+                cmt.comment_status = true;
+                cmt.member_id = memberID[random.Next(0, 5)];
+                cmt.travel_partner = partner[random.Next(0, 5)];
+
+                if (ModelState.IsValid)
+                {
+                    db.comment.Add(cmt);
+                    db.SaveChanges();
+                }
+            }
+
+
+
+            return View();
+        }
+
     }
 }
