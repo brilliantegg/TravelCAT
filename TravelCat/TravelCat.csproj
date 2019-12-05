@@ -1961,6 +1961,11 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ActivitiesController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\api_collections_detailController.cs" />
+    <Compile Include="Controllers\api_comment_emoji_detailsController.cs" />
+    <Compile Include="Controllers\api_issuesController.cs" />
+    <Compile Include="Controllers\api_messagesController.cs" />
+    <Compile Include="Controllers\api_message_emoji_detailsController.cs" />
     <Compile Include="Controllers\badgesController.cs" />
     <Compile Include="Controllers\commentsController.cs" />
     <Compile Include="Controllers\CommentsWebController.cs" />
@@ -2183,7 +2188,6 @@
     <Content Include="Views\web_comments\Create.cshtml" />
     <Content Include="Views\web_comments\Delete.cshtml" />
     <Content Include="Views\web_comments\Details.cshtml" />
-    <Content Include="Views\web_comments\Edit.cshtml" />
     <Content Include="Views\web_comments\Index.cshtml" />
     <Content Include="Views\web_comments\_PhotoGallery.cshtml" />
     <Content Include="Views\Search\_Activity.cshtml" />

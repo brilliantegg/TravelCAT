@@ -14,7 +14,7 @@
     {
         memberId = Session["memberID"].ToString();
     }
-
+    
 }
 
 <div class=" justify-content-center align-items-center">
@@ -23,14 +23,24 @@
     <section class="bg-white py-5  text-center">
         <div class="container col-md-10 ">
             <!--加入收藏-->
-            <form action="/web_activities/Postcollections_detail" method="post">
-                @Html.AntiForgeryToken()
-                <input type="hidden" name="member_id" value="@Session["memberID"]" />
-                <input type="hidden" name="privacy" value="True" />
-                <input type="hidden" name="tourism_id" value="@ViewBag.id" />
-                <input type="hidden" name="collection_type_id" value="1" />
-                <input type="submit" name="add_to_bucket_list" class="add_to_bucket_list btn btn-outline-info" value="加入收藏" />
-            </form>
+
+
+            @if (@Model.collections_detail.Where(m => m.member_id == @memberId).Count() > 0)
+            {
+                <input type="submit" name="delete_bucket_list" class="delete_bucket_list btn btn-outline-info" value="取消收藏" />
+            }
+            else
+            {
+                <form action="/web_activities/Postcollections_detail" method="post">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="member_id" value="@Session["memberID"]" />
+                    <input type="hidden" name="privacy" value="True" />
+                    <input type="hidden" name="tourism_id" value="@ViewBag.tourismId" />
+                    <input type="hidden" name="collection_type_id" value="1" />
+                    <input type="submit" name="add_to_bucket_list" class="add_to_bucket_list btn btn-outline-info" value="加入收藏" />
+                </form>
+            }
+
             <h2>
                 @Html.DisplayNameFor(model => model.activity.activity_intro)
             </h2>
@@ -40,12 +50,7 @@
             <i class="fas fa-angle-double-down readmore"></i>
         </div>
     </section>
-
-    <h2 class="text-center">@Html.DisplayFor(model => model.activity.activity_title)</h2>
-    <form method="post">
-        <input type="submit" name="add_to_bucket_list" class="add_to_bucket_list" value="add_to_bucket_list" />
-    </form>
-
+    <!--景點資料-->
     <section class="bg-white py-4 ">
         <div class="container  col-md-10">
             <div class="row">
@@ -268,159 +273,193 @@
 
 
     <hr />
-    @foreach (var item in Model.comment)
-    {
-        if (item.comment_status)
+    @Html.Action("_CommentsForDestination", "CommentsWeb", new { tourismId = @ViewBag.tourismId })
+
+    @*<!--評論開始-->
+        @foreach (var item in Model.comment)
         {
-            <div class="container">
+            if (item.comment_status)
+            {
+                <div class="container">
 
 
-                <div class="single_comments  ">
-                    <input id="comment_id" type="hidden" value=@item.comment_id />
-                    <div class="member_detail ">
-                        <div class="d-flex">
-                            <img class="member_avatar" src="~/images/member/@item.member.member_profile.profile_photo" alt="...">
+                    <div class="single_comments  ">
+                        <input id="comment_id" type="hidden" value=@item.comment_id />
+                        <div class="member_detail ">
                             <div class="d-flex">
-                                <h5 class="member_name">@item.member.member_profile.nickname</h5>
+                                <img class="member_avatar" src="~/images/member/@item.member.member_profile.profile_photo" alt="...">
+                                <div class="d-flex">
+                                    <h5 class="member_name">@item.member.member_profile.nickname</h5>
+                                </div>
                             </div>
-                        </div>
-                        <!-- 更多選項 -->
-                        <div class="more_action">
-                            <a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img class="icon" src="~/images/emoji/more.png" />
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                <a class="dropdown-item" href="#">分享到 facebook</a>
-                                <a class="dropdown-item" href="#">分享到 line</a>
-                                <a class="dropdown-item" href="#">分享到 google</a>
-                                <a class="dropdown-item report_comment" data-toggle="modal" data-target="#exampleModalScrollable"> 檢舉此評論</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="comment_photo">
-                        <img src="/images/comment/@item.comment_photo" class="comment_photo img-fluid" />
-                    </div>
-                    <div class="commemt_content">
-                        <h2 class="comment_title">@item.comment_title</h2>
-                        <span class="create_time "> @item.comment_date.ToString("yyyy MM dd")  </span>
-
-                        <div class="response_content">
-                            <p>@Html.Raw(item.comment_content.ToString().Replace("\n", "<br>"))</p>
-                        </div>
-                        <a href="" class="hashtag "> #@Model.activity.activity_title </a>
-                    </div>
-
-                    @if (memberId == item.member_id)
-                    {
-                        <div class="text-right">
-                            @Html.ActionLink("編輯", "Edit", "web_comments", new { id = @item.comment_id }, null)
-                            @Html.ActionLink("刪除", "Delete", "web_comments", new { id = @item.comment_id }, new { @class = "", onclick = "return confirm('確認要刪除?')" })
-                        </div>
-                    }
-                    <hr />
-                    <div class="emoji_panel d-flex btn-group btn-group-toggle mb-3 mt-3  " data-toggle="buttons">
-                        <div class="comment_emoji_detail emoji">
-                            <img class="icon comment_emoji_heart" src="~/images/emoji/talk.png" data-value="@item.comment_emoji_details.Where(m => m.emoji_id == 1).Count()" comment_id="@item.comment_id" emoji_id="1" />
-                            <span class="comment_emoji_heart_num">@item.comment_emoji_details.Where(m => m.emoji_id == 1).Count() </span>
-                            <img class="icon comment_emoji_unicorn" src="~/images/emoji/unicorn.svg" data-value="@item.comment_emoji_details.Where(m => m.emoji_id == 2).Count() " comment_id="@item.comment_id" emoji_id="2" />
-                            <span class="comment_emoji_unicorn_num">@item.comment_emoji_details.Where(m => m.emoji_id == 2).Count()</span>
-                            <img class="icon comment_emoji_good" src="~/images/emoji/sweet-potato.png" data-value="@item.comment_emoji_details.Where(m => m.emoji_id == 3).Count()" comment_id="@item.comment_id" emoji_id="3" />
-                            <span class="comment_emoji_good_num">@item.comment_emoji_details.Where(m => m.emoji_id == 3).Count()</span>
-                        </div>
-
-
-                        <hr />
-
-
-                        <!--檢舉評論modal-->
-                        <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-scrollable" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalScrollableTitle">檢舉評論</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <textarea id="report_content" name="report_content" rows="20" cols="20" placeholder="請附上有問題的網址，以及違規評論內容"></textarea>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button id="btnTest" type="submit" class="btn btn-outline-dark submit_issue" data-dismiss="modal">提交表單</button>
-                                    </div>
+                            <!-- 更多選項 -->
+                            <div class="more_action">
+                                <a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <img class="icon" src="~/images/emoji/more.png" />
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <a class="dropdown-item" href="#">分享到 facebook</a>
+                                    <a class="dropdown-item" href="#">分享到 line</a>
+                                    <a class="dropdown-item" href="#">分享到 google</a>
+                                    <a class="dropdown-item report_comment" data-toggle="modal" data-target="#exampleModalScrollable"> 檢舉此評論</a>
                                 </div>
                             </div>
                         </div>
+                        <div class="comment_photo">
+                            <img src="/images/comment/@item.comment_photo" class="comment_photo img-fluid" />
+                        </div>
+                        <div class="commemt_content">
+                            <h2 class="comment_title">@item.comment_title</h2>
+                            <span class="create_time "> @item.comment_date.ToString("yyyy MM dd")  </span>
 
+                            <div class="response_content">
+                                <p>@Html.Raw(item.comment_content.ToString().Replace("\n", "<br>"))</p>
+                            </div>
+                            <a href="" class="hashtag "> #@Model.activity.activity_title </a>
+                        </div>
 
-
-
-                    </div>
-                    <!--單則留言-->
-                    <div class="message_list  ">
-
-
-                        @foreach (var msgItem in item.message)
+                        @if (memberId == item.member_id)
                         {
-                            <div class=" single_message py-3">
-                                <div class="media mt-3">
-                                    <img src="~/images/member/@msgItem.member.member_profile.profile_photo" width="74" height="74" class="mr-3 ml-3 member_avatar" alt="...">
-                                    <div class="media-body">
-                                        <h5 class="member_name">
-                                            @msgItem.member.member_profile.nickname
-                                        </h5>
-                                        <span class="create_time">
-                                            @msgItem.msg_time.ToString("yyyy MM dd")
-                                        </span>
-                                        <div class="response_content">
-                                            @msgItem.msg_content
-                                        </div>
-                                        <hr />
-                                        <div class="emoji">
-                                            <img class="icon msg_emoji_heart" src="~/images/emoji/talk.png" />
-                                            <span class="msg_emoji_heart">@msgItem.message_emoji_details.Where(m => m.emoji_id == 1).Count() </span>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="text-right">
+                                @Html.ActionLink("編輯", "Edit", "web_comments", new { id = @item.comment_id }, null)
+                                @Html.ActionLink("刪除", "Delete", "web_comments", new { id = @item.comment_id }, new { @class = "", onclick = "return confirm('確認要刪除?')" })
                             </div>
                         }
-                        <!--回覆留言-->
+                        <hr />
+                        <div class="emoji_panel d-flex btn-group btn-group-toggle mb-3 mt-3  " data-toggle="buttons">
+                            <div class="comment_emoji_detail emoji">
 
-                        <div class="add_message single_message">
-                            @if (@memberId != null)
-                            {
-                                <form action="/web_activities/createMessage" method="post">
-                                    @Html.AntiForgeryToken()
-                                    <input type="hidden" name="comment_id" value="@item.comment_id" />
-                                    <input type="hidden" name="msg_time" value="@ViewBag.getTime" />
-                                    <input type="hidden" name="member_id" value="@Session["memberID"]" />
-                                    <input type="hidden" name="msg_status" value="True" />
-                                    <input type="hidden" name="tourism_id" value="@item.tourism_id" />
-                                    <textarea class="msg_content" rows="2" cols="20" name="msg_content" placeholder="@User.Identity.GetUserName(),想說說甚麼..."></textarea>
-                                    <br />
-                                    <div class="add_message_Submit_area text-right">
-                                        <input id="add_message_Submit" class="btn btn-outline-dark" type="submit" value="submit" />
+                                @if (@Model.comment_emoji_details.Where(m => m.member_id == @memberId && m.comment_id == item.comment_id && m.emoji_id == 1 && m.tourism_id == @Model.activity.activity_id).Count() > 0)
+                                {
+
+                                    <img class="icon comment_emoji_heart click_button" src="~/images/emoji/talk.png" data-value="@item.comment_emoji_details.Where(m => m.emoji_id == 1).Count()" comment_id="@item.comment_id" emoji_id="1" disabled="disabled" />
+                                    <span class="comment_emoji_heart_num">@item.comment_emoji_details.Where(m => m.emoji_id == 1).Count() </span>
+                                }
+                                else
+                                {
+                                    <img class="icon comment_emoji_heart" src="~/images/emoji/talk.png" data-value="@item.comment_emoji_details.Where(m => m.emoji_id == 1).Count()" comment_id="@item.comment_id" emoji_id="1" />
+                                    <span class="comment_emoji_heart_num">@item.comment_emoji_details.Where(m => m.emoji_id == 1).Count() </span>
+                                }
+                                @if (@Model.comment_emoji_details.Where(m => m.member_id == @memberId && m.comment_id == item.comment_id && m.emoji_id == 2 && m.tourism_id == @Model.activity.activity_id).Count() > 0)
+                                {
+
+                                    <img class="icon comment_emoji_unicorn click_button" src="~/images/emoji/unicorn.svg" data-value="@item.comment_emoji_details.Where(m => m.emoji_id == 2).Count() " comment_id="@item.comment_id" emoji_id="2" disabled="disabled" />
+                                    <span class="comment_emoji_unicorn_num">@item.comment_emoji_details.Where(m => m.emoji_id == 2).Count()</span>
+                                }
+                                else
+                                {
+                                    <img class="icon comment_emoji_unicorn" src="~/images/emoji/unicorn.svg" data-value="@item.comment_emoji_details.Where(m => m.emoji_id == 2).Count() " comment_id="@item.comment_id" emoji_id="2" />
+                                    <span class="comment_emoji_unicorn_num">@item.comment_emoji_details.Where(m => m.emoji_id == 2).Count()</span>
+                                }
+                                @if (@Model.comment_emoji_details.Where(m => m.member_id == @memberId && m.comment_id == item.comment_id && m.emoji_id == 3 && m.tourism_id == @Model.activity.activity_id).Count() > 0)
+                                {
+
+                                    <img class="icon comment_emoji_good click_button" src="~/images/emoji/sweet-potato.png" data-value="@item.comment_emoji_details.Where(m => m.emoji_id == 3).Count()" comment_id="@item.comment_id" emoji_id="3" disabled="disabled" />
+                                    <span class="comment_emoji_good_num">@item.comment_emoji_details.Where(m => m.emoji_id == 3).Count()</span>
+                                }
+                                else
+                                {
+                                    <img class="icon comment_emoji_good" src="~/images/emoji/sweet-potato.png" data-value="@item.comment_emoji_details.Where(m => m.emoji_id == 3).Count()" comment_id="@item.comment_id" emoji_id="3" />
+                                    <span class="comment_emoji_good_num">@item.comment_emoji_details.Where(m => m.emoji_id == 3).Count()</span>
+                                }
+
+                            </div>
+
+
+                            <hr />
+
+
+                            <!--檢舉評論modal-->
+                            <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-scrollable" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalScrollableTitle">檢舉評論</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <textarea id="report_content" name="report_content" rows="20" cols="20" placeholder="請附上有問題的網址，以及違規評論內容"></textarea>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button id="btnTest" type="submit" class="btn btn-outline-dark submit_issue" data-dismiss="modal">提交表單</button>
+                                        </div>
                                     </div>
-                                </form>
-                            }
-                            else
-                            {
-                                <textarea class="msg_content" rows="2" cols="20" name="msg_content" placeholder="請先登入後留言"></textarea>
-                            }
+                                </div>
+                            </div>
+
+
+
+
                         </div>
+                        <!--單則留言-->
+                        <div class="message_list  ">
+
+
+                            @foreach (var msgItem in item.message)
+                            {
+                                <div class=" single_message py-3">
+                                    <div class="media mt-3">
+                                        <img src="~/images/member/@msgItem.member.member_profile.profile_photo" width="74" height="74" class="mr-3 ml-3 member_avatar" alt="...">
+                                        <div class="media-body">
+                                            <h5 class="member_name">
+                                                @msgItem.member.member_profile.nickname
+                                            </h5>
+                                            <span class="create_time">
+                                                @msgItem.msg_time.ToString("yyyy MM dd")
+                                            </span>
+                                            <div class="response_content">
+                                                @msgItem.msg_content
+                                            </div>
+                                            <hr />
+                                            <div class="emoji">
+                                                <img class="icon msg_emoji_heart" src="~/images/emoji/talk.png" />
+                                                <span class="msg_emoji_heart">@msgItem.message_emoji_details.Where(m => m.emoji_id == 1).Count() </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            <!--回覆留言-->
+
+                            <div class="add_message single_message">
+                                @if (@memberId != null)
+                                {
+                                    <form action="/web_activities/createMessage" method="post">
+                                        @Html.AntiForgeryToken()
+                                        <input type="hidden" name="comment_id" value="@item.comment_id" />
+                                        <input type="hidden" name="msg_time" value="@DateTime.Now" />
+                                        <input type="hidden" name="member_id" value="@Session["memberID"]" />
+                                        <input type="hidden" name="msg_status" value="True" />
+                                        <input type="hidden" name="tourism_id" value="@item.tourism_id" />
+                                        <textarea class="msg_content" rows="2" cols="20" name="msg_content" placeholder="@User.Identity.GetUserName(),想說說甚麼..."></textarea>
+                                        <br />
+                                        <div class="add_message_Submit_area text-right">
+                                            <input id="add_message_Submit" class="btn btn-outline-dark" type="submit" value="submit" />
+                                        </div>
+                                    </form>
+                                }
+                                else
+                                {
+                                    <textarea class="msg_content" rows="2" cols="20" name="msg_content" placeholder="請先登入後留言"></textarea>
+                                }
+                            </div>
 
 
 
 
+                        </div>
                     </div>
                 </div>
-            </div>
+            }
         }
-    }
+        <!--評論結束-->*@
+
 </div>
 
 
-
+<!--FB-->
 <script>
     window.fbAsyncInit = function () {
         FB.init({
@@ -434,9 +473,8 @@
 <script async defer src="https://connect.facebook.net/en_US/sdk.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAbQxjXC0otfo4YjWBXOOzuVnvAAHMsFs8&callback=initMap" async defer></script>
 
-
-    <script>
-    //GOOGLEMAP API
+<!--google-->
+<script>
     var map;
     var marker;
     function initMap() {
@@ -454,11 +492,12 @@
      var a = '123';
 
 </script>
-@section scripts {
+
+@*@section scripts {
 
     <script>
         var id ;
-        var tourismId = "@ViewBag.id";
+        var tourismId = "@ViewBag.tourismId";
 
         if ("@Session["memberID"]" =="") {
             id = null
@@ -572,7 +611,7 @@
 
 
     </script>
-}
+}*@
 
             });
 

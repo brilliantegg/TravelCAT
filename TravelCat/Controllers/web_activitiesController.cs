@@ -44,7 +44,7 @@ namespace TravelCat.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.tourismId = id;
+            ViewBag.tourismId = id;    
             return View(model);
         }
 

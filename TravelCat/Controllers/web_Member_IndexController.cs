@@ -20,13 +20,18 @@ namespace TravelCat.Controllers
         // GET: web_Member_Index
         public ActionResult Index(string id)
         {
+
             MemberIndexViewModels model = new MemberIndexViewModels()
             {
                 member = db.member.Find(id),
                 member_profile = db.member_profile.Find(id),
                 comment = db.comment.OrderByDescending(m=>m.comment_id).ToList(),
                 follow_list = db.follow_list.ToList(),
-                collections_detail = db.collections_detail.Where(m=>m.member_id==id).ToList()
+                collections_detail = db.collections_detail.Where(m=>m.member_id==id).ToList(),
+                activity =db.activity.ToList(),
+                hotel = db.hotel.ToList(),
+                restaurant = db.restaurant.ToList(),
+                spot = db.spot.ToList(),
             };
             ViewBag.memberId = id;
             return View(model);

@@ -32,24 +32,46 @@ namespace TravelCat.Controllers
         [ValidateAntiForgeryToken]
         public PartialViewResult _CommentsForDestination(string tourismId, message message)
         {
-            message.msg_time = DateTime.Now;
-            db.message.Add(message);
-            db.SaveChanges();
             destinationsViewModel model = new destinationsViewModel()
             {
 
-                activity = db.activity.Where(m => m.activity_id == tourismId).FirstOrDefault(),
-                comment = db.comment.Where(m => m.tourism_id == tourismId).OrderByDescending(m => m.comment_date).ToList(),
-                message = db.message.Where(m => m.tourism_id == tourismId).OrderByDescending(m => m.msg_time).ToList(),
+                comment = db.comment.Where(m => m.member_id == memId).ToList(),
+                message = db.message.Where(m => m.member_id == memId).ToList(),
                 comment_emoji_details = db.comment_emoji_details.ToList(),
                 message_emoji_details = db.message_emoji_details.ToList(),
-                member_profile = db.member_profile.ToList(),
-                member = db.member.ToList(),
+                member_profile = db.member_profile.Where(m => m.member_id == memId).ToList(),
+                member = db.member.Where(m => m.member_id == memId).ToList(),
             };
-            ViewBag.tourismId = tourismId;
-            return PartialView("_CommentsForDestination", model);
+            return PartialView(model);
         }
+        public PartialViewResult _CommentsForFollwers(string memId)
+        {
+            MemberIndexViewModels model = new MemberIndexViewModels()
+            {
 
+                comment = db.comment.Where(m => m.member_id == memId).ToList(),
+                message = db.message.Where(m => m.member_id == memId).ToList(),
+                comment_emoji_details = db.comment_emoji_details.ToList(),
+                message_emoji_details = db.message_emoji_details.ToList(),
+                //member_profile = db.member_profile.Where(m => m.member_id == memId).ToList(),
+                //member = db.member.Where(m => m.member_id == memId).ToList(),
+            };
+
+            return PartialView(model);
+
+
+
+        }
+        public int getMsgEmojiNum(int msg_id, string tourismId)
+        {
+            int num = db.message_emoji_details.Where(m => m.msg_id == msg_id && m.tourism_id == tourismId).Count();
+            return num;
+        }
+        public int getCommentEmojiNum(int emojiId,int commentId,string tourismId)
+        {
+            int num = db.comment_emoji_details.Where(m =>m.emoji_id == emojiId && m.comment_id == commentId && m.tourism_id== tourismId).Count();
+            return num;
+        }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult createMessage(message message)
@@ -65,20 +87,7 @@ namespace TravelCat.Controllers
 
             return RedirectToRoute(new { controller = "web_activities", action = "Details", id = message.tourism_id });
         }
-        public PartialViewResult _CommentsFromMember(string memId)
-        {
-            destinationsViewModel model = new destinationsViewModel()
-            {
-
-                comment = db.comment.Where(m => m.member_id == memId).ToList(),
-                message = db.message.Where(m => m.member_id == memId).ToList(),
-                comment_emoji_details = db.comment_emoji_details.ToList(),
-                message_emoji_details = db.message_emoji_details.ToList(),
-                member_profile = db.member_profile.Where(m => m.member_id == memId).ToList(),
-                member = db.member.Where(m => m.member_id == memId).ToList(),
-            };
-            return PartialView(model);
-        }
+        
         public PartialViewResult _CreateMsg(string tourismID)
         {
             comment newComment = new comment();
@@ -107,5 +116,27 @@ namespace TravelCat.Controllers
         //    ViewBag.tourismID = tourismID;
         //    return PartialView("_CreateComment", comments.ToList());
         //}
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public PartialViewResult _CommentsForDestination(string tourismId, message message)
+        {
+            message.msg_time = DateTime.Now;
+            db.message.Add(message);
+            db.SaveChanges();
+            destinationsViewModel model = new destinationsViewModel()
+            {
+
+                activity = db.activity.Where(m => m.activity_id == tourismId).FirstOrDefault(),
+                comment = db.comment.Where(m => m.tourism_id == tourismId).OrderByDescending(m => m.comment_date).ToList(),
+                message = db.message.Where(m => m.tourism_id == tourismId).OrderByDescending(m => m.msg_time).ToList(),
+                comment_emoji_details = db.comment_emoji_details.ToList(),
+                message_emoji_details = db.message_emoji_details.ToList(),
+                member_profile = db.member_profile.ToList(),
+                member = db.member.ToList(),
+            };
+            ViewBag.tourismId = tourismId;
+            return PartialView("_CommentsForDestination", model);
+        }
+
     }
 }
