@@ -4,11 +4,74 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/web-Layout.cshtml";
 }
-    <link href="~/Content/web-activite-home.css" rel="stylesheet" />
 
-    
-    <div class="container">
-        <div class="banner">
-            <img src="~/images/hotel-1111199_1920.jpg" alt="Alternate Text" />
-        </div>
-    </div>
+<h2>活動頁面</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.activity_title)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.city)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.district)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.address_detail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.end_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.begin_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.organizer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.website)
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+
+                @Html.ActionLink(item.activity_title, "Details", new { id = item.activity_id })
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.city)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.district)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.address_detail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.end_date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.begin_date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.organizer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.website)
+            </td>
+
+            <td>
+            </td>
+        </tr>
+    }
+
+</table>
