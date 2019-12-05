@@ -1786,6 +1786,7 @@
     <Content Include="Content\fontawesome-free-5.11.2-web\webfonts\fa-solid-900.svg" />
     <Content Include="Content\Layout-pages.css" />
     <Content Include="Content\Login-index.css" />
+    <Content Include="Content\MemberIndex.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\Searchindex.css" />
     <Content Include="Content\Site.css" />
