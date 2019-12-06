@@ -31,16 +31,16 @@
                 @if (Request.IsAuthenticated && Session["memberID"] != null)
                 {
                     <div>
-                        @Html.ActionLink(@User.Identity.GetUserName(), "Index", "web_Member_Index", new { id = mem_id }, new { @class = " far fa-user memberId" })
+                        @Html.ActionLink(@User.Identity.GetUserName(), "Index", "web_Member_Index", new { id = mem_id }, new { @class = "  memberId aTag_style" })
 
-                        @Html.ActionLink("登出", "LogOut", "Home", null, new { @class = " text-dark" })
+                        @Html.ActionLink("登出", "LogOut", "Home", null, new { @class = " text-dark aTag_style" })
                     </div>
                 }
                 else
                 {
                     <div>
-                        @Html.ActionLink("登入", "LogIn", "Home", null, new { @class = " far fa-user " })
-                        @Html.ActionLink("註冊", "Index", "Register", null, new { @class = " far" })
+                        @Html.ActionLink("登入", "LogIn", "Home", null, new { @class = "  aTag_style" })
+                        @Html.ActionLink("註冊", "Index", "Register", null, new { @class = "  aTag_style" })
                     </div>
                 }
             </div>
@@ -49,13 +49,13 @@
     <div class="top-bar">
         <ul class="body-menu">
 
-            <li><a href="#"><i class=" fas fa-map-marked-alt">景點</i></a></li>
-            @Html.ActionLink("活動", "Index", "web_activities", null, new { @class = " fas fa-running text-info" })
-            <li><a href="#"><i class="fas fa-hamburger">餐廳</i></a></li>
-            <li><a href="#"><i class="fas fa-building">飯店</i></a></li>
+            <li><a href="#"><i class=" fas fa-map-marked-alt "></i> 景點</a></li>
+            <li><i class="fas fa-running"></i>@Html.ActionLink(" 活動", "Index", "web_activities", null, new { @class = "  text-black" })</li>
+            <li><a href="#"><i class="fas fa-hamburger"></i> 餐廳</a> </li>
+            <li><a href="#"><i class="fas fa-building"></i> 飯店</a> </li>
             <li class="search">
                 <form action="/Search/Index" method="get">
-                    <input name="q" type="text" class="search-txt">
+                    <input name="q" type="text" class="search-txt" placeholder="想去哪裡呢?">
                     <button class="fas fa-search" type="submit" style="display: inline-block; margin-left: -4px;"></button>
                 </form>
             </li>
@@ -71,7 +71,22 @@
     <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
     @RenderBody()
     @RenderSection("scripts", required: false)
-    @*<footer class="footer">行動商務第2組專題</footer>*@
+@*<footer class="footer">
+
+    <ul>
+        <li>
+            <strong>行動商務第 2 組專題</strong>
+            <ul>
+                <li>Adresse, street</li>
+                <li>Tlf: Phone</li>
+            </ul>
+            <ul class="right">
+                <li>Zipcode/City</li>
+                <li>Mail: Email</li>
+            </ul>
+            </li>
+     </ul>
+</footer>*@
 </body>
 </html>
 

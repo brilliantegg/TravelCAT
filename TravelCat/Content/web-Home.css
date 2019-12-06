@@ -5,7 +5,7 @@
 }
 
     .carousel .carousel-inner .carousel-item {
-        height: 70vh;
+        height: 80vh;
     }
 
         .carousel .carousel-inner .carousel-item img {
@@ -18,21 +18,31 @@
     margin-top: 3vh;
     margin: 0 auto;
 }
+section {
+    height: 15rem;
+    margin: 8rem 0
+}
+.section_title {
+    text-align: center;
+    color: black;
+    padding: .75rem 0;
+}
+.container h3 {
+    text-align: center;
+    color: #844200;
+    font-size: 1.5rem;
+    line-height: 3;
+    font-weight: 900;
+    padding-bottom: .75rem;
 
-    .container h3 {
-        text-align: center;
-        color: #16ac84;
-        font-size: 1.5rem;
-        line-height: 1.5;
-        font-weight: 900;
-        padding-bottom: .75rem;
-        border-bottom: 1px solid;
-    }
+}
     /*切換選單樣式*/
+
 
     .container .row .col-12 .list-group {
         flex-direction: row;
         justify-content: center;
+        margin:50px
     }
 
         .container .row .col-12 .list-group a {
@@ -52,16 +62,17 @@
             border-bottom: 2px solid #128566;
         }
 
-    /*card*/
-    .container .row .col-12 .tab-content .tab-pane .card {
-        display: inline-block;
-        width: 24%;
-        margin-left: .5%;
-        margin-top: 20px;
-        position: relative;
-        box-shadow: 2px 2px 4px #CCC;
-        transition: .3s;
-    }
+ 
+/*card*/
+.container .row .col-12 .tab-content .tab-pane .card {
+    display: inline-block;
+    width: 24%;
+    margin-left: .5%;
+    margin-top: 20px;
+    position: relative;
+    box-shadow: 2px 2px 4px #CCC;
+    transition: .3s;
+}
 
         .container .row .col-12 .tab-content .tab-pane .card:hover {
             transform: translateY(-10px);
@@ -79,7 +90,7 @@
 
             .container .row .col-12 .tab-content .tab-pane .card .card-body .card-title {
                 text-align: center;
-                color: red;
+                color: #844200;
                 text-decoration: none;
                 font-weight: 900;
                 white-space: nowrap;
@@ -99,23 +110,30 @@
             vertical-align: bottom;
         }
 
-        .container .row .col-12 .tab-content .tab-pane .card .card-body .btn {
-            position: absolute;
-            bottom: 20px;
-            right: 20px;
-            background-color: #16ac84;
-        }
+    .container .row .col-12 .tab-content .tab-pane .card .card-body .btn {
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+        color: #16ac84;
+        background-color: white;
+    }
 
             .container .row .col-12 .tab-content .tab-pane .card .card-body .btn:hover {
                 background-color: #128566;
             }
 
-    .container .secbanner {
+    .container .row .col-12 .tab-content .tab-pane .card img {
+        width: 100%;
+         margin: 0px 
+    }
+
+     .secbanner {
         background-image: url('../images/people-2590616_1920.jpg');
         background-size: cover;
         width: 100%;
         height: 600px;
         position: relative;
+        margin:10rem 0
     }
 
         .container .secbanner .txt {
@@ -153,11 +171,12 @@
             position: relative;
             width: 63%;
         }
-            .container .comment-main .comment .card-lg .card-body .card-title{
+            .container .comment-main .comment .card-lg .card-body .card-title {
+                text-align: center;
                 font-size: 1.5rem;
                 font-weight: 700;
-                color: red;
-                padding-bottom: 20px;
+                color: #844200;
+                padding: 20px;
                 border-bottom: 1px solid #CCC;
             }
             .container .comment-main .comment .card-lg .card-body .mem-comment {
@@ -187,9 +206,11 @@
                     height: 342px;
                 }
 
-            .container .comment-main .comment .card-sm .card-body {
-                text-align: center;
-            }
+                    .container .comment-main .comment .card-sm .card-body {
+                        text-align: center;
+                        padding: 1.25rem 0;
+                        
+                    }
 
                 .container .comment-main .comment .card-sm .card-body a {
                     text-decoration: none;
@@ -273,7 +294,7 @@
             left: -4px;
         }
             .container .item .card .card-body h2 {
-                color: #096e54;
+                color: #844200;
                 font-weight: 900;
                 text-align: center;
             }

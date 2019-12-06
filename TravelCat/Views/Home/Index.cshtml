@@ -19,10 +19,17 @@
     </ol>
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <img src="~/images/buildings-1846728_1920.jpg" class=" w-100" title="台北101">
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/AhAJ6J01R7w" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+            </div>
+            @*<img src="~/images/buildings-1846728_1920.jpg" class=" w-100" title="台北101">*@
+            <div class="carousel-caption">
+            </div>
         </div>
         <div class="carousel-item">
             <img src="~/images/taiwan-2696156_1920.jpg" class=" w-100" title="阿里山雲海">
+            <h3>一種全新的體驗</h3>
         </div>
         <div class="carousel-item">
             <img src="~/images/taiwan-667563_1920.jpg" class=" w-100" title="橘貓so cute!!!!!!">
@@ -40,17 +47,25 @@
 
 <!--main-->
 <div class="container mb-5">
-    <h3>
-        利用週休的時間計劃一趟短期休閒旅遊已蔚為風潮，形成一種全民運動!<br>
+    <section>
+        <h1 class="section_title">開啟新旅程，探索世界的更多可能</h1>
+        <h3>
+            利用週休的時間計劃一趟短期休閒旅遊已蔚為風潮，形成一種全民運動!<br>
 
-        還在為了去哪裡旅行或找尋飯店、餐廳而煩惱嗎？<br>
+            還在為了去哪裡旅行或找尋飯店、餐廳而煩惱嗎？<br>
 
-        旅途貓透過在地旅人最真實的心聲，為您呈現最佳旅遊地點！
-    </h3>
+            旅途貓透過在地旅人最真實的心聲，為您呈現最佳旅遊地點！
+            <br>
+            <br>
+            <br>
+        </h3>
+    </section>
+    <hr />
 
     <!--下方篩選-->
     <div class="row mb-5">
         <div class="col-12">
+            <h1 class="section_title">熱門目的地</h1>
             <div class="list-group" id="list-tab" role="tablist">
                 <a class="active" id="list-home-list" data-toggle="list" href="#list-spot" role="tab" aria-controls="home">精選景點</a>
                 <a class="" id="list-profile-list" data-toggle="list" href="#list-activities" role="tab" aria-controls="profile">精選活動</a>
@@ -58,6 +73,7 @@
                 <a class="" id="list-settings-list" data-toggle="list" href="#list-restaurant" role="tab" aria-controls="settings">精選餐廳</a>
             </div>
         </div>
+
         <div class="col-12">
             <div class="tab-content" id="nav-tabContent">
 
@@ -67,8 +83,8 @@
                     <!--景點card-->
                     @for (int i = 0; i < 8; i++)
                     {
-                        <div class="card">
-                            <img src="~/images/dribbbe_bmo-01.png" class="card-img-top" alt="...">
+                        <div class="card ">
+                            <img src="~/images/index/@(i.ToString()+".jpg")" class="card-img-top " alt="..." >
                             <div class="card-body">
                                 <h5 class="card-title">@Model.spot[i].spot_title</h5>
                                 <p class="card-text">@Model.spot[i].spot_intro</p>
@@ -146,6 +162,8 @@
     </div>
 </div>
 
+
+
 <!--留言展示-->
 <div class="container mb-5 mt-5 Card-group">
     <div class="comment-main row">
@@ -160,18 +178,18 @@
                     <a href="#" class="btn btn-primary btn-sm">前去觀看</a>
                 </div>
             </div>
-                <!--介紹卡-->
-                <div class="card card-sm">
-                    <div class="card-body">
-                        @Html.ActionLink(@Model.activity[100].activity_title, "Details", "web_activities", new { id = @Model.activity[100].activity_id }, null)
-                        <img src="~/images/bmo-02.jpg" class="mb-4">
-                        <div class="like">
-                            <i class="far fa-thumbs-up">999</i>
-                            <i class="far fa-comment ml-5">123</i>
-                        </div>
+            <!--介紹卡-->
+            <div class="card card-sm">
+                <div class="card-body">
+                    @Html.ActionLink(@Model.activity[100].activity_title, "Details", "web_activities", new { id = @Model.activity[100].activity_id }, null)
+                    <img src="~/images/bmo-02.jpg" class="mb-4">
+                    <div class="like">
+                        <i class="far fa-thumbs-up">999</i>
+                        <i class="far fa-comment ml-5">123</i>
                     </div>
                 </div>
             </div>
+        </div>
 
         <div class="comment col-12">
 
@@ -201,7 +219,7 @@
 
     <div class="item ">
         <div class="card ">
-            <div class="card-body timeline" >
+            <div class="card-body timeline">
                 <h2 class="mb-2">如何出遊不遇雷呢?</h2>
                 <ul>
                     <li>
@@ -244,6 +262,18 @@
             </div>
         </div>
     </div>
-    
+
 
 </div>
+
+
+<script>
+    //停止carousel
+    $('.carousel').carousel({
+        interval: false
+    })
+
+
+
+
+</script>
