@@ -6,13 +6,10 @@ using TravelCat.Models;
 
 namespace TravelCat.ViewModels
 {
-    public class MemberIndexViewModels
+    public class FollowerViewModels
     {
-        public FollowerViewModels FollowerViewModels { get; set; }
-
-        public destinationsViewModel destinationsViewModel { get; set; }
-        public member member { get; set; }
-        public member_profile member_profile { get; set; }
+        public List<member> member { get; set; }
+        public List<member_profile> member_profile { get; set; }
 
         public List<badge_details> badge_details { get; set; }
 
@@ -31,5 +28,4 @@ namespace TravelCat.ViewModels
         public List<restaurant> restaurant { get; set; }
         public List<spot> spot { get; set; }
     }
-
 }

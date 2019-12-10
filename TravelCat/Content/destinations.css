@@ -5,7 +5,7 @@
 /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
 #map {
-    height: 400px;
+    height: 40rem;
     width: 100%;
 }
 /* Optional: Makes the sample page fill the window. */
@@ -13,12 +13,33 @@ html, body {
     height: 100%;
     margin: 0;
     padding: 0;
+    background-color: #f2eeeb;
 }
+.carousel {
+    margin-top: 116px;
+    height: 70vh;
+    z-index: 1;
+}
+.carousel .carousel-inner .carousel-item {
+height: 70vh;
+}
+.blur {
+    -webkit-filter: blur(10px); /* Chrome, Opera */
+    -moz-filter: blur(10px);
+    -ms-filter: blur(10px);
+    filter: blur(10px);
+}
+    .carousel .carousel-inner .carousel-item img {
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+
+    }
 .gallery_caption {
     text-align: center;
 }
 
-.add_to_bucket_list {
+.bucket_list {
     float: right;
 }
 .single_comments {
@@ -65,11 +86,61 @@ textarea:focus {
     background-position: center center;
 }
 .carousel-caption {
-    background: rgba(255,255,255,0.3);
+    z-index: 10;
+    color: #fff;
+    top: 50%;
+    bottom: auto;
+    border: 2px solid #f7f7f7;
+    text-transform: uppercase;
+    overflow: hidden;
+
+
+}
+    .carousel-caption:hover {
+       
+        box-shadow: inset 0px 0px 0px 3px #f7f7f7;
+    }
+    .carousel-caption h5 {
+        text-align: center;
+    }
+
+    .mapbg {
+        height: 40rem;
+    }
+.travel_info {
+    justify-content: flex-end;
 }
 
-.mapbg {
-    height: 400px;
+.destinate_info {
+    height: auto;
+    background-color: white;
+}
+
+    .destinate_info ul li {
+        margin: 1rem
+    }
+
+        .destinate_info ul li span {
+            margin: 1rem
+        }
+
+.intro {
+    white-space: pre-wrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 10;
+    -webkit-box-orient: vertical;
+
+}
+
+    .intro p {
+        display: block;
+        line-height: 3rem;
+    }
+
+.showMore {
+    -webkit-line-clamp: 100
 }
 .icon {
     height: 40px;
@@ -80,8 +151,14 @@ textarea:focus {
 .add_message {
     padding: 10px;
 }
-.single_message{
-    margin:10px
+.single_comments a{
+    color: dimgrey
+}
+.single_comments a:hover {
+    color: deeppink
+}
+.single_message {
+    margin: 10px
 }
 .msg_content {
     height: 50px;
@@ -104,34 +181,27 @@ textarea:focus {
     width: 60%;
     margin: 50px;
     position: relative;
-    padding: 10px
+    padding: 20px
 }
 
-.member_avatar {
-    width: 50px;
-    height: 50px;
-    margin-right: 20px;
-    margin-bottom: 5px;
-    background: #f80;
-    border-radius: 50%;
-    object-fit: cover;
-}
+    .fliter_set {
+        padding: 10px;
+    }
+
+    .member_avatar {
+        width: 50px;
+        height: 50px;
+        margin-right: 20px;
+        margin-bottom: 5px;
+        background: #f80;
+        border-radius: 50%;
+        object-fit: cover;
+    }
 .click_button {
     border: 1px solid rgba(0%,0%,100%,0.4);
     
 }
 
-.intro {
-
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 10;
-    -webkit-box-orient: vertical;
-}
-.showMore {
-    -webkit-line-clamp: 100
-}
 .member_detail {
     display: flex;
     flex-direction: row;
@@ -167,4 +237,76 @@ textarea:focus {
     width: 100%;
     padding-right: 0;
     padding-left: 0;
+}
+.progress {
+    margin: 5px;
+}
+/*
+    checkbox
+*/
+/* The container */
+.filter_container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+    /* Hide the browser's default checkbox */
+    .filter_container input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+    }
+
+/* Create a custom checkbox */
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.filter_container:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.filter_container input:checked ~ .checkmark {
+    background-color: black;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.filter_container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.filter_container .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
 }
