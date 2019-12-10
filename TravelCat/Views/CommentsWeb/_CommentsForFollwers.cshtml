@@ -1,9 +1,8 @@
 ﻿<link href="~/Content/destinations.css" rel="stylesheet" />
-@using Microsoft.AspNet.Identity
-@model TravelCat.ViewModels.destinationsViewModel
+@model  TravelCat.ViewModels.FollowerViewModels
 @{
     ViewBag.Title = "Details";
-    Layout = null;
+    Layout = "~/Views/Shared/web-Layout.cshtml";
 
     string memberId;
     if (Session["memberID"] == null || string.IsNullOrWhiteSpace(Session["memberID"].ToString()))

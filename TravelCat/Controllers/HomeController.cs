@@ -43,6 +43,9 @@ namespace TravelCat.Controllers
                 member = db.member.Where(m => m.member_account == account).FirstOrDefault(),
                 comment = db.comment.OrderBy(m => m.comment_date).ToList()
             };
+            //select tourism_id,count(*) as total from comment group by tourism_id order by total desc
+            var most_comment = db.comment.GroupBy(s => s.tourism_id).OrderByDescending(x => x.Count()).SelectMany(s=>s).ToList();
+
 
             return View(model);
         }

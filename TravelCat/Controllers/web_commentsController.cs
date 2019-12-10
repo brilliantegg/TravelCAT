@@ -14,31 +14,88 @@ namespace TravelCat.Controllers
     public class web_commentsController : Controller
     {
         private dbTravelCat db = new dbTravelCat();
-
-        // GET: web_comments
-        public ActionResult Index()
+        //新增收藏
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Postcollections_detail(string member_id, string tourism_id, int collection_type_id)
         {
-            var comment = db.comment.Include(c => c.member);
-            return View();
+            string id = tourism_id.Substring(0, 1);
+            string controller;
+            switch (id)
+            {
+                case "A":
+                    controller = "web_activities";
+                    break;
+                case "H":
+                    controller = "WebHotels";
+                    break;
+                case "R":
+                    controller = "WebRestaurants";
+                    break;
+                case "S":
+                    controller = "WebSpots";
+                    break;
+                default:
+                    controller = "web_activities";
+                    break;
+            }
+            collections_detail collect = new collections_detail();
+            collect.member_id = member_id;
+            collect.tourism_id = tourism_id;
+            collect.privacy = true;
+            collect.collection_type_id = 1;
+
+
+            if (ModelState.IsValid)
+            {
+                db.collections_detail.Add(collect);
+                db.SaveChanges();
+                return RedirectToRoute(new { controller = controller, action = "Details", id = tourism_id });
+
+            }
+
+            return RedirectToRoute(new { controller = controller, action = "Details", id = tourism_id });
+        }
+        //新增留言
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult createMessage(message message)
+        {
+            
+            string id = message.tourism_id.Substring(0, 1);
+            string controller;
+            switch (id)
+            {
+                case "A":
+                    controller = "web_activities";
+                    break;
+                case "H":
+                    controller = "WebHotels";
+                    break;
+                case "R":
+                    controller = "WebRestaurants";
+                    break;
+                case "S":
+                    controller = "WebSpots";
+                    break;
+                default:
+                    controller = "web_activities";
+                    break;
+            }
+            message.msg_time = DateTime.Now;
+            if (ModelState.IsValid)
+            {
+                db.message.Add(message);
+                db.SaveChanges();
+
+                return RedirectToRoute(new { controller = controller, action = "Details", id = message.tourism_id });
+
+            }
+
+            return RedirectToRoute(new { controller = controller, action = "Details", id = message.tourism_id });
         }
 
-        // GET: web_comments/Details/5
-        public ActionResult Details(long? id)
-        {
-
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            comment comment = db.comment.Find(id);
-            if (comment == null)
-            {
-                return HttpNotFound();
-            }
-            return View(comment);
-        }
-
-        // GET: web_comments/Create
+        // GET 新增評論
         public ActionResult Create(string tourismID)
         {
             ViewBag.tourismID = tourismID;
@@ -47,12 +104,32 @@ namespace TravelCat.Controllers
             return View();
         }
 
-        // POST: web_comments/Create
+        // POST 新增評論
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(comment comment, HttpPostedFileBase comment_photo)
         {
+            string id = comment.tourism_id.Substring(0, 1);
+            string controller;
+            switch (id)
+            {
+                case "A":
+                    controller = "web_activities";
+                    break;
+                case "H":
+                    controller = "WebHotels";
+                    break;
+                case "R":
+                    controller = "WebRestaurants";
+                    break;
+                case "S":
+                    controller = "WebSpots";
+                    break;
+                default:
+                    controller = "web_activities";
+                    break;
+            }
             //處理圖檔上傳
             string fileName = "";
             string rename_filename = "";
@@ -74,14 +151,17 @@ namespace TravelCat.Controllers
                 comment.comment_photo = rename_filename;
                 db.comment.Add(comment);
                 db.SaveChanges();
-                return RedirectToRoute(new { controller = "web_activities", action = "Details", id = comment.tourism_id });
+                //Response.Cache.SetCacheability(HttpCacheability.NoCache);
+                //Response.Cache.AppendCacheExtension("no-store, must-revalidate");
+                //Response.Write("<script type='text/javascript'>window.location.reload(history.go(-2)); </script>");
+                return RedirectToRoute(new { controller = controller, action = "Details", id = comment.tourism_id });
 
             }
 
             return View(comment);
         }
 
-        // GET: web_comments/Edit/5
+        // GET 編輯評論
         public ActionResult Edit(long? id)
         {
             if (id == null)
@@ -97,15 +177,35 @@ namespace TravelCat.Controllers
             return View(comment);
         }
 
-        // POST: web_comments/Edit/5
+        // POST: 編輯評論
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(comment comment, HttpPostedFileBase comment_photo, string oldImg)
         {
+            string id = comment.tourism_id.Substring(0, 1);
+            string controller;
+            switch (id)
+            {
+                case "A":
+                    controller = "web_activities";
+                    break;
+                case "H":
+                    controller = "WebHotels";
+                    break;
+                case "R":
+                    controller = "WebRestaurants";
+                    break;
+                case "S":
+                    controller = "WebSpots";
+                    break;
+                default:
+                    controller = "web_activities";
+                    break;
+            }
             db.Entry(comment).State = EntityState.Modified;
             db.SaveChanges();
-            String id = comment.tourism_id;
+
             //處理圖檔上傳
             string fileName = "";
             string rename_filename = "";
@@ -129,13 +229,15 @@ namespace TravelCat.Controllers
             if (ModelState.IsValid)
             {               
                 db.SaveChanges();
-                return RedirectToAction("Details", "web_activities", new { id = id });
+
+
+                return RedirectToRoute(new { controller = controller, action = "Details", id = comment.tourism_id });
             }
 
             return View(comment);
         }
 
-        // GET: web_comments/Delete/5
+        // 刪除評論
         public ActionResult Delete(long? id)
         {
             if (id == null)
@@ -164,43 +266,12 @@ namespace TravelCat.Controllers
             {
                 return HttpNotFound();
             }
-            //for(int i = 0; i< emojis.Count; i++)
-            //{
-            //    db.comment_emoji_details.Remove(emojis[i]);
-            //    db.SaveChanges();
-            //}            
-
-
             return RedirectToRoute(new { controller = "web_activities", action = "Details", id = comment.tourism_id });
 
         }
 
 
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-        //_ partial view
-        [ChildActionOnly]
-        public ActionResult _PhotoGallery(int number = 0)
-        {
-            List<comment> comment;
-            if (number == 0)
-            {
-                comment = db.comment.OrderByDescending(p => p.comment_date).ThenByDescending(p => p.comment_id).ToList();
-
-            }
-            else
-            {
-                comment = db.comment.OrderByDescending(p => p.comment_date).ThenByDescending(p => p.comment_id).Take(number).ToList();
-            }
-            return PartialView(comment);
-        }
 
     }
 }

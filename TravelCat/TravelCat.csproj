@@ -24,7 +24,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <TypeScriptToolsVersion>3.6</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
     <WebGreaseLibPath>..\packages\WebGrease.1.5.2\lib</WebGreaseLibPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -35,6 +35,19 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <TypeScriptTarget>ES3</TypeScriptTarget>
+    <TypeScriptJSXEmit>React</TypeScriptJSXEmit>
+    <TypeScriptModuleKind>AMD</TypeScriptModuleKind>
+    <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
+    <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
+    <TypeScriptRemoveComments>False</TypeScriptRemoveComments>
+    <TypeScriptOutFile />
+    <TypeScriptOutDir />
+    <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
+    <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
+    <TypeScriptSourceMap>True</TypeScriptSourceMap>
+    <TypeScriptMapRoot />
+    <TypeScriptSourceRoot />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -1828,6 +1841,7 @@
     <Content Include="images\hotel-1749602_1920.jpg" />
     <Content Include="images\hotel\bmo_png_159083.png" />
     <Content Include="images\hotel\CJXH_Japan_Nachi_Nachi-Falls_189118511.jpg" />
+    <Content Include="images\index\dont-go-to-taiwan-travel-film-by-tolt-16.mp4" />
     <Content Include="images\taiwan-2696156_1920.jpg" />
     <Content Include="images\taiwan-651854_1920.jpg" />
     <Content Include="images\taiwan-667563_1920.jpg" />
@@ -1985,6 +1999,7 @@
     <Compile Include="Controllers\RestaurantsController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\SpotsController.cs" />
+    <Compile Include="Controllers\WebSpots.cs" />
     <Compile Include="Controllers\web_activitiesController.cs" />
     <Compile Include="Controllers\web_commentsController.cs" />
     <Compile Include="Controllers\web_Member_IndexController.cs" />
@@ -2077,7 +2092,9 @@
       <DependentUpon>TravelCat.edmx</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\CommentsViewModel.cs" />
     <Compile Include="ViewModels\destinationsViewModel.cs" />
+    <Compile Include="ViewModels\FollowerViewModels .cs" />
     <Compile Include="ViewModels\MemberIndexViewModels.cs" />
     <Compile Include="ViewModels\MemberViewModels.cs" />
     <Compile Include="ViewModels\SearchViewModel.cs" />
@@ -2170,11 +2187,7 @@
     <Content Include="Views\Register\ConfirmView.cshtml" />
     <Content Include="Views\web_Member_Index\EditMemberProfile.cshtml" />
     <Content Include="Views\web_comments\Create.cshtml" />
-    <Content Include="Views\web_comments\Delete.cshtml" />
-    <Content Include="Views\web_comments\Details.cshtml" />
     <Content Include="Views\web_comments\Edit.cshtml" />
-    <Content Include="Views\web_comments\Index.cshtml" />
-    <Content Include="Views\web_comments\_PhotoGallery.cshtml" />
     <Content Include="Views\web_Member_Index\Editpassword.cshtml" />
     <Content Include="Views\Search\Index.cshtml" />
     <Content Include="Views\Home\_test.cshtml" />
@@ -2186,16 +2199,16 @@
     <Content Include="Views\Search\Index.cshtml" />
     <Content Include="Views\Home\_test.cshtml" />
     <Content Include="Views\web_comments\Create.cshtml" />
-    <Content Include="Views\web_comments\Delete.cshtml" />
-    <Content Include="Views\web_comments\Details.cshtml" />
-    <Content Include="Views\web_comments\Index.cshtml" />
-    <Content Include="Views\web_comments\_PhotoGallery.cshtml" />
     <Content Include="Views\Search\_Activity_OLD.cshtml" />
     <Content Include="Views\CommentsWeb\_CommentsFromMember.cshtml" />
     <Content Include="Views\Search\_Activity.cshtml" />
     <Content Include="Views\Home\ForgetPwd.cshtml" />
     <Content Include="Views\Home\ForgetView.cshtml" />
     <Content Include="Views\Home\ResetPwd.cshtml" />
+    <Content Include="Views\CommentsWeb\_CommentsForFollwers.cshtml" />
+    <Content Include="Views\web_activities\List.cshtml" />
+    <Content Include="Views\WebSpots\Index.cshtml" />
+    <Content Include="Views\WebSpots\Details.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
