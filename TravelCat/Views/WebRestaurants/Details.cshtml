@@ -28,17 +28,17 @@
             <div class="carousel-inner text-center ">
                 <div class="carousel-item header-carousel-item bg-cover active " style="background-image:url( https://www.blacktomato.com/wp-content/uploads/2016/02/Amalfi-coast_Shutterstock-9.jpg)">
                     <div class="carousel-caption offset-2 col-4 ">
-                        <h5>@Model.activity.activity_title</h5>
+                        <h5>@Model.restaurant.restaurant_title</h5>
                     </div>
                 </div>
                 <div class="carousel-item header-carousel-item bg-cover " style="background-image:url(https://www.blacktomato.com/wp-content/uploads/2016/02/Positano-italy.jpg)">
                     <div class="carousel-caption offset-2 col-4">
-                        <h5>@Model.activity.activity_title</h5>
+                        <h5>@Model.restaurant.restaurant_title</h5>
                     </div>
                 </div>
                 <div class="carousel-item header-carousel-item bg-cover " style="background-image:url(https://www.blacktomato.com/wp-content/uploads/2016/02/Amazing-Amalfi-coast.jpg)">
                     <div class="carousel-caption offset-2 col-4">
-                        <h5>@Model.activity.activity_title</h5>
+                        <h5>@Model.restaurant.restaurant_title</h5>
                     </div>
                 </div>
             </div>
@@ -78,11 +78,11 @@
                 </form>
             }
             <h2>
-                @Html.DisplayNameFor(model => model.activity.activity_intro)
+                @Html.DisplayNameFor(model => model.restaurant.restaurant_intro)
             </h2>
             <div class="intro text-left">
                 <p>
-                    @Html.DisplayFor(model => model.activity.activity_intro)
+                    @Html.DisplayFor(model => model.restaurant.restaurant_intro)
                 </p>
             </div>
             <i class="fas fa-angle-double-down readmore"></i>
@@ -97,17 +97,18 @@
             <div class="col-md-4 destinate_info ">
                 <ul>
                     <li>
-                        <span>
-                            <i class="fas fa-phone-alt"></i>
-                        </span>
-                        @if (String.IsNullOrEmpty(@Model.activity.activity_tel))
+
+                        @if (String.IsNullOrEmpty(@Model.restaurant.restaurant_tel))
                         {
-                            <span>無</span>
+
                         }
                         else
                         {
                             <span>
-                                @Html.DisplayFor(model => model.activity.activity_tel)
+                                <i class="fas fa-phone-alt"></i>
+                            </span>
+                            <span>
+                                @Model.restaurant.restaurant_tel
                             </span>
                         }
                     </li>
@@ -116,40 +117,29 @@
                             <i class="fas fa-map-marker-alt"></i>
                         </span>
                         <span>
-                            @Model.activity.city @Model.activity.district @Html.DisplayFor(model => model.activity.address_detail)
+                            @Model.restaurant.city @Model.restaurant.district @Model.restaurant.address_detail)
                         </span>
                     </li>
                     <li>
-                        <span>
-                            <i class="far fa-clock"></i>
-                        </span>
-                        <span>
-                            @Model.activity.begin_date ~ @Model.activity.end_date
-                        </span>
-                    </li>
-                    <li>
-                        <span>
-                            <i class="far fa-user"></i>
-                        </span>
-                        <span>
-                            @Html.DisplayFor(model => model.activity.organizer)
-                        </span>
-                    </li>
-                    <li>
-                        @if (String.IsNullOrEmpty(@Model.activity.website))
+
+
+                        @if (String.IsNullOrEmpty(@Model.restaurant.open_time))
                         {
 
                         }
                         else
                         {
                             <span>
-                                <i class="fas fa-mouse-pointer"></i>
+                                <i class="far fa-clock"></i>
                             </span>
                             <span>
-                                @Html.DisplayFor(model => model.activity.website)
+                                @Model.restaurant.open_time
                             </span>
                         }
+
                     </li>
+                    
+
                 </ul>
                 <br />
             </div>
@@ -159,8 +149,7 @@
 
 
     <!--篩選評論-->
-    @{ double totalCommentNum = @Model.comment.Count();
-    }
+    @{ double totalCommentNum = @Model.comment.Count(); }
     <section>
 
 
@@ -307,7 +296,7 @@
 
             <div class="new_comment container">
                 <form action="/web_comments/Create" Method="GET">
-                    <input type="hidden" name="tourismID" value=@Model.activity.activity_id />
+                    <input type="hidden" name="tourismID" value=@ViewBag.tourismId />
                     <input type="hidden" name="mem_id" value="@Session["memberID"]" />
                     <button type="submit" class="add_comment btn btn-outline-info  ">新增評論</button>
                 </form>
@@ -315,10 +304,10 @@
         </div>
     </section>
 
-<!--渲染評論-->
+    <!--渲染評論-->
     <div id="render_comment">
         @Html.Action("_CommentsForDestination", "CommentsWeb", new { tourismId = @ViewBag.tourismId })
-    </div>        
+    </div>
 
 </div>
 
@@ -343,7 +332,7 @@
     var marker;
     function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
-            center: { lat: @Model.activity.latitude, lng:@Model.activity.longitude  },
+            center: { lat: @Model.restaurant.latitude, lng:@Model.restaurant.longitude  },
             zoom: 17,
             styles:[
     {
@@ -580,33 +569,15 @@
 ]
         });
       marker = new google.maps.Marker({
-      position : { lat: @Model.activity.latitude, lng: @Model.activity.longitude },//positon 位置
+      position : { lat: @Model.restaurant.latitude, lng: @Model.restaurant.longitude },//positon 位置
       map:map, //標示地圖
-      title:'@Model.activity.activity_title'//說明文字(選擇性填寫)
+      title:'@Model.restaurant.restaurant_title'//說明文字(選擇性填寫)
     })
     }
      var a = '123';
 
 </script>
 <script>
-
-        $("#CheckBoxListFor").change(function () {
-        debugger;
-        var favorite = [];
-        $.each($("input[name='sbuIDs']:checked"), function () {
-            favorite.push($(this).val());
-        });
-
-        $.ajax({
-            type: "POST",
-            dataType: "json",
-            contentType: "application/json",
-            url: '@Url.Action("Getvalues", "Home")',
-
-            data: JSON.stringify({ values: favorite })
-        });
-
-    });
     $(`.filter_comment`).on("change", function () {
         var comment_rating_values = [];
         var travel_partner_values = [];

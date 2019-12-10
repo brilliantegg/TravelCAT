@@ -135,13 +135,12 @@ body {
         .top-bar .body-menu li {
             margin-right: 5px
         }
-        .top-bar .body-menu li a {
-            color: black;
-            font-size: 1.2rem;
-            
-        }
+            .top-bar .body-menu li a {
+                color: darkolivegreen;
+                font-size: 1.2rem;
+            }
         .aTag_style {
-            color: black;
+            color: darkolivegreen;
             font-size: 1.2rem;
         }
             .aTag_style:hover {

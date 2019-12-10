@@ -137,7 +137,7 @@ namespace TravelCat.Controllers
             destinationsViewModel model = new destinationsViewModel()
             {
 
-                comment = db.comment.Where(m => m.member_id == memId).ToList(),
+                comment = db.comment.Where(m => m.member_id == memId).OrderByDescending(m=>m.comment_date).Take(50).ToList(),
                 message = db.message.Where(m => m.member_id == memId).ToList(),
                 comment_emoji_details = db.comment_emoji_details.ToList(),
                 message_emoji_details = db.message_emoji_details.ToList(),
@@ -178,19 +178,19 @@ namespace TravelCat.Controllers
             }
             FollowerViewModels model = new FollowerViewModels()
             {
-                comment = comments.OrderByDescending(m => m.comment_date).ToList(),
+                comment = comments.OrderByDescending(m => m.comment_date).Take(50).ToList(),
                 comment_emoji_details = db.comment_emoji_details.ToList(),
                 member_profile = db.member_profile.Where(m => m.member_id == memId).ToList(),
                 member = members,
             };
-            IEnumerable<member> followers = from mem in db.member
-                                            join fol in db.follow_list on mem.member_id equals fol.member_id
-                                            where fol.member_id == memId
-                                            select mem;
+            //IEnumerable<member> followers = from mem in db.member
+            //                                join fol in db.follow_list on mem.member_id equals fol.member_id
+            //                                where fol.member_id == memId
+            //                                select mem;
 
-            IEnumerable<comment> comm = from mem in followers
-                                       join com in db.comment on mem.member_id equals com.member_id
-                                       select com;
+            //IEnumerable<comment> comm = from mem in followers
+            //                           join com in db.comment on mem.member_id equals com.member_id
+            //                           select com;
             return PartialView(model);
         }
         public int getMsgEmojiNum(int msg_id, string tourismId)

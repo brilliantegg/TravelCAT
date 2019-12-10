@@ -59,7 +59,13 @@
             <!--加入收藏-->
             @if (@Model.collections_detail.Where(m => m.member_id == @memberId).Count() > 0)
             {
-                <input type="submit" name="delete_bucket_list" class="bucket_list btn btn-outline-info" value="取消收藏" />
+                <form action="/web_comments/Deletecollections_detail" method="post">
+                    <input type="hidden" name="member_id" value="@Session["memberID"]" />
+                    <input type="hidden" name="tourism_id" value="@ViewBag.tourismId" />
+                    <input type="hidden" name="collection_id" value="@Model.collections_detail.Where(m => m.member_id == @memberId).FirstOrDefault().collection_id" />
+                    <input type="submit" class="delete_bucket_list bucket_list btn btn-outline-info" value="取消收藏" />
+                </form>
+                
             }
             else
             {
@@ -160,7 +166,7 @@
 
 
     <!--篩選評論-->
-    @{ double totalCommentNum = @Model.comment.Count();    }
+    @{ double totalCommentNum = @Model.comment.Count(); }
     <section>
 
 
@@ -621,5 +627,25 @@
                     alert(data);
                 }
             });
-        });
+    });
+    
+    @*function addBucket() {
+                    $.ajax({
+                type: 'POST',
+                url: `http://localhost:54678/web_comments/Postcollections_detail?memberId=${"@Session["memberID"]"}&tourism_id=${"@ViewBag.tourismId"}&collection_type_id=1`,
+                success: function (data, status) {
+                    alert("收藏成功!")
+                }
+            });
+            
+    }
+        $('.add_to_bucket_list').click(function (e) {
+            if (id == null) {
+                event.stopPropagation();
+                alert('請先登入:)');
+                return false;
+            }
+            addBucket()
+    });*@
 </script>
+

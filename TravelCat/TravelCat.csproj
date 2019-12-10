@@ -1984,7 +1984,6 @@
     <Compile Include="Controllers\badgesController.cs" />
     <Compile Include="Controllers\commentsController.cs" />
     <Compile Include="Controllers\CommentsWebController.cs" />
-    <Compile Include="Controllers\destinationsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HotelsController.cs" />
     <Compile Include="Controllers\Import_acController.cs" />
@@ -1999,6 +1998,8 @@
     <Compile Include="Controllers\RestaurantsController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\SpotsController.cs" />
+    <Compile Include="Controllers\WebHotels .cs" />
+    <Compile Include="Controllers\WebRestaurants.cs" />
     <Compile Include="Controllers\WebSpots.cs" />
     <Compile Include="Controllers\web_activitiesController.cs" />
     <Compile Include="Controllers\web_commentsController.cs" />
@@ -2207,9 +2208,12 @@
     <Content Include="Views\Home\ForgetView.cshtml" />
     <Content Include="Views\Home\ResetPwd.cshtml" />
     <Content Include="Views\CommentsWeb\_CommentsForFollwers.cshtml" />
-    <Content Include="Views\web_activities\List.cshtml" />
     <Content Include="Views\WebSpots\Index.cshtml" />
     <Content Include="Views\WebSpots\Details.cshtml" />
+    <Content Include="Views\WebHotels\Index.cshtml" />
+    <Content Include="Views\WebHotels\Details.cshtml" />
+    <Content Include="Views\WebRestaurants\Index.cshtml" />
+    <Content Include="Views\WebRestaurants\Details.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

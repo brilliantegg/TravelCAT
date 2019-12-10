@@ -13,8 +13,20 @@
     border-style: solid;
     border-color: #e5e5e5;
 }
-
-
+.nav-link {
+    display: block;
+    padding: .5rem 1rem;
+}
+.nav nav-pills {
+    display: flex;
+}
+.nav-item {
+    justify-content: center;
+    align-items: center;
+}
+.nav-pills .nav-link.active {
+    background: #721c24;
+}
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
     background: #4e57ef;
 }
@@ -27,17 +39,19 @@
     list-style: none;
 }
 
-    .listyle li:first-child {
-        color: #844200;
-        margin-bottom: 5px;
-        font-size: 20px;
-    }
+.listyle li:first-child {
+    color: #844200;
+    margin-bottom: 5px;
+    font-size: 20px;
+}
+.badge img {
 
-.intro {
+}
+.member_intro {
     font-weight: bolder;
-    position:relative;
-    height:700px;
-    padding:100px
+    position: relative;
+    height: 700px;
+    padding: 100px
 }
 
 .bg-cover {
@@ -46,16 +60,7 @@
     height: 360px;
 }
 
-a {
-    color: #844200;
-    text-decoration: none;
-    background-color: transparent;
-    font-size: 20Px;
-    font-weight: bolder;
-}
-a:hover {
-    color: darkorange;    
-}
+
 .profile_avatar img {
     margin: 10px 50px;
     width: 200px;
@@ -73,7 +78,7 @@ a:hover {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     position: relative;
     overflow: hidden;
-    max-width: 92%;
+    max-width: 80%;
     margin: 30px auto 20px;
     background: #fff;
     border-radius: 3px;
@@ -92,6 +97,9 @@ a:hover {
     padding : 0 2rem;
     border-left:1px solid gray 
 }
-.card{
-    margin:10px
+.card-text{
+    font-weight:400
+}
+.card {
+    margin: 10px
 }
