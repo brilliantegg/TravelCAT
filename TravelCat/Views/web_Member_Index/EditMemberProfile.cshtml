@@ -60,7 +60,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.member_profile.nickname, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    <input id="newnickname" type="text" value="@Model.member_profile.nickname" name="newnickname" class="form-control" />
+                    <input id="newnickname" type="text" value="@Model.member_profile.nickname" name="newnickname" class="form-control" required="required"/>
                     @Html.ValidationMessageFor(model => model.member_profile.nickname, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -70,7 +70,6 @@
                     <select id="newnation" name="newnation" class="form-control">
                         <option value="台灣">台灣</option>
                         <option value="其他國家">其他國家</option>
-
                     </select>
 
                     @Html.ValidationMessageFor(model => model.member_profile.nation, "", new { @class = "text-danger" })
@@ -79,7 +78,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.member_profile.city, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    <select id="newcity" name="newcity" value="@Model.member_profile.city" class="form-control">
+                    <select id="newcity" name="newcity" class="form-control">
                         <option value="北部地區" disabled>北部地區</option>
                         <option value="台北市">台北市</option>
                         <option value="新北市">新北市</option>
@@ -123,7 +122,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.member_profile.phone, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    <input id="newphone" type="text" value="@Model.member_profile.phone" name="newphone" class="form-control" />
+                    <input id="newphone" type="text" value="@Model.member_profile.phone" name="newphone" class="form-control" required="required"/>
                     @Html.ValidationMessageFor(model => model.member_profile.phone, "", new { @class = "text-danger" })
                 </div>
             </div>

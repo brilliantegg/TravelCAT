@@ -72,7 +72,9 @@
                 @Html.LabelFor(model => model.member_profile.nation, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     <select id="newnation" name="member_profile.nation" class="form-control">
+                        <option value="" disabled selected>請選擇</option>
                         <option value="台灣">台灣</option>
+                        <option value="其他國家">其他國家</option>
                     </select>
                     @Html.ValidationMessageFor(model => model.member_profile.nation, "", new { @class = "text-danger" })
                 </div>
@@ -81,6 +83,7 @@
                 @Html.LabelFor(model => model.member_profile.city, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     <select id="newcity" name="member_profile.city" class="form-control">
+                        <option value="" disabled selected>請選擇</option>
                         <option value="北部地區" disabled>北部地區</option>
                         <option value="台北市">台北市</option>
                         <option value="新北市">新北市</option>
@@ -108,6 +111,7 @@
                         <option value="澎湖縣">澎湖縣</option>
                         <option value="金門縣">金門縣</option>
                         <option value="連江縣">連江縣</option>
+                        <option value="其他城市">其他城市</option>
                     </select>
                     @Html.ValidationMessageFor(model => model.member_profile.city, "", new { @class = "text-danger" })
                 </div>

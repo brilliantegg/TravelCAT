@@ -2179,7 +2179,6 @@
     <Content Include="Views\Search\Index.cshtml" />
     <Content Include="Views\Home\_test.cshtml" />
     <Content Include="Views\web_Member_Index\Editemail.cshtml" />
-    <Content Include="Views\web_Member_Index\EditMemberProfile1.cshtml" />
     <Content Include="Views\web_Member_Index\EditMemberProfile.cshtml" />
     <Content Include="Views\CommentsWeb\_CreateMsg.cshtml" />
     <Content Include="Views\CommentsWeb\_CreateComment.cshtml" />
