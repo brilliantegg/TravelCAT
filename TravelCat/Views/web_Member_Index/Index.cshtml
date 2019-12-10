@@ -49,24 +49,24 @@
 
                 </div>
             </div>
+            <div class="member_location">
 
+                <ul class="">
+                    <li><span>location</span></li>
+                    <li><span>@Model.member_profile.city</span></li>
+                    <li><span>website</span></li>
+                    <li><a href="@Model.member_profile.website_link"><i class="far fa-id-card"></i></a></li>
+
+                </ul>
+
+            </div>
         </div>
-        <div class="member_location">
 
-            <ul class="">
-                <li><span>location</span></li>
-                <li><span>@Model.member_profile.city</span></li>
-                <li><span>website</span></li>
-                <li><a href="@Model.member_profile.website_link"><i class="far fa-id-card"></i></a></li>
-
-            </ul>
-
-        </div>
     </div>
 
 </div>
 <div class=" container">
-    
+
     <!-- Modal -->
     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -91,101 +91,100 @@
         </div>
     </div>
 
-                    <div class="row ">
-                        <div class="intro col-3 px-0">
-                            <div class="text-left ">
-                                <div style="height:auto">
-                                    <div>
-                                        <ul class="listyle">
-                                            <li>徽章牆</li>
-                                            <li>
-                                                分數 @{
-                                                    var comeent_num = Model.comment.Where(m => m.member_id == @Model.member.member_id).Count();
-                                                    var follow_num = @Model.follow_list.Where(m => m.member_id == @Model.member.member_id).Count();
-                                                    var score = comeent_num * 5 + follow_num * 5;
-                                                }
-                                                @score
-                                            </li>
-                                            <li>
-                                                @if (score > 10)
-                                                {
-                                                    <img src="http://localhost:54678/images/badges/9.png" />
-                                                }
-                                                else if (score > 20)
-                                                {
-                                                    <img src="http://localhost:54678/images/badges/1000_invites.png" />
-                                                }
-                                                else if (score > 30)
-                                                {
-                                                    <img src="http://localhost:54678/images/badges/100000_comments.png" />
-                                                }
-                                                else if (score > 40)
-                                                {
-                                                    <img src="http://localhost:54678/images/badges/50000_fans.png" />
-                                                }
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div>
-                                        <ul class="listyle">
-                                            <li>評論數 @Model.comment.Where(m => m.member_id == @Model.member.member_id).Count()</li>
-                                            <li>追蹤者 @Model.follow_list.Where(m => m.followed_id == @Model.member.member_id).Count()</li>
-                                            <li>關注中 @Model.follow_list.Where(m => m.member_id == @Model.member.member_id).Count() </li>
-                                            <li>加入時間 @Model.member_profile.create_time.ToString("yyyy MM dd")</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-9 mt-2" style="height:300px ">
-                            <ul class="nav nav-pills mb-3 " id="pills-tab" role="tablist">
-                                <li class="nav-item ">
-                                    <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">個人評論</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">追蹤評論</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">我的珍藏</a>
-                                </li>
+    <div class="row ">
+        <div class="intro col-3 px-0">
+            <div class="text-left ">
+                <div style="height:auto">
+                    <div>
+                        <ul class="listyle">
+                            <li>徽章牆</li>
+                            <li>
+                                分數 @{
+                                    var comeent_num = Model.comment.Where(m => m.member_id == @Model.member.member_id).Count();
+                                    var follow_num = @Model.follow_list.Where(m => m.member_id == @Model.member.member_id).Count();
+                                    var score = comeent_num * 5 + follow_num * 5;
+                                }
+                                @score
+                            </li>
+                            <li>
+                                @if (score > 10)
+                                {
+                                    <img src="http://localhost:54678/images/badges/9.png" />
+                                }
+                                else if (score > 20)
+                                {
+                                    <img src="http://localhost:54678/images/badges/1000_invites.png" />
+                                }
+                                else if (score > 30)
+                                {
+                                    <img src="http://localhost:54678/images/badges/100000_comments.png" />
+                                }
+                                else if (score > 40)
+                                {
+                                    <img src="http://localhost:54678/images/badges/50000_fans.png" />
+                                }
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <ul class="listyle">
+                            <li>評論數 @Model.comment.Where(m => m.member_id == @Model.member.member_id).Count()</li>
+                            <li>追蹤者 @Model.follow_list.Where(m => m.followed_id == @Model.member.member_id).Count()</li>
+                            <li>關注中 @Model.follow_list.Where(m => m.member_id == @Model.member.member_id).Count() </li>
+                            <li>加入時間 @Model.member_profile.create_time.ToString("yyyy MM dd")</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-9 mt-2" style="height:300px ">
+            <ul class="nav nav-pills mb-3 " id="pills-tab" role="tablist">
+                <li class="nav-item ">
+                    <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">個人評論</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">追蹤評論</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">我的珍藏</a>
+                </li>
 
-                            </ul>
-                            <!--會員評論-->
-                            <div class="tab-content" id="pills-tabContent">
-                                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">@Html.Action("_CommentsFromMember", "CommentsWeb", new { memId = @Model.member.member_id }) </div>
+            </ul>
+            <!--會員評論-->
+            <div class="tab-content" id="pills-tabContent">
+                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">@Html.Action("_CommentsFromMember", "CommentsWeb", new { memId = @Model.member.member_id }) </div>
 
-                                <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">@Html.Action("_CommentsFromMember", "CommentsWeb", new { memId = @Model.member.member_id })</div>
+                <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">@Html.Action("_CommentsFromMember", "CommentsWeb", new { memId = @Model.member.member_id })</div>
 
-                                <!--我的收藏-->
-                                <div class=" tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
-                                    <div class="row">
-                                        @foreach (var item in Model.collections_detail)
-                                        {
+                <!--我的收藏-->
+                <div class=" tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+                    <div class="row">
+                        @foreach (var item in Model.collections_detail)
+                        {
 
-                                            <div class=" card col-4 collection_card">
-                                                <img class="card-img-top img-fluid" src="~/images/activity/A001069_20191118下午0456093.jpg" alt="Card image cap">
-                                                <div class="card-body">
-                                                    <p class="card-text">
-                                                        @Model.activity.Where(m => m.activity_id == @item.tourism_id).FirstOrDefault().activity_title
-                                                    </p>
 
-                                                        
-                                                </div>
-                                            </div>
-                                        }
-                                    </div>
+                            <div class=" card col-4 collection_card text-center">
+                                <img class="card-img card-img-top img-fluid" src="~/images/activity/taipei.jpg" alt="Card image cap">
+                                <div class="card-img-overlay">
+                                    <p class="card-text">
+                                        <a class="card-link  text-white" href="#">@Model.activity.Where(m => m.activity_id == @item.tourism_id).FirstOrDefault().activity_title</a>
+                                    </p>
                                 </div>
 
                             </div>
-
-                        </div>
-
+                        }
                     </div>
+                </div>
 
-                        </div>
-                    </div>
+            </div>
+
+        </div>
+
+    </div>
 
 </div>
+
+
 
 
 <script>
