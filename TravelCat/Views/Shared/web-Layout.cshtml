@@ -8,6 +8,7 @@
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/fontawesome-free-5.11.2-web/css/all.css" rel="stylesheet" />
     <link href="~/Content/web-Layout.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC&display=swap" rel="stylesheet">
 </head>
 <body>
     @{ string mem_id;
@@ -48,9 +49,13 @@
     </header>
     <div class="top-bar">
         <ul class="body-menu">
+            <li>
+                    <a href="#"><i class=" fas fa-map-marked-alt "></i> 景點</a>                
+            </li>
+            <li>                    
+                    <a class="  text-black" href="/web_activities"><i class="fas fa-running"></i> 活動</a>
 
-            <li><a href="#"><i class=" fas fa-map-marked-alt "></i> 景點</a></li>
-            <li><i class="fas fa-running"></i>@Html.ActionLink(" 活動", "Index", "web_activities", null, new { @class = "  text-black" })</li>
+            </li>
             <li><a href="#"><i class="fas fa-hamburger"></i> 餐廳</a> </li>
             <li><a href="#"><i class="fas fa-building"></i> 飯店</a> </li>
             <li class="search">

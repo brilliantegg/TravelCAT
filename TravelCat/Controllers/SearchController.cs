@@ -13,7 +13,7 @@ namespace TravelCat.Controllers
     public class SearchController : Controller
     {
         dbTravelCat db = new dbTravelCat();
-        int pageSize = 15;
+        //int pageSize = 15;
 
         //GET: Search
         public ActionResult Index(string q = null, int page = 1)

@@ -3,7 +3,7 @@
 @model TravelCat.ViewModels.destinationsViewModel
 @{
     ViewBag.Title = "Details";
-    Layout = "~/Views/Shared/web-Layout.cshtml";
+    Layout = null;
 
     string memberId;
     if (Session["memberID"] == null || string.IsNullOrWhiteSpace(Session["memberID"].ToString()))
@@ -14,10 +14,29 @@
     {
         memberId = Session["memberID"].ToString();
     }
-
+    string firstChar = ViewBag.tourismId.Substring(0, 1);
+            string destinatations;
+            switch (firstChar)
+            {
+                case "A":
+                    destinatations = "A";
+                    break;
+                case "H":
+                    destinatations = "H";
+                    break;
+                case "R":
+                    destinatations = "R";
+                    break;
+                case "S":
+                    destinatations = "S";
+                    break;
+                default:
+                    destinatations = "A";
+                    break;
+            }
 }
 
-
+<!--1則 評論-->
 <div class=" justify-content-center align-items-center">
 
     @foreach (var item in Model.comment)
@@ -82,7 +101,15 @@
                         <div class="response_content">
                             <p>@Html.Raw(item.comment_content.ToString().Replace("\n", "<br>"))</p>
                         </div>
-                        <a href="" class="hashtag "> #@Model.activity.activity_title </a>
+                        @if (destinatations == "A")
+                        {
+                            <a href="" class="hashtag "> #@Model.activity.activity_title </a>
+                        }
+                        else if (destinatations == "S")
+                        {
+                            <a href="" class="hashtag "> #@Model.spot.spot_title </a>
+                        }
+
                     </div>
 
                     @if (memberId == item.member_id)
@@ -93,10 +120,12 @@
                         </div>
                     }
                     <hr />
+                    <!--判斷前端是否要顯示被按讚過-->
+                    
                     <div class="emoji_panel d-flex  ">
                         <div class="comment_emoji_detail  d-flex">
                             <div class="emoji ">
-                                @if (@Model.comment_emoji_details.Where(m => m.member_id == @memberId && m.comment_id == item.comment_id && m.emoji_id == 1 && m.tourism_id == @Model.activity.activity_id).Count() > 0)
+                                @if(@Model.comment_emoji_details.Where(m => m.member_id == @memberId && m.comment_id == item.comment_id && m.emoji_id == 1).Count() > 0)
                                 {
 
                                     <img class="icon comment_emoji_heart click_button" src="~/images/emoji/talk.png" data-value="@item.comment_emoji_details.Where(m => m.emoji_id == 1).Count()" data-comment_id="@item.comment_id" data-emoji_id="1" disabled="disabled" />
@@ -109,7 +138,7 @@
                                 }
                             </div>
                             <div class="emoji">
-                                @if (@Model.comment_emoji_details.Where(m => m.member_id == @memberId && m.comment_id == item.comment_id && m.emoji_id == 2 && m.tourism_id == @Model.activity.activity_id).Count() > 0)
+                                @if (@Model.comment_emoji_details.Where(m => m.member_id == @memberId && m.comment_id == item.comment_id && m.emoji_id == 2 ).Count() > 0)
                                 {
 
                                     <img class="icon comment_emoji_unicorn click_button" src="~/images/emoji/unicorn.svg" data-value="@item.comment_emoji_details.Where(m => m.emoji_id == 2).Count() " data-comment_id="@item.comment_id" data-emoji_id="2" disabled="disabled" />
@@ -123,7 +152,7 @@
                             </div>
                             <div class="emoji">
 
-                                @if (@Model.comment_emoji_details.Where(m => m.member_id == @memberId && m.comment_id == item.comment_id && m.emoji_id == 3 && m.tourism_id == @Model.activity.activity_id).Count() > 0)
+                                @if (@Model.comment_emoji_details.Where(m => m.member_id == @memberId && m.comment_id == item.comment_id && m.emoji_id == 3 ).Count() > 0)
                                 {
 
                                     <img class="icon comment_emoji_good click_button" src="~/images/emoji/sweet-potato.png" data-value="@item.comment_emoji_details.Where(m => m.emoji_id == 3).Count()" data-comment_id="@item.comment_id" data-emoji_id="3" disabled="disabled" />
@@ -145,7 +174,7 @@
 
 
                         <!--檢舉評論modal-->
-              
+
                         <div class="modal fade" id="reportModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-scrollable" role="document">
                                 <div class="modal-content">
@@ -212,7 +241,7 @@
                         <div class="add_message single_message">
                             @if (@memberId != null)
                             {
-                                <form action="/web_activities/createMessage" method="post">
+                                <form action="/web_comments/createMessage" method="post">
                                     @Html.AntiForgeryToken()
                                     <input type="hidden" name="comment_id" value="@item.comment_id" />
                                     <input type="hidden" name="msg_time" value="@DateTime.Now" />

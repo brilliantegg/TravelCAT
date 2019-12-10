@@ -1,0 +1,119 @@
+﻿@model IEnumerable<TravelCat.Models.spot>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.spot_title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.spot_tel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.spot_intro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.longitude)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.latitude)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.addition_note)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.city)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.district)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.address_detail)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.open_time)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ticket_info)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.update_date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.travelling_info)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.page_status)
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.spot_title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.spot_tel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.spot_intro)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.longitude)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.latitude)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.addition_note)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.city)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.district)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.address_detail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.open_time)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ticket_info)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.update_date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.travelling_info)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.page_status)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.spot_id }) |
+                @Html.ActionLink("Details", "Details", new { id=item.spot_id }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.spot_id })
+            </td>
+        </tr>
+    }
+    
+    </table>
+</body>
+</html>

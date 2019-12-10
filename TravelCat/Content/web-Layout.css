@@ -1,9 +1,11 @@
-﻿* {
+﻿@import url('https://fonts.googleapis.com/css?family=Noto+Sans+TC&display=swap');
+
+
+* {
     margin: 0;
     padding: 0;
     list-style: none;
-    font-family: "Helvetica Neue", Helvetica, Arial, "PingFang TC", 微软雅黑, "Microsoft YaHei", 华文细黑, STHeiti, sans-serif;
-
+    font-family: "Noto Sans TC","Helvetica Neue", Helvetica, Arial, "PingFang TC", 微软雅黑, "Microsoft YaHei", 华文细黑, STHeiti, sans-serif;
 }
 body {
     margin-top: 116px
@@ -11,7 +13,7 @@ body {
 }
 /*表頭*/
 .header {
-    background-color: ghostwhite;
+    background-color: #f2eeeb;
     position: fixed;
     top: 0;
     left: 0;
@@ -43,7 +45,7 @@ body {
             -webkit-box-align: center;
             -ms-flex-align: center;
             align-items: center;
-            color: #551029;
+            color: rgba(174,37,46,0.99);
             font-weight: 700;
         }
 
@@ -135,22 +137,25 @@ body {
         }
         .top-bar .body-menu li a {
             color: black;
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             
         }
         .aTag_style {
             color: black;
-            font-size: 1.5rem;
+            font-size: 1.2rem;
+        }
+            .aTag_style:hover {
+                color: #128566;
+            }
+
+        .top-bar .body-menu li a:hover {
+            color: #128566;
+            text-decoration: none;
         }
 
-.top-bar .body-menu li a:hover {
-    color: #128566;
-    text-decoration: none;
-}
-
-i {
-    font-size: 1.5rem;
-}
+        i {
+            font-size: 1.5rem;
+        }
 
 
 
