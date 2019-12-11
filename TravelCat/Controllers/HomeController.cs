@@ -63,13 +63,14 @@ namespace TravelCat.Controllers
                 }
             }
         }
-        public ActionResult Login()
+        public ActionResult Login(string returnUrl)
         {
+            ViewBag.returnUrl = returnUrl;
             return View();
         }
 
         [HttpPost]
-        public ActionResult Login(string username, string password)
+        public ActionResult Login(string username, string password, string returnUrl)
         {
             byte[] password1 = System.Text.Encoding.UTF8.GetBytes(password);
             byte[] hash = new System.Security.Cryptography.SHA256Managed().ComputeHash(password1);
@@ -110,7 +111,10 @@ namespace TravelCat.Controllers
 
                 HttpContext.GetOwinContext().Authentication.SignIn(
                    new AuthenticationProperties { IsPersistent = false }, ident);
-                return RedirectToAction("test"); // auth succeed 
+
+
+
+                return RedirectToAction("RedirectPage", new { url = returnUrl }); // auth succeed 
             }
 
             ViewBag.LoginErr = "帳號或密碼錯誤";
@@ -122,18 +126,37 @@ namespace TravelCat.Controllers
             var authManager = ctx.Authentication;
             //Response.Cookies["memID"].Expires = DateTime.Now.AddDays(-1);
             Session.Clear();
-
             authManager.SignOut("ApplicationCookie");
-            return RedirectToAction("Index", "Home");
+            return Redirect("Index");
         }
+        //登入導頁
         [Authorize]
-        public ActionResult test()
+        public ActionResult RedirectPage(string url)
         {
             string user = User.Identity.GetUserName();
             var member = db.member.Where(m => m.member_account == user).FirstOrDefault();
-            Session["memberID"] = member.member_id.ToString();
-            ViewBag.Data = DateTime.Now.ToString();
-            return View();
+
+            if (User.IsInRole("Confirmed"))
+            {
+
+                Session["memberID"] = member.member_id.ToString();
+                return Redirect(url); 
+            }
+            else if (User.IsInRole("UnConfirmed"))
+            {
+                HttpContext.Response.Write("<script type='text/javascript'>alert('請去驗證信箱'); location.href = '"+ url + "';</script>");
+                return new EmptyResult();
+            }
+            else
+            {
+                var ctx = Request.GetOwinContext();
+                var authManager = ctx.Authentication;
+                Session.Clear();
+                authManager.SignOut("ApplicationCookie");
+                Response.Write("<script type='text/javascript'>alert('您已被停權'); </script>");
+                return RedirectToAction("Index", "Home");
+            }
+
         }
 
         //忘記密碼

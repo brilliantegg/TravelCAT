@@ -18,38 +18,41 @@
 <div class="jumbotron jumbotron-fluid text-catcolor">
 
 </div>
-<div class="user_profile_header ">
-    <div class="d-flex row justify-content-between">
-        <div class="profile_avatar d-flex row">
+<div class="user_profile_header container">
+
+        <div class="profile_avatar d-flex row ">
             @if (@Model.member_profile.profile_photo != null)
             {
-                <img src="~/images/member/@Model.member_profile.profile_photo" alt="...">
+                <img src="~/images/member/@Model.member_profile.profile_photo" alt="..." onError="this.onerror=null;this.src='/images/member/avatar.png';">
             }
             else
             {
                 <img src="~/images/member/avatar.png" alt="...">
             }
+            
+        <div class="member_header">
+            <div class="personal_info ">
+                <h2 class="">@Model.member_profile.nickname</h2>
+                <p class="brief">@Model.member_profile.brief_intro</p>
 
-            <div class="member_header">
-                <div class="personal_info">
-                    <h2 class="">@Model.member_profile.nickname</h2>
-                    <p class="brief">@Model.member_profile.brief_intro</p>
+                <!--編輯會員 or 追蹤會員-->
+                @if (@memberId == @Model.member.member_id)
+                {
+                    <button type="button" class="btn  btn-outline-dark " data-toggle="modal" data-target="#exampleModalCenter">
+                        + 編輯資料
+                    </button>
+                }
+                else if (@Model.follow_list.Where(m => m.followed_id == @Model.member.member_id && m.member_id == @memberId).Count() > 0)
+                {
+                    <button class="follwered_btn btn btn-outline-dark " value="@Model.member.member_id">-追蹤</button>
+                }
+                else if (@memberId != null && @memberId != @Model.member.member_id)
+                {
+                    <button class="follwered_btn btn btn-outline-dark " value="@Model.member.member_id">+追蹤</button>
+                }
 
-                    <!--編輯會員 or 追蹤會員-->
-                    @if (@memberId == @Model.member.member_id)
-                    {
-                        <button type="button" class="btn  btn-outline-dark " data-toggle="modal" data-target="#exampleModalCenter">
-                            + 編輯資料
-                        </button>
-                    }
-                    @if (@memberId != null && @memberId != @Model.member.member_id)
-                    {
-                        <button class="follwered_btn btn btn-outline-dark" value="@Model.member.member_id">+ follow</button>
-                    }
-
-                </div>
             </div>
-            <div class="member_location">
+            <div class="member_location ">
 
                 <ul class="">
                     <li><span>location</span></li>
@@ -60,6 +63,8 @@
                 </ul>
 
             </div>
+
+
         </div>
 
     </div>
@@ -218,20 +223,43 @@
 
 
 <script>
-        $(".follwered_btn").click(function(){
+
+    $(".personal_info").click(function () {
+        if ($(".follwered_btn").text()=="-追蹤"){
+            Unfollowed()
+        } else if($(".follwered_btn").text()=="+追蹤"){
             getfollowed();
-        });
+        }
+
+     });
         function getfollowed() {
         $.post("@Url.Action("getfollowed","web_Member_Index")",
             {
                 member_id: "@memberId",
                 followed_id: $(".follwered_btn").val()
             })
-            .done(function () {
-                alert( `跟蹤成功` );
+            .done(function (response) {
+                alert(response);
+                $(".follwered_btn").text("-追蹤");
             })
             .fail(function() {
-                alert( `跟蹤失敗` );
+                alert( `追蹤失敗` );
             })
         }
+
+        function Unfollowed() {
+        $.post("@Url.Action("Unfollowed","web_Member_Index")",
+            {
+                member_id: "@memberId",
+                followed_id: $(".follwered_btn").val()
+            })
+            .done(function (response) {
+                alert(response);
+                $(".follwered_btn").text("+追蹤")
+            })
+            .fail(function() {
+                alert( `取消追蹤失敗` );
+            })
+        }
+    
 </script>

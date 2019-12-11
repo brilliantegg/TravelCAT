@@ -16,7 +16,7 @@ namespace TravelCat.Controllers
         private dbTravelCat db = new dbTravelCat();
         //新增收藏
         [HttpPost]
-        public ActionResult Postcollections_detail(string member_id, string tourism_id,int collection_type_id)
+        public ActionResult Postcollections_detail(string member_id, string tourism_id,int collection_type_id=1)
         {
             string id = tourism_id.Substring(0, 1);
             string controller;
@@ -42,7 +42,7 @@ namespace TravelCat.Controllers
             collect.member_id = member_id;
             collect.tourism_id = tourism_id;
             collect.privacy = true;
-            collect.collection_type_id = 1;
+            collect.collection_type_id = collection_type_id;
 
 
             if (ModelState.IsValid)

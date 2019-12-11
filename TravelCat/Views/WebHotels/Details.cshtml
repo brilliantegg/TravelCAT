@@ -68,15 +68,65 @@
             }
             else
             {
-                <form action="/web_comments/Postcollections_detail" method="post">
-                    @Html.AntiForgeryToken()
-                    <input type="hidden" name="member_id" value="@Session["memberID"]" />
-                    <input type="hidden" name="privacy" value="True" />
-                    <input type="hidden" name="tourism_id" value="@ViewBag.tourismId" />
-                    <input type="hidden" name="collection_type_id" value="1" />
-                    <input type="submit" name="add_to_bucket_list" class="add_to_bucket_list bucket_list btn btn-outline-info" value="加入收藏" />
-                </form>
+
+                <!-- 收藏Modal啟動 -->
+                <button type="button" class="bucket_list btn btn-outline-info" data-toggle="modal" data-target="#collectModal">
+                    加入收藏
+                </button>
+
             }
+
+            <!-- 收藏Modal -->
+            <div class="modal fade" id="collectModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">請選擇收藏分類</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form action="/web_comments/Postcollections_detail" method="post">
+                            <div class="modal-body">
+
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="member_id" value="@Session["memberID"]" />
+                                <input type="hidden" name="privacy" value="True" />
+                                <input type="hidden" name="tourism_id" value="@ViewBag.tourismId" />
+
+                                <div class="collection_type">
+                                    <ul>
+                                        <li>
+                                            <input type="radio" id="f-option" name="collection_type_id" value="1">
+                                            <label for="f-option">收藏</label>
+                                            <div class="check"></div>
+                                        </li>
+                                        <li>
+                                            <input type="radio" id="2-option" name="collection_type_id" value="2">
+                                            <label for="2-option">已經去過</label>
+                                            <div class="check"></div>
+                                        </li>
+                                        <li>
+                                            <input type="radio" id="3-option" name="collection_type_id" value="3">
+                                            <label for="3-option">想要去</label>
+                                            <div class="check"></div>
+                                        </li>
+                                        <li>
+                                            <input type="radio" id="4-option" name="collection_type_id" value="4">
+                                            <label for="4-option">非去不可</label>
+                                            <div class="check"></div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <input type="submit" name="add_to_bucket_list" class="add_to_bucket_list bucket_list btn btn-outline-info" value="加入收藏" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!--簡介-->
             <h2>
                 @Html.DisplayNameFor(model => model.hotel.hotel_intro)
             </h2>
@@ -576,23 +626,6 @@
 </script>
 <script>
 
-        $("#CheckBoxListFor").change(function () {
-        debugger;
-        var favorite = [];
-        $.each($("input[name='sbuIDs']:checked"), function () {
-            favorite.push($(this).val());
-        });
-
-        $.ajax({
-            type: "POST",
-            dataType: "json",
-            contentType: "application/json",
-            url: '@Url.Action("Getvalues", "Home")',
-
-            data: JSON.stringify({ values: favorite })
-        });
-
-    });
     $(`.filter_comment`).on("change", function () {
         var comment_rating_values = [];
         var travel_partner_values = [];

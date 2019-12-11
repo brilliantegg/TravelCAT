@@ -60,7 +60,17 @@
     height: 360px;
 }
 
-
+.member_header {
+    display: flex;
+    justify-content: flex-end;
+}
+.personal_info {
+    padding: 0 2rem
+}
+.member_location {
+    border-left: 1px solid gray;
+    padding: 0 2rem
+}
 .profile_avatar img {
     margin: 10px 50px;
     width: 200px;
@@ -92,14 +102,13 @@
     padding-right: 0;
     padding-left: 0;
 }
-.member_location{
-    margin:0 4rem;
-    padding : 0 2rem;
-    border-left:1px solid gray 
-}
+
 .card-text{
     font-weight:400
 }
 .card {
     margin: 10px
+}
+.tab-pane{
+    height:100%
 }

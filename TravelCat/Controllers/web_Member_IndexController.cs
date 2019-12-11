@@ -202,7 +202,7 @@ namespace TravelCat.Controllers
         [HttpPost]
         public string getfollowed(string member_id, string followed_id)
         {
-            string response = "done";
+            string response = "追蹤成功";
             follow_list follower = new follow_list();
             follower.follow_date = DateTime.Now;
             follower.member_id = member_id;
@@ -210,6 +210,19 @@ namespace TravelCat.Controllers
             db.follow_list.Add(follower);
             db.SaveChanges();
             return response;
+        }
+        [HttpPost]
+        public string Unfollowed(string member_id, string followed_id)
+        {
+            string response = "取消追蹤";
+            follow_list follower = db.follow_list.Where(m=>m.member_id== member_id&& m.followed_id== followed_id).FirstOrDefault();
+            db.follow_list.Remove(follower);
+            db.SaveChanges();
+            return response;
+        }
+        public ActionResult Collections()
+        {
+            return View();
         }
     }
 }

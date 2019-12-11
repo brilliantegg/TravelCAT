@@ -2214,6 +2214,8 @@
     <Content Include="Views\WebHotels\Details.cshtml" />
     <Content Include="Views\WebRestaurants\Index.cshtml" />
     <Content Include="Views\WebRestaurants\Details.cshtml" />
+    <Content Include="Views\Shared\_footer.cshtml" />
+    <Content Include="Views\web_Member_Index\Collections.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
