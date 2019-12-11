@@ -78,6 +78,7 @@ namespace TravelCat.Controllers
                 }
                 if (!String.IsNullOrEmpty(comment_rating))
                 {
+                    ViewBag.rating = comment_rating;
                     string id;
                     double rating = int.Parse(comment_rating); //查詢條件轉型
                     for (int i = 0; i < model.activity.Count; i++)
@@ -105,7 +106,7 @@ namespace TravelCat.Controllers
                 if (!String.IsNullOrEmpty(comment_stay_total))
                 {
                     string id;
-
+                    ViewBag.stay = comment_stay_total;
                     for (int i = 0; i < model.activity.Count; i++)
                     {
                         id = model.activity[i].activity_id;
@@ -155,6 +156,7 @@ namespace TravelCat.Controllers
                 }
                 if (travel_partner != null)
                 {
+                    ViewBag.partner = travel_partner;
                     string id;
                     for (int i = 0; i < model.activity.Count; i++)
                     {
@@ -182,6 +184,7 @@ namespace TravelCat.Controllers
                 //搜尋月份
                 if (travel_month != null)
                 {
+                    ViewBag.month = travel_month;
                     string id;
                     string[] month = new string[3];
                     switch (travel_month)
