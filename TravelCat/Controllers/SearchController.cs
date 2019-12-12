@@ -151,16 +151,16 @@ namespace TravelCat.Controllers
                                    where b.tourism_id == null
                                    select new result_rating { id = a.spot_id, rating = b.tourism_id }).ToList();
 
-                List<result_rating> result = rating_result.Union(null_result).OrderByDescending(s => s.rating).ToList();
+                //List<result_rating> result = rating_result.Union(null_result).OrderByDescending(s => s.rating).ToList();
 
-                model.result_ratings = model.activity.Join(result, a => a.activity_id, b => b.id,
-                                                                        (a, b) => new result_rating
-                                                                        {
-                                                                            id = a.activity_id,
-                                                                            title = a.activity_title,
-                                                                            intro = a.activity_intro,
-                                                                            rating = b.rating
-                                                                        }).OrderBy(r => r.rating).ToList();
+                //model.result_ratings = model.activity.Join(result, a => a.activity_id, b => b.id,
+                //                                                        (a, b) => new result_rating
+                //                                                        {
+                //                                                            id = a.activity_id,
+                //                                                            title = a.activity_title,
+                //                                                            intro = a.activity_intro,
+                //                                                            rating = b.rating
+                //                                                        }).OrderBy(r => r.rating).ToList();
 
                 return View(model);
             }
