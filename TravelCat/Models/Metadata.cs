@@ -38,6 +38,9 @@ namespace TravelCat.Models
     public partial class member { }
     public class Metadata_member
     {
+        [DisplayName("會員編號")]
+        public string member_id { get; set; }
+
         [DisplayName("帳號")]
         [Required(ErrorMessage = "此欄位為必填")]
         [StringLength(15, ErrorMessage = "最多15個字")]

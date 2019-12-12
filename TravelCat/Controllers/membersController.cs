@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using TravelCat.Models;
+using TravelCat.ViewModels;
 
 namespace TravelCat.Controllers
 {
@@ -20,7 +21,15 @@ namespace TravelCat.Controllers
             return View(db.member.ToList());
         }
 
-        
+        [ChildActionOnly]
+        public PartialViewResult _ProblemMember(int id)
+        {
+            var issue = db.issue.Where(m => m.issue_id == id).ToList();
+
+            ViewBag.issueId = id;
+          
+            return PartialView(issue);
+        }              
 
         // GET: members1/Edit/5
         public ActionResult Edit(string id)

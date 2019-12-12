@@ -2048,6 +2048,7 @@
     <Compile Include="Models\issue_type.cs">
       <DependentUpon>TravelCat.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\LoginCheck.cs" />
     <Compile Include="Models\member.cs">
       <DependentUpon>TravelCat.tt</DependentUpon>
     </Compile>
@@ -2095,6 +2096,7 @@
     <Compile Include="ViewModels\CommentsViewModel.cs" />
     <Compile Include="ViewModels\destinationsViewModel.cs" />
     <Compile Include="ViewModels\FollowerViewModels .cs" />
+    <Compile Include="ViewModels\issuemember.cs" />
     <Compile Include="ViewModels\MemberIndexViewModels.cs" />
     <Compile Include="ViewModels\MemberViewModels.cs" />
     <Compile Include="ViewModels\SearchViewModel.cs" />
@@ -2209,6 +2211,10 @@
     <Content Include="Views\web_activities\List.cshtml" />
     <Content Include="Views\WebSpots\Index.cshtml" />
     <Content Include="Views\WebSpots\Details.cshtml" />
+    <Content Include="Views\Loginadmin\ForgetPwd.cshtml" />
+    <Content Include="Views\Loginadmin\ResetPwd.cshtml" />
+    <Content Include="Views\Loginadmin\ForgetView.cshtml" />
+    <Content Include="Views\members\_ProblemMember.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

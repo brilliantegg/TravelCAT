@@ -1,8 +1,7 @@
-﻿@model TravelCat.Models.member
+﻿@model TravelCat.Models.admin
 
 @{
-    ViewBag.Title = "重設密碼";
-    Layout = "~/Views/Shared/_Layout 1.cshtml";
+    ViewBag.Title = "ResetPwd";
 }
 
 <div class="container">
@@ -14,7 +13,7 @@
             <h2>重設密碼</h2>
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            @Html.HiddenFor(model => model.member_id)
+            @Html.HiddenFor(model => model.admin_id)
 
             <div class="form-group">
                 <label class="col-form-label">新密碼</label>
@@ -42,6 +41,7 @@
     }
 
 </div>
+
 @section scripts{
     <script>
         $('#submit').click(function () {
@@ -59,9 +59,10 @@
                 alert("兩次輸入的密碼不一致！");
                 return false;
             }
-            else
+            else {
                 alert("密碼更改成功，按下確定至登入頁面");
-            return true;
+                return true;
+            }
         });
 
         $('#show_password').click(function () {
