@@ -4,22 +4,28 @@
     ViewBag.Title = "test";
     Layout = "~/Views/Shared/web-Layout.cshtml";
 }
+    <link href="~/Content/web-Login.css" rel="stylesheet" />
 
     <div class="container">
-        <h2>@User.Identity.GetUserName()，您好!</h2>
-        <h1>@ViewBag.Data / @Session["memberID"]</h1>
+        <div class="main">
+            <div class="Login-box">
+                <div class="welcome">
+                    <h1 class="mb-4">@User.Identity.GetUserName()，您好!</h1>
+                    <h3 class="mb-4">@ViewBag.Data</h3>
 
-        @if (User.IsInRole("Confirmed"))
-        {
-            <p>現在將跳轉首頁</p>
-        }
-        else if (User.IsInRole("UnConfirmed"))
-        {
-            <p>請去驗證信箱</p>
-        }
-        else
-        {
-            <p>您已被停權</p>
-        }
-
+                    @if (User.IsInRole("Confirmed"))
+                    {
+                <a href="/Home/index">點擊前往首頁</a>
+                    }
+                    else if (User.IsInRole("UnConfirmed"))
+                    {
+                        <p>請去驗證信箱</p>
+                    }
+                    else
+                    {
+                        <p>您已被停權</p>
+                    }
+                </div>
+            </div>
+        </div>
     </div>
