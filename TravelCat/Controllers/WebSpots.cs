@@ -44,7 +44,9 @@ namespace TravelCat.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.tourismId = id;    
+            List<hotel> hotel = db.hotel.Where(m => m.district == model.spot.district).OrderByDescending(m => m.hotel_id).Take(3).ToList();
+            ViewBag.tourismId = id;
+            ViewBag.hotel = hotel;
             return View(model);
         }
 

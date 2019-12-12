@@ -209,39 +209,26 @@
         </div>
     </section>
     <section>
+        <h2 class="text-center">豪華住宿</h2>
         <div class="row col-10 offset-1">
-            <div class="col-4">
-                <div class="card">
-                    <div class="card__image card__image--record"></div>
-                    <div class="card__content">
-                        <div class="card__title">Flex Shrink</div>
-                        <p class="card__text">This defines the ability for a flex item to shrink if necessary. Negative numbers are invalid.</p>
-                        <button class="btn btn--block card__btn">Button</button>
+            @if(@ViewBag.hotel != null)
+            {
+                foreach (var item in @ViewBag.hotel)
+                {
+                    <div class="col-4">
+                        <div class="card">
+                            <div class="card__image card__image--record"></div>
+                            <div class="card__content">
+                                <div class="card__title">@item.hotel_title</div>
+                                <p class="card__text">@item.hotel_intro</p>
+                                <button class="btn btn--block card__btn">前往頁面</button>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-4">
-                <div class="card">
-                    <div class="card__image card__image--record"></div>
-                    <div class="card__content">
-                        <div class="card__title">Flex Shrink</div>
-                        <p class="card__text">This defines the ability for a flex item to shrink if necessary. Negative numbers are invalid.</p>
-                        <button class="btn btn--block card__btn">Button</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-4">
-                <div class="card">
-                    <div class="card__image card__image--record"></div>
-                    <div class="card__content">
-                        <div class="card__title">Flex Shrink</div>
-                        <p class="card__text">This defines the ability for a flex item to shrink if necessary. Negative numbers are invalid.</p>
-                        <button class="btn btn--block card__btn">Button</button>
-                    </div>
-                </div>
-            </div>
+                }
+            }
         </div>
-    </section>
+        </section>
 
 
     <!--篩選評論-->

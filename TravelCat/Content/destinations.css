@@ -527,4 +527,9 @@ img {
     font-size: 0.875rem;
     line-height: 1.5;
     margin-bottom: 1.25rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
 }
