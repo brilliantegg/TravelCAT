@@ -4,51 +4,57 @@
     ViewBag.Title = "ForgetPwd";
     Layout = "~/Views/Shared/web-Layout.cshtml";
 }
-
+<link href="~/Content/web-Login.css" rel="stylesheet" />
 
 <div class="container">
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
+    <div class="main">
+        <div class="Login-box">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
 
-        <div class="form-horizontal">
-            <h3>重設密碼</h3>
-            <p>請填入申辦時的帳號跟信箱</p>
-            <hr />
-            
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <h4>重設密碼</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.member_account, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    <input id="account" name="account" type="text" class="form-control" required="required"/>
-                    @Html.ValidationMessageFor(model => model.member_account, "", new { @class = "text-danger" })
+                <div class="form-inline">
+                    @Html.LabelFor(model => model.member_account, htmlAttributes: new { @class = "control-label" })
+                        <input id="account" name="account" type="text" class="form-control ml-2" />
+                        @Html.ValidationMessageFor(model => model.member_account, "", new { @class = "text-danger" })
                 </div>
-            </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.member_profile.email, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    <input id="email" name="email" type="text" class="form-control" required="required"/>
-                    @Html.ValidationMessageFor(model => model.member_profile.email, "", new { @class = "text-danger" })
+                <div class="form-inline mt-3">
+                    @Html.LabelFor(model => model.member_profile.email, htmlAttributes: new { @class = "control-label " })
+                        <input id="email" name="email" type="text" class="form-control ml-2" />
+                        @Html.ValidationMessageFor(model => model.member_profile.email, "", new { @class = "text-danger" })
                 </div>
-            </div>
-            <p class="text-danger">@ViewBag.PwdErr</p>
+                <span class="text-danger">@ViewBag.PwdErr</span>
 
-            <div class="form-group mt-2">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" id="submit" value="送出" class="btn btn-primary" />
-                </div>
-            </div>
+
+
+                 <input type="submit" id="submit" value="送出" class="btn btn-info mt-3 mr-3" />
+                 @Html.ActionLink("返回登入頁", "Login", "Home",new { @class="btn btn-info mt-3 ml-3"})
+            }
+
+
         </div>
-    }
-
-    <div>
-        @Html.ActionLink("返回登入頁", "Login", "Home")
     </div>
-
 </div>
 <script src="~/Scripts/jquery-3.4.1.min.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script>
+    $('#submit').click(function () {
+        if ($('#account').val() == "") {
+            alert("請填入申辦的帳號");
+            return false;
+        }
+        else if ($('#email').val() == "") {
+            alert("請填入申辦的信箱");
+            return false;
+        }
+        else
+            return true;
+    });
+</script>

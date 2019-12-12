@@ -4,37 +4,65 @@
     ViewBag.Title = "Editemail";
     Layout = "~/Views/Shared/web-Layout.cshtml";
 }
-<div class="container">
-    <h2>更改信箱</h2>
-
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-
-        <div class="form-horizontal">
-            <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            @Html.HiddenFor(model => model.member_id)
-
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.email, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    <input id="newemail" type="text" value="@Model.email" name="newemail" class="form-control" />
-                    @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input id="submit" type="submit" value="修改" class="btn btn-primary" />
-                </div>
-            </div>
-        </div>
+<style>
+    body {
+        background-image: url('../../images/photo-1452423668729-43a98052d3ee.jpg');
+        background-size: cover;
     }
 
-    <div>
-        @Html.ActionLink("回到個人頁", "Index", new { id = Model.member_id })
+    .form_panel {
+        background: hsla(0,0%,100%,.3);
+        color: #000;
+    }
+     .darkolivegreen-cat {
+        background-color:darkolivegreen;/*深綠*/
+       color:aliceblue; /*白色*/
+       
+    }
+        .darkolivegreen-cat:hover {
+            background-color:#227700;/*墨綠*/
+            color: aliceblue;
+        }
+</style>
+<div class="container">
+    <div class="form_panel ">
+        <h2 class="pt-4">更改信箱</h2>
+        
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <div class="container">
+                    <div class="row">
+                        <div class="offset-2 col-md-8">
+
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            @Html.HiddenFor(model => model.member_id)
+
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.email, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    <input id="newemail" type="text" value="@Model.email" name="newemail" class="form-control" />
+                                    @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10  row justify-content-end">
+                                    <input id="submit" type="submit" value="修改" class="btn darkolivegreen-cat btn-lg" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div class="font-weight-bold  pb-2 pl-2">
+            <h3> @Html.ActionLink("<-回到個人頁", "Index", new { id = Model.member_id })</h3>
+        </div>
     </div>
 </div>
 <script src="~/Scripts/jquery-3.4.1.min.js"></script>
