@@ -18,38 +18,41 @@
 <div class="jumbotron jumbotron-fluid text-catcolor">
 
 </div>
-<div class="user_profile_header col-8 offset-2">
-    <div class="d-flex row justify-content-between">
-        <div class="profile_avatar d-flex row">
+<div class="user_profile_header container">
+
+        <div class="profile_avatar d-flex row ">
             @if (@Model.member_profile.profile_photo != null)
             {
-                <img src="~/images/member/@Model.member_profile.profile_photo" alt="...">
+                <img src="~/images/member/@Model.member_profile.profile_photo" alt="..." onError="this.onerror=null;this.src='/images/member/avatar.png';">
             }
             else
             {
                 <img src="~/images/member/avatar.png" alt="...">
             }
+            
+        <div class="member_header">
+            <div class="personal_info ">
+                <h2 class="">@Model.member_profile.nickname</h2>
+                <p class="brief">@Model.member_profile.brief_intro</p>
 
-            <div class="member_header">
-                <div class="personal_info">
-                    <h2 class="">@Model.member_profile.nickname</h2>
-                    <p class="brief">@Model.member_profile.brief_intro</p>
+                <!--編輯會員 or 追蹤會員-->
+                @if (@memberId == @Model.member.member_id)
+                {
+                    <button type="button" class="btn  btn-outline-dark " data-toggle="modal" data-target="#exampleModalCenter">
+                        + 編輯資料
+                    </button>
+                }
+                else if (@Model.follow_list.Where(m => m.followed_id == @Model.member.member_id && m.member_id == @memberId).Count() > 0)
+                {
+                    <button class="follwered_btn btn btn-outline-dark " value="@Model.member.member_id">-追蹤</button>
+                }
+                else if (@memberId != null && @memberId != @Model.member.member_id)
+                {
+                    <button class="follwered_btn btn btn-outline-dark " value="@Model.member.member_id">+追蹤</button>
+                }
 
-                    <!--編輯會員 or 追蹤會員-->
-                    @if (@memberId == @Model.member.member_id)
-                    {
-                        <button type="button" class="btn  btn-outline-dark " data-toggle="modal" data-target="#exampleModalCenter">
-                            + 編輯資料
-                        </button>
-                    }
-                    @if (@memberId != null && @memberId != @Model.member.member_id)
-                    {
-                        <button class="follwered_btn btn btn-outline-dark" value="@Model.member.member_id">+ follow</button>
-                    }
-
-                </div>
             </div>
-            <div class="member_location">
+            <div class="member_location ">
 
                 <ul class="">
                     <li><span>location</span></li>
@@ -60,6 +63,8 @@
                 </ul>
 
             </div>
+
+
         </div>
 
     </div>
@@ -92,12 +97,19 @@
     </div>
 
     <div class="row ">
-        <div class="intro col-3 px-0">
+        <div class="member_intro col-3 px-0">
             <div class="text-left ">
                 <div style="height:auto">
                     <div>
-                        <ul class="listyle">
-                            <li>徽章牆</li>
+                        <ul class="">
+
+
+                            <li> 評論數 @Model.comment.Where(m => m.member_id == @Model.member.member_id).Count()</li>
+                            <li> 追蹤者 @Model.follow_list.Where(m => m.followed_id == @Model.member.member_id).Count()</li>
+                            <li> 關注中 @Model.follow_list.Where(m => m.member_id == @Model.member.member_id).Count() </li>
+                            <li> 加入時間 @Model.member_profile.create_time.ToString("yyyy MM dd")</li>
+
+
                             <li>
                                 分數 @{
                                     var comeent_num = Model.comment.Where(m => m.member_id == @Model.member.member_id).Count();
@@ -106,33 +118,37 @@
                                 }
                                 @score
                             </li>
-                            <li>
-                                @if (score > 10)
-                                {
-                                    <img src="http://localhost:54678/images/badges/9.png" />
-                                }
-                                else if (score > 20)
-                                {
-                                    <img src="http://localhost:54678/images/badges/1000_invites.png" />
-                                }
-                                else if (score > 30)
-                                {
-                                    <img src="http://localhost:54678/images/badges/100000_comments.png" />
-                                }
-                                else if (score > 40)
-                                {
-                                    <img src="http://localhost:54678/images/badges/50000_fans.png" />
-                                }
-                            </li>
+
                         </ul>
                     </div>
-                    <div>
-                        <ul class="listyle">
-                            <li>評論數 @Model.comment.Where(m => m.member_id == @Model.member.member_id).Count()</li>
-                            <li>追蹤者 @Model.follow_list.Where(m => m.followed_id == @Model.member.member_id).Count()</li>
-                            <li>關注中 @Model.follow_list.Where(m => m.member_id == @Model.member.member_id).Count() </li>
-                            <li>加入時間 @Model.member_profile.create_time.ToString("yyyy MM dd")</li>
-                        </ul>
+                    <div class="badge">
+                        @{
+                            string badge = "";
+                            if (score > 1000)
+                            {
+
+                                <img src='http://localhost:54678/images/badges/9.png' />
+                                <img src='http://localhost:54678/images/badges/1000_invites.png' />
+                                <img src='http://localhost:54678/images/badges/100000_comments.png' />
+                                <img src='http://localhost:54678/images/badges/50000_fans.png' />
+                            }
+                            else if (score > 500)
+                            {
+                                <img src='http://localhost:54678/images/badges/9.png' />
+                                <img src='http://localhost:54678/images/badges/1000_invites.png' />
+                                <img src='http://localhost:54678/images/badges/100000_comments.png' />
+                            }
+                            else if (score > 400)
+                            {
+                                <img src='http://localhost:54678/images/badges/9.png' />
+                                <img src='http://localhost:54678/images/badges/1000_invites.png' />
+                            }
+                            else if (score > 300)
+                            {
+                                <img src='http://localhost:54678/images/badges/9.png' />
+                            }
+                        }
+                        @badge
                     </div>
                 </div>
             </div>
@@ -154,7 +170,7 @@
             <div class="tab-content" id="pills-tabContent">
                 <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">@Html.Action("_CommentsFromMember", "CommentsWeb", new { memId = @Model.member.member_id }) </div>
 
-                <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">@Html.Action("_CommentsForFollwers", "CommentsWeb", new { memId = @Model.member.member_id  })</div>
+                <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">@Html.Action("_CommentsForFollwers", "CommentsWeb", new { memId = @Model.member.member_id })</div>
 
                 <!--我的收藏-->
                 <div class=" tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
@@ -162,15 +178,34 @@
                         @foreach (var item in Model.collections_detail)
                         {
 
+                            <div class="col-4">
+                                <div class=" card  collection_card text-center">
+                                    <img class="card-img card-img-top img-fluid" src="~/images/activity/taipei.jpg" alt="Card image cap">
+                                    <div class="card-img-overlay">
+                                        <p class="card-text">
+                                            @{if (@Model.activity.Where(m => m.activity_id == @item.tourism_id).Count() > 0)
+                                                {
+                                                    <a class="card-link  text-white" href="#">@Model.activity.Where(m => m.activity_id == @item.tourism_id).FirstOrDefault().activity_title</a>
+                                                }
+                                                else if (@Model.spot.Where(m => m.spot_id == @item.tourism_id).Count() > 0)
+                                                {
+                                                    <a class="card-link  text-white" href="#">@Model.spot.Where(m => m.spot_id == @item.tourism_id).FirstOrDefault().spot_title</a>
+                                                }
+                                                else if (@Model.restaurant.Where(m => m.restaurant_id == @item.tourism_id).Count() > 0)
+                                                {
+                                                    <a class="card-link  text-white" href="#">@Model.restaurant.Where(m => m.restaurant_id == @item.tourism_id).FirstOrDefault().restaurant_title</a>
+                                                }
+                                                else if (@Model.hotel.Where(m => m.hotel_id == @item.tourism_id).Count() > 0)
+                                                {
+                                                    <a class="card-link  text-white" href="#">@Model.hotel.Where(m => m.hotel_id == @item.tourism_id).FirstOrDefault().hotel_title</a>
+                                                }
 
-                            <div class=" card col-4 collection_card text-center">
-                                <img class="card-img card-img-top img-fluid" src="~/images/activity/taipei.jpg" alt="Card image cap">
-                                <div class="card-img-overlay">
-                                    <p class="card-text">
-                                        <a class="card-link  text-white" href="#">@Model.activity.Where(m => m.activity_id == @item.tourism_id).FirstOrDefault().activity_title</a>
-                                    </p>
+                                            }
+
+                                        </p>
+                                    </div>
+
                                 </div>
-
                             </div>
                         }
                     </div>
@@ -188,20 +223,43 @@
 
 
 <script>
-        $(".follwered_btn").click(function(){
+
+    $(".personal_info").click(function () {
+        if ($(".follwered_btn").text()=="-追蹤"){
+            Unfollowed()
+        } else if($(".follwered_btn").text()=="+追蹤"){
             getfollowed();
-        });
+        }
+
+     });
         function getfollowed() {
         $.post("@Url.Action("getfollowed","web_Member_Index")",
             {
                 member_id: "@memberId",
                 followed_id: $(".follwered_btn").val()
             })
-            .done(function () {
-                alert( `跟蹤成功` );
+            .done(function (response) {
+                alert(response);
+                $(".follwered_btn").text("-追蹤");
             })
             .fail(function() {
-                alert( `跟蹤失敗` );
+                alert( `追蹤失敗` );
             })
         }
+
+        function Unfollowed() {
+        $.post("@Url.Action("Unfollowed","web_Member_Index")",
+            {
+                member_id: "@memberId",
+                followed_id: $(".follwered_btn").val()
+            })
+            .done(function (response) {
+                alert(response);
+                $(".follwered_btn").text("+追蹤")
+            })
+            .fail(function() {
+                alert( `取消追蹤失敗` );
+            })
+        }
+    
 </script>

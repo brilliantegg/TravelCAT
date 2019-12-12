@@ -20,18 +20,21 @@
     <div class="carousel-inner">
         <div class="carousel-item active">
             @*<div class="embed-responsive embed-responsive-16by9">
-                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/AhAJ6J01R7w" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/AhAJ6J01R7w" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-            </div>*@
+                </div>*@
 
-                <img src="~/images/buildings-1846728_1920.jpg" class=" w-100" title="台北101">
-                <div class="carousel-caption">
-                </div>
+            <img src="~/images/buildings-1846728_1920.jpg" class=" w-100" title="台北101">
+            <div class="carousel-caption">
+                台北101
+            </div>
 
         </div>
         <div class="carousel-item">
             <img src="~/images/taiwan-2696156_1920.jpg" class=" w-100" title="阿里山雲海">
-
+            <div class="carousel-caption">
+                阿里山雲海
+            </div>
         </div>
         <div class="carousel-item">
             <img src="~/images/taiwan-667563_1920.jpg" class=" w-100" title="橘貓so cute!!!!!!">
@@ -86,7 +89,7 @@
                     @for (int i = 0; i < 8; i++)
                     {
                         <div class="card ">
-                            <img src="~/images/index/@(i.ToString()+".jpg")" class="card-img-top " alt="..." >
+                            <img src="~/images/index/@(i.ToString()+".jpg")" class="card-img-top " alt="...">
                             <div class="card-body">
                                 <h5 class="card-title">@Model.spot[i].spot_title</h5>
                                 <p class="card-text">@Model.spot[i].spot_intro</p>
@@ -161,6 +164,7 @@
         <p class="txt">
             放假了<br>
             <span class="mt-5">我好想出去玩！</span><br>
+        </p>
     </div>
 </div>
 
@@ -268,13 +272,29 @@
 
 </div>
 
+<footer class="footer">
+
+    <ul>
+        <li>
+            <strong>行動商務第 2 組專題</strong>
+            <ul>
+                <li><a href="要連結的 URL 放這裡" target="連結目標" title="連結替代文字">要顯示的連結文字或圖片放這裡</a></li>
+
+            </ul>
+            <ul class="right">
+                <li>Zipcode/City</li>
+
+            </ul>
+        </li>
+    </ul>
+</footer>
 
 <script>
     ////停止carousel
     //$('.carousel').carousel({
     //    interval: false
     //})
-    
+
 
 
 
