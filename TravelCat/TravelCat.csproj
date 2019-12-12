@@ -2133,7 +2133,6 @@
     <Compile Include="ViewModels\CommentsViewModel.cs" />
     <Compile Include="ViewModels\destinationsViewModel.cs" />
     <Compile Include="ViewModels\FollowerViewModels .cs" />
-    <Compile Include="ViewModels\issuemember.cs" />
     <Compile Include="ViewModels\MemberIndexViewModels.cs" />
     <Compile Include="ViewModels\MemberViewModels.cs" />
     <Compile Include="ViewModels\SearchViewModel.cs" />

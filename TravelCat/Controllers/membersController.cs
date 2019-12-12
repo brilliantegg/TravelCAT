@@ -19,6 +19,7 @@ namespace TravelCat.Controllers
         public ActionResult Index()
         {
             return View(db.member.ToList());
+
         }
 
         [ChildActionOnly]
