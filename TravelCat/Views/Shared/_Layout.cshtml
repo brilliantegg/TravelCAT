@@ -20,8 +20,7 @@
                 <i class="far fa-user"></i>
                 管理員編號
             </a>
-            <div class="dropdown-menu dropdown-menu-right bg-dark border border-secondary"
-                 aria-labelledby="navbarDropdownMenuLink">
+            <div class="dropdown-menu dropdown-menu-right bg-dark border border-secondary" aria-labelledby="navbarDropdownMenuLink">
                 @Html.ActionLink("設定", "Index", "Admin", null, new { @class = "dropdown-item bg-dark text-light mb-1" })
                 @Html.ActionLink("登出", "Logout", "Loginadmin", null, new { @class = "dropdown-item bg-dark text-light mb-1" })
             </div>
@@ -52,10 +51,11 @@
 
 
 
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
     <script src="~/Scripts/modernizr-2.8.3.js"></script>
-    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
-
-    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/bootstrap.bundle.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    @RenderSection("scripts", required: false)
 </body>
 </html>
 
