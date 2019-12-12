@@ -3,10 +3,12 @@
 @{
     ViewBag.Title = "Login";
     Layout = "~/Views/Shared/web-Layout.cshtml";
+    
 }
 <div class="container" style="min-height: calc(100vh - 316px)">
     <h2>會員登入</h2>
     <form id="login" method="post" action="@Url.Action("Login")">
+        <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl"/>
         <div class="form-inline mt-3">
             @Html.LabelFor(model => model.member_account)
             <input id="username" name="username" type="text" required="required" class="form-control ml-2" />

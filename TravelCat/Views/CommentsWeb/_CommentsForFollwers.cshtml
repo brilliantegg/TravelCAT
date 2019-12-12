@@ -30,7 +30,14 @@
                     <input id="comment_id" type="hidden" value=@item.comment_id />
                     <div class="member_detail ">
                         <div class="d-flex">
-                            <img class="member_avatar" src="~/images/member/@item.member.member_profile.profile_photo" alt="...">
+                            @if (@item.member.member_profile.profile_photo != null)
+                            {
+                                <img class="member_avatar" src="~/images/member/@item.member.member_profile.profile_photo" alt="X_X" onerror="this.src='~/images/member/avatar.png';">
+                            }else
+                            {
+                            <img class="member_avatar" src="~/images/member/avatar.png" alt="X_X">
+                            }
+
                             <div class="d-flex">
                                 <h5 class="member_name">@item.member.member_profile.nickname</h5>
                             </div>
@@ -49,7 +56,9 @@
                         </div>
                     </div>
                     <div class="comment_photo">
-                        <img src="/images/comment/@item.comment_photo" class="comment_photo w-100" />
+                            <img src="/images/comment/@item.comment_photo" class="comment_photo w-100" alt="X_X" onerror="this.src='/images/comment/0_2019129下午090757.jpg';"/>
+
+
                     </div>
                     <div class="commemt_content">
                         <h2 class="comment_title">@item.comment_title</h2>

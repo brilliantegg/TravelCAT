@@ -46,196 +46,307 @@ namespace TravelCat.Controllers
             //return View(model.activity.OrderBy(m => m.activity_id).ToPagedList(page, pageSize));
         }
         [ChildActionOnly]
-        public ActionResult _Activity(string q = null, int page = 1, string Sortby = "htol", string city = null, string comment_rating = null, string[] travel_partner = null, string travel_month = null, string comment_stay_total = null)
+        public ActionResult _Activity(string q = null, int page = 1, string Sortby = null, string city = null, string comment_rating = null, string[] travel_partner = null, string travel_month = null, string comment_stay_total = null)
         {
             ViewBag.q = q;
             Session["pg"] = page;
             SearchViewModel model = new SearchViewModel
             {
-                activity = db.activity.OrderBy(s => s.activity_title).ToList()
+                activity = db.activity.OrderBy(s => s.activity_title).ToList(),
+                result_ratings = null
             };
-
             if (!String.IsNullOrEmpty(q))
             {
                 model.activity = db.activity.Where(s => s.activity_intro.Contains(q) || s.activity_title.Contains(q) || s.city.Contains(q) || s.district.Contains(q)).ToList();
-                if (!String.IsNullOrEmpty(city))
-                {
-                    ViewBag.city = city;
-                    //model.activity = model.activity.Where(s => s.city.Contains(city) || s.district.Contains(city)|| s.activity_intro.Contains(city) || s.activity_title.Contains(city)).ToList();
-                    for (int i = 0; i < model.activity.Count; i++)
-                    {
-                        if (String.IsNullOrEmpty(model.activity[i].city) && String.IsNullOrEmpty(model.activity[i].district))
-                        {
-                            model.activity.RemoveAt(i);
-                            i -= 1;
-                        }
-                        else if (!model.activity[i].city.Contains(city) && !model.activity[i].district.Contains(city))
-                        {
-                            model.activity.RemoveAt(i);
-                            i -= 1;
-                        }
-                    }
-                }
-                if (!String.IsNullOrEmpty(comment_rating))
-                {
-                    string id;
-                    double rating = int.Parse(comment_rating); //查詢條件轉型
-                    for (int i = 0; i < model.activity.Count; i++)
-                    {
-                        id = model.activity[i].activity_id;
-                        int cmt_count = db.comment.Where(s => s.tourism_id == id).Count();
-                        if (cmt_count == 0)
-                        {
-                            model.activity.RemoveAt(i);
-                            i = i - 1;
-                        }
-                        else
-                        {
-                            //找每個活動的平均評分
-                            double rating_avg = db.comment.Where(s => s.tourism_id == id).Average(r => r.comment_rating);
-                            if (rating_avg < rating)
-                            {
-                                model.activity.RemoveAt(i);     //移除評分過小者
-                                i = i - 1;
-                            }
-                        }
-                    }
-                }
-                //找平均時間
-                if (!String.IsNullOrEmpty(comment_stay_total))
-                {
-                    string id;
-
-                    for (int i = 0; i < model.activity.Count; i++)
-                    {
-                        id = model.activity[i].activity_id;
-                        int cmt_count = db.comment.Where(s => s.tourism_id == id).Count();
-                        if (cmt_count == 0)
-                        {
-                            model.activity.RemoveAt(i);
-                            i = i - 1;
-                        }
-                        else
-                        {
-                            //找每個活動的平均評分
-                            double time_avg = db.comment.Where(s => s.tourism_id == id).Average(r => r.comment_rating);
-                            switch (comment_stay_total)
-                            {
-                                case "under1":
-                                    if (time_avg > 1)
-                                    {
-                                        model.activity.RemoveAt(i);
-                                        i = i - 1;
-                                    }
-                                    break;
-                                case "1to2":
-                                    if (time_avg < 1 || time_avg > 2)
-                                    {
-                                        model.activity.RemoveAt(i);
-                                        i = i - 1;
-                                    }
-                                    break;
-                                case "2to3":
-                                    if (time_avg < 2 || time_avg > 3)
-                                    {
-                                        model.activity.RemoveAt(i);
-                                        i = i - 1;
-                                    }
-                                    break;
-                                case "above3":
-                                    if (time_avg < 3)
-                                    {
-                                        model.activity.RemoveAt(i);
-                                        i = i - 1;
-                                    }
-                                    break;
-                            }
-                        }
-                    }
-                }
-                if (travel_partner != null)
-                {
-                    string id;
-                    for (int i = 0; i < model.activity.Count; i++)
-                    {
-                        bool activity_exist = false;
-                        id = model.activity[i].activity_id;
-                        model.comment = db.comment.Where(s => s.tourism_id == id).ToList();
-                        for (int j = 0; j < model.comment.Count; j++)   //找對於單個活動的所有評論內是否有含搜尋選項
-                        {
-                            for (int x = 0; x < travel_partner.Length; x++)
-                            {
-                                int result = model.comment.Where(s => s.travel_partner == travel_partner[x]).Count();
-                                if (result != 0)
-                                {
-                                    activity_exist = true;  //只要有一項就代表活動符合資格
-                                }
-                            }
-                        }
-                        if (!activity_exist)
-                        {
-                            model.activity.RemoveAt(i);     //不符合資格的移除
-                            i = i - 1;
-                        }
-                    }
-                }
-                //搜尋月份
-                if (travel_month != null)
-                {
-                    string id;
-                    string[] month = new string[3];
-                    switch (travel_month)
-                    {
-                        case "3to5":
-                            month[0] = "3";
-                            month[1] = "4";
-                            month[2] = "5";
-                            break;
-                        case "6to8":
-                            month[0] = "6";
-                            month[1] = "7";
-                            month[2] = "8";
-                            break;
-                        case "9to11":
-                            month[0] = "9";
-                            month[1] = "10";
-                            month[2] = "11";
-                            break;
-                        case "12to2":
-                            month[0] = "12";
-                            month[1] = "1";
-                            month[2] = "2";
-                            break;
-                    }
-                    for (int i = 0; i < model.activity.Count; i++)
-                    {
-                        bool activity_exist = false;
-                        id = model.activity[i].activity_id;
-                        model.comment = db.comment.Where(s => s.tourism_id == id).ToList();
-                        for (int j = 0; j < model.comment.Count; j++)   //某個活動內的某個留言
-                        {
-                            for (int x = 0; x < month.Length; x++) //找這個留言內有沒有我們要的月份
-                            {
-                                int result = model.comment.Where(s => s.travel_month == month[x]).Count();
-                                if (result != 0)
-                                {
-                                    activity_exist = true;  //只要有一項就代表活動符合資格
-                                }
-                            }
-                        }
-                        if (!activity_exist)
-                        {
-                            model.activity.RemoveAt(i);     //不符合資格的移除
-                            i = i - 1;
-                        }
-                    }
-                }
-
             }
-            return View(model);
-            //排序條件還沒寫
-            //return View(model.activity.OrderBy(m => m.activity_id).ToPagedList(page, pageSize));
+            //找地區
+            search_city(city,model);            
+            //找平均時間
+            search_stay(comment_stay_total, model);
+            //旅伴
+            search_partner(travel_partner, model);
+            //搜尋月份
+            search_month(travel_month, model);
+
+            if (!String.IsNullOrEmpty(comment_rating))
+            {
+                ViewBag.rating = comment_rating;
+                string id;
+                double rating = int.Parse(comment_rating); //查詢條件轉型
+                for (int i = 0; i < model.activity.Count; i++)
+                {
+                    id = model.activity[i].activity_id;
+                    int cmt_count = db.comment.Where(s => s.tourism_id == id).Count();
+                    if (cmt_count == 0)
+                    {
+                        model.activity.RemoveAt(i);
+                        i = i - 1;
+                    }
+                    else
+                    {
+                        //找每個活動的平均評分
+                        double rating_avg = db.comment.Where(s => s.tourism_id == id).Average(r => r.comment_rating);
+                        if (rating_avg < rating)
+                        {
+                            model.activity.RemoveAt(i);     //移除評分過小者
+                            i = i - 1;
+                        }
+                    }
+                }
+            }
+
+            //依照分數排序
+            if (!String.IsNullOrEmpty(Sortby))
+            {
+                //有評論分數的
+                //select tourism_id,avg(comment_rating) as aver
+                //from activity as a
+                //join comment as c on a.activity_id = c.tourism_id
+                //group by tourism_id
+                //order by aver desc               
+                var activity_rating_result = (from a in db.activity
+                                     join b in db.comment on a.activity_id equals b.tourism_id
+                                     group b by b.tourism_id into g
+                                     orderby g.Average(s => s.comment_rating)
+                                     select new result_rating { id = g.Key, rating = g.Average(s => s.comment_rating).ToString() }).ToList();
+                var hotel_rating_result = (from a in db.hotel
+                                     join b in db.comment on a.hotel_id equals b.tourism_id
+                                     group b by b.tourism_id into g
+                                     orderby g.Average(s => s.comment_rating)
+                                     select new result_rating { id = g.Key, rating = g.Average(s => s.comment_rating).ToString() }).ToList();
+                var restaurant_rating_result = (from a in db.restaurant
+                                     join b in db.comment on a.restaurant_id equals b.tourism_id
+                                     group b by b.tourism_id into g
+                                     orderby g.Average(s => s.comment_rating)
+                                     select new result_rating { id = g.Key, rating = g.Average(s => s.comment_rating).ToString() }).ToList();
+                var spot_rating_result = (from a in db.spot
+                                     join b in db.comment on a.spot_id equals b.tourism_id
+                                     group b by b.tourism_id into g
+                                     orderby g.Average(s => s.comment_rating)
+                                     select new result_rating { id = g.Key, rating = g.Average(s => s.comment_rating).ToString() }).ToList();
+
+                //沒有評論分數的
+                //select a.activity_id,tourism_id
+                //from activity as a left join comment as c
+                //on a.activity_id = c.tourism_id
+                //where c.tourism_id is null
+                var null_result = (from a in db.activity
+                                   join b in db.comment on a.activity_id equals b.tourism_id into x
+                                   from b in x.DefaultIfEmpty()
+                                   where b.tourism_id == null
+                                   select new result_rating { id = a.activity_id, rating = b.tourism_id }).ToList();
+                var hotel_null_result = (from a in db.hotel
+                                   join b in db.comment on a.hotel_id equals b.tourism_id into x
+                                   from b in x.DefaultIfEmpty()
+                                   where b.tourism_id == null
+                                   select new result_rating { id = a.hotel_id, rating = b.tourism_id }).ToList();
+                var restaurant_null_result = (from a in db.restaurant
+                                              join b in db.comment on a.restaurant_id equals b.tourism_id into x
+                                   from b in x.DefaultIfEmpty()
+                                   where b.tourism_id == null
+                                   select new result_rating { id = a.restaurant_id, rating = b.tourism_id }).ToList();
+                var spot_null_result = (from a in db.spot
+                                        join b in db.comment on a.spot_id equals b.tourism_id into x
+                                   from b in x.DefaultIfEmpty()
+                                   where b.tourism_id == null
+                                   select new result_rating { id = a.spot_id, rating = b.tourism_id }).ToList();
+
+                //List<result_rating> result = rating_result.Union(null_result).OrderByDescending(s => s.rating).ToList();
+
+                //model.result_ratings = model.activity.Join(result, a => a.activity_id, b => b.id,
+                //                                                        (a, b) => new result_rating
+                //                                                        {
+                //                                                            id = a.activity_id,
+                //                                                            title = a.activity_title,
+                //                                                            intro = a.activity_intro,
+                //                                                            rating = b.rating
+                //                                                        }).OrderBy(r => r.rating).ToList();
+
+                return View(model);
+            }
+            else
+            {
+                //model.result_ratings.Add(id=,title=,intro=,,,)
+
+                return View(model);
+            }
         }
+        //排序
+        //關鍵字搜尋
+        //地點
+        private SearchViewModel search_city(string city,SearchViewModel model) 
+        {
+            if (!String.IsNullOrEmpty(city))
+            {
+                ViewBag.city = city;
+                for (int i = 0; i < model.activity.Count; i++)
+                {
+                    if (String.IsNullOrEmpty(model.activity[i].city) && String.IsNullOrEmpty(model.activity[i].district))
+                    {
+                        model.activity.RemoveAt(i);
+                        i -= 1;
+                    }
+                    else if (!model.activity[i].city.Contains(city) && !model.activity[i].district.Contains(city))
+                    {
+                        model.activity.RemoveAt(i);
+                        i -= 1;
+                    }
+                }                
+            }
+            return model;
+        }
+        private SearchViewModel search_month(string travel_month, SearchViewModel model)
+        {
+            if (travel_month != null)
+            {
+                ViewBag.month = travel_month;
+                string id;
+                string[] month = new string[3];
+                switch (travel_month)
+                {
+                    case "3至5月":
+                        month[0] = "3";
+                        month[1] = "4";
+                        month[2] = "5";
+                        break;
+                    case "6至8月":
+                        month[0] = "6";
+                        month[1] = "7";
+                        month[2] = "8";
+                        break;
+                    case "9至11月":
+                        month[0] = "9";
+                        month[1] = "10";
+                        month[2] = "11";
+                        break;
+                    case "12至2月":
+                        month[0] = "12";
+                        month[1] = "1";
+                        month[2] = "2";
+                        break;
+                }
+                for (int i = 0; i < model.activity.Count; i++)
+                {
+                    bool activity_exist = false;
+                    id = model.activity[i].activity_id;
+                    model.comment = db.comment.Where(s => s.tourism_id == id).ToList();
+                    for (int j = 0; j < model.comment.Count; j++)   //某個活動內的某個留言
+                    {
+                        for (int x = 0; x < month.Length; x++) //找這個留言內有沒有我們要的月份
+                        {
+                            int result = model.comment.Where(s => s.travel_month == month[x]).Count();
+                            if (result != 0)
+                            {
+                                activity_exist = true;  //只要有一項就代表活動符合資格
+                            }
+                        }
+                    }
+                    if (!activity_exist)
+                    {
+                        model.activity.RemoveAt(i);     //不符合資格的移除
+                        i = i - 1;
+                    }
+                }
+            }
+            return model;
+        }
+        private SearchViewModel search_partner(string[] travel_partner, SearchViewModel model)
+        {
+            if (travel_partner != null)
+            {
+                ViewBag.partner = travel_partner;
+                string id;
+                for (int i = 0; i < model.activity.Count; i++)
+                {
+                    bool activity_exist = false;
+                    id = model.activity[i].activity_id;
+                    model.comment = db.comment.Where(s => s.tourism_id == id).ToList();
+                    for (int j = 0; j < model.comment.Count; j++)   //找對於單個活動的所有評論內是否有含搜尋選項
+                    {
+                        for (int x = 0; x < travel_partner.Length; x++)
+                        {
+                            int result = model.comment.Where(s => s.travel_partner == travel_partner[x]).Count();
+                            if (result != 0)
+                            {
+                                activity_exist = true;  //只要有一項就代表活動符合資格
+                            }
+                        }
+                    }
+                    if (!activity_exist)
+                    {
+                        model.activity.RemoveAt(i);     //不符合資格的移除
+                        i = i - 1;
+                    }
+                }
+            }
+            return model;
+        }
+        private SearchViewModel search_stay(string comment_stay_total, SearchViewModel model)
+        {
+            if (!String.IsNullOrEmpty(comment_stay_total))
+            {
+                string id;
+                ViewBag.stay = comment_stay_total;
+                for (int i = 0; i < model.activity.Count; i++)
+                {
+                    id = model.activity[i].activity_id;
+                    int cmt_count = db.comment.Where(s => s.tourism_id == id).Count();
+                    if (cmt_count == 0)
+                    {
+                        model.activity.RemoveAt(i);
+                        i = i - 1;
+                    }
+                    else
+                    {
+                        //找每個活動的平均
+                        double time_avg = db.comment.Where(s => s.tourism_id == id).Average(r => r.comment_rating);
+                        switch (comment_stay_total)
+                        {
+                            case "三到四小時":
+                                if (time_avg > 4 || time_avg < 3)
+                                {
+                                    model.activity.RemoveAt(i);
+                                    i = i - 1;
+                                }
+                                break;
+                            case "一到兩小時":
+                                if (time_avg < 1 || time_avg > 2)
+                                {
+                                    model.activity.RemoveAt(i);
+                                    i = i - 1;
+                                }
+                                break;
+                            case "兩到三小時":
+                                if (time_avg < 2 || time_avg > 3)
+                                {
+                                    model.activity.RemoveAt(i);
+                                    i = i - 1;
+                                }
+                                break;
+                            case "四小時以上":
+                                if (time_avg < 4)
+                                {
+                                    model.activity.RemoveAt(i);
+                                    i = i - 1;
+                                }
+                                break;
+                        }
+                    }
+                }
+            }
+            return model;
+        }
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -256,6 +367,7 @@ namespace TravelCat.Controllers
         //        return View();
         //    }
         //}
+
         //[ChildActionOnly]
         //public ActionResult _Restaurant(string q = null, int page = 1)
         //{
@@ -272,6 +384,7 @@ namespace TravelCat.Controllers
         //        return View();
         //    }
         //}
+
         //[ChildActionOnly]
         //public ActionResult _Spot(string q = null, int page = 1)
         //{

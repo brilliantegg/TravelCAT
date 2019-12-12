@@ -14,5 +14,14 @@ namespace TravelCat.ViewModels
         public List<spot> spot { get; set; }
         public List<member_profile> member { get; set; }
         public List<comment> comment { get; set; }
+        public List<result_rating> result_ratings { get; set; }
+     }
+    public class result_rating 
+    {
+        public string id { get; set; }
+        public string title { get; set; }
+        public string intro { get; set; }
+        public string rating { get; set; }
     }
+
 }

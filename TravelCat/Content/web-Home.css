@@ -81,6 +81,7 @@ section {
             width: 80%;
             margin: 0px 10%;
             margin-top: 10px;
+         
         }
 
         .container .row .col-12 .tab-content .tab-pane .card .card-body {
@@ -125,19 +126,23 @@ section {
         width: 100%;
          margin: 0px 
     }
-
-     .secbanner {
+        .card-img-top {
+            width: 100%;
+            height: 12vw;
+            object-fit: cover;
+        }
+      .container .secbanner {
         background-image: url('../images/people-2590616_1920.jpg');
         background-size: cover;
         width: 100%;
         height: 600px;
         position: relative;
-        margin:10rem 0
+        margin: 2rem 0;
     }
 
         .container .secbanner .txt {
             background: linear-gradient(45deg, #5fdbba, #096e54);
-
+            -webkit-background-clip: text;
             color: transparent;
             line-height: 2.5;
             letter-spacing: 5px;
@@ -148,7 +153,6 @@ section {
             top: 25px;
             left: 180px;
         }
-
 
 
 
@@ -333,3 +337,27 @@ section {
         .container .item .card .card-body li:nth-child(even) h6::after{
             left: 0;
         }
+
+
+body {
+
+    position: relative;
+}
+/*表尾*/
+footer {
+
+    height: 200px;
+    text-align: center;
+    position: relative;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 1rem;
+    background-color: #efefef;
+    width: 100%;
+    height: 200px;
+    background-color: #f0f0f0;
+    color: #000;
+    font-weight: 900;
+}
