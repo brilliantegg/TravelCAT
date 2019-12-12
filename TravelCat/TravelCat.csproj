@@ -1939,6 +1939,7 @@
     <Content Include="Content\web-activite-home.css" />
     <Content Include="Content\web-Home.css" />
     <Content Include="Content\web-Layout.css" />
+    <Content Include="Content\web-Login.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

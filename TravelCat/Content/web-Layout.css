@@ -141,10 +141,12 @@ body {
             
         }
         .aTag_style {
+            
             color: black;
             font-size: 1.2rem;
         }
             .aTag_style:hover {
+                text-decoration: none;
                 color: #128566;
             }
 
