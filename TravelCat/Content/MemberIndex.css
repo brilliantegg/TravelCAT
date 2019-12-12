@@ -112,3 +112,13 @@
 .tab-pane{
     height:100%
 }
+
+.nav-pills-cat .nav-link-cat.active,
+.nav-pills-cat .show > .nav-link-cat {
+    color: #ffffff;
+    background-color: darkolivegreen;
+}
+
+.nav-pills-cat .nav-link-cat {
+    
+}
