@@ -77,15 +77,15 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">編輯資料</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    @Html.ActionLink("編輯個人資料", "EditMemberProfile", "web_Member_Index", new { id = Model.member.member_id }, new { @class = "btn btn-outline-info" })<br />
-                    @Html.ActionLink("修改密碼", "Editpassword", "web_Member_Index", new { id = Model.member.member_id }, new { @class = "btn btn-outline-info mt-2" })
-                    @Html.ActionLink("更改信箱", "Editemail", "web_Member_Index", new { id = Model.member.member_id }, new { @class = "btn btn-outline-info" })
+                    @Html.ActionLink("+編輯個人資料", "EditMemberProfile", "web_Member_Index", new { id = Model.member.member_id }, new { @class = "btn btn-outline-dark mt-2" })<br />
+                    @Html.ActionLink("+修改密碼", "Editpassword", "web_Member_Index", new { id = Model.member.member_id }, new { @class = "btn btn-outline-dark mt-2" })<br />
+                    @Html.ActionLink("+更改信箱", "Editemail", "web_Member_Index", new { id = Model.member.member_id }, new { @class = "btn btn-outline-dark mt-2 mb-5" })<br />
                     <span>信箱驗證狀態:</span>
                     @if (@Model.member_profile.emailConfirmed == true)
                     {<span>已認證</span> }
@@ -154,17 +154,16 @@
             </div>
         </div>
         <div class="col-9 mt-2" style="height:300px ">
-            <ul class="nav nav-pills mb-3 " id="pills-tab" role="tablist">
-                <li class="nav-item ">
-                    <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">個人評論</a>
+            <ul class="nav nav-pills-cat mb-3 row justify-content-center" id="pills-tab" role="tablist">
+                <li class="nav-item col-md-2 text-center ">
+                    <a class="nav-link-cat active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">個人評論</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">追蹤評論</a>
+                <li class="nav-item  col-md-2 text-center ">
+                    <a class="nav-link-cat" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">追蹤評論</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">我的珍藏</a>
+                <li class="nav-item  col-md-2 text-center ">
+                    <a class="nav-link-cat" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">我的珍藏</a>
                 </li>
-
             </ul>
             <!--會員評論-->
             <div class="tab-content" id="pills-tabContent">
