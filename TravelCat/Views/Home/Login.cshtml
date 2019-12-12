@@ -34,7 +34,7 @@
                     <a href="@Url.Action("ForgetPwd","Home")" class="text-info text-right">忘記密碼?</a>
                 </div>
 
-
+                <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl" />
                 <input id="Submit1" type="submit" value="送出" class="btn btn-info mt-3 mr-3 " />
                 <input id="Reset1" type="reset" value="清除" class="btn btn-info mt-3 ml-3" />
             </form>
