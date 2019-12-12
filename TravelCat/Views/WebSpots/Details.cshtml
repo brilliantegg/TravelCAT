@@ -126,9 +126,7 @@
                 </div>
             </div>
             <!--簡介-->
-            <h2>
-                @Html.DisplayNameFor(model => model.spot.spot_intro)
-            </h2>
+
             <div class="intro text-left">
                 <p>
                     @Html.DisplayFor(model => model.spot.spot_intro)
@@ -210,7 +208,40 @@
             </div>
         </div>
     </section>
-
+    <section>
+        <div class="row col-10 offset-1">
+            <div class="col-4">
+                <div class="card">
+                    <div class="card__image card__image--record"></div>
+                    <div class="card__content">
+                        <div class="card__title">Flex Shrink</div>
+                        <p class="card__text">This defines the ability for a flex item to shrink if necessary. Negative numbers are invalid.</p>
+                        <button class="btn btn--block card__btn">Button</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="card">
+                    <div class="card__image card__image--record"></div>
+                    <div class="card__content">
+                        <div class="card__title">Flex Shrink</div>
+                        <p class="card__text">This defines the ability for a flex item to shrink if necessary. Negative numbers are invalid.</p>
+                        <button class="btn btn--block card__btn">Button</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="card">
+                    <div class="card__image card__image--record"></div>
+                    <div class="card__content">
+                        <div class="card__title">Flex Shrink</div>
+                        <p class="card__text">This defines the ability for a flex item to shrink if necessary. Negative numbers are invalid.</p>
+                        <button class="btn btn--block card__btn">Button</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
 
     <!--篩選評論-->
@@ -218,7 +249,7 @@
     <section>
 
 
-        <div class="filter_comment row ">
+        <div class="filter_comment row col-7 offset-1">
             <input type="hidden" name="tourismId" value="@ViewBag.tourismId" />
             <div class="fliter_set col-4">
                 <div class="fliter_set">
