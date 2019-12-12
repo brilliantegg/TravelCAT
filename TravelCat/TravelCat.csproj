@@ -2135,6 +2135,7 @@
     <Content Include="Scripts\esm\popper.js.map" />
     <Content Include="Scripts\esm\popper-utils.min.js.map" />
     <Content Include="Scripts\esm\popper-utils.js.map" />
+    <Content Include="Scripts\bootstrap.min.js.map" />
     <Content Include="Scripts\bootstrap.js.map" />
     <Content Include="Scripts\bootstrap.bundle.min.js.map" />
     <Content Include="Scripts\bootstrap.bundle.js.map" />
@@ -2261,6 +2262,7 @@
     <Compile Include="Models\issue_type.cs">
       <DependentUpon>TravelCat.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\LoginCheck.cs" />
     <Compile Include="Models\member.cs">
       <DependentUpon>TravelCat.tt</DependentUpon>
     </Compile>
@@ -2394,7 +2396,6 @@
     <Content Include="Views\Search\Index.cshtml" />
     <Content Include="Views\Home\_test.cshtml" />
     <Content Include="Views\web_Member_Index\Editemail.cshtml" />
-    <Content Include="Views\web_Member_Index\EditMemberProfile1.cshtml" />
     <Content Include="Views\web_Member_Index\EditMemberProfile.cshtml" />
     <Content Include="Views\CommentsWeb\_CreateMsg.cshtml" />
     <Content Include="Views\CommentsWeb\_CreateComment.cshtml" />
@@ -2411,6 +2412,10 @@
     <Content Include="Views\CommentsWeb\_CommentsForFollwers.cshtml" />
     <Content Include="Views\WebSpots\Index.cshtml" />
     <Content Include="Views\WebSpots\Details.cshtml" />
+    <Content Include="Views\Loginadmin\ForgetPwd.cshtml" />
+    <Content Include="Views\Loginadmin\ResetPwd.cshtml" />
+    <Content Include="Views\Loginadmin\ForgetView.cshtml" />
+    <Content Include="Views\members\_ProblemMember.cshtml" />
     <Content Include="Views\WebHotels\Index.cshtml" />
     <Content Include="Views\WebHotels\Details.cshtml" />
     <Content Include="Views\WebRestaurants\Index.cshtml" />

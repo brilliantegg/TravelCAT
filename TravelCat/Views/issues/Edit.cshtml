@@ -4,77 +4,75 @@
     ViewBag.Title = "Edit";
 }
 
-    <link href="~/Content/back-end-Create.css" rel="stylesheet" />
+<link href="~/Content/back-end-Create.css" rel="stylesheet" />
 <h2 class="ml-3 mt-3 text-danger text-center">網頁問題管理</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
-<div class="form-horizontal">
 
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @Html.HiddenFor(model => model.id)
-    @Html.HiddenFor(model => model.member_id)
-    @Html.HiddenFor(model => model.admin_id)
-    @Html.HiddenFor(model => model.issue_id)
+    <div class="form-horizontal">
+
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.id)
+        @Html.HiddenFor(model => model.member_id)
+        @Html.HiddenFor(model => model.admin_id)
+        @Html.HiddenFor(model => model.issue_id)
 
 
-    <!--會員id-->
-    <div class="row">
-        <div class="co col-6">
-            @Html.LabelFor(model => model.member_id, "會員編號", htmlAttributes: new { @class = "txt" })
-            @Html.EditorFor(model => model.member_id, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+        <!--會員id-->
+        <div class="row">
+            <div class="co col-6">
+                @Html.LabelFor(model => model.member_id, "會員編號", htmlAttributes: new { @class = "txt" })
+                @Html.EditorFor(model => model.member_id, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+            </div>
         </div>
+
+        <!--回報日期-->
+        <div class="row">
+            <div class="co col-6">
+                @Html.LabelFor(model => model.report_date, htmlAttributes: new { @class = "txt" })
+                @Html.EditorFor(model => model.report_date, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.report_date, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <!--回報內容-->
+        <div class="row">
+            <div class="co col-6">
+                @Html.LabelFor(model => model.issue_content, htmlAttributes: new { @class = "txt" })
+                @Html.TextAreaFor(model => model.issue_content, new { @class = "form-control", rows = "5", @readonly = "readonly" })
+                @Html.ValidationMessageFor(model => model.issue_content, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <!--問題處理結果-->
+        <div class="row">
+            <div class="co col-6">
+                @Html.LabelFor(model => model.issue_result, htmlAttributes: new { @class = "txt" })
+                @Html.TextAreaFor(model => model.issue_result, new { @class = "form-control", rows = "5" })
+                @Html.ValidationMessageFor(model => model.issue_result, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <!--問題狀態-->
+        <div class="row">
+            <div class="co col-6">
+                @Html.LabelFor(model => model.issue_status, htmlAttributes: new { @class = "txt" })
+                @Html.EditorFor(model => model.issue_status, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.issue_status, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <!--下方按鈕-->
+        <div class="row text-center mt-3">
+            <div class="col-md-12">
+                <input type="submit" value="存檔" class="btn btn-primary" />
+                @Html.ActionLink("返回列表", "Index", null, new { @class = "btn btn-primary" })
+            </div>
+        </div>
+
     </div>
-
-    <!--回報日期-->
-    <div class="row">
-        <div class="co col-6">
-            @Html.LabelFor(model => model.report_date, htmlAttributes: new { @class = "txt" })
-            @Html.EditorFor(model => model.report_date, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-            @Html.ValidationMessageFor(model => model.report_date, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <!--回報內容-->
-    <div class="row">
-        <div class="co col-6">
-            @Html.LabelFor(model => model.issue_content, htmlAttributes: new { @class = "txt" })
-            @Html.TextAreaFor(model => model.issue_content, new { @class = "form-control", rows = "5", @readonly = "readonly" })
-            @Html.ValidationMessageFor(model => model.issue_content, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <!--問題處理結果-->
-    <div class="row">
-        <div class="co col-6">
-            @Html.LabelFor(model => model.issue_result, htmlAttributes: new { @class = "txt" })
-            @Html.TextAreaFor(model => model.issue_result, new { @class = "form-control", rows = "5" })
-            @Html.ValidationMessageFor(model => model.issue_result, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <!--問題狀態-->
-    <div class="row">
-        <div class="co col-6">
-            @Html.LabelFor(model => model.issue_status, htmlAttributes: new { @class = "txt" })
-            @Html.EditorFor(model => model.issue_status, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.issue_status, "", new { @class = "text-danger" })
-        </div>
-    </div>
-
-    <!--下方按鈕-->
-    <div class="row text-center footer">
-        <div class="col-1">
-            <input type="submit" value="存檔" class="btn btn-primary" />
-        </div>
-        <div class="col-2">
-            @Html.ActionLink("返回列表", "Index", null, new { @class = "btn btn-primary" })
-        </div>
-    </div>
-
-</div>
 }
 

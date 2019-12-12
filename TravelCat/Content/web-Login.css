@@ -11,6 +11,7 @@ body::before{
     bottom: 0;
     background-color: rgba(200,200,200,.6);
     z-index: -1;
+    min-height: calc(100vh - 117px);
 }
 .container {
     display: flex;

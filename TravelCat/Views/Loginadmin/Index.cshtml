@@ -16,26 +16,37 @@
 
             <div class="form-group">
                 <input id="id" name="id" type="text" class="login-Id" required="required" placeholder="請輸入帳號"><br />
-
                 <input id="pwd" name="pwd" type="password" class="login-Pw" required="required" placeholder="請輸入密碼"><br />
-     
+                <input type="checkbox" id="show_password" />顯示密碼
             </div>
+
+            <h5><a href="@Url.Action("ForgetPwd","Loginadmin")" class="text-warning">忘記密碼?</a></h5>
 
             <div class="from-btn">
                 <input id="Submit1" type="submit" value="登入" class="btn btn-primary" />
                 <input id="Reset1" type="reset" value="清除" class="btn btn-primary" />
-                <input id="Button1" type="button" value="忘記密碼" class="btn btn-info" />
             </div>
 
+            <h4 class="text-danger text-center">@ViewBag.LoginErr</h4>
         </form>
 
     </div>
-    <h4 class="text-danger">@ViewBag.LoginErr</h4>
+
 </div>
+@section scripts{
+    <script>
+        $('#show_password').click(function () {
+            if ($('#pwd').attr("type") == "password") {
+                $('#pwd').attr("type", "text");
+            }
+            else {
+                $('#pwd').attr("type", "password");
+            }
+        });
 
-<script src="~/Scripts/jquery-3.3.1.min.js"></script>
-<script src="~/Scripts/bootstrap.min.js"></script>
+    </script>
 
+}
 
 
 
