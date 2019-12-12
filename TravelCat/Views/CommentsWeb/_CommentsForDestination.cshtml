@@ -52,7 +52,7 @@
                         <div class="d-flex">
                             @if (item.member.member_profile.profile_photo != null)
                             {
-                                <img class="member_avatar" src="~/images/member/@item.member.member_profile.profile_photo" alt="...">
+                                <img class="member_avatar" src="~/images/member/@item.member.member_profile.profile_photo" alt="..." onerror="this.src='/images/comment/0_2019129下午090757.jpg';">
                             }
                             else
                             {
@@ -80,7 +80,7 @@
                         </div>
                     </div>
                     <div class="comment_photo">
-                        <img src="/images/comment/@item.comment_photo" class="comment_photo w-100" />
+                        <img src="/images/comment/@item.comment_photo" class="comment_photo w-100" alt="X_X" onerror="this.src='/images/comment/0_2019129下午090757.jpg';" />
                     </div>
                     <div class="commemt_content">
                         @{int rating = item.comment_rating;
@@ -88,7 +88,7 @@
                         }
                         @for (int i = 0; i < rating; i++)
                         {
-                            <i class="fas fa-heart" style="color:red"></i>
+                            <i class="fas fa-heart" style="color:rgba(174,37,46,0.99);"></i>
                         }
                         @for (int i = 0; i < empty; i++)
                         {
@@ -305,7 +305,7 @@
 
         })
         //新增收藏
-        $(".add_to_bucket_list").click(function (e) {
+        $(".bucket_list").click(function (e) {
             if (id == null) {
                 event.stopPropagation();
                 alert('請先登入:)');

@@ -12,6 +12,7 @@
 </head>
 <body>
     @{ string mem_id;
+       string returnUrl = Request.Url.AbsoluteUri;
         if (Session["memberID"] == null || string.IsNullOrWhiteSpace(Session["memberID"].ToString()))
         {
             mem_id = "null";
@@ -20,6 +21,7 @@
         {
             mem_id = Session["memberID"].ToString();
         }
+
     }
     <header>
         <div class="header">
@@ -34,13 +36,13 @@
                     <div>
                         @Html.ActionLink(@User.Identity.GetUserName(), "Index", "web_Member_Index", new { id = mem_id }, new { @class = "  memberId aTag_style" })
 
-                        @Html.ActionLink("登出", "LogOut", "Home", null, new { @class = " text-dark aTag_style" })
+                        @Html.ActionLink("登出", "LogOut", "Home", null, new { @class = " aTag_style" })
                     </div>
                 }
                 else
                 {
                     <div>
-                        @Html.ActionLink("登入", "LogIn", "Home", null, new { @class = "  aTag_style" })
+                        @Html.ActionLink("登入", "LogIn", "Home", new { returnUrl=@returnUrl}, new { @class = "  aTag_style" })
                         @Html.ActionLink("註冊", "Index", "Register", null, new { @class = "  aTag_style" })
                     </div>
                 }
@@ -50,14 +52,14 @@
     <div class="top-bar">
         <ul class="body-menu">
             <li>
-                    <a href="#"><i class=" fas fa-map-marked-alt "></i> 景點</a>                
+                <a href="/WebSpots"><i class=" fas fa-map-marked-alt "></i> 景點</a>
             </li>
-            <li>                    
-                    <a class="  text-black" href="/web_activities"><i class="fas fa-running"></i> 活動</a>
+            <li>
+                <a href="/web_activities"><i class="fas fa-running"></i> 活動</a>
 
             </li>
-            <li><a href="#"><i class="fas fa-hamburger"></i> 餐廳</a> </li>
-            <li><a href="#"><i class="fas fa-building"></i> 飯店</a> </li>
+            <li><a href="/WebRestaurants"><i class="fas fa-hamburger"></i> 餐廳</a> </li>
+            <li><a href="/WebHotels"><i class="fas fa-building"></i> 飯店</a> </li>
             <li class="search">
                 <form action="/Search/Index" method="get">
                     <input name="q" type="text" class="search-txt" placeholder="想去哪裡呢?">
@@ -76,27 +78,30 @@
     <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
     @RenderBody()
     @RenderSection("scripts", required: false)
-@*<footer class="footer">
+    @*@RenderPage("~/Views/Shared/_footer.cshtml" )*@
+    @*<footer class="footer">
 
-    <ul>
-        <li>
-            <strong>行動商務第 2 組專題</strong>
             <ul>
-                <li>Adresse, street</li>
-                <li>Tlf: Phone</li>
-            </ul>
-            <ul class="right">
-                <li>Zipcode/City</li>
-                <li>Mail: Email</li>
-            </ul>
-            </li>
-     </ul>
-</footer>*@
+                <li>
+                    <strong>行動商務第 2 組專題</strong>
+                    <ul>
+                        <li>Adresse, street</li>
+                        <li>Tlf: Phone</li>
+                    </ul>
+                    <ul class="right">
+                        <li>Zipcode/City</li>
+                        <li>Mail: Email</li>
+                    </ul>
+                    </li>
+             </ul>
+        </footer>*@
 </body>
 </html>
 
 
-
+<script>
+    console.log("@Url")
+</script>
 
 
 

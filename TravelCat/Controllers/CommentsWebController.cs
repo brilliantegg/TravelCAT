@@ -86,16 +86,10 @@ namespace TravelCat.Controllers
             }
             if (comment_rating != null)
             {
-
                 foreach (var comment in comments.ToList())
                 {
-                    foreach (var item in comment_rating)
-                    {
-                        if (comment.comment_rating.ToString() != item)
-                        {
-                            comments.Remove(comment);
-                        }
-                    }
+                    if (!comment_rating.Contains(comment.comment_rating.ToString()))
+                        comments.Remove(comment);
                 }
             }
             if (travel_partner != null)
@@ -103,29 +97,44 @@ namespace TravelCat.Controllers
 
                 foreach (var comment in comments.ToList())
                 {
-                    foreach (var item in travel_partner)
-                    {
-                        if (comment.travel_partner != item)
-                        {
-                            comments.Remove(comment);
-                        }
-                    }
+
+                    if (!travel_partner.Contains(comment.travel_partner))
+                        comments.Remove(comment);
+
                 }
             }
-            //if (travel_month != null)
-            //{
-
-            //    foreach (var comment in comments)
-            //    {
-            //        foreach (var item in travel_month)
-            //        {
-            //            if (comment.travel_month != item)
-            //            {
-            //                comments.Remove(comment);
-            //            }
-            //        }
-            //    }
-            //}
+            if (travel_month != null)
+            {
+                string[] month = new string[3];
+                switch (travel_month[0].ToString())
+                {
+                    case "3to5":
+                        month[0] = "3";
+                        month[1] = "4";
+                        month[2] = "5";
+                        break;
+                    case "6to8":
+                        month[0] = "6";
+                        month[1] = "7";
+                        month[2] = "8";
+                        break;
+                    case "9to11":
+                        month[0] = "9";
+                        month[1] = "10";
+                        month[2] = "11";
+                        break;
+                    case "12to2":
+                        month[0] = "12";
+                        month[1] = "1";
+                        month[2] = "2";
+                        break;
+                }
+                foreach (var comment in comments)
+                {
+                    if (!month.Contains(comment.travel_month))
+                        comments.Remove(comment);
+                }
+            }
             model.comment = comments;
             ViewBag.tourismId = tourismId;
 
@@ -137,7 +146,7 @@ namespace TravelCat.Controllers
             destinationsViewModel model = new destinationsViewModel()
             {
 
-                comment = db.comment.Where(m => m.member_id == memId).ToList(),
+                comment = db.comment.Where(m => m.member_id == memId).OrderByDescending(m=>m.comment_date).Take(50).ToList(),
                 message = db.message.Where(m => m.member_id == memId).ToList(),
                 comment_emoji_details = db.comment_emoji_details.ToList(),
                 message_emoji_details = db.message_emoji_details.ToList(),
@@ -178,19 +187,19 @@ namespace TravelCat.Controllers
             }
             FollowerViewModels model = new FollowerViewModels()
             {
-                comment = comments.OrderByDescending(m => m.comment_date).ToList(),
+                comment = comments.OrderByDescending(m => m.comment_date).Take(50).ToList(),
                 comment_emoji_details = db.comment_emoji_details.ToList(),
                 member_profile = db.member_profile.Where(m => m.member_id == memId).ToList(),
                 member = members,
             };
-            IEnumerable<member> followers = from mem in db.member
-                                            join fol in db.follow_list on mem.member_id equals fol.member_id
-                                            where fol.member_id == memId
-                                            select mem;
+            //IEnumerable<member> followers = from mem in db.member
+            //                                join fol in db.follow_list on mem.member_id equals fol.member_id
+            //                                where fol.member_id == memId
+            //                                select mem;
 
-            IEnumerable<comment> comm = from mem in followers
-                                       join com in db.comment on mem.member_id equals com.member_id
-                                       select com;
+            //IEnumerable<comment> comm = from mem in followers
+            //                           join com in db.comment on mem.member_id equals com.member_id
+            //                           select com;
             return PartialView(model);
         }
         public int getMsgEmojiNum(int msg_id, string tourismId)

@@ -16,8 +16,7 @@ namespace TravelCat.Controllers
         private dbTravelCat db = new dbTravelCat();
         //新增收藏
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Postcollections_detail(string member_id, string tourism_id, int collection_type_id)
+        public ActionResult Postcollections_detail(string member_id, string tourism_id,int collection_type_id=1)
         {
             string id = tourism_id.Substring(0, 1);
             string controller;
@@ -43,7 +42,7 @@ namespace TravelCat.Controllers
             collect.member_id = member_id;
             collect.tourism_id = tourism_id;
             collect.privacy = true;
-            collect.collection_type_id = 1;
+            collect.collection_type_id = collection_type_id;
 
 
             if (ModelState.IsValid)
@@ -53,6 +52,42 @@ namespace TravelCat.Controllers
                 return RedirectToRoute(new { controller = controller, action = "Details", id = tourism_id });
 
             }
+
+            return RedirectToRoute(new { controller = controller, action = "Details", id = tourism_id });
+        }
+        //刪除收藏
+        [HttpPost]
+        public ActionResult Deletecollections_detail(string tourism_id,int? collection_id,string member_id)
+        {
+            if (collection_id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            collections_detail collections_detail = db.collections_detail.Where(m => m.collection_id == collection_id && m.member_id == member_id).FirstOrDefault();
+            db.collections_detail.Remove(collections_detail);
+            db.SaveChanges();
+
+            string id = tourism_id.Substring(0, 1);
+            string controller;
+            switch (id)
+            {
+                case "A":
+                    controller = "web_activities";
+                    break;
+                case "H":
+                    controller = "WebHotels";
+                    break;
+                case "R":
+                    controller = "WebRestaurants";
+                    break;
+                case "S":
+                    controller = "WebSpots";
+                    break;
+                default:
+                    controller = "web_activities";
+                    break;
+            }
+
 
             return RedirectToRoute(new { controller = controller, action = "Details", id = tourism_id });
         }
@@ -240,6 +275,27 @@ namespace TravelCat.Controllers
         // 刪除評論
         public ActionResult Delete(long? id)
         {
+            string tourism_id = db.comment.Where(m => m.comment_id == id).FirstOrDefault().tourism_id;
+            string firstChar = tourism_id.Substring(0, 1);
+            string controller;
+            switch (firstChar)
+            {
+                case "A":
+                    controller = "web_activities";
+                    break;
+                case "H":
+                    controller = "WebHotels";
+                    break;
+                case "R":
+                    controller = "WebRestaurants";
+                    break;
+                case "S":
+                    controller = "WebSpots";
+                    break;
+                default:
+                    controller = "web_activities";
+                    break;
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -266,7 +322,7 @@ namespace TravelCat.Controllers
             {
                 return HttpNotFound();
             }
-            return RedirectToRoute(new { controller = "web_activities", action = "Details", id = comment.tourism_id });
+            return RedirectToRoute(new { controller = controller, action = "Details", id = comment.tourism_id });
 
         }
 

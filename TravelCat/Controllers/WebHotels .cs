@@ -11,14 +11,14 @@ using TravelCat.ViewModels;
 
 namespace TravelCat.Controllers
 {
-    public class WebSpotsController : Controller
+    public class WebHotelsController : Controller
     {
         private dbTravelCat db = new dbTravelCat();
 
         // GET: web_activities
         public ActionResult Index()
         {
-            return View(db.spot.OrderByDescending(m=>m.update_date).Take(100).ToList());
+            return View(db.hotel.OrderByDescending(m => m.latitude).Take(100).ToList());
         }
 
         // GET: web_activities/Details/5
@@ -31,7 +31,7 @@ namespace TravelCat.Controllers
             }
             destinationsViewModel model = new destinationsViewModel()
             {
-                spot = db.spot.Where(m => m.spot_id == id).FirstOrDefault(),
+                hotel = db.hotel.Where(m => m.hotel_id == id).FirstOrDefault(),
                 comment = db.comment.Where(m => m.tourism_id == id).OrderByDescending(m=>m.comment_date).ToList(),
                 message = db.message.Where(m => m.tourism_id == id).OrderByDescending(m => m.msg_time).ToList(),
                 comment_emoji_details = db.comment_emoji_details.ToList(),
@@ -46,10 +46,7 @@ namespace TravelCat.Controllers
             }
             ViewBag.tourismId = id;    
             return View(model);
-        }
-
-
-        
+        }     
         
     }
 }
