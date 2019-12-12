@@ -187,11 +187,11 @@
             <!--介紹卡-->
             <div class="card card-sm">
                 <div class="card-body">
-                    @Html.ActionLink(@Model.activity[100].activity_title, "Details", "web_activities", new { id = @Model.activity[100].activity_id }, null)
+                    @Html.ActionLink(@Model.activity.Where(s=>s.activity_id==ViewBag.comment_id).FirstOrDefault().activity_title, "Details", "web_activities", new { id = @ViewBag.comment_id }, null)
                     <img src="~/images/bmo-02.jpg" class="mb-4">
                     <div class="like">
-                        <i class="far fa-thumbs-up">999</i>
-                        <i class="far fa-comment ml-5">123</i>
+                        <i class="far fa-thumbs-up">@ViewBag.like</i>
+                        <i class="far fa-comment ml-5">@ViewBag.comment_count</i>
                     </div>
                 </div>
             </div>
