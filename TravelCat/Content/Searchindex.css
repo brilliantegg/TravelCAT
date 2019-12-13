@@ -38,10 +38,12 @@ body {
 
 
 .intro_content {
-    width:inherit;
+    width: inherit;
     height: 72px;
     overflow: hidden;
-    /*white-space: nowrap;*/
+    white-space: normal;
     text-overflow: ellipsis;
+    display: -webkit-box;
     -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
 }
