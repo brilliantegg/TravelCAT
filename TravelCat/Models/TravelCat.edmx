@@ -150,6 +150,7 @@
           <Property Name="issue_result" Type="nvarchar" MaxLength="1000" />
           <Property Name="issue_status" Type="nchar" MaxLength="10" />
           <Property Name="resolve_date" Type="datetime" />
+          <Property Name="problem_id" Type="varchar" MaxLength="40" />
         </EntityType>
         <EntityType Name="issue_type">
           <Key>
@@ -714,6 +715,7 @@
           <NavigationProperty Name="admin" Relationship="Self.FK__issue__admin_id__534D60F1" FromRole="issue" ToRole="admin" />
           <NavigationProperty Name="issue_type" Relationship="Self.FK__issue__issue_id__5812160E" FromRole="issue" ToRole="issue_type" />
           <NavigationProperty Name="member" Relationship="Self.FK__issue__member_id__4D94879B" FromRole="issue" ToRole="member" />
+          <Property Name="problem_id" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="issue_type">
           <Key>
@@ -1293,6 +1295,7 @@
           <EntitySetMapping Name="issue">
             <EntityTypeMapping TypeName="travel_cat_v1Model.issue">
               <MappingFragment StoreEntitySet="issue">
+                <ScalarProperty Name="problem_id" ColumnName="problem_id" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="member_id" ColumnName="member_id" />
                 <ScalarProperty Name="admin_id" ColumnName="admin_id" />

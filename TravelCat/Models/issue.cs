@@ -23,6 +23,7 @@ namespace TravelCat.Models
         public string issue_result { get; set; }
         public string issue_status { get; set; }
         public Nullable<System.DateTime> resolve_date { get; set; }
+        public string problem_id { get; set; }
     
         public virtual admin admin { get; set; }
         public virtual issue_type issue_type { get; set; }

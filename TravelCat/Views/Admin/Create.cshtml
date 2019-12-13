@@ -1,17 +1,8 @@
 ﻿@model TravelCat.Models.admin
 
-@*@{
+@{
     ViewBag.Title = "Create";
-    var account = "";
-    if (Session["id"] == null || string.IsNullOrWhiteSpace(Session["id"].ToString()))
-    {
-        Response.Redirect("~/Loginadmin/Index");
-    }
-    else
-    {
-        account = Session["id"].ToString();
-    }
-}*@
+}
 
 <h2>新增管理員</h2>
 
@@ -53,17 +44,6 @@
                 @Html.ValidationMessageFor(model => model.admin_email, "", new { @class = "text-danger" })
             </div>
         </div>
-
-        @*<div class="form-group">
-                @Html.LabelFor(model => model.emailConfirmed, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    <div class="checkbox">
-                        @Html.EditorFor(model => model.emailConfirmed)
-                        @Html.ValidationMessageFor(model => model.emailConfirmed, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-            </div>*@
-     
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

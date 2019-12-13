@@ -34,6 +34,12 @@
                 </div>
                 @Html.ValidationMessageFor(model => model.member_password, "", new { @class = "text-danger" })
 
+                //確認密碼
+                <div class="form-inline mt-3">
+                    <label class="col-form-label">確認密碼</label>
+                    <input id="Password2" type="password" class="form-control ml-3" required="required"/>
+                </div>
+
                 <!--姓名-->
                 <div class="form-inline mt-3">
                     <label class="control-label">姓名</label>
@@ -68,6 +74,7 @@
                     @Html.LabelFor(model => model.member_profile.nation, htmlAttributes: new { @class = "control-label  " })
                     <select id="newnation" name="member_profile.nation" class="form-control ml-2">
                         <option value="台灣">台灣</option>
+                        <option value="其他國家">其他國家</option>
                     </select>
 
                     <!--城市-->
@@ -100,6 +107,7 @@
                         <option value="澎湖縣">澎湖縣</option>
                         <option value="金門縣">金門縣</option>
                         <option value="連江縣">連江縣</option>
+                        <option value="其他城市">其他城市</option>
                     </select>
                 </div>
 
@@ -122,9 +130,9 @@
                 @Html.HiddenFor(model => model.member_profile.member_id)
                 @Html.HiddenFor(model => model.member_profile.member_score)
 
-                <div class="form-inline mt-3">
-                    <input type="submit" value="送出" class="btn btn-primary" />
-                </div>
+
+                    <input id="submit" type="submit" value="送出" class="btn btn-primary mt-3" />
+
 
 
 
@@ -182,3 +190,15 @@
         });
     });
 </script>
+@section scripts{
+    <script>
+        $('#submit').click(function () {
+            if ($('#member_password').val() != $('#Password2').val()) {
+                alert("兩次輸入的密碼不一致！");
+                return false;
+            }
+        });
+
+    </script>
+
+}
