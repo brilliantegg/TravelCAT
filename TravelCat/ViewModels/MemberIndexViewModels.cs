@@ -22,8 +22,10 @@ namespace TravelCat.ViewModels
 
         public List<comment_emoji_details> comment_emoji_details { get; set; }
         public List<message_emoji_details> message_emoji_details { get; set; }
-        public List<follow_list> follow_list { get; set; }
+        public List<follow_list> follow { get; set; }
 
+        public List<follow_list> followed { get; set; }
+        public List<follow_list> follow_list { get; set; }
         public List<collections_detail> collections_detail { get; set; }
 
         public List<activity> activity { get; set; }

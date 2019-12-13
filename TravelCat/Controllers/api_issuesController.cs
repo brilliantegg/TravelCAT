@@ -16,70 +16,71 @@ namespace TravelCat.Controllers
     {
         private dbTravelCat db = new dbTravelCat();
 
-        // GET: api/api_issues
-        public IQueryable<issue> Getissue()
-        {
-            return db.issue;
-        }
+        //// GET: api/api_issues
+        //public IQueryable<issue> Getissue()
+        //{
+        //    return db.issue;
+        //}
 
-        // GET: api/api_issues/5
-        [ResponseType(typeof(issue))]
-        public IHttpActionResult Getissue(int id)
-        {
-            issue issue = db.issue.Find(id);
-            if (issue == null)
-            {
-                return NotFound();
-            }
+        //// GET: api/api_issues/5
+        //[ResponseType(typeof(issue))]
+        //public IHttpActionResult Getissue(int id)
+        //{
+        //    issue issue = db.issue.Find(id);
+        //    if (issue == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return Ok(issue);
-        }
+        //    return Ok(issue);
+        //}
 
-        // PUT: api/api_issues/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult Putissue(int id, issue issue)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+        //// PUT: api/api_issues/5
+        //[ResponseType(typeof(void))]
+        //public IHttpActionResult Putissue(int id, issue issue)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
 
-            if (id != issue.id)
-            {
-                return BadRequest();
-            }
+        //    if (id != issue.id)
+        //    {
+        //        return BadRequest();
+        //    }
 
-            db.Entry(issue).State = EntityState.Modified;
+        //    db.Entry(issue).State = EntityState.Modified;
 
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!issueExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+        //    try
+        //    {
+        //        db.SaveChanges();
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        if (!issueExists(id))
+        //        {
+        //            return NotFound();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
 
-            return StatusCode(HttpStatusCode.NoContent);
-        }
+        //    return StatusCode(HttpStatusCode.NoContent);
+        //}
         [HttpPost]
         // POST: api/api_issues
         [ResponseType(typeof(issue))]
-        public IHttpActionResult Post(string memberId,string issueContent)
+        public IHttpActionResult Post(string memberId,string issueContent,int issue_id, int problem_id = 1)
         {
             issue issue = new issue();
             issue.member_id = memberId;
             issue.issue_content = issueContent;
             issue.admin_id = 1;
-            issue.issue_id = 3;
+            issue.issue_id = issue_id;
             issue.report_date = DateTime.Now;
+            issue.problem_id = problem_id.ToString();
             db.issue.Add(issue);
             db.SaveChanges();
 

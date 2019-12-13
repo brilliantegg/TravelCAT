@@ -5,6 +5,16 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/web-Layout.cshtml";
+    string mem_id;
+
+        if (Session["memberID"] == null || string.IsNullOrWhiteSpace(Session["memberID"].ToString()))
+        {
+            mem_id = "null";
+        }
+        else
+        {
+            mem_id = Session["memberID"].ToString();
+        }
 }
 <link href="~/Content/web-Home.css" rel="stylesheet" />
 
@@ -93,7 +103,8 @@
                                 <h5 class="card-title">@Model.spot[i].spot_title</h5>
                                 <p class="card-text">@Model.spot[i].spot_intro</p>
                                 <p class="card-city" style="color: #128566; font-weight: 900; padding-top: 5px;">@Model.spot[i].city</p>
-                                @Html.ActionLink("more", "Details", "WebSpots", new { id = @Model.spot[i].spot_id }, new { @class = "btn btn-sm" })
+                                
+                                @Html.ActionLink("more", "Details", "WebSpots", new { id = @Model.spot[i].spot_id }, new { @class = "btn btn-primary btn-sm" })
                             </div>
                         </div>
                     }
@@ -111,7 +122,7 @@
                                 <h5 class="card-title">@Model.activity[i].activity_title</h5>
                                 <p class="card-text">@Model.activity[i].activity_intro</p>
                                 <p class="card-city" style="color: #128566; font-weight: 900; padding-top: 5px;">@Model.spot[i].city</p>
-                                @Html.ActionLink("more", "Details", "web_activities", new { id = @Model.activity[i].activity_id }, new { @class = "btn btn-sm" })
+                                @Html.ActionLink("more", "Details", "Web_activities", new { id = @Model.activity[i].activity_id }, new { @class = "btn btn-primary btn-sm" })
                             </div>
                         </div>
                     }
@@ -129,7 +140,7 @@
                                 <h5 class="card-title">@Model.hotel[i].hotel_title</h5>
                                 <p class="card-text">@Model.hotel[i].hotel_intro</p>
                                 <p class="card-city" style="color: #128566; font-weight: 900; padding-top: 5px;">@Model.spot[i].city</p>
-                                @Html.ActionLink("more", "Details", "webHotels", new { id = @Model.hotel[i].hotel_id }, new { @class = "btn btn-sm" })
+                                @Html.ActionLink("more", "Details", "WebHotels", new { id = @Model.hotel[i].hotel_id }, new { @class = "btn btn-primary btn-sm" })
                             </div>
                         </div>
                     }
@@ -147,7 +158,7 @@
                                 <h5 class="card-title">@Model.restaurant[i].restaurant_title</h5>
                                 <p class="card-text">@Model.restaurant[i].restaurant_intro</p>
                                 <p class="card-city" style="color: #128566; font-weight: 900; padding-top: 5px;">@Model.spot[i].city</p>
-                                @Html.ActionLink("more", "Details", "webRestaurants", new { id = @Model.restaurant[i].restaurant_id }, new { @class = "btn btn-sm" })
+                                @Html.ActionLink("more", "Details", "WebRestaurants", new { id = @Model.restaurant[i].restaurant_id }, new { @class = "btn btn-primary btn-sm" })
                             </div>
                         </div>
                     }
@@ -277,15 +288,40 @@
         <li>
             <strong>行動商務第 2 組專題</strong>
             <ul>
-                <li><a href="要連結的 URL 放這裡" target="連結目標" title="連結替代文字">要顯示的連結文字或圖片放這裡</a></li>
 
             </ul>
             <ul class="right">
-                <li>Zipcode/City</li>
+                <li></li>
 
             </ul>
         </li>
     </ul>
+    <button type="button" class="btn btn-btn-dark" data-toggle="modal" data-target="#exampleModal" data-whatever="">回報問題 </button>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">網站問題回報</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <form>
+
+                        <div class="form-group">
+                            <label for="message-text" class="col-form-label">問題內容:</label>
+                            <textarea class="form-control" id="report_message"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">                    
+                    <button type="button" class="btn btn-dark submit_web_issue" data-dismiss="modal">送出</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </footer>
 
 <script>
@@ -293,7 +329,36 @@
     //$('.carousel').carousel({
     //    interval: false
     //})
+    //檢舉評論
+        var id ;
+        var tourismId = "@ViewBag.tourismId";
+        if ("@Session["memberID"]" =="") {
+            id = null
+        } else {
+            id = "@Session["memberID"]"
+        }
 
+        function sendReport() {
+
+            $.ajax({
+                type: 'POST',
+                url: `http://localhost:54678/api/api_issues?memberId=${id}&issueContent=${$('#report_message').val()}&issue_id=1`,
+                success: function (data, status) {
+                    alert("提交成功!")
+                }
+            });
+            $('#report_message').val("")
+        }
+        $(".submit_web_issue").click(function (e) {
+
+            if (id == null) {
+                event.stopPropagation();
+                alert('請先登入:)');
+                return false;
+            }
+
+            sendReport()
+        });
 
 
 
