@@ -41,6 +41,7 @@ namespace TravelCat.Models
         [DisplayName("帳號")]
         [Required(ErrorMessage = "此欄位為必填")]
         [StringLength(15, ErrorMessage = "最多15個字")]
+        [Checkmemberacc]
         public string member_account { get; set; }
 
         [DisplayName("密碼")]
@@ -207,6 +208,7 @@ namespace TravelCat.Models
         [DisplayName("會員姓名")]
         [Required(ErrorMessage = "此欄位為必填")]
         [StringLength(20, ErrorMessage = "此欄為最多20個字")]
+
         public string member_name { get; set; }
 
         [DisplayName("性別")]
@@ -599,6 +601,26 @@ namespace TravelCat.Models
         public string tourism_photo1 { get; set; }
     }
 
+    public class Checkmemberacc : ValidationAttribute
+    {
+        dbTravelCat db = new dbTravelCat();
+
+        public Checkmemberacc()
+        {
+            ErrorMessage = "帳號重複";
+        }
+
+        public override bool IsValid(object value)
+        {
+            var result = db.member.Where(c => c.member_account == value.ToString()).FirstOrDefault();
+
+            if (result == null)
+                return true;
+
+            return false;
+        }
+
+    }
 
 
 

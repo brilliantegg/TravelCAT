@@ -114,8 +114,8 @@ section {
         position: absolute;
         bottom: 20px;
         right: 20px;
-        color: #16ac84;
-        background-color: white;
+        color: #fff;
+        background-color: #16ac84;
     }
 
             .container .row .col-12 .tab-content .tab-pane .card .card-body .btn:hover {
@@ -155,7 +155,7 @@ section {
         }
 
 
-
+        /*留言卡*/
 .Card-group {
     display: flex;
     justify-content: space-between;
@@ -166,6 +166,10 @@ section {
 }
 
     .container .comment-main .comment {
+        width: 100%;
+        height: 330px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
         display: flex;
         justify-content: space-between;
     }
@@ -179,7 +183,6 @@ section {
                 font-size: 1.5rem;
                 font-weight: 700;
                 color: #844200;
-                padding: 20px;
                 border-bottom: 1px solid #CCC;
             }
             .container .comment-main .comment .card-lg .card-body .mem-comment {
@@ -206,7 +209,7 @@ section {
 
                 .container .comment-main .comment .card-sm {
                     width: 35%;
-                    height: 342px;
+                    height: 330px;
                 }
 
                     .container .comment-main .comment .card-sm .card-body {
@@ -237,6 +240,9 @@ section {
             cursor: default;
         }
 
+
+
+        /*時間軸*/
 .container .item {
     width: 32%;
 }
