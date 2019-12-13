@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using TravelCat.Models;
+using X.PagedList.Mvc;
+using X.PagedList;
 
 namespace TravelCat.ViewModels
 {
@@ -14,8 +16,9 @@ namespace TravelCat.ViewModels
         public List<spot> spot { get; set; }
         public List<member_profile> member { get; set; }
         public List<comment> comment { get; set; }
+        public IPagedList<result_rating> show_ratings { get; set; }
         public List<result_rating> result_ratings { get; set; }
-     }
+    }
     public class result_rating 
     {
         public string id { get; set; }

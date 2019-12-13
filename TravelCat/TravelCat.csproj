@@ -2435,6 +2435,9 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Search\_Hotel.cshtml" />
+    <Content Include="Views\Search\_Restaurant.cshtml" />
+    <Content Include="Views\Search\_Spot.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
