@@ -12,7 +12,7 @@
 </head>
 <body>
     @{ string mem_id;
-       string returnUrl = Request.Url.AbsoluteUri;
+        string returnUrl = Request.Url.AbsoluteUri;
         if (Session["memberID"] == null || string.IsNullOrWhiteSpace(Session["memberID"].ToString()))
         {
             mem_id = "null";
@@ -42,7 +42,7 @@
                 else
                 {
                     <div>
-                        @Html.ActionLink("登入", "LogIn", "Home", new { returnUrl=returnUrl}, new { @class = "  aTag_style" })
+                        @Html.ActionLink("登入", "LogIn", "Home", new { returnUrl = returnUrl }, new { @class = "  aTag_style" })
                     </div>
                 }
             </div>
@@ -75,6 +75,7 @@
     <script src="~/Scripts/modernizr-2.8.3.js"></script>
     <script src="~/Scripts/bootstrap.bundle.js"></script>
     <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    @*<script src="~/Scripts/bootstrap.js"></script>*@
     @RenderBody()
     @RenderSection("scripts", required: false)
     @*@RenderPage("~/Views/Shared/_footer.cshtml" )*@

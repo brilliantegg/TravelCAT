@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<TravelCat.Models.hotel>
 
 @{
-    Layout = null;
+    Layout = "~/Views/Shared/web-Layout.cshtml";
 }
 
 <!DOCTYPE html>
@@ -12,9 +12,7 @@
     <title>Index</title>
 </head>
 <body>
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
+
     <table class="table">
         <tr>
             <th>
@@ -33,9 +31,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.address_detail)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.page_status)
-            </th>
+            
             <th></th>
         </tr>
     
@@ -57,9 +53,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.address_detail)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.page_status)
-            </td>
+           
             <td>
 
                 @Html.ActionLink("Details", "Details", new { id=item.hotel_id }) |

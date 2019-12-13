@@ -105,47 +105,53 @@
 
 
                             <li> 評論數 @Model.comment.Where(m => m.member_id == @Model.member.member_id).Count()</li>
-                            <li> 追蹤者 @Model.follow_list.Where(m => m.followed_id == @Model.member.member_id).Count()</li>
-                            <li> 關注中 @Model.follow_list.Where(m => m.member_id == @Model.member.member_id).Count() </li>
+                            <li> 追蹤者 <a data-toggle="modal" class="text-primary" data-target="#follow">@Model.follow.Count()</a></li>
+                            <li> 關注中 <a data-toggle="modal" class="text-primary" data-target="#followed">@Model.followed.Count()</a> </li>
                             <li> 加入時間 @Model.member_profile.create_time.ToString("yyyy MM dd")</li>
-
-
                             <li>
                                 分數 @{
                                     var comeent_num = Model.comment.Where(m => m.member_id == @Model.member.member_id).Count();
-                                    var follow_num = @Model.follow_list.Where(m => m.member_id == @Model.member.member_id).Count();
+                                    var follow_num = @Model.followed.Count();
                                     var score = comeent_num * 5 + follow_num * 5;
                                 }
                                 @score
                             </li>
 
                         </ul>
+
+                        
+
+
+
+
+
                     </div>
+
                     <div class="badge">
                         @{
                             string badge = "";
                             if (score > 1000)
                             {
 
-                                <img src='http://localhost:54678/images/badges/9.png' />
-                                <img src='http://localhost:54678/images/badges/1000_invites.png' />
-                                <img src='http://localhost:54678/images/badges/100000_comments.png' />
-                                <img src='http://localhost:54678/images/badges/50000_fans.png' />
+                                <img src='http://localhost:54678/images/badges/9.png' title="300分徽章" data-toggle="popover" data-placement="bottom" />
+                                <img src='http://localhost:54678/images/badges/1000_invites.png' title="400分徽章" data-toggle="popover" data-placement="bottom" />
+                                <img src='http://localhost:54678/images/badges/100000_comments.png' title="500分徽章" data-toggle="popover" data-placement="bottom" />
+                                <img src='http://localhost:54678/images/badges/50000_fans.png' title="1000分徽章" data-toggle="popover" data-placement="bottom" />
                             }
                             else if (score > 500)
                             {
-                                <img src='http://localhost:54678/images/badges/9.png' />
-                                <img src='http://localhost:54678/images/badges/1000_invites.png' />
-                                <img src='http://localhost:54678/images/badges/100000_comments.png' />
+                                <img src='http://localhost:54678/images/badges/9.png' title="300分徽章" data-toggle="popover" data-placement="bottom" />
+                                <img src='http://localhost:54678/images/badges/1000_invites.png' title="400分徽章" data-toggle="popover" data-placement="bottom" />
+                                <img src='http://localhost:54678/images/badges/100000_comments.png' title="500分徽章" data-toggle="popover" data-placement="bottom" />
                             }
                             else if (score > 400)
                             {
-                                <img src='http://localhost:54678/images/badges/9.png' />
-                                <img src='http://localhost:54678/images/badges/1000_invites.png' />
+                                <img src='http://localhost:54678/images/badges/9.png' title="300分徽章" data-toggle="popover" data-placement="bottom" />
+                                <img src='http://localhost:54678/images/badges/1000_invites.png' title="400分徽章" data-toggle="popover" data-placement="bottom" />
                             }
                             else if (score > 300)
                             {
-                                <img src='http://localhost:54678/images/badges/9.png' />
+                                <img src='http://localhost:54678/images/badges/9.png' title="300分徽章" data-toggle="popover" data-placement="bottom" />
                             }
                         }
                         @badge
@@ -222,8 +228,12 @@
 
 
 <script>
+    $(function (){
+    $("[data-toggle='popover']").popover();
+    });
 
-    $(".personal_info").click(function () {
+
+    $(".follwered_btn").click(function () {
         if ($(".follwered_btn").text()=="-追蹤"){
             Unfollowed()
         } else if($(".follwered_btn").text()=="+追蹤"){

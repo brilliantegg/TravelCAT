@@ -31,7 +31,7 @@
                     <input id="comment_id" type="hidden" value=@item.comment_id />
                     <div class="member_detail ">
                         <div class="d-flex">
-                            <img class="member_avatar" src="~/images/member/@item.member.member_profile.profile_photo" alt="...">
+                            <img class="member_avatar" src="~/images/member/@item.member.member_profile.profile_photo" alt="..." onerror="this.src='/images/member/avatar.png';">
                             <div class="d-flex">
                                 <h5 class="member_name">@item.member.member_profile.nickname</h5>
                             </div>
