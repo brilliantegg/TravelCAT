@@ -44,9 +44,7 @@ namespace TravelCat.Controllers
             return View();
         }
 
-        // POST: messages/Create
-        // 若要免於過量張貼攻擊，請啟用想要繫結的特定屬性，如需
-        // 詳細資訊，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "msg_id,msg_time,msg_content,comment_id,member_id")] message message)
@@ -80,9 +78,7 @@ namespace TravelCat.Controllers
             return View(message);
         }
 
-        // POST: messages/Edit/5
-        // 若要免於過量張貼攻擊，請啟用想要繫結的特定屬性，如需
-        // 詳細資訊，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "msg_id,msg_time,msg_content,comment_id,member_id")] message message)
