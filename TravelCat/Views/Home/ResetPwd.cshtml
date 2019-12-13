@@ -1,67 +1,69 @@
 ﻿@model TravelCat.Models.member
 
 @{
-    ViewBag.Title = "ResetPwd";
-    Layout = "~/Views/Shared/web-Layout.cshtml";
+    ViewBag.Title = "重設密碼";
+    Layout = "~/Views/Shared/_Layout 1.cshtml";
 }
+    <link href="~/Content/web-Login.css" rel="stylesheet" />
 
 <div class="container">
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
+    <div class="main">
+        <div class="Login-box">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
 
-        <div class="form-horizontal">
-            <h2>重設密碼</h2>
-            <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            @Html.HiddenFor(model => model.member_id)
+                    <h2>重設密碼</h2>
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.member_id)
 
-            <div class="form-group">
-                <label class="col-form-label">新密碼</label>
-                <div class="col-md-10">
-                    <input id="Password1" type="password" name="newpassword" class="form-control" />
-                </div>
-            </div>
+                    <div class="form-inline mb-4">
+                        <label class="col-form-label">新密碼</label>
+                            <input id="Password1" type="password" name="newpassword" class="form-control" />
+                    </div>
 
-            <div class="form-group">
-                <label class="col-form-label">確認密碼</label>
-                <div class="col-md-10">
-                    <input id="Password2" type="password" class="form-control" />
-                </div>
-            </div>
+                    <div class="form-inline mb-4">
+                        <label class="col-form-label">確認密碼</label>
+                            <input id="Password2" type="password" class="form-control" />
+                    </div>
 
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input id="submit" type="submit" value="更改密碼" class="btn btn-primary" />
-                </div>
-            </div>
+                            <input id="submit" type="submit" value="確定更改密碼" class="btn btn-primary" />
+            }
         </div>
-    }
-
+    </div>
 </div>
-<script src="~/Scripts/jquery-3.4.1.min.js"></script>
-<script src="~/Scripts/jquery.validate.min.js"></script>
-<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
-<script>
-    $('#submit').click(function () {
-        var psd1 = $('#Password1').val();
-        var psd2 = $('#Password2').val();
-
-        if (psd1 == "") {
-            alert("請輸入新密碼！");
-            return false;
-        }
-        if (psd2 == "") {
-            alert("請輸入確認密碼！");
-            return false;
-        }
-        else if (psd1 != psd2) {
-            alert("兩次輸入的密碼不一致！");
-            return false;
-        }
-        else
-            alert("密碼更改成功，按下確定至登入頁面");
+@section scripts{
+    <script>
+        $('#submit').click(function () {
+            var psd1 = $('#Password1').val();
+            var psd2 = $('#Password2').val();
+            if (psd1 == "") {
+                alert("請輸入新密碼！");
+                return false;
+            }
+            if (psd2 == "") {
+                alert("請輸入確認密碼！");
+                return false;
+            }
+            else if (psd1 != psd2) {
+                alert("兩次輸入的密碼不一致！");
+                return false;
+            }
+            else
+                alert("密碼更改成功，按下確定至登入頁面");
             return true;
-    });
-    
-</script>
+        });
+
+        $('#show_password').click(function () {
+            if ($('#Password1').attr("type") && $('#Password2').attr("type") == "password") {
+                $('#Password1').attr("type", "text");
+                $('#Password2').attr("type", "text");
+            }
+            else {
+                $('#Password1').attr("type", "password");
+                $('#Password2').attr("type", "password");
+            }
+        });
+    </script>
+}

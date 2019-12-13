@@ -1,0 +1,61 @@
+﻿body {
+    background-image: url('../images/bled-1899264_1920.jpg');
+    z-index: -2;
+}
+body::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(200,200,200,.6);
+    z-index: -1;
+    min-height: calc(100vh - 117px);
+}
+.container {
+    display: flex;
+    justify-content: center;
+}
+.container .main{
+    margin-top: 50px;
+    width: 400px;
+}
+    .container .main>ul{
+        display: flex;
+        margin-bottom: 0;
+    }
+        .container .main > ul li a{
+           padding: 10px;
+           width: 100px;
+           margin-right:20px;
+           display: inline-block;
+           background-color: #ccc;
+           text-align: center;
+           border-radius: 10% 10% 0 0;
+           text-decoration: none;
+        }
+        .container .main .active{
+            background-color: #fff;
+        }
+    .container .main .Login-box {
+        color: #239ad1;
+        padding: 20px;
+        background-color: #FFF;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+    }
+.container .main .Login-box .text-info {
+    text-decoration: none;
+    color: #239ad1 !important;
+}
+            .container .main .Login-box .text-info:hover {
+                color: #38afe6 !important;
+            }
+            .container .main .Login-box .btn {
+                background-color: #239ad1;
+            }
+                .container .main .Login-box .btn:hover {
+                    background-color: #38afe6;
+                }

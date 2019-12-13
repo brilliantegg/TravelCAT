@@ -2,15 +2,6 @@
 
 @{
     ViewBag.Title = "Index";
-    var account = "";
-    if(Session["id"] == null || string.IsNullOrWhiteSpace(Session["id"].ToString()))
-    {
-        Response.Redirect("~/Loginadmin/Index");
-    }
-    else
-    {
-        account = Session["id"].ToString();
-    }
 }
 
 <h2>管理員</h2>
@@ -23,9 +14,6 @@
         <th>
             @Html.DisplayNameFor(model => model.admin_account)
         </th>
-        @*<th>
-            @Html.DisplayNameFor(model => model.admin_password)
-        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.admin_email)
         </th>
@@ -40,14 +28,18 @@
         <td>
             @Html.DisplayFor(modelItem => item.admin_account)
         </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.admin_password)
-        </td>*@
         <td>
             @Html.DisplayFor(modelItem => item.admin_email)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.emailConfirmed)
+            @if (item.emailConfirmed == true)
+            {
+                <span class="badge badge-success">已驗證</span>
+            }
+            else
+            {
+                <span class="badge badge-danger">未驗證</span>
+            }
         </td>
         <td>
             @Html.ActionLink("修改個人資料", "Edit", new { id = item.admin_id }, new { @class = "btn btn-primary" }) |

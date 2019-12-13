@@ -12,6 +12,7 @@ using System.IO;
 
 namespace TravelCat.Controllers
 {
+    [LoginCheck]
     public class ActivitiesController : Controller
     {        
         dbTravelCat db = new dbTravelCat();
