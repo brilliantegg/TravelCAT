@@ -18,7 +18,7 @@ namespace TravelCat.Controllers
         // GET: web_activities
         public ActionResult Index()
         {
-            return View(db.spot.OrderByDescending(m=>m.update_date).Take(100).ToList());
+            return View(db.spot.ToList());
         }
 
         // GET: web_activities/Details/5

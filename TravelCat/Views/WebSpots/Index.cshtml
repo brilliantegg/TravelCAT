@@ -1,73 +1,35 @@
-﻿@model IEnumerable<TravelCat.Models.spot>
+﻿
+
+@model IEnumerable<TravelCat.Models.spot>
+
+
 
 @{
-    Layout = null;
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/web-Layout.cshtml";
+
 }
 
-<!DOCTYPE html>
+<div class="container">
+    <ul>
+        <li>
+            <h2></h2>
+            <div class="item">
+            </div>
+        </li>
+        <li>
+            <h2>北部地區</h2>
+        </li>
+        <li>
+            <h2>北部地區</h2>
+        </li>
+        <li>
+            <h2>北部地區</h2>
+        </li>
+        <li>
+            <h2>北部地區</h2>
+        </li>
+    </ul>
+</div>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
 
-    <table class="table container">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.spot_title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.spot_tel)
-            </th>
-
-            <th>
-                @Html.DisplayNameFor(model => model.addition_note)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.city)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.district)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.address_detail)
-            </th>
-
-            <th></th>
-        </tr>
-    
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.spot_title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.spot_tel)
-            </td>
-
-            <td>
-                @Html.DisplayFor(modelItem => item.addition_note)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.city)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.district)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.address_detail)
-            </td>
-
-            <td>
-
-                @Html.ActionLink("Details", "Details", new { id=item.spot_id }) |
-
-            </td>
-        </tr>
-    }
-    
-    </table>
-</body>
-</html>
