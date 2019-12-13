@@ -30,11 +30,18 @@
                 </div>
 
                 <div>
-                    <input type="checkbox" id="show_password" class="mb-3"/>顯示密碼<br />
+                    <input type="checkbox" id="show_password" class="mb-3" />顯示密碼<br />
                     <a href="@Url.Action("ForgetPwd","Home")" class="text-info text-right">忘記密碼?</a>
                 </div>
+                @if (@ViewBag.returnUrl == null)
+                {
+                    <input type="hidden" name="returnUrl" value="http://localhost:54678/Home/Index" />
+                }
+                else
+                {
+                    <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl" />
+                }
 
-                <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl" />
                 <input id="Submit1" type="submit" value="送出" class="btn btn-info mt-3 mr-3 " />
                 <input id="Reset1" type="reset" value="清除" class="btn btn-info mt-3 ml-3" />
             </form>

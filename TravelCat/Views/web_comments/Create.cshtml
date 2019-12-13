@@ -66,7 +66,7 @@
 
 
 
-<form action="/web_comments/Create" method="post" enctype="multipart/form-data">
+<form action="/web_comments/Create" method="post" enctype="multipart/form-data" data-toggle="validator">
     @Html.AntiForgeryToken()
 
     <div class=" py-4" style="height:110%;">
@@ -79,13 +79,15 @@
 
                     <div class="col-md-12">
                         <label class="btn darkolivegreen-cat">
-                            <input type="file" id="imgInp" name="comment_photo" style="display:none;" accept="image/gif, image/jpeg, image/png">
-                            <i class="fa fa-photo"></i> 上傳圖片
+                            <input type="file" id="imgInp" name="photo" style="display:none;" accept="image/gif, image/jpeg, image/png" required="required">
+                            上傳圖片
                         </label>
+
+                        <span class="error_message text-danger"></span>
                         <br />
                         <div class="row">
                             <img id="preview_img" src="https://images.unsplash.com/photo-1516546453174-5e1098a4b4af?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80" alt="預覽圖片" class="col-md-12" />
-                            @Html.ValidationMessageFor(model => model.comment_photo, "", new { @class = "text-danger" })
+                            @*@Html.ValidationMessageFor(model => model.comment_photo, "", new { @class = "text-danger" })*@
                         </div>
                     </div>
                 </div>
@@ -97,8 +99,9 @@
                     <div class=" form-group  ">
                         <h3> @Html.LabelFor(model => model.comment_title, htmlAttributes: new { @class = "control-label col-md-8" })</h3>
                         <div class="col-md-10">
-                            @Html.EditorFor(model => model.comment_title, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(model => model.comment_title, new { htmlAttributes = new { @class = "form-control comment_title" } })
                             @Html.ValidationMessageFor(model => model.comment_title, "", new { @class = "text-danger" })
+                             <span class="title_error_message text-danger"></span>
                         </div>
                     </div>
                     <!--評論內容-->
@@ -109,9 +112,9 @@
 
                         </h4>
                         <div class="col-md-10">
-                            @Html.TextAreaFor(model => model.comment_content, new { @class = "form-control", rows = "5" })
+                            @Html.TextAreaFor(model => model.comment_content, new { @class = "form-control comment_content", rows = "5" })
                             @Html.ValidationMessageFor(model => model.comment_content, "", new { @class = "text-danger" })
-
+                            <span class="content_error_message text-danger"></span>
                         </div>
                     </div>
                     <!--旅伴-->
@@ -122,9 +125,9 @@
 
                         </h4>
                         <div class="col-md-10">
-                            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                            <div class="btn-group btn-group-toggle" data-toggle="buttons" required="required">
                                 <label class="btn btn-outline-darkolivegreen travel_partner ">
-                                    <input type="radio" name="travel_partner" id="travel_partner1" autocomplete="off" checked value="蜜月"> 蜜月
+                                    <input type="radio" name="travel_partner" id="travel_partner1" autocomplete="off" value="蜜月"> 蜜月
                                 </label>
                                 <label class="btn btn-outline-darkolivegreen travel_partner">
                                     <input type="radio" name="travel_partner" id="travel_partner2" autocomplete="off" value="伴侶"> 伴侶
@@ -141,6 +144,7 @@
                             </div>
                         </div>
                         @Html.ValidationMessageFor(model => model.travel_partner, "", new { @class = "text-danger" })
+                       <span class="partner_error_message  text-danger"></span>
                     </div>
                     <!--bottom-->
                     <div class="form-group ">
@@ -152,7 +156,7 @@
                         <div class="col-md-10 ">
                             <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                 <label class="btn btn-outline-darkolivegreen comment_rating ">
-                                    <input type="radio" name="comment_rating" id="comment_rating1" autocomplete="off" checked value="1">1分
+                                    <input type="radio" name="comment_rating" id="comment_rating1" autocomplete="off" value="1">1分
                                 </label>
                                 <label class="btn btn-outline-darkolivegreen comment_rating">
                                     <input type="radio" name="comment_rating" id="comment_rating2" autocomplete="off" value="2"> 2分
@@ -167,10 +171,8 @@
                                     <input type="radio" name="comment_rating" id="comment_rating5" autocomplete="off" value="5"> 5分
                                 </label>
                             </div>
-
-
-
                             @Html.ValidationMessageFor(model => model.comment_rating, "", new { @class = "text-danger" })
+                            <span class="rating_error_message  text-danger"></span>
                         </div>
 
                         <!--發表時間 -->
@@ -186,8 +188,8 @@
                             <div class="col-md-10">
 
                                 <div class="input-group mb-3">
-                                    <select class="custom-select" id="inputGroupSelect01" name="travel_month">
-                                        <option selected>請選擇旅遊月份</option>
+                                    <select class="custom-select" id="travel_month" name="travel_month">
+                                        <option disabled>請選擇旅遊月份</option>
                                         <option value="1">1月</option>
                                         <option value="2">2月</option>
                                         <option value="3">3月</option>
@@ -204,6 +206,7 @@
                                 </div>
 
                                 @Html.ValidationMessageFor(model => model.travel_month, "", new { @class = "text-danger" })
+                                 <span class="month_error_message  text-danger"></span>
                             </div>
                         </div>
                         <!--停留時間-->
@@ -216,7 +219,7 @@
                             <div class="col-md-10">
                                 <div class="input-group mb-6">
                                     <select class="custom-select" id="comment_stay_total" name="comment_stay_total">
-                                        <option selected>請選擇停留時間</option>
+                                        <option disabled>請選擇停留時間</option>
                                         <option value="1">1小時</option>
                                         <option value="2">2小時</option>
                                         <option value="3">3小時</option>
@@ -244,7 +247,7 @@
                     <div class=" col-md-10 ">
                         <div class="form-group justify-content-end row">
 
-                            <input type="submit" value="Create" class="btn btn-lg darkolivegreen-cat" />
+                            <input type="submit" value="Create" class="btn btn-lg darkolivegreen-cat sumbit_comment" />
                         </div>
                     </div>
                 </div>
@@ -257,7 +260,65 @@
 
 @section scripts {
     <script>
+         
+        $(".sumbit_comment").click(function (e) {
 
+            var file = $("#imgInp").val();  //Fetch the filename of the submitted file
+            var comment_content = $('.comment_content').val();
+            var comment_title = $('.comment_title').val();
+            if (file == ''){    //Check if a file was selected
+            $(".error_message").text("請上傳圖片");
+            e.preventDefault();
+            }
+            if (comment_content == '') {
+                $(".content_error_message ").text("請輸入內容");
+             e.preventDefault();
+            }
+            if (comment_title == '') {
+                $(".title_error_message ").text("請輸入內容");
+             e.preventDefault();
+            }
+            //驗證旅伴
+            var genValue = false;
+            var travel_partner = document.getElementsByName('travel_partner');
+             for(var i=0; i<travel_partner.length;i++){
+            if(travel_partner[i].checked == true){
+                genValue = true;    
+                }
+            }
+            if(!genValue){
+             $(".partner_error_message ").text("請輸入內容");
+                e.preventDefault();
+            }
+            //驗證評分
+            var rateValue = false;
+            var comment_rating = document.getElementsByName('comment_rating');
+             for(var i=0; i<comment_rating.length;i++){
+            if(comment_rating[i].checked == true){
+                rateValue = true;    
+                }
+            }
+            if(!rateValue){
+             $(".rating_error_message ").text("請輸入內容");
+                e.preventDefault();
+            }
+            //旅遊月份
+            var monthValue = false;
+            var travel_month = document.getElementsByName('travel_month');
+             for(var i=0; i<travel_month.length;i++){
+            if(travel_month[i].checked == true){
+                monthValue = true;    
+                }
+            }
+            if(!monthValue){
+             $(".month_error_message ").text("請輸入內容");
+                e.preventDefault();
+            }
+            //停留時間
+            
+    
+});
+       
     function readURL(input){
       if(input.files && input.files[0]){
         var reader = new FileReader();

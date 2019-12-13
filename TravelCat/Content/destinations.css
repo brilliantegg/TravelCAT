@@ -427,11 +427,9 @@ html {
 
 body {
     color: #999999;
-    font-family: 'Roboto','Helvetica Neue', Helvetica, Arial, sans-serif;
     font-style: normal;
     font-weight: 400;
     letter-spacing: 0;
-    padding: 1rem;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -452,10 +450,10 @@ img {
     text-transform: lowercase;
 }
 
-.btn--block {
-    display: block;
-    width: 100%;
-}
+    .btn--block {
+        display: block;
+        width: 100%;
+    }
 
 .cards {
     display: flex;
@@ -511,7 +509,7 @@ img {
     }
 
 .card__image--record {
-    background-image: url(https://unsplash.it/800/600?image=39);
+    background-image: url(https://images.unsplash.com/photo-1434434319959-1f886517e1fe?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1189&q=80);
 }
 
 .card__title {

@@ -143,7 +143,7 @@ namespace TravelCat.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(comment comment, HttpPostedFileBase comment_photo)
+        public ActionResult Create(comment comment, HttpPostedFileBase photo)
         {
             string id = comment.tourism_id.Substring(0, 1);
             string controller;
@@ -168,12 +168,12 @@ namespace TravelCat.Controllers
             //處理圖檔上傳
             string fileName = "";
             string rename_filename = "";
-            if (comment_photo != null)
+            if (photo != null)
             {
-                if (comment_photo.ContentLength > 0)
+                if (photo.ContentLength > 0)
                 {
 
-                    fileName = System.IO.Path.GetFileName(comment_photo.FileName);      //取得檔案的檔名(主檔名+副檔名)
+                    fileName = System.IO.Path.GetFileName(photo.FileName);      //取得檔案的檔名(主檔名+副檔名)
                     rename_filename = comment.comment_id + "_" + DateTime.Now.ToString().Replace("/", "").Replace(":", "").Replace(" ", "") + Path.GetExtension(fileName);
 
                 }
@@ -181,7 +181,7 @@ namespace TravelCat.Controllers
             //end
             if (ModelState.IsValid)
             {
-                comment_photo.SaveAs(Server.MapPath("~/images/comment/" + rename_filename));      //將檔案存到該資料夾
+                photo.SaveAs(Server.MapPath("~/images/comment/" + rename_filename));      //將檔案存到該資料夾
                 comment.comment_date = DateTime.Now;
                 comment.comment_photo = rename_filename;
                 db.comment.Add(comment);
@@ -192,7 +192,7 @@ namespace TravelCat.Controllers
                 return RedirectToRoute(new { controller = controller, action = "Details", id = comment.tourism_id });
 
             }
-
+            ViewBag.tourismID = comment.tourism_id;
             return View(comment);
         }
 
