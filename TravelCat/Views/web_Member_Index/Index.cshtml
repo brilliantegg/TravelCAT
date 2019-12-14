@@ -15,10 +15,8 @@
     }
 }
 
-<div class="jumbotron jumbotron-fluid text-catcolor">
 
-</div>
-<div class="user_profile_header container">
+<div class="user_profile_header ">
 
         <div class="profile_avatar d-flex row ">
             @if (@Model.member_profile.profile_photo != null)
@@ -32,7 +30,7 @@
             
         <div class="member_header">
             <div class="personal_info ">
-                <h2 class="">@Model.member_profile.nickname</h2>
+                <h2 class="" style="color:black">@Model.member_profile.nickname</h2>
                 <p class="brief">@Model.member_profile.brief_intro</p>
 
                 <!--編輯會員 or 追蹤會員-->
@@ -55,23 +53,16 @@
             <div class="member_location ">
 
                 <ul class="">
-                    <li><span>location</span></li>
+                    <li><span>地點</span></li>
                     <li><span>@Model.member_profile.city</span></li>
-                    <li><span>website</span></li>
+                    <li><span>網站</span></li>
                     <li><a href="@Model.member_profile.website_link"><i class="far fa-id-card"></i></a></li>
-
                 </ul>
-
             </div>
-
-
         </div>
-
     </div>
-
 </div>
 <div class=" container">
-
     <!-- Modal -->
     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -102,11 +93,9 @@
                 <div style="height:auto">
                     <div>
                         <ul class="">
-
-
                             <li> 評論數 @Model.comment.Where(m => m.member_id == @Model.member.member_id).Count()</li>
-                            <li> 追蹤者 <a data-toggle="modal" class="text-primary" data-target="#follow">@Model.follow.Count()</a></li>
-                            <li> 關注中 <a data-toggle="modal" class="text-primary" data-target="#followed">@Model.followed.Count()</a> </li>
+                            <li> 追蹤者 <a data-toggle="modal" class="info_content " data-target="#follow">@Model.follow.Count()</a></li>
+                            <li> 關注中 <a data-toggle="modal" class="info_content" data-target="#followed">@Model.followed.Count()</a> </li>
                             <li> 加入時間 @Model.member_profile.create_time.ToString("yyyy MM dd")</li>
                             <li>
                                 分數 @{
@@ -116,17 +105,62 @@
                                 }
                                 @score
                             </li>
-
                         </ul>
 
-                        
+                            <div class="modal fade" id="follow" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLongTitle">追蹤者</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <ul class="list-group list-group-flush">
+                                                @foreach (var item in @Model.follow)
+                                                {
+                                                <li class="list-group-item">
+                                                    <img class="member_avatar" src="~/images/member/@item.member.member_profile.profile_photo" alt="..." onerror="this.src='/images/member/avatar.png';">
+                                                    <a href="@Url.Action("Index","web_Member_Index",new {id =@item.member.member_id })">@item.member.member_profile.nickname</a>
+                                                </li>
+                                                }
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal fade" id="followed" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLongTitle">關注中</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <ul class="list-group list-group-flush">
+                                                @foreach (var item in @Model.followed)
+                                                {
+                                                    foreach (var mem in @ViewBag.member_profile)
+                                                    {
+                                                        if (item.followed_id == mem.member_id)
+                                                        {
+                                                            <li class="list-group-item">
+                                                                <img class="member_avatar" src="~/images/member/@mem.profile_photo" alt="..." onerror="this.src='/images/member/avatar.png';">
+                                                                <a href="@Url.Action("Index","web_Member_Index",new {id =@mem.member_id})"> @mem.nickname</a>
+                                                            </li>
+                                                        }
+                                                    }
 
-
-
-
-
+                                                }
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                     </div>
-
                     <div class="badge">
                         @{
                             string badge = "";

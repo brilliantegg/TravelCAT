@@ -186,15 +186,15 @@ textarea:focus {
         padding: 10px;
     }
 
-    .member_avatar {
-        width: 50px;
-        height: 50px;
-        margin-right: 20px;
-        margin-bottom: 5px;
-        background: #f80;
-        border-radius: 50%;
-        object-fit: cover;
-    }
+.member_avatar {
+    width: 50px;
+    height: 50px;
+    margin-right: 20px;
+    margin-bottom: 5px;
+    background: #551029;
+    border-radius: 50%;
+    object-fit: cover;
+}
 .click_button {
     border: 1px solid rgba(0%,0%,100%,0.4);
     
@@ -530,4 +530,13 @@ img {
     display: -webkit-box;
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
+}
+/*留言*/
+.message_body {
+    position: relative;
+}
+.msg_more_action {
+    position: absolute;
+    right: 1rem;
+
 }

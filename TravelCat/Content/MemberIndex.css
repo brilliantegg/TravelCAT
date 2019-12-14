@@ -1,8 +1,36 @@
-﻿body {
-    margin-top: 200px
+﻿*,
+*::before,
+*::after {
+    box-sizing: border-box;
 }
-.text-catcolor {
-    color: #00cc99 !important;
+html {
+    background-color: #f0f0f0;
+}
+
+body {
+    background-color: #f0f0f0;
+    color: #999999;
+    font-style: normal;
+    font-weight: 400;
+    letter-spacing: 0;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -moz-font-feature-settings: "liga" on;
+}
+
+img {
+    height: auto;
+    max-width: 100%;
+    vertical-align: middle;
+}
+
+.btn {
+    background-color: white;
+    border: 1px solid #cccccc;
+    color: #696969;
+    padding: 0.5rem;
+    text-transform: lowercase;
 }
 
 .box2 {
@@ -30,20 +58,18 @@
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
     background: #4e57ef;
 }
-.jumbotron {
-    margin-bottom: 0px;
-    z-index:1
+.nav-link-cat {
+    color: dimgrey;
+    text-decoration: none;
+    background-color: transparent;
 }
 
-.listyle {
-    list-style: none;
-}
+    .nav-link-cat:hover {
+        color: #4e57ef;
+        text-decoration: none;
+        background-color: transparent;
+    }
 
-.listyle li:first-child {
-    color: #844200;
-    margin-bottom: 5px;
-    font-size: 20px;
-}
 .badge img {
 
 }
@@ -85,11 +111,10 @@
     height: 300px;
     border: 2px solid #551029;
     box-shadow: 5px 6px 0px #551029;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     position: relative;
     overflow: hidden;
     max-width: 80%;
-    margin: 30px auto 20px;
+    margin: 136px auto 20px;
     background: #fff;
     border-radius: 3px;
 }
@@ -116,9 +141,30 @@
 .nav-pills-cat .nav-link-cat.active,
 .nav-pills-cat .show > .nav-link-cat {
     color: #ffffff;
-    background-color: darkolivegreen;
+    background: #cfd7ff;
+    color: #0a0a0a;
+    border: 1px solid #4e57ef;
+    box-shadow: 3px 4px 0px #4e57ef;
+    display: inline-block;
+    padding: 2px 8px;
+    font-size: 0.95em;
+    border-radius: 2px;
+    font-stretch: condensed;
+    top: 18px;
+    font-weight: 600;
 }
 
-.nav-pills-cat .nav-link-cat {
-    
+
+a {
+    color: dimgrey
+}
+a:hover {
+    color: deeppink;
+    cursor:pointer
+}
+
+a {
+    /* color: #007bff; */
+    text-decoration: none;
+    background-color: transparent;
 }

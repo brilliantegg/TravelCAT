@@ -36,6 +36,7 @@ namespace TravelCat.Controllers
                 spot = db.spot.ToList(),
             };
             ViewBag.memberId = id;
+            ViewBag.member_profile = db.member_profile.ToList();
             return View(model);
         }
         public ActionResult EditMemberProfile(string id)
