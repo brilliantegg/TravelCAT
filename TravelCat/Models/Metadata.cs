@@ -211,6 +211,7 @@ namespace TravelCat.Models
         [DisplayName("會員姓名")]
         [Required(ErrorMessage = "此欄位為必填")]
         [StringLength(20, ErrorMessage = "此欄為最多20個字")]
+
         public string member_name { get; set; }
 
         [DisplayName("性別")]

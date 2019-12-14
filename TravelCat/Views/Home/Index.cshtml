@@ -117,7 +117,7 @@
                     @for (int i = 0; i < 8; i++)
                     {
                         <div class="card">
-                            <img src="~/images/dribbbe_bmo-01.png" class="card-img-top" alt="...">
+                            <img src="~/images/index/@(i.ToString()+".jpg")" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title">@Model.activity[i].activity_title</h5>
                                 <p class="card-text">@Model.activity[i].activity_intro</p>
@@ -135,7 +135,7 @@
                     @for (int i = 0; i < 8; i++)
                     {
                         <div class="card">
-                            <img src="~/images/dribbbe_bmo-01.png" class="card-img-top" alt="...">
+                            <img src="~/images/index/@(i.ToString()+".jpg")" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title">@Model.hotel[i].hotel_title</h5>
                                 <p class="card-text">@Model.hotel[i].hotel_intro</p>
@@ -153,7 +153,7 @@
                     @for (int i = 0; i < 8; i++)
                     {
                         <div class="card">
-                            <img src="~/images/dribbbe_bmo-01.png" class="card-img-top" alt="...">
+                            <img src="~/images/index/@(i.ToString()+".jpg")" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title">@Model.restaurant[i].restaurant_title</h5>
                                 <p class="card-text">@Model.restaurant[i].restaurant_intro</p>
@@ -184,21 +184,21 @@
 <div class="container mb-5 mt-5 Card-group">
     <div class="comment-main row">
 
-        <div class="comment mb-3 col-12">
+        <div class="comment mb-2 col-12">
 
             <!--留言卡-->
-            <div class="card card-lg">
+            <div class="card-lg">
                 <div class="card-body">
                     <div class="card-title mem">聰明蛋</div>
                     <div class="mem-comment">畢業於台灣第一學府－國立台灣大學，精通多國語言，連續四年獲得學生最高榮譽－書卷獎，打破創校以來最佳紀錄。外貌全身皆有細短絨毛，皮黃，身高可達29尺，生有鐵皮，長有獠牙，生性暴躁，口大可吞人，一次可進食數萬人類！平時穴居洞中，捕食路過之旅人，一年下山一次，每次下山皆造成當地大範圍傷害。傳聞此獸喜歡一種名為bmo的玩物，常為了此物與各方妖怪打鬥。</div>
-                    <a href="#" class="btn btn-primary btn-sm">前去觀看</a>
+                    <a href="#" class="btn  btn-sm">前去觀看</a>
                 </div>
             </div>
             <!--介紹卡-->
-            <div class="card card-sm">
+            <div class=" card-sm">
                 <div class="card-body">
-                    @Html.ActionLink(@Model.activity.Where(s=>s.activity_id==ViewBag.comment_id).FirstOrDefault().activity_title, "Details", "web_activities", new { id = @ViewBag.comment_id }, null)
-                    <img src="~/images/bmo-02.jpg" class="mb-4">
+                    @Html.ActionLink(@Model.activity.Where(s => s.activity_id == ViewBag.comment_id).FirstOrDefault().activity_title, "Details", "web_activities", new { id = @ViewBag.comment_id }, null)
+                    <img src="~/images/bmo-02.jpg" class="mb-2">
                     <div class="like">
                         <i class="far fa-thumbs-up">@ViewBag.like</i>
                         <i class="far fa-comment ml-5">@ViewBag.comment_count</i>
@@ -209,75 +209,75 @@
 
         <div class="comment col-12">
 
-            <!--介紹卡-->
-            <div class="card card-sm">
+            <!--留言卡-->
+            <div class="card-lg">
                 <div class="card-body">
-                    @Html.ActionLink(@Model.activity[200].activity_title, "Details", "web_activities", new { id = @Model.activity[200].activity_id }, null)
-                    <img src="~/images/bmo-02.jpg" class="mb-4">
+                    <div class="card-title mem">聰明蛋</div>
+                    <div class="mem-comment">畢業於台灣第一學府－國立台灣大學，精通多國語言，連續四年獲得學生最高榮譽－書卷獎，打破創校以來最佳紀錄。外貌全身皆有細短絨毛，皮黃，身高可達29尺，生有鐵皮，長有獠牙，生性暴躁，口大可吞人，一次可進食數萬人類！平時穴居洞中，捕食路過之旅人，一年下山一次，每次下山皆造成當地大範圍傷害。傳聞此獸喜歡一種名為bmo的玩物，常為了此物與各方妖怪打鬥。</div>
+                    <a href="#" class="btn  btn-sm">前去觀看</a>
+                </div>
+            </div>
+            <!--介紹卡-->
+            <div class=" card-sm">
+                <div class="card-body">
+                    @Html.ActionLink(@Model.activity.Where(s => s.activity_id == ViewBag.comment_id).FirstOrDefault().activity_title, "Details", "web_activities", new { id = @ViewBag.comment_id }, null)
+                    <img src="~/images/bmo-02.jpg" class="mb-2">
                     <div class="like">
-                        <i class="far fa-thumbs-up">666</i>
-                        <i class="far fa-comment ml-5">878</i>
+                        <i class="far fa-thumbs-up">@ViewBag.like</i>
+                        <i class="far fa-comment ml-5">@ViewBag.comment_count</i>
                     </div>
                 </div>
             </div>
-
-            <!--留言卡-->
-            <div class="card card-lg">
-                <div class="card-body">
-                    <div class="card-title mem">可達鴨</div>
-                    <div class="mem-comment">可達鴨是有鴨子外貌特徵的寶可夢。牠的身體是黃色的，牠的眼睛裡有極小的瞳孔。牠的嘴巴是扁狀的，頭上有三條黑色的呆毛，四肢短壯，酷似河童。牠有短小的尾巴和有蹼的腳掌。</div>
-                    <a href="#" class="btn btn-primary btn-sm">前去觀看</a>
-                </div>
-            </div>
         </div>
 
-    </div>
+</div>
 
-    <div class="item ">
-        <div class="card ">
-            <div class="card-body timeline">
-                <h2 class="mb-2">如何出遊不遇雷呢?</h2>
-                <ul>
-                    <li>
-                        <a href="#">
-                            <h6>Stp1</h6>
-                            <p>打開旅途貓，點選類型!</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <h6>Stp2</h6>
-                            <p>搜尋地點</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <h6>Stp3</h6>
-                            <p>瀏覽喜歡的景點!</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <h6>Stp4</h6>
-                            <p>觀看真實評論</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <h6>Stp5</h6>
-                            <p>多方參考並規劃</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <h6>Stp6</h6>
-                            <p>快樂出遊~!</p>
-                        </a>
-                    </li>
-                </ul>
-            </div>
+
+<div class="item ml-3">
+    <div class="card ">
+        <div class="card-body timeline">
+            <h2 class="mb-2">如何出遊不遇雷呢?</h2>
+            <ul>
+                <li>
+                    <a href="#">
+                        <h6>Stp1</h6>
+                        <p>打開旅途貓，點選類型!</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <h6>Stp2</h6>
+                        <p>搜尋地點</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <h6>Stp3</h6>
+                        <p>瀏覽喜歡的景點!</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <h6>Stp4</h6>
+                        <p>觀看真實評論</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <h6>Stp5</h6>
+                        <p>多方參考並規劃</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <h6>Stp6</h6>
+                        <p>快樂出遊~!</p>
+                    </a>
+                </li>
+            </ul>
         </div>
     </div>
+</div>
 
 
 </div>
