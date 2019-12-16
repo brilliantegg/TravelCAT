@@ -93,30 +93,29 @@
                                 <input type="hidden" name="member_id" value="@Session["memberID"]" />
                                 <input type="hidden" name="privacy" value="True" />
                                 <input type="hidden" name="tourism_id" value="@ViewBag.tourismId" />
+                                
+                                <div class="radio-button">
 
-                                <div class="collection_type">
-                                    <ul>
-                                        <li>
-                                            <input type="radio" id="f-option" name="collection_type_id" value="1">
-                                            <label for="f-option">收藏</label>
-                                            <div class="check"></div>
-                                        </li>
-                                        <li>
-                                            <input type="radio" id="2-option" name="collection_type_id" value="2">
-                                            <label for="2-option">已經去過</label>
-                                            <div class="check"></div>
-                                        </li>
-                                        <li>
-                                            <input type="radio" id="3-option" name="collection_type_id" value="3">
-                                            <label for="3-option">想要去</label>
-                                            <div class="check"></div>
-                                        </li>
-                                        <li>
-                                            <input type="radio" id="4-option" name="collection_type_id" value="4">
-                                            <label for="4-option">非去不可</label>
-                                            <div class="check"></div>
-                                        </li>
-                                    </ul>
+                                    <div class="radio-button">
+                                        <input id="radio-1" name="radio" type="radio" value="1">
+                                        <label for="radio-1" class="radio-label">收藏</label>
+                                    </div>
+
+                                    <div class="radio-button">
+                                        <input id="radio-2" name="radio" type="radio" value="2">
+                                        <label for="radio-2" class="radio-label">已經去過</label>
+                                    </div>
+
+                                    <div class="radio-button">
+                                        <input id="radio-3" name="radio" type="radio" value="3">
+                                        <label for="radio-3" class="radio-label">已經去過</label>
+                                    </div>
+
+                                    <div class="radio-button">
+                                        <input id="radio-4" name="radio" type="radio" value="4">
+                                        <label for="radio-4" class="radio-label">非去不可</label>
+                                    </div>
+
                                 </div>
                             </div>
                             <div class="modal-footer">

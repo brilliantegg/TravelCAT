@@ -17,12 +17,7 @@ namespace TravelCat.ViewModels
         public List<restaurant> restaurant { get; set; }
         public List<spot> spot { get; set; }
 
-        public List<a_c> a_c { get; set; }
 
     }
 
-    public class a_c
-    {
-        public string id;
-    }
 }

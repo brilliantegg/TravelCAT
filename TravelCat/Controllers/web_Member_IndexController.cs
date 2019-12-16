@@ -237,13 +237,14 @@ namespace TravelCat.Controllers
                 spot = db.spot.ToList(),
 
             };
-            var collect = model.collections_detail.Where(m => m.collection_type.ToString() == "1").ToList();
+
+            var collect = model.collections_detail.Where(m => m.collection_type_id.ToString() == "1").ToList();
             ViewBag.collect = collect;
-            var wannaGo = model.collections_detail.Where(m => m.collection_type.ToString() == "2").ToList();
+            var wannaGo = model.collections_detail.Where(m => m.collection_type_id.ToString() == "2").ToList();
             ViewBag.wannaGo = wannaGo;
-            var hadBeen = model.collections_detail.Where(m => m.collection_type.ToString() == "3").ToList();
+            var hadBeen = model.collections_detail.Where(m => m.collection_type_id.ToString() == "3").ToList();
             ViewBag.hadBeen = hadBeen;
-            var mustGo = model.collections_detail.Where(m => m.collection_type.ToString() == "4").ToList();
+            var mustGo = model.collections_detail.Where(m => m.collection_type_id.ToString() == "4").ToList();
             ViewBag.mustGo = mustGo;
             //model.a_c = (from a in db.activity
             //                        join c in model.collections_detail on a.activity_id equals c.tourism_id into x
