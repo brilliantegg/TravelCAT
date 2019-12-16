@@ -44,7 +44,13 @@ namespace TravelCat.Controllers
                           group i by i.tourism_id into g
                           orderby g.Count() descending
                           select new { id = g.Key, count = g.Count() }).FirstOrDefault();
+            var result1 = (from i in db.comment_emoji_details
+                           group i by i.comment_id into g
+                           orderby g.Count() descending
+                           select new { id = g.Key, count = g.Count() }).FirstOrDefault();
+
             ViewBag.comment_id = result.id;
+            ViewBag.ccc = result1.id;
             ViewBag.comment_count = result.count;
             //找讚數
             int like = db.collections_detail.Where(s => s.tourism_id == result.id).Count();
