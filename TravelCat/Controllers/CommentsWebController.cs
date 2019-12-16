@@ -63,23 +63,7 @@ namespace TravelCat.Controllers
                 member = db.member.ToList(),
             };
             List<comment> comments = new List<comment>();
-            //if (comment_rating != null)
-            //{
-
-            //    for (int i = 0;i<model.comment.Count; i++)
-            //    {
-            //        for (int j = 0; j < comment_rating.Length; j++)
-
-            //        {
-
-            //            if (model.comment[i].comment_rating.ToString() != comment_rating[j])
-            //            {
-            //                model.comment.RemoveAt(i);
-            //                i = i - 1;
-            //            }
-            //        }
-            //    }
-            //}
+            
             foreach (var comment in origin.ToList())
             {
                 comments.Add(comment);
@@ -192,14 +176,7 @@ namespace TravelCat.Controllers
                 member_profile = db.member_profile.Where(m => m.member_id == memId).ToList(),
                 member = members,
             };
-            //IEnumerable<member> followers = from mem in db.member
-            //                                join fol in db.follow_list on mem.member_id equals fol.member_id
-            //                                where fol.member_id == memId
-            //                                select mem;
 
-            //IEnumerable<comment> comm = from mem in followers
-            //                           join com in db.comment on mem.member_id equals com.member_id
-            //                           select com;
             return PartialView(model);
         }
         public int getMsgEmojiNum(int msg_id, string tourismId)
