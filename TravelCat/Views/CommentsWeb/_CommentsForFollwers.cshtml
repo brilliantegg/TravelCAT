@@ -163,82 +163,8 @@
                         </div>
                         <hr />
                     </div>
-                    <!--單則留言-->
-                    <div class="message_list  ">
 
-
-                        @foreach (var msgItem in item.message)
-                        {
-                            <div class=" single_message py-3">
-                                <div class="media mt-3">
-                                    <img src="~/images/member/@msgItem.member.member_profile.profile_photo" width="74" height="74" class="mr-3 ml-3 member_avatar" alt="...">
-
-                                    <div class="media-body ">
-
-                                        <div class="d-flex message_body">
-                                            <h5 class="member_name">
-                                                @msgItem.member.member_profile.nickname
-                                            </h5>
-                                            
-
-                                        </div>
-                                       
-
-                                        <span class="create_time">
-                                            @msgItem.msg_time.ToString("yyyy MM dd")
-                                        </span>
-                                        <div class="response_content">
-                                            @msgItem.msg_content
-                                        </div>
-                                        <hr />
-                                        <div class="emoji">
-                                            @if (@Model.message_emoji_details.Where(m => m.member_id == @memberId && m.msg_id == msgItem.msg_id).Count() > 0)
-                                            {
-
-                                                <img class="icon msg_emoji_heart click_button" src="~/images/emoji/talk.png" data-value="@msgItem.message_emoji_details.Count()" data-msgid="@msgItem.msg_id" data-emojiid=1 disabled="disabled" />
-                                                <span class="msg_emoji_heart_num">@msgItem.message_emoji_details.Count() </span>
-                                            }
-                                            else
-                                            {
-                                                <img class="icon msg_emoji_heart" src="~/images/emoji/talk.png" data-value="@msgItem.message_emoji_details.Count()" data-msgid="@msgItem.msg_id" data-emojiid=1 />
-                                                <span class="msg_emoji_heart_num">@msgItem.message_emoji_details.Count()</span>
-                                            }
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        }
-
-                        <!--回覆留言-->
-
-                        <div class="add_message single_message">
-                            @if (@memberId != null)
-                            {
-                                <form action="/web_comments/createMessage" method="post">
-                                    @Html.AntiForgeryToken()
-                                    <input type="hidden" name="comment_id" value="@item.comment_id" />
-                                    <input type="hidden" name="msg_time" value="@DateTime.Now" />
-                                    <input type="hidden" name="member_id" value="@Session["memberID"]" />
-                                    <input type="hidden" name="msg_status" value="True" />
-                                    <input type="hidden" name="tourism_id" value="@item.tourism_id" />
-                                    <textarea class="msg_content" rows="2" cols="20" name="msg_content" placeholder="@User.Identity.GetUserName(),想說說甚麼..."></textarea>
-                                    <br />
-                                    <div class="add_message_Submit_area text-right">
-                                        <input id="add_message_Submit" class="btn btn-outline-dark" type="submit" value="submit" />
-                                    </div>
-                                </form>
-                            }
-                            else
-                            {
-                                <textarea class="msg_content" rows="2" cols="20" name="msg_content" placeholder="請先登入後留言"></textarea>
-                            }
-                        </div>
-
-
-
-
-                    </div>
+                    
                 </div>
             </div>
         }
