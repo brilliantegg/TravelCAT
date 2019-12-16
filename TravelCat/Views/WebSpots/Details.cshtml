@@ -26,17 +26,17 @@
                 <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
             </ol>
             <div class="carousel-inner text-center ">
-                <div class="carousel-item header-carousel-item bg-cover active " style="background-image:url( https://www.blacktomato.com/wp-content/uploads/2016/02/Amalfi-coast_Shutterstock-9.jpg)">
+                <div class="carousel-item header-carousel-item bg-cover active " style="background-image:url( https://images.unsplash.com/photo-1568110929146-c5e9854fc7a2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1934&q=80)">
                     <div class="carousel-caption offset-2 col-4 ">
                         <h5>@Model.spot.spot_title</h5>
                     </div>
                 </div>
-                <div class="carousel-item header-carousel-item bg-cover " style="background-image:url(https://www.blacktomato.com/wp-content/uploads/2016/02/Positano-italy.jpg)">
+                <div class="carousel-item header-carousel-item bg-cover " style="background-image:url(https://images.unsplash.com/photo-1520917954351-17bee86d882a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1944&q=80)">
                     <div class="carousel-caption offset-2 col-4">
                         <h5>@Model.spot.spot_title</h5>
                     </div>
                 </div>
-                <div class="carousel-item header-carousel-item bg-cover " style="background-image:url(https://www.blacktomato.com/wp-content/uploads/2016/02/Amazing-Amalfi-coast.jpg)">
+                <div class="carousel-item header-carousel-item bg-cover " style="background-image:url(https://images.unsplash.com/photo-1569841991387-0626a27d5cca?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1934&q=80)">
                     <div class="carousel-caption offset-2 col-4">
                         <h5>@Model.spot.spot_title</h5>
                     </div>
@@ -62,14 +62,14 @@
                     <input type="hidden" name="member_id" value="@Session["memberID"]" />
                     <input type="hidden" name="tourism_id" value="@ViewBag.tourismId" />
                     <input type="hidden" name="collection_id" value="@Model.collections_detail.Where(m => m.member_id == @memberId).FirstOrDefault().collection_id" />
-                    <input type="submit" class="delete_bucket_list bucket_list btn btn-outline-info" value="取消收藏" />
+                    <input type="submit" class="delete_bucket_list bucket_list btn btn-outline-dark" value="取消收藏" />
                 </form>
             }
             else
             {
 
                 <!-- 收藏Modal啟動 -->
-                <button type="button" class="bucket_list btn btn-outline-info" data-toggle="modal" data-target="#collectModal">
+                <button type="button" class="bucket_list btn " data-toggle="modal" data-target="#collectModal">
                     加入收藏
                 </button>
 
@@ -209,39 +209,35 @@
         </div>
     </section>
     <section>
+        <h2 class="text-center">附近住宿</h2>
         <div class="row col-10 offset-1">
-            <div class="col-4">
-                <div class="card">
-                    <div class="card__image card__image--record"></div>
-                    <div class="card__content">
-                        <div class="card__title">Flex Shrink</div>
-                        <p class="card__text">This defines the ability for a flex item to shrink if necessary. Negative numbers are invalid.</p>
-                        <button class="btn btn--block card__btn">Button</button>
+            @if(@ViewBag.hotel != null)
+            {
+                foreach (var item in @ViewBag.hotel)
+                {
+                    <div class="col-4">
+                        <div class="card">
+                            <div class="card__image card__image--record"></div>
+                            <div class="card__content">
+                                <div class="card__title">@item.hotel_title</div>
+                                @if (@item.hotel_intro == null)
+                                {
+                                    <br />
+                                }
+                                else
+                                {
+                                    <p class="card__text">@item.hotel_intro</p>
+                                }
+                                
+                                    <button class="btn btn--block card__btn"  onclick="window.location.href='@Url.Action("Details","WebHotels",new {id=item.hotel_id })'">前往頁面</button>
+                                
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-4">
-                <div class="card">
-                    <div class="card__image card__image--record"></div>
-                    <div class="card__content">
-                        <div class="card__title">Flex Shrink</div>
-                        <p class="card__text">This defines the ability for a flex item to shrink if necessary. Negative numbers are invalid.</p>
-                        <button class="btn btn--block card__btn">Button</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-4">
-                <div class="card">
-                    <div class="card__image card__image--record"></div>
-                    <div class="card__content">
-                        <div class="card__title">Flex Shrink</div>
-                        <p class="card__text">This defines the ability for a flex item to shrink if necessary. Negative numbers are invalid.</p>
-                        <button class="btn btn--block card__btn">Button</button>
-                    </div>
-                </div>
-            </div>
+                }
+            }
         </div>
-    </section>
+        </section>
 
 
     <!--篩選評論-->
@@ -394,7 +390,7 @@
                 <form action="/web_comments/Create" Method="GET">
                     <input type="hidden" name="tourismID" value=@ViewBag.tourismId />
                     <input type="hidden" name="mem_id" value="@Session["memberID"]" />
-                    <button type="submit" class="add_comment btn btn-outline-info  ">新增評論</button>
+                    <button type="submit" class="add_comment btn btn-outline-dark  ">新增評論</button>
                 </form>
             </div>
         </div>

@@ -211,6 +211,7 @@ namespace TravelCat.Models
         [DisplayName("會員姓名")]
         [Required(ErrorMessage = "此欄位為必填")]
         [StringLength(20, ErrorMessage = "此欄為最多20個字")]
+
         public string member_name { get; set; }
 
         [DisplayName("性別")]
@@ -384,7 +385,7 @@ namespace TravelCat.Models
 
         [DisplayName("評論標題")]
         [Required(ErrorMessage = "此欄位為必填")]
-        [StringLength(20, ErrorMessage = "名稱最多20個字")]
+        [StringLength(50, ErrorMessage = "名稱最多50個字")]
         public string comment_title { get; set; }
 
         [DisplayName("評論內容")]
@@ -401,18 +402,18 @@ namespace TravelCat.Models
         public string comment_photo { get; set; }
 
         [DisplayName("停留時間")]
+        [Required(ErrorMessage = "此欄位為必填")]
         public int comment_stay_total { get; set; }
         [DisplayName("旅伴")]
         [Required(ErrorMessage = "此欄位為必填")]
-        [StringLength(10, ErrorMessage = "名稱最多10個字")]
         public string travel_partner { get; set; }
 
         [DisplayName("評分")]
+        [Required(ErrorMessage = "此欄位為必填")]
         public short comment_rating { get; set; }
 
         [DisplayName("旅遊月份")]
         [Required(ErrorMessage = "此欄位為必填")]
-        [StringLength(10, ErrorMessage = "名稱最多10個字")]
         public string travel_month { get; set; }
 
         [DisplayName("評論狀態")]

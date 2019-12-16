@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<TravelCat.Models.spot>
 
 @{
-    Layout = null;
+    Layout = "~/Views/Shared/web-Layout.cshtml";
 }
 
 <!DOCTYPE html>
@@ -11,63 +11,38 @@
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
 </head>
+
 <body>
+    <style>
+    </style>
+    <div class="container">
+        <h2>景點</h2>
 
-    <table class="table container">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.spot_title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.spot_tel)
-            </th>
 
-            <th>
-                @Html.DisplayNameFor(model => model.addition_note)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.city)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.district)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.address_detail)
-            </th>
 
-            <th></th>
-        </tr>
-    
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.spot_title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.spot_tel)
-            </td>
+        <section>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.addition_note)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.city)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.district)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.address_detail)
-            </td>
 
-            <td>
+            @foreach (var item in Model)
+            {
+                <div class="row col-10 offset-1">
 
-                @Html.ActionLink("Details", "Details", new { id=item.spot_id }) |
+                    <div class="col-4">
+                        <div class="card">
+                            <div class="card__image "></div>
+                            <div class="card__content">
+                                <div class="card__title"> @Html.DisplayFor(modelItem => item.spot_title)</div>
 
-            </td>
-        </tr>
-    }
-    
-    </table>
+
+                                <button class="btn btn--block card__btn" onclick="window.location.href='@Url.Action("Details","WebSpots",new {id=item.spot_id })'">前往頁面</button>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            }
+        </section>
+    </div>
 </body>
 </html>
