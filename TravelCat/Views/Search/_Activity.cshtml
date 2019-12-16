@@ -1,33 +1,53 @@
 ﻿@model TravelCat.ViewModels.SearchViewModel
 @{ Layout = "";}
 <style>
-    .ad 
-    {
-        position:fixed;
-        left:0;
-        bottom: 0;
-        z-index:0;
-
-    }
-    .seachcomtant{
+    
+    .seachcomtant {
         overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
     }
-</style>
 
-    <div class="row">
-        <div class="col-md-3  mt-5 border-right ad">
+    .row1 {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .searchbox1 {
+        position: sticky;
+        top: 8rem;
+        bottom: 2rem;
+        z-index: 1000;
+        height: calc(100vh - 4rem);
+        padding-bottom: 100px;
+         padding-top: 100px;
+    }
+
+    .searchbox2 {
+        position: sticky;
+        top: 8rem;
+        bottom: 2rem;
+        z-index: 1000;
+        height: calc(100vh - 4rem);
+        overflow-y: auto;
+        padding-bottom: 150px;
+    }
+   
+</style>
+<div class="container-fluid">
+    <div class="row1 ">
+        <div class="col-md-3  searchbox1 ">
             <form>
-                <div class="row">
-                    <div class="col-md-12 col-sm-6 ">
-                        <div class="text-center mb-4 border-bottom ">
-                            <h2>喜好篩選</h2>
-                        </div>
+
+                <div class="col-md-12 col-sm-6  ">
+                    <div class="text-center mb-4 border-bottom ">
+                        <h2>喜好篩選</h2>
+
                     </div>
+                </div>
+                <div class="row searchbox2">
                     <div class="col-md-12 col-sm-6  ">
                         <div class="text-left mb-4 px-2 py-2 border-bottom">
                             <h4>
@@ -132,7 +152,7 @@
                                 旅遊月份:
                             </h4>
                             <div class="row ">
-                                <div class="btn-group btn-group-toggle mb-4 offset-2 " data-toggle="buttons">
+                                <div class="btn-group btn-group-toggle mb-1 offset-2 " data-toggle="buttons">
                                     <label class="btn  btn-light col-md-10 mb-1">
                                         <input type="radio" name="travel_month" id="travel_month1" autocomplete="off" value="3至5月"> 3至5月
                                     </label>
@@ -154,18 +174,19 @@
                             </div>
 
                         </div>
-                        <div>
-                            <input type="hidden" name="q" value=@ViewBag.q />
-                            <input type="submit" class="btn btn-dark align-self-center" />
-                        </div>
-                    </div>
 
+                    </div>
+                    <div class="col-md-12 col-sm-6 row justify-content-end">
+                        <input type="hidden" name="q" value=@ViewBag.q />
+
+                        <input type="submit" class="btn btn-dark align-self-center " />
+                    </div>
                 </div>
             </form>
         </div>
 
 
-        <div class="offset-3 col-md-9 mb-2 ">
+        <div class="col-md-9 mb-2 ">
             <div>
                 <h2 class="font-weight-bold ">@ViewBag.q 的搜尋結果</h2>
                 <h5>
@@ -294,7 +315,7 @@
                                         <div class="col-md-6 col-sm-12">測試欄位</div>
                                         <div class="col-md-6 col-sm-12">
                                             旅客評分: <div style="width:100px">
-                                                <div class="progress ">
+                                                <div>
                                                     <div class="progress-bar w-75" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">@item.rating 分</div>
                                                 </div>
                                             </div>
@@ -384,4 +405,6 @@
             </div>
         </div>
 
+
     </div>
+</div>
