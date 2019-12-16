@@ -188,14 +188,43 @@
                         }
 
                     </li>
-                    
+
 
                 </ul>
                 <br />
             </div>
         </div>
     </section>
+    <section>
+        <h2 class="text-center">附近景點</h2>
+        <div class="row col-10 offset-1">
+            @if (@ViewBag.spot != null)
+            {
+                foreach (var item in @ViewBag.spot)
+                {
+                    <div class="col-4">
+                        <div class="card">
+                            <div class="card__image card__image--record"></div>
+                            <div class="card__content">
+                                <div class="card__title">@item.spot_title</div>
+                                @if (@item.spot_intro == null)
+                                {
+                                    <br />
+                                }
+                                else
+                                {
+                                    <p class="card__text">@item.spot_intro</p>
+                                }
 
+                                <button class="btn btn--block card__btn" onclick="window.location.href='@Url.Action("Details","WebSpots",new {id=item.spot_id })'">前往頁面</button>
+
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </section>
 
 
     <!--篩選評論-->
@@ -203,7 +232,7 @@
     <section>
 
 
-        <div class="filter_comment row ">
+        <div class="filter_comment row row col-7 offset-1">
             <input type="hidden" name="tourismId" value="@ViewBag.tourismId" />
             <div class="fliter_set col-4">
                 <div class="fliter_set">

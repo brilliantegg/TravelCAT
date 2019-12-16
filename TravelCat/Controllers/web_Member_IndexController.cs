@@ -18,7 +18,7 @@ namespace TravelCat.Controllers
         dbTravelCat db = new dbTravelCat();
 
         // GET: web_Member_Index
-        public ActionResult Index(string id)
+        public ActionResult Index(string id = "M000003")
         {
 
             MemberIndexViewModels model = new MemberIndexViewModels()
@@ -37,6 +37,7 @@ namespace TravelCat.Controllers
             };
             ViewBag.memberId = id;
             ViewBag.member_profile = db.member_profile.ToList();
+            ViewBag.scoreRank = db.member_profile.OrderByDescending(m => m.member_score).Take(3).ToList();
             return View(model);
         }
         public ActionResult EditMemberProfile(string id)
@@ -223,9 +224,34 @@ namespace TravelCat.Controllers
             db.SaveChanges();
             return response;
         }
-        public ActionResult Collections()
+        public ActionResult Collections(string id= "M000003")
         {
-            return View();
+            CollectionViewModels model = new CollectionViewModels()
+            {
+                member = db.member.Find(id),
+                member_profile = db.member_profile.Find(id),
+                collections_detail = db.collections_detail.Where(m => m.member_id == id).ToList(),
+                activity = db.activity.ToList(),
+                hotel = db.hotel.ToList(),
+                restaurant = db.restaurant.ToList(),
+                spot = db.spot.ToList(),
+
+            };
+            var collect = model.collections_detail.Where(m => m.collection_type.ToString() == "1").ToList();
+            ViewBag.collect = collect;
+            var wannaGo = model.collections_detail.Where(m => m.collection_type.ToString() == "2").ToList();
+            ViewBag.wannaGo = wannaGo;
+            var hadBeen = model.collections_detail.Where(m => m.collection_type.ToString() == "3").ToList();
+            ViewBag.hadBeen = hadBeen;
+            var mustGo = model.collections_detail.Where(m => m.collection_type.ToString() == "4").ToList();
+            ViewBag.mustGo = mustGo;
+            //model.a_c = (from a in db.activity
+            //                        join c in model.collections_detail on a.activity_id equals c.tourism_id into x
+            //                        from b in x
+            //                        select new a_c { id = a.activity_id }).ToList();
+            //ViewBag.collect_activity = collect_activity;
+
+            return View(model);
         }
     }
 }

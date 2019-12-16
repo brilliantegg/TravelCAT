@@ -72,7 +72,7 @@ namespace TravelCat.Controllers
         [HttpPost]
         // POST: api/api_issues
         [ResponseType(typeof(issue))]
-        public IHttpActionResult Post(string memberId,string issueContent,int issue_id, int problem_id = 1)
+        public IHttpActionResult Post(string memberId,string issueContent,int issue_id, string problem_id = null)
         {
             issue issue = new issue();
             issue.member_id = memberId;
@@ -80,7 +80,7 @@ namespace TravelCat.Controllers
             issue.admin_id = 1;
             issue.issue_id = issue_id;
             issue.report_date = DateTime.Now;
-            issue.problem_id = problem_id.ToString();
+            issue.problem_id = problem_id;
             db.issue.Add(issue);
             db.SaveChanges();
 

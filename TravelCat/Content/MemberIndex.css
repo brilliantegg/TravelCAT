@@ -80,25 +80,20 @@ img {
     padding: 100px
 }
 
-.bg-cover {
-    background-size: cover;
-    background-position: center center;
-    height: 360px;
-}
-
 .member_header {
+    width:80%;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
 }
 .personal_info {
     padding: 0 2rem
 }
-.member_location {
-    border-left: 1px solid gray;
-    padding: 0 2rem
+.member_location  {
+    border-left: 3px solid gray;
+    padding-left: 2rem
 }
-.profile_avatar img {
-    margin: 10px 50px;
+.profile_avatar {
+    margin: 5px 30px 10px 20px;
     width: 200px;
     height: 200px;
     background: #551029;
@@ -106,8 +101,13 @@ img {
     object-fit: cover;
     border: 2px solid #551029;
 }
+.mem_more_action img {
+    background:transparent;
+    width: 34px;
+    height: 34px;
+}
 .user_profile_header {
-    padding: 50px;
+    padding: 50px 50px 70px 50px;
     height: 300px;
     border: 2px solid #551029;
     box-shadow: 5px 6px 0px #551029;
@@ -118,14 +118,12 @@ img {
     background: #fff;
     border-radius: 3px;
 }
+.content_body {
+    margin: 0px auto 20px;
+    max-width: 80%;
+}
 .brief {
     font-style: italic
-}
-.col, .col-1, .col-10, .col-11, .col-12, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-auto, .col-lg, .col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-auto, .col-md, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-auto, .col-sm, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-auto, .col-xl, .col-xl-1, .col-xl-10, .col-xl-11, .col-xl-12, .col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-auto {
-    position: relative;
-    width: 100%;
-    padding-right: 0;
-    padding-left: 0;
 }
 
 .card-text{
@@ -153,8 +151,14 @@ img {
     top: 18px;
     font-weight: 600;
 }
-
-
+.nav-pills-cat {
+    width: inherit;
+    margin-bottom:2rem
+}
+.nav-item{
+    height:0;
+    width:inherit
+}
 a {
     color: dimgrey
 }
@@ -163,8 +167,18 @@ a:hover {
     cursor:pointer
 }
 
-a {
-    /* color: #007bff; */
-    text-decoration: none;
-    background-color: transparent;
+.subject_title {
+    color: #696969
+}
+
+.info_content {
+    margin: 0;
+    padding: 0;
+    border: 1px solid transparent;
+    outline: none;
+    background: transparent;
+    color: #4e57ef;
+}
+.a_style {
+    color: #4e57ef;
 }

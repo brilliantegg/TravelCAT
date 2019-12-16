@@ -475,7 +475,7 @@
         function sendReport() {
             $.ajax({
                 type: 'POST',
-                url: `http://localhost:54678/api/api_issues?memberId=${id}&issueContent=${$('#report_content').val()}&issue_id=3&problem_id=${$('.report_comment_id').val()}`,
+                url: `http://localhost:54678/api/api_issues?memberId=${id}&issueContent=${$('#report_content').val()}&issue_id=3&problem_id=${$('.report_comment_id').val().toString()}`,
                 success: function (data, status) {
                     alert("提交成功!")
                 }
@@ -485,7 +485,7 @@
             function sendMsgReport() {
             $.ajax({
                 type: 'POST',
-                url: `http://localhost:54678/api/api_issues?memberId=${id}&issueContent=${$('.msg_report_content').val()}&issue_id=4&problem_id=${$('.report_message_id').val()}`,
+                url: `http://localhost:54678/api/api_issues?memberId=${id}&issueContent=${$('.msg_report_content').val()}&issue_id=4&problem_id=${$('.report_message_id').val().toString()}`,
                 success: function (data, status) {
                     alert("提交成功!")
                 }
