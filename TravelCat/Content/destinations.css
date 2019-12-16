@@ -428,12 +428,6 @@ textarea:focus {
 }
 
 /*收藏radio*/
-.collection_type ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    overflow: auto;
-}
 
 .collection_type ul li {
     color: #AAAAAA; /*灰色*/
