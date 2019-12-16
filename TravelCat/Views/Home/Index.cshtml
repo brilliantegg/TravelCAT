@@ -190,7 +190,8 @@
             <div class="card-lg">
                 <div class="card-body">
                     <div class="card-title mem">聰明蛋</div>
-                    <div class="mem-comment">畢業於台灣第一學府－國立台灣大學，精通多國語言，連續四年獲得學生最高榮譽－書卷獎，打破創校以來最佳紀錄。外貌全身皆有細短絨毛，皮黃，身高可達29尺，生有鐵皮，長有獠牙，生性暴躁，口大可吞人，一次可進食數萬人類！平時穴居洞中，捕食路過之旅人，一年下山一次，每次下山皆造成當地大範圍傷害。傳聞此獸喜歡一種名為bmo的玩物，常為了此物與各方妖怪打鬥。</div>
+                    @*<div class="mem-comment">畢業於台灣第一學府－國立台灣大學，精通多國語言，連續四年獲得學生最高榮譽－書卷獎，打破創校以來最佳紀錄。外貌全身皆有細短絨毛，皮黃，身高可達29尺，生有鐵皮，長有獠牙，生性暴躁，口大可吞人，一次可進食數萬人類！平時穴居洞中，捕食路過之旅人，一年下山一次，每次下山皆造成當地大範圍傷害。傳聞此獸喜歡一種名為bmo的玩物，常為了此物與各方妖怪打鬥。</div>*@
+                    <div class="mem-comment">@Model.comment.Where(c=>c.comment_id==ViewBag.ccc).FirstOrDefault().comment_content)</div>
                     <a href="#" class="btn  btn-sm">前去觀看</a>
                 </div>
             </div>
