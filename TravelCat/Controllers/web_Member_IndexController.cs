@@ -237,7 +237,11 @@ namespace TravelCat.Controllers
                 spot = db.spot.ToList(),
 
             };
-
+            var a_collect = (from a in db.activity
+                            join c in db.collections_detail on a.activity_id equals c.tourism_id into x
+                            select new {title =a.activity_title, longitude =a.longitude, latitude =a.latitude}).ToList()
+                            ;
+            ViewBag.a_collect = a_collect;
             var collect = model.collections_detail.Where(m => m.collection_type_id.ToString() == "1").ToList();
             ViewBag.collect = collect;
             var wannaGo = model.collections_detail.Where(m => m.collection_type_id.ToString() == "2").ToList();

@@ -138,6 +138,11 @@
             </div>
             <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
                 <div class="row">
+                    @foreach(var item in ViewBag.a_collect)
+                    {
+                        <h1>yeah</h1>
+                    <h1>@item.id</h1>
+                    }
                     @foreach (var item in ViewBag.hadBeen)
                     {
                         <div class="collect_card col-4 mb-5">
