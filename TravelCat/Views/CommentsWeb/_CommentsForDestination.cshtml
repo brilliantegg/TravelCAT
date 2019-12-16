@@ -64,18 +64,40 @@
                             </div>
                         </div>
                         <!-- 更多選項 -->
+                        @if (@memberId != null)
+                        {
+                            <div class="more_action dropdown dropleft">
+                                <a class="" href="#" id="dropdownMore" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                    <img class="icon" src="~/images/emoji/more.png" />
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMore">
+                                    <a class="dropdown-item" href="#">分享到 facebook</a>
+                                    <a class="dropdown-item" href="#">分享到 line</a>
+                                    <a class="dropdown-item" href="#">分享到 google</a>
+                                    <a class="dropdown-item report_comment" data-toggle="modal" data-target="#reportModel"> 檢舉此評論</a>
+                                </div>
+                            </div>
+                        }
 
-                        
+                    </div>
+                    <!--檢舉評論modal-->
 
-                        <div class="more_action dropdown dropleft">
-                            <a class="" href="#" id="dropdownMore" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                <img class="icon" src="~/images/emoji/more.png" />
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMore">
-                                <a class="dropdown-item" href="#">分享到 facebook</a>
-                                <a class="dropdown-item" href="#">分享到 line</a>
-                                <a class="dropdown-item" href="#">分享到 google</a>
-                                <a class="dropdown-item report_comment" data-toggle="modal" data-target="#reportModel"> 檢舉此評論</a>
+                    <div class="modal fade" id="reportModel" tabindex="-1" role="dialog" aria-labelledby="reportModel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-scrollable" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" >檢舉評論</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <textarea id="report_content" name="report_content" rows="20" cols="20" placeholder="請附上有問題的網址，以及違規評論內容"></textarea>
+                                </div>
+                                <input type="hidden" class="report_comment_id" value="@item.comment_id" />
+                                <div class="modal-footer">
+                                    <button id="btnTest" type="submit" class="btn btn-outline-dark submit_issue" data-dismiss="modal">提交表單</button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -172,40 +194,8 @@
                                     <span class="emoji_num comment_emoji_good_num">@item.comment_emoji_details.Where(m => m.emoji_id == 3).Count()</span>
                                 }
                             </div>
-
-
-
                         </div>
-
-
                         <hr />
-
-
-                        <!--檢舉評論modal-->
-
-                        <div class="modal fade" id="reportModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-scrollable" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalScrollableTitle">檢舉評論</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <textarea id="report_content" name="report_content" rows="20" cols="20" placeholder="請附上有問題的網址，以及違規評論內容"></textarea>
-                                    </div>
-                                    <input type="hidden" class="report_comment_id" value="@item.comment_id" />
-                                    <div class="modal-footer">
-                                        <button id="btnTest" type="submit" class="btn btn-outline-dark submit_issue"  data-dismiss="modal">提交表單</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-
-
                     </div>
                     <!--單則留言-->
                     <div class="message_list  ">
@@ -216,10 +206,49 @@
                             <div class=" single_message py-3">
                                 <div class="media mt-3">
                                     <img src="~/images/member/@msgItem.member.member_profile.profile_photo" width="74" height="74" class="mr-3 ml-3 member_avatar" alt="...">
-                                    <div class="media-body">
-                                        <h5 class="member_name">
-                                            @msgItem.member.member_profile.nickname
-                                        </h5>
+
+                                    <div class="media-body ">
+
+                                        <div class="d-flex message_body">
+                                            <h5 class="member_name">
+                                                @msgItem.member.member_profile.nickname
+                                            </h5>
+                                            <!-- 更多選項 -->
+                                            @if (@memberId != null)
+                                            {
+                                                <div class="msg_more_action dropdown dropleft">
+                                                    <a class="" href="#" id="dropdownMore" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                        <img class="icon" src="~/images/emoji/more.png" />
+                                                    </a>
+                                                    <div class="dropdown-menu" aria-labelledby="dropdownMore">
+                                                        <a class="dropdown-item report_msg" data-toggle="modal" data-target="#msgreportModel"> 檢舉此留言</a>
+                                                    </div>
+                                                </div>
+                                            }
+
+                                        </div>
+                                        <!--檢舉留言modal-->
+
+                                        <div class="modal fade" id="msgreportModel" tabindex="-1" role="dialog" aria-labelledby="msgreportModel" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-scrollable" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalScrollableTitle">檢舉留言</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <textarea class="msg_report_content" name="report_content" rows="20" cols="20" placeholder="請附上有問題的網址，以及違規評論內容"></textarea>
+                                                    </div>
+                                                    <input type="hidden" class="report_message_id" value="@msgItem.msg_id" />
+                                                    <div class="modal-footer">
+                                                        <button id="btnTest" type="submit" class="btn btn-outline-dark submit_msg_issue" data-dismiss="modal">提交表單</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                         <span class="create_time">
                                             @msgItem.msg_time.ToString("yyyy MM dd")
                                         </span>
@@ -245,6 +274,7 @@
                                 </div>
                             </div>
                         }
+
                         <!--回覆留言-->
 
                         <div class="add_message single_message">
@@ -295,15 +325,6 @@
         }
         console.log(id)
     console.log(tourismId)
-    //回報問題
-        $(".report_comment").click(function () {
-            if (id == null) {
-                event.stopPropagation();
-                alert('請先登入:)');
-                return false;
-            }
-
-        })
 
         //顯示文章
         $(".readmore").click(function () {
@@ -452,17 +473,45 @@
         });
         //檢舉評論
         function sendReport() {
-
             $.ajax({
                 type: 'POST',
-                url: `http://localhost:54678/api/api_issues?memberId=${id}&issueContent=${$('#report_content').val()}&issue_id=3&problem_id=${$('.report_comment_id').val()}`,
+                url: `http://localhost:54678/api/api_issues?memberId=${id}&issueContent=${$('#report_content').val()}&issue_id=3&problem_id=${$('.report_comment_id').val().toString()}`,
                 success: function (data, status) {
                     alert("提交成功!")
                 }
-            });
-            $('#report_content').val("")
-        }
+            });           
+            
+    }
+            function sendMsgReport() {
+            $.ajax({
+                type: 'POST',
+                url: `http://localhost:54678/api/api_issues?memberId=${id}&issueContent=${$('.msg_report_content').val()}&issue_id=4&problem_id=${$('.report_message_id').val().toString()}`,
+                success: function (data, status) {
+                    alert("提交成功!")
+                }
+            });            
+            
+    }
         $(".submit_issue").click(function (e) {
+            if (id == null) {
+                event.stopPropagation();
+                alert('請先登入:)');
+                return false;
+            }
+            sendReport()
+            $('#report_content').val("")
+        });
+
+
+    $(".report_msg").click(function (e) {
+            if (id == null) {
+                event.stopPropagation();
+                alert('請先登入:)');
+                return false;
+            }
+
+        });
+         $(".submit_msg_issue").click(function (e) {
 
 
             if (id == null) {
@@ -470,10 +519,10 @@
                 alert('請先登入:)');
                 return false;
             }
-
-            sendReport()
+             
+             sendMsgReport()
+             $('.msg_report_content').val("")
         });
-
 
 </script>
 

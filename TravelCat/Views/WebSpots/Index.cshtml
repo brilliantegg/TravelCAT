@@ -33,3 +33,138 @@
 </div>
 
 
+﻿@model TravelCat.ViewModels.TaiwanViewModel
+@using TravelCat.ViewModels
+@{
+    Layout = "~/Views/Shared/web-Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+
+<body>
+    <style>
+    </style>
+    <div class="container">
+        <h2>景點</h2>
+
+
+
+        <section>
+
+
+            <h2>南部景點</h2>
+            <div class="d-flex row">
+                @foreach (var item in Model.south)
+                {
+
+                    <div class="col-4">
+                        <div class="card">
+                            <div class="card__image "></div>
+                            <div class="card__content">
+                                <div class="card__title">@item.spot_title </div>
+                                <p>@item.city</p>
+                                <button class="btn btn--block card__btn" onclick="window.location.href='@Url.Action("Details","WebSpots",new {id=item.spot_id })'">前往頁面</button>
+                            </div>
+                        </div>
+                    </div>
+
+                }
+            </div>
+        </section>
+        <section>
+            <h2>中部景點</h2>
+            <div class="d-flex row">
+
+                @foreach (var item in Model.middle)
+                {
+
+                    <div class="col-4">
+                        <div class="card">
+                            <div class="card__image "></div>
+                            <div class="card__content">
+                                <div class="card__title">@item.spot_title </div>
+                                <p>@item.city</p>
+                                <button class="btn btn--block card__btn" onclick="window.location.href='@Url.Action("Details","WebSpots",new {id=item.spot_id })'">前往頁面</button>
+                            </div>
+                        </div>
+                    </div>
+
+
+                }
+            </div>
+        </section>
+        <section>
+            <h2>北部景點</h2>
+            <div class="d-flex row">
+
+                @foreach (var item in Model.north)
+                {
+
+                    <div class="col-4">
+                        <div class="card">
+                            <div class="card__image "></div>
+                            <div class="card__content">
+                                <div class="card__title">@item.spot_title </div>
+                                <p>@item.city</p>
+                                <button class="btn btn--block card__btn" onclick="window.location.href='@Url.Action("Details","WebSpots",new {id=item.spot_id })'">前往頁面</button>
+                            </div>
+                        </div>
+                    </div>
+
+
+                }
+            </div>
+        </section>
+        <section>
+            <h2>東部景點</h2>
+            <div class="d-flex row">
+
+                @foreach (var item in Model.East)
+                {
+
+                    <div class="col-4">
+                        <div class="card">
+                            <div class="card__image "></div>
+                            <div class="card__content">
+                                <div class="card__title">@item.spot_title </div>
+                                <p>@item.city</p>
+                                <button class="btn btn--block card__btn" onclick="window.location.href='@Url.Action("Details","WebSpots",new {id=item.spot_id })'">前往頁面</button>
+                            </div>
+                        </div>
+                    </div>
+
+
+                }
+            </div>
+        </section>
+        <section>
+            <h2>離島景點</h2>
+            <div class="d-flex row">
+
+                @foreach (var item in Model.island)
+                {
+
+                    <div class="col-4">
+                        <div class="card">
+                            <div class="card__image "></div>
+                            <div class="card__content">
+                                <div class="card__title">@item.spot_title </div>
+                                <p>@item.city</p>
+                                <button class="btn btn--block card__btn" onclick="window.location.href='@Url.Action("Details","WebSpots",new {id=item.spot_id })'">前往頁面</button>
+                            </div>
+                        </div>
+                    </div>
+
+
+                }
+            </div>
+        </section>
+    </div>
+</body>
+</html>

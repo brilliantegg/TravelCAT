@@ -1,8 +1,9 @@
 ﻿<link href="~/Content/destinations.css" rel="stylesheet" />
-@model  TravelCat.ViewModels.FollowerViewModels
+@using Microsoft.AspNet.Identity
+@model TravelCat.ViewModels.FollowerViewModels
 @{
     ViewBag.Title = "Details";
-    Layout = "~/Views/Shared/web-Layout.cshtml";
+    Layout = null;
 
     string memberId;
     if (Session["memberID"] == null || string.IsNullOrWhiteSpace(Session["memberID"].ToString()))
@@ -16,7 +17,7 @@
 
 }
 
-
+<!--1則 評論-->
 <div class=" justify-content-center align-items-center">
 
     @foreach (var item in Model.comment)
@@ -30,12 +31,13 @@
                     <input id="comment_id" type="hidden" value=@item.comment_id />
                     <div class="member_detail ">
                         <div class="d-flex">
-                            @if (@item.member.member_profile.profile_photo != null)
+                            @if (item.member.member_profile.profile_photo != null)
                             {
-                                <img class="member_avatar" src="~/images/member/@item.member.member_profile.profile_photo" alt="X_X" onerror="this.src='~/images/member/avatar.png';">
-                            }else
+                                <img class="member_avatar" src="~/images/member/@item.member.member_profile.profile_photo" alt="..." onerror="this.src='/images/member/avatar.png';">
+                            }
+                            else
                             {
-                            <img class="member_avatar" src="~/images/member/avatar.png" alt="X_X">
+                                <img class="member_avatar" src="~/images/member/avatar.png" alt="...">
                             }
 
                             <div class="d-flex">
@@ -43,29 +45,67 @@
                             </div>
                         </div>
                         <!-- 更多選項 -->
-                        <div class="more_action">
-                            <a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <img class="icon" src="~/images/emoji/more.png" />
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                <a class="dropdown-item" href="#">分享到 facebook</a>
-                                <a class="dropdown-item" href="#">分享到 line</a>
-                                <a class="dropdown-item" href="#">分享到 google</a>
-                                <a class="dropdown-item report_comment" data-toggle="modal" data-target="#exampleModalScrollable"> 檢舉此評論</a>
+                        @if (@memberId != null)
+                        {
+                            <div class="more_action dropdown dropleft">
+                                <a class="" href="#" id="dropdownMore" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                    <img class="icon" src="~/images/emoji/more.png" />
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMore">
+                                    <a class="dropdown-item" href="#">分享到 facebook</a>
+                                    <a class="dropdown-item" href="#">分享到 line</a>
+                                    <a class="dropdown-item" href="#">分享到 google</a>
+                                    <a class="dropdown-item report_comment" data-toggle="modal" data-target="#reportModel"> 檢舉此評論</a>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+                    <!--檢舉評論modal-->
+
+                    <div class="modal fade" id="reportModel" tabindex="-1" role="dialog" aria-labelledby="reportModel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-scrollable" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">檢舉評論</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <textarea id="report_content" name="report_content" rows="20" cols="20" placeholder="請附上有問題的網址，以及違規評論內容"></textarea>
+                                </div>
+                                <input type="hidden" class="report_comment_id" value="@item.comment_id" />
+                                <div class="modal-footer">
+                                    <button id="btnTest" type="submit" class="btn btn-outline-dark submit_issue" data-dismiss="modal">提交表單</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="comment_photo">
-                            <img src="/images/comment/@item.comment_photo" class="comment_photo w-100" alt="X_X" onerror="this.src='/images/comment/0_2019129下午090757.jpg';"/>
-
-
+                        <img src="/images/comment/@item.comment_photo" class="comment_photo w-100" alt="X_X" onerror="this.src='/images/comment/0_2019129下午090757.jpg';" />
                     </div>
                     <div class="commemt_content">
+                        @{int rating = item.comment_rating;
+                            int empty = 5 - item.comment_rating;
+                        }
+                        @for (int i = 0; i < rating; i++)
+                        {
+                            <i class="fas fa-heart" style="color:rgba(174,37,46,0.99);"></i>
+                        }
+                        @for (int i = 0; i < empty; i++)
+                        {
+                            <i class="fas fa-heart-broken"></i>
+                        }
+
                         <h2 class="comment_title">@item.comment_title</h2>
                         <span class="create_time "> @item.comment_date.ToString("yyyy MM dd")  </span>
+
                         <div class="response_content">
                             <p>@Html.Raw(item.comment_content.ToString().Replace("\n", "<br>"))</p>
                         </div>
+
+
                     </div>
 
                     @if (memberId == item.member_id)
@@ -76,167 +116,58 @@
                         </div>
                     }
                     <hr />
-                    <div class="emoji_panel d-flex btn-group btn-group-toggle mb-3 mt-3  " data-toggle="buttons">
-                        <div class="comment_emoji_detail emoji">
-                            <img class="icon comment_emoji_heart" src="~/images/emoji/talk.png" data-value="@item.comment_emoji_details.Where(m => m.emoji_id == 1).Count()" comment_id="@item.comment_id" emoji_id="1" />
-                            <span class="comment_emoji_heart_num">@item.comment_emoji_details.Where(m => m.emoji_id == 1).Count() </span>
-                            <img class="icon comment_emoji_unicorn" src="~/images/emoji/unicorn.svg" data-value="@item.comment_emoji_details.Where(m => m.emoji_id == 2).Count() " comment_id="@item.comment_id" emoji_id="2" />
-                            <span class="comment_emoji_unicorn_num">@item.comment_emoji_details.Where(m => m.emoji_id == 2).Count()</span>
-                            <img class="icon comment_emoji_good" src="~/images/emoji/sweet-potato.png" data-value="@item.comment_emoji_details.Where(m => m.emoji_id == 3).Count()" comment_id="@item.comment_id" emoji_id="3" />
-                            <span class="comment_emoji_good_num">@item.comment_emoji_details.Where(m => m.emoji_id == 3).Count()</span>
-                        </div>
+                    <!--判斷前端是否要顯示被按讚過-->
 
+                    <div class="emoji_panel d-flex  ">
+                        <div class="comment_emoji_detail  d-flex">
+                            <div class="emoji ">
+                                @if (@Model.comment_emoji_details.Where(m => m.member_id == @memberId && m.comment_id == item.comment_id && m.emoji_id == 1).Count() > 0)
+                                {
 
-                        <hr />
+                                    <img class="icon comment_emoji_heart click_button" src="~/images/emoji/talk.png" data-value="@item.comment_emoji_details.Where(m => m.emoji_id == 1).Count()" data-comment_id="@item.comment_id" data-emoji_id="1" disabled="disabled" />
+                                    <span class="emoji_num comment_emoji_heart_num">@item.comment_emoji_details.Where(m => m.emoji_id == 1).Count() </span>
+                                }
+                                else
+                                {
+                                    <img class="icon comment_emoji_heart" src="~/images/emoji/talk.png" data-value="@item.comment_emoji_details.Where(m => m.emoji_id == 1).Count()" data-comment_id="@item.comment_id" data-emoji_id="1" />
+                                    <span class="emoji_num comment_emoji_heart_num">@item.comment_emoji_details.Where(m => m.emoji_id == 1).Count() </span>
+                                }
+                            </div>
+                            <div class="emoji">
+                                @if (@Model.comment_emoji_details.Where(m => m.member_id == @memberId && m.comment_id == item.comment_id && m.emoji_id == 2).Count() > 0)
+                                {
 
+                                    <img class="icon comment_emoji_unicorn click_button" src="~/images/emoji/unicorn.svg" data-value="@item.comment_emoji_details.Where(m => m.emoji_id == 2).Count() " data-comment_id="@item.comment_id" data-emoji_id="2" disabled="disabled" />
+                                    <span class="emoji_num comment_emoji_unicorn_num">@item.comment_emoji_details.Where(m => m.emoji_id == 2).Count()</span>
+                                }
+                                else
+                                {
+                                    <img class="icon comment_emoji_unicorn" src="~/images/emoji/unicorn.svg" data-value="@item.comment_emoji_details.Where(m => m.emoji_id == 2).Count() " data-comment_id="@item.comment_id" data-emoji_id="2" />
+                                    <span class="emoji_num comment_emoji_unicorn_num">@item.comment_emoji_details.Where(m => m.emoji_id == 2).Count()</span>
+                                }
+                            </div>
+                            <div class="emoji">
 
-                        <!--檢舉評論modal-->
-                        <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-scrollable" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalScrollableTitle">檢舉評論</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <textarea id="report_content" name="report_content" rows="20" cols="20" placeholder="請附上有問題的網址，以及違規評論內容"></textarea>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button id="btnTest" type="submit" class="btn btn-outline-dark submit_issue" data-dismiss="modal">提交表單</button>
-                                    </div>
-                                </div>
+                                @if (@Model.comment_emoji_details.Where(m => m.member_id == @memberId && m.comment_id == item.comment_id && m.emoji_id == 3).Count() > 0)
+                                {
+
+                                    <img class="icon comment_emoji_good click_button" src="~/images/emoji/sweet-potato.png" data-value="@item.comment_emoji_details.Where(m => m.emoji_id == 3).Count()" data-comment_id="@item.comment_id" data-emoji_id="3" disabled="disabled" />
+                                    <span class="emoji_num comment_emoji_good_num">@item.comment_emoji_details.Where(m => m.emoji_id == 3).Count()</span>
+                                }
+                                else
+                                {
+                                    <img class="icon comment_emoji_good" src="~/images/emoji/sweet-potato.png" data-value="@item.comment_emoji_details.Where(m => m.emoji_id == 3).Count()" data-comment_id="@item.comment_id" data-emoji_id="3" />
+                                    <span class="emoji_num comment_emoji_good_num">@item.comment_emoji_details.Where(m => m.emoji_id == 3).Count()</span>
+                                }
                             </div>
                         </div>
-
-
-
-
+                        <hr />
                     </div>
 
+                    
                 </div>
             </div>
         }
     }
 </div>
-
-
-
-
-@section scripts {
-
-    <script>
-        var id ;
-        var tourismId = "@ViewBag.id";
-
-        if ("@Session["memberID"]" =="") {
-            id = null
-
-        } else {
-
-            id = "@Session["memberID"]"
-
-        }
-        console.log(id)
-        console.log(tourismId)
-
-        //顯示文章
-        $(".readmore").click(function () {
-            $(".intro").toggleClass('showMore');
-
-        })
-        //新增收藏
-        $(".add_to_bucket_list").click(function (e) {
-            if (id == null) {
-                event.stopPropagation();
-                alert('請先登入:)');
-                return false;
-            }
-        });
-        //新增評論
-        $(".add_comment").click(function (e) {
-            if (id == null) {
-                event.stopPropagation();
-                alert('請先登入:)');
-                return false;
-            }
-        })
-        //評論按讚
-        $(".comment_emoji_detail").click(function (e) {
-            if (id == null) {
-                event.stopPropagation();
-                alert('請先登入:)');
-                return false;
-            }
-            let value = parseInt(e.target.getAttribute('data-value'))
-            let plusValue = value + 1
-            let comment_id = e.target.getAttribute('comment_id')
-            let emoji_id = e.target.getAttribute('emoji_id')
-
-            if ($(e.target).attr('disabled') == 'disabled') {
-                $(e.target).attr('disabled', false);
-                $(e.target).removeClass('click_button');
-                $(event.target).next().text(value);
-                $.ajax({
-                    type: 'Delete',
-                    url: "http://localhost:54678/api/api_comment_emoji_details",
-                    contentType: 'application/json',
-                    data: JSON.stringify({
-                        "member_id": id,
-                        "comment_id": comment_id,
-                        "emoji_id": emoji_id,
-                        "tourism_id":tourismId
-                    }),
-                    success: function (data, status) {
-
-
-                    }
-                });
-                return;
-            } else
-            $(e.target).attr('disabled', true);
-            $(e.target).addClass('click_button')
-            $(event.target).next().text(plusValue);
-            $.ajax({
-                type: 'POST',
-                url: "http://localhost:54678/api/api_comment_emoji_details",
-                contentType: 'application/json',
-                data: JSON.stringify({
-                    "member_id": id,
-                    "comment_id": comment_id,
-                    "emoji_id": emoji_id,
-                    "tourism_id":tourismId
-                }),
-                success: function (data, status) {
-
-
-                }
-            });
-
-        });
-        //檢舉評論
-        function sendReport() {
-
-            $.ajax({
-                type: 'POST',
-                url: `http://localhost:54678/api/api_issues?memberId=${id}&issueContent=${$('#report_content').val()}`,
-                success: function (data, status) {
-                    alert("提交成功!")
-                }
-            });
-            $('#report_content').val("")
-        }
-        $(".submit_issue").click(function (e) {
-            if (id == null) {
-                event.stopPropagation();
-                alert('請先登入:)');
-                return false;
-            }
-            sendReport()
-        });
-
-
-    </script>
-}
 

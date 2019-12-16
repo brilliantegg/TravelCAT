@@ -44,7 +44,9 @@ namespace TravelCat.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.tourismId = id;    
+            List<spot> spot = db.spot.Where(m => m.district == model.restaurant.district).OrderByDescending(m => m.spot_id).Take(3).ToList();
+            ViewBag.tourismId = id;
+            ViewBag.spot = spot;
             return View(model);
         }
 

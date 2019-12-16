@@ -5,7 +5,7 @@
 
 @{ Layout = "";}
 
-@foreach (var item in Model.result_ratings)
+@foreach (var item in Model.show_ratings)
     {
         if (item.id.Contains("R"))
         {
@@ -14,8 +14,8 @@
                 <div class="media-body ">
                     <h3 class="my-2 font-weight-bold border-bottom pb-2">@Html.ActionLink(item.title, "Details", "web_restsaurants", new { id = item.id }, null)</h3>
                     <div class="row">
-                        <div class="col-md-6 col-sm-12">@Model.restaurant.Where(s => s.restaurant_id == item.id).FirstOrDefault().city @Model.restaurant.Where(s => s.restaurant_id == item.id).FirstOrDefault().district</div>
-                        <div class="col-md-6 col-sm-12 intro_content">@item.intro</div>
+                        <div class="col-md-12 col-sm-12">@Model.restaurant.Where(s => s.restaurant_id == item.id).FirstOrDefault().city @Model.restaurant.Where(s => s.restaurant_id == item.id).FirstOrDefault().district</div>
+                        <div class="col-md-12 col-sm-12 intro_content">@item.intro</div>
                         <div class="col-md-6 col-sm-12">測試欄位</div>
                         <div class="col-md-6 col-sm-12">
                             @if (String.IsNullOrEmpty(item.rating)) { item.rating = "0"; }

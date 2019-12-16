@@ -302,19 +302,6 @@
              $(".rating_error_message ").text("請輸入內容");
                 e.preventDefault();
             }
-            //旅遊月份
-            var monthValue = false;
-            var travel_month = document.getElementsByName('travel_month');
-             for(var i=0; i<travel_month.length;i++){
-            if(travel_month[i].checked == true){
-                monthValue = true;    
-                }
-            }
-            if(!monthValue){
-             $(".month_error_message ").text("請輸入內容");
-                e.preventDefault();
-            }
-            //停留時間
             
     
 });

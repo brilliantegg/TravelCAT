@@ -3,7 +3,8 @@
 @using X.PagedList.Mvc.Common
 @model TravelCat.ViewModels.SearchViewModel
 
-@{ Layout = "";}
+@{ Layout = "";
+    int num = 0;}
 
 @foreach (var item in Model.show_ratings)
     {
@@ -14,9 +15,10 @@
                 <div class="media-body ">
                     <h3 class="my-2 font-weight-bold border-bottom pb-2">@Html.ActionLink(item.title, "Details", "web_activities", new { id = item.id }, null)</h3>
                     <div class="row">
-                        <div class="col-md-6 col-sm-12">@Model.hotel.Where(s => s.hotel_id == item.id).FirstOrDefault().city @Model.hotel.Where(s => s.hotel_id == item.id).FirstOrDefault().district</div>
-                        <div class="col-md-6 col-sm-12 intro_content">@item.intro</div>
-                        <div class="col-md-6 col-sm-12">測試欄位</div>
+                        <div class="col-md-12 col-sm-12">@Model.hotel.Where(s => s.hotel_id == item.id).FirstOrDefault().city @Model.hotel.Where(s => s.hotel_id == item.id).FirstOrDefault().district</div>
+                        <div class="col-md-12 col-sm-12 intro_content">@item.intro</div>
+                        @*@if (Model.comment.Where(s => s.tourism_id == item.id) != null) { num = Model.comment.Where(s => s.tourism_id == item.id).Count(); }*@
+                        <div class="col-md-6 col-sm-12">有 @num 則評論</div>
                         <div class="col-md-6 col-sm-12">
                             @if (String.IsNullOrEmpty(item.rating)) { item.rating = "0"; }
                             <div style="width:100px">
