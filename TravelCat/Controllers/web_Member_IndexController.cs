@@ -20,7 +20,7 @@ namespace TravelCat.Controllers
         // GET: web_Member_Index
         public ActionResult Index(string id = "M000003")
         {
-
+            var score = db.Database.SqlQuery<string>("Select dbo.GetactivityId()").ToList();
             MemberIndexViewModels model = new MemberIndexViewModels()
             {
                 member = db.member.Find(id),
