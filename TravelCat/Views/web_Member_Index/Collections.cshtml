@@ -14,9 +14,17 @@
     {
         memberId = Session["memberID"].ToString();
     }
+    var jss = new System.Web.Script.Serialization.JavaScriptSerializer();
+    var mapJson = jss.Serialize(ViewBag.data);
 }
-
+<style>
+    #map {
+        height: 400px;
+    }
+</style>
+<div id="map"></div>
 <div class="col-8 offset-2 ">
+
 
 
     <ul class="nav nav-pills mb-3 justify-content-center" id="pills-tab" role="tablist">
@@ -135,113 +143,428 @@
                     </div>
                 }
             </div>
-            </div>
-            <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
-                <div class="row">
-                    @foreach(var item in ViewBag.a_collect)
-                    {
-                        <h1>yeah</h1>
-                    <h1>@item.id</h1>
-                    }
-                    @foreach (var item in ViewBag.hadBeen)
-                    {
-                        <div class="collect_card col-4 mb-5">
-                            @{if (item.tourism_id.Contains("A"))
-                                {
-                                    <a class="collection_text  text-white" href="@Url.Action("Details","web_activities",new { id= @item.tourism_id})">
+        </div>
+        <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+            <div class="row">
 
-                                        <div class="c_img " style="background-image:url('https://source.unsplash.com/collection/388793/random?sig=@(Guid.NewGuid())');">
-                                            <i class="fas fa-running"></i>
-                                            @Model.activity.Where(m => m.activity_id == @item.tourism_id).FirstOrDefault().activity_title
-                                        </div>
-                                    </a>
-                                }
-                                else if (item.tourism_id.Contains("S"))
-                                {
-                                    <a class="collection_text  text-white" href="@Url.Action("Details","webSpots",new { id= @item.tourism_id})">
+                @foreach (var item in ViewBag.hadBeen)
+                {
+                    <div class="collect_card col-4 mb-5">
+                        @{if (item.tourism_id.Contains("A"))
+                            {
+                                <a class="collection_text  text-white" href="@Url.Action("Details","web_activities",new { id= @item.tourism_id})">
 
-                                        <div class="c_img " style="background-image:url('https://source.unsplash.com/collection/388793/random?sig=@(Guid.NewGuid())');">
-                                            <i class=" fas fa-map-marked-alt "></i>
-                                            @Model.spot.Where(m => m.spot_id == @item.tourism_id).FirstOrDefault().spot_title
-                                        </div>
-                                    </a>
-                                }
-                                else if (item.tourism_id.Contains("R"))
-                                {
-
-                                    <a class="collection_text  text-white" href="@Url.Action("Details","WebRestaurants",new { id= @item.tourism_id})">
-
-                                        <div class="c_img " style="background-image:url('https://source.unsplash.com/collection/388793/random?sig=@(Guid.NewGuid())');">
-                                            <i class="fas fa-hamburger"></i>
-                                            @Model.restaurant.Where(m => m.restaurant_id == @item.tourism_id).FirstOrDefault().restaurant_title
-                                        </div>
-                                    </a>
-                                }
-                                else if (item.tourism_id.Contains("H"))
-                                {
-                                    <a class="collection_text  text-white" href="@Url.Action("Details","WebHotels",new { id= @item.tourism_id})">
-
-                                        <div class="c_img " style="background-image:url('https://source.unsplash.com/collection/388793/random?sig=@(Guid.NewGuid())');">
-                                            <i class="fas fa-building"></i>
-                                            @Model.hotel.Where(m => m.hotel_id == @item.tourism_id).FirstOrDefault().hotel_title
-                                        </div>
-                                    </a>
-                                }
+                                    <div class="c_img " style="background-image:url('https://source.unsplash.com/collection/388793/random?sig=@(Guid.NewGuid())');">
+                                        <i class="fas fa-running"></i>
+                                        @Model.activity.Where(m => m.activity_id == @item.tourism_id).FirstOrDefault().activity_title
+                                    </div>
+                                </a>
                             }
-                        </div>
-                    }
-                </div>
-                </div>
-            <div class="tab-pane fade" id="mustGo" role="tabpanel" aria-labelledby="pills-contact-tab">
-                <div class="row">
-                    @foreach (var item in ViewBag.mustGo)
-                    {
-                        <div class="collect_card col-4 mb-5">
-                            @{if (item.tourism_id.Contains("A"))
-                                {
-                                    <a class="collection_text  text-white" href="@Url.Action("Details","web_activities",new { id= @item.tourism_id})">
+                            else if (item.tourism_id.Contains("S"))
+                            {
+                                <a class="collection_text  text-white" href="@Url.Action("Details","webSpots",new { id= @item.tourism_id})">
 
-                                        <div class="c_img " style="background-image:url('https://source.unsplash.com/collection/388793/random?sig=@(Guid.NewGuid())');">
-                                            <i class="fas fa-running"></i>
-                                            @Model.activity.Where(m => m.activity_id == @item.tourism_id).FirstOrDefault().activity_title
-                                        </div>
-                                    </a>
-                                }
-                                else if (item.tourism_id.Contains("S"))
-                                {
-                                    <a class="collection_text  text-white" href="@Url.Action("Details","webSpots",new { id= @item.tourism_id})">
-
-                                        <div class="c_img " style="background-image:url('https://source.unsplash.com/collection/388793/random?sig=@(Guid.NewGuid())');">
-                                            <i class=" fas fa-map-marked-alt "></i>
-                                            @Model.spot.Where(m => m.spot_id == @item.tourism_id).FirstOrDefault().spot_title
-                                        </div>
-                                    </a>
-                                }
-                                else if (item.tourism_id.Contains("R"))
-                                {
-
-                                    <a class="collection_text  text-white" href="@Url.Action("Details","WebRestaurants",new { id= @item.tourism_id})">
-
-                                        <div class="c_img " style="background-image:url('https://source.unsplash.com/collection/388793/random?sig=@(Guid.NewGuid())');">
-                                            <i class="fas fa-hamburger"></i>
-                                            @Model.restaurant.Where(m => m.restaurant_id == @item.tourism_id).FirstOrDefault().restaurant_title
-                                        </div>
-                                    </a>
-                                }
-                                else if (item.tourism_id.Contains("H"))
-                                {
-                                    <a class="collection_text  text-white" href="@Url.Action("Details","WebHotels",new { id= @item.tourism_id})">
-
-                                        <div class="c_img " style="background-image:url('https://source.unsplash.com/collection/388793/random?sig=@(Guid.NewGuid())');">
-                                            <i class="fas fa-building"></i>
-                                            @Model.hotel.Where(m => m.hotel_id == @item.tourism_id).FirstOrDefault().hotel_title
-                                        </div>
-                                    </a>
-                                }
+                                    <div class="c_img " style="background-image:url('https://source.unsplash.com/collection/388793/random?sig=@(Guid.NewGuid())');">
+                                        <i class=" fas fa-map-marked-alt "></i>
+                                        @Model.spot.Where(m => m.spot_id == @item.tourism_id).FirstOrDefault().spot_title
+                                    </div>
+                                </a>
                             }
-                        </div>
-                    }
-                </div>
-                </div>
+                            else if (item.tourism_id.Contains("R"))
+                            {
+
+                                <a class="collection_text  text-white" href="@Url.Action("Details","WebRestaurants",new { id= @item.tourism_id})">
+
+                                    <div class="c_img " style="background-image:url('https://source.unsplash.com/collection/388793/random?sig=@(Guid.NewGuid())');">
+                                        <i class="fas fa-hamburger"></i>
+                                        @Model.restaurant.Where(m => m.restaurant_id == @item.tourism_id).FirstOrDefault().restaurant_title
+                                    </div>
+                                </a>
+                            }
+                            else if (item.tourism_id.Contains("H"))
+                            {
+                                <a class="collection_text  text-white" href="@Url.Action("Details","WebHotels",new { id= @item.tourism_id})">
+
+                                    <div class="c_img " style="background-image:url('https://source.unsplash.com/collection/388793/random?sig=@(Guid.NewGuid())');">
+                                        <i class="fas fa-building"></i>
+                                        @Model.hotel.Where(m => m.hotel_id == @item.tourism_id).FirstOrDefault().hotel_title
+                                    </div>
+                                </a>
+                            }
+                        }
+                    </div>
+                }
             </div>
+        </div>
+        <div class="tab-pane fade" id="mustGo" role="tabpanel" aria-labelledby="pills-contact-tab">
+            <div class="row">
+                @foreach (var item in ViewBag.mustGo)
+                {
+                    <div class="collect_card col-4 mb-5">
+                        @{if (item.tourism_id.Contains("A"))
+                            {
+                                <a class="collection_text  text-white" href="@Url.Action("Details","web_activities",new { id= @item.tourism_id})">
+
+                                    <div class="c_img " style="background-image:url('https://source.unsplash.com/collection/388793/random?sig=@(Guid.NewGuid())');">
+                                        <i class="fas fa-running"></i>
+                                        @Model.activity.Where(m => m.activity_id == @item.tourism_id).FirstOrDefault().activity_title
+                                    </div>
+                                </a>
+                            }
+                            else if (item.tourism_id.Contains("S"))
+                            {
+                                <a class="collection_text  text-white" href="@Url.Action("Details","webSpots",new { id= @item.tourism_id})">
+
+                                    <div class="c_img " style="background-image:url('https://source.unsplash.com/collection/388793/random?sig=@(Guid.NewGuid())');">
+                                        <i class=" fas fa-map-marked-alt "></i>
+                                        @Model.spot.Where(m => m.spot_id == @item.tourism_id).FirstOrDefault().spot_title
+                                    </div>
+                                </a>
+                            }
+                            else if (item.tourism_id.Contains("R"))
+                            {
+
+                                <a class="collection_text  text-white" href="@Url.Action("Details","WebRestaurants",new { id= @item.tourism_id})">
+
+                                    <div class="c_img " style="background-image:url('https://source.unsplash.com/collection/388793/random?sig=@(Guid.NewGuid())');">
+                                        <i class="fas fa-hamburger"></i>
+                                        @Model.restaurant.Where(m => m.restaurant_id == @item.tourism_id).FirstOrDefault().restaurant_title
+                                    </div>
+                                </a>
+                            }
+                            else if (item.tourism_id.Contains("H"))
+                            {
+                                <a class="collection_text  text-white" href="@Url.Action("Details","WebHotels",new { id= @item.tourism_id})">
+
+                                    <div class="c_img " style="background-image:url('https://source.unsplash.com/collection/388793/random?sig=@(Guid.NewGuid())');">
+                                        <i class="fas fa-building"></i>
+                                        @Model.hotel.Where(m => m.hotel_id == @item.tourism_id).FirstOrDefault().hotel_title
+                                    </div>
+                                </a>
+                            }
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
 </div>
+
+<div>
+
+</div>
+<!--google-->
+
+<script>
+
+    var map;
+    var marker;
+    function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: { lat: parseFloat(mapJson[0].latitude), lng: parseFloat(mapJson[0].longitude) },
+            zoom: 7,
+            styles: [
+                {
+                    "featureType": "administrative",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                        {
+                            "color": "#6195a0"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "administrative.province",
+                    "elementType": "geometry.stroke",
+                    "stylers": [
+                        {
+                            "visibility": "off"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "landscape",
+                    "elementType": "geometry",
+                    "stylers": [
+                        {
+                            "lightness": "0"
+                        },
+                        {
+                            "saturation": "0"
+                        },
+                        {
+                            "color": "#f5f5f2"
+                        },
+                        {
+                            "gamma": "1"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "landscape.man_made",
+                    "elementType": "all",
+                    "stylers": [
+                        {
+                            "lightness": "-3"
+                        },
+                        {
+                            "gamma": "1.00"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "landscape.natural.terrain",
+                    "elementType": "all",
+                    "stylers": [
+                        {
+                            "visibility": "off"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "poi",
+                    "elementType": "all",
+                    "stylers": [
+                        {
+                            "visibility": "off"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "poi.park",
+                    "elementType": "geometry.fill",
+                    "stylers": [
+                        {
+                            "color": "#bae5ce"
+                        },
+                        {
+                            "visibility": "on"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "road",
+                    "elementType": "all",
+                    "stylers": [
+                        {
+                            "saturation": -100
+                        },
+                        {
+                            "lightness": 45
+                        },
+                        {
+                            "visibility": "simplified"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "road.highway",
+                    "elementType": "all",
+                    "stylers": [
+                        {
+                            "visibility": "simplified"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "road.highway",
+                    "elementType": "geometry.fill",
+                    "stylers": [
+                        {
+                            "color": "#fac9a9"
+                        },
+                        {
+                            "visibility": "simplified"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "road.highway",
+                    "elementType": "labels.text",
+                    "stylers": [
+                        {
+                            "color": "#4e4e4e"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "road.arterial",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                        {
+                            "color": "#787878"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "road.arterial",
+                    "elementType": "labels.icon",
+                    "stylers": [
+                        {
+                            "visibility": "off"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "transit",
+                    "elementType": "all",
+                    "stylers": [
+                        {
+                            "visibility": "simplified"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "transit.station.airport",
+                    "elementType": "labels.icon",
+                    "stylers": [
+                        {
+                            "hue": "#0a00ff"
+                        },
+                        {
+                            "saturation": "-77"
+                        },
+                        {
+                            "gamma": "0.57"
+                        },
+                        {
+                            "lightness": "0"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "transit.station.rail",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                        {
+                            "color": "#43321e"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "transit.station.rail",
+                    "elementType": "labels.icon",
+                    "stylers": [
+                        {
+                            "hue": "#ff6c00"
+                        },
+                        {
+                            "lightness": "4"
+                        },
+                        {
+                            "gamma": "0.75"
+                        },
+                        {
+                            "saturation": "-68"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "water",
+                    "elementType": "all",
+                    "stylers": [
+                        {
+                            "color": "#eaf6f8"
+                        },
+                        {
+                            "visibility": "on"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "water",
+                    "elementType": "geometry.fill",
+                    "stylers": [
+                        {
+                            "color": "#c7eced"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "water",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                        {
+                            "lightness": "-49"
+                        },
+                        {
+                            "saturation": "-53"
+                        },
+                        {
+                            "gamma": "0.79"
+                        }
+                    ]
+                }
+            ]
+        });
+        for (var i = 0; i < mapJson.length; i++) {
+            marker = new google.maps.Marker({
+                position: { lat: parseFloat(mapJson[i].latitude), lng: parseFloat(mapJson[i].longitude) },//positon 位置
+                map: map, //標示地圖
+                title: mapJson[i].title
+            })
+        }
+    }
+
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAbQxjXC0otfo4YjWBXOOzuVnvAAHMsFs8&callback=initMap" async defer></script>
+
+
+<script>
+    //use Json.parse to convert string to Json
+
+    var mapJson = JSON.parse(@Html.Raw(mapJson));
+
+
+    $(function () {
+
+
+    });
+</script>
+
+<script>
+    // 先確認使用者裝置能不能抓地點
+if(navigator.geolocation) {
+
+  // 使用者不提供權限，或是發生其它錯誤
+  function error() {
+    alert('無法取得你的位置');
+  }
+
+  // 使用者允許抓目前位置，回傳經緯度
+  function success(position) {
+    console.log(position.coords.latitude, position.coords.longitude);
+  }
+
+  // 跟使用者拿所在位置的權限
+  navigator.geolocation.getCurrentPosition(success, error);
+
+} else {
+  alert('Sorry, 你的裝置不支援地理位置功能。')
+    }
+
+
+    var origin1 = new google.maps.LatLng(55.930385, -3.118425);
+var origin2 = 'Greenwich, England';
+var destinationA = 'Stockholm, Sweden';
+var destinationB = new google.maps.LatLng(50.087692, 14.421150);
+
+var service = new google.maps.DistanceMatrixService();
+service.getDistanceMatrix(
+  {
+    origins: [origin1, origin2],
+    destinations: [destinationA, destinationB],
+    travelMode: 'DRIVING',
+    transitOptions: TransitOptions,
+    drivingOptions: DrivingOptions,
+    unitSystem: UnitSystem,
+    avoidHighways: Boolean,
+    avoidTolls: Boolean,
+  }, callback);
+
+function callback(response, status) {
+  // See Parsing the Results for
+  // the basics of a callback function.
+}
+</script>

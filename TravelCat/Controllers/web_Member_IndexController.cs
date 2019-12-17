@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.IO;
@@ -237,11 +238,62 @@ namespace TravelCat.Controllers
                 spot = db.spot.ToList(),
 
             };
-            var a_collect = (from a in db.activity
-                            join c in db.collections_detail on a.activity_id equals c.tourism_id into x
-                            select new {title =a.activity_title, longitude =a.longitude, latitude =a.latitude}).ToList()
-                            ;
-            ViewBag.a_collect = a_collect;
+            
+            var data = new[] { new { title = "", longitude = "", latitude = "" } }.ToList();
+            data.RemoveAt(0);
+            var member = db.member.Find(id);
+            
+
+            foreach (var c in member.collections_detail)
+            {
+                string firstChar = c.tourism_id.Substring(0, 1);
+                switch (firstChar)
+                {
+                    case "A":
+                        var activity = db.activity.Where(a => a.activity_id == c.tourism_id).FirstOrDefault();
+                        data.Add(new
+                        {
+                            title = activity.activity_title.Replace(" ", ""),
+                            longitude = activity.longitude,
+                            latitude = activity.latitude
+                        });
+                        break;
+                    case "H":
+                        var hotel = db.hotel.Where(a => a.hotel_id == c.tourism_id).FirstOrDefault();
+                        data.Add(new
+                        {
+                            title = hotel.hotel_title.Replace(" ", ""),
+                            longitude = hotel.longitude,
+                            latitude = hotel.latitude
+                        });
+                        break;
+                    case "R":
+                        var restaurant = db.restaurant.Where(a => a.restaurant_id == c.tourism_id).FirstOrDefault();
+                        data.Add(new
+                        {
+                            title = restaurant.restaurant_title.Replace(" ", ""),
+                            longitude = restaurant.longitude,
+                            latitude = restaurant.latitude
+                        });
+                        break;
+                    case "S":
+                        var spot = db.spot.Where(a => a.spot_id == c.tourism_id).FirstOrDefault();
+                        data.Add(new
+                        {
+                            title = spot.spot_title.Replace(" ", ""),
+                            longitude = spot.longitude,
+                            latitude = spot.latitude
+                        });
+                        break;
+                    default:
+                        break;
+                }                          
+                
+            }
+            
+            string json = JsonConvert.SerializeObject(data);
+            ViewBag.data = json;
+
             var collect = model.collections_detail.Where(m => m.collection_type_id.ToString() == "1").ToList();
             ViewBag.collect = collect;
             var wannaGo = model.collections_detail.Where(m => m.collection_type_id.ToString() == "2").ToList();
@@ -256,7 +308,9 @@ namespace TravelCat.Controllers
             //                        select new a_c { id = a.activity_id }).ToList();
             //ViewBag.collect_activity = collect_activity;
 
+
             return View(model);
+
         }
     }
 }

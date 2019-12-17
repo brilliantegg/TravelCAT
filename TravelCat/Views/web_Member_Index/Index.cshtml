@@ -19,6 +19,7 @@
 <div class="user_profile_header ">
 
         <div class="wrapper d-flex  ">
+
             @if (@Model.member_profile.profile_photo != null)
             {
                 <img class="profile_avatar"  src="~/images/member/@Model.member_profile.profile_photo" alt="..." onError="this.onerror=null;this.src='/images/member/avatar.png';">
