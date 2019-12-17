@@ -33,12 +33,12 @@
 
                 @if (Request.IsAuthenticated && Session["memberID"] != null)
                 {
-            <div>
-                <a href="@Url.Action("Collections","web_Member_Index" ,new { id = mem_id })"><img src="https://image.flaticon.com/icons/png/512/1077/1077035.png" style="width:20px;height:20px" /></a>
-                @Html.ActionLink(@User.Identity.GetUserName(), "Index", "web_Member_Index", new { id = mem_id }, new { @class = "  memberId aTag_style" })
+                    <div>
+                        <a href="@Url.Action("Collections","web_Member_Index" ,new { id = mem_id })"><img src="https://image.flaticon.com/icons/png/512/1077/1077035.png" style="width:20px;height:20px" /></a>
+                        @Html.ActionLink(@User.Identity.GetUserName(), "Index", "web_Member_Index", new { id = mem_id }, new { @class = "  memberId aTag_style" })
 
-                @Html.ActionLink("登出", "LogOut", "Home", null, new { @class = " aTag_style" })
-            </div>
+                        @Html.ActionLink("登出", "LogOut", "Home", null, new { @class = " aTag_style" })
+                    </div>
                 }
                 else
                 {
