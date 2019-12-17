@@ -14,6 +14,9 @@
 
 <body>
     <style>
+        .added{
+            color:red
+        }
     </style>
     <div class="container">
         <h2>景點</h2>
@@ -32,9 +35,10 @@
                         <div class="card">
                             <div class="card__image "></div>
                             <div class="card__content">
-                                <div class="card__title">@item.spot_title </div>
+                                <div class="card__title" >@item.spot_title </div>
                                 <p>@item.city</p>
                                 <button class="btn btn--block card__btn" onclick="window.location.href='@Url.Action("Details","WebSpots",new {id=item.spot_id })'">前往頁面</button>
+                                <button class="add_to_bucket_list" data-id="@item.spot_id">收藏</button>
                             </div>
                         </div>
                     </div>
@@ -133,3 +137,70 @@
     </div>
 </body>
 </html>
+<script>
+        var id ;
+        var tourismId = "@ViewBag.tourismId";
+
+        if ("@Session["memberID"]" =="") {
+            id = null
+
+        } else {
+
+            id = "@Session["memberID"]"
+
+        }
+
+    $(".add_to_bucket_list").click(function (e) {
+        if (id == null) {
+                event.stopPropagation();
+                alert('請先登入:)');
+                return false;
+            }
+        e.preventDefault();
+
+        if ($(this).hasClass("added")) {
+            remove_bucket($(this))
+            $(this).removeClass("added");
+        } else {
+            add_bucket($(this))
+            $(this).addClass("added");
+        }
+    })
+    function add_bucket(object) {
+
+        var url = "@Url.Action("Postcollections_detail","web_comments")"
+
+            $.ajax({
+            type: "POST",
+            url: url,
+            data: {
+                member_id:"@Session["memberID"]" ,
+                tourism_id: object.data('id')
+            },
+           success:function()
+           {
+               alert('add')
+           }
+         });
+        }
+    function remove_bucket(object) {
+
+        var url = "@Url.Action("Deletecollections_detail","web_comments")"
+
+            $.ajax({
+            type: "POST",
+            url: url,
+            data: {
+                member_id:"@Session["memberID"]" ,
+                tourism_id: object.data('id')
+            },
+           success:function()
+           {
+               alert('delete')
+           }
+         });
+        }
+
+
+        
+</script>
