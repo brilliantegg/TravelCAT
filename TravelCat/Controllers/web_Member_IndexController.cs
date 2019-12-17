@@ -30,15 +30,63 @@ namespace TravelCat.Controllers
                 follow = db.follow_list.Where(m => m.followed_id == id).ToList(),
                 followed = db.follow_list.Where(m => m.member_id == id).ToList(),
                 follow_list = db.follow_list.ToList(),
-                collections_detail = db.collections_detail.Where(m=>m.member_id==id).ToList(),
-                activity =db.activity.ToList(),
+                collections_detail = db.collections_detail.Where(m => m.member_id == id).ToList(),
+                activity = db.activity.ToList(),
                 hotel = db.hotel.ToList(),
                 restaurant = db.restaurant.ToList(),
                 spot = db.spot.ToList(),
+
             };
+
+            var result2 = (from a in db.follow_list
+                           group a by a.member_id into b
+                           orderby b.Count() descending
+                           select new { id = b.Key, count = b.Count() }).ToList();
+
+
+            var result3 = (from a in db.comment
+                           group a by a.member_id into b
+                           orderby b.Count() descending
+                           select new { id = b.Key, count = b.Count() }).Take(3).ToList();
+
+
+            var result4 = (from a in db.follow_list
+                           group a by a.member_id into b
+                           orderby b.Count() descending
+                           select new { id = b.Key, count = b.Count() })
+                         .Union
+                         (from a in db.comment
+                          group a by a.member_id into b
+                          orderby b.Count() descending
+                          select new { id = b.Key, count = b.Count() }).ToList();
+
+            var result5 = (from a in result4
+                           group a by a.id into b
+                           orderby b.Count() descending
+                           select new { id = b.Key, count = b.Count() }).ToList();
+
+            //score final_result = new score();
+            //for (int i = 0; i < result5.Count; i++)
+            //{
+            //    score final_result = new score();
+            //    string memid = result5[i].id;
+            //    int score_result = 0;
+            //    for (int j = 0; j < result5[i].count; j++)
+            //    {
+            //        score_result += result4.Where(s => s.id == id).ToList()[j].count;
+            //    }
+
+            //    final_result.memID = memid;
+            //    final_result.mem_score = score_result;
+            //    model.scores.Add(final_result);
+            //}
+
             ViewBag.memberId = id;
             ViewBag.member_profile = db.member_profile.ToList();
-            ViewBag.scoreRank = db.member_profile.OrderByDescending(m => m.member_score).Take(3).ToList();
+            ViewBag.score = result3;
+
+            //result2.GetType().GetProperty("id").GetValue(result2);
+
             return View(model);
         }
         public ActionResult EditMemberProfile(string id)
