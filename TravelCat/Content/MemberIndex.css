@@ -182,3 +182,8 @@ a:hover {
 .a_style {
     color: #4e57ef;
 }
+.badge_sticker img {
+    transform: rotate(-15deg);
+    margin-left: 6px;
+    margin-right: 2px;
+}

@@ -56,12 +56,62 @@
            
             <td>
 
-                @Html.ActionLink("Details", "Details", new { id=item.hotel_id }) |
+   
 
-            </td>
-        </tr>
-    }
-    
-    </table>
-</body>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.hotel_title)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.hotel_tel)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.city)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.district)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.address_detail)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.page_status)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.hotel_title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.hotel_tel)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.city)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.district)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.address_detail)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.page_status)
+                    </td>
+                    <td>
+
+                        @Html.ActionLink("Details", "Details", new { id = item.hotel_id }) |
+
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </body>
 </html>

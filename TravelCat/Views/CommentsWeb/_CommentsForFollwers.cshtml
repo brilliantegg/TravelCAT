@@ -108,13 +108,7 @@
 
                     </div>
 
-                    @if (memberId == item.member_id)
-                    {
-                        <div class="text-right">
-                            @Html.ActionLink("編輯", "Edit", "web_comments", new { id = @item.comment_id }, null)
-                            @Html.ActionLink("刪除", "Delete", "web_comments", new { id = @item.comment_id }, new { @class = "", onclick = "return confirm('確認要刪除?')" })
-                        </div>
-                    }
+
                     <hr />
                     <!--判斷前端是否要顯示被按讚過-->
 
