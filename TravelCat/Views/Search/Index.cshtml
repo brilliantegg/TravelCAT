@@ -45,14 +45,15 @@
 
                             <div class="text-center mb-4 border-bottom ">
                                 <h2>篩選條件</h2>
-
                             </div>
-                            <div class="input-group my-3">
-                                <input type="text" id="q" name="q" class="form-control search_bar" placeholder="請輸入你想去的地方" aria-label="Recipient's username" aria-describedby="button-addon2">
-                                <div class="input-group-append">
-                                    <button class="btn btn-outline-secondary" type="submit" id="button-addon2">GO</button>
+                            <form>
+                                <div class="input-group my-3">
+                                    <input type="text" id="q" name="q" class="form-control search_bar" placeholder="請輸入你想去的地方" aria-label="Recipient's username" aria-describedby="button-addon2">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary" type="submit" id="button-addon2">GO</button>
+                                    </div>
                                 </div>
-                            </div>
+                            </form>
                         </div>
 
                         <div class="row">
@@ -323,6 +324,14 @@
         $('#Sortby').change(function () {
             $('#form_right').submit();
         });
+
+        $('#travel_month input[value=@ViewBag.month').parent('label').addClass('active');
+
+        $('#travel_partner input[value=@ViewBag.partner]').parent('label').addClass('active');
+
+        $('#city option[value=@ViewBag.city]').attr("selected", "selected");
+        $('#comment_rating option[value=@ViewBag.rating]').attr("selected","selected")
+        $('#comment_stay_total option[value=@ViewBag.stay]').attr("selected", "selected");
 
     </script>
 }
