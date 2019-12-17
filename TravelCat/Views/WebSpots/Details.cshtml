@@ -61,7 +61,7 @@
                 <form action="/web_comments/Deletecollections_detail" method="post">
                     <input type="hidden" name="member_id" value="@Session["memberID"]" />
                     <input type="hidden" name="tourism_id" value="@ViewBag.tourismId" />
-                    <input type="hidden" name="collection_id" value="@Model.collections_detail.Where(m => m.member_id == @memberId).FirstOrDefault().collection_id" />
+                    <input type="hidden" name="collection_type_id" value="@Model.collections_detail.Where(m => m.member_id == @memberId).FirstOrDefault().collection_type_id" />
                     <input type="submit" class="delete_bucket_list bucket_list btn btn-outline-dark" value="取消收藏" />
                 </form>
             }

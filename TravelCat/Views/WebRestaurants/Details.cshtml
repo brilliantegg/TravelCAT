@@ -62,7 +62,7 @@
                 <form action="/web_comments/Deletecollections_detail" method="post">
                     <input type="hidden" name="member_id" value="@Session["memberID"]" />
                     <input type="hidden" name="tourism_id" value="@ViewBag.tourismId" />
-                    <input type="hidden" name="collection_id" value="@Model.collections_detail.Where(m => m.member_id == @memberId).FirstOrDefault().collection_id" />
+                    <input type="hidden" name="collection_type_id" value="@Model.collections_detail.Where(m => m.member_id == @memberId).FirstOrDefault().collection_type_id" />
                     <input type="submit" class="delete_bucket_list bucket_list btn btn-outline-info" value="取消收藏" />
                 </form>
             }
@@ -86,7 +86,7 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <form action="/web_comments/Postcollections_detail" method="post">
+                        <form  id="bucket_form" action="/web_comments/Postcollections_detail" method="post">
                             <div class="modal-body">
 
                                 @Html.AntiForgeryToken()
@@ -377,7 +377,7 @@
                 <form action="/web_comments/Create" Method="GET">
                     <input type="hidden" name="tourismID" value=@ViewBag.tourismId />
                     <input type="hidden" name="mem_id" value="@Session["memberID"]" />
-                    <button type="submit" class="add_comment btn btn-outline-info  ">新增評論</button>
+                    <button type="submit" class="add_comment btn btn-outline-dark  ">新增評論</button>
                 </form>
             </div>
         </div>
@@ -690,4 +690,22 @@
                 }
             });
         });
+</script>
+<script>
+    @*$(".add_to_bucket_list").click(function(e){
+    e.preventDefault();
+    var url ="@Url.Action("Postcollections_detail","web_comments")";// the script where you handle the form input.
+
+    $.ajax({
+           type:"POST",
+           url: url,
+           data: $("#bucket_form").serialize(),// serializes the form's elements.
+           success:function()
+           {
+             
+           }
+         });
+     $('#collectModal').modal('toggle');
+    
+});*@
 </script>

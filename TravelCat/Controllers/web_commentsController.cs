@@ -59,13 +59,10 @@ namespace TravelCat.Controllers
         }
         //刪除收藏
         [HttpPost]
-        public ActionResult Deletecollections_detail(string tourism_id,int? collection_id,string member_id)
+        public ActionResult Deletecollections_detail(string member_id, string tourism_id, int collection_type_id = 1)
         {
-            if (collection_id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            collections_detail collections_detail = db.collections_detail.Where(m => m.collection_id == collection_id && m.member_id == member_id).FirstOrDefault();
+
+            collections_detail collections_detail = db.collections_detail.Where(m => m.collection_type_id == collection_type_id &&  m.member_id == member_id && m.tourism_id == tourism_id).FirstOrDefault();
             db.collections_detail.Remove(collections_detail);
             db.SaveChanges();
 
