@@ -38,11 +38,13 @@ namespace TravelCat.Controllers
                     controller = "web_activities";
                     break;
             }
-            collections_detail collect = new collections_detail();
-            collect.member_id = member_id;
-            collect.tourism_id = tourism_id;
-            collect.privacy = true;
-            collect.collection_type_id = collection_type_id;
+            collections_detail collect = new collections_detail()
+            {
+                member_id = member_id,
+                tourism_id = tourism_id,
+                privacy = true,
+                collection_type_id = collection_type_id
+            };
 
 
             if (ModelState.IsValid)
