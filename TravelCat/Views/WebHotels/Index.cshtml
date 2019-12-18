@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<TravelCat.Models.hotel>
 
 @{
-    Layout = null;
+    Layout = "~/Views/Shared/web-Layout.cshtml";
 }
 
 <!DOCTYPE html>
@@ -12,34 +12,9 @@
     <title>Index</title>
 </head>
 <body>
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.hotel_title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.hotel_tel)
-            </th>
-            
-            <th>
-                @Html.DisplayNameFor(model => model.city)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.district)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.address_detail)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.page_status)
-            </th>
-            <th></th>
-        </tr>
-    
-    @foreach (var item in Model) {
+    <table>
+    @foreach (var item in Model)
+    {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.hotel_title)
@@ -47,7 +22,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.hotel_tel)
             </td>
-            
+
             <td>
                 @Html.DisplayFor(modelItem => item.city)
             </td>
@@ -62,12 +37,14 @@
             </td>
             <td>
 
-                @Html.ActionLink("Details", "Details", new { id=item.hotel_id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.hotel_id }) |
 
             </td>
         </tr>
     }
-    
+
+
+
     </table>
 </body>
 </html>

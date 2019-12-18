@@ -26,17 +26,17 @@
                 <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
             </ol>
             <div class="carousel-inner text-center ">
-                <div class="carousel-item header-carousel-item bg-cover active " style="background-image:url( https://www.blacktomato.com/wp-content/uploads/2016/02/Amalfi-coast_Shutterstock-9.jpg)">
+                <div class="carousel-item header-carousel-item bg-cover active " style="background-image:url( https://images.unsplash.com/photo-1554840757-8ceb09d6aa05?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80)">
                     <div class="carousel-caption offset-2 col-4 ">
                         <h5>@Model.hotel.hotel_title</h5>
                     </div>
                 </div>
-                <div class="carousel-item header-carousel-item bg-cover " style="background-image:url(https://www.blacktomato.com/wp-content/uploads/2016/02/Positano-italy.jpg)">
+                <div class="carousel-item header-carousel-item bg-cover " style="background-image:url(https://images.unsplash.com/photo-1535479939465-f597a4f58943?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80)">
                     <div class="carousel-caption offset-2 col-4">
                         <h5>@Model.hotel.hotel_title</h5>
                     </div>
                 </div>
-                <div class="carousel-item header-carousel-item bg-cover " style="background-image:url(https://www.blacktomato.com/wp-content/uploads/2016/02/Amazing-Amalfi-coast.jpg)">
+                <div class="carousel-item header-carousel-item bg-cover " style="background-image:url(https://images.unsplash.com/photo-1529290130-4ca3753253ae?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1955&q=80)">
                     <div class="carousel-caption offset-2 col-4">
                         <h5>@Model.hotel.hotel_title</h5>
                     </div>
@@ -62,7 +62,7 @@
                 <form action="/web_comments/Deletecollections_detail" method="post">
                     <input type="hidden" name="member_id" value="@Session["memberID"]" />
                     <input type="hidden" name="tourism_id" value="@ViewBag.tourismId" />
-                    <input type="hidden" name="collection_id" value="@Model.collections_detail.Where(m => m.member_id == @memberId).FirstOrDefault().collection_id" />
+                    <input type="hidden" name="collection_type_id" value="@Model.collections_detail.Where(m => m.member_id == @memberId).FirstOrDefault().collection_type_id" />
                     <input type="submit" class="delete_bucket_list bucket_list btn btn-outline-info" value="取消收藏" />
                 </form>
             }
@@ -169,8 +169,8 @@
                             @Model.hotel.city @Model.hotel.district @Html.DisplayFor(model => model.hotel.address_detail)
                         </span>
                     </li>
-                    
-                   
+
+
                     <li>
                         @if (String.IsNullOrEmpty(@Model.hotel.website))
                         {
@@ -192,7 +192,36 @@
         </div>
     </section>
 
+    <section>
+        <h2 class="text-center">附近景點</h2>
+        <div class="row col-10 offset-1">
+            @if (@ViewBag.spot != null)
+            {
+                foreach (var item in @ViewBag.spot)
+                {
+                    <div class="col-4">
+                        <div class="card">
+                            <div class="card__image card__image--record"></div>
+                            <div class="card__content">
+                                <div class="card__title">@item.spot_title</div>
+                                @if (@item.spot_intro == null)
+                                {
+                                    <br />
+                                }
+                                else
+                                {
+                                    <p class="card__text">@item.spot_intro</p>
+                                }
 
+                                <button class="btn btn--block card__btn" onclick="window.location.href='@Url.Action("Details","WebSpots",new {id=item.spot_id })'">前往頁面</button>
+
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </section>
 
     <!--篩選評論-->
     @{ double totalCommentNum = @Model.comment.Count();
@@ -200,7 +229,7 @@
     <section>
 
 
-        <div class="filter_comment row ">
+        <div class="filter_comment row row col-7 offset-1">
             <input type="hidden" name="tourismId" value="@ViewBag.tourismId" />
             <div class="fliter_set col-4">
                 <div class="fliter_set">
@@ -345,7 +374,7 @@
                 <form action="/web_comments/Create" Method="GET">
                     <input type="hidden" name="tourismID" value=@ViewBag.tourismId />
                     <input type="hidden" name="mem_id" value="@Session["memberID"]" />
-                    <button type="submit" class="add_comment btn btn-outline-info  ">新增評論</button>
+                    <button type="submit" class="add_comment btn btn-outline-dark  ">新增評論</button>
                 </form>
             </div>
         </div>
@@ -616,12 +645,14 @@
 ]
         });
       marker = new google.maps.Marker({
-      position : { lat: @Model.hotel.latitude, lng: @Model.hotel.longitude },//positon 位置
-      map:map, //標示地圖
-      title:'@Model.hotel.hotel_title'//說明文字(選擇性填寫)
+          position : { lat: @Model.hotel.latitude, lng: @Model.hotel.longitude },//positon 位置
+          map: map, //標示地圖
+          animation: google.maps.Animation.BOUNCE,
+          title: '@Model.hotel.hotel_title',//說明文字
+          icon:'http://www.oxxostudio.tw/img/articles/201801/google-maps-3-marker-icon.png'
     })
     }
-     var a = '123';
+
 
 </script>
 <script>

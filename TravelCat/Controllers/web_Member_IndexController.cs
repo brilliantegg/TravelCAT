@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.IO;
@@ -18,22 +19,74 @@ namespace TravelCat.Controllers
         dbTravelCat db = new dbTravelCat();
 
         // GET: web_Member_Index
-        public ActionResult Index(string id)
+        public ActionResult Index(string id = "M000003")
         {
-
+            var score = db.Database.SqlQuery<string>("Select dbo.GetactivityId()").ToList();
             MemberIndexViewModels model = new MemberIndexViewModels()
             {
                 member = db.member.Find(id),
                 member_profile = db.member_profile.Find(id),
                 comment = db.comment.OrderByDescending(m => m.comment_id).ToList(),
+                follow = db.follow_list.Where(m => m.followed_id == id).ToList(),
+                followed = db.follow_list.Where(m => m.member_id == id).ToList(),
                 follow_list = db.follow_list.ToList(),
-                collections_detail = db.collections_detail.Where(m=>m.member_id==id).ToList(),
-                activity =db.activity.ToList(),
+                collections_detail = db.collections_detail.Where(m => m.member_id == id).ToList(),
+                activity = db.activity.ToList(),
                 hotel = db.hotel.ToList(),
                 restaurant = db.restaurant.ToList(),
                 spot = db.spot.ToList(),
+
             };
+
+            var result2 = (from a in db.follow_list
+                           group a by a.member_id into b
+                           orderby b.Count() descending
+                           select new { id = b.Key, count = b.Count() }).ToList();
+
+
+            var result3 = (from a in db.comment
+                           group a by a.member_id into b
+                           orderby b.Count() descending
+                           select new { id = b.Key, count = b.Count() }).Take(3).ToList();
+
+
+            var result4 = (from a in db.follow_list
+                           group a by a.member_id into b
+                           orderby b.Count() descending
+                           select new { id = b.Key, count = b.Count() })
+                         .Union
+                         (from a in db.comment
+                          group a by a.member_id into b
+                          orderby b.Count() descending
+                          select new { id = b.Key, count = b.Count() }).ToList();
+
+            var result5 = (from a in result4
+                           group a by a.id into b
+                           orderby b.Count() descending
+                           select new { id = b.Key, count = b.Count() }).ToList();
+
+            //score final_result = new score();
+            //for (int i = 0; i < result5.Count; i++)
+            //{
+            //    score final_result = new score();
+            //    string memid = result5[i].id;
+            //    int score_result = 0;
+            //    for (int j = 0; j < result5[i].count; j++)
+            //    {
+            //        score_result += result4.Where(s => s.id == id).ToList()[j].count;
+            //    }
+
+            //    final_result.memID = memid;
+            //    final_result.mem_score = score_result;
+            //    model.scores.Add(final_result);
+            //}
+
             ViewBag.memberId = id;
+            ViewBag.member_profile = db.member_profile.ToList();
+            ViewBag.score = result3;
+
+            //result2.GetType().GetProperty("id").GetValue(result2);
+
             return View(model);
         }
         public ActionResult EditMemberProfile(string id)
@@ -221,9 +274,92 @@ namespace TravelCat.Controllers
             db.SaveChanges();
             return response;
         }
-        public ActionResult Collections()
+        public ActionResult Collections(string id= "M000003")
         {
-            return View();
+            CollectionViewModels model = new CollectionViewModels()
+            {
+                member = db.member.Find(id),
+                member_profile = db.member_profile.Find(id),
+                collections_detail = db.collections_detail.Where(m => m.member_id == id).ToList(),
+                activity = db.activity.ToList(),
+                hotel = db.hotel.ToList(),
+                restaurant = db.restaurant.ToList(),
+                spot = db.spot.ToList(),
+
+            };
+            
+            var data = new[] { new { title = "", longitude = "", latitude = "" } }.ToList();
+            data.RemoveAt(0);
+            var member = db.member.Find(id);
+            
+
+            foreach (var c in member.collections_detail)
+            {
+                string firstChar = c.tourism_id.Substring(0, 1);
+                switch (firstChar)
+                {
+                    case "A":
+                        var activity = db.activity.Where(a => a.activity_id == c.tourism_id).FirstOrDefault();
+                        data.Add(new
+                        {
+                            title = activity.activity_title.Replace(" ", ""),
+                            longitude = activity.longitude,
+                            latitude = activity.latitude
+                        });
+                        break;
+                    case "H":
+                        var hotel = db.hotel.Where(a => a.hotel_id == c.tourism_id).FirstOrDefault();
+                        data.Add(new
+                        {
+                            title = hotel.hotel_title.Replace(" ", ""),
+                            longitude = hotel.longitude,
+                            latitude = hotel.latitude
+                        });
+                        break;
+                    case "R":
+                        var restaurant = db.restaurant.Where(a => a.restaurant_id == c.tourism_id).FirstOrDefault();
+                        data.Add(new
+                        {
+                            title = restaurant.restaurant_title.Replace(" ", ""),
+                            longitude = restaurant.longitude,
+                            latitude = restaurant.latitude
+                        });
+                        break;
+                    case "S":
+                        var spot = db.spot.Where(a => a.spot_id == c.tourism_id).FirstOrDefault();
+                        data.Add(new
+                        {
+                            title = spot.spot_title.Replace(" ", ""),
+                            longitude = spot.longitude,
+                            latitude = spot.latitude
+                        });
+                        break;
+                    default:
+                        break;
+                }                          
+                
+            }
+            
+            string json = JsonConvert.SerializeObject(data);
+            ViewBag.data = json;
+
+            var collect = model.collections_detail.Where(m => m.collection_type_id.ToString() == "1").ToList();
+            ViewBag.collect = collect;
+            var wannaGo = model.collections_detail.Where(m => m.collection_type_id.ToString() == "2").ToList();
+            ViewBag.wannaGo = wannaGo;
+            var hadBeen = model.collections_detail.Where(m => m.collection_type_id.ToString() == "3").ToList();
+            ViewBag.hadBeen = hadBeen;
+            var mustGo = model.collections_detail.Where(m => m.collection_type_id.ToString() == "4").ToList();
+            ViewBag.mustGo = mustGo;
+            //model.a_c = (from a in db.activity
+            //                        join c in model.collections_detail on a.activity_id equals c.tourism_id into x
+            //                        from b in x
+            //                        select new a_c { id = a.activity_id }).ToList();
+            //ViewBag.collect_activity = collect_activity;
+
+
+            return View(model);
+
         }
     }
 }

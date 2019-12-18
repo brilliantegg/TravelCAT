@@ -2007,10 +2007,11 @@
     <Content Include="Content\Searchindex.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\back-end-index.css" />
-    <Content Include="Content\web-activite-home.css" />
     <Content Include="Content\web-Home.css" />
     <Content Include="Content\web-Layout.css" />
+    <Content Include="Content\collection.css" />
     <Content Include="Content\web-Login.css" />
+    <Content Include="Content\web-Spot-home.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -2021,13 +2022,31 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="images\17671-neko-atsume-best-toys-items-goodies-06.png" />
     <Content Include="images\1810043.jpg" />
+    <Content Include="images\badges\0-6263_tumblr-sticker-png-planeta-transparent-png.png" />
     <Content Include="images\badges\03_16x9.jpg" />
     <Content Include="images\badges\100000_comments.png" />
     <Content Include="images\badges\1000_invites.png" />
     <Content Include="images\badges\13.png" />
     <Content Include="images\badges\25000_plurks.png" />
+    <Content Include="images\badges\327-3270485_spongebob-house-png-sticker-de-bob-esponja-transparent.png" />
     <Content Include="images\badges\50000_fans.png" />
     <Content Include="images\badges\9.png" />
+    <Content Include="images\badges\AD7sqjR.png" />
+    <Content Include="images\badges\band-sticker-printing-designs-nirvana-png-logo-11.png" />
+    <Content Include="images\badges\bart-simpson-sticker-decal-clip-art-image-bart-simpson.jpg" />
+    <Content Include="images\badges\cartoon-yellow-line-art-sticker-png-favpng-Ze4EPJHEqQCWEhUukF04DsgVu.jpg" />
+    <Content Include="images\badges\cute-pastel-stickers-png-sticker-clipart-b8851062f8b584d3.jpg" />
+    <Content Include="images\badges\emoji-adventures-vol-1-the-horse-party-pt-evans-jake-adventure-time-jake-sticker-11563163073nam7fmjcer.png" />
+    <Content Include="images\badges\images %281%29.jpg" />
+    <Content Include="images\badges\images %282%29.jpg" />
+    <Content Include="images\badges\images %283%29.jpg" />
+    <Content Include="images\badges\images.jpg" />
+    <Content Include="images\badges\ins-imga.png" />
+    <Content Include="images\badges\kisspng-bumper-sticker-rainbow-iron-on-clip-art-5bff6ff9395e99.437948311543467001235.jpg" />
+    <Content Include="images\badges\kisspng-pizza-pizza-sticker-clip-art-sticker-png-5b0bb39c6167f7.807919841527493532399.jpg" />
+    <Content Include="images\badges\paper-mario-styled-ba-blue-and-yellow-dragon-sticker-png-clipart.jpg" />
+    <Content Include="images\badges\popular-and-trending-dab-pogba-stickers-on-picsart-unrnio-kawaii-11555090996ul6jsf6rrj.png" />
+    <Content Include="images\badges\v799-te-10.png" />
     <Content Include="images\bled-1899264_1920.jpg" />
     <Content Include="images\bmo-02.jpg" />
     <Content Include="images\buildings-1846728_1920.jpg" />
@@ -2146,7 +2165,6 @@
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="bin\roslyn\csc.exe.config" />
-    <Content Include="bin\roslyn\csc.rsp" />
     <Content Include="bin\roslyn\csi.exe.config" />
     <Content Include="bin\roslyn\csi.rsp" />
     <Content Include="bin\roslyn\Microsoft.CSharp.Core.targets" />
@@ -2158,7 +2176,6 @@
     <Content Include="bin\TravelCat.dll.config" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
-    <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -2312,8 +2329,10 @@
     <Compile Include="ViewModels\CommentsViewModel.cs" />
     <Compile Include="ViewModels\destinationsViewModel.cs" />
     <Compile Include="ViewModels\FollowerViewModels .cs" />
+    <Compile Include="ViewModels\CollectionViewModels.cs" />
     <Compile Include="ViewModels\MemberIndexViewModels.cs" />
     <Compile Include="ViewModels\MemberViewModels.cs" />
+    <Compile Include="ViewModels\TaiwanViewModel .cs" />
     <Compile Include="ViewModels\SearchViewModel.cs" />
     <Compile Include="ViewModels\SpotPhotoViewModel.cs" />
     <Compile Include="ViewModels\RestaurantPhotoViewModel.cs" />
@@ -2399,8 +2418,6 @@
     <Content Include="Views\Home\_test.cshtml" />
     <Content Include="Views\web_Member_Index\Editemail.cshtml" />
     <Content Include="Views\web_Member_Index\EditMemberProfile.cshtml" />
-    <Content Include="Views\CommentsWeb\_CreateMsg.cshtml" />
-    <Content Include="Views\CommentsWeb\_CreateComment.cshtml" />
     <Content Include="Views\CommentsWeb\_CommentsForDestination.cshtml" />
     <Content Include="Views\Search\Index.cshtml" />
     <Content Include="Views\Home\_test.cshtml" />
@@ -2435,6 +2452,9 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Search\_Hotel.cshtml" />
+    <Content Include="Views\Search\_Restaurant.cshtml" />
+    <Content Include="Views\Search\_Spot.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

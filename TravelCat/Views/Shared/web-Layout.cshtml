@@ -12,7 +12,7 @@
 </head>
 <body>
     @{ string mem_id;
-       string returnUrl = Request.Url.AbsoluteUri;
+        string returnUrl = Request.Url.AbsoluteUri;
         if (Session["memberID"] == null || string.IsNullOrWhiteSpace(Session["memberID"].ToString()))
         {
             mem_id = "null";
@@ -33,16 +33,19 @@
 
                 @if (Request.IsAuthenticated && Session["memberID"] != null)
                 {
-                    <div>
-                        @Html.ActionLink(@User.Identity.GetUserName(), "Index", "web_Member_Index", new { id = mem_id }, new { @class = "  memberId aTag_style" })
+            <div>
+                <a href="@Url.Action("Collections","web_Member_Index" ,new { id = mem_id })">
+                    <i class="far fa-heart" style="color:red"></i>
+                </a>
+                @Html.ActionLink(@User.Identity.GetUserName(), "Index", "web_Member_Index", new { id = mem_id }, new { @class = "  memberId aTag_style" })
 
-                        @Html.ActionLink("登出", "LogOut", "Home", null, new { @class = " aTag_style" })
-                    </div>
+                @Html.ActionLink("登出", "LogOut", "Home", null, new { @class = " aTag_style" })
+            </div>
                 }
                 else
                 {
                     <div>
-                        @Html.ActionLink("登入", "LogIn", "Home", new { returnUrl=returnUrl}, new { @class = "  aTag_style" })
+                        @Html.ActionLink("登入", "LogIn", "Home", new { returnUrl = returnUrl }, new { @class = "  aTag_style" })
                     </div>
                 }
             </div>
@@ -75,6 +78,7 @@
     <script src="~/Scripts/modernizr-2.8.3.js"></script>
     <script src="~/Scripts/bootstrap.bundle.js"></script>
     <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    @*<script src="~/Scripts/bootstrap.js"></script>*@
     @RenderBody()
     @RenderSection("scripts", required: false)
     @*@RenderPage("~/Views/Shared/_footer.cshtml" )*@
@@ -98,9 +102,6 @@
 </html>
 
 
-<script>
-    console.log("@Url")
-</script>
 
 
 

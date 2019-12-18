@@ -15,25 +15,25 @@
         memberId = Session["memberID"].ToString();
     }
     string firstChar = ViewBag.tourismId.Substring(0, 1);
-            string destinatations;
-            switch (firstChar)
-            {
-                case "A":
-                    destinatations = "A";
-                    break;
-                case "H":
-                    destinatations = "H";
-                    break;
-                case "R":
-                    destinatations = "R";
-                    break;
-                case "S":
-                    destinatations = "S";
-                    break;
-                default:
-                    destinatations = "A";
-                    break;
-            }
+    string destinatations;
+    switch (firstChar)
+    {
+        case "A":
+            destinatations = "A";
+            break;
+        case "H":
+            destinatations = "H";
+            break;
+        case "R":
+            destinatations = "R";
+            break;
+        case "S":
+            destinatations = "S";
+            break;
+        default:
+            destinatations = "A";
+            break;
+    }
 }
 
 <!--1則 評論-->
@@ -52,7 +52,7 @@
                         <div class="d-flex">
                             @if (item.member.member_profile.profile_photo != null)
                             {
-                                <img class="member_avatar" src="~/images/member/@item.member.member_profile.profile_photo" alt="..." onerror="this.src='/images/comment/0_2019129下午090757.jpg';">
+                                <img class="member_avatar" src="~/images/member/@item.member.member_profile.profile_photo" alt="..." onerror="this.src='/images/member/avatar.png';">
                             }
                             else
                             {
@@ -64,18 +64,40 @@
                             </div>
                         </div>
                         <!-- 更多選項 -->
+                        @if (@memberId != null)
+                        {
+                            <div class="more_action dropdown dropleft">
+                                <a class="" href="#" id="dropdownMore" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                    <img class="icon" src="~/images/emoji/more.png" />
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMore">
+                                    <a class="dropdown-item" href="#">分享到 facebook</a>
+                                    <a class="dropdown-item" href="#">分享到 line</a>
+                                    <a class="dropdown-item" href="#">分享到 google</a>
+                                    <a class="dropdown-item report_comment" data-toggle="modal" data-target="#reportModel"> 檢舉此評論</a>
+                                </div>
+                            </div>
+                        }
 
+                    </div>
+                    <!--檢舉評論modal-->
 
-
-                        <div class="more_action dropdown dropleft">
-                            <a href="#" role="button" id="dropdownMore" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                <img class="icon" src="~/images/emoji/more.png" />
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMore">
-                                <a class="dropdown-item" href="#">分享到 facebook</a>
-                                <a class="dropdown-item" href="#">分享到 line</a>
-                                <a class="dropdown-item" href="#">分享到 google</a>
-                                <a class="dropdown-item report_comment" data-toggle="modal" data-target="#reportModel"> 檢舉此評論</a>
+                    <div class="modal fade" id="reportModel" tabindex="-1" role="dialog" aria-labelledby="reportModel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-scrollable" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" >檢舉評論</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <textarea id="report_content" name="report_content" rows="20" cols="20" placeholder="請附上有問題的網址，以及違規評論內容"></textarea>
+                                </div>
+                                <input type="hidden" class="report_comment_id" value="@item.comment_id" />
+                                <div class="modal-footer">
+                                    <button id="btnTest" type="submit" class="btn btn-outline-dark submit_issue" data-dismiss="modal">提交表單</button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -103,11 +125,19 @@
                         </div>
                         @if (destinatations == "A")
                         {
-                            <a href="" class="hashtag "> #@Model.activity.activity_title </a>
+                            <a href="" class="hashtag "> #@Model.activity.activity_title #@item.travel_partner #@item.travel_month 月</a>
                         }
                         else if (destinatations == "S")
                         {
-                            <a href="" class="hashtag "> #@Model.spot.spot_title </a>
+                            <a href="" class="hashtag "> #@Model.spot.spot_title #@item.travel_partner #@item.travel_month 月</a>
+                        }
+                        else if (destinatations == "R")
+                        {
+                            <a href="" class="hashtag "> #@Model.restaurant.restaurant_title #@item.travel_partner #@item.travel_month 月</a>
+                        }
+                        else if (destinatations == "H")
+                        {
+                            <a href="" class="hashtag "> #@Model.hotel.hotel_title #@item.travel_partner #@item.travel_month 月</a>
                         }
 
                     </div>
@@ -121,11 +151,11 @@
                     }
                     <hr />
                     <!--判斷前端是否要顯示被按讚過-->
-                    
+
                     <div class="emoji_panel d-flex  ">
                         <div class="comment_emoji_detail  d-flex">
                             <div class="emoji ">
-                                @if(@Model.comment_emoji_details.Where(m => m.member_id == @memberId && m.comment_id == item.comment_id && m.emoji_id == 1).Count() > 0)
+                                @if (@Model.comment_emoji_details.Where(m => m.member_id == @memberId && m.comment_id == item.comment_id && m.emoji_id == 1).Count() > 0)
                                 {
 
                                     <img class="icon comment_emoji_heart click_button" src="~/images/emoji/talk.png" data-value="@item.comment_emoji_details.Where(m => m.emoji_id == 1).Count()" data-comment_id="@item.comment_id" data-emoji_id="1" disabled="disabled" />
@@ -138,7 +168,7 @@
                                 }
                             </div>
                             <div class="emoji">
-                                @if (@Model.comment_emoji_details.Where(m => m.member_id == @memberId && m.comment_id == item.comment_id && m.emoji_id == 2 ).Count() > 0)
+                                @if (@Model.comment_emoji_details.Where(m => m.member_id == @memberId && m.comment_id == item.comment_id && m.emoji_id == 2).Count() > 0)
                                 {
 
                                     <img class="icon comment_emoji_unicorn click_button" src="~/images/emoji/unicorn.svg" data-value="@item.comment_emoji_details.Where(m => m.emoji_id == 2).Count() " data-comment_id="@item.comment_id" data-emoji_id="2" disabled="disabled" />
@@ -152,7 +182,7 @@
                             </div>
                             <div class="emoji">
 
-                                @if (@Model.comment_emoji_details.Where(m => m.member_id == @memberId && m.comment_id == item.comment_id && m.emoji_id == 3 ).Count() > 0)
+                                @if (@Model.comment_emoji_details.Where(m => m.member_id == @memberId && m.comment_id == item.comment_id && m.emoji_id == 3).Count() > 0)
                                 {
 
                                     <img class="icon comment_emoji_good click_button" src="~/images/emoji/sweet-potato.png" data-value="@item.comment_emoji_details.Where(m => m.emoji_id == 3).Count()" data-comment_id="@item.comment_id" data-emoji_id="3" disabled="disabled" />
@@ -164,39 +194,8 @@
                                     <span class="emoji_num comment_emoji_good_num">@item.comment_emoji_details.Where(m => m.emoji_id == 3).Count()</span>
                                 }
                             </div>
-
-
-
                         </div>
-
-
                         <hr />
-
-
-                        <!--檢舉評論modal-->
-
-                        <div class="modal fade" id="reportModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-scrollable" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalScrollableTitle">檢舉評論</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <textarea id="report_content" name="report_content" rows="20" cols="20" placeholder="請附上有問題的網址，以及違規評論內容"></textarea>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button id="btnTest" type="submit" class="btn btn-outline-dark submit_issue" data-dismiss="modal">提交表單</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-
-
                     </div>
                     <!--單則留言-->
                     <div class="message_list  ">
@@ -207,10 +206,49 @@
                             <div class=" single_message py-3">
                                 <div class="media mt-3">
                                     <img src="~/images/member/@msgItem.member.member_profile.profile_photo" width="74" height="74" class="mr-3 ml-3 member_avatar" alt="...">
-                                    <div class="media-body">
-                                        <h5 class="member_name">
-                                            @msgItem.member.member_profile.nickname
-                                        </h5>
+
+                                    <div class="media-body ">
+
+                                        <div class="d-flex message_body">
+                                            <h5 class="member_name">
+                                                @msgItem.member.member_profile.nickname
+                                            </h5>
+                                            <!-- 更多選項 -->
+                                            @if (@memberId != null)
+                                            {
+                                                <div class="msg_more_action dropdown dropleft">
+                                                    <a class="" href="#" id="dropdownMore" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                        <img class="icon" src="~/images/emoji/more.png" />
+                                                    </a>
+                                                    <div class="dropdown-menu" aria-labelledby="dropdownMore">
+                                                        <a class="dropdown-item report_msg" data-toggle="modal" data-target="#msgreportModel"> 檢舉此留言</a>
+                                                    </div>
+                                                </div>
+                                            }
+
+                                        </div>
+                                        <!--檢舉留言modal-->
+
+                                        <div class="modal fade" id="msgreportModel" tabindex="-1" role="dialog" aria-labelledby="msgreportModel" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-scrollable" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalScrollableTitle">檢舉留言</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <textarea class="msg_report_content" name="report_content" rows="20" cols="20" placeholder="請附上有問題的網址，以及違規評論內容"></textarea>
+                                                    </div>
+                                                    <input type="hidden" class="report_message_id" value="@msgItem.msg_id" />
+                                                    <div class="modal-footer">
+                                                        <button id="btnTest" type="submit" class="btn btn-outline-dark submit_msg_issue" data-dismiss="modal">提交表單</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                         <span class="create_time">
                                             @msgItem.msg_time.ToString("yyyy MM dd")
                                         </span>
@@ -219,16 +257,16 @@
                                         </div>
                                         <hr />
                                         <div class="emoji">
-                                            @if (@Model.message_emoji_details.Where(m => m.member_id == @memberId && m.msg_id == msgItem.msg_id && m.emoji_id == 1 && m.tourism_id == @Model.activity.activity_id).Count() > 0)
+                                            @if (@Model.message_emoji_details.Where(m => m.member_id == @memberId && m.msg_id == msgItem.msg_id).Count() > 0)
                                             {
 
-                                                <img class="icon msg_emoji_heart click_button" src="~/images/emoji/talk.png" data-value="@msgItem.message_emoji_details.Where(m => m.emoji_id == 1).Count()" data-msgid="@msgItem.msg_id" data-emojiid=1 disabled="disabled" />
-                                                <span class="msg_emoji_heart_num">@msgItem.message_emoji_details.Where(m => m.emoji_id == 1).Count() </span>
+                                                <img class="icon msg_emoji_heart click_button" src="~/images/emoji/talk.png" data-value="@msgItem.message_emoji_details.Count()" data-msgid="@msgItem.msg_id" data-emojiid=1 disabled="disabled" />
+                                                <span class="msg_emoji_heart_num">@msgItem.message_emoji_details.Count() </span>
                                             }
                                             else
                                             {
-                                                <img class="icon msg_emoji_heart" src="~/images/emoji/talk.png" data-value="@msgItem.message_emoji_details.Where(m => m.emoji_id == 1).Count()" data-msgid="@msgItem.msg_id" data-emojiid=1 />
-                                                <span class="msg_emoji_heart_num">@msgItem.message_emoji_details.Where(m => m.emoji_id == 1).Count()</span>
+                                                <img class="icon msg_emoji_heart" src="~/images/emoji/talk.png" data-value="@msgItem.message_emoji_details.Count()" data-msgid="@msgItem.msg_id" data-emojiid=1 />
+                                                <span class="msg_emoji_heart_num">@msgItem.message_emoji_details.Count()</span>
                                             }
 
                                         </div>
@@ -236,6 +274,7 @@
                                 </div>
                             </div>
                         }
+
                         <!--回覆留言-->
 
                         <div class="add_message single_message">
@@ -270,9 +309,6 @@
         }
     }
 </div>
-<script src="~/Scripts/jquery-3.4.1.js"></script>
-<script src="~/Scripts/modernizr-2.8.3.js"></script>
-<script src="~/Scripts/bootstrap.bundle.js"></script>
 
 
 <script>
@@ -289,16 +325,7 @@
         }
         console.log(id)
     console.log(tourismId)
-    //回報問題
-        $(".report_comment").click(function () {
-            if (id == null) {
-                event.stopPropagation();
-                alert('請先登入:)');
-                return false;
-            }
 
-        })
-    
         //顯示文章
         $(".readmore").click(function () {
             $(".intro").toggleClass('showMore');
@@ -359,7 +386,7 @@
             } else {
              emoji.attr('disabled', true);
             emoji.addClass('click_button')
-            
+
             $.ajax({
                 type: 'POST',
                 url: "http://localhost:54678/api/api_comment_emoji_details",
@@ -400,7 +427,7 @@
 
             emoji.attr('disabled', false);
             emoji.removeClass('click_button');
-            let remove = $.ajax({
+            $.ajax({
                 type: 'Delete',
                 url: "http://localhost:54678/api/api_message_emoji_details",
                 contentType: 'application/json',
@@ -410,16 +437,19 @@
                     "emoji_id": emoji_id,
                     "tourism_id": tourismId
                 }),
-            });
-            remove.done(function () {
-                $.get(`@Url.Action("getMsgEmojiNum","CommentsWeb")?msg_id=${msg_id}&tourismId=${tourismId}`, function (data) {
+                success: function (data, status) {
+                        $.get(`@Url.Action("getMsgEmojiNum","CommentsWeb")?msg_id=${msg_id}&tourismId=${tourismId}`, function (data) {
                     emoji_num.text(data)
+                    console.log(data)
                 });
-            })
+
+                }
+            });
+
         } else {
         emoji.attr('disabled', true);
        emoji.addClass('click_button')
-        let postMsgEmoji =
+
             $.ajax({
                 type: 'POST',
                 url: "http://localhost:54678/api/api_message_emoji_details",
@@ -429,28 +459,39 @@
                     "msg_id": msg_id,
                     "emoji_id": emoji_id,
                     "tourism_id": tourismId
-                })
-            });
-            postMsgEmoji.done(function () {
-                $.get(`@Url.Action("getMsgEmojiNum","CommentsWeb")?msg_id=${msg_id}`, function (data) {
+                }),
+                success: function (data, status) {
+                    $.get(`@Url.Action("getMsgEmojiNum","CommentsWeb")?msg_id=${msg_id}&tourismId=${tourismId}`, function (data) {
                     emoji_num.text(data)
-
+                        console.log(data)
                 });
-            })            
+
+                }
+            });
+
          }
         });
         //檢舉評論
         function sendReport() {
-
             $.ajax({
                 type: 'POST',
-                url: `http://localhost:54678/api/api_issues?memberId=${id}&issueContent=${$('#report_content').val()}`,
+                url: `http://localhost:54678/api/api_issues?memberId=${id}&issueContent=${$('#report_content').val()}&issue_id=3&problem_id=${$('.report_comment_id').val().toString()}`,
                 success: function (data, status) {
                     alert("提交成功!")
                 }
-            });
-            $('#report_content').val("")
-        }
+            });           
+            
+    }
+            function sendMsgReport() {
+            $.ajax({
+                type: 'POST',
+                url: `http://localhost:54678/api/api_issues?memberId=${id}&issueContent=${$('.msg_report_content').val()}&issue_id=4&problem_id=${$('.report_message_id').val().toString()}`,
+                success: function (data, status) {
+                    alert("提交成功!")
+                }
+            });            
+            
+    }
         $(".submit_issue").click(function (e) {
             if (id == null) {
                 event.stopPropagation();
@@ -458,8 +499,30 @@
                 return false;
             }
             sendReport()
+            $('#report_content').val("")
         });
 
+
+    $(".report_msg").click(function (e) {
+            if (id == null) {
+                event.stopPropagation();
+                alert('請先登入:)');
+                return false;
+            }
+
+        });
+         $(".submit_msg_issue").click(function (e) {
+
+
+            if (id == null) {
+                event.stopPropagation();
+                alert('請先登入:)');
+                return false;
+            }
+             
+             sendMsgReport()
+             $('.msg_report_content').val("")
+        });
 
 </script>
 

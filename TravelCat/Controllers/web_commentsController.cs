@@ -38,11 +38,13 @@ namespace TravelCat.Controllers
                     controller = "web_activities";
                     break;
             }
-            collections_detail collect = new collections_detail();
-            collect.member_id = member_id;
-            collect.tourism_id = tourism_id;
-            collect.privacy = true;
-            collect.collection_type_id = collection_type_id;
+            collections_detail collect = new collections_detail()
+            {
+                member_id = member_id,
+                tourism_id = tourism_id,
+                privacy = true,
+                collection_type_id = collection_type_id
+            };
 
 
             if (ModelState.IsValid)
@@ -57,13 +59,10 @@ namespace TravelCat.Controllers
         }
         //刪除收藏
         [HttpPost]
-        public ActionResult Deletecollections_detail(string tourism_id,int? collection_id,string member_id)
+        public ActionResult Deletecollections_detail(string member_id, string tourism_id, int collection_type_id = 1)
         {
-            if (collection_id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            collections_detail collections_detail = db.collections_detail.Where(m => m.collection_id == collection_id && m.member_id == member_id).FirstOrDefault();
+
+            collections_detail collections_detail = db.collections_detail.Where(m => m.collection_type_id == collection_type_id &&  m.member_id == member_id && m.tourism_id == tourism_id).FirstOrDefault();
             db.collections_detail.Remove(collections_detail);
             db.SaveChanges();
 
@@ -143,7 +142,7 @@ namespace TravelCat.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(comment comment, HttpPostedFileBase comment_photo)
+        public ActionResult Create(comment comment, HttpPostedFileBase photo)
         {
             string id = comment.tourism_id.Substring(0, 1);
             string controller;
@@ -168,12 +167,12 @@ namespace TravelCat.Controllers
             //處理圖檔上傳
             string fileName = "";
             string rename_filename = "";
-            if (comment_photo != null)
+            if (photo != null)
             {
-                if (comment_photo.ContentLength > 0)
+                if (photo.ContentLength > 0)
                 {
 
-                    fileName = System.IO.Path.GetFileName(comment_photo.FileName);      //取得檔案的檔名(主檔名+副檔名)
+                    fileName = System.IO.Path.GetFileName(photo.FileName);      //取得檔案的檔名(主檔名+副檔名)
                     rename_filename = comment.comment_id + "_" + DateTime.Now.ToString().Replace("/", "").Replace(":", "").Replace(" ", "") + Path.GetExtension(fileName);
 
                 }
@@ -181,7 +180,7 @@ namespace TravelCat.Controllers
             //end
             if (ModelState.IsValid)
             {
-                comment_photo.SaveAs(Server.MapPath("~/images/comment/" + rename_filename));      //將檔案存到該資料夾
+                photo.SaveAs(Server.MapPath("~/images/comment/" + rename_filename));      //將檔案存到該資料夾
                 comment.comment_date = DateTime.Now;
                 comment.comment_photo = rename_filename;
                 db.comment.Add(comment);
@@ -192,7 +191,7 @@ namespace TravelCat.Controllers
                 return RedirectToRoute(new { controller = controller, action = "Details", id = comment.tourism_id });
 
             }
-
+            ViewBag.tourismID = comment.tourism_id;
             return View(comment);
         }
 

@@ -31,12 +31,12 @@ namespace TravelCat.Controllers
             }
             WebIndexViewModel model = new WebIndexViewModel()
             {
-                activity = db.activity.OrderBy(m => Guid.NewGuid()).ToList(),
-                hotel = db.hotel.OrderBy(m => Guid.NewGuid()).ToList(),
-                restaurant = db.restaurant.OrderBy(m => Guid.NewGuid()).ToList(),
-                spot = db.spot.OrderBy(m => Guid.NewGuid()).ToList(),
+                activity = db.activity.OrderByDescending(m => db.comment.Where(s=>s.tourism_id==m.activity_id).Count()).ToList(),
+                hotel = db.hotel.OrderByDescending(m => db.comment.Where(s=>s.tourism_id==m.hotel_id).Count()).ToList(),
+                restaurant = db.restaurant.OrderByDescending(m => db.comment.Where(s => s.tourism_id == m.restaurant_id).Count()).ToList(),
+                spot = db.spot.OrderByDescending(m => db.comment.Where(s => s.tourism_id == m.spot_id).Count()).ToList(),
                 member = db.member.Where(m => m.member_account == account).FirstOrDefault(),
-                comment = db.comment.OrderBy(m => m.comment_date).ToList()
+                comment = db.comment.OrderByDescending(m => m.comment_date).ToList()
             };
             //最多評論觀光物件
             //select tourism_id,count(*) as total from comment group by tourism_id order by total desc
@@ -44,27 +44,20 @@ namespace TravelCat.Controllers
                           group i by i.tourism_id into g
                           orderby g.Count() descending
                           select new { id = g.Key, count = g.Count() }).FirstOrDefault();
+            var result1 = (from i in db.comment_emoji_details
+                           group i by i.comment_id into g
+                           orderby g.Count() descending
+                           select new { id = g.Key, count = g.Count() }).FirstOrDefault();
+
             ViewBag.comment_id = result.id;
+            ViewBag.ccc = result1.id;
             ViewBag.comment_count = result.count;
             //找讚數
             int like = db.collections_detail.Where(s => s.tourism_id == result.id).Count();
             ViewBag.like = like;
-
-           
-            //判斷觀光種類
-            //if (result.id.Contains("A"))
-            //{
-            //    like = db.collections_detail.Where(s => s.tourism_id == result.id).Count();
-            //}
-            //else if (result.id.Contains("H"))
-            //{
-            //}
-            //else if (result.id.Contains("R"))
-            //{
-            //}
-            //else
-            //{ }
-
+            string temp = model.comment[0].tourism_id;
+            int like_new = db.collections_detail.Where(s => s.tourism_id == temp).Count();
+            ViewBag.liken = like_new;
 
             return View(model);
         }
