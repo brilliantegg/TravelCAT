@@ -21,15 +21,16 @@ namespace TravelCat.Controllers
         {
             ViewBag.q = q;
             ViewBag.city = city;
-            ViewBag.month = travel_month;            
+            ViewBag.month = travel_month;
             ViewBag.partner = travel_partner;
             ViewBag.rating = comment_rating;
             ViewBag.stay = comment_stay_total;
             ViewBag.sort = Sortby;
+
             return View();
         }
         [ChildActionOnly]
-        public ActionResult _Activity(int page = 1, string q = null, string Sortby = null, string city = null, string comment_rating = null, string[] travel_partner = null, string travel_month = null, string comment_stay_total = null)
+        public ActionResult _Activity(int page = 1, string q = null, string Sortby = null, string city = null, string comment_rating = null, string travel_partner = null, string travel_month = null, string comment_stay_total = null)
         {
             ViewBag.q = q;
             //Session["pg"] = page;
@@ -152,12 +153,12 @@ namespace TravelCat.Controllers
                 }
             }
 
-            ViewBag.count = model.result_ratings.Count;
+            ViewBag.counta = model.result_ratings.Count;
             model.show_ratings = model.result_ratings.ToPagedList(page, pageSize);
             return View(model);
         }
         [ChildActionOnly]
-        public ActionResult _Hotel(int page = 1, string q = null, string Sortby = null, string city = null, string comment_rating = null, string[] travel_partner = null, string travel_month = null, string comment_stay_total = null)
+        public ActionResult _Hotel(int page = 1, string q = null, string Sortby = null, string city = null, string comment_rating = null, string travel_partner = null, string travel_month = null, string comment_stay_total = null)
         {
             ViewBag.q = q;
             SearchViewModel model = new SearchViewModel()
@@ -187,7 +188,7 @@ namespace TravelCat.Controllers
                                      select new result_rating { id = a.hotel_id, rating = b.tourism_id }).ToList();
             List<result_rating> result = rating_result.Union(hotel_null_result).OrderByDescending(s => s.rating).ToList();
 
-            model.result_ratings=model.hotel.Join(result, a => a.hotel_id, b => b.id,
+            model.result_ratings = model.hotel.Join(result, a => a.hotel_id, b => b.id,
                                                                     (a, b) => new result_rating
                                                                     {
                                                                         id = a.hotel_id,
@@ -221,12 +222,13 @@ namespace TravelCat.Controllers
                     model.result_ratings = model.result_ratings.OrderBy(s => s.rating).ToList();
                 }
             }
-
+            ViewBag.counth = model.result_ratings.Count;
             model.show_ratings = model.result_ratings.ToPagedList(page, pageSize);
             return View(model);
+
         }
         [ChildActionOnly]
-        public ActionResult _Restaurant(int page = 1, string q = null, string Sortby = null, string city = null, string comment_rating = null, string[] travel_partner = null, string travel_month = null, string comment_stay_total = null)
+        public ActionResult _Restaurant(int page = 1, string q = null, string Sortby = null, string city = null, string comment_rating = null, string travel_partner = null, string travel_month = null, string comment_stay_total = null)
         {
             ViewBag.q = q;
             SearchViewModel model = new SearchViewModel()
@@ -291,13 +293,13 @@ namespace TravelCat.Controllers
                     model.result_ratings = model.result_ratings.OrderBy(s => s.rating).ToList();
                 }
             }
-
+            ViewBag.countr = model.result_ratings.Count;
             ViewBag.count = model.result_ratings.Count;
             model.show_ratings = model.result_ratings.ToPagedList(page, pageSize);
             return View(model);
         }
         [ChildActionOnly]
-        public ActionResult _Spot(int page = 1, string q = null, string Sortby = null, string city = null, string comment_rating = null, string[] travel_partner = null, string travel_month = null, string comment_stay_total = null)
+        public ActionResult _Spot(int page = 1, string q = null, string Sortby = null, string city = null, string comment_rating = null, string travel_partner = null, string travel_month = null, string comment_stay_total = null)
         {
             ViewBag.q = q;
             SearchViewModel model = new SearchViewModel()
@@ -349,14 +351,15 @@ namespace TravelCat.Controllers
             //搜尋月份
             search_month(travel_month, model);
             //依照分數排序
-            search_sort(Sortby,model);
+            search_sort(Sortby, model);
 
+            ViewBag.counts = model.result_ratings.Count;
             ViewBag.count = model.result_ratings.Count;
             model.show_ratings = model.result_ratings.ToPagedList(page, pageSize);
             return View(model);
         }
 
-        private SearchViewModel search_sort(string Sortby, SearchViewModel model) 
+        private SearchViewModel search_sort(string Sortby, SearchViewModel model)
         {
             if (!String.IsNullOrEmpty(Sortby))
             {
@@ -499,7 +502,7 @@ namespace TravelCat.Controllers
             }
             return model;
         }
-        private SearchViewModel search_partner(string[] travel_partner, SearchViewModel model)
+        private SearchViewModel search_partner(string travel_partner, SearchViewModel model)
         {
             if (travel_partner != null)
             {
@@ -512,13 +515,10 @@ namespace TravelCat.Controllers
                     model.comment = db.comment.Where(s => s.tourism_id == id).ToList();
                     for (int j = 0; j < model.comment.Count; j++)   //找對於單個活動的所有評論內是否有含搜尋選項
                     {
-                        for (int x = 0; x < travel_partner.Length; x++)
+                        int result = model.comment.Where(s => s.travel_partner == travel_partner).Count();
+                        if (result != 0)
                         {
-                            int result = model.comment.Where(s => s.travel_partner == travel_partner[x]).Count();
-                            if (result != 0)
-                            {
-                                is_exist = true;  //只要有一項就代表活動符合資格
-                            }
+                            is_exist = true;  //只要有一項就代表活動符合資格
                         }
                     }
                     if (!is_exist)
@@ -528,6 +528,7 @@ namespace TravelCat.Controllers
                     }
                 }
             }
+
             return model;
         }
         private SearchViewModel search_stay(string comment_stay_total, SearchViewModel model)
