@@ -17,9 +17,20 @@ namespace TravelCat.Controllers
         // GET: issues
         public ActionResult Index()
         {
-
             var issues = db.issue.Include(i => i.admin).Include(i => i.issue_type).Include(i => i.member);
-            return View(issues.ToList());
+            //return View(issues.ToList());
+            return View();
+        }
+
+        //問題PartialView
+        [ChildActionOnly]
+        public PartialViewResult _Problem(int type_id)
+        {
+            var issue = db.issue.Where(m => m.issue_id == type_id).OrderBy(m=>m.resolve_date).ToList();
+
+            ViewBag.issueId = type_id;
+
+            return PartialView(issue);
         }
 
         // GET: issues/Edit/5
@@ -31,7 +42,7 @@ namespace TravelCat.Controllers
             }
 
             issue issue = new issue();
-            issue = db.issue.Where(m=>m.id==id).FirstOrDefault();
+            issue = db.issue.Where(m => m.id == id).FirstOrDefault();
 
             //issue issue. = db.issues.Find(id);
             if (issue == null)
@@ -48,19 +59,42 @@ namespace TravelCat.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,member_id,admin_id,issue_id,report_date,issue_content,issue_result,issue_status,resolve_date")] issue issue)
+        public ActionResult Edit([Bind(Include = "id,member_id,admin_id,issue_id,report_date,issue_content,issue_result,issue_status,resolve_date,problem_id")] issue issue)
         {
+            int id = issue.issue_id;
+            string controller;
+            switch (id)
+            {
+                case 1:
+                    controller = "issues";
+                    break;
+                case 2:
+                    controller = "members";
+                    break;
+                case 3:
+                    controller = "comments";
+                    break;
+                case 4:
+                    controller = "messages";
+                    break;
+                default:
+                    controller = "issues";
+                    break;
+            }
+            issue.resolve_date = DateTime.Now;
+
             if (ModelState.IsValid)
             {
                 db.Entry(issue).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+
+                return RedirectToRoute(new { controller = controller, action = "Index" });
             }
 
             return View(issue);
         }
 
 
-        
+
     }
 }

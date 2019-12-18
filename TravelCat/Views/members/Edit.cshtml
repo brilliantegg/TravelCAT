@@ -21,10 +21,15 @@
         <div class="row">
             <div class="co col-6">
                 @Html.LabelFor(model => model.member_status, htmlAttributes: new { @class = "txt" })
-                <span class="checkbox ml-3">
-                    @Html.EditorFor(model => model.member_status)
+                
+                    @*@Html.EditorFor(model => model.member_status)*@
+                    <select id="Select1" name="member_status" class="form-control">
+                        <option value="True">隱藏</option>
+                        <option value="False">顯示</option>
+
+                    </select>
                     @Html.ValidationMessageFor(model => model.member_status, "", new { @class = "text-danger" })
-                </span>
+                
             </div>
         </div>
 
@@ -53,5 +58,11 @@
         </div>
     </div>
 }
+@section scripts{
+    <script>
+        $('#Select1 option[value=@Model.member_status]').attr('selected', 'selected');
 
+    </script>
+    
+    }
 

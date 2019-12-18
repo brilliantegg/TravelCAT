@@ -1,4 +1,7 @@
-﻿@model IEnumerable<TravelCat.Models.comment>
+﻿@using PagedList.Mvc
+@using PagedList
+
+@model IPagedList<TravelCat.Models.comment>
 
 @{
     ViewBag.Title = "管理評論";
@@ -20,34 +23,40 @@
 <div class="row">
     <div class="col-md-12">
         <div class="list-group" id="list-tab" role="tablist">
-            <a class="list-group-item active" data-toggle="list" href="#comment2">被檢舉評論</a>
-            <a class="list-group-item" data-toggle="list" href="#comment1">所有評論</a>
+            <a id="1" class="list-group-item active" data-toggle="list" href="#comment1">被檢舉評論</a>
+            <a id="2" class="list-group-item" data-toggle="list" href="#comment2">所有評論</a>
         </div>
     </div>
 
     <div class="col-md-12">
         <div class="tab-content" id="nav-tabContent">
             <div class="tab-pane fade show active" id="comment1">
+                @Html.Action("_Problem", "issues", new { type_id = 3 })
+            </div>
+            <div class="tab-pane fade" id="comment2">
                 <table class="table">
                     <tr class="row">
                         <th class="col-1"></th>
                         <th class="col-1">
-                            @Html.DisplayNameFor(model => model.member.member_account)
+                            @Html.DisplayNameFor(model => model.FirstOrDefault().member.member_account)
                         </th>
                         <th class="col-1">
-                            @Html.DisplayNameFor(model => model.tourism_id)
+                            @Html.DisplayNameFor(model => model.FirstOrDefault().tourism_id)
                         </th>
                         <th class="col-1">
-                            @Html.DisplayNameFor(model => model.comment_id)
+                            @Html.DisplayNameFor(model => model.FirstOrDefault().comment_id)
                         </th>
                         <th class="col-2 text-truncate">
-                            @Html.DisplayNameFor(model => model.comment_title)
+                            @Html.DisplayNameFor(model => model.FirstOrDefault().comment_title)
                         </th>
-                        <th class="col-3 text-truncate">
-                            @Html.DisplayNameFor(model => model.comment_content)
+                        <th class="col-2 text-truncate">
+                            @Html.DisplayNameFor(model => model.FirstOrDefault().comment_content)
                         </th>
-                        <th class="col-3 text-truncate">
-                            @Html.DisplayNameFor(model => model.comment_date)
+                        <th class="col-2">
+                            @Html.DisplayNameFor(model => model.FirstOrDefault().comment_date)
+                        </th>
+                        <th class="col-2">
+                            @Html.DisplayNameFor(model => model.FirstOrDefault().comment_status)
                         </th>
                     </tr>
 
@@ -69,21 +78,32 @@
                             <td class="col-2 text-truncate">
                                 @Html.DisplayFor(modelItem => item.comment_title)
                             </td>
-                            <td class="col-3 text-truncate">
+                            <td class="col-2 text-truncate">
                                 @Html.DisplayFor(modelItem => item.comment_content)
                             </td>
-                            <td class="col-3 text-truncate">
+                            <td class="col-2">
                                 @Html.DisplayFor(modelItem => item.comment_date)
+                            </td>
+                            <td class="col-2">
+                                @if (item.comment_status == true)
+                                {
+                                    <span class="badge badge-success">顯示</span>
+                                }
+                                else
+                                {
+                                    <span class="badge badge-danger">隱藏</span>
+                                }
                             </td>
                         </tr>
                     }
 
                 </table>
+                <div class="text-center">
+                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+                </div>
             </div>
 
-            <div class="tab-pane fade" id="comment2">
-                123546
-            </div>
         </div>
     </div>
 </div>
+
