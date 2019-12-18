@@ -8,17 +8,16 @@
 
     <link href="~/Content/web-Spot-home.css" rel="stylesheet" />
 
-
+    <ul class="Anchor-bar">
+        <li><a href="#N" id="n" class="active">北部地區</a> </li>
+        <li><a href="#M" id="m">中部地區</a></li>
+        <li><a href="#S" id="s">南部地區</a></li>
+        <li><a href="#E" id="e">東部地區</a></li>
+        <li><a href="#O" id="o">離島地區</a></li>
+        <li id="Gotop"><a href="#">回到頂部</a> </li>
+    </ul>
     <div class="container">
 
-        <ul class="Anchor-bar">
-            <li><a href="#N" id="n">北部地區</a> </li>
-            <li><a href="#M" id="m">中部地區</a></li>
-            <li><a href="#S" id="s">南部地區</a></li>
-            <li><a href="#E" id="e">東部地區</a></li>
-            <li><a href="#O" id="o">離島地區</a></li>
-            <li id="Gotop">回到頂部</li>
-        </ul>
         <!--北部-->
         <div class="card-top mb-3" id="N">
             <img src="~/images/taiwan-651854_1920.jpg" class="pic" />
@@ -68,8 +67,10 @@
                                 <i class="far fa-heart"></i>
                             </span>
                         </span>
-                        <img src="https://source.unsplash.com/collection/388793/random?sig=@(Guid.NewGuid())" title="@item.spot_title" onclick=" window.location.href='@Url.Action("Details","WebSpots",new {id=item.spot_id })'" />
-                        <div class="card-body">
+                        <div class="img">
+                            <img src="https://source.unsplash.com/collection/388793/random?sig=@(Guid.NewGuid())" title="@item.spot_title" onclick=" window.location.href='@Url.Action("Details","WebSpots",new {id=item.spot_id })'" />
+                        </div>
+                            <div class="card-body">
                             <h2 class="card-title" onclick=" window.location.href='@Url.Action("Details","WebSpots",new {id=item.spot_id })'">@item.spot_title </h2>
                             <p>評分</p>
                             <p>@item.city</p>
@@ -100,7 +101,9 @@
                                 <i class="far fa-heart"></i>
                             </span>
                         </span>
-                        <img src="https://source.unsplash.com/collection/388793/random?sig=@(Guid.NewGuid())" title="@item.spot_title" onclick=" window.location.href='@Url.Action("Details","WebSpots",new {id=item.spot_id })'" />
+                        <div class="img">
+                            <img src="https://source.unsplash.com/collection/388793/random?sig=@(Guid.NewGuid())" title="@item.spot_title" onclick=" window.location.href='@Url.Action("Details","WebSpots",new {id=item.spot_id })'" />
+                        </div>
                         <div class="card-body">
                             <h2 class="card-title" onclick=" window.location.href='@Url.Action("Details","WebSpots",new {id=item.spot_id })'">@item.spot_title </h2>
                             <p>評分</p>
@@ -132,7 +135,9 @@
                                 <i class="far fa-heart"></i>
                             </span>
                         </span>
-                        <img src="https://source.unsplash.com/collection/388793/random?sig=@(Guid.NewGuid())" title="@item.spot_title" onclick=" window.location.href='@Url.Action("Details","WebSpots",new {id=item.spot_id })'" />
+                        <div class="img">
+                            <img src="https://source.unsplash.com/collection/388793/random?sig=@(Guid.NewGuid())" title="@item.spot_title" onclick=" window.location.href='@Url.Action("Details","WebSpots",new {id=item.spot_id })'" />
+                        </div>
                         <div class="card-body">
                             <h2 class="card-title" onclick=" window.location.href='@Url.Action("Details","WebSpots",new {id=item.spot_id })'">@item.spot_title </h2>
                             <p></p>
@@ -165,7 +170,9 @@
                                 <i class="far fa-heart"></i>
                             </span>
                         </span>
-                        <img src="https://source.unsplash.com/collection/388793/random?sig=@(Guid.NewGuid())" title="@item.spot_title" onclick=" window.location.href='@Url.Action("Details","WebSpots",new {id=item.spot_id })'" />
+                        <div class="img">
+                            <img src="https://source.unsplash.com/collection/388793/random?sig=@(Guid.NewGuid())" title="@item.spot_title" onclick=" window.location.href='@Url.Action("Details","WebSpots",new {id=item.spot_id })'" />
+                        </div>
                         <div class="card-body">
                             <h2 class="card-title" onclick=" window.location.href='@Url.Action("Details","WebSpots",new {id=item.spot_id })'">@item.spot_title </h2>
                             <p>評分</p>
@@ -178,6 +185,9 @@
 
             }
         </div>
+
+
+
     </div>
     <script>
     $(function () {
