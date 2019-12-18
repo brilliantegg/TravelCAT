@@ -1,3 +1,5 @@
+﻿
+
 ﻿@model TravelCat.ViewModels.TaiwanViewModel
 @using TravelCat.ViewModels
 @{
@@ -83,8 +85,10 @@
                                 <i class="far fa-heart"></i>
                             </span>
                         </span>
-                        <img src="https://source.unsplash.com/collection/388793/random?sig=@(Guid.NewGuid())" title="@item.spot_title" onclick=" window.location.href='@Url.Action("Details","WebSpots",new {id=item.spot_id })'" />
-                        <div class="card-body">
+                        <div class="img">
+                            <img src="https://source.unsplash.com/collection/388793/random?sig=@(Guid.NewGuid())" title="@item.spot_title" onclick=" window.location.href='@Url.Action("Details","WebSpots",new {id=item.spot_id })'" />
+                        </div>
+                            <div class="card-body">
                             <h2 class="card-title" onclick=" window.location.href='@Url.Action("Details","WebSpots",new {id=item.spot_id })'">@item.spot_title </h2>
                             <p>評分</p>
                             <p>@item.city</p>
@@ -164,7 +168,7 @@
 
         <!--離島-->
         <div class="card-top mb-3" id="O">
-            <img src="~/images/buildings-1846728_1920.jpg" class="pic" />
+            <img src="~/images/buildings-1846728_1920.jpg" class="pic"/>
             <h1>離島景點</h1>
         </div>
         <div class="row mb-5">
@@ -180,7 +184,9 @@
                                 <i class="far fa-heart"></i>
                             </span>
                         </span>
-                        <img src="https://source.unsplash.com/collection/388793/random?sig=@(Guid.NewGuid())" title="@item.spot_title" onclick=" window.location.href='@Url.Action("Details","WebSpots",new {id=item.spot_id })'" />
+                        <div class="img">
+                            <img src="https://source.unsplash.com/collection/388793/random?sig=@(Guid.NewGuid())" title="@item.spot_title" onclick=" window.location.href='@Url.Action("Details","WebSpots",new {id=item.spot_id })'" />
+                        </div>
                         <div class="card-body">
                             <h2 class="card-title" onclick=" window.location.href='@Url.Action("Details","WebSpots",new {id=item.spot_id })'">@item.spot_title </h2>
                             <p>評分</p>
@@ -193,10 +199,11 @@
 
             }
         </div>
+
+
+
     </div>
-
-
-<script>
+    <script>
     $(function () {
         $("#Gotop").click(function () {
             $("html,body").animate({ scrollTop:0 }, 500);
