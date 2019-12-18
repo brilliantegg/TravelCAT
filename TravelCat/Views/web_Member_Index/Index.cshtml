@@ -150,13 +150,19 @@
                                         @score
                                     </li>
                                 </ul>
+                                <!--RANK-->
                                 <ul>
-                                    @foreach (var item in ViewBag.scoreRank)
-                                    {
-                                        <li>@item.nickname</li>
-                                        <li>@item.member_score</li>
-                                    }
 
+                                    @foreach (var item in ViewBag.score)
+                                    {
+
+                                        <li>
+                                            @(item.GetType().GetProperty("id").GetValue(item))
+                                        </li>
+                                        <li>
+                                            @(item.GetType().GetProperty("count").GetValue(item) * 5)
+                                        </li>
+                                    }
                                 </ul>
                                 <div class="modal fade" id="follow" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered" role="document">

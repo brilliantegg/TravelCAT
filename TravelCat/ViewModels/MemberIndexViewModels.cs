@@ -25,6 +25,12 @@ namespace TravelCat.ViewModels
         public List<hotel> hotel { get; set; }
         public List<restaurant> restaurant { get; set; }
         public List<spot> spot { get; set; }
+        public List<score> scores { get; set; }
+    }
+    public class score
+    {
+        public string memID { get; set; }
+        public int mem_score { get; set; }
     }
 
 }

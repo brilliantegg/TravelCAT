@@ -41,103 +41,107 @@
             <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#mustGo" role="tab" aria-controls="pills-contact" aria-selected="false">非去不可</a>
         </li>
     </ul>
-    <div class="tab-content justify-content-center" id="pills-tabContent">
-        <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-            <div class="row">
-                @foreach (var item in ViewBag.collect)
-                {
-                    <div class="collect_card col-4 mb-5">
-                        @{if (item.tourism_id.Contains("A"))
-                            {
-                                <a class="collection_text  text-white" href="@Url.Action("Details","web_activities",new { id= @item.tourism_id})">
+    <div>
+        <div class="tab-content justify-content-center" id="pills-tabContent">
+            <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                @*內容*@
+                <div class="row">
+                    @foreach (var item in ViewBag.collect)
+                    {
+                        <div class="collect_card col-4 mb-5">
+                            @{if (item.tourism_id.Contains("A"))
+                                {
+                                    <a class="collection_text  text-white" href="@Url.Action("Details","web_activities",new { id= @item.tourism_id})">
 
-                                    <div class="c_img " style="background-image:url('https://source.unsplash.com/collection/388793/random?sig=@(Guid.NewGuid())');">
-                                        <i class="fas fa-running"></i>
-                                        @Model.activity.Where(m => m.activity_id == @item.tourism_id).FirstOrDefault().activity_title
-                                    </div>
-                                </a>
+                                        <div class="c_img " style="background-image:url('https://source.unsplash.com/collection/388793/random?sig=@(Guid.NewGuid())');">
+                                            <i class="fas fa-running"></i>
+                                            @Model.activity.Where(m => m.activity_id == @item.tourism_id).FirstOrDefault().activity_title
+                                        </div>
+                                    </a>
+                                }
+                                else if (item.tourism_id.Contains("S"))
+                                {
+                                    <a class="collection_text  text-white" href="@Url.Action("Details","webSpots",new { id= @item.tourism_id})">
+
+                                        <div class="c_img " style="background-image:url('https://source.unsplash.com/collection/388793/random?sig=@(Guid.NewGuid())');">
+                                            <i class=" fas fa-map-marked-alt "></i>
+                                            @Model.spot.Where(m => m.spot_id == @item.tourism_id).FirstOrDefault().spot_title
+                                        </div>
+                                    </a>
+                                }
+                                else if (item.tourism_id.Contains("R"))
+                                {
+
+                                    <a class="collection_text  text-white" href="@Url.Action("Details","WebRestaurants",new { id= @item.tourism_id})">
+
+                                        <div class="c_img " style="background-image:url('https://source.unsplash.com/collection/388793/random?sig=@(Guid.NewGuid())');">
+                                            <i class="fas fa-hamburger"></i>
+                                            @Model.restaurant.Where(m => m.restaurant_id == @item.tourism_id).FirstOrDefault().restaurant_title
+                                        </div>
+                                    </a>
+                                }
+                                else if (item.tourism_id.Contains("H"))
+                                {
+                                    <a class="collection_text  text-white" href="@Url.Action("Details","WebHotels",new { id= @item.tourism_id})">
+
+                                        <div class="c_img " style="background-image:url('https://source.unsplash.com/collection/388793/random?sig=@(Guid.NewGuid())');">
+                                            <i class="fas fa-building"></i>
+                                            @Model.hotel.Where(m => m.hotel_id == @item.tourism_id).FirstOrDefault().hotel_title
+                                        </div>
+                                    </a>
+                                }
                             }
-                            else if (item.tourism_id.Contains("S"))
-                            {
-                                <a class="collection_text  text-white" href="@Url.Action("Details","webSpots",new { id= @item.tourism_id})">
-
-                                    <div class="c_img " style="background-image:url('https://source.unsplash.com/collection/388793/random?sig=@(Guid.NewGuid())');">
-                                        <i class=" fas fa-map-marked-alt "></i>
-                                        @Model.spot.Where(m => m.spot_id == @item.tourism_id).FirstOrDefault().spot_title
-                                    </div>
-                                </a>
-                            }
-                            else if (item.tourism_id.Contains("R"))
-                            {
-
-                                <a class="collection_text  text-white" href="@Url.Action("Details","WebRestaurants",new { id= @item.tourism_id})">
-
-                                    <div class="c_img " style="background-image:url('https://source.unsplash.com/collection/388793/random?sig=@(Guid.NewGuid())');">
-                                        <i class="fas fa-hamburger"></i>
-                                        @Model.restaurant.Where(m => m.restaurant_id == @item.tourism_id).FirstOrDefault().restaurant_title
-                                    </div>
-                                </a>
-                            }
-                            else if (item.tourism_id.Contains("H"))
-                            {
-                                <a class="collection_text  text-white" href="@Url.Action("Details","WebHotels",new { id= @item.tourism_id})">
-
-                                    <div class="c_img " style="background-image:url('https://source.unsplash.com/collection/388793/random?sig=@(Guid.NewGuid())');">
-                                        <i class="fas fa-building"></i>
-                                        @Model.hotel.Where(m => m.hotel_id == @item.tourism_id).FirstOrDefault().hotel_title
-                                    </div>
-                                </a>
-                            }
-                        }
-                    </div>
-                }
+                        </div>
+                    }
+                </div>
+                @*內容結尾*@
             </div>
-        </div>
-        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-            <div class="row">
-                @foreach (var item in ViewBag.wannaGo)
-                {
-                    <div class="collect_card col-4 mb-5">
-                        @{if (item.tourism_id.Contains("A"))
-                            {
-                                <a class="collection_text  text-white" href="@Url.Action("Details","web_activities",new { id= @item.tourism_id})">
+            <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                <div class="row">
+                    @foreach (var item in ViewBag.wannaGo)
+                    {
+                        <div class="collect_card col-4 mb-5">
+                            @{if (item.tourism_id.Contains("A"))
+                                {
+                                    <a class="collection_text  text-white" href="@Url.Action("Details","web_activities",new { id= @item.tourism_id})">
 
-                                    <div class="c_img " style="background-image:url('https://source.unsplash.com/collection/388793/random?sig=@(Guid.NewGuid())');">
-                                        <i class="fas fa-running"></i>
-                                        @Model.activity.Where(m => m.activity_id == @item.tourism_id).FirstOrDefault().activity_title
-                                    </div>
-                                </a>
-                            }
-                            else if (item.tourism_id.Contains("S"))
-                            {
-                                <a class="collection_text  text-white" href="@Url.Action("Details","webSpots",new { id= @item.tourism_id})">
+                                        <div class="c_img " style="background-image:url('https://source.unsplash.com/collection/388793/random?sig=@(Guid.NewGuid())');">
+                                            <i class="fas fa-running"></i>
+                                            @Model.activity.Where(m => m.activity_id == @item.tourism_id).FirstOrDefault().activity_title
+                                        </div>
+                                    </a>
+                                }
+                                else if (item.tourism_id.Contains("S"))
+                                {
+                                    <a class="collection_text  text-white" href="@Url.Action("Details","webSpots",new { id= @item.tourism_id})">
 
-                                    <div class="c_img " style="background-image:url('https://source.unsplash.com/collection/388793/random?sig=@(Guid.NewGuid())');">
-                                        <i class=" fas fa-map-marked-alt "></i>
-                                        @Model.spot.Where(m => m.spot_id == @item.tourism_id).FirstOrDefault().spot_title
-                                    </div>
-                                </a>
-                            }
-                            else if (item.tourism_id.Contains("R"))
-                            {
+                                        <div class="c_img " style="background-image:url('https://source.unsplash.com/collection/388793/random?sig=@(Guid.NewGuid())');">
+                                            <i class=" fas fa-map-marked-alt "></i>
+                                            @Model.spot.Where(m => m.spot_id == @item.tourism_id).FirstOrDefault().spot_title
+                                        </div>
+                                    </a>
+                                }
+                                else if (item.tourism_id.Contains("R"))
+                                {
 
-                                <a class="collection_text  text-white" href="@Url.Action("Details","WebRestaurants",new { id= @item.tourism_id})">
+                                    <a class="collection_text  text-white" href="@Url.Action("Details","WebRestaurants",new { id= @item.tourism_id})">
 
-                                    <div class="c_img " style="background-image:url('https://source.unsplash.com/collection/388793/random?sig=@(Guid.NewGuid())');">
-                                        <i class="fas fa-hamburger"></i>
-                                        @Model.restaurant.Where(m => m.restaurant_id == @item.tourism_id).FirstOrDefault().restaurant_title
-                                    </div>
-                                </a>
-                            }
-                            else if (item.tourism_id.Contains("H"))
-                            {
-                                <a class="collection_text  text-white" href="@Url.Action("Details","WebHotels",new { id= @item.tourism_id})">
+                                        <div class="c_img " style="background-image:url('https://source.unsplash.com/collection/388793/random?sig=@(Guid.NewGuid())');">
+                                            <i class="fas fa-hamburger"></i>
+                                            @Model.restaurant.Where(m => m.restaurant_id == @item.tourism_id).FirstOrDefault().restaurant_title
+                                        </div>
+                                    </a>
+                                }
+                                else if (item.tourism_id.Contains("H"))
+                                {
+                                    <a class="collection_text  text-white" href="@Url.Action("Details","WebHotels",new { id= @item.tourism_id})">
 
-                                    <div class="c_img " style="background-image:url('https://source.unsplash.com/collection/388793/random?sig=@(Guid.NewGuid())');">
-                                        <i class="fas fa-building"></i>
-                                        @Model.hotel.Where(m => m.hotel_id == @item.tourism_id).FirstOrDefault().hotel_title
-                                    </div>
-                                </a>
+                                        <div class="c_img " style="background-image:url('https://source.unsplash.com/collection/388793/random?sig=@(Guid.NewGuid())');">
+                                            <i class="fas fa-building"></i>
+                                            @Model.hotel.Where(m => m.hotel_id == @item.tourism_id).FirstOrDefault().hotel_title
+                                        </div>
+                                    </a>
+                                }
                             }
                         }
                     </div>

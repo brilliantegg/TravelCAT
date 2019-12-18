@@ -10,6 +10,7 @@ namespace TravelCat.ViewModels
 {
     public class TaiwanViewModel
     {
+        public List<collections_detail> collections_detail { get; set; }
         public List<activity> activity { get; set; }
         public List<hotel> hotel { get; set; }
         public List<restaurant> restaurant { get; set; }

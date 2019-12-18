@@ -3,6 +3,8 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/web-Layout.cshtml";
+
+
 }
 <link href="~/Content/Searchindex.css" rel="stylesheet" />
 <style>
@@ -69,7 +71,7 @@
                                                 城市:
                                             </h4>
                                             <select id="city" name="city" class="col-10 offset-1 btn-light mb-4 border-bottom px-2 py-2">
-                                                <option value="" disabled selected>請選擇</option>
+                                                <option value="" disabled >請選擇</option>
                                                 <option value="" disabled>北部地區</option>
                                                 <option value="臺北市">臺北市</option>
                                                 <option value="新北市">新北市</option>
@@ -107,7 +109,7 @@
                                                 旅客評分:
                                             </h4>
                                             <select id="comment_rating" name="comment_rating" class="col-10 offset-1  btn-light mb-4 border-bottom px-2 py-2">
-                                                <option value="" disabled selected>請選擇</option>
+                                                <option value="" disabled >請選擇</option>
                                                 <option value="1">大於1分</option>
                                                 <option value="2">大於2分</option>
                                                 <option value="3">大於3分</option>
@@ -122,7 +124,7 @@
                                                 停留時間:
                                             </h4>
                                             <select id="comment_stay_total" name="comment_stay_total" class="col-10 offset-1  btn-light mb-4 border-bottom px-2 py-2">
-                                                <option value="" disabled selected>請選擇</option>
+                                                <option value="" disabled >請選擇</option>
                                                 <option value="一到兩小時">一到兩小時</option>
                                                 <option value="兩到三小時">兩到三小時</option>
                                                 <option value="三到四小時">三到四小時</option>
@@ -136,7 +138,7 @@
                                                 旅伴:
                                             </h4>
                                             <div class="row ">
-                                                <div class="btn-group btn-group-toggle mb-4 offset-2" data-toggle="buttons">
+                                                <div id="travel_partner" class="btn-group btn-group-toggle mb-4 offset-2" data-toggle="buttons">
                                                     <label class="btn  btn-light col-md-10 mb-1">
                                                         <input type="radio" name="travel_partner" id="travel_partner1" autocomplete="off" value="蜜月"> 蜜月
                                                     </label>
@@ -168,7 +170,7 @@
                                                 旅遊月份:
                                             </h4>
                                             <div class="row ">
-                                                <div class="btn-group btn-group-toggle mb-4 offset-2 " data-toggle="buttons">
+                                                <div id="travel_month" class="btn-group btn-group-toggle mb-4 offset-2 " data-toggle="buttons">
                                                     <label class="btn  btn-light col-md-10 mb-1">
                                                         <input type="radio" name="travel_month" id="travel_month1" autocomplete="off" value="3至5月"> 3至5月
                                                     </label>
@@ -225,7 +227,7 @@
                                         }
                                         if (ViewBag.partner != null)
                                         {
-                                            <span class="btn btn-info">@ViewBag.partner[0]</span>
+                                            <span class="btn btn-info">@ViewBag.partner</span>
                                         }
                                         if (!String.IsNullOrEmpty(ViewBag.month))
                                         {
@@ -251,17 +253,17 @@
                                 </select>
                                 @{
                                     if (!String.IsNullOrEmpty(ViewBag.q))
-                                    {<input type="hidden" name="q" value=@ViewBag.q />}
+                                    {<input type="hidden" name="q" value="@ViewBag.q" />}
                                     if (!String.IsNullOrEmpty(ViewBag.city))
-                                    {<input type="hidden" name="city" value=@ViewBag.city />}
+                                    {<input type="hidden" name="city" value="@ViewBag.city" />}
                                     if (!String.IsNullOrEmpty(ViewBag.rating))
-                                    {<input type="hidden" name="comment_rating" value=@ViewBag.rating />}
+                                    {<input type="hidden" name="comment_rating" value="@ViewBag.rating" />}
                                     if (ViewBag.partner != null)
-                                    {<input type="hidden" name="travel_partner" value=@ViewBag.partner />}
+                                    {<input type="hidden" name="travel_partner" value="@ViewBag.partner" />}
                                     if (!String.IsNullOrEmpty(ViewBag.month))
-                                    {<input type="hidden" name="travel_month" value=@ViewBag.month />}
+                                    {<input type="hidden" name="travel_month" value="@ViewBag.month" />}
                                     if (!String.IsNullOrEmpty(ViewBag.stay))
-                                    {<input type="hidden" name="comment_stay_total" value=@ViewBag.stay />}
+                                    {<input type="hidden" name="comment_stay_total" value="@ViewBag.stay" />}
                                 }
                             </div>
                         </form>
@@ -321,17 +323,19 @@
 
 @section scripts{
     <script>
+
+
         $('#Sortby').change(function () {
             $('#form_right').submit();
         });
 
-        $('#travel_month input[value=@ViewBag.month').parent('label').addClass('active');
-
-        $('#travel_partner input[value=@ViewBag.partner]').parent('label').addClass('active');
-
-        $('#city option[value=@ViewBag.city]').attr("selected", "selected");
-        $('#comment_rating option[value=@ViewBag.rating]').attr("selected","selected")
-        $('#comment_stay_total option[value=@ViewBag.stay]').attr("selected", "selected");
+        $(function () {
+                    $('#travel_partner input[value="@ViewBag.partner"]').parent('label').addClass('active');
+                    $('#travel_month input[value="@ViewBag.month"]').parent('label').addClass('active');
+                    $('#city option[value="@ViewBag.city"]').attr("selected", "selected");
+                    $('#comment_rating option[value="@ViewBag.rating"]').attr("selected", "selected")
+                    $('#comment_stay_total option[value="@ViewBag.stay"]').attr("selected", "selected");
+        });
 
     </script>
 }

@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using TravelCat.Models;
 using TravelCat.ViewModels;
+using System.Web.Script.Serialization;
 
 namespace TravelCat.Controllers
 {
@@ -16,11 +17,11 @@ namespace TravelCat.Controllers
         int pageSize = 10;
 
         //GET: Search
-        public ActionResult Index(int page = 1, string q = null, string Sortby = null, string city = null, string comment_rating = null, string[] travel_partner = null, string travel_month = null, string comment_stay_total = null)
+        public ActionResult Index(int page = 1, string q = null, string Sortby = null, string city = null, string comment_rating = null, string travel_partner = null, string travel_month = null, string comment_stay_total = null)
         {
             ViewBag.q = q;
             ViewBag.city = city;
-            ViewBag.month = travel_month;
+            ViewBag.month = travel_month;            
             ViewBag.partner = travel_partner;
             ViewBag.rating = comment_rating;
             ViewBag.stay = comment_stay_total;
