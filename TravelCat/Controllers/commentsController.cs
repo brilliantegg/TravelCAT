@@ -24,6 +24,7 @@ namespace TravelCat.Controllers
             var pagedlist = comments.ToPagedList(pagecurrent, pagesize);
 
             return View("Index", pagedlist);
+
         }
 
         // GET: comments/Edit/5
