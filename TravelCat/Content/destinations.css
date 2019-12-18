@@ -170,8 +170,9 @@ height: 70vh;
     overflow: hidden;
 }
 .comment_photo img {
-
-    display: block
+    display: block;
+    object-fit:cover;
+    max-height:450px
 }
 
 textarea {
