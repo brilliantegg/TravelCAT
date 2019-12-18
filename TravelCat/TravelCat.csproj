@@ -2007,11 +2007,11 @@
     <Content Include="Content\Searchindex.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\back-end-index.css" />
+    <Content Include="Content\web-activite-home.css" />
     <Content Include="Content\web-Home.css" />
     <Content Include="Content\web-Layout.css" />
     <Content Include="Content\collection.css" />
     <Content Include="Content\web-Login.css" />
-    <Content Include="Content\web-Spot-home.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -2046,6 +2046,7 @@
     <Content Include="images\badges\rainbow.png" />
     <Content Include="images\badges\start.png" />
     <Content Include="images\badges\unicorn.png" />
+    <Content Include="images\badges\擷取.PNG" />
     <Content Include="images\bled-1899264_1920.jpg" />
     <Content Include="images\bmo-02.jpg" />
     <Content Include="images\buildings-1846728_1920.jpg" />
