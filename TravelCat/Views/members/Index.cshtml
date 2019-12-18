@@ -28,7 +28,7 @@
     <div class="col-md-12">
         <div class="tab-content" id="nav-tabContent">
             <div class="tab-pane fade show active" id="issue-member" role="tabpanel">
-                @Html.Action("_ProblemMember", "members", new { id = 2 })
+                @Html.Action("_Problem", "issues", new { type_id = 2 })
             </div>
             <div class="tab-pane fade" id="member" role="tabpanel">
                 <table class="table">
@@ -58,8 +58,15 @@
                             <td class="col-3">
                                 @Html.DisplayFor(modelItem => item.member_account)
                             </td>
-                            <td class="col-3">
-                                @Html.DisplayFor(modelItem => item.member_status)
+                            <td class="col-3">                             
+                                @if (item.member_status == false)
+                                {
+                                    <span class="badge badge-success">顯示</span>
+                                }
+                                else
+                                {
+                                    <span class="badge badge-danger">隱藏</span>
+                                }
                             </td>
                         </tr>
                     }

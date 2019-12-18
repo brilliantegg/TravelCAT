@@ -15,11 +15,12 @@ namespace TravelCat.Models
         [DisplayName("帳號")]
         [Required(ErrorMessage = "此欄位為必填")]
         [StringLength(15, ErrorMessage = "最多15個字")]
+        [RegularExpression("\\w{5,}", ErrorMessage = "請輸入5~15碼的英文或數字")]
         public string admin_account { get; set; }
 
         [DisplayName("密碼")]
         [Required(ErrorMessage = "此欄位為必填")]
-        [StringLength(60, ErrorMessage = "最多60個字")]
+        [StringLength(60, ErrorMessage = "最多20個字")]
         [DataType(DataType.Password)]
         public string admin_password { get; set; }
 
@@ -44,12 +45,14 @@ namespace TravelCat.Models
         [DisplayName("帳號")]
         [Required(ErrorMessage = "此欄位為必填")]
         [StringLength(15, ErrorMessage = "最多15個字")]
-        [Checkmemberacc]
+        [RegularExpression("\\w{5,}", ErrorMessage = "請輸入5~15碼的英文或數字")]
+        //[Checkmemberacc]
         public string member_account { get; set; }
 
         [DisplayName("密碼")]
         [Required(ErrorMessage = "此欄位為必填")]
         [StringLength(60, ErrorMessage = "最多60個字")]
+        //[RegularExpression("\\w{8,}", ErrorMessage = "請輸入8~20碼的英文和數字")]
         [DataType(DataType.Password)]
         public string member_password { get; set; }
 
@@ -97,8 +100,7 @@ namespace TravelCat.Models
         public string issue_result { get; set; }
 
         [DisplayName("問題狀態")]
-        [StringLength(10, ErrorMessage = "最多10個字")]
-        public string issue_status { get; set; }
+        public Nullable<bool> issue_status { get; set; }
 
         [DisplayName("處理日期")]
         [DataType(DataType.DateTime, ErrorMessage = "輸入日期錯誤")]
@@ -604,38 +606,26 @@ namespace TravelCat.Models
         public string tourism_photo1 { get; set; }
     }
 
-    public class Checkmemberacc : ValidationAttribute
-    {
-        dbTravelCat db = new dbTravelCat();
+    //public class Checkmemberacc : ValidationAttribute
+    //{
+    //    dbTravelCat db = new dbTravelCat();
 
-        public Checkmemberacc()
-        {
-            ErrorMessage = "帳號重複";
-        }
+    //    public Checkmemberacc()
+    //    {
+    //        ErrorMessage = "帳號重複";
+    //    }
 
-        public override bool IsValid(object value)
-        {
-            var result = db.member.Where(c => c.member_account == value.ToString()).FirstOrDefault();
+    //    public override bool IsValid(object value)
+    //    {
+    //        var result = db.member.Where(c => c.member_account == value.ToString()).FirstOrDefault();
 
-            if (result == null)
-                return true;
+    //        if (result == null)
+    //            return true;
 
-            return false;
-        }
+    //        return false;
+    //    }
 
-    }
-
-
-
-
-
-
-
-
-
-
-
-
+    //}
 
 
 

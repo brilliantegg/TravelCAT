@@ -26,7 +26,7 @@
             }
             else
             {
-                <img src="~/images/member/avatar.png" alt="...">
+                <img class="profile_avatar" src="~/images/member/avatar.png" alt="...">
             }
             
         <div class="member_header">
@@ -160,7 +160,7 @@
                                             @(item.GetType().GetProperty("id").GetValue(item))
                                         </li>
                                         <li>
-                                            @(item.GetType().GetProperty("count").GetValue(item) * 5)
+                                            @(item.GetType().GetProperty("total").GetValue(item))
                                         </li>
                                     }
                                 </ul>

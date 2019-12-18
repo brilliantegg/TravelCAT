@@ -57,20 +57,21 @@
     @Html.ActionLink("返回", "Index")
 </div>
 
-<script src="~/Scripts/jquery-3.3.1.min.js"></script>
-<script src="~/Scripts/jquery.validate.min.js"></script>
-<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
-<script>
-    $('#submit').click(function () {
-        var psd1 = $('#admin_password').val();
-        var psd2 = $('#Password1').val();
+@section scripts{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script>
+        $('#submit').click(function () {
+            var psd1 = $('#admin_password').val();
+            var psd2 = $('#Password1').val();
 
-        if (psd2!=psd1) {
-            alert("兩次輸入的密碼不一致！");
-            return false;
-        }
-        else
-            return true;
-    });
+            if (psd2 != psd1) {
+                alert("兩次輸入的密碼不一致！");
+                return false;
+            }
+            else
+                return true;
+        });
 
-</script>
+    </script>
+}

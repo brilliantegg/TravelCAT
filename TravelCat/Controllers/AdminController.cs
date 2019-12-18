@@ -117,10 +117,14 @@ namespace TravelCat.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "admin_id,admin_account,admin_password,admin_email,emailConfirmed")] admin admin)
+        public ActionResult Edit(int id,string admin_email)
         {
+            var admin = db.admin.Find(id);
+
             if (ModelState.IsValid)
             {
+                admin.admin_email = admin_email;
+                admin.emailConfirmed = false;
 
                 var callbackUrl = Url.Action("Confirm", "Admin", new { account = admin.admin_account }, protocol: Request.Url.Scheme);
                 GmailSender gs = new GmailSender();
@@ -137,8 +141,6 @@ namespace TravelCat.Controllers
                 db.Entry(admin).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
-
-
 
             }
             return View(admin);

@@ -38,32 +38,24 @@ namespace TravelCat.Controllers
 
             };
 
-            var result2 = (from a in db.follow_list
+            var follow_score = (from a in db.follow_list
                            group a by a.member_id into b
                            orderby b.Count() descending
-                           select new { id = b.Key, count = b.Count() }).ToList();
+                           select new { id = b.Key, score = b.Count()*5 }).ToList();
 
 
-            var result3 = (from a in db.comment
+            var comment_score = (from a in db.comment
                            group a by a.member_id into b
                            orderby b.Count() descending
-                           select new { id = b.Key, count = b.Count() }).Take(3).ToList();
+                           select new { id = b.Key, score = b.Count()*5 }).ToList();
 
 
-            var result4 = (from a in db.follow_list
-                           group a by a.member_id into b
-                           orderby b.Count() descending
-                           select new { id = b.Key, count = b.Count() })
-                         .Union
-                         (from a in db.comment
-                          group a by a.member_id into b
-                          orderby b.Count() descending
-                          select new { id = b.Key, count = b.Count() }).ToList();
+            var totoal_score = (follow_score).Union(comment_score).GroupBy(m=>m.id).Select(m=>new { id=m.Key,total=m.Sum(x=>x.score) }).OrderByDescending(m=>m.total).Take(3).ToList();
 
-            var result5 = (from a in result4
-                           group a by a.id into b
-                           orderby b.Count() descending
-                           select new { id = b.Key, count = b.Count() }).ToList();
+            //var result5 = (from a in result4
+            //               group a by a.id into b
+            //               orderby b.Count() descending
+            //               select new { id = b.Key, count = b.Count() }).ToList();
 
             //score final_result = new score();
             //for (int i = 0; i < result5.Count; i++)
@@ -83,7 +75,7 @@ namespace TravelCat.Controllers
 
             ViewBag.memberId = id;
             ViewBag.member_profile = db.member_profile.ToList();
-            ViewBag.score = result3;
+            ViewBag.score = totoal_score;
 
             //result2.GetType().GetProperty("id").GetValue(result2);
 
@@ -155,9 +147,10 @@ namespace TravelCat.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Editpassword(string id, string oldpassword, string newpassword)
+        public ActionResult Editpassword(string id,string oldpassword, string newpassword)
         {
             member member = db.member.Find(id);
+
 
             byte[] password1 = System.Text.Encoding.UTF8.GetBytes(oldpassword);
             byte[] hash1 = new System.Security.Cryptography.SHA256Managed().ComputeHash(password1);
