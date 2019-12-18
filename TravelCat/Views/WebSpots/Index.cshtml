@@ -58,7 +58,13 @@
                         </div>
                         <div class="card-body">
                             <h2 class="card-title" onclick=" window.location.href='@Url.Action("Details","WebSpots",new {id=item.spot_id })'">@item.spot_title </h2>
-                            <p>評分</p>
+                            <span>評分數</span>
+                            @if(@Model.comment.Where(m => m.tourism_id == item.spot_id).Count()>0)
+                            {
+                            <span>@Model.comment.Where(m => m.tourism_id == item.spot_id).Count()</span>
+                            }else{
+                            <span>0</span>
+                            }
                             <p>@item.city</p>
                         </div>
                     </div>
@@ -80,17 +86,35 @@
                 <div class="col-4 mb-3">
                     <div class="card">
                         <span class="fa">
-                            <span>
-                                <i class="fas fa-heart"></i>
-                                <i class="far fa-heart"></i>
-                            </span>
+                            @if (Model.collections_detail.Where(m => m.tourism_id == @item.spot_id && m.member_id == @memberId).Count() > 0)
+                            {
+                                <span class="add_to_bucket_list added" data-id="@item.spot_id">
+                                    <i class="fas fa-heart" style="color:red"></i>
+                                    <i class="far fa-heart"></i>
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="add_to_bucket_list" data-id="@item.spot_id">
+                                    <i class="fas fa-heart"></i>
+                                    <i class="far fa-heart"></i>
+                                </span>
+                            }
                         </span>
                         <div class="img">
                             <img src="https://source.unsplash.com/collection/388793/random?sig=@(Guid.NewGuid())" title="@item.spot_title" onclick=" window.location.href='@Url.Action("Details","WebSpots",new {id=item.spot_id })'" />
                         </div>
                             <div class="card-body">
                             <h2 class="card-title" onclick=" window.location.href='@Url.Action("Details","WebSpots",new {id=item.spot_id })'">@item.spot_title </h2>
-                            <p>評分</p>
+                            <span>評分數</span>
+                            @if (@Model.comment.Where(m => m.tourism_id == item.spot_id).Count() > 0)
+                            {
+                                <span>@Model.comment.Where(m => m.tourism_id == item.spot_id).Count()</span>
+                            }
+                            else
+                            {
+                                <span>0</span>
+                            }
                             <p>@item.city</p>
 
                         </div>
@@ -114,15 +138,33 @@
                 <div class="col-4 mb-3">
                     <div class="card">
                         <span class="fa">
-                            <span>
-                                <i class="fas fa-heart"></i>
-                                <i class="far fa-heart"></i>
-                            </span>
+                            @if (Model.collections_detail.Where(m => m.tourism_id == @item.spot_id && m.member_id == @memberId).Count() > 0)
+                            {
+                                <span class="add_to_bucket_list added" data-id="@item.spot_id">
+                                    <i class="fas fa-heart" style="color:red"></i>
+                                    <i class="far fa-heart"></i>
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="add_to_bucket_list" data-id="@item.spot_id">
+                                    <i class="fas fa-heart"></i>
+                                    <i class="far fa-heart"></i>
+                                </span>
+                            }
                         </span>
                         <img src="https://source.unsplash.com/collection/388793/random?sig=@(Guid.NewGuid())" title="@item.spot_title" onclick=" window.location.href='@Url.Action("Details","WebSpots",new {id=item.spot_id })'" />
                         <div class="card-body">
                             <h2 class="card-title" onclick=" window.location.href='@Url.Action("Details","WebSpots",new {id=item.spot_id })'">@item.spot_title </h2>
-                            <p>評分</p>
+                            <span>評分數</span>
+                            @if (@Model.comment.Where(m => m.tourism_id == item.spot_id).Count() > 0)
+                            {
+                                <span>@Model.comment.Where(m => m.tourism_id == item.spot_id).Count()</span>
+                            }
+                            else
+                            {
+                                <span>0</span>
+                            }
                             <p>@item.city</p>
 
                         </div>
@@ -146,15 +188,33 @@
                 <div class="col-4 mb-3">
                     <div class="card">
                         <span class="fa">
-                            <span>
-                                <i class="fas fa-heart"></i>
-                                <i class="far fa-heart"></i>
-                            </span>
+                            @if (Model.collections_detail.Where(m => m.tourism_id == @item.spot_id && m.member_id == @memberId).Count() > 0)
+                            {
+                                <span class="add_to_bucket_list added" data-id="@item.spot_id">
+                                    <i class="fas fa-heart" style="color:red"></i>
+                                    <i class="far fa-heart"></i>
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="add_to_bucket_list" data-id="@item.spot_id">
+                                    <i class="fas fa-heart"></i>
+                                    <i class="far fa-heart"></i>
+                                </span>
+                            }
                         </span>
                         <img src="https://source.unsplash.com/collection/388793/random?sig=@(Guid.NewGuid())" title="@item.spot_title" onclick=" window.location.href='@Url.Action("Details","WebSpots",new {id=item.spot_id })'" />
                         <div class="card-body">
                             <h2 class="card-title" onclick=" window.location.href='@Url.Action("Details","WebSpots",new {id=item.spot_id })'">@item.spot_title </h2>
-                            <p></p>
+                            <span>評分數</span>
+                            @if (@Model.comment.Where(m => m.tourism_id == item.spot_id).Count() > 0)
+                            {
+                                <span>@Model.comment.Where(m => m.tourism_id == item.spot_id).Count()</span>
+                            }
+                            else
+                            {
+                                <span>0</span>
+                            }
                             <p>@item.city</p>
 
                         </div>
@@ -179,17 +239,35 @@
                 <div class="col-4 mb-3">
                     <div class="card">
                         <span class="fa">
-                            <span>
-                                <i class="fas fa-heart"></i>
-                                <i class="far fa-heart"></i>
-                            </span>
+                            @if (Model.collections_detail.Where(m => m.tourism_id == @item.spot_id && m.member_id == @memberId).Count() > 0)
+                            {
+                                <span class="add_to_bucket_list added" data-id="@item.spot_id">
+                                    <i class="fas fa-heart" style="color:red"></i>
+                                    <i class="far fa-heart"></i>
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="add_to_bucket_list" data-id="@item.spot_id">
+                                    <i class="fas fa-heart"></i>
+                                    <i class="far fa-heart"></i>
+                                </span>
+                            }
                         </span>
                         <div class="img">
                             <img src="https://source.unsplash.com/collection/388793/random?sig=@(Guid.NewGuid())" title="@item.spot_title" onclick=" window.location.href='@Url.Action("Details","WebSpots",new {id=item.spot_id })'" />
                         </div>
                         <div class="card-body">
                             <h2 class="card-title" onclick=" window.location.href='@Url.Action("Details","WebSpots",new {id=item.spot_id })'">@item.spot_title </h2>
-                            <p>評分</p>
+                            <span>評分數</span>
+                            @if (@Model.comment.Where(m => m.tourism_id == item.spot_id).Count() > 0)
+                            {
+                                <span>@Model.comment.Where(m => m.tourism_id == item.spot_id).Count()</span>
+                            }
+                            else
+                            {
+                                <span>0</span>
+                            }
                             <p>@item.city</p>
 
                         </div>

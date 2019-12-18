@@ -1,73 +1,374 @@
-﻿@model IEnumerable<TravelCat.Models.restaurant>
-
+﻿@model TravelCat.ViewModels.TaiwanViewModel
+@using TravelCat.ViewModels
 @{
     Layout = "~/Views/Shared/web-Layout.cshtml";
-}
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.restaurant_title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.restaurant_tel)
-            </th>
-           
-            <th>
-                @Html.DisplayNameFor(model => model.city)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.district)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.address_detail)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.open_time)
-            </th>
-
-            <th></th>
-        </tr>
-    
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.restaurant_title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.restaurant_tel)
-            </td>
-           
-            <td>
-                @Html.DisplayFor(modelItem => item.city)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.district)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.address_detail)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.open_time)
-            </td>
-
-            <td>
-
-                @Html.ActionLink("Details", "Details", new { id=item.restaurant_id }) |
-
-            </td>
-        </tr>
+    string memberId;
+    if (Session["memberID"] == null || string.IsNullOrWhiteSpace(Session["memberID"].ToString()))
+    {
+        memberId = null;
     }
-    
-    </table>
-</body>
-</html>
+    else
+    {
+        memberId = Session["memberID"].ToString();
+    }
+}
+<link href="~/Content/web-Spot-home.css" rel="stylesheet" />
+
+<div class="container">
+    <ul class="Anchor-bar">
+        <li><a href="#N" id="n">北部地區</a> </li>
+        <li><a href="#M" id="m">中部地區</a></li>
+        <li><a href="#S" id="s">南部地區</a></li>
+        <li><a href="#E" id="e">東部地區</a></li>
+        <li><a href="#O" id="o">離島地區</a></li>
+        <li id="Gotop">回到頂部</li>
+    </ul>
+    <!--北部-->
+    <div class="card-top mb-3" id="N">
+        <img src="~/images/taiwan-651854_1920.jpg" class="pic" />
+        <h1>北部景點</h1>
+    </div>
+    <div class="row mb-5">
+
+        @foreach (var item in Model.restaurant_north)
+        {
+            <div class="col-4 mb-3">
+                <div class="card">
+                    <span class="fa">
+                        @if (Model.collections_detail.Where(m => m.tourism_id == @item.restaurant_id && m.member_id == @memberId).Count() > 0)
+                        {
+                            <span class="add_to_bucket_list added" data-id="@item.restaurant_id">
+                                <i class="fas fa-heart" style="color:red"></i>
+                                <i class="far fa-heart"></i>
+                            </span>
+                        }
+                        else
+                        {
+                            <span class="add_to_bucket_list" data-id="@item.restaurant_id">
+                                <i class="fas fa-heart"></i>
+                                <i class="far fa-heart"></i>
+                            </span>
+                        }
+
+                    </span>
+                    <div class="img">
+                        <img src="https://source.unsplash.com/collection/388793/random?sig=@(Guid.NewGuid())" title="@item.restaurant_title" onclick=" window.location.href='@Url.Action("Details","WebRestaurants",new {id=item.restaurant_id })'" />
+                    </div>
+                    <div class="card-body">
+                        <h2 class="card-title" onclick=" window.location.href='@Url.Action("Details","WebRestaurants",new {id=item.restaurant_id })'">@item.restaurant_title </h2>
+                        <span>評分數</span>
+                        @if (@Model.comment.Where(m => m.tourism_id == item.restaurant_id).Count() > 0)
+                        {
+                            <span>@Model.comment.Where(m => m.tourism_id == item.restaurant_id).Count()</span>
+                        }
+                        else
+                        {
+                            <span>0</span>
+                        }
+                        <p>@item.city</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+
+    <!--中部-->
+    <div class="card-top mb-3" id="M">
+        <img src="~/images/temple-756337_1920.jpg" class="pic" />
+        <h1>中部景點</h1>
+    </div>
+    <div class="row mb-5">
+
+        @foreach (var item in Model.restaurant_middle)
+        {
+
+            <div class="col-4 mb-3">
+                <div class="card">
+                    <span class="fa">
+                        @if (Model.collections_detail.Where(m => m.tourism_id == @item.restaurant_id && m.member_id == @memberId).Count() > 0)
+                        {
+                            <span class="add_to_bucket_list added" data-id="@item.restaurant_id">
+                                <i class="fas fa-heart" style="color:red"></i>
+                                <i class="far fa-heart"></i>
+                            </span>
+                        }
+                        else
+                        {
+                            <span class="add_to_bucket_list" data-id="@item.restaurant_id">
+                                <i class="fas fa-heart"></i>
+                                <i class="far fa-heart"></i>
+                            </span>
+                        }
+                    </span>
+                    <img src="https://source.unsplash.com/collection/388793/random?sig=@(Guid.NewGuid())" title="@item.restaurant_title" onclick=" window.location.href='@Url.Action("Details","WebRestaurants",new {id=item.restaurant_id })'" />
+                    <div class="card-body">
+                        <h2 class="card-title" onclick=" window.location.href='@Url.Action("Details","WebRestaurants",new {id=item.restaurant_id })'">@item.restaurant_title </h2>
+                        <span>評分數</span>
+                        @if (@Model.comment.Where(m => m.tourism_id == item.restaurant_id).Count() > 0)
+                        {
+                            <span>@Model.comment.Where(m => m.tourism_id == item.restaurant_id).Count()</span>
+                        }
+                        else
+                        {
+                            <span>0</span>
+                        }
+                        <p>@item.city</p>
+
+                    </div>
+                </div>
+            </div>
+
+
+        }
+    </div>
+
+
+    <!--南部-->
+    <div class="card-top mb-3" id="S">
+        <img src="~/images/restaurant-1749602_1920.jpg" class="pic" />
+        <h1>南部景點</h1>
+    </div>
+    <div class="row mb-5">
+        @foreach (var item in Model.restaurant_south)
+        {
+
+            <div class="col-4 mb-3">
+                <div class="card">
+                    <span class="fa">
+                        @if (Model.collections_detail.Where(m => m.tourism_id == @item.restaurant_id && m.member_id == @memberId).Count() > 0)
+                        {
+                            <span class="add_to_bucket_list added" data-id="@item.restaurant_id">
+                                <i class="fas fa-heart" style="color:red"></i>
+                                <i class="far fa-heart"></i>
+                            </span>
+                        }
+                        else
+                        {
+                            <span class="add_to_bucket_list" data-id="@item.restaurant_id">
+                                <i class="fas fa-heart"></i>
+                                <i class="far fa-heart"></i>
+                            </span>
+                        }
+                    </span>
+                    <img src="https://source.unsplash.com/collection/388793/random?sig=@(Guid.NewGuid())" title="@item.restaurant_title" onclick=" window.location.href='@Url.Action("Details","WebRestaurants",new {id=item.restaurant_id })'" />
+                    <div class="card-body">
+                        <h2 class="card-title" onclick=" window.location.href='@Url.Action("Details","WebRestaurants",new {id=item.restaurant_id })'">@item.restaurant_title </h2>
+                        <span>評分數</span>
+                        @if (@Model.comment.Where(m => m.tourism_id == item.restaurant_id).Count() > 0)
+                        {
+                            <span>@Model.comment.Where(m => m.tourism_id == item.restaurant_id).Count()</span>
+                        }
+                        else
+                        {
+                            <span>0</span>
+                        }
+                        <p>@item.city</p>
+
+                    </div>
+                </div>
+            </div>
+
+        }
+    </div>
+
+
+    <!--東部-->
+    <div class="card-top mb-3" id="E">
+        <img src="~/images/culture-village-2356862_1920.jpg" class="pic" />
+        <h1>東部景點</h1>
+    </div>
+    <div class="row mb-5">
+
+        @foreach (var item in Model.restaurant_East)
+        {
+
+            <div class="col-4 mb-3">
+                <div class="card">
+                    <span class="fa">
+                        @if (Model.collections_detail.Where(m => m.tourism_id == @item.restaurant_id && m.member_id == @memberId).Count() > 0)
+                        {
+                            <span class="add_to_bucket_list added" data-id="@item.restaurant_id">
+                                <i class="fas fa-heart" style="color:red"></i>
+                                <i class="far fa-heart"></i>
+                            </span>
+                        }
+                        else
+                        {
+                            <span class="add_to_bucket_list" data-id="@item.restaurant_id">
+                                <i class="fas fa-heart"></i>
+                                <i class="far fa-heart"></i>
+                            </span>
+                        }
+                    </span>
+                    <img src="https://source.unsplash.com/collection/388793/random?sig=@(Guid.NewGuid())" title="@item.restaurant_title" onclick=" window.location.href='@Url.Action("Details","WebRestaurants",new {id=item.restaurant_id })'" />
+                    <div class="card-body">
+                        <h2 class="card-title" onclick=" window.location.href='@Url.Action("Details","WebRestaurants",new {id=item.restaurant_id })'">@item.restaurant_title </h2>
+                        <span>評分數</span>
+                        @if (@Model.comment.Where(m => m.tourism_id == item.restaurant_id).Count() > 0)
+                        {
+                            <span>@Model.comment.Where(m => m.tourism_id == item.restaurant_id).Count()</span>
+                        }
+                        else
+                        {
+                            <span>0</span>
+                        }
+                        <p>@item.city</p>
+
+                    </div>
+                </div>
+            </div>
+
+
+        }
+    </div>
+
+
+    <!--離島-->
+    <div class="card-top mb-3" id="O">
+        <img src="~/images/buildings-1846728_1920.jpg" class="pic" />
+        <h1>離島景點</h1>
+    </div>
+    <div class="row mb-5">
+
+        @foreach (var item in Model.restaurant_island)
+        {
+
+            <div class="col-4 mb-3">
+                <div class="card">
+                    <span class="fa">
+                        @if (Model.collections_detail.Where(m => m.tourism_id == @item.restaurant_id && m.member_id == @memberId).Count() > 0)
+                        {
+                            <span class="add_to_bucket_list added" data-id="@item.restaurant_id">
+                                <i class="fas fa-heart" style="color:red"></i>
+                                <i class="far fa-heart"></i>
+                            </span>
+                        }
+                        else
+                        {
+                            <span class="add_to_bucket_list" data-id="@item.restaurant_id">
+                                <i class="fas fa-heart"></i>
+                                <i class="far fa-heart"></i>
+                            </span>
+                        }
+                    </span>
+                    <img src="https://source.unsplash.com/collection/388793/random?sig=@(Guid.NewGuid())" title="@item.restaurant_title" onclick=" window.location.href='@Url.Action("Details","WebRestaurants",new {id=item.restaurant_id })'" />
+                    <div class="card-body">
+                        <h2 class="card-title" onclick=" window.location.href='@Url.Action("Details","WebRestaurants",new {id=item.restaurant_id })'">@item.restaurant_title </h2>
+                        <span>評分數</span>
+                        @if (@Model.comment.Where(m => m.tourism_id == item.restaurant_id).Count() > 0)
+                        {
+                            <span>@Model.comment.Where(m => m.tourism_id == item.restaurant_id).Count()</span>
+                        }
+                        else
+                        {
+                            <span>0</span>
+                        }
+                        <p>@item.city</p>
+
+                    </div>
+                </div>
+            </div>
+
+
+        }
+    </div>
+</div>
+
+
+<script>
+    $(function () {
+        $("#Gotop").click(function () {
+            $("html,body").animate({ scrollTop:0 }, 500);
+        });
+    });
+    $(function () {
+        $("#n").click(function () {
+            $("html,body").animate({ scrollTop:$('#N').offset().top }, 700);
+        });
+    });
+    $(function () {
+        $("#m").click(function () {
+            $("html,body").animate({scrollTop:$('#M').offset().top }, 700);
+        });
+    });
+    $(function () {
+        $("#s").click(function () {
+            $("html,body").animate({ scrollTop:$('#S').offset().top }, 700);
+        });
+    });
+    $(function () {
+        $("#e").click(function () {
+            $("html,body").animate({ scrollTop:$('#E').offset().top }, 700);
+        });
+    });
+    $(function () {
+        $("#o").click(function () {
+            $("html,body").animate({ scrollTop:$('#O').offset().top }, 700);
+        });
+    });
+        var id ;
+        var tourismId = "@ViewBag.tourismId";
+
+        if ("@Session["memberID"]" =="") {
+            id = null
+
+        } else {
+
+            id = "@Session["memberID"]"
+
+        }
+
+    $(".add_to_bucket_list").click(function (e) {
+        if (id == null) {
+               alert('請先登入:)');
+                return false;
+            }
+        if ($(this).hasClass("added")) {
+            remove_bucket($(this))
+            $(this).removeClass("added");
+            $(this).children('.fas').css({"color":"black","transition":"0.3s"})
+        } else {
+            add_bucket($(this))
+            $(this).addClass("added");
+            $(this).children('.fas').css({"color":"red","transition":"0.3s"})
+        }
+    })
+    function add_bucket(object) {
+
+        var url = "@Url.Action("Postcollections_detail","web_comments")"
+
+            $.ajax({
+            type: "POST",
+            url: url,
+            data: {
+                member_id:"@Session["memberID"]" ,
+                tourism_id: object.data('id')
+            },
+           success:function()
+           {
+               alert('add')
+           }
+         });
+        }
+    function remove_bucket(object) {
+
+        var url = "@Url.Action("Deletecollections_detail","web_comments")"
+
+            $.ajax({
+            type: "POST",
+            url: url,
+            data: {
+                member_id:"@Session["memberID"]" ,
+                tourism_id: object.data('id')
+            },
+           success:function()
+           {
+               alert('delete')
+           }
+         });
+        }
+
+
+
+</script>
