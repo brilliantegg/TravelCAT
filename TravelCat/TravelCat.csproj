@@ -2434,7 +2434,7 @@
     <Content Include="Views\Loginadmin\ForgetPwd.cshtml" />
     <Content Include="Views\Loginadmin\ResetPwd.cshtml" />
     <Content Include="Views\Loginadmin\ForgetView.cshtml" />
-    <Content Include="Views\members\_ProblemMember.cshtml" />
+    <Content Include="Views\issues\_Problem.cshtml" />
     <Content Include="Views\WebHotels\Index.cshtml" />
     <Content Include="Views\WebHotels\Details.cshtml" />
     <Content Include="Views\WebRestaurants\Index.cshtml" />
