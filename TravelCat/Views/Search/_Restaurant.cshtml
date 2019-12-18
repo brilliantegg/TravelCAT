@@ -12,7 +12,7 @@
             <div class="media mt-3  pl-3 mb-2 border-dark">
                 <img src="https://images.unsplash.com/photo-1574714802271-15a6dbfdff96?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" width="180" height="150" class="mr-3 ml-3" alt="...">
                 <div class="media-body ">
-                    <h3 class="my-2 font-weight-bold border-bottom pb-2">@Html.ActionLink(item.title, "Details", "web_restsaurants", new { id = item.id }, null)</h3>
+                    <h3 class="my-2 font-weight-bold border-bottom pb-2">@Html.ActionLink(item.title, "Details", "WebRestaurants", new { id = item.id }, null)</h3>
                     <div class="row">
                         <div class="col-md-12 col-sm-12">@Model.restaurant.Where(s => s.restaurant_id == item.id).FirstOrDefault().city @Model.restaurant.Where(s => s.restaurant_id == item.id).FirstOrDefault().district</div>
                         <div class="col-md-12 col-sm-12 intro_content">@item.intro</div>
