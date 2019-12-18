@@ -50,6 +50,7 @@ namespace TravelCat.Controllers
             int like = db.collections_detail.Where(s => s.tourism_id == result.id).Count();
             ViewBag.like = like;
 
+           
             //判斷觀光種類
             //if (result.id.Contains("A"))
             //{

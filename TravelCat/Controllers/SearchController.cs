@@ -115,6 +115,10 @@ namespace TravelCat.Controllers
 
             List<result_rating> result = rating_result.Union(activity_null_result.Union(restaurant_null_result.Union(hotel_null_result.Union(spot_null_result)))).OrderByDescending(s => s.rating).ToList();
 
+           ;
+
+            
+
             model.result_ratings = model.activity.Join(result, a => a.activity_id, b => b.id,
                                                                     (a, b) => new result_rating
                                                                     {

@@ -18,7 +18,7 @@
             <a class="nav-link text-light dropdown-toggle" href="#" id="navbarDropdownMenuLink"
                data-toggle="dropdown">
                 <i class="far fa-user"></i>
-                管理員編號
+                @Session["id"]
             </a>
             <div class="dropdown-menu dropdown-menu-right bg-dark border border-secondary" aria-labelledby="navbarDropdownMenuLink">
                 @Html.ActionLink("設定", "Index", "Admin", null, new { @class = "dropdown-item bg-dark text-light mb-1" })

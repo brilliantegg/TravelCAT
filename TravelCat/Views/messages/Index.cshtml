@@ -19,16 +19,22 @@
 <div class="row">
     <div class="col-md-12">
         <div class="list-group" id="list-tab" role="tablist">
-            <a class="list-group-item active" data-toggle="list" href="#message2">被檢舉留言</a>
-            <a class="list-group-item" data-toggle="list" href="#message1">所有留言</a>
-        </div>      
+            <a class="list-group-item active" data-toggle="list" href="#message1">被檢舉留言</a>
+            <a class="list-group-item" data-toggle="list" href="#message2">所有留言</a>
+        </div>
     </div>
     <div class="col-md-12">
         <div class="tab-content" id="nav-tabContent">
             <div class="tab-pane fade show active" id="message1">
+                @Html.Action("_Problem", "issues", new { type_id = 4 })
+            </div>
+            <div class="tab-pane fade" id="message2">
                 <table class="table">
                     <tr class="row">
                         <th class="col-1"></th>
+                        <th class="col-1">
+                            @Html.DisplayNameFor(model => model.msg_id)
+                        </th>
                         <th class="col-1">
                             @Html.DisplayNameFor(model => model.comment.tourism_id)
                         </th>
@@ -38,14 +44,14 @@
                         <th class="col-1">
                             @Html.DisplayNameFor(model => model.comment_id)
                         </th>
-                        <th class="col-1">
-                            @Html.DisplayNameFor(model => model.msg_id)
-                        </th>
-                        <th class="col-3">
+                        <th class="col-2">
                             @Html.DisplayNameFor(model => model.msg_time)
                         </th>
-                        <th class="col-3 text-truncate">
+                        <th class="col-2 text-truncate">
                             @Html.DisplayNameFor(model => model.msg_content)
+                        </th>
+                        <th class="col-2">
+                            @Html.DisplayNameFor(model => model.msg_status)
                         </th>
                     </tr>
 
@@ -56,6 +62,9 @@
                                 @Html.ActionLink("管理", "Edit", new { id = item.msg_id }, new { @class = "btn btn-sm btn-outline-primary" })
                             </td>
                             <td class="col-1">
+                                @Html.DisplayFor(modelItem => item.msg_id)
+                            </td>
+                            <td class="col-1">
                                 @Html.DisplayFor(modelItem => item.comment.tourism_id)
                             </td>
                             <td class="col-2">
@@ -64,23 +73,28 @@
                             <td class="col-1">
                                 @Html.DisplayFor(modelItem => item.comment_id)
                             </td>
-                            <td class="col-1">
-                                @Html.DisplayFor(modelItem => item.msg_id)
-                            </td>
-                            <td class="col-3">
+                            <td class="col-2">
                                 @Html.DisplayFor(modelItem => item.msg_time)
                             </td>
-                            <td class="col-3 text-truncate">
+                            <td class="col-2 text-truncate">
                                 @Html.DisplayFor(modelItem => item.msg_content)
+                            </td>
+                            <td class="col-2">
+                                @if (item.msg_status == true)
+                                {
+                                    <span class="badge badge-success">顯示</span>
+                                }
+                                else
+                                {
+                                    <span class="badge badge-danger">隱藏</span>
+                                }
                             </td>
                         </tr>
                     }
 
                 </table>
             </div>
-            <div class="tab-pane fade" id="message2">
-                ...
-            </div>
+
 
 
         </div>

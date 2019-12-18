@@ -148,7 +148,7 @@
           <Property Name="report_date" Type="datetime" Nullable="false" />
           <Property Name="issue_content" Type="nvarchar" MaxLength="1000" Nullable="false" />
           <Property Name="issue_result" Type="nvarchar" MaxLength="1000" />
-          <Property Name="issue_status" Type="nchar" MaxLength="10" />
+          <Property Name="issue_status" Type="bit" />
           <Property Name="resolve_date" Type="datetime" />
           <Property Name="problem_id" Type="varchar" MaxLength="40" />
         </EntityType>
@@ -601,7 +601,7 @@
           <Property Name="admin_password" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="admin_email" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="emailConfirmed" Type="Boolean" />
-          <NavigationProperty Name="issue" Relationship="Self.FK__issue__admin_id__534D60F1" FromRole="admin" ToRole="issue" />
+          <NavigationProperty Name="issue" Relationship="travel_cat_v1Model.FK__issue__admin_id__534D60F1" FromRole="admin" ToRole="issue" />
         </EntityType>
         <EntityType Name="badge">
           <Key>
@@ -696,34 +696,13 @@
           <Property Name="address_detail" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="page_status" Type="Boolean" Nullable="false" />
         </EntityType>
-        <EntityType Name="issue">
-          <Key>
-            <PropertyRef Name="id" />
-            <PropertyRef Name="member_id" />
-            <PropertyRef Name="admin_id" />
-            <PropertyRef Name="issue_id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="member_id" Type="String" MaxLength="7" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="admin_id" Type="Int32" Nullable="false" />
-          <Property Name="issue_id" Type="Int32" Nullable="false" />
-          <Property Name="report_date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="issue_content" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="issue_result" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="issue_status" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="resolve_date" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="admin" Relationship="Self.FK__issue__admin_id__534D60F1" FromRole="issue" ToRole="admin" />
-          <NavigationProperty Name="issue_type" Relationship="Self.FK__issue__issue_id__5812160E" FromRole="issue" ToRole="issue_type" />
-          <NavigationProperty Name="member" Relationship="Self.FK__issue__member_id__4D94879B" FromRole="issue" ToRole="member" />
-          <Property Name="problem_id" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="issue_type">
           <Key>
             <PropertyRef Name="issue_id" />
           </Key>
           <Property Name="issue_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="issue_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="issue" Relationship="Self.FK__issue__issue_id__5812160E" FromRole="issue_type" ToRole="issue" />
+          <NavigationProperty Name="issue" Relationship="travel_cat_v1Model.FK__issue__issue_id__5812160E" FromRole="issue_type" ToRole="issue" />
         </EntityType>
         <EntityType Name="member">
           <Key>
@@ -737,11 +716,11 @@
           <NavigationProperty Name="comment" Relationship="Self.FK__comment__member___48CFD27E" FromRole="member" ToRole="comment" />
           <NavigationProperty Name="comment_emoji_details" Relationship="Self.FK__comment_e__membe__4AB81AF0" FromRole="member" ToRole="comment_emoji_details" />
           <NavigationProperty Name="follow_list" Relationship="Self.FK__follow_li__membe__4F7CD00D" FromRole="member" ToRole="follow_list" />
-          <NavigationProperty Name="issue" Relationship="Self.FK__issue__member_id__4D94879B" FromRole="member" ToRole="issue" />
           <NavigationProperty Name="member_profile" Relationship="Self.FK__member_pr__membe__47DBAE45" FromRole="member" ToRole="member_profile" />
           <NavigationProperty Name="message" Relationship="Self.FK__message__member___4BAC3F29" FromRole="member" ToRole="message" />
           <NavigationProperty Name="message_emoji_details" Relationship="Self.FK__message_e__membe__49C3F6B7" FromRole="member" ToRole="message_emoji_details" />
           <NavigationProperty Name="collections_detail" Relationship="travel_cat_v1Model.FK__collectio__membe__4E88ABD4" FromRole="member" ToRole="collections_detail" />
+          <NavigationProperty Name="issue" Relationship="travel_cat_v1Model.FK__issue__member_id__4D94879B" FromRole="member" ToRole="issue" />
         </EntityType>
         <EntityType Name="member_profile">
           <Key>
@@ -840,18 +819,6 @@
           <Property Name="tourism_id" Type="String" MaxLength="7" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="tourism_photo1" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
         </EntityType>
-        <Association Name="FK__issue__admin_id__534D60F1">
-          <End Role="admin" Type="Self.admin" Multiplicity="1" />
-          <End Role="issue" Type="Self.issue" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="admin">
-              <PropertyRef Name="admin_id" />
-            </Principal>
-            <Dependent Role="issue">
-              <PropertyRef Name="admin_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__badge_det__badge__5441852A">
           <End Role="badge" Type="Self.badge" Multiplicity="1" />
           <End Role="badge_details" Type="Self.badge_details" Multiplicity="*" />
@@ -960,30 +927,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__issue__issue_id__5812160E">
-          <End Role="issue_type" Type="Self.issue_type" Multiplicity="1" />
-          <End Role="issue" Type="Self.issue" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="issue_type">
-              <PropertyRef Name="issue_id" />
-            </Principal>
-            <Dependent Role="issue">
-              <PropertyRef Name="issue_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__issue__member_id__4D94879B">
-          <End Role="member" Type="Self.member" Multiplicity="1" />
-          <End Role="issue" Type="Self.issue" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="member">
-              <PropertyRef Name="member_id" />
-            </Principal>
-            <Dependent Role="issue">
-              <PropertyRef Name="member_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__member_pr__membe__47DBAE45">
           <End Role="member" Type="Self.member" Multiplicity="1" />
           <End Role="member_profile" Type="Self.member_profile" Multiplicity="0..1" />
@@ -1042,7 +985,6 @@
           <EntitySet Name="emoji" EntityType="Self.emoji" />
           <EntitySet Name="follow_list" EntityType="Self.follow_list" />
           <EntitySet Name="hotel" EntityType="Self.hotel" />
-          <EntitySet Name="issue" EntityType="Self.issue" />
           <EntitySet Name="issue_type" EntityType="Self.issue_type" />
           <EntitySet Name="member" EntityType="Self.member" />
           <EntitySet Name="member_profile" EntityType="Self.member_profile" />
@@ -1051,10 +993,6 @@
           <EntitySet Name="restaurant" EntityType="Self.restaurant" />
           <EntitySet Name="spot" EntityType="Self.spot" />
           <EntitySet Name="tourism_photo" EntityType="Self.tourism_photo" />
-          <AssociationSet Name="FK__issue__admin_id__534D60F1" Association="Self.FK__issue__admin_id__534D60F1">
-            <End Role="admin" EntitySet="admin" />
-            <End Role="issue" EntitySet="issue" />
-          </AssociationSet>
           <AssociationSet Name="FK__badge_det__badge__5441852A" Association="Self.FK__badge_det__badge__5441852A">
             <End Role="badge" EntitySet="badge" />
             <End Role="badge_details" EntitySet="badge_details" />
@@ -1091,14 +1029,6 @@
             <End Role="member" EntitySet="member" />
             <End Role="follow_list" EntitySet="follow_list" />
           </AssociationSet>
-          <AssociationSet Name="FK__issue__issue_id__5812160E" Association="Self.FK__issue__issue_id__5812160E">
-            <End Role="issue_type" EntitySet="issue_type" />
-            <End Role="issue" EntitySet="issue" />
-          </AssociationSet>
-          <AssociationSet Name="FK__issue__member_id__4D94879B" Association="Self.FK__issue__member_id__4D94879B">
-            <End Role="member" EntitySet="member" />
-            <End Role="issue" EntitySet="issue" />
-          </AssociationSet>
           <AssociationSet Name="FK__member_pr__membe__47DBAE45" Association="Self.FK__member_pr__membe__47DBAE45">
             <End Role="member" EntitySet="member" />
             <End Role="member_profile" EntitySet="member_profile" />
@@ -1125,7 +1055,20 @@
             <End Role="member" EntitySet="member" />
             <End Role="collections_detail" EntitySet="collections_detail" />
           </AssociationSet>
-        </EntityContainer>
+          <EntitySet Name="issue" EntityType="travel_cat_v1Model.issue" />
+          <AssociationSet Name="FK__issue__admin_id__534D60F1" Association="travel_cat_v1Model.FK__issue__admin_id__534D60F1">
+            <End Role="admin" EntitySet="admin" />
+            <End Role="issue" EntitySet="issue" />
+          </AssociationSet>
+          <AssociationSet Name="FK__issue__issue_id__5812160E" Association="travel_cat_v1Model.FK__issue__issue_id__5812160E">
+            <End Role="issue_type" EntitySet="issue_type" />
+            <End Role="issue" EntitySet="issue" />
+          </AssociationSet>
+          <AssociationSet Name="FK__issue__member_id__4D94879B" Association="travel_cat_v1Model.FK__issue__member_id__4D94879B">
+            <End Role="member" EntitySet="member" />
+            <End Role="issue" EntitySet="issue" />
+          </AssociationSet>
+          </EntityContainer>
         <EntityType Name="collection_type">
           <Key>
             <PropertyRef Name="collection_type_id" />
@@ -1171,7 +1114,64 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        <EntityType Name="issue">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="member_id" />
+            <PropertyRef Name="admin_id" />
+            <PropertyRef Name="issue_id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="member_id" Type="String" Nullable="false" MaxLength="7" FixedLength="true" Unicode="false" />
+          <Property Name="admin_id" Type="Int32" Nullable="false" />
+          <Property Name="issue_id" Type="Int32" Nullable="false" />
+          <Property Name="report_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="issue_content" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="issue_result" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="issue_status" Type="Boolean" />
+          <Property Name="resolve_date" Type="DateTime" Precision="3" />
+          <Property Name="problem_id" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="admin" Relationship="travel_cat_v1Model.FK__issue__admin_id__534D60F1" FromRole="issue" ToRole="admin" />
+          <NavigationProperty Name="issue_type" Relationship="travel_cat_v1Model.FK__issue__issue_id__5812160E" FromRole="issue" ToRole="issue_type" />
+          <NavigationProperty Name="member" Relationship="travel_cat_v1Model.FK__issue__member_id__4D94879B" FromRole="issue" ToRole="member" />
+        </EntityType>
+        <Association Name="FK__issue__admin_id__534D60F1">
+          <End Type="travel_cat_v1Model.admin" Role="admin" Multiplicity="1" />
+          <End Type="travel_cat_v1Model.issue" Role="issue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="admin">
+              <PropertyRef Name="admin_id" />
+            </Principal>
+            <Dependent Role="issue">
+              <PropertyRef Name="admin_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__issue__issue_id__5812160E">
+          <End Type="travel_cat_v1Model.issue_type" Role="issue_type" Multiplicity="1" />
+          <End Type="travel_cat_v1Model.issue" Role="issue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="issue_type">
+              <PropertyRef Name="issue_id" />
+            </Principal>
+            <Dependent Role="issue">
+              <PropertyRef Name="issue_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__issue__member_id__4D94879B">
+          <End Type="travel_cat_v1Model.member" Role="member" Multiplicity="1" />
+          <End Type="travel_cat_v1Model.issue" Role="issue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="member">
+              <PropertyRef Name="member_id" />
+            </Principal>
+            <Dependent Role="issue">
+              <PropertyRef Name="member_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -1289,22 +1289,6 @@
                 <ScalarProperty Name="district" ColumnName="district" />
                 <ScalarProperty Name="address_detail" ColumnName="address_detail" />
                 <ScalarProperty Name="page_status" ColumnName="page_status" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="issue">
-            <EntityTypeMapping TypeName="travel_cat_v1Model.issue">
-              <MappingFragment StoreEntitySet="issue">
-                <ScalarProperty Name="problem_id" ColumnName="problem_id" />
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="member_id" ColumnName="member_id" />
-                <ScalarProperty Name="admin_id" ColumnName="admin_id" />
-                <ScalarProperty Name="issue_id" ColumnName="issue_id" />
-                <ScalarProperty Name="report_date" ColumnName="report_date" />
-                <ScalarProperty Name="issue_content" ColumnName="issue_content" />
-                <ScalarProperty Name="issue_result" ColumnName="issue_result" />
-                <ScalarProperty Name="issue_status" ColumnName="issue_status" />
-                <ScalarProperty Name="resolve_date" ColumnName="resolve_date" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1436,6 +1420,22 @@
                 <ScalarProperty Name="tourism_id" ColumnName="tourism_id" />
                 <ScalarProperty Name="member_id" ColumnName="member_id" />
                 <ScalarProperty Name="collection_id" ColumnName="collection_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="issue">
+            <EntityTypeMapping TypeName="travel_cat_v1Model.issue">
+              <MappingFragment StoreEntitySet="issue">
+                <ScalarProperty Name="problem_id" ColumnName="problem_id" />
+                <ScalarProperty Name="resolve_date" ColumnName="resolve_date" />
+                <ScalarProperty Name="issue_status" ColumnName="issue_status" />
+                <ScalarProperty Name="issue_result" ColumnName="issue_result" />
+                <ScalarProperty Name="issue_content" ColumnName="issue_content" />
+                <ScalarProperty Name="report_date" ColumnName="report_date" />
+                <ScalarProperty Name="issue_id" ColumnName="issue_id" />
+                <ScalarProperty Name="admin_id" ColumnName="admin_id" />
+                <ScalarProperty Name="member_id" ColumnName="member_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

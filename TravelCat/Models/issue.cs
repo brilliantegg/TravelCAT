@@ -21,7 +21,7 @@ namespace TravelCat.Models
         public System.DateTime report_date { get; set; }
         public string issue_content { get; set; }
         public string issue_result { get; set; }
-        public string issue_status { get; set; }
+        public Nullable<bool> issue_status { get; set; }
         public Nullable<System.DateTime> resolve_date { get; set; }
         public string problem_id { get; set; }
     

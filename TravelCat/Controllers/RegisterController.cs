@@ -48,7 +48,7 @@ namespace TravelCat.Controllers
                     model.member_profile.profile_photo = fileName;
                 }
             }
-            
+
             var callbackUrl = Url.Action("Confirm", "Register", new { account = model.member_account, id = mem_id }, protocol: Request.Url.Scheme);
 
             if (ModelState.IsValid)
@@ -62,12 +62,12 @@ namespace TravelCat.Controllers
                 gs.messageBody = "恭喜註冊成功<br><a href=" + callbackUrl + ">請點此連結</a>";
                 gs.IsHtml = true;
                 gs.Send();
-                
-                
+
+
                 db.member.Add(model);
                 db.member_profile.Add(model.member_profile);
                 db.SaveChanges();
-                return RedirectToAction("ConfirmView", "Register",new { account = model.member_account});
+                return RedirectToAction("ConfirmView", "Register", new { account = model.member_account });
             }
             return View(model);
         }
@@ -95,10 +95,20 @@ namespace TravelCat.Controllers
                 return View("重新整理");
             }
             else
-            {                
+            {
                 DialogResult ans = MessageBox.Show("請先註冊會員!", "錯誤", MessageBoxButtons.OK, MessageBoxIcon.Question);
                 return RedirectToAction("Index", "Register");
             }
+        }
+
+        //帳號重複
+        public ActionResult AccountCheck(string account)
+        {
+            if (db.member.Any(m => m.member_account == account))
+                return Content("true");
+
+            return Content("false");
+
         }
     }
 }

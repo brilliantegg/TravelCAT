@@ -5,7 +5,7 @@
 }
 
 <link href="~/Content/back-end-Create.css" rel="stylesheet" />
-<h2 class="ml-3 mt-3 text-danger text-center">網頁問題管理</h2>
+<h2 class="ml-3 mt-3 text-danger text-center">問題管理</h2>
 
 @using (Html.BeginForm())
 {
@@ -17,24 +17,14 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.id)
         @Html.HiddenFor(model => model.member_id)
-        @Html.HiddenFor(model => model.admin_id)
         @Html.HiddenFor(model => model.issue_id)
 
 
-        <!--會員id-->
+        <!--被檢舉ID-->
         <div class="row">
             <div class="co col-6">
-                @Html.LabelFor(model => model.member_id, "會員編號", htmlAttributes: new { @class = "txt" })
-                @Html.EditorFor(model => model.member_id, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-            </div>
-        </div>
-
-        <!--回報日期-->
-        <div class="row">
-            <div class="co col-6">
-                @Html.LabelFor(model => model.report_date, htmlAttributes: new { @class = "txt" })
-                @Html.EditorFor(model => model.report_date, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
-                @Html.ValidationMessageFor(model => model.report_date, "", new { @class = "text-danger" })
+                @Html.LabelFor(model => model.problem_id, "被檢舉ID", htmlAttributes: new { @class = "txt" })
+                @Html.EditorFor(model => model.problem_id, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
             </div>
         </div>
 
@@ -46,6 +36,26 @@
                 @Html.ValidationMessageFor(model => model.issue_content, "", new { @class = "text-danger" })
             </div>
         </div>
+
+        <!--檢舉人帳號-->
+        <div class="row">
+            <div class="co col-6">
+                @Html.LabelFor(model => model.member.member_id, "檢舉人ID", htmlAttributes: new { @class = "txt" })
+                @Html.EditorFor(model => model.member.member_id, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+            </div>
+        </div>
+
+
+        <!--回報日期-->
+        <div class="row">
+            <div class="co col-6">
+                @Html.LabelFor(model => model.report_date, htmlAttributes: new { @class = "txt" })
+                @Html.EditorFor(model => model.report_date, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.report_date, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
 
         <!--問題處理結果-->
         <div class="row">
@@ -60,8 +70,22 @@
         <div class="row">
             <div class="co col-6">
                 @Html.LabelFor(model => model.issue_status, htmlAttributes: new { @class = "txt" })
-                @Html.EditorFor(model => model.issue_status, new { htmlAttributes = new { @class = "form-control" } })
+                @*@Html.EditorFor(model => model.issue_status, new { htmlAttributes = new { @class = "form-control" } })*@
+                <select id="Select1" name="issue_status" class="form-control">
+                    <option disabled selected>請選擇</option>
+                    <option value="True">已處理</option>
+                    <option value="False">未處理</option>
+                </select>
                 @Html.ValidationMessageFor(model => model.issue_status, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="co col-6">
+                @Html.LabelFor(model => model.admin_id, htmlAttributes: new { @class = "txt" })
+                @Html.DropDownList("admin_id", null, htmlAttributes: new { @class = "form-control" })
+
+
             </div>
         </div>
 
@@ -69,10 +93,18 @@
         <div class="row text-center mt-3">
             <div class="col-md-12">
                 <input type="submit" value="存檔" class="btn btn-primary" />
-                @Html.ActionLink("返回列表", "Index", null, new { @class = "btn btn-primary" })
+                @* @Html.ActionLink("返回列表", "Index", null, new { @class = "btn btn-primary" })*@
             </div>
         </div>
 
     </div>
+}
+
+@section scripts{
+    <script>
+        $('#Select1 option[value=@Model.issue_status]').attr('selected', 'selected');
+    </script>
+
+
 }
 

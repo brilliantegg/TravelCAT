@@ -102,9 +102,10 @@ namespace TravelCat.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Editpassword(string id, string oldpassword, string newpassword)
+        public ActionResult Editpassword(string id,string oldpassword, string newpassword)
         {
             member member = db.member.Find(id);
+
 
             byte[] password1 = System.Text.Encoding.UTF8.GetBytes(oldpassword);
             byte[] hash1 = new System.Security.Cryptography.SHA256Managed().ComputeHash(password1);

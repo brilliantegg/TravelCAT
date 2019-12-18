@@ -26,6 +26,7 @@
                     @Html.EditorFor(model => model.member_account, new { htmlAttributes = new { @class = "form-control ml-2" } })
                 </div>
                 @Html.ValidationMessageFor(model => model.member_account, "", new { @class = "text-danger" })
+                <div id="AccountCheck" class="text-danger"></div>
 
                 <!--密碼-->
                 <div class="form-inline mt-3">
@@ -33,12 +34,14 @@
                     @Html.EditorFor(model => model.member_password, new { htmlAttributes = new { @class = "form-control ml-2" } })
                 </div>
                 @Html.ValidationMessageFor(model => model.member_password, "", new { @class = "text-danger" })
+                <div id="pwdlength" class="text-danger"></div>
 
                 //確認密碼
                 <div class="form-inline mt-3">
                     <label class="col-form-label">確認密碼</label>
-                    <input id="Password2" type="password" class="form-control ml-3" required="required"/>
+                    <input id="Password2" type="password" class="form-control ml-3" />
                 </div>
+                <div id="pwdconfiirm" class="text-danger"></div>
 
                 <!--姓名-->
                 <div class="form-inline mt-3">
@@ -130,9 +133,9 @@
                 @Html.HiddenFor(model => model.member_profile.member_id)
                 @Html.HiddenFor(model => model.member_profile.member_score)
 
-
+                <div>
                     <input id="submit" type="submit" value="送出" class="btn btn-primary mt-3" />
-
+                </div>
 
 
 
@@ -144,11 +147,48 @@
     </div>
 </div>
 @section scripts{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
     <script>
         $('#submit').click(function () {
             if ($('#member_password').val() != $('#Password2').val()) {
                 alert("兩次輸入的密碼不一致！");
                 return false;
+            }
+        });
+
+        //帳號重複
+        $('#member_account').focusout(function () {
+            $.post("/Register/AccountCheck", { account: $(this).val() }, function (data) {
+                if (data == 'true') {
+                    $('#member_account').css('border-color', 'red');
+                    $('#AccountCheck').text('此帳號已被使用');
+
+                }
+                else {
+                    $('#member_account').css('border-color', '#ced4da');
+                    $('#AccountCheck').text('');
+                }
+            })
+        })
+
+        //密碼長度
+        $('#member_password').keyup(function () {
+            if ($('#member_password').val().length < 8) {
+                $('#pwdlength').text("請輸入超過8碼")
+            }
+            else {
+                $('#pwdlength').text('');
+            }
+
+        });
+
+        $('#Password2').keyup(function () {
+            if ($('#member_password').val() != $('#Password2').val()) {
+                $('#pwdconfiirm').text("確認密碼跟密碼不一致");
+            }
+            else {
+                $('#pwdconfiirm').text('');
             }
         });
 

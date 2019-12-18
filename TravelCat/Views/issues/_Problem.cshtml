@@ -1,0 +1,80 @@
+﻿@model IEnumerable<TravelCat.Models.issue>
+
+
+<table class="table">
+    <tr>
+        <th></th>
+        <th>
+            @Html.DisplayNameFor(model => model.issue_type.issue_name)
+        </th>
+        <th>
+            被檢舉ID
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.issue_content)
+        </th>
+        <th>
+            檢舉人ID
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.report_date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.issue_result)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.issue_status)
+        </th>
+        <th>
+            管理員帳號
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.resolve_date)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink("管理", "Edit", new { id = item.id }, new { @class = "btn btn-sm btn-outline-primary" })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.issue_type.issue_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.problem_id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.issue_content)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.member.member_id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.report_date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.issue_result)
+            </td>
+            <td>
+                @if (item.issue_status == true)
+                {
+                    <span class="badge badge-success">已處理</span>
+                }
+                else
+                {
+                    <span class="badge badge-danger">未處理</span>
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.admin.admin_account)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.resolve_date)
+            </td>
+        </tr>
+    }
+
+</table>
