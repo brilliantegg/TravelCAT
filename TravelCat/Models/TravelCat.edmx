@@ -148,7 +148,7 @@
           <Property Name="report_date" Type="datetime" Nullable="false" />
           <Property Name="issue_content" Type="nvarchar" MaxLength="1000" Nullable="false" />
           <Property Name="issue_result" Type="nvarchar" MaxLength="1000" />
-          <Property Name="issue_status" Type="nchar" MaxLength="10" />
+          <Property Name="issue_status" Type="bit" />
           <Property Name="resolve_date" Type="datetime" />
           <Property Name="problem_id" Type="varchar" MaxLength="40" />
         </EntityType>
@@ -710,7 +710,7 @@
           <Property Name="report_date" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="issue_content" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="issue_result" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="issue_status" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="issue_status" Type="String" />
           <Property Name="resolve_date" Type="DateTime" Precision="3" />
           <NavigationProperty Name="admin" Relationship="Self.FK__issue__admin_id__534D60F1" FromRole="issue" ToRole="admin" />
           <NavigationProperty Name="issue_type" Relationship="Self.FK__issue__issue_id__5812160E" FromRole="issue" ToRole="issue_type" />
