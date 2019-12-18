@@ -696,27 +696,6 @@
           <Property Name="address_detail" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="page_status" Type="Boolean" Nullable="false" />
         </EntityType>
-        <EntityType Name="issue">
-          <Key>
-            <PropertyRef Name="id" />
-            <PropertyRef Name="member_id" />
-            <PropertyRef Name="admin_id" />
-            <PropertyRef Name="issue_id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="member_id" Type="String" MaxLength="7" FixedLength="true" Unicode="false" Nullable="false" />
-          <Property Name="admin_id" Type="Int32" Nullable="false" />
-          <Property Name="issue_id" Type="Int32" Nullable="false" />
-          <Property Name="report_date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="issue_content" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="issue_result" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="issue_status" Type="String" />
-          <Property Name="resolve_date" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="admin" Relationship="Self.FK__issue__admin_id__534D60F1" FromRole="issue" ToRole="admin" />
-          <NavigationProperty Name="issue_type" Relationship="Self.FK__issue__issue_id__5812160E" FromRole="issue" ToRole="issue_type" />
-          <NavigationProperty Name="member" Relationship="Self.FK__issue__member_id__4D94879B" FromRole="issue" ToRole="member" />
-          <Property Name="problem_id" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="issue_type">
           <Key>
             <PropertyRef Name="issue_id" />
@@ -1089,7 +1068,7 @@
             <End Role="member" EntitySet="member" />
             <End Role="issue" EntitySet="issue" />
           </AssociationSet>
-          </EntityContainer>
+        </EntityContainer>
         <EntityType Name="collection_type">
           <Key>
             <PropertyRef Name="collection_type_id" />
@@ -1192,7 +1171,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        </Schema>
+      </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
