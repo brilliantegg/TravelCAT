@@ -22,8 +22,8 @@
                             <div style="width:100px">
                                 旅客評分:
                                 <div class="progress ">
-                                    @{var width_convert = (Double.Parse(item.rating)) * 20; }
-                                    <div class="progress-bar" role="progressbar" style="width:@width_convert%;" aria-valuenow="@Double.Parse(item.rating)" aria-valuemin="0" aria-valuemax="5">@item.rating 分</div>
+                                    @{var width_convert = (Double.Parse(item.rating)) * 20+"%"; }
+                                    <div class="progress-bar" role="progressbar" style="width:@width_convert;" aria-valuenow="@Double.Parse(item.rating)" aria-valuemin="0" aria-valuemax="5">@item.rating 分</div>
                                 </div>
                             </div>
                         </div>

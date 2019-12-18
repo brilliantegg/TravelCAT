@@ -143,48 +143,56 @@
                 <div class="text-left ">
                     <div>
                         <div>
-                            <ul>
-                                <li> <span span class="subject_title">評論數</span> @Model.comment.Where(m => m.member_id == @Model.member.member_id).Count()</li>
-                                <li> <span span class="subject_title">追蹤者</span> <button data-toggle="modal" class="info_content " data-target="#follow">@Model.follow.Count()</button></li>
-                                <li> <span span class="subject_title">關注中</span> <button data-toggle="modal" class="info_content" data-target="#followed">@Model.followed.Count()</button> </li>
-                                <li> <span span class="subject_title">加入時間</span> @Model.member_profile.create_time.ToString("yyyy MM dd")</li>
-                                <li>
-                                    <span span class="subject_title">分數</span> @{
-                                        var comeent_num = Model.comment.Where(m => m.member_id == @Model.member.member_id).Count();
-                                        var follow_num = @Model.followed.Count();
-                                        var score = comeent_num * 5 + follow_num * 5;
+                            <div>
+                                <ul>
+                                    <li> <span span class="subject_title">評論數</span> @Model.comment.Where(m => m.member_id == @Model.member.member_id).Count()</li>
+                                    <li> <span span class="subject_title">追蹤者</span> <button data-toggle="modal" class="info_content " data-target="#follow">@Model.follow.Count()</button></li>
+                                    <li> <span span class="subject_title">關注中</span> <button data-toggle="modal" class="info_content" data-target="#followed">@Model.followed.Count()</button> </li>
+                                    <li> <span span class="subject_title">加入時間</span> @Model.member_profile.create_time.ToString("yyyy MM dd")</li>
+                                    <li>
+                                        <span span class="subject_title">分數</span> @{
+                                            var comeent_num = Model.comment.Where(m => m.member_id == @Model.member.member_id).Count();
+                                            var follow_num = @Model.followed.Count();
+                                            var score = comeent_num * 5 + follow_num * 5;
 
+                                        }
+                                        @score
+                                    </li>
+                                </ul>
+                                <!--RANK-->
+                                <ul>
+
+                                    @foreach (var item in ViewBag.score)
+                                    {
+
+                                        <li>
+                                            @(item.GetType().GetProperty("id").GetValue(item))
+                                        </li>
+                                        <li>
+                                            @(item.GetType().GetProperty("count").GetValue(item) * 5)
+                                        </li>
                                     }
-                                    @score
-                                </li>
-                            </ul>
-                            <ul>
-                                @foreach (var item in ViewBag.scoreRank)
-                                {
-                                    <li>@item.nickname</li>
-                                    <li>@item.member_score</li>
-                                }
-
-                            </ul>
-                            <div class="modal fade" id="follow" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLongTitle">追蹤者</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <ul class="list-group list-group-flush">
-                                                @foreach (var item in @Model.follow)
-                                                {
-                                                    <li class="list-group-item">
-                                                        <img class="member_avatar" src="~/images/member/@item.member.member_profile.profile_photo" alt="..." onerror="this.src='/images/member/avatar.png';">
-                                                        <a href="@Url.Action("Index","web_Member_Index",new {id =@item.member.member_id })">@item.member.member_profile.nickname</a>
-                                                    </li>
-                                                }
-                                            </ul>
+                                </ul>
+                                <div class="modal fade" id="follow" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLongTitle">追蹤者</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <ul class="list-group list-group-flush">
+                                                    @foreach (var item in @Model.follow)
+                                                    {
+                                                        <li class="list-group-item">
+                                                            <img class="member_avatar" src="~/images/member/@item.member.member_profile.profile_photo" alt="..." onerror="this.src='/images/member/avatar.png';">
+                                                            <a href="@Url.Action("Index","web_Member_Index",new {id =@item.member.member_id })">@item.member.member_profile.nickname</a>
+                                                        </li>
+                                                    }
+                                                </ul>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

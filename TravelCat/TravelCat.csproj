@@ -2007,11 +2007,11 @@
     <Content Include="Content\Searchindex.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\back-end-index.css" />
-    <Content Include="Content\web-activite-home.css" />
     <Content Include="Content\web-Home.css" />
     <Content Include="Content\web-Layout.css" />
     <Content Include="Content\collection.css" />
     <Content Include="Content\web-Login.css" />
+    <Content Include="Content\web-Spot-home.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
