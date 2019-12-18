@@ -18,7 +18,18 @@ namespace TravelCat.Controllers
         // GET: web_activities
         public ActionResult Index()
         {
-            return View(db.activity.ToList());
+            TaiwanViewModel model = new TaiwanViewModel()
+            {
+                collections_detail = db.collections_detail.ToList(),
+                comment = db.comment.ToList(),
+                activity_north = db.activity.Where(m => m.city.Contains("臺北市") || m.city.Contains("新北市") || m.city.Contains("基隆市") || m.city.Contains("新竹市") || m.city.Contains("桃園市") || m.city.Contains("新竹縣") || m.city.Contains("宜蘭縣")).OrderByDescending(m => db.comment.Where(s => s.tourism_id == m.activity_id).Count()).Take(6).ToList(),
+                activity_middle = db.activity.Where(m => m.city.Contains("臺中市") || m.city.Contains("苗栗縣") || m.city.Contains("彰化縣") || m.city.Contains("南投縣") || m.city.Contains("雲林縣")).OrderByDescending(m => db.comment.Where(s => s.tourism_id == m.activity_id).Count()).Take(6).ToList(),
+                activity_south = db.activity.Where(m => m.city.Contains("高雄市") || m.city.Contains("臺南市") || m.city.Contains("嘉義市") || m.city.Contains("屏東縣") || m.city.Contains("澎湖縣")).OrderByDescending(m => db.comment.Where(s => s.tourism_id == m.activity_id).Count()).Take(6).ToList(),
+                activity_East = db.activity.Where(m => m.city.Contains("花蓮縣") || m.city.Contains("臺東縣")).OrderByDescending(m => db.comment.Where(s => s.tourism_id == m.activity_id).Count()).Take(6).ToList(),
+                activity_island = db.activity.Where(m => m.city.Contains("金門縣") || m.city.Contains("連江縣")).OrderByDescending(m => db.comment.Where(s => s.tourism_id == m.activity_id).Count()).Take(6).ToList(),
+
+            };
+            return View(model);
         }
 
         // GET: web_activities/Details/5

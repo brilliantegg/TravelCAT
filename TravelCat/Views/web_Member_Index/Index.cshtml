@@ -37,9 +37,15 @@
             <img src="~/images/member/avatar.png" alt="...">
         }
 
+                <img class="profile_avatar"  src="~/images/member/@Model.member_profile.profile_photo" alt="..." onError="this.onerror=null;this.src='/images/member/avatar.png';">
+            }
+            else
+            {
+                <img class="profile_avatar" src="~/images/member/avatar.png" alt="...">
+            }
+            
         <div class="member_header">
             <div class="personal_info col-8 col-md-5">
-                <h2 class="" style="color:black">@Model.member_profile.nickname</h2>
                 <p class="brief">@Model.member_profile.brief_intro</p>
 
                 <!--編輯會員 or 追蹤會員-->
@@ -169,7 +175,7 @@
                                             @(item.GetType().GetProperty("id").GetValue(item))
                                         </li>
                                         <li>
-                                            @(item.GetType().GetProperty("count").GetValue(item) * 5)
+                                            @(item.GetType().GetProperty("total").GetValue(item))
                                         </li>
                                     }
                                 </ul>
