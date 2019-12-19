@@ -25,15 +25,23 @@
         if (item.comment_status)
         {
             <div class="container">
-
-
                 <div class="single_comments  ">
                     <input id="comment_id" type="hidden" value=@item.comment_id />
                     <div class="member_detail ">
                         <div class="d-flex">
                             @if (item.member.member_profile.profile_photo != null)
                             {
-                                <img class="member_avatar" src="~/images/member/@item.member.member_profile.profile_photo" alt="..." onerror="this.src='/images/member/avatar.png';">
+                                <a href="@Url.Action("Index","web_Member_Index",new { id=item.member_id})">
+                                    <img class="member_avatar"
+                                         src="~/images/member/@item.member.member_profile.profile_photo"
+                                         alt="..." onerror="this.src='/images/member/avatar.png';"
+                                         data-toggle="popover"
+                                         data-trigger="hover"
+                                         data-placement="left"
+                                         data-html="true"
+                                         title="<b>@item.member.member_profile.nickname</b>"
+                                         data-content="<div><b>城市</b>@item.member.member_profile.city</div>">
+                                </a>
                             }
                             else
                             {
@@ -54,34 +62,13 @@
                                 <div class="dropdown-menu" aria-labelledby="dropdownMore">
                                     <a class="dropdown-item" href="#">分享到 facebook</a>
                                     <a class="dropdown-item" href="#">分享到 line</a>
-                                    <a class="dropdown-item" href="#">分享到 google</a>
-                                    <a class="dropdown-item report_comment" data-toggle="modal" data-target="#reportModel"> 檢舉此評論</a>
+                                    <a class="dropdown-item" href="#">分享到 google</a>                                    
                                 </div>
                             </div>
                         }
 
                     </div>
-                    <!--檢舉評論modal-->
-
-                    <div class="modal fade" id="reportModel" tabindex="-1" role="dialog" aria-labelledby="reportModel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-scrollable" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title">檢舉評論</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <textarea id="report_content" name="report_content" rows="20" cols="20" placeholder="請附上有問題的網址，以及違規評論內容"></textarea>
-                                </div>
-                                <input type="hidden" class="report_comment_id" value="@item.comment_id" />
-                                <div class="modal-footer">
-                                    <button id="btnTest" type="submit" class="btn btn-outline-dark submit_issue" data-dismiss="modal">提交表單</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    
                     <div class="comment_photo">
                         <img src="/images/comment/@item.comment_photo" class="comment_photo w-100" alt="X_X" onerror="this.src='/images/comment/0_2019129下午090757.jpg';" />
                     </div>
@@ -104,7 +91,24 @@
                         <div class="response_content">
                             <p>@Html.Raw(item.comment_content.ToString().Replace("\n", "<br>"))</p>
                         </div>
-                        
+                        @if (item.tourism_id.StartsWith("A"))
+                        {
+                            var activity = Model.activity_list.Where(m => m.activity_id == item.tourism_id).FirstOrDefault();
+                            <a href="@Url.Action("Details","web_activities",new { id=item.tourism_id})" class="hashtag "> #@activity.activity_title #@item.travel_partner #@item.travel_month 月</a>
+                        }
+                        else if (item.tourism_id.StartsWith("S"))
+                        {
+                            var spot = Model.spot_list.Where(m => m.spot_id == item.tourism_id).FirstOrDefault();
+                            <a href="@Url.Action("Details","WebSpots",new { id=item.tourism_id})" class="hashtag "> #@spot.spot_title #@item.travel_partner #@item.travel_month 月</a>
+                        }
+                        else if (item.tourism_id.StartsWith("R"))
+                        {
+                            <a href="" class="hashtag "> #@Model.restaurant.restaurant_title #@item.travel_partner #@item.travel_month 月</a>
+                        }
+                        else if (item.tourism_id.StartsWith("H"))
+                        {
+                            <a href="" class="hashtag "> #@Model.hotel.hotel_title #@item.travel_partner #@item.travel_month 月</a>
+                        }
 
                     </div>
 
@@ -168,24 +172,17 @@
                                     <img src="~/images/member/@msgItem.member.member_profile.profile_photo" width="74" height="74" class="mr-3 ml-3 member_avatar" alt="...">
 
                                     <div class="media-body ">
-
                                         <div class="d-flex message_body">
                                             <h5 class="member_name">
                                                 @msgItem.member.member_profile.nickname
-                                            </h5>                                          
-                                            
-
+                                            </h5>
                                         </div>
-                                        
-
-                                        
-
                                         <span class="create_time">
                                             @msgItem.msg_time.ToString("yyyy MM dd")
                                         </span>
                                         <div class="response_content">
                                             @msgItem.msg_content
-                                        </div>
+                                        </div>                                        
                                         <hr />
                                         <div class="emoji">
                                             @if (@Model.message_emoji_details.Where(m => m.member_id == @memberId && m.msg_id == msgItem.msg_id).Count() > 0)
@@ -199,16 +196,11 @@
                                                 <img class="icon msg_emoji_heart" src="~/images/emoji/talk.png" data-value="@msgItem.message_emoji_details.Count()" data-msgid="@msgItem.msg_id" data-emojiid=1 />
                                                 <span class="msg_emoji_heart_num">@msgItem.message_emoji_details.Count()</span>
                                             }
-
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        }
-
-                        
-
-
+                        }          
                     </div>
                 </div>
             </div>
@@ -216,3 +208,16 @@
     }
 </div>
 
+<script>
+        // Initialize tooltip component
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+
+// Initialize popover component
+$(function () {
+  $('[data-toggle="popover"]').popover()
+})
+
+
+</script>

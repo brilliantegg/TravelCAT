@@ -34,15 +34,9 @@
         }
         else
         {
-            <img src="~/images/member/avatar.png" alt="...">
+            <img class="profile_avatar" src="~/images/member/avatar.png" alt="...">
         }
 
-                <img class="profile_avatar"  src="~/images/member/@Model.member_profile.profile_photo" alt="..." onError="this.onerror=null;this.src='/images/member/avatar.png';">
-            }
-            else
-            {
-                <img class="profile_avatar" src="~/images/member/avatar.png" alt="...">
-            }
             
         <div class="member_header">
             <div class="personal_info col-8 col-md-5">
@@ -234,31 +228,31 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="badge">
+                        <div class="badge container-fluid">
                             @{
                                 string badge = "";
                                 if (score > 1000)
                                 {
 
-                                    <img src='http://localhost:54678/images/badges/9.png' title="300分徽章" data-toggle="popover" data-placement="bottom" />
-                                    <img src='http://localhost:54678/images/badges/1000_invites.png' title="400分徽章" data-toggle="popover" data-placement="bottom" />
-                                    <img src='http://localhost:54678/images/badges/100000_comments.png' title="500分徽章" data-toggle="popover" data-placement="bottom" />
-                                    <img src='http://localhost:54678/images/badges/50000_fans.png' title="1000分徽章" data-toggle="popover" data-placement="bottom" />
+                                    <img src='http://localhost:54678/images/badges/9.png' title="300分徽章" data-toggle="popover" data-placement="bottom" data-trigger="hover"/>
+                                    <img src='http://localhost:54678/images/badges/1000_invites.png' title="400分徽章" data-toggle="popover" data-placement="bottom" data-trigger="hover"/>
+                                    <img src='http://localhost:54678/images/badges/100000_comments.png' title="500分徽章" data-toggle="popover" data-placement="bottom" data-trigger="hover"/>
+                                    <img src='http://localhost:54678/images/badges/50000_fans.png' title="1000分徽章" data-toggle="popover" data-placement="bottom" data-trigger="hover" />
                                 }
                                 else if (score > 500)
                                 {
-                                    <img src='http://localhost:54678/images/badges/9.png' title="300分徽章" data-toggle="popover" data-placement="bottom" />
-                                    <img src='http://localhost:54678/images/badges/1000_invites.png' title="400分徽章" data-toggle="popover" data-placement="bottom" />
-                                    <img src='http://localhost:54678/images/badges/100000_comments.png' title="500分徽章" data-toggle="popover" data-placement="bottom" />
+                                    <img src='http://localhost:54678/images/badges/9.png' title="300分徽章" data-toggle="popover" data-placement="bottom" data-trigger="hover" />
+                                    <img src='http://localhost:54678/images/badges/1000_invites.png' title="400分徽章" data-toggle="popover" data-placement="bottom" data-trigger="hover"/>
+                                    <img src='http://localhost:54678/images/badges/100000_comments.png' title="500分徽章" data-toggle="popover" data-placement="bottom" data-trigger="hover"/>
                                 }
                                 else if (score > 400)
                                 {
-                                    <img src='http://localhost:54678/images/badges/9.png' title="300分徽章" data-toggle="popover" data-placement="bottom" />
-                                    <img src='http://localhost:54678/images/badges/1000_invites.png' title="400分徽章" data-toggle="popover" data-placement="bottom" />
+                                    <img src='http://localhost:54678/images/badges/9.png' title="300分徽章" data-toggle="popover" data-placement="bottom" data-trigger="hover"/>
+                                    <img src='http://localhost:54678/images/badges/1000_invites.png' title="400分徽章" data-toggle="popover" data-placement="bottom" data-trigger="hover"/>
                                 }
                                 else if (score > 300)
                                 {
-                                    <img src='http://localhost:54678/images/badges/9.png' title="300分徽章" data-toggle="popover" data-placement="bottom" />
+                                    <img src='http://localhost:54678/images/badges/9.png' title="300分徽章" data-toggle="popover" data-placement="bottom" data-trigger="hover"/>
                                 }
                             }
                             @badge
@@ -434,7 +428,9 @@
             .fail(function() {
                 alert( `取消追蹤失敗` );
             })
-        }
+    }
+
+
     //圖片旋轉
 
     jQuery(function($) {
