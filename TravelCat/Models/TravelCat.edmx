@@ -1068,7 +1068,7 @@
             <End Role="member" EntitySet="member" />
             <End Role="issue" EntitySet="issue" />
           </AssociationSet>
-          </EntityContainer>
+        </EntityContainer>
         <EntityType Name="collection_type">
           <Key>
             <PropertyRef Name="collection_type_id" />
@@ -1171,7 +1171,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        </Schema>
+      </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>

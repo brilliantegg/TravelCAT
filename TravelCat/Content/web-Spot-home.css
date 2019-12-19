@@ -1,29 +1,40 @@
 ﻿body{
     background-color: #f0f0f0;
 }
-.container .Anchor-bar{
+ .Anchor-bar{
     position: fixed;
     top: 200px;
-    right: 100px;
+    right: 10%;
 }
-    .container .Anchor-bar li {
+     .Anchor-bar li {
         padding: 10px;
         border-left: 1px solid;
         border-right: 1px solid;
         border-top: 1px solid;
         background-color: #f2eeeb;
+        
     }
-        .container .Anchor-bar li:nth-last-child(1){
+         .Anchor-bar li:nth-last-child(1){
             border-bottom: 1px solid;
         }
-
-        .container .card-top::before {
-            content: "";
-            display: block;
-            margin-top: -120px;
-            height: 120px;
-            visibility: hidden;
+        .Anchor-bar li a {
+            color: #000;
+            font-weight: 700;
+            text-decoration: none;
         }
+            .Anchor-bar li a:hover{
+                color:  red;
+            }
+            .container {
+                position: relative;
+            }
+.container .card-top::before {
+    content: "";
+    display: block;
+    margin-top: -120px;
+    height: 120px;
+    visibility: hidden;
+}
 .container .card-top{
     position: relative;
 }

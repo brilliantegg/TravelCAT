@@ -18,7 +18,18 @@ namespace TravelCat.Controllers
         // GET: web_activities
         public ActionResult Index()
         {
-            return View(db.restaurant.OrderByDescending(m => m.latitude).Take(100).ToList());
+            TaiwanViewModel model = new TaiwanViewModel()
+            {
+                collections_detail = db.collections_detail.ToList(),
+                comment = db.comment.ToList(),
+                restaurant_north = db.restaurant.Where(m => m.city.Contains("臺北市") || m.city.Contains("新北市") || m.city.Contains("基隆市") || m.city.Contains("新竹市") || m.city.Contains("桃園市") || m.city.Contains("新竹縣") || m.city.Contains("宜蘭縣")).OrderByDescending(m => db.comment.Where(s => s.tourism_id == m.restaurant_id).Count()).Take(6).ToList(),
+                restaurant_middle = db.restaurant.Where(m => m.city.Contains("臺中市") || m.city.Contains("苗栗縣") || m.city.Contains("彰化縣") || m.city.Contains("南投縣") || m.city.Contains("雲林縣")).OrderByDescending(m => db.comment.Where(s => s.tourism_id == m.restaurant_id).Count()).Take(6).ToList(),
+                restaurant_south = db.restaurant.Where(m => m.city.Contains("高雄市") || m.city.Contains("臺南市") || m.city.Contains("嘉義市") || m.city.Contains("屏東縣") || m.city.Contains("澎湖縣")).OrderByDescending(m => db.comment.Where(s => s.tourism_id == m.restaurant_id).Count()).Take(6).ToList(),
+                restaurant_East = db.restaurant.Where(m => m.city.Contains("花蓮縣") || m.city.Contains("臺東縣")).OrderByDescending(m => db.comment.Where(s => s.tourism_id == m.restaurant_id).Count()).Take(6).ToList(),
+                restaurant_island = db.restaurant.Where(m => m.city.Contains("金門縣") || m.city.Contains("連江縣")).OrderByDescending(m => db.comment.Where(s => s.tourism_id == m.restaurant_id).Count()).Take(6).ToList(),
+
+            };
+            return View(model);
         }
 
         // GET: web_activities/Details/5
