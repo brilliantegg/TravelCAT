@@ -61,6 +61,7 @@ namespace TravelCat.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "id,member_id,admin_id,issue_id,report_date,issue_content,issue_result,issue_status,resolve_date,problem_id")] issue issue)
         {
+
             int id = issue.issue_id;
             string controller;
             switch (id)
@@ -81,8 +82,8 @@ namespace TravelCat.Controllers
                     controller = "issues";
                     break;
             }
-            issue.resolve_date = DateTime.Now;
 
+            issue.resolve_date = DateTime.Now;
             if (ModelState.IsValid)
             {
                 db.Entry(issue).State = EntityState.Modified;
@@ -90,6 +91,8 @@ namespace TravelCat.Controllers
 
                 return RedirectToRoute(new { controller = controller, action = "Index" });
             }
+        
+            ViewBag.admin_id = new SelectList(db.admin, "admin_id", "admin_account", issue.admin_id);
 
             return View(issue);
         }

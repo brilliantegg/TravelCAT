@@ -39,9 +39,9 @@
                 //確認密碼
                 <div class="form-inline mt-3">
                     <label class="col-form-label">確認密碼</label>
-                    <input id="Password2" type="password" class="form-control ml-3"/>
+                    <input id="Password2" type="password" class="form-control ml-3" />
                 </div>
-                <div id="pwdconfiirm" class="text-danger"></div>
+                <div id="pwdconfirm" class="text-danger"></div>
 
                 <!--姓名-->
                 <div class="form-inline mt-3">
@@ -76,42 +76,44 @@
                 <div class="form-inline mt-3">
                     @Html.LabelFor(model => model.member_profile.nation, htmlAttributes: new { @class = "control-label  " })
                     <select id="newnation" name="member_profile.nation" class="form-control ml-2">
+                        <option disabled selected>請選擇</option>
                         <option value="台灣">台灣</option>
                         <option value="其他國家">其他國家</option>
                     </select>
 
                     <!--城市-->
                     @Html.LabelFor(model => model.member_profile.city, htmlAttributes: new { @class = "control-label  ml-2" })
-                    <select id="newcity" name="member_profile.city" class="form-control ml-2">
-                        <option value="北部地區" disabled>北部地區</option>
-                        <option value="台北市">台北市</option>
-                        <option value="新北市">新北市</option>
-                        <option value="基隆市">基隆市</option>
-                        <option value="桃園市">桃園市</option>
-                        <option value="新竹市">新竹市</option>
-                        <option value="新竹縣">新竹縣</option>
-                        <option value="苗栗縣">苗栗縣</option>
-                        <option value="中部地區" disabled>中部地區</option>
-                        <option value="台中市">台中市</option>
-                        <option value="彰化縣">彰化縣</option>
-                        <option value="南投縣">南投縣</option>
-                        <option value="南部地區" disabled>南部地區</option>
-                        <option value="雲林縣">雲林縣</option>
-                        <option value="嘉義市">嘉義市</option>
-                        <option value="嘉義縣">嘉義縣</option>
-                        <option value="台南市">台南市</option>
-                        <option value="高雄市">高雄市</option>
-                        <option value="屏東縣">屏東縣</option>
-                        <option value="東部地區" disabled>東部地區</option>
-                        <option value="宜蘭縣">宜蘭縣</option>
-                        <option value="花蓮縣">花蓮縣</option>
-                        <option value="台東縣">台東縣</option>
-                        <option value="離島地區" disabled>離島地區</option>
-                        <option value="澎湖縣">澎湖縣</option>
-                        <option value="金門縣">金門縣</option>
-                        <option value="連江縣">連江縣</option>
-                        <option value="其他城市">其他城市</option>
-                    </select>
+                <select id="newcity" name="member_profile.city" class="form-control ml-2">
+                    <option disabled selected>請選擇</option>
+                    <option value="北部地區" disabled>北部地區</option>
+                    <option value="台北市">台北市</option>
+                    <option value="新北市">新北市</option>
+                    <option value="基隆市">基隆市</option>
+                    <option value="桃園市">桃園市</option>
+                    <option value="新竹市">新竹市</option>
+                    <option value="新竹縣">新竹縣</option>
+                    <option value="苗栗縣">苗栗縣</option>
+                    <option value="中部地區" disabled>中部地區</option>
+                    <option value="台中市">台中市</option>
+                    <option value="彰化縣">彰化縣</option>
+                    <option value="南投縣">南投縣</option>
+                    <option value="南部地區" disabled>南部地區</option>
+                    <option value="雲林縣">雲林縣</option>
+                    <option value="嘉義市">嘉義市</option>
+                    <option value="嘉義縣">嘉義縣</option>
+                    <option value="台南市">台南市</option>
+                    <option value="高雄市">高雄市</option>
+                    <option value="屏東縣">屏東縣</option>
+                    <option value="東部地區" disabled>東部地區</option>
+                    <option value="宜蘭縣">宜蘭縣</option>
+                    <option value="花蓮縣">花蓮縣</option>
+                    <option value="台東縣">台東縣</option>
+                    <option value="離島地區" disabled>離島地區</option>
+                    <option value="澎湖縣">澎湖縣</option>
+                    <option value="金門縣">金門縣</option>
+                    <option value="連江縣">連江縣</option>
+                    <option value="其他城市">其他城市</option>
+                </select>
                 </div>
 
 
@@ -202,7 +204,12 @@
                 alert("兩次輸入的密碼不一致！");
                 return false;
             }
+            else if ($('#AccountCheck').text() || $('#pwdlength').text() != "") {
+                alert("請確認資料是否填入正確");
+                return false;
+            }
         });
+
 
         //帳號重複
         $('#member_account').focusout(function () {
@@ -232,10 +239,10 @@
 
         $('#Password2').keyup(function () {
             if ($('#member_password').val() != $('#Password2').val()) {
-                $('#pwdconfiirm').text("確認密碼跟密碼不一致");
+                $('#pwdconfirm').text("確認密碼跟密碼不一致");
             }
             else {
-                $('#pwdconfiirm').text('');
+                $('#pwdconfirm').text('');
             }
         });
 

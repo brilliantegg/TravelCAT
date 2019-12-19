@@ -85,7 +85,7 @@ namespace TravelCat.Controllers
         // 詳細資訊，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "msg_id,msg_time,msg_content,comment_id,member_id")] message message)
+        public ActionResult Edit([Bind(Include = "msg_id,msg_time,msg_content,comment_id,member_id,msg_status,tourism_id")] message message)
         {
             if (ModelState.IsValid)
             {

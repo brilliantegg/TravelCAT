@@ -23,9 +23,10 @@
         <div class="row">
             <div class="co col-6">
                 @Html.LabelFor(model => model.comment_status, htmlAttributes: new { @class = "txt" })
-                <span class="checkbox ml-3">
-                    @Html.EditorFor(model => model.comment_status)
-                </span>
+                <select id="Select1" name="msg_status" class="form-control">
+                    <option value="True">顯示</option>
+                    <option value="False">隱藏</option>
+                </select>
             </div>
         </div>
 
@@ -129,6 +130,9 @@
     </div>
 }
 
-<script src="~/Scripts/jquery-3.3.1.min.js"></script>
-<script src="~/Scripts/jquery.validate.min.js"></script>
-<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+@section scripts{
+    <script>
+        $('#Select1 option[value=@Model.comment_status]').attr('selected', 'selected');
+    </script>
+    
+    }
