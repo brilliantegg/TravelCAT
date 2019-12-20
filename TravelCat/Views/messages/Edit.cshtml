@@ -17,15 +17,18 @@
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     @Html.HiddenFor(model => model.msg_id)
+    @Html.HiddenFor(model => model.tourism_id)
 
 
     <!--留言狀態-->
     <div class="row">
         <div class="co col-6">
             @Html.LabelFor(model => model.msg_status,"留言狀態", htmlAttributes: new { @class = "txt" })
-            <span class="checkbox ml-3">
-                @Html.EditorFor(model => model.msg_status)
-            </span>
+            <select id="Select1" name="msg_status" class="form-control">
+                <option value="True">顯示</option>
+                <option value="False">隱藏</option>
+            </select>
+            
         </div>
     </div>
 
@@ -84,7 +87,9 @@
 </div>
 }
 
-
-<script src="~/Scripts/jquery-3.3.1.min.js"></script>
-<script src="~/Scripts/jquery.validate.min.js"></script>
-<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+@section scripts{
+    <script>
+        $('#Select1 option[value=@Model.msg_status]').attr('selected', 'selected');
+    </script>
+       
+    }

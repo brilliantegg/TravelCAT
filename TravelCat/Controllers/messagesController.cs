@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using TravelCat.Models;
+using X.PagedList;
 
 namespace TravelCat.Controllers
 {
@@ -15,10 +16,25 @@ namespace TravelCat.Controllers
         private dbTravelCat db = new dbTravelCat();
 
         // GET: messages
-        public ActionResult Index()
+        public ActionResult Index(string id = null, int page = 1)
         {
-            var messages = db.message.Include(m => m.comment).Include(m => m.member);
-            return View(messages.ToList());
+            ViewBag.id = id;
+
+            var messages = db.message.Include(m => m.comment).Include(m => m.member).ToList();
+            int pagesize = 10;
+            int pagecurrent = page < 1 ? 1 : page;
+            var pagedlist = messages.ToPagedList(pagecurrent, pagesize);
+
+            if (!String.IsNullOrEmpty(id))
+            {
+                var search = db.message.Where(m => m.msg_id.ToString().Contains(id));
+                return View(search.OrderBy(m => m.msg_id).ToPagedList(page, pagesize));
+            }
+            else
+            {
+                return View("Index", pagedlist);
+            }
+
         }
 
         // GET: messages/Details/5
@@ -85,7 +101,7 @@ namespace TravelCat.Controllers
         // 詳細資訊，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "msg_id,msg_time,msg_content,comment_id,member_id")] message message)
+        public ActionResult Edit([Bind(Include = "msg_id,msg_time,msg_content,comment_id,member_id,msg_status,tourism_id")] message message)
         {
             if (ModelState.IsValid)
             {

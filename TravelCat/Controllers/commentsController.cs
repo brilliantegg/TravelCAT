@@ -7,7 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using TravelCat.Models;
-using PagedList;
+using X.PagedList;
+using X.PagedList.Mvc;
 
 namespace TravelCat.Controllers
 {
@@ -16,14 +17,24 @@ namespace TravelCat.Controllers
         private dbTravelCat db = new dbTravelCat();
 
         // GET: comments
-        public ActionResult Index(int page=1)
+        public ActionResult Index(string id=null,int page=1)
         {
-            var comments = db.comment.Include(c => c.member).ToList();
-            int pagesize = 15;
+            ViewBag.id = id;
+
+            var comments = db.comment.Include(c => c.member).OrderBy(m => m.comment_id).ToList();
+            int pagesize = 10;
             int pagecurrent = page < 1 ? 1 : page;
             var pagedlist = comments.ToPagedList(pagecurrent, pagesize);
 
-            return View("Index", pagedlist);
+            if (!String.IsNullOrEmpty(id))
+            {
+                var search = db.comment.Where(m => m.comment_id.ToString().Contains(id));
+                return View(search.OrderBy(m => m.comment_id).ToPagedList(page, pagesize));
+            }
+            else
+            {
+                return View("Index", pagedlist);
+            }
 
         }
 
