@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using TravelCat.Models;
+using X.PagedList;
 
 namespace TravelCat.Controllers
 {
@@ -24,13 +25,17 @@ namespace TravelCat.Controllers
 
         //問題PartialView
         [ChildActionOnly]
-        public PartialViewResult _Problem(int type_id)
+        public PartialViewResult _Problem(int type_id, int page = 1)
         {
             var issue = db.issue.Where(m => m.issue_id == type_id).OrderBy(m=>m.resolve_date).ToList();
 
+            int pagesize = 10;
+            int pagecurrent = page < 1 ? 1 : page;
+            var pagedlist = issue.ToPagedList(pagecurrent, pagesize);
+
             ViewBag.issueId = type_id;
 
-            return PartialView(issue);
+            return PartialView("_Problem", pagedlist);
         }
 
         // GET: issues/Edit/5
