@@ -36,12 +36,12 @@
                 @Html.ValidationMessageFor(model => model.member_password, "", new { @class = "text-danger" })
                 <div id="pwdlength" class="text-danger"></div>
 
-                //確認密碼
+                <!--確認密碼-->
                 <div class="form-inline mt-3">
                     <label class="col-form-label">確認密碼</label>
-                    <input id="Password2" type="password" class="form-control ml-3"/>
+                    <input id="Password2" type="password" class="form-control ml-3" />
                 </div>
-                <div id="pwdconfiirm" class="text-danger"></div>
+                <div id="pwdconfirm" class="text-danger"></div>
 
                 <!--姓名-->
                 <div class="form-inline mt-3">
@@ -76,6 +76,7 @@
                 <div class="form-inline mt-3">
                     @Html.LabelFor(model => model.member_profile.nation, htmlAttributes: new { @class = "control-label  " })
                     <select id="newnation" name="member_profile.nation" class="form-control ml-2">
+                        <option disabled selected>請選擇</option>
                         <option value="台灣">台灣</option>
                         <option value="其他國家">其他國家</option>
                     </select>
@@ -83,6 +84,7 @@
                     <!--城市-->
                     @Html.LabelFor(model => model.member_profile.city, htmlAttributes: new { @class = "control-label  ml-2" })
                     <select id="newcity" name="member_profile.city" class="form-control ml-2">
+                        <option disabled selected>請選擇</option>
                         <option value="北部地區" disabled>北部地區</option>
                         <option value="台北市">台北市</option>
                         <option value="新北市">新北市</option>
@@ -202,10 +204,15 @@
                 alert("兩次輸入的密碼不一致！");
                 return false;
             }
+            else if ($('#AccountCheck').text() || $('#pwdlength').text() != "") {
+                alert("請確認資料是否填入正確");
+                return false;
+            }
         });
 
+
         //帳號重複
-        $('#member_account').focusout(function () {
+        $('#member_account').keyup(function () {
             $.post("/Register/AccountCheck", { account: $(this).val() }, function (data) {
                 if (data == 'true') {
                     $('#member_account').css('border-color', 'red');
@@ -222,7 +229,7 @@
         //密碼長度
         $('#member_password').keyup(function () {
             if ($('#member_password').val().length < 8) {
-                $('#pwdlength').text("請輸入超過8碼")
+                $('#pwdlength').text("請輸入最少8碼的英文或數字")
             }
             else {
                 $('#pwdlength').text('');
@@ -232,10 +239,10 @@
 
         $('#Password2').keyup(function () {
             if ($('#member_password').val() != $('#Password2').val()) {
-                $('#pwdconfiirm').text("確認密碼跟密碼不一致");
+                $('#pwdconfirm').text("確認密碼跟密碼不一致");
             }
             else {
-                $('#pwdconfiirm').text('');
+                $('#pwdconfirm').text('');
             }
         });
 

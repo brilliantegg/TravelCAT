@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using TravelCat.Models;
+using X.PagedList;
 
 namespace TravelCat.Controllers
 {
@@ -24,13 +25,17 @@ namespace TravelCat.Controllers
 
         //問題PartialView
         [ChildActionOnly]
-        public PartialViewResult _Problem(int type_id)
+        public PartialViewResult _Problem(int type_id, int page = 1)
         {
             var issue = db.issue.Where(m => m.issue_id == type_id).OrderBy(m=>m.resolve_date).ToList();
 
+            int pagesize = 10;
+            int pagecurrent = page < 1 ? 1 : page;
+            var pagedlist = issue.ToPagedList(pagecurrent, pagesize);
+
             ViewBag.issueId = type_id;
 
-            return PartialView(issue);
+            return PartialView("_Problem", pagedlist);
         }
 
         // GET: issues/Edit/5
@@ -61,6 +66,7 @@ namespace TravelCat.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "id,member_id,admin_id,issue_id,report_date,issue_content,issue_result,issue_status,resolve_date,problem_id")] issue issue)
         {
+
             int id = issue.issue_id;
             string controller;
             switch (id)
@@ -81,8 +87,8 @@ namespace TravelCat.Controllers
                     controller = "issues";
                     break;
             }
-            issue.resolve_date = DateTime.Now;
 
+            issue.resolve_date = DateTime.Now;
             if (ModelState.IsValid)
             {
                 db.Entry(issue).State = EntityState.Modified;
@@ -90,6 +96,8 @@ namespace TravelCat.Controllers
 
                 return RedirectToRoute(new { controller = controller, action = "Index" });
             }
+        
+            ViewBag.admin_id = new SelectList(db.admin, "admin_id", "admin_account", issue.admin_id);
 
             return View(issue);
         }

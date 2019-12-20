@@ -78,7 +78,14 @@
                 @Html.DisplayFor(modelItem => item.open_time)
             </td>
             <td class="col-1">
-                @Html.DisplayFor(modelItem => item.page_status)
+                @if (item.page_status == false)
+                {
+                    <span class="badge badge-success">顯示</span>
+                }
+                else
+                {
+                    <span class="badge badge-danger">隱藏</span>
+                }
             </td>
         </tr>
     }

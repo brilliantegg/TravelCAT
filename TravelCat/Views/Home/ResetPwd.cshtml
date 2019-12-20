@@ -18,20 +18,22 @@
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 @Html.HiddenFor(model => model.member_id)
 
-                <div class="form-inline mb-4">
+                <div class="form-inline">
                     <label class="col-form-label">新密碼</label>
                     <input id="Password1" type="password" name="newpassword" class="form-control" />
                 </div>
+                <div id="pwdlength" class="text-danger"></div>
 
-                <div class="form-inline mb-4">
+                <div class="form-inline mt-3">
                     <label class="col-form-label">確認密碼</label>
                     <input id="Password2" type="password" class="form-control" />
                 </div>
+                <div id="pwdconfiirm" class="text-danger"></div>
 
                 <div class="form-inline mb-4">
-                    <input type="checkbox" id="show_password"  />顯示密碼
+                    <input type="checkbox" id="show_password" />顯示密碼
                 </div>
-                            
+
                 <input id="submit" type="submit" value="確定更改密碼" class="btn btn-primary" />
             }
         </div>
@@ -67,6 +69,26 @@
             else {
                 $('#Password1').attr("type", "password");
                 $('#Password2').attr("type", "password");
+            }
+        });
+
+        //密碼長度
+        $('#Password1').keyup(function () {
+            if ($('#Password1').val().length < 8) {
+                $('#pwdlength').text("請輸入超過8碼")
+            }
+            else {
+                $('#pwdlength').text('');
+            }
+
+        });
+
+        $('#Password2').keyup(function () {
+            if ($('#member_password').val() != $('#Password2').val()) {
+                $('#pwdconfiirm').text("確認密碼跟密碼不一致");
+            }
+            else {
+                $('#pwdconfiirm').text('');
             }
         });
     </script>

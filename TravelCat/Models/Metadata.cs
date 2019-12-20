@@ -20,7 +20,7 @@ namespace TravelCat.Models
 
         [DisplayName("密碼")]
         [Required(ErrorMessage = "此欄位為必填")]
-        [StringLength(60, ErrorMessage = "最多20個字")]
+        [StringLength(60, ErrorMessage = "最多60個字")]
         [DataType(DataType.Password)]
         public string admin_password { get; set; }
 
@@ -46,13 +46,11 @@ namespace TravelCat.Models
         [Required(ErrorMessage = "此欄位為必填")]
         [StringLength(15, ErrorMessage = "最多15個字")]
         [RegularExpression("\\w{5,}", ErrorMessage = "請輸入5~15碼的英文或數字")]
-        //[Checkmemberacc]
         public string member_account { get; set; }
 
         [DisplayName("密碼")]
         [Required(ErrorMessage = "此欄位為必填")]
         [StringLength(60, ErrorMessage = "最多60個字")]
-        //[RegularExpression("\\w{8,}", ErrorMessage = "請輸入8~20碼的英文和數字")]
         [DataType(DataType.Password)]
         public string member_password { get; set; }
 
