@@ -23,10 +23,11 @@
         <div class="row">
             <div class="co col-6">
                 @Html.LabelFor(model => model.activity.page_status, htmlAttributes: new { @class = "txt" })
-                <span class="checkbox ml-3">
-                    @Html.EditorFor(model => model.activity.page_status)
-                    @Html.ValidationMessageFor(model => model.activity.page_status, "", new { @class = "text-danger" })
-                </span>
+                <select id="Select1" name="activity.page_status" class="form-control">
+                    <option value="False">顯示</option>
+                    <option value="True">隱藏</option>
+                </select>
+                @Html.ValidationMessageFor(model => model.activity.page_status, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -159,38 +160,39 @@
         <div class="row">
             <div class="co col-6">
                 <label class="">圖片</label>
-               
+
                 <div class="row">
                     @{ var photo = Model.activity_photos.Where(m => m.tourism_id == Model.activity.activity_id).ToList();
-                        for(int i = 0; i < 3; i++) {
-                                        <div class="col-md-4">
-                                            @if (i>photo.Count-1)
-                                            {
-                                                <h3>no image</h3>
-                                            }
-                                            else
-                                            {
-                                                <img src="/images/activity/@photo[i].tourism_photo1" width="150" />
-                                                <input id="oldImg" name="oldImg" type="text" value="@photo[i].tourism_photo1" />
-                                            }
-                                            <input id="tourism_photo" name="tourism_photo" type="file" class="form-control" />
-                                            @Html.ValidationMessageFor(model => model.activity_photos[i].tourism_photo1, "", new { @class = "text-danger" })
-                                        </div>
+                        for (int i = 0; i < 3; i++)
+                        {
+                            <div class="col-md-4">
+                                @if (i > photo.Count - 1)
+                                {
+                                    <h3>no image</h3>
+                                }
+                                else
+                                {
+                                    <img src="/images/activity/@photo[i].tourism_photo1" width="150" />
+                                    <input id="oldImg" name="oldImg" type="text" value="@photo[i].tourism_photo1" />
+                                }
+                                <input id="tourism_photo" name="tourism_photo" type="file" class="form-control" />
+                                @Html.ValidationMessageFor(model => model.activity_photos[i].tourism_photo1, "", new { @class = "text-danger" })
+                            </div>
                         }
                     }
                 </div>
             </div>
         </div>
         <!--下方按鈕-->
-        <div class="row text-center footer">
+        <div class="row text-center m-3">
             <div class="col-1">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="儲存" class="btn btn-primary" />
             </div>
             <div class="col-1">
                 @Html.ActionLink("刪除", "Delete", new { id = Model.activity.activity_id }, new { @class = "btn btn-danger", onclick = "return confirm('確定不後悔?')" })
             </div>
             <div class="col-2">
-                @Html.ActionLink("回到景點列表", "Index", new { page=Session["pg"]}, new { @class = "btn btn-primary" })
+                @Html.ActionLink("回到景點列表", "Index", new { page = Session["pg"] }, new { @class = "btn btn-primary" })
             </div>
 
         </div>
@@ -200,6 +202,11 @@
 </form>
 
 
-<script src="~/Scripts/jquery-3.3.1.min.js"></script>
-<script src="~/Scripts/jquery.validate.min.js"></script>
-<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+@section scripts{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script>
+        $('#Select1 option[value=@Model.activity.page_status]').attr('selected', 'selected');
+    </script>
+
+}

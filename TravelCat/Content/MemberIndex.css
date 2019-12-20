@@ -187,3 +187,17 @@ a:hover {
     margin-left: 6px;
     margin-right: 2px;
 }
+
+/*.modal {
+    display: block !important; /* I added this to see the modal, you don't need this */
+}*/
+
+/* Important part */
+.modal-dialog {
+    overflow-y: initial !important
+}
+
+.modal-body {
+    height: 60vh;
+    overflow-y: auto;
+}
