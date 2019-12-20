@@ -222,7 +222,7 @@
                     <div class="mem-comment">
                         <p><b>@Model.comment[0].comment_title</b>
                         <br>留言人： @Model.comment[0].member_id</p>
-                        @Model.comment[0].comment_content
+                        @Html.Raw(Model.comment[0].comment_content)
                     </div>
                     <a href="#" class="btn  btn-sm">前去觀看</a>
                 </div>
