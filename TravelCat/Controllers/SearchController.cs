@@ -592,6 +592,8 @@ namespace TravelCat.Controllers
         //水軍遊樂場
         public ActionResult generate_comment()
         {
+            //List<spot> spots = db.spot.OrderBy(m => Guid.NewGuid()).ToList();
+            //List<activity> activitys = db.activity.OrderBy(m => Guid.NewGuid()).ToList();
             //List<hotel> hotels = db.hotel.OrderBy(m => Guid.NewGuid()).ToList();
             List<restaurant> restaurants = db.restaurant.OrderBy(m => Guid.NewGuid()).ToList();
             //string id = "";
@@ -605,11 +607,14 @@ namespace TravelCat.Controllers
 
             Random random = new Random();
 
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < 2000; i++)
             {
                 comment cmt = new comment();
                 DateTime parsedDate = DateTime.Parse(date[random.Next(0, 18)]);
 
+                //cmt.tourism_id = spots[i].spot_id;
+                //cmt.tourism_id = activitys[i].activity_id;
+                //cmt.tourism_id = hotels[i].hotel_id;
                 cmt.tourism_id = restaurants[i].restaurant_id;
                 cmt.comment_title = title[random.Next(0, 9)];
                 cmt.comment_content = content[random.Next(0, 6)];
