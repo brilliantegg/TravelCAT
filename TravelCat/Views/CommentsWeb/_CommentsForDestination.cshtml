@@ -52,16 +52,21 @@
                         <div class="d-flex">
                             @if (item.member.member_profile.profile_photo != null)
                             {
-                                <img class="member_avatar" src="~/images/member/@item.member.member_profile.profile_photo" alt="..." onerror="this.src='/images/member/avatar.png';">
+                                <a href="@Url.Action("Index","web_Member_Index",new { id=item.member_id})">
+                                    <img class="member_avatar"
+                                         src="~/images/member/@item.member.member_profile.profile_photo"
+                                         alt="..." onerror="this.src='/images/member/avatar.png';" />
+                                </a>
                             }
                             else
                             {
-                                <img class="member_avatar" src="~/images/member/avatar.png" alt="...">
+                                <a href="@Url.Action("Index","web_Member_Index",new { id=item.member_id})">
+                                    <img class="member_avatar" src="~/images/member/avatar.png" alt="...">
+                                </a>
                             }
-
-                            <div class="d-flex">
+                            <a href="@Url.Action("Index","web_Member_Index",new { id=item.member_id})" style="margin:auto">
                                 <h5 class="member_name">@item.member.member_profile.nickname</h5>
-                            </div>
+                            </a>
                         </div>
                         <!-- 更多選項 -->
                         @if (@memberId != null)
@@ -205,7 +210,7 @@
                         {
                             <div class=" single_message py-3">
                                 <div class="media mt-3">
-                                    <img src="~/images/member/@msgItem.member.member_profile.profile_photo" width="74" height="74" class="mr-3 ml-3 member_avatar" alt="...">
+                                    <img src="~/images/member/@msgItem.member.member_profile.profile_photo" class="mr-3 ml-3 member_avatar" alt="..." onerror="this.src='/images/member/avatar.png';">
 
                                     <div class="media-body ">
 
@@ -274,34 +279,35 @@
                                 </div>
                             </div>
                         }
-
+                        <div class="render_msg"></div>
                         <!--回覆留言-->
 
-                        <div class="add_message single_message">
-                            @if (@memberId != null)
-                            {
-                                <form action="/web_comments/createMessage" method="post">
-                                    @Html.AntiForgeryToken()
-                                    <input type="hidden" name="comment_id" value="@item.comment_id" />
-                                    <input type="hidden" name="msg_time" value="@DateTime.Now" />
-                                    <input type="hidden" name="member_id" value="@Session["memberID"]" />
-                                    <input type="hidden" name="msg_status" value="True" />
-                                    <input type="hidden" name="tourism_id" value="@item.tourism_id" />
-                                    <textarea class="msg_content" rows="2" cols="20" name="msg_content" placeholder="@User.Identity.GetUserName(),想說說甚麼..."></textarea>
-                                    <br />
-                                    <div class="add_message_Submit_area text-right">
-                                        <input id="add_message_Submit" class="btn btn-outline-dark" type="submit" value="submit" />
-                                    </div>
-                                </form>
-                            }
-                            else
-                            {
-                                <textarea class="msg_content" rows="2" cols="20" name="msg_content" placeholder="請先登入後留言"></textarea>
-                            }
-                        </div>
+                    <div class="add_message single_message">
+                        <button class="submit_msg" value="submit_msg">submit_msg</button>
+                        @if (@memberId != null)
+                        {
+                            <form action="/web_comments/createMessage" method="post">
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="comment_id" value="@item.comment_id" />
+                                <input type="hidden" name="msg_time" value="@DateTime.Now" />
+                                <input type="hidden" name="member_id" value="@Session["memberID"]" />
+                                <input type="hidden" name="msg_status" value="True" />
+                                <input type="hidden" name="tourism_id" value="@item.tourism_id" />
+                                <textarea class="msg_content" rows="2" cols="20" name="msg_content" placeholder="@User.Identity.GetUserName(),想說說甚麼..."></textarea>
+                                <br />
+                                <div class="add_message_Submit_area text-right">
+                                    <input id="add_message_Submit" class="btn btn-outline-dark" type="submit" value="submit" />
+                                </div>
+                            </form>
+                        }
+                        else
+                        {
+                            <textarea class="msg_content" rows="2" cols="20" name="msg_content" placeholder="請先登入後留言"></textarea>
+                        }
+                    </div>
 
 
-
+                        
 
                     </div>
                 </div>
@@ -324,8 +330,41 @@
 
         }
         console.log(id)
-    console.log(tourismId)
+        console.log(tourismId)
+    @{  var member = Model.member.Where(m => m.member_id == memberId).FirstOrDefault();  }
+    //新增留言
+    $(".submit_msg").click(function () {
+        $(".render_msg").append(`<div class=" single_message py-3">
+                                <div class="media mt-3">
+                                    <img src="http://localhost:54678/images/member/@member.member_profile.profile_photo" class="mr-3 ml-3 member_avatar" alt="..." onerror="this.src='/images/member/avatar.png';">
 
+                                    <div class="media-body ">
+
+                                        <div class="d-flex message_body">
+                                            <h5 class="member_name">
+                                                @member.member_profile.nickname
+                                            </h5>                                           
+                                        <br>
+                                        <span class="create_time">
+                                            @DateTime.Now.ToString("yyyy MM dd")
+                                        </span>
+<br>
+                                        <div class="response_content">
+                                            ${$('.msg_content').val()}
+                                        </div>
+<br>
+                                        <hr />
+                                        <div class="emoji">
+                                                <img class="icon msg_emoji_heart" src="http://localhost:54678/images/emoji/talk.png" data-value="0" data-msgid="0" data-emojiid=1 />
+                                                <span class="msg_emoji_heart_num">0</span>                                            
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>`);
+        $('.msg_content').val("")
+
+        })
         //顯示文章
         $(".readmore").click(function () {
             $(".intro").toggleClass('showMore');
@@ -366,7 +405,7 @@
                 emoji.removeClass('click_button');
 
                 $.ajax({
-                    type: 'Delete',
+                type: 'Delete',
                     url: "http://localhost:54678/api/api_comment_emoji_details",
                     contentType: 'application/json',
                     data: JSON.stringify({
@@ -384,15 +423,15 @@
                 });
                 return;
             } else {
-             emoji.attr('disabled', true);
-            emoji.addClass('click_button')
+                emoji.attr('disabled', true);
+                emoji.addClass('click_button')
 
             $.ajax({
                 type: 'POST',
                 url: "http://localhost:54678/api/api_comment_emoji_details",
                 contentType: 'application/json',
                 data: JSON.stringify({
-                    "member_id": id,
+                        "member_id": id,
                     "comment_id": comment_id,
                     "emoji_id": emoji_id,
                     "tourism_id":tourismId
@@ -402,8 +441,8 @@
                             emoji_num.text(data)
                         });
 
-                }
-            });
+                    }
+                });
             }
 
 
@@ -413,85 +452,85 @@
 
 
     $(".msg_emoji_heart").click(function (e) {
-        if (id == null) {
-            e.stopPropagation();
-            alert('請先登入:)');
-            return false;
-        }
-        let emoji = $(this).closest('.emoji').find('.msg_emoji_heart ')
+            if (id == null) {
+                e.stopPropagation();
+                alert('請先登入:)');
+                return false;
+            }
+            let emoji = $(this).closest('.emoji').find('.msg_emoji_heart ')
         let emoji_num = $(this).closest('.emoji').find('.msg_emoji_heart_num')
         let msg_id = emoji.data("msgid")
         let emoji_id = emoji.data("emojiid")
 
         if (emoji.attr('disabled') == 'disabled') {
 
-            emoji.attr('disabled', false);
-            emoji.removeClass('click_button');
+                emoji.attr('disabled', false);
+                emoji.removeClass('click_button');
             $.ajax({
                 type: 'Delete',
                 url: "http://localhost:54678/api/api_message_emoji_details",
                 contentType: 'application/json',
                 data: JSON.stringify({
-                    "member_id": id,
+                        "member_id": id,
                     "msg_id": msg_id,
                     "emoji_id": emoji_id,
                     "tourism_id": tourismId
                 }),
                 success: function (data, status) {
                         $.get(`@Url.Action("getMsgEmojiNum","CommentsWeb")?msg_id=${msg_id}&tourismId=${tourismId}`, function (data) {
-                    emoji_num.text(data)
+                            emoji_num.text(data)
                     console.log(data)
                 });
 
-                }
-            });
+                    }
+                });
 
-        } else {
-        emoji.attr('disabled', true);
-       emoji.addClass('click_button')
-
+            } else {
+                emoji.attr('disabled', true);
+                emoji.addClass('click_button')
+    
             $.ajax({
                 type: 'POST',
                 url: "http://localhost:54678/api/api_message_emoji_details",
                 contentType: 'application/json',
                 data: JSON.stringify({
-                    "member_id": id,
+                        "member_id": id,
                     "msg_id": msg_id,
                     "emoji_id": emoji_id,
                     "tourism_id": tourismId
                 }),
                 success: function (data, status) {
                     $.get(`@Url.Action("getMsgEmojiNum","CommentsWeb")?msg_id=${msg_id}&tourismId=${tourismId}`, function (data) {
-                    emoji_num.text(data)
+                            emoji_num.text(data)
                         console.log(data)
                 });
 
-                }
-            });
+                    }
+                });
 
-         }
+            }
         });
         //檢舉評論
         function sendReport() {
             $.ajax({
-                type: 'POST',
+            type: 'POST',
                 url: `http://localhost:54678/api/api_issues?memberId=${id}&issueContent=${$('#report_content').val()}&issue_id=3&problem_id=${$('.report_comment_id').val().toString()}`,
-                success: function (data, status) {
+            success: function (data, status) {
                     alert("提交成功!")
                 }
-            });           
-            
-    }
-            function sendMsgReport() {
+            });
+
+        }
+        function sendMsgReport() {
             $.ajax({
-                type: 'POST',
+            type: 'POST',
                 url: `http://localhost:54678/api/api_issues?memberId=${id}&issueContent=${$('.msg_report_content').val()}&issue_id=4&problem_id=${$('.report_message_id').val().toString()}`,
-                success: function (data, status) {
+            success: function (data, status) {
                     alert("提交成功!")
                 }
-            });            
-            
-    }
+            });
+
+        }
         $(".submit_issue").click(function (e) {
             if (id == null) {
                 event.stopPropagation();
@@ -519,8 +558,8 @@
                 alert('請先登入:)');
                 return false;
             }
-             
-             sendMsgReport()
+
+            sendMsgReport()
              $('.msg_report_content').val("")
         });
 

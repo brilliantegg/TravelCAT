@@ -128,14 +128,18 @@ namespace TravelCat.Controllers
         public PartialViewResult _CommentsFromMember(string memId)
         {
             destinationsViewModel model = new destinationsViewModel()
-            {
-
+            {            
                 comment = db.comment.Where(m => m.member_id == memId).OrderByDescending(m=>m.comment_date).Take(50).ToList(),
                 message = db.message.Where(m => m.member_id == memId).ToList(),
                 comment_emoji_details = db.comment_emoji_details.ToList(),
                 message_emoji_details = db.message_emoji_details.ToList(),
                 member_profile = db.member_profile.Where(m => m.member_id == memId).ToList(),
                 member = db.member.Where(m => m.member_id == memId).ToList(),
+                hotel_list = db.hotel.ToList(),
+                activity_list = db.activity.ToList(),
+                spot_list = db.spot.ToList(),
+                restaurant_list = db.restaurant.ToList(),
+
             };
             return PartialView(model);
         }
@@ -171,6 +175,10 @@ namespace TravelCat.Controllers
             }
             FollowerViewModels model = new FollowerViewModels()
             {
+                hotel_list = db.hotel.ToList(),
+                activity_list = db.activity.ToList(),
+                spot_list = db.spot.ToList(),
+                restaurant_list = db.restaurant.ToList(),
                 comment = comments.OrderByDescending(m => m.comment_date).Take(50).ToList(),
                 comment_emoji_details = db.comment_emoji_details.ToList(),
                 member_profile = db.member_profile.Where(m => m.member_id == memId).ToList(),

@@ -268,6 +268,7 @@ namespace TravelCat.Controllers
         }
         public ActionResult Collections(string id= "M000003")
         {
+            ViewBag.id = id;
             CollectionViewModels model = new CollectionViewModels()
             {
                 member = db.member.Find(id),

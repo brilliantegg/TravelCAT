@@ -40,6 +40,7 @@
             
         <div class="member_header">
             <div class="personal_info col-8 col-md-5">
+                <h1>@Model.member_profile.nickname</h1>
                 <p class="brief">@Model.member_profile.brief_intro</p>
 
                 <!--編輯會員 or 追蹤會員-->
@@ -127,11 +128,6 @@
                     @Html.ActionLink("+編輯個人資料", "EditMemberProfile", "web_Member_Index", new { id = Model.member.member_id }, new { @class = "btn btn-outline-dark mt-2" })<br />
                     @Html.ActionLink("+修改密碼", "Editpassword", "web_Member_Index", new { id = Model.member.member_id }, new { @class = "btn btn-outline-dark mt-2" })<br />
                     @Html.ActionLink("+更改信箱", "Editemail", "web_Member_Index", new { id = Model.member.member_id }, new { @class = "btn btn-outline-dark mt-2 mb-5" })<br />
-                    <span>信箱驗證狀態:</span>
-                    @if (@Model.member_profile.emailConfirmed == true)
-                    {<span>已認證</span> }
-                    else
-                    {<span>尚未認證</span>}
                 </div>
             </div>
         </div>
@@ -145,6 +141,15 @@
                         <div>
                             <div>
                                 <ul>
+                                    <li>
+                                        <span class="subject_title">信箱驗證</span>
+                                        @if (@Model.member_profile.emailConfirmed == true)
+                                        {
+                                            <span>已認證</span> }
+                                        else
+                                        {
+                                            <span>尚未認證</span>}
+                                    </li>
                                     <li> <span span class="subject_title">評論數</span> @Model.comment.Where(m => m.member_id == @Model.member.member_id).Count()</li>
                                     <li> <span span class="subject_title">追蹤者</span> <button data-toggle="modal" class="info_content " data-target="#follow">@Model.follow.Count()</button></li>
                                     <li> <span span class="subject_title">關注中</span> <button data-toggle="modal" class="info_content" data-target="#followed">@Model.followed.Count()</button> </li>
@@ -161,7 +166,7 @@
                                 </ul>
                                 <!--RANK-->
                                 <ul>
-
+                                    <li>排行榜</li>
                                     @foreach (var item in ViewBag.score)
                                     {
 
@@ -173,7 +178,7 @@
                                         </li>
                                     }
                                 </ul>
-                                <div class="modal fade" id="follow" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                <div class="modal fade " id="follow" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -197,7 +202,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="modal fade" id="followed" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal fade " id="followed" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -227,35 +232,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="badge container-fluid">
-                            @{
-                                string badge = "";
-                                if (score > 1000)
-                                {
-
-                                    <img src='http://localhost:54678/images/badges/9.png' title="300分徽章" data-toggle="popover" data-placement="bottom" data-trigger="hover"/>
-                                    <img src='http://localhost:54678/images/badges/1000_invites.png' title="400分徽章" data-toggle="popover" data-placement="bottom" data-trigger="hover"/>
-                                    <img src='http://localhost:54678/images/badges/100000_comments.png' title="500分徽章" data-toggle="popover" data-placement="bottom" data-trigger="hover"/>
-                                    <img src='http://localhost:54678/images/badges/50000_fans.png' title="1000分徽章" data-toggle="popover" data-placement="bottom" data-trigger="hover" />
-                                }
-                                else if (score > 500)
-                                {
-                                    <img src='http://localhost:54678/images/badges/9.png' title="300分徽章" data-toggle="popover" data-placement="bottom" data-trigger="hover" />
-                                    <img src='http://localhost:54678/images/badges/1000_invites.png' title="400分徽章" data-toggle="popover" data-placement="bottom" data-trigger="hover"/>
-                                    <img src='http://localhost:54678/images/badges/100000_comments.png' title="500分徽章" data-toggle="popover" data-placement="bottom" data-trigger="hover"/>
-                                }
-                                else if (score > 400)
-                                {
-                                    <img src='http://localhost:54678/images/badges/9.png' title="300分徽章" data-toggle="popover" data-placement="bottom" data-trigger="hover"/>
-                                    <img src='http://localhost:54678/images/badges/1000_invites.png' title="400分徽章" data-toggle="popover" data-placement="bottom" data-trigger="hover"/>
-                                }
-                                else if (score > 300)
-                                {
-                                    <img src='http://localhost:54678/images/badges/9.png' title="300分徽章" data-toggle="popover" data-placement="bottom" data-trigger="hover"/>
-                                }
-                            }
-                            @badge
                         </div>
                     </div>
                 </div>
@@ -287,20 +263,27 @@
                 <div class="row pt-5 pagebox">
                     <div class="col-md-6 ">
                         <div>
-                            <img src="~/images/badges/AD7sqjR.png" class="photo"  />
-                        
-                            <img src="~/images/badges/baby.png" class="photo" />
-                      
-                            <img src="~/images/badges/band-sticker-printing-designs-nirvana-png-logo-11.png" class="photo" />
-                        
-                            <img src="~/images/badges/cup.png" class="photo" />
-                        </div>
+                            @if (Model.followed.Count()>10)
+                            {
+                                <img src="~/images/badges/AD7sqjR.png" class="photo" title="好朋友 -追蹤人數超過10 位"/>
+
+                            }
+                            
+                                <img src="~/images/badges/band-sticker-printing-designs-nirvana-png-logo-11.png" class="photo" title="狂放不羈- 曾經有被檢舉的紀錄"/>
+
+                                <img src="~/images/badges/cup.png" class="photo" />
+                            </div>
                         <div>
-                            <img src="~/images/badges/dinosaur.png" class="photo" />
-                        
-                            <img src="~/images/badges/fish.png" class="photo" />
-                       
-                            <img src="~/images/badges/fire.png" class="photo" />
+
+                                <img src="~/images/badges/dinosaur.png" class="photo" title="遠古化石- 創立超過10 年的帳號"/>
+
+
+
+                            @if (Model.member_profile.emailConfirmed == true)
+                            {
+                                <img src="~/images/badges/fire.png" class="photo" title="已知用火- 信箱通過認證" />
+                            }
+
                         </div>
 
 
@@ -309,26 +292,26 @@
                     </div>
                     <div class="col-md-6">
                         <div>
-                            <img src="~/images/badges/GG.png" class="photo" />
-                        
-                        
-                            <img src="~/images/badges/happydog.png" class="photo" />
-                        
-                            <img src="~/images/badges/ins-imga.png" class="photo" />
-                     
-                        
-                            <img src="~/images/badges/NBAGE.png" class="photo" />
-                        </div>
+                            @if (Model.comment.Where(m => m.member_id == memberId && m.tourism_id.StartsWith("A")).Count() > 20)
+                            {
+                                <img src="~/images/badges/happydog.png" class="photo" title="玩樂達人- 發表 20 篇活動評論"/>
+                            }
+
+
+                                <img src="~/images/badges/NBAGE.png" class="photo" />
+                            </div>
                         <div>
                             <img src="~/images/badges/pineapple.png" class="photo" />
-                        
-                        
-                            <img src="~/images/badges/pizza.png" class="photo" />
-                        
+                            @if (Model.comment.Where(m => m.member_id == memberId && m.tourism_id.StartsWith("R")).Count() > 20)
+                            {
+                                <img src="~/images/badges/pizza.png" class="photo" title="美食評論家- 發表 20 篇餐廳評論" />
+                            }
+
+
                             <img src="~/images/badges/rainbow.png" class="photo" />
-                        
-                        
-                          
+
+
+
 
                         </div>
 
@@ -387,9 +370,6 @@
              $('.mem_report_content').val("")
              });
 
-    $(function (){
-    $("[data-toggle='popover']").popover();
-    });
 
 
     $(".follwered_btn").click(function () {

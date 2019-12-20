@@ -17,32 +17,37 @@
 
 }
 
+<style>
+</style>
 <!--1則 評論-->
-<div class=" justify-content-center align-items-center">
-
-    @foreach (var item in Model.comment)
-    {
-        if (item.comment_status)
+<div class="d-flex justify-content-center align-items-center">
+    <div class="container">
+        @foreach (var item in Model.comment)
         {
-            <div class="container">
-
+            if (item.comment_status)
+            {
 
                 <div class="single_comments  ">
                     <input id="comment_id" type="hidden" value=@item.comment_id />
                     <div class="member_detail ">
-                        <div class="d-flex">
+                        <div class="d-flex ">
                             @if (item.member.member_profile.profile_photo != null)
                             {
-                                <img class="member_avatar" src="~/images/member/@item.member.member_profile.profile_photo" alt="..." onerror="this.src='/images/member/avatar.png';" >
+                                <a href="@Url.Action("Index","web_Member_Index",new { id=item.member_id})">
+                                    <img class="member_avatar"
+                                         src="~/images/member/@item.member.member_profile.profile_photo"
+                                         alt="..." onerror="this.src='/images/member/avatar.png';" />
+                                </a>
                             }
                             else
                             {
-                                <img class="member_avatar" src="~/images/member/avatar.png" alt="...">
+                                <a href="@Url.Action("Index","web_Member_Index",new { id=item.member_id})">
+                                    <img class="member_avatar" src="~/images/member/avatar.png" alt="...">
+                                </a>
                             }
-
-                            <div class="d-flex">
+                            <a href="@Url.Action("Index","web_Member_Index",new { id=item.member_id})" style="margin:auto">
                                 <h5 class="member_name">@item.member.member_profile.nickname</h5>
-                            </div>
+                            </a>
                         </div>
                         <!-- 更多選項 -->
                         @if (@memberId != null)
@@ -55,33 +60,12 @@
                                     <a class="dropdown-item" href="#">分享到 facebook</a>
                                     <a class="dropdown-item" href="#">分享到 line</a>
                                     <a class="dropdown-item" href="#">分享到 google</a>
-                                    <a class="dropdown-item report_comment" data-toggle="modal" data-target="#reportModel"> 檢舉此評論</a>
                                 </div>
                             </div>
                         }
 
                     </div>
-                    <!--檢舉評論modal-->
 
-                    <div class="modal fade" id="reportModel" tabindex="-1" role="dialog" aria-labelledby="reportModel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-scrollable" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title">檢舉評論</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <textarea id="report_content" name="report_content" rows="20" cols="20" placeholder="請附上有問題的網址，以及違規評論內容"></textarea>
-                                </div>
-                                <input type="hidden" class="report_comment_id" value="@item.comment_id" />
-                                <div class="modal-footer">
-                                    <button id="btnTest" type="submit" class="btn btn-outline-dark submit_issue" data-dismiss="modal">提交表單</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <div class="comment_photo">
                         <img src="/images/comment/@item.comment_photo" class="comment_photo w-100" alt="X_X" onerror="this.src='/images/comment/0_2019129下午090757.jpg';" />
                     </div>
@@ -104,7 +88,26 @@
                         <div class="response_content">
                             <p>@Html.Raw(item.comment_content.ToString().Replace("\n", "<br>"))</p>
                         </div>
-
+                        @if (item.tourism_id.StartsWith("A"))
+                        {
+                            var activity = Model.activity_list.Where(m => m.activity_id == item.tourism_id).FirstOrDefault();
+                            <a href="@Url.Action("Details","web_activities",new { id=item.tourism_id})" class="hashtag "> #@activity.activity_title #@item.travel_partner #@item.travel_month 月</a>
+                        }
+                        else if (item.tourism_id.StartsWith("S"))
+                        {
+                            var spot = Model.spot_list.Where(m => m.spot_id == item.tourism_id).FirstOrDefault();
+                            <a href="@Url.Action("Details","WebSpots",new { id=item.tourism_id})" class="hashtag "> #@spot.spot_title #@item.travel_partner #@item.travel_month 月</a>
+                        }
+                        else if (item.tourism_id.StartsWith("R"))
+                        {
+                            var restaurant = Model.restaurant_list.Where(m => m.restaurant_id == item.tourism_id).FirstOrDefault();
+                            <a href="@Url.Action("Details","WebRestaurants",new { id=item.tourism_id})" class="hashtag "> #@restaurant.restaurant_title #@item.travel_partner #@item.travel_month 月</a>
+                        }
+                        else if (item.tourism_id.StartsWith("H"))
+                        {
+                            var hotel = Model.hotel_list.Where(m => m.hotel_id == item.tourism_id).FirstOrDefault();
+                            <a href="@Url.Action("Details","WebHotels",new { id=item.tourism_id})" class="hashtag "> #@hotel.hotel_title #@item.travel_partner #@item.travel_month 月</a>
+                        }
 
                     </div>
 
@@ -157,11 +160,22 @@
                         </div>
                         <hr />
                     </div>
-
+                    <!--單則留言-->
                     
                 </div>
-            </div>
+
+            }
         }
-    }
+    </div>
 </div>
 
+<script>
+    $(function () {
+        $('[data-toggle="popover"]').popover()
+
+        //$('[data-toggle="tooltip"]').tooltip()
+
+    })
+
+
+</script>

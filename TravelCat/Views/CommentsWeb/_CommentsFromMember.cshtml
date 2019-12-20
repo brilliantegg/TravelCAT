@@ -16,41 +16,37 @@
     }
     
 }
-
+<style>
+</style>
 <!--1則 評論-->
-<div class=" justify-content-center align-items-center">
-
-    @foreach (var item in Model.comment)
-    {
-        if (item.comment_status)
+<div class="d-flex justify-content-center align-items-center">
+    <div class="container">
+        @foreach (var item in Model.comment)
         {
-            <div class="container">
+            if (item.comment_status)
+            {
+
                 <div class="single_comments  ">
                     <input id="comment_id" type="hidden" value=@item.comment_id />
                     <div class="member_detail ">
-                        <div class="d-flex">
+                        <div class="d-flex ">
                             @if (item.member.member_profile.profile_photo != null)
                             {
                                 <a href="@Url.Action("Index","web_Member_Index",new { id=item.member_id})">
                                     <img class="member_avatar"
                                          src="~/images/member/@item.member.member_profile.profile_photo"
-                                         alt="..." onerror="this.src='/images/member/avatar.png';"
-                                         data-toggle="popover"
-                                         data-trigger="hover"
-                                         data-placement="left"
-                                         data-html="true"
-                                         title="<b>@item.member.member_profile.nickname</b>"
-                                         data-content="<div><b>城市</b>@item.member.member_profile.city</div>">
+                                         alt="..." onerror="this.src='/images/member/avatar.png';" />
                                 </a>
                             }
                             else
                             {
-                                <img class="member_avatar" src="~/images/member/avatar.png" alt="...">
+                                <a href="@Url.Action("Index","web_Member_Index",new { id=item.member_id})">
+                                    <img class="member_avatar" src="~/images/member/avatar.png" alt="...">
+                                </a>
                             }
-
-                            <div class="d-flex">
+                        <a href="@Url.Action("Index","web_Member_Index",new { id=item.member_id})" style="margin:auto">
                                 <h5 class="member_name">@item.member.member_profile.nickname</h5>
-                            </div>
+                        </a>
                         </div>
                         <!-- 更多選項 -->
                         @if (@memberId != null)
@@ -62,13 +58,13 @@
                                 <div class="dropdown-menu" aria-labelledby="dropdownMore">
                                     <a class="dropdown-item" href="#">分享到 facebook</a>
                                     <a class="dropdown-item" href="#">分享到 line</a>
-                                    <a class="dropdown-item" href="#">分享到 google</a>                                    
+                                    <a class="dropdown-item" href="#">分享到 google</a>
                                 </div>
                             </div>
                         }
 
                     </div>
-                    
+
                     <div class="comment_photo">
                         <img src="/images/comment/@item.comment_photo" class="comment_photo w-100" alt="X_X" onerror="this.src='/images/comment/0_2019129下午090757.jpg';" />
                     </div>
@@ -103,16 +99,18 @@
                         }
                         else if (item.tourism_id.StartsWith("R"))
                         {
-                            <a href="" class="hashtag "> #@Model.restaurant.restaurant_title #@item.travel_partner #@item.travel_month 月</a>
+                            var restaurant = Model.restaurant_list.Where(m => m.restaurant_id == item.tourism_id).FirstOrDefault();
+                            <a href="@Url.Action("Details","WebRestaurants",new { id=item.tourism_id})" class="hashtag "> #@restaurant.restaurant_title #@item.travel_partner #@item.travel_month 月</a>
                         }
                         else if (item.tourism_id.StartsWith("H"))
                         {
-                            <a href="" class="hashtag "> #@Model.hotel.hotel_title #@item.travel_partner #@item.travel_month 月</a>
+                            var hotel = Model.hotel_list.Where(m => m.hotel_id == item.tourism_id).FirstOrDefault();
+                            <a href="@Url.Action("Details","WebHotels",new { id=item.tourism_id})" class="hashtag "> #@hotel.hotel_title #@item.travel_partner #@item.travel_month 月</a>
                         }
 
                     </div>
 
-                    
+
                     <hr />
                     <!--判斷前端是否要顯示被按讚過-->
 
@@ -182,7 +180,7 @@
                                         </span>
                                         <div class="response_content">
                                             @msgItem.msg_content
-                                        </div>                                        
+                                        </div>
                                         <hr />
                                         <div class="emoji">
                                             @if (@Model.message_emoji_details.Where(m => m.member_id == @memberId && m.msg_id == msgItem.msg_id).Count() > 0)
@@ -200,23 +198,21 @@
                                     </div>
                                 </div>
                             </div>
-                        }          
+                        }
                     </div>
                 </div>
-            </div>
+
+            }
         }
-    }
+    </div>
 </div>
 
 <script>
-        // Initialize tooltip component
-$(function () {
-  $('[data-toggle="tooltip"]').tooltip()
-})
-
-// Initialize popover component
-$(function () {
+    $(function () {
   $('[data-toggle="popover"]').popover()
+
+  //$('[data-toggle="tooltip"]').tooltip()
+
 })
 
 

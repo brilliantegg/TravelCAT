@@ -8,6 +8,10 @@ namespace TravelCat.ViewModels
 {
     public class FollowerViewModels
     {
+        public List<restaurant> restaurant_list { get; set; }
+        public List<hotel> hotel_list { get; set; }
+        public List<activity> activity_list { get; set; }
+        public List<spot> spot_list { get; set; }
         public List<member> member { get; set; }
         public List<member_profile> member_profile { get; set; }
 
