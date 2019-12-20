@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using TravelCat.Models;
+using X.PagedList.Mvc;
+using X.PagedList;
 
 namespace TravelCat.ViewModels
 {
@@ -31,5 +33,6 @@ namespace TravelCat.ViewModels
         public List<hotel> hotel { get; set; }
         public List<restaurant> restaurant { get; set; }
         public List<spot> spot { get; set; }
+        public IPagedList<comment> comment_page { get; set; }
     }
 }

@@ -1,5 +1,8 @@
 ﻿<link href="~/Content/destinations.css" rel="stylesheet" />
 @using Microsoft.AspNet.Identity
+@using X.PagedList.Mvc
+@using X.PagedList
+@using X.PagedList.Mvc.Common
 @model TravelCat.ViewModels.destinationsViewModel
 @{
     ViewBag.Title = "Details";
@@ -39,7 +42,7 @@
 <!--1則 評論-->
 <div class=" justify-content-center align-items-center">
 
-    @foreach (var item in Model.comment)
+    @foreach (var item in Model.comment_page)
     {
         if (item.comment_status)
         {
@@ -91,7 +94,7 @@
                         <div class="modal-dialog modal-dialog-scrollable" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" >檢舉評論</h5>
+                                    <h5 class="modal-title">檢舉評論</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -282,38 +285,49 @@
                         <div class="render_msg"></div>
                         <!--回覆留言-->
 
-                    <div class="add_message single_message">
-                        <button class="submit_msg" value="submit_msg">submit_msg</button>
-                        @if (@memberId != null)
-                        {
-                            <form action="/web_comments/createMessage" method="post">
-                                @Html.AntiForgeryToken()
-                                <input type="hidden" name="comment_id" value="@item.comment_id" />
-                                <input type="hidden" name="msg_time" value="@DateTime.Now" />
-                                <input type="hidden" name="member_id" value="@Session["memberID"]" />
-                                <input type="hidden" name="msg_status" value="True" />
-                                <input type="hidden" name="tourism_id" value="@item.tourism_id" />
-                                <textarea class="msg_content" rows="2" cols="20" name="msg_content" placeholder="@User.Identity.GetUserName(),想說說甚麼..."></textarea>
-                                <br />
-                                <div class="add_message_Submit_area text-right">
-                                    <input id="add_message_Submit" class="btn btn-outline-dark" type="submit" value="submit" />
-                                </div>
-                            </form>
-                        }
-                        else
-                        {
-                            <textarea class="msg_content" rows="2" cols="20" name="msg_content" placeholder="請先登入後留言"></textarea>
-                        }
-                    </div>
+                        <div class="add_message single_message">
+                            @*<button class="submit_msg" value="submit_msg">submit_msg</button>*@
+                            @if (@memberId != null)
+                            {
+                                <form action="/web_comments/createMessage" method="post">
+                                    @Html.AntiForgeryToken()
+                                    <input type="hidden" name="comment_id" value="@item.comment_id" />
+                                    <input type="hidden" name="msg_time" value="@DateTime.Now" />
+                                    <input type="hidden" name="member_id" value="@Session["memberID"]" />
+                                    <input type="hidden" name="msg_status" value="True" />
+                                    <input type="hidden" name="tourism_id" value="@item.tourism_id" />
+                                    <textarea class="msg_content" rows="2" cols="20" name="msg_content" placeholder="@User.Identity.GetUserName(),想說說甚麼..."></textarea>
+                                    <br />
+                                    <div class="add_message_Submit_area text-right">
+                                        <input id="add_message_Submit" class="btn btn-outline-dark" type="submit" value="submit" />
+                                    </div>
+                                </form>
+                            }
+                            else
+                            {
+                                <textarea class="msg_content" rows="2" cols="20" name="msg_content" placeholder="請先登入後留言"></textarea>
+                            }
+                        </div>
 
 
-                        
+
 
                     </div>
                 </div>
+
             </div>
+
         }
     }
+    @*<div>
+        @Html.PagedListPager(Model.comment_page, page => Url.Action("Index", "web_Member_Index", new { page = page }),
+        new PagedListRenderOptions
+        {
+            ContainerDivClasses = new[] { "" },
+            LiElementClasses = new[] { "page-item" },
+            PageClasses = new[] { "page-link" },
+        })
+    </div>*@
 </div>
 
 
@@ -333,20 +347,20 @@
         console.log(tourismId)
     @{  var member = Model.member.Where(m => m.member_id == memberId).FirstOrDefault();  }
     //新增留言
-    $(".submit_msg").click(function () {
+    @*$(".submit_msg").click(function () {
         $(".render_msg").append(`<div class=" single_message py-3">
-                                <div class="media mt-3">
-                                    <img src="http://localhost:54678/images/member/@member.member_profile.profile_photo" class="mr-3 ml-3 member_avatar" alt="..." onerror="this.src='/images/member/avatar.png';">
+                                                                                                                  <div class="media mt-3">
+                                    <img src='http://localhost:54678/images/member/"@(member.member_profile.profile_photo)"' class="mr-3 ml-3 member_avatar" alt="..." onerror="this.src='/images/member/avatar.png';">
 
                                     <div class="media-body ">
 
                                         <div class="d-flex message_body">
                                             <h5 class="member_name">
-                                                @member.member_profile.nickname
-                                            </h5>                                           
+                                                "@(member.member_profile.nickname)"
+                                            </h5>
                                         <br>
                                         <span class="create_time">
-                                            @DateTime.Now.ToString("yyyy MM dd")
+                                            @(DateTime.Now.ToString("yyyy MM dd"))
                                         </span>
 <br>
                                         <div class="response_content">
@@ -356,7 +370,7 @@
                                         <hr />
                                         <div class="emoji">
                                                 <img class="icon msg_emoji_heart" src="http://localhost:54678/images/emoji/talk.png" data-value="0" data-msgid="0" data-emojiid=1 />
-                                                <span class="msg_emoji_heart_num">0</span>                                            
+                                                <span class="msg_emoji_heart_num">0</span>
 
                                         </div>
                                     </div>
@@ -364,7 +378,7 @@
                             </div>`);
         $('.msg_content').val("")
 
-        })
+        })*@
         //顯示文章
         $(".readmore").click(function () {
             $(".intro").toggleClass('showMore');
@@ -488,7 +502,7 @@
             } else {
                 emoji.attr('disabled', true);
                 emoji.addClass('click_button')
-    
+
             $.ajax({
                 type: 'POST',
                 url: "http://localhost:54678/api/api_message_emoji_details",

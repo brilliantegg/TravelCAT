@@ -5,17 +5,20 @@ using System.Web;
 using System.Web.Mvc;
 using TravelCat.Models;
 using TravelCat.ViewModels;
+using X.PagedList;
+using X.PagedList.Mvc;
 
 namespace TravelCat.Controllers
 {
     public class CommentsWebController : Controller
     {
         private dbTravelCat db = new dbTravelCat();
-        // GET: CommentsWeb
+        int pageSize = 10;
+        
 
-        public PartialViewResult _CommentsForDestination(string tourismId)
+        public PartialViewResult _CommentsForDestination(string tourismId, int page = 1)
         {
-            
+            int currentPage = page < 1 ? 1 : page;
             destinationsViewModel model = new destinationsViewModel()
             {                
                 comment = db.comment.Where(m => m.tourism_id == tourismId).ToList(),
@@ -43,13 +46,16 @@ namespace TravelCat.Controllers
                 default:                    
                     break;
             }
+            model.comment_page = model.comment.ToPagedList(currentPage, pageSize);
             ViewBag.tourismId = tourismId;
             return PartialView(model);
 
         }
+        //篩選評論
         [HttpPost]
-        public PartialViewResult _CommentsForDestination(string tourismId, string[] comment_rating = null, string[] travel_partner = null, string travel_month = null)
+        public PartialViewResult _CommentsForDestination(string tourismId, string[] comment_rating = null, string[] travel_partner = null, string travel_month = null, int page = 1)
         {
+            int currentPage = page < 1 ? 1 : page;
             List<comment> origin = db.comment.Where(m => m.tourism_id == tourismId).ToList();
 
             destinationsViewModel model = new destinationsViewModel()
@@ -121,15 +127,17 @@ namespace TravelCat.Controllers
             }
             model.comment = comments;
             ViewBag.tourismId = tourismId;
-
+            model.comment_page = model.comment.ToPagedList(currentPage, pageSize);
             return PartialView(model);
 
         }
-        public PartialViewResult _CommentsFromMember(string memId)
+        //個人評論
+        public PartialViewResult _CommentsFromMember(string memId, int page = 1)
         {
+            int currentPage = page < 1 ? 1 : page;
             destinationsViewModel model = new destinationsViewModel()
             {            
-                comment = db.comment.Where(m => m.member_id == memId).OrderByDescending(m=>m.comment_date).Take(50).ToList(),
+                comment = db.comment.Where(m => m.member_id == memId).OrderByDescending(m=>m.comment_date).ToList(),
                 message = db.message.Where(m => m.member_id == memId).ToList(),
                 comment_emoji_details = db.comment_emoji_details.ToList(),
                 message_emoji_details = db.message_emoji_details.ToList(),
@@ -141,10 +149,12 @@ namespace TravelCat.Controllers
                 restaurant_list = db.restaurant.ToList(),
 
             };
+            model.comment_page = model.comment.ToPagedList(currentPage, pageSize);
             return PartialView(model);
         }
-        public PartialViewResult _CommentsForFollwers(string memId)
+        public PartialViewResult _CommentsForFollwers(string memId, int page = 1)
         {
+            int currentPage = page < 1 ? 1 : page;
             List<member> member = db.member.ToList();
             List<comment> comment = db.comment.ToList();
             List<follow_list> follw = db.follow_list.Where(m => m.member_id == memId).ToList();
@@ -179,12 +189,12 @@ namespace TravelCat.Controllers
                 activity_list = db.activity.ToList(),
                 spot_list = db.spot.ToList(),
                 restaurant_list = db.restaurant.ToList(),
-                comment = comments.OrderByDescending(m => m.comment_date).Take(50).ToList(),
+                comment = comments.OrderByDescending(m => m.comment_date).ToList(),
                 comment_emoji_details = db.comment_emoji_details.ToList(),
                 member_profile = db.member_profile.Where(m => m.member_id == memId).ToList(),
                 member = members,
             };
-
+            model.comment_page = model.comment.ToPagedList(currentPage, pageSize);
             return PartialView(model);
         }
         public int getMsgEmojiNum(int msg_id, string tourismId)

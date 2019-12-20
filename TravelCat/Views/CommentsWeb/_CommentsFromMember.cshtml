@@ -1,5 +1,8 @@
 ﻿<link href="~/Content/destinations.css" rel="stylesheet" />
 @using Microsoft.AspNet.Identity
+@using X.PagedList.Mvc
+@using X.PagedList
+@using X.PagedList.Mvc.Common
 @model TravelCat.ViewModels.destinationsViewModel
 @{
     ViewBag.Title = "Details";
@@ -14,14 +17,14 @@
     {
         memberId = Session["memberID"].ToString();
     }
-    
+
 }
 <style>
 </style>
 <!--1則 評論-->
 <div class="d-flex justify-content-center align-items-center">
     <div class="container">
-        @foreach (var item in Model.comment)
+        @foreach (var item in Model.comment_page)
         {
             if (item.comment_status)
             {
@@ -44,9 +47,9 @@
                                     <img class="member_avatar" src="~/images/member/avatar.png" alt="...">
                                 </a>
                             }
-                        <a href="@Url.Action("Index","web_Member_Index",new { id=item.member_id})" style="margin:auto">
+                            <a href="@Url.Action("Index","web_Member_Index",new { id=item.member_id})" style="margin:auto">
                                 <h5 class="member_name">@item.member.member_profile.nickname</h5>
-                        </a>
+                            </a>
                         </div>
                         <!-- 更多選項 -->
                         @if (@memberId != null)
@@ -204,16 +207,25 @@
 
             }
         }
+        <div>
+            @Html.PagedListPager(Model.comment_page, page => Url.Action("Index","web_Member_Index", new { page = page }),
+            new PagedListRenderOptions
+            {
+                ContainerDivClasses = new[] { "" },
+                LiElementClasses = new[] { "page-item" },
+                PageClasses = new[] { "page-link" },
+            })
+        </div>
     </div>
 </div>
 
 <script>
     $(function () {
-  $('[data-toggle="popover"]').popover()
+        $('[data-toggle="popover"]').popover()
 
-  //$('[data-toggle="tooltip"]').tooltip()
+        //$('[data-toggle="tooltip"]').tooltip()
 
-})
+    })
 
 
 </script>

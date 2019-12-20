@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using TravelCat.Models;
+using X.PagedList.Mvc;
+using X.PagedList;
 
 namespace TravelCat.ViewModels
 {
@@ -24,5 +26,6 @@ namespace TravelCat.ViewModels
         public List<comment_emoji_details> comment_emoji_details { get; set; }
         public List<emoji> emoji { get; set; }
         public List<collections_detail> collections_detail { get; set; }
+        public IPagedList<comment> comment_page { get; set; }
     }
 }
