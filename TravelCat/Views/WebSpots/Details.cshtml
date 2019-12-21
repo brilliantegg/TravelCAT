@@ -247,6 +247,19 @@
 
         <div class="filter_comment row col-7 offset-1">
             <input type="hidden" name="tourismId" value="@ViewBag.tourismId" />
+            <div class="col-12 mt-3">
+                <div class="row">
+                    <h1 class="col-9">評論</h1>
+                    <div class="new_comment col-3 justify-content-end">
+                        <form action="/web_comments/Create" Method="GET">
+                            <input type="hidden" name="tourismID" value=@Model.spot.spot_id />
+                            <input type="hidden" name="mem_id" value="@Session["memberID"]" />
+                            <button type="submit" class="add_comment btn btn-outline-dark btn-lg  ">新增評論</button>
+                        </form>
+                    </div>
+                </div>
+                <hr />
+            </div>
             <div class="fliter_set col-4">
                 <div class="fliter_set">
                     <h4>旅客評等</h4><br />
@@ -386,13 +399,7 @@
 
             </div>
 
-            <div class="new_comment container">
-                <form action="/web_comments/Create" Method="GET">
-                    <input type="hidden" name="tourismID" value=@ViewBag.tourismId />
-                    <input type="hidden" name="mem_id" value="@Session["memberID"]" />
-                    <button type="submit" class="add_comment btn btn-outline-dark  ">新增評論</button>
-                </form>
-            </div>
+
         </div>
     </section>
 

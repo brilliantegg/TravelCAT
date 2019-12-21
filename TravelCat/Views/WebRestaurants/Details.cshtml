@@ -86,7 +86,7 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <form  id="bucket_form" action="/web_comments/Postcollections_detail" method="post">
+                        <form id="bucket_form" action="/web_comments/Postcollections_detail" method="post">
                             <div class="modal-body">
 
                                 @Html.AntiForgeryToken()
@@ -228,12 +228,27 @@
 
 
     <!--篩選評論-->
-    @{ double totalCommentNum = @Model.comment.Count(); }
+    @{ double totalCommentNum = 0;
+        if (@Model.comment.Count() > 0) { totalCommentNum = @Model.comment.Count(); }
+    }
     <section>
 
 
         <div class="filter_comment row row col-7 offset-1">
             <input type="hidden" name="tourismId" value="@ViewBag.tourismId" />
+            <div class="col-12 mt-3">
+                <div class="row">
+                    <h1 class="col-9">評論</h1>
+                    <div class="new_comment col-3 justify-content-end">
+                        <form action="/web_comments/Create" Method="GET">
+                            <input type="hidden" name="tourismID" value=@Model.restaurant.restaurant_id />
+                            <input type="hidden" name="mem_id" value="@Session["memberID"]" />
+                            <button type="submit" class="add_comment btn btn-outline-dark btn-lg  ">新增評論</button>
+                        </form>
+                    </div>
+                </div>
+                <hr />
+            </div>
             <div class="fliter_set col-4">
                 <div class="fliter_set">
                     <h4>旅客評等</h4><br />
@@ -373,13 +388,7 @@
 
             </div>
 
-            <div class="new_comment container">
-                <form action="/web_comments/Create" Method="GET">
-                    <input type="hidden" name="tourismID" value=@ViewBag.tourismId />
-                    <input type="hidden" name="mem_id" value="@Session["memberID"]" />
-                    <button type="submit" class="add_comment btn btn-outline-dark  ">新增評論</button>
-                </form>
-            </div>
+
         </div>
     </section>
 
@@ -702,10 +711,10 @@
            data: $("#bucket_form").serialize(),// serializes the form's elements.
            success:function()
            {
-             
+
            }
          });
      $('#collectModal').modal('toggle');
-    
+
 });*@
 </script>
