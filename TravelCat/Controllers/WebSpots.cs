@@ -33,7 +33,7 @@ namespace TravelCat.Controllers
         }
 
         // GET: web_activities/Details/5
-        public ActionResult Details(string id)
+        public ActionResult Details(string id,int page =1)
         {
             
             if (id == null)

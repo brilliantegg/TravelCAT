@@ -19,22 +19,28 @@
     }
     string firstChar = ViewBag.tourismId.Substring(0, 1);
     string destinatations;
+    string controller;
     switch (firstChar)
     {
         case "A":
             destinatations = "A";
+            controller = "web_activities";
             break;
         case "H":
             destinatations = "H";
+            controller = "WebHotels";
             break;
         case "R":
             destinatations = "R";
+            controller = "WebRestaurants";
             break;
         case "S":
             destinatations = "S";
+            controller = "WebSpots";
             break;
         default:
             destinatations = "A";
+            controller = "";
             break;
     }
 }
@@ -319,15 +325,15 @@
 
         }
     }
-    @*<div>
-        @Html.PagedListPager(Model.comment_page, page => Url.Action("Index", "web_Member_Index", new { page = page }),
+    <div>
+        @Html.PagedListPager(Model.comment_page, page => Url.Action("Details", controller, new { id=@ViewBag.tourismId,page = page }),
         new PagedListRenderOptions
         {
             ContainerDivClasses = new[] { "" },
             LiElementClasses = new[] { "page-item" },
             PageClasses = new[] { "page-link" },
         })
-    </div>*@
+    </div>
 </div>
 
 

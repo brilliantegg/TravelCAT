@@ -1,52 +1,81 @@
-﻿@using X.PagedList.Mvc
+﻿<link href="~/Content/Searchindex.css" rel="stylesheet" />
+@using X.PagedList.Mvc
 @using X.PagedList
 @using X.PagedList.Mvc.Common
 @model TravelCat.ViewModels.SearchViewModel
 
 @{ Layout = "";
-    ViewBag.count = Model.show_ratings.Count;}
-
-@foreach (var item in Model.show_ratings)
+    int num = 0;
+    string memberId;
+    if (Session["memberID"] == null || string.IsNullOrWhiteSpace(Session["memberID"].ToString()))
+    {
+        memberId = null;
+    }
+    else
+    {
+        memberId = Session["memberID"].ToString();
+    }
+}
+@if (Model.show_ratings.Count == 0)
+{
+    <span>沒有搜尋結果</span>
+}
+else
+{
+    foreach (var item in Model.show_ratings)
     {
         if (item.id.Contains("S"))
         {
             <div class="media mt-3  pl-3 mb-2 border-dark">
-                <img src="https://images.unsplash.com/photo-1574714802271-15a6dbfdff96?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80" width="180" height="150" class="mr-3 ml-3" alt="...">
+                <img src="https://source.unsplash.com/collection/388793/random?sig=@(Guid.NewGuid())" width="250" height="150" class="mr-3 ml-3" alt="...">
                 <div class="media-body ">
-                    <h3 class="my-2 font-weight-bold border-bottom pb-2">@Html.ActionLink(item.title, "Details", "WebSpots", new { id = item.id }, null)</h3>
+                    <h3 class="col-md-11 font-weight-bold border-bottom pb-2">@Html.ActionLink(item.title, "Details", "WebSpots", new { id = item.id }, null)</h3>
                     <div class="row">
-                        <div class="col-md-12 col-sm-12">@Model.spot.Where(s => s.spot_id == item.id).FirstOrDefault().city @Model.spot.Where(s => s.spot_id == item.id).FirstOrDefault().district</div>
+                        <div class="col-md-12 col-sm-12 font-weight-bold">@Model.spot.Where(s => s.spot_id == item.id).FirstOrDefault().city @Model.spot.Where(s => s.spot_id == item.id).FirstOrDefault().district</div>
                         <div class="col-md-12 col-sm-12 intro_content">@item.intro</div>
-                        <div class="col-md-6 col-sm-12">測試欄位</div>
-                        <div class="col-md-6 col-sm-12">
+                        @if (Model.comment.Where(s => s.tourism_id == item.id).Count() > 0) { num = Model.comment.Where(s => s.tourism_id == item.id).Count(); }
+                        <div class="col-md-6 col-sm-12">有 @num 則評論</div>
+                        <div class="col-md-4 col-sm-12">
                             @if (String.IsNullOrEmpty(item.rating)) { item.rating = "0"; }
-                            <div style="width:100px">
-                                旅客評分:
+                            <div style="margin:5px 0">
                                 <div class="progress ">
-                                    @{var width_convert = (Double.Parse(item.rating)) * 20+"%"; }
-                                    <div class="progress-bar" role="progressbar" style="width:@width_convert;" aria-valuenow="@Double.Parse(item.rating)" aria-valuemin="0" aria-valuemax="5">@item.rating 分</div>
+                                    @{var width_convert = (Double.Parse(item.rating)) * 20 + "%"; }
+                                    <div class="progress-bar" role="progressbar" style="width:@width_convert;" aria-valuenow="@Double.Parse(item.rating)" aria-valuemin="0" aria-valuemax="5">@Math.Round(@Double.Parse(item.rating), 1, MidpointRounding.AwayFromZero) 分</div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                    <label class="btn  btn-light ">
-                        <input type="radio" name="options" id="option1" autocomplete="off" checked> <i class="far fa-thumbs-up"></i>按讚
-                    </label>
-                </div>
+                <span class="fa">
+                    @if (Model.collections_detail.Where(m => m.tourism_id == item.id && m.member_id == @memberId).Count() > 0)
+                    {
+                        <span class="add_to_bucket_list added" data-id="@item.id">
+                            <i class="fas fa-heart" style="color:red"></i>
+                            <i class="far fa-heart"></i>
+                        </span>
+                    }
+                    else
+                    {
+                        <span class="add_to_bucket_list" data-id="@item.id">
+                            <i class="fas fa-heart"></i>
+                            <i class="far fa-heart"></i>
+                        </span>
+                    }
+
+                </span>
             </div>
             <hr />
         }
     }
 
-<div>
-    @Html.PagedListPager(Model.show_ratings, page => Url.Action("Index", new { page = page, q = ViewBag.q, comment_stay_total = ViewBag.stay, city = ViewBag.city, travel_partner = ViewBag.partner, comment_rating = ViewBag.rating, travel_month = ViewBag.month, Sortby = ViewBag.sort }),
-    new PagedListRenderOptions
-    {
-        ContainerDivClasses = new[] { "" },
-        LiElementClasses = new[] { "page-item" },
-        PageClasses = new[] { "page-link" },
-    })
-</div>
+    <div>
+        @Html.PagedListPager(Model.show_ratings, page => Url.Action("Index", new { page = page, q = ViewBag.q, comment_stay_total = ViewBag.stay, city = ViewBag.city, travel_partner = ViewBag.partner, comment_rating = ViewBag.rating, travel_month = ViewBag.month, Sortby = ViewBag.sort }),
+                                                 new PagedListRenderOptions
+                                                 {
+                                                     ContainerDivClasses = new[] { "" },
+                                                     LiElementClasses = new[] { "page-item" },
+                                                     PageClasses = new[] { "page-link" },
+                                                 })
+    </div>
 
+}

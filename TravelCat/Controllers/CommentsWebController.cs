@@ -21,7 +21,7 @@ namespace TravelCat.Controllers
             int currentPage = page < 1 ? 1 : page;
             destinationsViewModel model = new destinationsViewModel()
             {                
-                comment = db.comment.Where(m => m.tourism_id == tourismId).ToList(),
+                comment = db.comment.Where(m => m.tourism_id == tourismId).OrderByDescending(m=>m.comment_date).ToList(),
                 message = db.message.Where(m => m.tourism_id == tourismId).ToList(),
                 comment_emoji_details = db.comment_emoji_details.Where(m => m.tourism_id == tourismId).ToList(),
                 message_emoji_details = db.message_emoji_details.Where(m => m.tourism_id == tourismId).ToList(),
@@ -53,7 +53,7 @@ namespace TravelCat.Controllers
         }
         //篩選評論
         [HttpPost]
-        public PartialViewResult _CommentsForDestination(string tourismId, string[] comment_rating = null, string[] travel_partner = null, string travel_month = null, int page = 1)
+        public PartialViewResult _CommentsForDestination(string tourismId, string[] comment_rating = null, string[] travel_partner = null, string[] travel_month = null, int page = 1)
         {
             int currentPage = page < 1 ? 1 : page;
             List<comment> origin = db.comment.Where(m => m.tourism_id == tourismId).ToList();
@@ -96,7 +96,7 @@ namespace TravelCat.Controllers
             if (travel_month != null)
             {
                 string[] month = new string[3];
-                switch (travel_month[0].ToString())
+                switch (travel_month[0])
                 {
                     case "3to5":
                         month[0] = "3";
@@ -134,6 +134,7 @@ namespace TravelCat.Controllers
         //個人評論
         public PartialViewResult _CommentsFromMember(string memId, int page = 1)
         {
+            ViewBag.memId = memId;
             int currentPage = page < 1 ? 1 : page;
             destinationsViewModel model = new destinationsViewModel()
             {            
@@ -154,6 +155,7 @@ namespace TravelCat.Controllers
         }
         public PartialViewResult _CommentsForFollwers(string memId, int page = 1)
         {
+            ViewBag.memId = memId;
             int currentPage = page < 1 ? 1 : page;
             List<member> member = db.member.ToList();
             List<comment> comment = db.comment.ToList();
