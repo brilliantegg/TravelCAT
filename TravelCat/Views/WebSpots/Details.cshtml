@@ -249,7 +249,7 @@
             <input type="hidden" name="tourismId" value="@ViewBag.tourismId" />
             <div class="col-12 mt-3">
                 <div class="row">
-                    <h1 class="col-9">評論</h1>
+                    <h3 class="col-9">評論 (@Model.comment.Count())</h3>
                     <div class="new_comment col-3 justify-content-end">
                         <form action="/web_comments/Create" Method="GET">
                             <input type="hidden" name="tourismID" value=@Model.spot.spot_id />
@@ -687,8 +687,17 @@
         $.each($("input[name='travel_partner']:checked"), function () {
             travel_partner_values.push($(this).val());
                 });
-        $.each($("input[name='travel_month']:checked"), function () {
-            travel_month_values.push($(this).val());
+        $.each($("input[name='travel_month']:checked"), function () {            
+            if ($(this).val() == '3-5') {
+                travel_month_values.push(3,4,5);
+            }else if ($(this).val() == '6-8') {
+                travel_month_values.push(6,7,8);
+            }else if ($(this).val() == '9-11') {
+                travel_month_values.push(9,10,11);
+            }else if($(this).val() == '12-2') {
+                travel_month_values.push(12,1,2);
+            }
+            
         });
         console.log(comment_rating_values)
         console.log(travel_partner_values)

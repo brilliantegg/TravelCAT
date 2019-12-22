@@ -234,7 +234,7 @@
             <input type="hidden" name="tourismId" value="@ViewBag.tourismId" />
             <div class="col-12 mt-3">
                 <div class="row">
-                    <h1 class="col-9">評論</h1>
+                    <h3 class="col-9">評論 (@Model.comment.Count())</h3>
                     <div class="new_comment col-3 justify-content-end">
                         <form action="/web_comments/Create" Method="GET">
                             <input type="hidden" name="tourismID" value=@Model.hotel.hotel_id />

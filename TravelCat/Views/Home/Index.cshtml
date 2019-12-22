@@ -199,13 +199,13 @@
             </div>
             <!--介紹卡-->
             <div class=" card-sm">
-                <div class="card-body">
+                <div class="card-body d-flex row justify-content-center">
                     @Html.ActionLink(@Model.activity.Where(s => s.activity_id == ViewBag.comment_id).FirstOrDefault().activity_title, "Details", "web_activities", new { id = @ViewBag.comment_id }, null)
                     <img src="~/images/comment/@Model.comment.Where(c => c.comment_id == ViewBag.most_like).FirstOrDefault().comment_photo" class="comment_photo">
-                    <div class="like">
-                        <i class="far fa-thumbs-up">@ViewBag.like</i>
-                        <i class="far fa-comment ml-5">@ViewBag.comment_count</i>
-                    </div>
+                    <div class="like d-flex justify-content-center">
+                        <p><i class="far fa-thumbs-up"></i> @ViewBag.like</p>
+                        <p><i class="far fa-comment ml-5"></i> @ViewBag.comment_count</p>
+</div>
                 </div>
             </div>
         </div>
@@ -213,7 +213,7 @@
         <div class="comment col-12">
             <!--介紹卡-->
             <div class=" card-sm">
-                <div class="card-body">
+                <div class="card-body d-flex row justify-content-center">
                     @switch (Model.comment[0].tourism_id[0].ToString())
                     {
                         case "A":
@@ -231,9 +231,9 @@
 
                     }
                     <img src="~/images/comment/@Model.comment.Where(s => s.tourism_id == Model.comment[0].tourism_id).FirstOrDefault().comment_photo" class="comment_photo">
-                    <div class="like">
-                        <i class="far fa-thumbs-up">@ViewBag.liken</i>
-                        <i class="far fa-comment ml-5">@Model.comment.Where(s => s.tourism_id == Model.comment[0].tourism_id).Count()</i>
+                    <div class="like d-flex justify-content-center">
+                        <p><i class="far fa-thumbs-up"></i> @ViewBag.liken</p>
+                        <p><i class="far fa-comment ml-5"></i> @Model.comment.Where(s => s.tourism_id == Model.comment[0].tourism_id).Count()</p>
                     </div>
                 </div>
             </div>
@@ -345,41 +345,11 @@
             </div>
         </div>
     </div>
-    <p><button onclick="geoFindMe()">Show my location</button></p>
-    <div id="out"></div>
+
 </footer>
 
 <script>
-    // 抓取用戶地址
-      function geoFindMe() {
-  var output = document.getElementById("out");
-
-  if (!navigator.geolocation){
-    output.innerHTML = "<p>Geolocation is not supported by your browser</p>";
-    return;
-  }
-
-  function success(position) {
-    var latitude  = position.coords.latitude;
-    var longitude = position.coords.longitude;
-
-    output.innerHTML = '<p>Latitude is ' + latitude + '° <br>Longitude is ' + longitude + '°</p>';
-
-
-  };
-
-  function error() {
-    output.innerHTML = "Unable to retrieve your location";
-  };
-
-  output.innerHTML = "<p>Locating…</p>";
-
-  navigator.geolocation.getCurrentPosition(success, error);
-}
-    ////停止carousel
-    //$('.carousel').carousel({
-    //    interval: false
-    //})
+ 
     //檢舉評論
         var id ;
         var tourismId = "@ViewBag.tourismId";

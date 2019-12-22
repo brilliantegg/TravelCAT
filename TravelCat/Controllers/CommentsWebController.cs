@@ -94,34 +94,10 @@ namespace TravelCat.Controllers
                 }
             }
             if (travel_month != null)
-            {
-                string[] month = new string[3];
-                switch (travel_month[0])
+            {               
+                foreach (var comment in comments.ToList())
                 {
-                    case "3to5":
-                        month[0] = "3";
-                        month[1] = "4";
-                        month[2] = "5";
-                        break;
-                    case "6to8":
-                        month[0] = "6";
-                        month[1] = "7";
-                        month[2] = "8";
-                        break;
-                    case "9to11":
-                        month[0] = "9";
-                        month[1] = "10";
-                        month[2] = "11";
-                        break;
-                    case "12to2":
-                        month[0] = "12";
-                        month[1] = "1";
-                        month[2] = "2";
-                        break;
-                }
-                foreach (var comment in comments)
-                {
-                    if (!month.Contains(comment.travel_month))
+                    if (!travel_month.Contains(comment.travel_month))
                         comments.Remove(comment);
                 }
             }
