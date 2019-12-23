@@ -52,26 +52,7 @@ namespace TravelCat.Controllers
 
             var totoal_score = (follow_score).Union(comment_score).GroupBy(m=>m.id).Select(m=>new { id=m.Key,total=m.Sum(x=>x.score) }).OrderByDescending(m=>m.total).Take(3).ToList();
 
-            //var result5 = (from a in result4
-            //               group a by a.id into b
-            //               orderby b.Count() descending
-            //               select new { id = b.Key, count = b.Count() }).ToList();
-
-            //score final_result = new score();
-            //for (int i = 0; i < result5.Count; i++)
-            //{
-            //    score final_result = new score();
-            //    string memid = result5[i].id;
-            //    int score_result = 0;
-            //    for (int j = 0; j < result5[i].count; j++)
-            //    {
-            //        score_result += result4.Where(s => s.id == id).ToList()[j].count;
-            //    }
-
-            //    final_result.memID = memid;
-            //    final_result.mem_score = score_result;
-            //    model.scores.Add(final_result);
-            //}
+            
 
             ViewBag.memberId = id;
             ViewBag.member_profile = db.member_profile.ToList();

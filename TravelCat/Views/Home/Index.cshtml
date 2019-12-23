@@ -194,7 +194,7 @@
                     </div>
 
                     <a href="@Url.Action("Details", "web_activities", new { id = @ViewBag.comment_id })" class="btn  btn-sm">前去觀看</a>
-                        
+
                 </div>
             </div>
             <!--介紹卡-->
@@ -205,7 +205,7 @@
                     <div class="like d-flex justify-content-center">
                         <p><i class="far fa-thumbs-up"></i> @ViewBag.like</p>
                         <p><i class="far fa-comment ml-5"></i> @ViewBag.comment_count</p>
-</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -307,6 +307,23 @@
 
 </div>
 <!--排行榜-->
+<!--RANK-->
+
+
+<ul>
+    <li>排行榜</li>
+    @foreach (var item in ViewBag.score1)
+    {
+
+        <li>
+            @(item.GetType().GetProperty("id").GetValue(item))
+        </li>
+        <li>
+            @(item.GetType().GetProperty("total").GetValue(item))
+        </li>
+    }
+</ul>
+
 <div class="center">
     <div class="top3">
         <div class="two item">
@@ -475,7 +492,7 @@
 </footer>
 
 <script>
- 
+
     //檢舉評論
         var id ;
         var tourismId = "@ViewBag.tourismId";
