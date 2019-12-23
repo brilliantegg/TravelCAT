@@ -7,34 +7,36 @@ using System.Web;
 using System.Web.Mvc;
 using TravelCat.Models;
 using TravelCat.ViewModels;
-using PagedList;
 using System.IO;
+using X.PagedList;
+using X.PagedList.Mvc;
 
 namespace TravelCat.Controllers
 {
     [LoginCheck]
     public class ActivitiesController : Controller
-    {        
+    {
         dbTravelCat db = new dbTravelCat();
         int pageSize = 10;
-        
+
         // GET: Activities
-        public ActionResult Index(string id=null,int page=1)
+        public ActionResult Index(string id = null, int page = 1)
         {
             ViewBag.id = id;
-            Session["pg"]=page;
-            
+            Session["pg"] = page;
+
             if (!String.IsNullOrEmpty(id))
             {
                 var search = db.activity.Where(s => s.activity_id.Contains(id) || s.activity_title.Contains(id)
                || s.city.Contains(id) || s.district.Contains(id));
-                return View(search.OrderBy(m=>m.activity_id).ToPagedList(page, pageSize));
+                return View(search.OrderBy(m => m.activity_id).ToPagedList(page, pageSize));
             }
-            else { 
-            var data = db.activity.OrderBy(m => m.activity_id);
-            return View(data.ToPagedList(page, pageSize));
-            }   
-        }     
+            else
+            {
+                var data = db.activity.OrderBy(m => m.activity_id);
+                return View(data.ToPagedList(page, pageSize));
+            }
+        }
 
         public ActionResult Create()
         {
@@ -46,8 +48,8 @@ namespace TravelCat.Controllers
         {
             string act_id = db.Database.SqlQuery<string>("Select dbo.GetactivityId()").FirstOrDefault();
             activity.activity_id = act_id;
-            
-             //圖片
+
+            //圖片
             string fileName = "";
             for (int i = 0; i < tourism_photo.Length; i++)
             {
@@ -57,7 +59,7 @@ namespace TravelCat.Controllers
                     if (f.ContentLength > 0)
                     {
                         string t = tourism_photo[i].FileName;
-                        fileName = activity.activity_id + "_" +DateTime.Now.ToString().Replace("/", "").Replace(":", "").Replace(" ", "") + (i + 1).ToString() + Path.GetExtension(t);
+                        fileName = activity.activity_id + "_" + DateTime.Now.ToString().Replace("/", "").Replace(":", "").Replace(" ", "") + (i + 1).ToString() + Path.GetExtension(t);
                         f.SaveAs(Server.MapPath("~/images/activity/" + fileName));
                         tourism_photo tp = new tourism_photo();
                         tp.tourism_photo1 = fileName;
@@ -71,18 +73,18 @@ namespace TravelCat.Controllers
             //try
             //{
             //    db.SaveChanges();
-           // }
+            // }
             //catch (DbEntityValidationException ex)
             //{
-              //  var entityError = ex.EntityValidationErrors.SelectMany(x => x.ValidationErrors).Select(x => x.ErrorMessage);
-                //var getFullMessage = string.Join("; ", entityError);
-                //var exceptionMessage = string.Concat(ex.Message, "errors are: ", getFullMessage);
-                //NLog
-                //return View(exceptionMessage.ToString());
-                
+            //  var entityError = ex.EntityValidationErrors.SelectMany(x => x.ValidationErrors).Select(x => x.ErrorMessage);
+            //var getFullMessage = string.Join("; ", entityError);
+            //var exceptionMessage = string.Concat(ex.Message, "errors are: ", getFullMessage);
+            //NLog
+            //return View(exceptionMessage.ToString());
+
             //}
 
-            return RedirectToAction("Index",new { page=Session["pg"] });
+            return RedirectToAction("Index", new { page = Session["pg"] });
         }
 
         public ActionResult Delete(string Id)
@@ -102,13 +104,14 @@ namespace TravelCat.Controllers
                 db.tourism_photo.Remove(photos[i]);
                 db.SaveChanges();
             }
-            return RedirectToAction("Index",new { page=Session["pg"] });
+            return RedirectToAction("Index", new { page = Session["pg"] });
         }
         public ActionResult Edit(string id)
         {
-            ActivityPhotoViewModel model = new ActivityPhotoViewModel() { 
-            activity= db.activity.Where(m => m.activity_id == id).FirstOrDefault(),
-            activity_photos = db.tourism_photo.Where(m => m.tourism_id == id).ToList()
+            ActivityPhotoViewModel model = new ActivityPhotoViewModel()
+            {
+                activity = db.activity.Where(m => m.activity_id == id).FirstOrDefault(),
+                activity_photos = db.tourism_photo.Where(m => m.tourism_id == id).ToList()
             };
             return View(model);
         }
@@ -116,9 +119,9 @@ namespace TravelCat.Controllers
         [HttpPost]
         public ActionResult Edit(string id, ActivityPhotoViewModel activityPhotoViewModel, HttpPostedFileBase[] tourism_photo, String oldImg)
         {
-            
+
             db.Entry(activityPhotoViewModel.activity).State = EntityState.Modified;
-            db.SaveChanges();            
+            db.SaveChanges();
 
             string fileName = "";
             var tp1 = db.tourism_photo.Where(m => m.tourism_id == id).ToList();
@@ -131,7 +134,7 @@ namespace TravelCat.Controllers
                     if (tourism_photo[i].ContentLength > 0)
                     {
                         //改名
-                        string t=tourism_photo[i].FileName;
+                        string t = tourism_photo[i].FileName;
                         fileName = activityPhotoViewModel.activity.activity_id + "_" + DateTime.Now.ToString().Replace("/", "").Replace(":", "").Replace(" ", "") + (i + 1).ToString() + Path.GetExtension(t);
                         if (i < tp1.Count)  //如果原有紀錄
                         {
@@ -153,8 +156,8 @@ namespace TravelCat.Controllers
                 }
             }
             db.SaveChanges();
-            
-            return RedirectToAction("Index",new { page=Session["pg"] });
+
+            return RedirectToAction("Index", new { page = Session["pg"] });
         }
 
     }

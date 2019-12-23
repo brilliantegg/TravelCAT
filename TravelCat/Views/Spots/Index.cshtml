@@ -1,8 +1,10 @@
-﻿@using PagedList;
-@using PagedList.Mvc;
-@model PagedList.IPagedList<TravelCat.Models.spot>
+﻿@using X.PagedList.Mvc
+@using X.PagedList
+@using X.PagedList.Mvc.Common
 
+@model IPagedList<TravelCat.Models.spot>
 @{
+
     ViewBag.Title = "景點列表";
 }
 
@@ -15,7 +17,7 @@
         @*@Html.TextBox("id", "", new { @class = " border", @placeholder = "編號,名稱,城市,行政區" })
 
             @Html.ActionLink("查詢", "contentQuery", new { id = "id" }, new{@class="btn btn-default"})*@
-        <form action="@Url.Action("Index","Spot")" method="get">
+        <form action="@Url.Action("Index","Spots")" method="get">
             @Html.TextBox("id", "", new { @class = " border", @placeholder = "編號,名稱,城市,行政區" })
             <input class="btn btn-secondary" type="submit" value="查詢" />
         </form>
@@ -99,6 +101,12 @@
 
 <!--分頁-->
 <div class="text-center">
-    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, id = ViewBag.id }))
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, id = ViewBag.id }),
+                  new PagedListRenderOptions
+                  {
+                      ContainerDivClasses = new[] { "" },
+                           LiElementClasses = new[] { "page-item" },
+                           PageClasses = new[] { "page-link" },
+                  })
 </div>
 
