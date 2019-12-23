@@ -26,8 +26,8 @@ namespace TravelCat.Controllers
             ViewBag.rating = comment_rating;
             ViewBag.stay = comment_stay_total;
             ViewBag.sort = Sortby;
-            int? count = (int?)TempData["counta"]+ (int?)TempData["counth"] + (int?)TempData["counts"] + (int?)TempData["countr"];
-            ViewBag.count = count;
+            //int? count = (int?)TempData["counta"]+ (int?)TempData["counth"] + (int?)TempData["counts"] + (int?)TempData["countr"];
+            //ViewBag.count = count;
             return View();
         }
         [ChildActionOnly]
@@ -157,8 +157,8 @@ namespace TravelCat.Controllers
                 }
             }
 
-            ViewBag.counta = model.result_ratings.Count;
-            TempData["counta"] = model.result_ratings.Count();
+            //ViewBag.counta = model.result_ratings.Count;
+            //TempData["counta"] = model.result_ratings.Count();
             model.show_ratings = model.result_ratings.ToPagedList(page, pageSize);
             return View(model);
         }
@@ -229,8 +229,8 @@ namespace TravelCat.Controllers
                     model.result_ratings = model.result_ratings.OrderBy(s => s.rating).ToList();
                 }
             }
-            ViewBag.counth = model.result_ratings.Count;
-            TempData["counth"] = model.result_ratings.Count();
+            //ViewBag.counth = model.result_ratings.Count;
+            //TempData["counth"] = model.result_ratings.Count();
             model.show_ratings = model.result_ratings.ToPagedList(page, pageSize);
             return View(model);
 
@@ -303,10 +303,10 @@ namespace TravelCat.Controllers
                     model.result_ratings = model.result_ratings.OrderBy(s => s.rating).ToList();
                 }
             }
-            ViewBag.countr = model.result_ratings.Count;
-            ViewBag.count = model.result_ratings.Count;
+            //ViewBag.countr = model.result_ratings.Count;
+            //ViewBag.count = model.result_ratings.Count;
 
-            TempData["countr"] = model.result_ratings.Count();
+            //TempData["countr"] = model.result_ratings.Count();
             model.show_ratings = model.result_ratings.ToPagedList(page, pageSize);
             return View(model);
         }
@@ -367,9 +367,9 @@ namespace TravelCat.Controllers
             //依照分數排序
             search_sort(Sortby, model);
 
-            ViewBag.counts = model.result_ratings.Count;
-            ViewBag.count = model.result_ratings.Count;
-            TempData["counts"] = model.result_ratings.Count();
+            //ViewBag.counts = model.result_ratings.Count;
+            //ViewBag.count = model.result_ratings.Count;
+            //TempData["counts"] = model.result_ratings.Count();
             model.show_ratings = model.result_ratings.ToPagedList(page, pageSize);
             return View(model);
         }

@@ -231,6 +231,7 @@ section {
 
                 .container .comment-main .comment .card-sm .card-body img {
                     width: 100%;
+                    height: 192px;
                     background-size: cover;
                 }
 
