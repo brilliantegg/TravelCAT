@@ -14,7 +14,7 @@
 
 <div class="row">
     <div class="col-md-12">
-        <div class="list-group" id="list-tab" role="tablist">
+        <div class="list-group m-3" id="list-tab" role="tablist">
             <a class="list-group-item active" data-toggle="list" href="#issue-member" role="tab">所有會員</a>
             <a class="list-group-item" data-toggle="list" href="#member" role="tab">被檢舉會員</a>
         </div>
@@ -23,8 +23,8 @@
         <div class="tab-content" id="nav-tabContent">
             <div class="tab-pane fade show active" id="issue-member" role="tabpanel">
 
-                <form action="@Url.Action("Index")" method="get" class="text-right search">
-                    @Html.TextBox("id", "", new { @class = "border", @placeholder = "請輸入會員編號或帳號" })
+                <form action="@Url.Action("Index")" method="get" class="text-right search m-2">
+                    @Html.TextBox("id", "", new { @class = "border", @placeholder = "請輸入會員編號" })
                     <input class="btn btn-secondary" type="submit" value="查詢" />
                 </form>
 

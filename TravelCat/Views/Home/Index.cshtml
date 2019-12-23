@@ -3,7 +3,7 @@
 @model TravelCat.ViewModels.WebIndexViewModel
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "首頁";
     Layout = "~/Views/Shared/web-Layout.cshtml";
     string mem_id;
 
@@ -28,11 +28,6 @@
     </ol>
     <div class="carousel-inner">
         <div class="carousel-item active">
-            @*<div class="embed-responsive embed-responsive-16by9">
-                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/AhAJ6J01R7w" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-                </div>*@
-
             <img src="~/images/buildings-1846728_1920.jpg" class=" w-100" title="台北101">
             <div class="carousel-caption">
                 台北101
@@ -185,51 +180,40 @@
     <div class="comment-main row">
 
         <div class="comment mb-2 col-12">
-
             <!--留言卡-->
             <div class="card-lg">
                 <div class="card-body">
                     <div class="card-title mem">最多人喜歡的評論</div>
                     @*<div class="mem-comment">畢業於台灣第一學府－國立台灣大學，精通多國語言，連續四年獲得學生最高榮譽－書卷獎，打破創校以來最佳紀錄。外貌全身皆有細短絨毛，皮黃，身高可達29尺，生有鐵皮，長有獠牙，生性暴躁，口大可吞人，一次可進食數萬人類！平時穴居洞中，捕食路過之旅人，一年下山一次，每次下山皆造成當地大範圍傷害。傳聞此獸喜歡一種名為bmo的玩物，常為了此物與各方妖怪打鬥。</div>*@
-                <div class="mem-comment">
-                    <p><b>@Model.comment.Where(c => c.comment_id == ViewBag.ccc).FirstOrDefault().comment_title</b>
-                    <br>留言人： @Model.comment.Where(c => c.comment_id == ViewBag.ccc).FirstOrDefault().member_id</p>
-                    @Model.comment.Where(c => c.comment_id == ViewBag.ccc).FirstOrDefault().comment_content
-                </div>
-                    <a href="#" class="btn  btn-sm">前去觀看</a>
+                    <div class="mem-comment">
+                        <p>
+                            <b>@Model.comment.Where(c => c.comment_id == ViewBag.most_like).FirstOrDefault().comment_title</b>
+                            <br>留言人 @Model.comment.Where(c => c.comment_id == ViewBag.most_like).FirstOrDefault().member_id
+                        </p>
+                        @Model.comment.Where(c => c.comment_id == ViewBag.most_like).FirstOrDefault().comment_content
+                    </div>
+
+                    <a href="@Url.Action("Details", "web_activities", new { id = @ViewBag.comment_id })" class="btn  btn-sm">前去觀看</a>
+                        
                 </div>
             </div>
             <!--介紹卡-->
             <div class=" card-sm">
-                <div class="card-body">
+                <div class="card-body d-flex row justify-content-center">
                     @Html.ActionLink(@Model.activity.Where(s => s.activity_id == ViewBag.comment_id).FirstOrDefault().activity_title, "Details", "web_activities", new { id = @ViewBag.comment_id }, null)
-                    <img src="~/images/bmo-02.jpg" class="mb-2">
-                    <div class="like">
-                        <i class="far fa-thumbs-up">@ViewBag.like</i>
-                        <i class="far fa-comment ml-5">@ViewBag.comment_count</i>
-                    </div>
+                    <img src="~/images/comment/@Model.comment.Where(c => c.comment_id == ViewBag.most_like).FirstOrDefault().comment_photo" class="comment_photo">
+                    <div class="like d-flex justify-content-center">
+                        <p><i class="far fa-thumbs-up"></i> @ViewBag.like</p>
+                        <p><i class="far fa-comment ml-5"></i> @ViewBag.comment_count</p>
+</div>
                 </div>
             </div>
         </div>
 
         <div class="comment col-12">
-
-            <!--留言卡-->
-            <div class="card-lg">
-                <div class="card-body">
-                    <div class="card-title mem">最新評論</div>
-                    @*<div class="mem-comment">畢業於台灣第一學府－國立台灣大學，精通多國語言，連續四年獲得學生最高榮譽－書卷獎，打破創校以來最佳紀錄。外貌全身皆有細短絨毛，皮黃，身高可達29尺，生有鐵皮，長有獠牙，生性暴躁，口大可吞人，一次可進食數萬人類！平時穴居洞中，捕食路過之旅人，一年下山一次，每次下山皆造成當地大範圍傷害。傳聞此獸喜歡一種名為bmo的玩物，常為了此物與各方妖怪打鬥。</div>*@
-                    <div class="mem-comment">
-                        <p><b>@Model.comment[0].comment_title</b>
-                        <br>留言人： @Model.comment[0].member_id</p>
-                        @Html.Raw(Model.comment[0].comment_content)
-                    </div>
-                    <a href="#" class="btn  btn-sm">前去觀看</a>
-                </div>
-            </div>
             <!--介紹卡-->
             <div class=" card-sm">
-                <div class="card-body">
+                <div class="card-body d-flex row justify-content-center">
                     @switch (Model.comment[0].tourism_id[0].ToString())
                     {
                         case "A":
@@ -246,13 +230,29 @@
                             break;
 
                     }
-                    <img src="~/images/bmo-02.jpg" class="mb-2">
-                    <div class="like">
-                        <i class="far fa-thumbs-up">@ViewBag.liken</i>
-                        <i class="far fa-comment ml-5">@Model.comment.Where(s => s.tourism_id == Model.comment[0].tourism_id).Count()</i>
+                    <img src="~/images/comment/@Model.comment.Where(s => s.tourism_id == Model.comment[0].tourism_id).FirstOrDefault().comment_photo" class="comment_photo">
+                    <div class="like d-flex justify-content-center">
+                        <p><i class="far fa-thumbs-up"></i> @ViewBag.liken</p>
+                        <p><i class="far fa-comment ml-5"></i> @Model.comment.Where(s => s.tourism_id == Model.comment[0].tourism_id).Count()</p>
                     </div>
                 </div>
             </div>
+            <!--留言卡-->
+            <div class="card-lg">
+                <div class="card-body">
+                    <div class="card-title mem">最新評論</div>
+                    @*<div class="mem-comment">畢業於台灣第一學府－國立台灣大學，精通多國語言，連續四年獲得學生最高榮譽－書卷獎，打破創校以來最佳紀錄。外貌全身皆有細短絨毛，皮黃，身高可達29尺，生有鐵皮，長有獠牙，生性暴躁，口大可吞人，一次可進食數萬人類！平時穴居洞中，捕食路過之旅人，一年下山一次，每次下山皆造成當地大範圍傷害。傳聞此獸喜歡一種名為bmo的玩物，常為了此物與各方妖怪打鬥。</div>*@
+                    <div class="mem-comment">
+                        <p>
+                            <b>@Model.comment[0].comment_title</b>
+                            <br>留言人： @Model.comment[0].member_id
+                        </p>
+                        @Html.Raw(Model.comment[0].comment_content)
+                    </div>
+                    <a href="#" class="btn  btn-sm">前去觀看</a>
+                </div>
+            </div>
+
         </div>
 
     </div>
@@ -345,41 +345,11 @@
             </div>
         </div>
     </div>
-    <p><button onclick="geoFindMe()">Show my location</button></p>
-    <div id="out"></div>
+
 </footer>
 
 <script>
-    // 抓取用戶地址
-      function geoFindMe() {
-  var output = document.getElementById("out");
-
-  if (!navigator.geolocation){
-    output.innerHTML = "<p>Geolocation is not supported by your browser</p>";
-    return;
-  }
-
-  function success(position) {
-    var latitude  = position.coords.latitude;
-    var longitude = position.coords.longitude;
-
-    output.innerHTML = '<p>Latitude is ' + latitude + '° <br>Longitude is ' + longitude + '°</p>';
-
-
-  };
-
-  function error() {
-    output.innerHTML = "Unable to retrieve your location";
-  };
-
-  output.innerHTML = "<p>Locating…</p>";
-
-  navigator.geolocation.getCurrentPosition(success, error);
-}
-    ////停止carousel
-    //$('.carousel').carousel({
-    //    interval: false
-    //})
+ 
     //檢舉評論
         var id ;
         var tourismId = "@ViewBag.tourismId";

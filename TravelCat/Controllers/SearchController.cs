@@ -26,7 +26,8 @@ namespace TravelCat.Controllers
             ViewBag.rating = comment_rating;
             ViewBag.stay = comment_stay_total;
             ViewBag.sort = Sortby;
-
+            int? count = (int?)TempData["counta"]+ (int?)TempData["counth"] + (int?)TempData["counts"] + (int?)TempData["countr"];
+            ViewBag.count = count;
             return View();
         }
         [ChildActionOnly]
@@ -36,6 +37,8 @@ namespace TravelCat.Controllers
             //Session["pg"] = page;
             SearchViewModel model = new SearchViewModel()
             {
+                comment = db.comment.ToList(),
+                collections_detail=db.collections_detail.ToList(),
                 activity = db.activity.Take(10).ToList(),
                 //hotel = db.hotel.ToList(),
                 //restaurant = db.restaurant.ToList(),
@@ -155,6 +158,7 @@ namespace TravelCat.Controllers
             }
 
             ViewBag.counta = model.result_ratings.Count;
+            TempData["counta"] = model.result_ratings.Count();
             model.show_ratings = model.result_ratings.ToPagedList(page, pageSize);
             return View(model);
         }
@@ -164,6 +168,8 @@ namespace TravelCat.Controllers
             ViewBag.q = q;
             SearchViewModel model = new SearchViewModel()
             {
+                comment = db.comment.ToList(),
+                collections_detail = db.collections_detail.ToList(),
                 hotel = db.hotel.Take(10).ToList(),
                 result_ratings = null
             };
@@ -224,6 +230,7 @@ namespace TravelCat.Controllers
                 }
             }
             ViewBag.counth = model.result_ratings.Count;
+            TempData["counth"] = model.result_ratings.Count();
             model.show_ratings = model.result_ratings.ToPagedList(page, pageSize);
             return View(model);
 
@@ -234,6 +241,8 @@ namespace TravelCat.Controllers
             ViewBag.q = q;
             SearchViewModel model = new SearchViewModel()
             {
+                comment = db.comment.ToList(),
+                collections_detail = db.collections_detail.ToList(),
                 restaurant = db.restaurant.Take(10).ToList(),
                 result_ratings = null
             };
@@ -296,6 +305,8 @@ namespace TravelCat.Controllers
             }
             ViewBag.countr = model.result_ratings.Count;
             ViewBag.count = model.result_ratings.Count;
+
+            TempData["countr"] = model.result_ratings.Count();
             model.show_ratings = model.result_ratings.ToPagedList(page, pageSize);
             return View(model);
         }
@@ -305,6 +316,8 @@ namespace TravelCat.Controllers
             ViewBag.q = q;
             SearchViewModel model = new SearchViewModel()
             {
+                comment = db.comment.ToList(),
+                collections_detail = db.collections_detail.ToList(),
                 spot = db.spot.Take(10).ToList(),
                 result_ratings = null
             };
@@ -356,6 +369,7 @@ namespace TravelCat.Controllers
 
             ViewBag.counts = model.result_ratings.Count;
             ViewBag.count = model.result_ratings.Count;
+            TempData["counts"] = model.result_ratings.Count();
             model.show_ratings = model.result_ratings.ToPagedList(page, pageSize);
             return View(model);
         }

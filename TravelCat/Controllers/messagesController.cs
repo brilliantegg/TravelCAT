@@ -27,8 +27,8 @@ namespace TravelCat.Controllers
 
             if (!String.IsNullOrEmpty(id))
             {
-                var search = db.message.Where(m => m.msg_id.ToString().Contains(id));
-                return View(search.OrderBy(m => m.msg_id).ToPagedList(page, pagesize));
+                var search = db.message.Where(m => m.msg_id.ToString()==id).ToList();
+                return View(search.ToPagedList(page, pagesize));
             }
             else
             {

@@ -7,11 +7,12 @@ using System.Web;
 using System.Web.Mvc;
 using TravelCat.Models;
 using TravelCat.ViewModels;
-using PagedList;
+using X.PagedList;
 using System.IO;
 
 namespace TravelCat.Controllers
 {
+    [LoginCheck]
     public class HotelsController : Controller
     {
         dbTravelCat db = new dbTravelCat();

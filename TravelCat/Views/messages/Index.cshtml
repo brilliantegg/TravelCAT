@@ -23,7 +23,7 @@
         <div class="tab-content" id="nav-tabContent">
             <div class="tab-pane fade show active" id="message1">
 
-                <form action="@Url.Action("Index")" method="get" class="text-right search">
+                <form action="@Url.Action("Index")" method="get" class="text-right search m-2">
                     @Html.TextBox("id", "", new { @class = "border", @placeholder = "請輸入留言編號" })
                     <input class="btn btn-secondary" type="submit" value="查詢" />
                 </form>

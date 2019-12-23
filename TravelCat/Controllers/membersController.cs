@@ -28,14 +28,14 @@ namespace TravelCat.Controllers
 
             if (!String.IsNullOrEmpty(id))
             {
-                var search = db.member.Where(m => m.member_id.Contains(id) || m.member_account.Contains(id));
-                return View(search.OrderBy(m => m.member_id).ToPagedList(page, pagesize));
+                var search = db.member.Where(m => m.member_id == id).ToList();
+                return View(search.ToPagedList(page, pagesize));
             }
             else
             {
                 return View("Index", pagedlist);
             }
-        }            
+        }
 
         // GET: members1/Edit/5
         public ActionResult Edit(string id)
@@ -59,9 +59,20 @@ namespace TravelCat.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "member_id,member_account,member_password,member_status")] member member)
         {
-            
+            //未完成
+            GmailSender gs = new GmailSender();
+            gs.account = "travelcat.service@gmail.com";
+            gs.password = "lqleyzcbmrmttloe";
+            gs.sender = "旅途貓 <travelcat.service@gmail.com>";
+            gs.receiver = $"{member.member_profile.email}";
+            gs.subject = "會員通知";
+            gs.messageBody = "親愛的會員您好:<br />因您已違反本網站規定，本站將取消您的會員，如有任何疑問請與本站客服人員聯絡。";
+            gs.IsHtml = true;
+            gs.Send();
+
             if (ModelState.IsValid)
             {
+               
                 db.Entry(member).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -69,6 +80,6 @@ namespace TravelCat.Controllers
             return View(member);
         }
 
-        
+
     }
 }

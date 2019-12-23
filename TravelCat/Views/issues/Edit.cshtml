@@ -91,7 +91,7 @@
         <!--下方按鈕-->
         <div class="row text-center mt-3">
             <div class="col-md-12">
-                <input type="submit" value="存檔" class="btn btn-primary" />
+                <input id="submit" type="submit" value="存檔" class="btn btn-primary" />
                 @* @Html.ActionLink("返回列表", "Index", null, new { @class = "btn btn-primary" })*@
             </div>
         </div>
@@ -102,6 +102,7 @@
 @section scripts{
     <script>
         $('#Select1 option[value=@Model.issue_status]').attr('selected', 'selected');
+       
     </script>
 
 

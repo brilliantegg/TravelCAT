@@ -25,7 +25,7 @@ namespace TravelCat.Controllers
 
         //問題PartialView
         [ChildActionOnly]
-        public PartialViewResult _Problem(int type_id, int page = 1)
+        public PartialViewResult _Problem(int type_id, int page = 1,string id=null)
         {
             var issue = db.issue.Where(m => m.issue_id == type_id).OrderBy(m=>m.resolve_date).ToList();
 
@@ -35,7 +35,16 @@ namespace TravelCat.Controllers
 
             ViewBag.issueId = type_id;
 
-            return PartialView("_Problem", pagedlist);
+            if (!String.IsNullOrEmpty(id))
+            {
+                var search = db.issue.Where(m => m.issue_content.Contains(id) || m.problem_id.Contains(id) || m.member_id.Contains(id));
+                return PartialView(search.OrderBy(m=>m.report_date).ToPagedList(pagecurrent, pagesize));
+            }
+            else
+            {
+                return PartialView("_Problem", pagedlist);
+            }
+         
         }
 
         // GET: issues/Edit/5
