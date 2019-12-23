@@ -1,40 +1,12 @@
-﻿@model TravelCat.ViewModels.SearchViewModel
+﻿<link href="~/Content/Searchindex.css" rel="stylesheet" />
+@model TravelCat.ViewModels.SearchViewModel
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/web-Layout.cshtml";
-
-
 }
-<link href="~/Content/Searchindex.css" rel="stylesheet" />
+
 <style>
-
-
-    .row1 {
-        display: flex;
-        flex-wrap: wrap;
-    }
-
-    .searchbox1 {
-        position: sticky;
-        top: 2rem;
-        bottom: 2rem;
-        z-index: 0;
-        height: calc(100vh - 4rem);
-        padding-bottom: 100px;
-        /*padding-top: 100px;*/
-    }
-
-
-    .searchbox2 {
-        position: sticky;
-        top: 8rem;
-        bottom: 2rem;
-        z-index: 1000;
-        height: calc(100vh - 4rem);
-        overflow-y: auto;
-        padding-bottom: 200px;
-    }
 </style>
 <section class="bg-white py-4 text-dark">
     <div class="container ">
@@ -50,9 +22,9 @@
                             </div>
                             <form>
                                 <div class="input-group my-3">
-                                    <input type="text" id="q" name="q" class="form-control search_bar" placeholder="請輸入你想去的地方" aria-label="Recipient's username" aria-describedby="button-addon2">
+                                    <input type="text" id="q" name="q" class="form-control search_bar" placeholder="目的地..." aria-label="Recipient's username" aria-describedby="button-addon2">
                                     <div class="input-group-append">
-                                        <button class="btn btn-outline-secondary" type="submit" id="button-addon2">GO</button>
+                                        <button class="btn btn-dark" type="submit" id="button-addon2">GO</button>
                                     </div>
                                 </div>
                             </form>
@@ -66,13 +38,12 @@
                                 <div class="row searchbox2">
 
                                     <div class="col-md-12 col-sm-6  ">
-                                        <div class="text-left mb-4 px-2 py-2 border-bottom">
+                                        <div class="text-center mb-4 px-2 py-2 border-bottom">
                                             <h4>
-                                                城市:
+                                                城市
                                             </h4>
                                             <select id="city" name="city" class="col-10 offset-1 btn-light mb-4 border-bottom px-2 py-2">
                                                 <option value="" disabled>請選擇</option>
-                                                @*<option value="" disabled>北部地區</option>*@
                                                 <option value="臺北市">臺北市</option>
                                                 <option value="新北市">新北市</option>
                                                 <option value="基隆市">基隆市</option>
@@ -80,22 +51,18 @@
                                                 <option value="新竹市">新竹市</option>
                                                 <option value="新竹縣">新竹縣</option>
                                                 <option value="苗栗縣">苗栗縣</option>
-                                                @*<option value="" disabled>中部地區</option>*@
                                                 <option value="臺中市">臺中市</option>
                                                 <option value="彰化縣">彰化縣</option>
                                                 <option value="南投縣">南投縣</option>
-                                                @*<option value="" disabled>南部地區</option>*@
                                                 <option value="雲林縣">雲林縣</option>
                                                 <option value="嘉義市">嘉義市</option>
                                                 <option value="嘉義縣">嘉義縣</option>
                                                 <option value="臺南市">臺南市</option>
                                                 <option value="高雄市">高雄市</option>
                                                 <option value="屏東縣">屏東縣</option>
-                                                @*<option value="" disabled>東部地區</option>*@
                                                 <option value="宜蘭縣">宜蘭縣</option>
                                                 <option value="花蓮縣">花蓮縣</option>
                                                 <option value="臺東縣">臺東縣</option>
-                                                @*<option value="" disabled>離島地區</option>*@
                                                 <option value="澎湖縣">澎湖縣</option>
                                                 <option value="金門縣">金門縣</option>
                                                 <option value="連江縣">連江縣</option>
@@ -104,24 +71,24 @@
                                     </div>
 
                                     <div class="col-md-12 col-sm-6  ">
-                                        <div class="text-left mb-4 px-2 py-2 border-bottom">
+                                        <div class="text-center mb-4 px-2 py-2 border-bottom">
                                             <h4>
-                                                旅客評分:
+                                                旅客評分
                                             </h4>
                                             <select id="comment_rating" name="comment_rating" class="col-10 offset-1  btn-light mb-4 border-bottom px-2 py-2">
                                                 <option value="" disabled>請選擇</option>
-                                                <option value="1">大於1分</option>
-                                                <option value="2">大於2分</option>
-                                                <option value="3">大於3分</option>
-                                                <option value="4">大於4分</option>
-                                                <option value="5">大於5分</option>
+                                                <option value="1">大於 1分</option>
+                                                <option value="2">大於 2分</option>
+                                                <option value="3">大於 3分</option>
+                                                <option value="4">大於 4分</option>
+                                                <option value="5">大於 5分</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-md-12 col-sm-6  ">
-                                        <div class="text-left mb-4 px-2 py-2 border-bottom">
+                                        <div class="text-center mb-4 px-2 py-2 border-bottom">
                                             <h4>
-                                                停留時間:
+                                                停留時間
                                             </h4>
                                             <select id="comment_stay_total" name="comment_stay_total" class="col-10 offset-1  btn-light mb-4 border-bottom px-2 py-2">
                                                 <option value="" disabled>請選擇</option>
@@ -133,9 +100,9 @@
                                         </div>
                                     </div>
                                     <div class="col-md-12 col-sm-6 col-12 ">
-                                        <div class="text-left mb-4 border-bottom ">
+                                        <div class="text-center mb-4 border-bottom ">
                                             <h4>
-                                                旅伴:
+                                                旅伴
                                             </h4>
                                             <div class="row ">
                                                 <div id="travel_partner" class="btn-group btn-group-toggle mb-4 offset-2" data-toggle="buttons">
@@ -165,26 +132,26 @@
                                         </div>
                                     </div>
                                     <div class="col-md-12 col-sm-6">
-                                        <div class="text-left mb-4 border-bottom ">
+                                        <div class="text-center mb-4 border-bottom ">
                                             <h4>
-                                                旅遊月份:
+                                                旅遊月份
                                             </h4>
                                             <div class="row ">
                                                 <div id="travel_month" class="btn-group btn-group-toggle mb-4 offset-2 " data-toggle="buttons">
                                                     <label class="btn  btn-light col-md-10 mb-1">
-                                                        <input type="radio" name="travel_month" id="travel_month1" autocomplete="off" value="3至5月"> 3至5月
+                                                        <input type="radio" name="travel_month" id="travel_month1" autocomplete="off" value="3至5月"> 3 至 5月
                                                     </label>
 
                                                     <label class="btn  btn-light col-md-10 mb-1">
-                                                        <input type="radio" name="travel_month" id="travel_month2" autocomplete="off" value="6至8月">6至8月
+                                                        <input type="radio" name="travel_month" id="travel_month2" autocomplete="off" value="6至8月">6 至 8月
                                                     </label>
 
                                                     <label class="btn  btn-light col-md-10 mb-1">
-                                                        <input type="radio" name="travel_month" id="travel_month3" autocomplete="off" value="9至11月">9至11月
+                                                        <input type="radio" name="travel_month" id="travel_month3" autocomplete="off" value="9至11月">9 至 11月
                                                     </label>
 
                                                     <label class="btn  btn-light col-md-10 mb-1">
-                                                        <input type="radio" name="travel_month" id="travel_month4" autocomplete="off" value="12至2月">12至2月
+                                                        <input type="radio" name="travel_month" id="travel_month4" autocomplete="off" value="12至2月">12 至 s2月
                                                     </label>
 
 
@@ -207,11 +174,14 @@
                         <div class="ml-4">
                             @if (!String.IsNullOrEmpty(ViewBag.q))
                             {
-                                <h2 class="font-weight-bold ">@ViewBag.q 的搜尋結果</h2>
-                                @*<p>共 @ViewBag.count 筆</p>*@
+                                <h2 class="font-weight-bold ">
+                                    我們為您找出 @if (ViewBag.count != null)
+                                    {@ViewBag.count} 筆" @ViewBag.q " 的搜尋結果
+                                </h2>
 
-                                <h5>
-                                    條件：
+
+
+                                <div class="query_condition">
                                     @{
                                         if (!String.IsNullOrEmpty(ViewBag.city))
                                         {
@@ -234,7 +204,9 @@
                                             <span id="query_month" class="btn btn-info">@ViewBag.month &times;</span>
                                         }
                                     }
-                                </h5>
+                                </div>
+
+
                             }
                             else
                             { <h2>        請於上方搜尋欄輸入條件開始進行搜尋</h2>}
@@ -243,11 +215,8 @@
 
                         <form id="form_right">
                             <div class="text-right  border-bottom ">
-                                <h4>
-                                    排序方式:
-                                </h4>
-                                <select id="Sortby" name="Sortby" class="col-6 offset-1  btn-light mb-4 border-bottom px-2 py-2">
-                                    <option value="" disabled selected>請選擇</option>
+                                <select id="Sortby" name="Sortby" class="col-3 offset-1  btn-light mb-4 border-bottom px-2 py-2">
+                                    <option value="" disabled selected>依照評分排序</option>
                                     <option value="ltoh">評論分數由低到高</option>
                                     <option value="htol">評論分數由高到低</option>
                                 </select>
@@ -269,11 +238,11 @@
                         </form>
                         <!--導覽列-->
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link" id="spot-tab" data-toggle="tab" href="#spot" role="tab" aria-controls="spot" aria-selected="false">景點</a>
+                            <li class="nav-item active">
+                                <a class="nav-link active" id="spot-tab" data-toggle="tab" href="#spot" role="tab" aria-controls="spot" aria-selected="false">景點</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" id="activity-tab" data-toggle="tab" href="#activity" role="tab" aria-controls="activity" aria-selected="true">活動</a>
+                                <a class="nav-link" id="activity-tab" data-toggle="tab" href="#activity" role="tab" aria-controls="activity" aria-selected="true">活動</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" id="restaurant-tab" data-toggle="tab" href="#restaurant" role="tab" aria-controls="restaurant" aria-selected="false">餐廳</a>
@@ -286,12 +255,12 @@
 
 
                         <div class="tab-content" id="myTabContent">
-                            <div class="tab-pane fade show" id="spot" role="tabpanel" aria-labelledby="spot-tab">
+                            <div class="tab-pane active show" id="spot" role="tabpanel" aria-labelledby="spot-tab">
                                 <!--內容-->
                                 @Html.Action("_Spot", "Search", new { q = ViewBag.q })
                             </div>
 
-                            <div class="tab-pane fade active show" id="activity" role="tabpanel" aria-labelledby="activity-tab">
+                            <div class="tab-pane fade " id="activity" role="tabpanel" aria-labelledby="activity-tab">
                                 <!--內容-->
                                 @Html.Action("_Activity", "Search", new { q = ViewBag.q })
                             </div>
@@ -369,4 +338,72 @@
         });
 
     </script>
+    <script>
+
+        var id ;
+
+        if ("@Session["memberID"]" =="") {
+            id = null
+
+        } else {
+
+            id = "@Session["memberID"]"
+
+        }
+
+    $(".add_to_bucket_list").click(function (e) {
+        if (id == null) {
+               alert('請先登入:)');
+                return false;
+            }
+        if ($(this).hasClass("added")) {
+            remove_bucket($(this))
+            $(this).removeClass("added");
+            $(this).children('.fas').css({"color":"black","transition":"0.3s"})
+        } else {
+            add_bucket($(this))
+            $(this).addClass("added");
+            $(this).children('.fas').css({"color":"red","transition":"0.3s"})
+        }
+    })
+    function add_bucket(object) {
+
+        var url = "@Url.Action("Postcollections_detail","web_comments")"
+
+            $.ajax({
+            type: "POST",
+            url: url,
+            data: {
+                member_id:"@Session["memberID"]" ,
+                tourism_id: object.data('id')
+            },
+           success:function()
+           {
+               alert('add')
+           }
+         });
+        }
+    function remove_bucket(object) {
+
+        var url = "@Url.Action("Deletecollections_detail","web_comments")"
+
+            $.ajax({
+            type: "POST",
+            url: url,
+            data: {
+                member_id:"@Session["memberID"]" ,
+                tourism_id: object.data('id')
+            },
+           success:function()
+           {
+               alert('delete')
+           }
+         });
+        }
+
+
+
+    </script>
+
 }
+
