@@ -49,7 +49,7 @@ else
                     </div>
                 </div>
                 <span class="fa">
-                    @if (Model.collections_detail.Where(m => m.tourism_id == item.id && m.member_id == @memberId).Count() > 0)
+                    @if (Model.collections_detail.Where(m => m.tourism_id == item.id && m.member_id == memberId).Count() > 0)
                     {
                         <span class="add_to_bucket_list added" data-id="@item.id">
                             <i class="fas fa-heart" style="color:red"></i>
