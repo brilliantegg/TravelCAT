@@ -3,16 +3,16 @@
     ViewBag.Title = "ConfirmView";
     Layout = "~/Views/Shared/web-Layout.cshtml";
 }
-
-<div class="container mt-5 mt-5 " style="height:700px">
-    <div class="row justify-content-center border align-items-center">
-        <div class="col-md-12">
-            <h1>歡迎 @ViewBag.account</h1>
-            <h3 class="mt-4">感謝您註冊旅途貓網站，請至您的信箱收取驗證信件</h3>
+<link href="~/Content/web-Login.css" rel="stylesheet" />
+<div class="container">
+    <div class="main">
+        <div class="card" style="margin: 0 auto">
+            <div class="card-body">
+                <h4 class="card-title mt-4">歡迎 ~@ViewBag.account</h4>
+                <p class="mt-4">感謝您註冊旅途貓網站，請至您的信箱收取驗證信件</p>
+                @Html.ActionLink("返回首頁", "Index", "Home", new { @class = "btn btn-info" })
+            </div>
         </div>
-        @Html.ActionLink("返回首頁", "Index", "Home")
 
     </div>
-        
 </div>
-
