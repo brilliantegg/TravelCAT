@@ -72,7 +72,7 @@
                                             </h4>
                                             <select id="city" name="city" class="col-10 offset-1 btn-light mb-4 border-bottom px-2 py-2">
                                                 <option value="" disabled>請選擇</option>
-                                                <option value="" disabled>北部地區</option>
+                                                @*<option value="" disabled>北部地區</option>*@
                                                 <option value="臺北市">臺北市</option>
                                                 <option value="新北市">新北市</option>
                                                 <option value="基隆市">基隆市</option>
@@ -80,22 +80,22 @@
                                                 <option value="新竹市">新竹市</option>
                                                 <option value="新竹縣">新竹縣</option>
                                                 <option value="苗栗縣">苗栗縣</option>
-                                                <option value="" disabled>中部地區</option>
+                                                @*<option value="" disabled>中部地區</option>*@
                                                 <option value="臺中市">臺中市</option>
                                                 <option value="彰化縣">彰化縣</option>
                                                 <option value="南投縣">南投縣</option>
-                                                <option value="" disabled>南部地區</option>
+                                                @*<option value="" disabled>南部地區</option>*@
                                                 <option value="雲林縣">雲林縣</option>
                                                 <option value="嘉義市">嘉義市</option>
                                                 <option value="嘉義縣">嘉義縣</option>
                                                 <option value="臺南市">臺南市</option>
                                                 <option value="高雄市">高雄市</option>
                                                 <option value="屏東縣">屏東縣</option>
-                                                <option value="" disabled>東部地區</option>
+                                                @*<option value="" disabled>東部地區</option>*@
                                                 <option value="宜蘭縣">宜蘭縣</option>
                                                 <option value="花蓮縣">花蓮縣</option>
                                                 <option value="臺東縣">臺東縣</option>
-                                                <option value="" disabled>離島地區</option>
+                                                @*<option value="" disabled>離島地區</option>*@
                                                 <option value="澎湖縣">澎湖縣</option>
                                                 <option value="金門縣">金門縣</option>
                                                 <option value="連江縣">連江縣</option>
@@ -208,30 +208,30 @@
                             @if (!String.IsNullOrEmpty(ViewBag.q))
                             {
                                 <h2 class="font-weight-bold ">@ViewBag.q 的搜尋結果</h2>
-                                <p>共 @ViewBag.count 筆</p>
+                                @*<p>共 @ViewBag.count 筆</p>*@
 
                                 <h5>
                                     條件：
                                     @{
                                         if (!String.IsNullOrEmpty(ViewBag.city))
                                         {
-                                            <span id="query_city" class="btn btn-info">@ViewBag.city</span>
+                                            <span id="query_city" class="btn btn-info">@ViewBag.city &times;</span>
                                         }
                                         if (!String.IsNullOrEmpty(ViewBag.rating))
                                         {
-                                            <span id="query_rating" class="btn btn-info">大於 @ViewBag.rating 分</span>
+                                            <span id="query_rating" class="btn btn-info">大於 @ViewBag.rating 分 &times;</span>
                                         }
                                         if (!String.IsNullOrEmpty(ViewBag.stay))
                                         {
-                                            <span id="query_stay" class="btn btn-info">@ViewBag.stay</span>
+                                            <span id="query_stay" class="btn btn-info">@ViewBag.stay &times;</span>
                                         }
                                         if (ViewBag.partner != null)
                                         {
-                                            <span id="query_partner" class="btn btn-info">@ViewBag.partner</span>
+                                            <span id="query_partner" class="btn btn-info">@ViewBag.partner &times;</span>
                                         }
                                         if (!String.IsNullOrEmpty(ViewBag.month))
                                         {
-                                            <span id="query_month" class="btn btn-info">@ViewBag.month</span>
+                                            <span id="query_month" class="btn btn-info">@ViewBag.month &times;</span>
                                         }
                                     }
                                 </h5>
@@ -334,7 +334,8 @@
                     $('#travel_month input[value="@ViewBag.month"]').parent('label').addClass('active');
                     $('#city option[value="@ViewBag.city"]').attr("selected", "selected");
                     $('#comment_rating option[value="@ViewBag.rating"]').attr("selected", "selected")
-                    $('#comment_stay_total option[value="@ViewBag.stay"]').attr("selected", "selected");
+            $('#comment_stay_total option[value="@ViewBag.stay"]').attr("selected", "selected");
+            $('#Sortby option[value="@ViewBag.sort"]').attr("selected", "selected");
         });
 
         $('#query_city').click(function () {
