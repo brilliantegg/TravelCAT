@@ -15,13 +15,13 @@
 <div class="row">
     <div class="col-md-12">
         <div class="list-group" id="list-tab" role="tablist">
-            <a class="list-group-item active" data-toggle="list" href="#message1">所有留言</a>
-            <a class="list-group-item" data-toggle="list" href="#message2">被檢舉留言</a>
+            <a id="message_link"class="list-group-item active" data-toggle="list" href="#message">所有留言</a>
+            <a id="issue_message_link"class="list-group-item" data-toggle="list" href="#issue_message">被檢舉留言</a>
         </div>
     </div>
     <div class="col-md-12">
         <div class="tab-content" id="nav-tabContent">
-            <div class="tab-pane fade show active" id="message1">
+            <div class="tab-pane fade show active" id="message">
 
                 <form action="@Url.Action("Index")" method="get" class="text-right search m-2">
                     @Html.TextBox("id", "", new { @class = "border", @placeholder = "請輸入留言編號" })
@@ -103,7 +103,7 @@
                 </div>
 
             </div>
-            <div class="tab-pane fade" id="message2">
+            <div class="tab-pane fade" id="issue_message">
                 @Html.Action("_Problem", "issues", new { type_id = 4 })
             </div>
 
@@ -111,3 +111,20 @@
     </div>
 </div>
 <script src="~/Scripts/bootstrap.js"></script>
+
+@section scripts{
+    <script>
+        var invoke_make_blank = true;
+        var tab = "@ViewBag.tab";
+    if (invoke_make_blank)
+    {
+           if (tab == '2') {
+        $('#message_link').removeClass('active')
+        $('#issue_message_link').addClass('active')
+        $('#message').removeClass('active show')
+        $('#issue_message').addClass('active show')
+    }
+        invoke_make_blank = false;
+    }
+    </script>
+}

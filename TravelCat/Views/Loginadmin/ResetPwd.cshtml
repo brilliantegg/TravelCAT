@@ -1,45 +1,45 @@
 ﻿@model TravelCat.Models.admin
-
+<link href="~/Content/Login-index.css" rel="stylesheet" />
 @{
     ViewBag.Title = "ResetPwd";
+    Layout = "~/Views/Shared/_Layout 1.cshtml";
 }
+<div class="warp container">
+    <div class="txt text-center">
+        <h2 class="text-warning">重設密碼</h2>
+    </div>
+    <div class="login">
+        <div class="container">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
 
-<div class="container">
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
+            <div class="form-horizontal">
 
-        <div class="form-horizontal">
-            <h2>重設密碼</h2>
-            <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            @Html.HiddenFor(model => model.admin_id)
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.admin_id)
 
-            <div class="form-group">
-                <label class="col-form-label">新密碼</label>
-                <div class="col-md-10">
-                    <input id="Password1" type="password" name="newpassword" class="form-control" />
+                <div class="form-group">
+                    <label class="col-form-label">新密碼</label>
+                    <input id="Password1" type="password" name="newpassword" class="form-control" placeholder="請輸入新密碼" />
                 </div>
-            </div>
+                <div id="pwdlength" class="text-warning"></div>
 
-            <div class="form-group">
-                <label class="col-form-label">確認密碼</label>
-                <div class="col-md-10">
-                    <input id="Password2" type="password" class="form-control" />
+                <div class="form-group">
+                    <label class="col-form-label">確認密碼</label>
+                    <input id="Password2" type="password" class="form-control" placeholder="請輸入確認密碼" />
                 </div>
-            </div>
-            <div class="col-md-12 mb-2">
-                <input type="checkbox" id="show_password" />顯示密碼
-            </div>
+                <div class="form-group">
+                    <input type="checkbox" id="show_password" />顯示密碼
+                </div>
 
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
+                <div class="form-group">
                     <input id="submit" type="submit" value="更改密碼" class="btn btn-primary" />
                 </div>
             </div>
+            }
         </div>
-    }
-
+    </div>
 </div>
 
 @section scripts{
@@ -59,6 +59,10 @@
                 alert("兩次輸入的密碼不一致！");
                 return false;
             }
+            else if ($('#pwdlength').text() != "") {
+                alert("請確認資料是否填入正確");
+                return false;
+            }
             else {
                 alert("密碼更改成功，按下確定至登入頁面");
                 return true;
@@ -74,6 +78,17 @@
                 $('#Password1').attr("type", "password");
                 $('#Password2').attr("type", "password");
             }
+        });
+
+        //密碼長度
+        $('#Password1').keyup(function () {
+            if ($('#Password1').val().length < 8) {
+                $('#pwdlength').text("請輸入最少8碼的英文或數字")
+            }
+            else {
+                $('#pwdlength').text('');
+            }
+
         });
     </script>
 }

@@ -31,6 +31,7 @@
                 <input id="Password1" type="password" name="newpassword" class="form-control" />
 
             </div>
+            <div id="pwdlength" class="text-danger"></div>
         </div>
 
         <div class="form-group">
@@ -39,6 +40,7 @@
                 <input id="Password2" type="password" class="form-control" />
 
             </div>
+            <div id="pwdconfirm" class="text-danger"></div>
         </div>
 
 
@@ -53,33 +55,52 @@
 <div>
     @Html.ActionLink("返回", "Index")
 </div>
-<script src="~/Scripts/jquery-3.4.1.min.js"></script>
-<script src="~/Scripts/jquery.validate.min.js"></script>
-<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
-<script>
-    $('#submit1').click(function () {
-        var psd1 = $('#oldpassword').val();
-        var psd2 = $('#Password1').val();
-        var psd3 = $('#Password2').val();
+@section scripts{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script>
+        $('#submit1').click(function () {
+            var psd1 = $('#oldpassword').val();
+            var psd2 = $('#Password1').val();
+            var psd3 = $('#Password2').val();
 
-        if (psd1 == "") {
-            alert("請輸入原密碼！");
-            return false;
-        }
-        if (psd2 == "") {
-            alert("請輸入新密碼！");
-            return false;
-        }
-        else if (psd3 == "") {
-            alert("請輸入確認密碼！");
-            return false;
-        }
-        else if (psd2 != psd3) {
-            alert("兩次輸入的密碼不一致！");
-            return false;
-        }
+            if (psd1 == "") {
+                alert("請輸入原密碼！");
+                return false;
+            }
+            if (psd2 == "") {
+                alert("請輸入新密碼！");
+                return false;
+            }
+            else if (psd3 == "") {
+                alert("請輸入確認密碼！");
+                return false;
+            }
+            else if (psd2 != psd3) {
+                alert("兩次輸入的密碼不一致！");
+                return false;
+            }
+            else if ($('#pwdlength').text() != "") {
+                alert("請確認資料是否填入正確");
+                return false;
+            }
 
-        else
-            return true;
-    });
-</script>
+
+            else
+                return true;
+
+        });
+
+        //密碼長度
+        $('#Password1').keyup(function () {
+            if ($('#Password1').val().length < 8) {
+                $('#pwdlength').text("請輸入最少8碼的英文或數字")
+            }
+            else {
+                $('#pwdlength').text('');
+            }
+
+        });
+
+    </script>
+}

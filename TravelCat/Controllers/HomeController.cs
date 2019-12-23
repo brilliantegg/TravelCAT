@@ -39,7 +39,6 @@ namespace TravelCat.Controllers
                 comment = db.comment.OrderByDescending(m => m.comment_date).ToList()
             };
             //最多評論觀光物件
-            //select tourism_id,count(*) as total from comment group by tourism_id order by total desc
             var result = (from i in db.comment
                           group i by i.tourism_id into g
                           orderby g.Count() descending
@@ -50,10 +49,10 @@ namespace TravelCat.Controllers
                            group i by i.comment_id into g
                            orderby g.Count() descending
                            select new { id = g.Key, count = g.Count() }).FirstOrDefault();
+
+            //最多評論觀光物件 裡面最多讚的
             var data = new[] { new { comment = "", like = 0 } }.ToList();
-            data.RemoveAt(0);
-
-
+            data.RemoveAt(0);          
             
             foreach(var item in comment_list)
             {
@@ -75,6 +74,21 @@ namespace TravelCat.Controllers
             int like_new = db.collections_detail.Where(s => s.tourism_id == temp).Count();
             ViewBag.liken = like_new;
 
+            //排行榜
+            var follow_score = (from a in db.follow_list
+                                group a by a.member_id into b
+                                orderby b.Count() descending
+                                select new { id = b.Key, score = b.Count() * 5 }).ToList();
+
+
+            var comment_score = (from a in db.comment
+                                 group a by a.member_id into b
+                                 orderby b.Count() descending
+                                 select new { id = b.Key, score = b.Count() * 5 }).ToList();
+
+
+            var totoal_score = (follow_score).Union(comment_score).GroupBy(m => m.id).Select(m => new { id = m.Key, total = m.Sum(x => x.score) }).OrderByDescending(m => m.total).ToList();
+            ViewBag.score1 = totoal_score.Take(1).ToList();
             return View(model);
         }
 

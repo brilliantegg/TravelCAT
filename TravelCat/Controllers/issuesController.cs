@@ -103,7 +103,7 @@ namespace TravelCat.Controllers
                 db.Entry(issue).State = EntityState.Modified;
                 db.SaveChanges();
 
-                return RedirectToRoute(new { controller = controller, action = "Index" });
+                return RedirectToRoute(new { controller = controller, action = "Index" ,tab = 2 });
             }
         
             ViewBag.admin_id = new SelectList(db.admin, "admin_id", "admin_account", issue.admin_id);

@@ -17,10 +17,10 @@ namespace TravelCat.Controllers
         private dbTravelCat db = new dbTravelCat();
 
         // GET: members1
-        public ActionResult Index(string id = null, int page = 1)
+        public ActionResult Index(string id = null, int page = 1,int tab =1)
         {
             ViewBag.id = id;
-
+            ViewBag.tab = tab;
             var member = db.member.OrderBy(m => m.member_id).ToList();
             int pagesize = 10;
             int pagecurrent = page < 1 ? 1 : page;
@@ -57,9 +57,10 @@ namespace TravelCat.Controllers
         // 詳細資訊，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "member_id,member_account,member_password,member_status")] member member)
+        public ActionResult Edit([Bind(Include = "member_id,member_account,member_password,member_status")] member member,string id)
         {
-            //未完成
+            member = db.member.Where(m => m.member_id == id).FirstOrDefault();
+
             GmailSender gs = new GmailSender();
             gs.account = "travelcat.service@gmail.com";
             gs.password = "lqleyzcbmrmttloe";
@@ -71,8 +72,8 @@ namespace TravelCat.Controllers
             gs.Send();
 
             if (ModelState.IsValid)
-            {
-               
+            {              
+
                 db.Entry(member).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

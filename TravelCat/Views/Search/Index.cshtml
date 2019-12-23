@@ -185,23 +185,23 @@
                                     @{
                                         if (!String.IsNullOrEmpty(ViewBag.city))
                                         {
-                                            <span id="query_city" class="btn btn-info">@ViewBag.city &times;</span>
+                                            <span id="query_city">@ViewBag.city &times;</span>
                                         }
                                         if (!String.IsNullOrEmpty(ViewBag.rating))
                                         {
-                                            <span id="query_rating" class="btn btn-info">大於 @ViewBag.rating 分 &times;</span>
+                                            <span id="query_rating">大於 @ViewBag.rating 分 &times;</span>
                                         }
                                         if (!String.IsNullOrEmpty(ViewBag.stay))
                                         {
-                                            <span id="query_stay" class="btn btn-info">@ViewBag.stay &times;</span>
+                                            <span id="query_stay">@ViewBag.stay &times;</span>
                                         }
                                         if (ViewBag.partner != null)
                                         {
-                                            <span id="query_partner" class="btn btn-info">@ViewBag.partner &times;</span>
+                                            <span id="query_partner">@ViewBag.partner &times;</span>
                                         }
                                         if (!String.IsNullOrEmpty(ViewBag.month))
                                         {
-                                            <span id="query_month" class="btn btn-info">@ViewBag.month &times;</span>
+                                            <span id="query_month">@ViewBag.month &times;</span>
                                         }
                                     }
                                 </div>
