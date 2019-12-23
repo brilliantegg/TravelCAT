@@ -4,7 +4,7 @@
     ViewBag.Title = "新增景點";
 }
 
-    <link href="~/Content/back-end-Create.css" rel="stylesheet" />
+<link href="~/Content/back-end-Create.css" rel="stylesheet" />
 
 <h2 class="ml-3 mt-3 text-danger text-center">新增景點</h2>
 
@@ -152,15 +152,20 @@
         </div>
 
         <!--下方按鈕-->
-        <div class="row footer">
-            <div class=" col-1">
+        <div class="row text-center m-3">
+            <div class="col-1">
                 <input type="submit" value="新增" class="btn btn-primary" />
+
             </div>
             <div class="col-2">
-                @Html.ActionLink("回到景點列表", "Index", new { page=Session["pg"]}, new { @class = "btn btn-primary" })
+                @Html.ActionLink("回到景點列表", "Index", new { page = Session["pg"] }, new { @class = "btn btn-primary" })
 
             </div>
         </div>
     </div>
 </form>
-  
+
+@section scripts{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+}
