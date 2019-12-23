@@ -16,10 +16,10 @@ namespace TravelCat.Controllers
         private dbTravelCat db = new dbTravelCat();
 
         // GET: messages
-        public ActionResult Index(string id = null, int page = 1)
+        public ActionResult Index(string id = null, int page = 1, int tab = 1)
         {
             ViewBag.id = id;
-
+            ViewBag.tab = tab;
             var messages = db.message.Include(m => m.comment).Include(m => m.member).ToList();
             int pagesize = 10;
             int pagecurrent = page < 1 ? 1 : page;

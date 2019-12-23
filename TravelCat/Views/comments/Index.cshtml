@@ -14,15 +14,15 @@
 <div class="row">
     <div class="col-md-12">
         <div class="list-group" id="list-tab" role="tablist">
-            <a id="1" class="list-group-item active" data-toggle="list" href="#comment1">所有評論</a>
-            <a id="2" class="list-group-item" data-toggle="list" href="#comment2">被檢舉評論</a>
+            <a id="comment_link" class="list-group-item active" data-toggle="list" href="#comment">所有評論</a>
+            <a id="issue_comment_link" class="list-group-item" data-toggle="list" href="#issue_comment">被檢舉評論</a>
         </div>
     </div>
 
     <div class="col-md-12">
 
         <div class="tab-content" id="nav-tabContent">
-            <div class="tab-pane fade show active" id="comment1">
+            <div class="tab-pane fade show active" id="comment">
 
                 <form action="@Url.Action("Index")" method="get" class="text-right search m-2">
                     @Html.TextBox("id", "", new { @class = "border", @placeholder = "請輸入評論編號" })
@@ -103,7 +103,7 @@
                    })
                 </div>
             </div>
-            <div class="tab-pane fade" id="comment2">
+            <div class="tab-pane fade" id="issue_comment">
                 @Html.Action("_Problem", "issues", new { type_id = 3 })
 
             </div>
@@ -112,3 +112,20 @@
     </div>
 </div>
 
+
+@section scripts{
+    <script>
+        var invoke_make_blank = true;
+        var tab = "@ViewBag.tab";
+    if (invoke_make_blank)
+    {
+           if (tab == '2') {
+        $('#comment_link').removeClass('active')
+        $('#issue_comment_link').addClass('active')
+        $('#comment').removeClass('active show')
+        $('#issue_comment').addClass('active show')
+    }
+        invoke_make_blank = false;
+    }
+    </script>
+}

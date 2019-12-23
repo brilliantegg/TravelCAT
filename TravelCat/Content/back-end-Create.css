@@ -1,4 +1,11 @@
-﻿.row {
+﻿h2 {
+    color: #000;
+    font-weight: 700;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #CCC;
+    font-family: "Noto Sans TC","Helvetica Neue", Helvetica, Arial, "PingFang TC", 微软雅黑, "Microsoft YaHei", 华文细黑, STHeiti, sans-serif;
+}
+.row {
     display: flex;
     justify-content: center;
 }

@@ -1,14 +1,12 @@
-@import url('https://fonts.googleapis.com/css?family=Noto+Serif+TC:300,400,500,700,900&display=swap');
-
-/*CSS reset*/
+ï»¿/*CSS reset*/
 * {
     margin: 0;
     padding: 0;
     list-style: none;
-    font-family: 'Noto Serif TC', serif;
+    font-family: "Noto Sans TC","Helvetica Neue", Helvetica, Arial, "PingFang TC", å¾®è½¯é›…é»‘, "Microsoft YaHei", åæ–‡ç»†é»‘, STHeiti, sans-serif ;
 }
 
-/*  Layout¥~®Ø   ¶}©l*/
+/*  Layoutå¤–æ¡†   é–‹å§‹*/
 html,
 body {
     height: 100%;
@@ -22,7 +20,7 @@ body {
     display: flex;
 }
 
-/*      ¥ª°¼¿ï³æ¼Ë¦¡      */
+/*      å·¦å´é¸å–®æ¨£å¼      */
 .side-menu {
     position: relative;
     width: 240px;
@@ -109,7 +107,7 @@ body {
             transform: scale(1);
         }
 
-/*  Layout¥~®Ø   µ²§ô*/
+/*  Layoutå¤–æ¡†   çµæŸ*/
 
 
 .container-fluid {
