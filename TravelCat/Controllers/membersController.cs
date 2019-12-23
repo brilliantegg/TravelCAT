@@ -57,23 +57,25 @@ namespace TravelCat.Controllers
         // 詳細資訊，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "member_id,member_account,member_password,member_status")] member member,string id)
+        public ActionResult Edit([Bind(Include = "member_id,member_account,member_password,member_status")] member member)
         {
-            member = db.member.Where(m => m.member_id == id).FirstOrDefault();
+            string email = db.member_profile.Where(m => m.member_id == member.member_id).FirstOrDefault().email;
 
-            GmailSender gs = new GmailSender();
-            gs.account = "travelcat.service@gmail.com";
-            gs.password = "lqleyzcbmrmttloe";
-            gs.sender = "旅途貓 <travelcat.service@gmail.com>";
-            gs.receiver = $"{member.member_profile.email}";
-            gs.subject = "會員通知";
-            gs.messageBody = "親愛的會員您好:<br />因您已違反本網站規定，本站將取消您的會員，如有任何疑問請與本站客服人員聯絡。";
-            gs.IsHtml = true;
-            gs.Send();
+            if (member.member_status == true)
+            {
+                GmailSender gs = new GmailSender();
+                gs.account = "travelcat.service@gmail.com";
+                gs.password = "lqleyzcbmrmttloe";
+                gs.sender = "旅途貓 <travelcat.service@gmail.com>";
+                gs.receiver = $"{email}";
+                gs.subject = "會員通知";
+                gs.messageBody = "親愛的會員您好:<br />因您已違反本網站規定，本站將取消您的會員，如有任何疑問請與本站客服人員聯絡。";
+                gs.IsHtml = true;
+                gs.Send();
+            }
 
             if (ModelState.IsValid)
-            {              
-
+            {
                 db.Entry(member).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

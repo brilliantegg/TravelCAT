@@ -27,7 +27,7 @@ namespace TravelCat.Controllers
         [ChildActionOnly]
         public PartialViewResult _Problem(int type_id, int page = 1,string id=null)
         {
-            var issue = db.issue.Where(m => m.issue_id == type_id).OrderBy(m=>m.resolve_date).ToList();
+            var issue = db.issue.Where(m => m.issue_id == type_id).OrderBy(m=>m.issue_status).ThenByDescending(m => m.resolve_date).ToList();
 
             int pagesize = 10;
             int pagecurrent = page < 1 ? 1 : page;
