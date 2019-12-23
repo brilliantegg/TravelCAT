@@ -6,21 +6,20 @@
 <link href="~/Content/web-Login.css" rel="stylesheet" />
 
 <div class="container">
-    <div class="main">
-        <div class="Login-box">
+    <div class="main" style="width:700px">
+        <div class="Login-box" >
 
             <div class="welcome">
-                <h2 class="mb-4">@ViewBag.account 您好!</h2>
+                <h2 class="mb-4">@ViewBag.account 會員您好!</h2>
 
-                <h4 class="mb-4">我們已寄了一封信到您的信箱，向您說明如何重設密碼，請記得檢查您的信箱。</h4>
+                <p class="mb-4">我們已寄了一封信到您的信箱，向您說明如何重設密碼，請記得檢查您的信箱。</p>
 
-                <h4 class="mb-4">您的電子信箱：@ViewBag.accemail</h4>
+                <p class="mb-4">您的電子信箱：@ViewBag.accemail</p>
 
-                @Html.ActionLink("回到登入頁", "Login", "Home")
+                @Html.ActionLink("回到登入頁", "Login", "Home", new { @class = "btn btn-primary" })
 
             </div>
 
         </div>
     </div>
 </div>
-

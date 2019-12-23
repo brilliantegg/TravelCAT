@@ -85,7 +85,7 @@
                             <div class="form-group">
                                 @Html.LabelFor(model => model.member_profile.nickname, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    <input id="newnickname" type="text" value="@Model.member_profile.nickname" name="newnickname" class="form-control" />
+                                    <input id="member_profile.nickname" type="text" value="@Model.member_profile.nickname" name="newnickname" class="form-control" />
                                     @Html.ValidationMessageFor(model => model.member_profile.nickname, "", new { @class = "text-danger" })
                                 </div>
                             </div>

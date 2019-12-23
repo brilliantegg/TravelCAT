@@ -57,9 +57,10 @@ namespace TravelCat.Controllers
         // 詳細資訊，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "member_id,member_account,member_password,member_status")] member member)
+        public ActionResult Edit([Bind(Include = "member_id,member_account,member_password,member_status")] member member,string id)
         {
-            //未完成
+            member = db.member.Where(m => m.member_id == id).FirstOrDefault();
+
             GmailSender gs = new GmailSender();
             gs.account = "travelcat.service@gmail.com";
             gs.password = "lqleyzcbmrmttloe";
@@ -71,8 +72,8 @@ namespace TravelCat.Controllers
             gs.Send();
 
             if (ModelState.IsValid)
-            {
-               
+            {              
+
                 db.Entry(member).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

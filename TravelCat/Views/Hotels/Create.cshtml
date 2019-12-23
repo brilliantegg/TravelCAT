@@ -121,18 +121,19 @@
             </div>
         </div>
 
-        <div class="row footer">
+        <div class="row text-center m-3">
             <div class="col-1">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="新增" class="btn btn-primary" />
             </div>
             <div class="col-2">
-                @Html.ActionLink("回到住宿列表", "Index",new { page=Session["pg"]}, new { @class = "btn btn-primary" })
+                @Html.ActionLink("回到住宿列表", "Index", new { page = Session["pg"] }, new { @class = "btn btn-primary" })
             </div>
         </div>
     </div>
 </form>
 
 
-<script src="~/Scripts/jquery-3.3.1.min.js"></script>
-<script src="~/Scripts/jquery.validate.min.js"></script>
-<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+@section scripts{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+}
