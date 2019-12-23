@@ -1,6 +1,8 @@
-﻿@using PagedList;
-@using PagedList.Mvc;
-@model PagedList.IPagedList<TravelCat.Models.hotel>
+﻿@using X.PagedList.Mvc
+@using X.PagedList
+@using X.PagedList.Mvc.Common
+
+@model IPagedList<TravelCat.Models.hotel>
 
 @{
     ViewBag.Title = "Index";
@@ -86,6 +88,12 @@
 </table>
 
 <div class="text-center">
-    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, id = ViewBag.id }))
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, id = ViewBag.id }),
+                  new PagedListRenderOptions
+                  {
+                      ContainerDivClasses = new[] { "" },
+                      LiElementClasses = new[] { "page-item" },
+                      PageClasses = new[] { "page-link" },
+                  })
 </div>
 

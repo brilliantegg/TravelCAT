@@ -17,7 +17,7 @@ namespace TravelCat.Controllers
         private dbTravelCat db = new dbTravelCat();
 
         // GET: comments
-        public ActionResult Index(string id=null,int page=1)
+        public ActionResult Index(string id = null, int page = 1)
         {
             ViewBag.id = id;
 
@@ -28,8 +28,8 @@ namespace TravelCat.Controllers
 
             if (!String.IsNullOrEmpty(id))
             {
-                var search = db.comment.Where(m => m.comment_id.ToString().Contains(id));
-                return View(search.OrderBy(m => m.comment_id).ToPagedList(page, pagesize));
+                var search = db.comment.Where(m => m.comment_id.ToString() == id).ToList();
+                return View(search.ToPagedList(pagecurrent, pagesize));
             }
             else
             {
@@ -59,7 +59,7 @@ namespace TravelCat.Controllers
         // 詳細資訊，請參閱 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit( comment comment)
+        public ActionResult Edit(comment comment)
         {
             if (ModelState.IsValid)
             {
@@ -67,7 +67,7 @@ namespace TravelCat.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            
+
             return View(comment);
         }
 
