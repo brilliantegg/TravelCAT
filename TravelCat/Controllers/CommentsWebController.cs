@@ -20,7 +20,11 @@ namespace TravelCat.Controllers
         {
             int currentPage = page < 1 ? 1 : page;
             destinationsViewModel model = new destinationsViewModel()
-            {                
+            {
+                activity_list = db.activity.ToList(),
+                spot_list = db.spot.ToList(),
+                restaurant_list = db.restaurant.ToList(),
+                hotel_list = db.hotel.ToList(),
                 comment = db.comment.Where(m => m.tourism_id == tourismId).OrderByDescending(m=>m.comment_date).ToList(),
                 message = db.message.Where(m => m.tourism_id == tourismId).ToList(),
                 comment_emoji_details = db.comment_emoji_details.Where(m => m.tourism_id == tourismId).ToList(),
@@ -60,7 +64,10 @@ namespace TravelCat.Controllers
 
             destinationsViewModel model = new destinationsViewModel()
             {
-                activity = db.activity.Where(m => m.activity_id == tourismId).FirstOrDefault(),
+                activity_list = db.activity.ToList(),
+                spot_list = db.spot.ToList(),
+                restaurant_list = db.restaurant.ToList(),
+                hotel_list = db.hotel.ToList(),
                 comment = db.comment.Where(m => m.tourism_id == tourismId && m.comment_status == true).ToList(),
                 message = db.message.Where(m => m.tourism_id == tourismId).ToList(),
                 comment_emoji_details = db.comment_emoji_details.ToList(),

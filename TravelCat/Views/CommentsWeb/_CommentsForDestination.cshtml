@@ -139,19 +139,19 @@
                         </div>
                         @if (destinatations == "A")
                         {
-                            <a href="" class="hashtag "> #@Model.activity.activity_title #@item.travel_partner #@item.travel_month 月</a>
+                            <a href="" class="hashtag "> #@Model.activity_list.Where(m => m.activity_id == @ViewBag.tourismId).FirstOrDefault().activity_title #@item.travel_partner #@item.travel_month 月</a>
                         }
                         else if (destinatations == "S")
                         {
-                            <a href="" class="hashtag "> #@Model.spot.spot_title #@item.travel_partner #@item.travel_month 月</a>
+                    <a href="" class="hashtag "> #@Model.spot_list.Where(m => m.spot_id == @ViewBag.tourismId).FirstOrDefault().spot_title #@item.travel_partner #@item.travel_month 月</a>
                         }
                         else if (destinatations == "R")
                         {
-                            <a href="" class="hashtag "> #@Model.restaurant.restaurant_title #@item.travel_partner #@item.travel_month 月</a>
+                    <a href="" class="hashtag "> #@Model.restaurant_list.Where(m => m.restaurant_id == @ViewBag.tourismId).FirstOrDefault().restaurant_title #@item.travel_partner #@item.travel_month 月</a>
                         }
                         else if (destinatations == "H")
                         {
-                            <a href="" class="hashtag "> #@Model.hotel.hotel_title #@item.travel_partner #@item.travel_month 月</a>
+                    <a href="" class="hashtag "> #@Model.hotel_list.Where(m => m.hotel_id == @ViewBag.tourismId).FirstOrDefault().hotel_title #@item.travel_partner #@item.travel_month 月</a>
                         }
 
                     </div>
@@ -325,7 +325,7 @@
 
         }
     }
-    <div>
+    <div class="col-4 offset-4">
         @Html.PagedListPager(Model.comment_page, page => Url.Action("Details", controller, new { id=@ViewBag.tourismId,page = page }),
         new PagedListRenderOptions
         {

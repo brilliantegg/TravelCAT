@@ -169,7 +169,20 @@
                                     @Html.ValidationMessageFor(model => model.member_profile.profile_photo, "", new { @class = "text-danger" })
                                 </div>
                             </div>
-
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.member_profile.website_link, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    <input id="newphone" type="text" value="@Model.member_profile.website_link" name="newphone" class="form-control" />
+                                    @Html.ValidationMessageFor(model => model.member_profile.website_link, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.member_profile.brief_intro, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    <input id="newphone" type="text" value="@Model.member_profile.brief_intro" name="newphone" class="form-control" />
+                                    @Html.ValidationMessageFor(model => model.member_profile.brief_intro, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
 
                             <div class="form-group">
                                 <div class="col-md-offset-2 col-md-10 row justify-content-end">

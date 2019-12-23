@@ -578,3 +578,14 @@ section{
     right: 1rem;
 
 }
+
+.page-item.active .page-link {
+    z-index: 1;
+    color: #fff;
+    background-color: darkolivegreen;
+    border-color: darkolivegreen;
+}
+
+.page-link {
+    color: darkolivegreen;
+}
