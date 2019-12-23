@@ -367,3 +367,11 @@ footer {
     color: #000;
     font-weight: 900;
 }
+
+.comment_photo {
+    max-height: 20vh;
+    object-fit: cover;
+}
+.like{
+    margin:10px 0;
+}

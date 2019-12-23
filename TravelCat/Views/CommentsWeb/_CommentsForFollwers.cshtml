@@ -170,7 +170,7 @@
             }
         }
         <div>
-            @Html.PagedListPager(Model.comment_page, page => Url.Action("Index", "web_Member_Index", new { page = page }),
+            @Html.PagedListPager(Model.comment_page, page => Url.Action("Index", "web_Member_Index", new {id=@ViewBag.memId, page = page }),
             new PagedListRenderOptions
             {
                 ContainerDivClasses = new[] { "" },
