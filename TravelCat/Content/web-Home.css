@@ -376,7 +376,7 @@ footer {
     margin:10px 0;
 }
 
-@import url("https://fonts.googleapis.com/css?family=Red+Hat+Display:400,900&display=swap");
+
 
 
 /*.center {
@@ -445,7 +445,7 @@ footer {
 
             .top3 .item .score:after {
                 display: block;
-                content: 'points';
+                content: '分';
                 opacity: 0.5;
             }
 
@@ -524,7 +524,7 @@ footer {
 
             .list .item .score:after {
                 margin-right: 1rem;
-                content: 'points';
+                content: '分';
                 opacity: 0.5;
             }
 

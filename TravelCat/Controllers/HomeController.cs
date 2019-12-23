@@ -36,7 +36,8 @@ namespace TravelCat.Controllers
                 restaurant = db.restaurant.OrderByDescending(m => db.comment.Where(s => s.tourism_id == m.restaurant_id).Count()).ToList(),
                 spot = db.spot.OrderByDescending(m => db.comment.Where(s => s.tourism_id == m.spot_id).Count()).ToList(),
                 member = db.member.Where(m => m.member_account == account).FirstOrDefault(),
-                comment = db.comment.OrderByDescending(m => m.comment_date).ToList()
+                comment = db.comment.OrderByDescending(m => m.comment_date).ToList(),
+                member_profile = db.member_profile.ToList()
             };
             //最多評論觀光物件
             var result = (from i in db.comment
@@ -89,6 +90,9 @@ namespace TravelCat.Controllers
 
             var totoal_score = (follow_score).Union(comment_score).GroupBy(m => m.id).Select(m => new { id = m.Key, total = m.Sum(x => x.score) }).OrderByDescending(m => m.total).ToList();
             ViewBag.score1 = totoal_score.Take(1).ToList();
+            ViewBag.score2 = totoal_score.Skip(1).Take(1).ToList();
+            ViewBag.score3 = totoal_score.Skip(2).Take(1).ToList();
+            ViewBag.score4= totoal_score.Skip(3).Take(7).ToList();
             return View(model);
         }
 
