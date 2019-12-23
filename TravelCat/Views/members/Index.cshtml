@@ -68,6 +68,7 @@
                         </tr>
                     }
                 </table>
+                
                 <div>
                     @Html.PagedListPager(Model, page => Url.Action("Index", new { page, id = ViewBag.id }),
                    new PagedListRenderOptions

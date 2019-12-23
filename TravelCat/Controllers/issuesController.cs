@@ -25,9 +25,9 @@ namespace TravelCat.Controllers
 
         //問題PartialView
         [ChildActionOnly]
-        public PartialViewResult _Problem(int type_id, int page = 1,string id=null)
+        public PartialViewResult _Problem(int type_id, int page = 1, string id = null)
         {
-            var issue = db.issue.Where(m => m.issue_id == type_id).OrderBy(m=>m.issue_status).ThenByDescending(m => m.resolve_date).ToList();
+            var issue = db.issue.Where(m => m.issue_id == type_id).OrderBy(m => m.issue_status).ThenByDescending(m => m.resolve_date).ToList();
 
             int pagesize = 10;
             int pagecurrent = page < 1 ? 1 : page;
@@ -38,13 +38,13 @@ namespace TravelCat.Controllers
             if (!String.IsNullOrEmpty(id))
             {
                 var search = db.issue.Where(m => m.issue_content.Contains(id) || m.problem_id.Contains(id) || m.member_id.Contains(id));
-                return PartialView(search.OrderBy(m=>m.report_date).ToPagedList(pagecurrent, pagesize));
+                return PartialView(search.OrderBy(m => m.report_date).ToPagedList(pagecurrent, pagesize));
             }
             else
             {
                 return PartialView("_Problem", pagedlist);
             }
-         
+
         }
 
         // GET: issues/Edit/5
@@ -75,6 +75,9 @@ namespace TravelCat.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "id,member_id,admin_id,issue_id,report_date,issue_content,issue_result,issue_status,resolve_date,problem_id")] issue issue)
         {
+            string email = db.member_profile.Where(m => m.member_id == issue.member_id).FirstOrDefault().email;
+            string result = issue.issue_result;
+            string content = issue.issue_content;
 
             int id = issue.issue_id;
             string controller;
@@ -97,15 +100,27 @@ namespace TravelCat.Controllers
                     break;
             }
 
+            if (issue.issue_status == true)
+            {
+                GmailSender gs = new GmailSender();
+                gs.account = "travelcat.service@gmail.com";
+                gs.password = "lqleyzcbmrmttloe";
+                gs.sender = "旅途貓 <travelcat.service@gmail.com>";
+                gs.receiver = $"{email}";
+                gs.subject = "系統問題回覆";
+                gs.messageBody = "關於您的問題:<br>" + content + "<br>" + "以下是本網站針對此問題做出的回覆:<br>" + result+ "<br>感謝您寶貴的建議，全體人員在此感謝。";
+                gs.IsHtml = true;
+                gs.Send();
+            }
             issue.resolve_date = DateTime.Now;
             if (ModelState.IsValid)
             {
                 db.Entry(issue).State = EntityState.Modified;
                 db.SaveChanges();
 
-                return RedirectToRoute(new { controller = controller, action = "Index" ,tab = 2 });
+                return RedirectToRoute(new { controller = controller, action = "Index", tab = 2 });
             }
-        
+
             ViewBag.admin_id = new SelectList(db.admin, "admin_id", "admin_account", issue.admin_id);
 
             return View(issue);
