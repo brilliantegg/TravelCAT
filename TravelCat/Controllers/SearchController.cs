@@ -38,7 +38,7 @@ namespace TravelCat.Controllers
             SearchViewModel model = new SearchViewModel()
             {
                 comment = db.comment.ToList(),
-                collections_detail=db.collections_detail.ToList(),
+                collections_detail = db.collections_detail.ToList(),
                 activity = db.activity.Take(10).ToList(),
                 //hotel = db.hotel.ToList(),
                 //restaurant = db.restaurant.ToList(),
@@ -54,8 +54,11 @@ namespace TravelCat.Controllers
                 //model.spot = db.spot.Where(s => s.spot_intro.Contains(q) || s.spot_title.Contains(q) || s.city.Contains(q) || s.district.Contains(q)).ToList();
             }
             //找地區
-            string type = "activity";
-            search_city(type, city, model);
+            if (!String.IsNullOrEmpty(city))
+            {
+                string type = "activity";
+                search_city(type, city, model);
+            }
             //有評論分數的
             //單個表的篩選寫法 要加上join
             //select tourism_id,avg(comment_rating) as aver
@@ -103,7 +106,7 @@ namespace TravelCat.Controllers
             //                        select new result_rating { id = a.spot_id, rating = b.tourism_id }).ToList();
 
             List<result_rating> result = rating_result.Union(activity_null_result).OrderByDescending(s => s.rating).ToList();
-          
+
 
             model.result_ratings = model.activity.Join(result, a => a.activity_id, b => b.id,
                                                                     (a, b) => new result_rating
@@ -138,23 +141,24 @@ namespace TravelCat.Controllers
                 //}
             }
             //找平均時間
-            search_stay(comment_stay_total, model);
+            if (!String.IsNullOrEmpty(comment_stay_total))
+            {
+                search_stay(comment_stay_total, model);
+            }
             //旅伴
-            search_partner(travel_partner, model);
+            if (!String.IsNullOrEmpty(travel_partner))
+            {
+                search_partner(travel_partner, model);
+            }
             //搜尋月份
-            search_month(travel_month, model);
+            if (!String.IsNullOrEmpty(travel_month))
+            {
+                search_month(travel_month, model);
+            }
             //依照分數排序
             if (!String.IsNullOrEmpty(Sortby))
             {
-                ViewBag.sort = Sortby;
-                if (Sortby == "htol")
-                {
-                    model.result_ratings = model.result_ratings.OrderByDescending(s => s.rating).ToList();
-                }
-                else if (Sortby == "ltoh")
-                {
-                    model.result_ratings = model.result_ratings.OrderBy(s => s.rating).ToList();
-                }
+                search_sort(Sortby, model);
             }
 
             //ViewBag.counta = model.result_ratings.Count;
@@ -179,8 +183,11 @@ namespace TravelCat.Controllers
                 model.hotel = db.hotel.Where(s => s.hotel_intro.Contains(q) || s.hotel_title.Contains(q) || s.city.Contains(q) || s.district.Contains(q)).ToList();
             }
             //找地區
-            string type = "hotel";
-            search_city(type, city, model);
+            if (!String.IsNullOrEmpty(city))
+            {
+                string type = "hotel";
+                search_city(type, city, model);
+            }
 
             //有評論分數的
             var rating_result = (from b in db.comment
@@ -212,25 +219,27 @@ namespace TravelCat.Controllers
             }
 
             //找平均時間
-            search_stay(comment_stay_total, model);
+            if (!String.IsNullOrEmpty(comment_stay_total))
+            {
+                search_stay(comment_stay_total, model);
+            }
             //旅伴
-            search_partner(travel_partner, model);
+            if (!String.IsNullOrEmpty(travel_partner))
+            {
+                search_partner(travel_partner, model);
+            }
             //搜尋月份
-            search_month(travel_month, model);
+            if (!String.IsNullOrEmpty(travel_month))
+            {
+                search_month(travel_month, model);
+            }
             //依照分數排序
             if (!String.IsNullOrEmpty(Sortby))
             {
-                if (Sortby == "htol")
-                {
-                    model.result_ratings = model.result_ratings.OrderByDescending(s => s.rating).ToList();
-                }
-                else if (Sortby == "ltoh")
-                {
-                    model.result_ratings = model.result_ratings.OrderBy(s => s.rating).ToList();
-                }
+                search_sort(Sortby, model);
             }
-            //ViewBag.counth = model.result_ratings.Count;
-            //TempData["counth"] = model.result_ratings.Count();
+
+
             model.show_ratings = model.result_ratings.ToPagedList(page, pageSize);
             return View(model);
 
@@ -252,8 +261,11 @@ namespace TravelCat.Controllers
                 model.restaurant = db.restaurant.Where(s => s.restaurant_intro.Contains(q) || s.restaurant_title.Contains(q) || s.city.Contains(q) || s.district.Contains(q)).ToList();
             }
             //找地區
-            string type = "restaurant";
-            search_city(type, city, model);
+            if (!String.IsNullOrEmpty(city))
+            {
+                string type = "restaurant";
+                search_city(type, city, model);
+            }
             //有評論分數的
             var rating_result = (from b in db.comment
                                  group b by b.tourism_id into g
@@ -285,28 +297,27 @@ namespace TravelCat.Controllers
                 model.result_ratings = model.result_ratings.Where(x => !String.IsNullOrEmpty(x.rating) && Double.Parse(x.rating) >= rating).ToList();
             }
             //找平均時間
-            search_stay(comment_stay_total, model);
+            if (!String.IsNullOrEmpty(comment_stay_total))
+            {
+                search_stay(comment_stay_total, model);
+            }
             //旅伴
-            search_partner(travel_partner, model);
+            if (!String.IsNullOrEmpty(travel_partner))
+            {
+                search_partner(travel_partner, model);
+            }
             //搜尋月份
-            search_month(travel_month, model);
+            if (!String.IsNullOrEmpty(travel_month))
+            {
+                search_month(travel_month, model);
+            }
             //依照分數排序
             if (!String.IsNullOrEmpty(Sortby))
             {
-                ViewBag.sort = Sortby;
-                if (Sortby == "htol")
-                {
-                    model.result_ratings = model.result_ratings.OrderByDescending(s => s.rating).ToList();
-                }
-                else if (Sortby == "ltoh")
-                {
-                    model.result_ratings = model.result_ratings.OrderBy(s => s.rating).ToList();
-                }
+                search_sort(Sortby, model);
             }
-            //ViewBag.countr = model.result_ratings.Count;
-            //ViewBag.count = model.result_ratings.Count;
 
-            //TempData["countr"] = model.result_ratings.Count();
+
             model.show_ratings = model.result_ratings.ToPagedList(page, pageSize);
             return View(model);
         }
@@ -327,8 +338,11 @@ namespace TravelCat.Controllers
                 model.spot = db.spot.Where(s => s.spot_intro.Contains(q) || s.spot_title.Contains(q) || s.city.Contains(q) || s.district.Contains(q)).ToList();
             }
             //找地區
-            string type = "spot";
-            search_city(type, city, model);
+            if (!String.IsNullOrEmpty(city))
+            {
+                string type = "spot";
+                search_city(type, city, model);
+            }
             //有評論分數的
             var rating_result = (from b in db.comment
                                  group b by b.tourism_id into g
@@ -359,35 +373,44 @@ namespace TravelCat.Controllers
                 model.result_ratings = model.result_ratings.Where(x => !String.IsNullOrEmpty(x.rating) && Double.Parse(x.rating) >= rating).ToList();
             }
             //找平均時間
-            search_stay(comment_stay_total, model);
+            if (!String.IsNullOrEmpty(comment_stay_total))
+            {
+                search_stay(comment_stay_total, model);
+            }
             //旅伴
-            search_partner(travel_partner, model);
+            if (!String.IsNullOrEmpty(travel_partner))
+            {
+                search_partner(travel_partner, model);
+            }
             //搜尋月份
-            search_month(travel_month, model);
+            if (!String.IsNullOrEmpty(travel_month))
+            {
+                search_month(travel_month, model);
+            }
             //依照分數排序
-            search_sort(Sortby, model);
+            if (!String.IsNullOrEmpty(Sortby))
+            {
+                search_sort(Sortby, model);
+            }
 
-            //ViewBag.counts = model.result_ratings.Count;
-            //ViewBag.count = model.result_ratings.Count;
-            //TempData["counts"] = model.result_ratings.Count();
+
             model.show_ratings = model.result_ratings.ToPagedList(page, pageSize);
             return View(model);
         }
 
         private SearchViewModel search_sort(string Sortby, SearchViewModel model)
         {
-            if (!String.IsNullOrEmpty(Sortby))
+
+            ViewBag.sort = Sortby;
+            if (Sortby == "htol")
             {
-                ViewBag.sort = Sortby;
-                if (Sortby == "htol")
-                {
-                    model.result_ratings = model.result_ratings.OrderByDescending(s => s.rating).ToList();
-                }
-                else if (Sortby == "ltoh")
-                {
-                    model.result_ratings = model.result_ratings.OrderBy(s => s.rating).ToList();
-                }
+                model.result_ratings = model.result_ratings.OrderByDescending(s => s.rating).ToList();
             }
+            else if (Sortby == "ltoh")
+            {
+                model.result_ratings = model.result_ratings.OrderBy(s => s.rating).ToList();
+            }
+
             return model;
         }
         private SearchViewModel search_city(string type, string city, SearchViewModel model)
@@ -464,138 +487,135 @@ namespace TravelCat.Controllers
         }
         private SearchViewModel search_month(string travel_month, SearchViewModel model)
         {
-            if (travel_month != null)
+
+            ViewBag.month = travel_month;
+            string id;
+            string[] month = new string[3];
+            switch (travel_month)
             {
-                ViewBag.month = travel_month;
-                string id;
-                string[] month = new string[3];
-                switch (travel_month)
-                {
-                    case "3至5月":
-                        month[0] = "3";
-                        month[1] = "4";
-                        month[2] = "5";
-                        break;
-                    case "6至8月":
-                        month[0] = "6";
-                        month[1] = "7";
-                        month[2] = "8";
-                        break;
-                    case "9至11月":
-                        month[0] = "9";
-                        month[1] = "10";
-                        month[2] = "11";
-                        break;
-                    case "12至2月":
-                        month[0] = "12";
-                        month[1] = "1";
-                        month[2] = "2";
-                        break;
-                }
-                for (int i = 0; i < model.result_ratings.Count; i++)
-                {
-                    bool is_exist = false;
-                    id = model.result_ratings[i].id;
-                    model.comment = db.comment.Where(s => s.tourism_id == id).ToList();
-                    for (int j = 0; j < model.comment.Count; j++)   //某個活動內的某個留言
-                    {
-                        for (int x = 0; x < month.Length; x++) //找這個留言內有沒有我們要的月份
-                        {
-                            int result = model.comment.Where(s => s.travel_month == month[x]).Count();
-                            if (result != 0)
-                            {
-                                is_exist = true;  //只要有一項就代表活動符合資格
-                            }
-                        }
-                    }
-                    if (!is_exist)
-                    {
-                        model.result_ratings.RemoveAt(i);     //不符合資格的移除
-                        i = i - 1;
-                    }
-                }
+                case "3至5月":
+                    month[0] = "3";
+                    month[1] = "4";
+                    month[2] = "5";
+                    break;
+                case "6至8月":
+                    month[0] = "6";
+                    month[1] = "7";
+                    month[2] = "8";
+                    break;
+                case "9至11月":
+                    month[0] = "9";
+                    month[1] = "10";
+                    month[2] = "11";
+                    break;
+                case "12至2月":
+                    month[0] = "12";
+                    month[1] = "1";
+                    month[2] = "2";
+                    break;
             }
-            return model;
-        }
-        private SearchViewModel search_partner(string travel_partner, SearchViewModel model)
-        {
-            if (travel_partner != null)
+
+            for (int i = 0; i < model.result_ratings.Count; i++)
             {
-                ViewBag.partner = travel_partner;
-                string id;
-                for (int i = 0; i < model.result_ratings.Count; i++)
+                bool is_exist = false;
+                id = model.result_ratings[i].id;
+                model.comment = db.comment.Where(s => s.tourism_id == id).ToList();
+                for (int j = 0; j < model.comment.Count; j++)   //某個活動內的某個留言
                 {
-                    bool is_exist = false;
-                    id = model.result_ratings[i].id;
-                    model.comment = db.comment.Where(s => s.tourism_id == id).ToList();
-                    for (int j = 0; j < model.comment.Count; j++)   //找對於單個活動的所有評論內是否有含搜尋選項
+                    for (int x = 0; x < month.Length; x++) //找這個留言內有沒有我們要的月份
                     {
-                        int result = model.comment.Where(s => s.travel_partner == travel_partner).Count();
+                        int result = model.comment.Where(s => s.travel_month == month[x]).Count();
                         if (result != 0)
                         {
                             is_exist = true;  //只要有一項就代表活動符合資格
                         }
                     }
-                    if (!is_exist)
-                    {
-                        model.result_ratings.RemoveAt(i);     //不符合資格的移除
-                        i = i - 1;
-                    }
+                }
+                if (!is_exist)
+                {
+                    model.result_ratings.RemoveAt(i);     //不符合資格的移除
+                    i = i - 1;
                 }
             }
 
             return model;
         }
+        private SearchViewModel search_partner(string travel_partner, SearchViewModel model)
+        {
+
+            ViewBag.partner = travel_partner;
+            string id;
+            for (int i = 0; i < model.result_ratings.Count; i++)
+            {
+                bool is_exist = false;
+                id = model.result_ratings[i].id;
+                model.comment = db.comment.Where(s => s.tourism_id == id).ToList();
+                for (int j = 0; j < model.comment.Count; j++)   //找對於單個活動的所有評論內是否有含搜尋選項
+                {
+                    int result = model.comment.Where(s => s.travel_partner == travel_partner).Count();
+                    if (result != 0)
+                    {
+                        is_exist = true;  //只要有一項就代表活動符合資格
+                    }
+                }
+                if (!is_exist)
+                {
+                    model.result_ratings.RemoveAt(i);     //不符合資格的移除
+                    i = i - 1;
+                }
+            }
+
+
+            return model;
+        }
         private SearchViewModel search_stay(string comment_stay_total, SearchViewModel model)
         {
-            if (!String.IsNullOrEmpty(comment_stay_total))
+
+            string id;
+            ViewBag.stay = comment_stay_total;
+            for (int i = 0; i < model.result_ratings.Count; i++)
             {
-                string id;
-                ViewBag.stay = comment_stay_total;
-                for (int i = 0; i < model.result_ratings.Count; i++)
+                id = model.result_ratings[i].id;
+                int cmt_count = db.comment.Where(s => s.tourism_id == id).Count();
+                if (cmt_count == 0)
                 {
-                    id = model.result_ratings[i].id;
-                    int cmt_count = db.comment.Where(s => s.tourism_id == id).Count();
-                    if (cmt_count == 0)
+                    model.result_ratings.RemoveAt(i);
+                    i = i - 1;
+                }
+                else
+                {
+                    //找每個活動的平均
+                    double time_avg = db.comment.Where(s => s.tourism_id == id).Average(r => r.comment_rating);
+                    switch (comment_stay_total)
                     {
-                        model.result_ratings.RemoveAt(i);
-                        i = i - 1;
-                    }
-                    else
-                    {
-                        //找每個活動的平均
-                        double time_avg = db.comment.Where(s => s.tourism_id == id).Average(r => r.comment_rating);
-                        switch (comment_stay_total)
-                        {
-                            case "三到四小時":
-                                if (time_avg > 4 || time_avg < 3)
-                                {
-                                    model.result_ratings.RemoveAt(i);
-                                    i = i - 1;
-                                }
-                                break;
-                            case "一到兩小時":
-                                if (time_avg < 1 || time_avg > 2)
-                                {
-                                    model.result_ratings.RemoveAt(i);
-                                    i = i - 1;
-                                }
-                                break;
-                            case "兩到三小時":
-                                if (time_avg < 2 || time_avg > 3)
-                                {
-                                    model.result_ratings.RemoveAt(i);
-                                    i = i - 1;
-                                }
-                                break;
-                            case "四小時以上":
-                                if (time_avg < 4)
-                                {
-                                    model.result_ratings.RemoveAt(i);
-                                    i = i - 1;
-                                }
-                                break;
-                        }
+                        case "三到四小時":
+                            if (time_avg > 4 || time_avg < 3)
+                            {
+                                model.result_ratings.RemoveAt(i);
+                                i = i - 1;
+                            }
+                            break;
+                        case "一到兩小時":
+                            if (time_avg < 1 || time_avg > 2)
+                            {
+                                model.result_ratings.RemoveAt(i);
+                                i = i - 1;
+                            }
+                            break;
+                        case "兩到三小時":
+                            if (time_avg < 2 || time_avg > 3)
+                            {
+                                model.result_ratings.RemoveAt(i);
+                                i = i - 1;
+                            }
+                            break;
+                        case "四小時以上":
+                            if (time_avg < 4)
+                            {
+                                model.result_ratings.RemoveAt(i);
+                                i = i - 1;
+                            }
+                            break;
                     }
                 }
             }
@@ -606,7 +626,7 @@ namespace TravelCat.Controllers
         //水軍遊樂場
         public ActionResult generate_comment()
         {
-            List<comment> comments = db.comment.Where(s=>s.tourism_id.Contains("H")).Take(1260).OrderBy(m => Guid.NewGuid()).ToList();
+            List<comment> comments = db.comment.Where(s => s.tourism_id.Contains("H")).Take(1260).OrderBy(m => Guid.NewGuid()).ToList();
             //string id = "";
             string[] title = { "大說謊家","下禮拜要報告好緊張","錢多事少離家近 數錢數到手抽筋","熱氣球飛行家",
                                         "去年聖誕節","Google goes offline after fibre cables cut","布魯克林孤兒","遲到騎車還下雨 有夠難過","Robert Downey Jr launches YouTube doc featuring AI","Airbnb is not an estate agent, EU court rules","Inside the lives of Orthodox Jewish women","Why did an entire civilisation vanish?","鋒迴路轉","賽道狂人","82年生的金智英"};
@@ -621,7 +641,7 @@ namespace TravelCat.Controllers
                                                "五歲的星星（陳品嫙 飾）有個跟別人不一樣的媽媽小青（姚愛寗 飾），愛笑的小青最喜歡跟星星一起玩耍，相依為命的兩人總在一聲聲的「謝謝」與「對不起」中尋求大家的認同與諒解。小青為了生活，帶著星星到市場打工，卻無意惹禍上身，開啟了一連串的麻煩事，甚至丟了工作，還引起新聞媒體的注意，爆出小青不堪的過往……。<br>在社會輿論的壓力下，社會局決定安排星星到寄養家庭，然而這個表面上《最好的安排》，竟成了小青母女倆《最壞的決定》。面對現實的壓迫與社會的歧視，小青決心帶著星星離開，但他們究竟該何去何從呢？<br>今年冬天最動人的溫馨電影《為你存在的每一天》，由資深監製曾禎執導，新生代演員群姚愛寗、黃遠、于樂誠及天才童星陳品嫙主演，本片大膽碰觸國片少見的社會弱勢議題，以及主演演技加持，近日已榮獲洛杉磯菲斯蒂喬斯國際影展六項大獎、義大利奧尼羅電影獎最佳劇情片、倫敦獨立電影獎兩項大獎以及入圍美國獨立電影獎最佳亞洲劇情片。《為你存在的每一天》將於12月13日全台閃耀上映，更多電影資訊請上官方粉絲團查詢。",
                                                "一事無成的凱特（艾蜜莉亞克拉克 飾）在倫敦渾渾噩噩地過日子，她做出一連串的糟糕決定導致的厄運總是伴隨著鞋子上發出的鈴聲如影隨形地跟著她，因為她只能打扮成聖誕老公公的小精靈，在一間全年無休的聖誕飾品店當店員。於是當心地善良的大帥哥湯姆（亨利高汀 飾）闖入凱特的人生，並且開始幫助她克服她人生中的許多障礙與難關，這一切都似乎美好得有點不真實。當倫敦在聖誕佳節期間轉變成一座童話般的夢幻王國，這兩個看似八竿子打不著的人應該不會結成良緣，但有時候你得順其自然、聆聽內心的聲音…而且一定要擁有信念。<br>《去年聖誕節》一片中有許多喬治麥可的經典名曲，當然包括與電影同名，詞意苦中帶甜的經典聖誕歌曲。這部電影中也有一些這位曾經榮獲多項葛萊美獎的傳奇歌手從未發表過的全新歌曲。喬治麥可在輝煌的演藝生涯中，總共賣出1億1千5百萬張專輯，並且擁有10首冠軍單曲。",
                                                "萊諾艾斯洛（艾德華諾頓 飾），一名患有妥瑞症的孤獨私家偵探，他的良師和唯一朋友法蘭克敏納（布魯斯威利 飾）遭到謀殺，他冒著生命危險設法破案。他手上只有寥寥無幾的線索，不過他滿懷衝勁，解開了層層掩飾的重大祕密，而那攸關著能否讓紐約市維持和諧的命運。在一連串的神祕事件中，他從哈林區醉生夢死的爵士俱樂部，來到布魯克林區邊緣化的貧民窟，最後來到紐約權力經紀人的陣地，萊諾必須對付流氓、腐敗和全市最危險的人，為的只是向他的朋友致敬，並拯救可能會讓他獲得救贖的女人。"};
-            string[] date = { "2019-08-07", "2019-01-05", "2016-05-20", "2019-12-13", "2018-08-23", "2019-12-20","2019-09-26" };
+            string[] date = { "2019-08-07", "2019-01-05", "2016-05-20", "2019-12-13", "2018-08-23", "2019-12-20", "2019-09-26" };
             string[] photo = { "01_ash.png", "02_candy_crush.jpg", "03_goodboy.jpg", "G4wXXRk.gif", "12_goodguy.png", "01_sleep.jpg", "01_sleeves.jpg", "05_gaming.jpg", "05_report.jpg", "06_gf_zero.jpg", "10_crow.jpg", "11_math.jpg", "11_spiderman.jpg", "13_ad.jpg", "16_useful.jpg", "19_hell.jpg", "20_bean.jpg" };
             //string[] memberID = { "M000001", "M000002", "M000003", "M000004", "M000005" };
             string[] partner = { "蜜月", "伴侶", "朋友", "商務", "家庭" };
