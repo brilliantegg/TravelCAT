@@ -16,6 +16,7 @@ namespace TravelCat.ViewModels
         public List<comment> comment { get; set; }
         public List<collections_detail> collections_Details { get; set; }
         public List<follow_list> follow_list { get; set; }
+        public List<member_profile>member_profile { get; set; }
 
-    }
+}
 }

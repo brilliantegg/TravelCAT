@@ -5,6 +5,8 @@
 @model TravelCat.ViewModels.SearchViewModel
 
 @{ Layout = "";
+    Random random = new Random();
+    int img_num = 0;
     int num = 0;
     string memberId;
     if (Session["memberID"] == null || string.IsNullOrWhiteSpace(Session["memberID"].ToString()))
@@ -18,14 +20,14 @@
 }
 @if (Model.show_ratings.Count == 0)
 {
+    <br />
     <span>沒有搜尋結果</span>
 }
 else
 {
     foreach (var item in Model.show_ratings)
     {
-        if (item.id.Contains("H"))
-        {
+        img_num = random.Next(1, 36);
             <div class="media mt-3  pl-3 mb-2 border-dark">
                 <img src="https://source.unsplash.com/collection/388793/random?sig=@(Guid.NewGuid())" width="250" height="150" class="mr-3 ml-3" alt="...">
                 <div class="media-body ">
@@ -40,7 +42,7 @@ else
                             <div style="margin:5px 0">
                                 <div class="progress ">
                                     @{var width_convert = (Double.Parse(item.rating)) * 20 + "%"; }
-                                    <div class="progress-bar" role="progressbar" style="width:@width_convert;" aria-valuenow="@Double.Parse(item.rating)" aria-valuemin="0" aria-valuemax="5">@Math.Round(@Double.Parse(item.rating), 1, MidpointRounding.AwayFromZero) 分</div>
+                                    <div class="progress-bar" role="progressbar" style="width:@width_convert;" aria-valuenow="@Double.Parse(item.rating)" aria-valuemin="0" aria-valuemax="5">@Math.Round(Double.Parse(item.rating), 1, MidpointRounding.AwayFromZero) 分</div>
                                 </div>
                             </div>
                         </div>
@@ -64,8 +66,7 @@ else
 
                 </span>
             </div>
-            <hr />
-        }
+
     }
 
     <div>

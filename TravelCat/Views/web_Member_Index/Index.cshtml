@@ -47,16 +47,16 @@
                 @if (@memberId == @Model.member.member_id)
                 {
                     <button type="button" class="btn  btn-outline-dark " data-toggle="modal" data-target="#exampleModalCenter">
-                        + 編輯資料
+                        編輯資料
                     </button>
                 }
                 else if (@Model.follow_list.Where(m => m.followed_id == @Model.member.member_id && m.member_id == @memberId).Count() > 0)
                 {
-                    <button class="follwered_btn btn btn-outline-dark " value="@Model.member.member_id">-追蹤</button>
+                    <button class="follwered_btn btn btn-outline-dark " value="@Model.member.member_id">取消追蹤</button>
                 }
                 else if (@memberId != null && @memberId != @Model.member.member_id)
                 {
-                    <button class="follwered_btn btn btn-outline-dark " value="@Model.member.member_id">+追蹤</button>
+                    <button class="follwered_btn btn btn-outline-dark " value="@Model.member.member_id">加入追蹤</button>
 
                 }
 
@@ -164,20 +164,7 @@
                                         @score
                                     </li>
                                 </ul>
-                                <!--RANK-->
-                                <ul>
-                                    <li>排行榜</li>
-                                    @foreach (var item in ViewBag.score)
-                                    {
-
-                                        <li>
-                                            @(item.GetType().GetProperty("id").GetValue(item))
-                                        </li>
-                                        <li>
-                                            @(item.GetType().GetProperty("total").GetValue(item))
-                                        </li>
-                                    }
-                                </ul>
+                                
                                 <div class="modal fade " id="follow" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
@@ -377,9 +364,9 @@
 
 
     $(".follwered_btn").click(function () {
-        if ($(".follwered_btn").text()=="-追蹤"){
+        if ($(".follwered_btn").text()=="取消追蹤"){
             Unfollowed()
-        } else if($(".follwered_btn").text()=="+追蹤"){
+        } else if($(".follwered_btn").text()=="加入追蹤"){
             getfollowed();
         }
 
@@ -392,7 +379,7 @@
             })
             .done(function (response) {
                 alert(response);
-                $(".follwered_btn").text("-追蹤");
+                $(".follwered_btn").text("取消追蹤");
             })
             .fail(function() {
                 alert( `追蹤失敗` );
@@ -407,7 +394,7 @@
             })
             .done(function (response) {
                 alert(response);
-                $(".follwered_btn").text("+追蹤")
+                $(".follwered_btn").text("加入追蹤")
             })
             .fail(function() {
                 alert( `取消追蹤失敗` );

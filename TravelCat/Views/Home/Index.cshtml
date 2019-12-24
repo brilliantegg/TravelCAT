@@ -15,6 +15,8 @@
     {
         mem_id = Session["memberID"].ToString();
     }
+    Random random = new Random();
+    int img_num = 0;
 }
 <link href="~/Content/web-Home.css" rel="stylesheet" />
 
@@ -95,8 +97,9 @@
                     <!--景點card-->
                     @for (int i = 0; i < 8; i++)
                     {
+                        img_num = random.Next(0, 27);
                         <div class="card ">
-                            <img src="https://source.unsplash.com/collection/9243920/random?sig=@(i.ToString())" class="card-img-top " alt="...">
+                            <img src="~/images/spot/S (@img_num).jpg" class="card-img-top " alt="...">
                             <div class="card-body">
                                 <h5 class="card-title">@Model.spot[i].spot_title</h5>
                                 <p class="card-text">@Model.spot[i].spot_intro</p>
@@ -114,8 +117,9 @@
                     <!--Card-->
                     @for (int i = 0; i < 8; i++)
                     {
+                        img_num = random.Next(0, 27);
                         <div class="card">
-                            <img src="https://source.unsplash.com/collection/9243928/random?sig=@(i.ToString())" class="card-img-top" alt="...">
+                            <img src="~/images/activity/A (@img_num).jpg" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title">@Model.activity[i].activity_title</h5>
                                 <p class="card-text">@Model.activity[i].activity_intro</p>
@@ -150,8 +154,9 @@
                     <!--Card-->
                     @for (int i = 0; i < 8; i++)
                     {
+                        img_num = random.Next(0, 26);
                         <div class="card">
-                            <img src="https://source.unsplash.com/collection/9243930/random?sig=@(i.ToString())" class="card-img-top" alt="...">
+                            <img src="~/images/restaurant/R (@img_num).jpg" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title">@Model.restaurant[i].restaurant_title</h5>
                                 <p class="card-text">@Model.restaurant[i].restaurant_intro</p>
@@ -313,145 +318,83 @@
 <!--RANK-->
 
 
-<ul>
-    <li>排行榜</li>
-    @foreach (var item in ViewBag.score1)
-    {
-
-        <li>
-            @(item.GetType().GetProperty("id").GetValue(item))
-        </li>
-        <li>
-            @(item.GetType().GetProperty("total").GetValue(item))
-        </li>
-    }
-</ul>
-
 <div class="center">
     <div class="top3">
         <div class="two item">
             <div class="pos">
                 2
             </div>
-            <div class="pic" style="background-image: url(&#39;https://randomuser.me/api/portraits/men/44.jpg&#39;)"></div>
-            <div class="name">
-                Edgar Soto
+            @foreach (var item in ViewBag.score2)
+            {<a href="@Url.Action("Index","web_Member_Index",new {id=item.GetType().GetProperty("id").GetValue(item)})">
+    <div class="pic" style="background-image: url(http://localhost:54678/images/member/@Model.member_profile.Where(m=>m.member_id ==  item.GetType().GetProperty("id").GetValue(item)).FirstOrDefault().profile_photo)"></div>
+</a>
+                    <div class="name">
+
+                        @Model.member_profile.Where(m => m.member_id == item.GetType().GetProperty("id").GetValue(item)).FirstOrDefault().nickname
+
             </div>
-            <div class="score">
-                6453
-            </div>
+                <div class="score">
+                    @(item.GetType().GetProperty("total").GetValue(item))
+                </div>
+            }
+
         </div>
         <div class="one item">
             <div class="pos">
                 1
             </div>
-            <div class="pic" style="background-image: url(&#39;https://randomuser.me/api/portraits/men/31.jpg&#39;)"></div>
-            <div class="name">
-                Clifford James
-            </div>
-            <div class="score">
-                6794
-            </div>
+            @foreach (var item in ViewBag.score1)
+            {
+                <div class="pic" style="background-image: url(http://localhost:54678/images/member/@Model.member_profile.Where(m=>m.member_id ==  item.GetType().GetProperty("id").GetValue(item)).FirstOrDefault().profile_photo)"></div>
+
+                <div class="name">
+                    @Model.member_profile.Where(m => m.member_id == item.GetType().GetProperty("id").GetValue(item)).FirstOrDefault().nickname
+                </div>
+                <div class="score">
+                    @(item.GetType().GetProperty("total").GetValue(item))
+                </div>
+            }
         </div>
         <div class="three item">
             <div class="pos">
                 3
             </div>
-            <div class="pic" style="background-image: url(&#39;https://randomuser.me/api/portraits/women/91.jpg&#39;)"></div>
-            <div class="name">
-                Nevaeh Silva
-            </div>
-            <div class="score">
-                6034
-            </div>
+            @foreach (var item in ViewBag.score3)
+            {
+                <div class="pic" style="background-image: url(http://localhost:54678/images/member/@Model.member_profile.Where(m=>m.member_id ==  item.GetType().GetProperty("id").GetValue(item)).FirstOrDefault().profile_photo)"></div>
+
+                <div class="name">
+                    @Model.member_profile.Where(m => m.member_id == item.GetType().GetProperty("id").GetValue(item)).FirstOrDefault().nickname
+                </div>
+                <div class="score">
+                    @(item.GetType().GetProperty("total").GetValue(item))
+                </div>
+            }
         </div>
     </div>
     <div class="list col-4 offset-4">
-        <div class="item">
-            <div class="pos">
-                4
+
+
+        @foreach (var item in ViewBag.score4)
+        {
+            <div class="item">
+                <div class="pos">
+                    4
+                </div>
+                <div class="pic" style="background-image: url(http://localhost:54678/images/member/@Model.member_profile.Where(m=>m.member_id ==  item.GetType().GetProperty("id").GetValue(item)).FirstOrDefault().profile_photo)"></div>
+
+                <div class="name">
+                    @Model.member_profile.Where(m => m.member_id == item.GetType().GetProperty("id").GetValue(item)).FirstOrDefault().nickname
+                </div>
+                <div class="score">
+                    @(item.GetType().GetProperty("total").GetValue(item))
+                </div>
             </div>
-            <div class="pic" style="background-image: url(&#39;https://randomuser.me/api/portraits/men/88.jpg&#39;)"></div>
-            <div class="name">
-                Clayton Watson
-            </div>
-            <div class="score">
-                5980
-            </div>
+                }
+
+
+
         </div>
-        <div class="item">
-            <div class="pos">
-                5
-            </div>
-            <div class="pic" style="background-image: url(&#39;https://randomuser.me/api/portraits/women/29.jpg&#39;)"></div>
-            <div class="name">
-                Debbie Lane
-            </div>
-            <div class="score">
-                5978
-            </div>
-        </div>
-        <div class="item">
-            <div class="pos">
-                6
-            </div>
-            <div class="pic" style="background-image: url(&#39;https://randomuser.me/api/portraits/women/85.jpg&#39;)"></div>
-            <div class="name">
-                Gabriella Steward
-            </div>
-            <div class="score">
-                5845
-            </div>
-        </div>
-        <div class="item">
-            <div class="pos">
-                7
-            </div>
-            <div class="pic" style="background-image: url(&#39;https://randomuser.me/api/portraits/women/39.jpg&#39;)"></div>
-            <div class="name">
-                Nina Perkins
-            </div>
-            <div class="score">
-                5799
-            </div>
-        </div>
-        <div class="item">
-            <div class="pos">
-                8
-            </div>
-            <div class="pic" style="background-image: url(&#39;https://randomuser.me/api/portraits/men/77.jpg&#39;)"></div>
-            <div class="name">
-                Dennis Henry
-            </div>
-            <div class="score">
-                5756
-            </div>
-        </div>
-        <div class="item">
-            <div class="pos">
-                9
-            </div>
-            <div class="pic" style="background-image: url(&#39;https://randomuser.me/api/portraits/women/49.jpg&#39;)"></div>
-            <div class="name">
-                Courtney Fuller
-            </div>
-            <div class="score">
-                5713
-            </div>
-        </div>
-        <div class="item">
-            <div class="pos">
-                10
-            </div>
-            <div class="pic" style="background-image: url(&#39;https://randomuser.me/api/portraits/women/30.jpg&#39;)"></div>
-            <div class="name">
-                Joan Wood
-            </div>
-            <div class="score">
-                5674
-            </div>
-        </div>
-    </div>
 </div>
 <footer class="footer">
 
