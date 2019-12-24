@@ -15,6 +15,8 @@
     {
         mem_id = Session["memberID"].ToString();
     }
+    Random random = new Random();
+    int img_num = 0;
 }
 <link href="~/Content/web-Home.css" rel="stylesheet" />
 
@@ -95,8 +97,9 @@
                     <!--景點card-->
                     @for (int i = 0; i < 8; i++)
                     {
+                        img_num = random.Next(0, 27);
                         <div class="card ">
-                            <img src="https://source.unsplash.com/collection/9243920/random?sig=@(i.ToString())" class="card-img-top " alt="...">
+                            <img src="~/images/spot/S (@img_num).jpg" class="card-img-top " alt="...">
                             <div class="card-body">
                                 <h5 class="card-title">@Model.spot[i].spot_title</h5>
                                 <p class="card-text">@Model.spot[i].spot_intro</p>
@@ -114,8 +117,9 @@
                     <!--Card-->
                     @for (int i = 0; i < 8; i++)
                     {
+                        img_num = random.Next(0, 27);
                         <div class="card">
-                            <img src="https://source.unsplash.com/collection/9243928/random?sig=@(i.ToString())" class="card-img-top" alt="...">
+                            <img src="~/images/activity/A (@img_num).jpg" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title">@Model.activity[i].activity_title</h5>
                                 <p class="card-text">@Model.activity[i].activity_intro</p>
@@ -150,8 +154,9 @@
                     <!--Card-->
                     @for (int i = 0; i < 8; i++)
                     {
+                        img_num = random.Next(0, 26);
                         <div class="card">
-                            <img src="https://source.unsplash.com/collection/9243930/random?sig=@(i.ToString())" class="card-img-top" alt="...">
+                            <img src="~/images/restaurant/R (@img_num).jpg" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title">@Model.restaurant[i].restaurant_title</h5>
                                 <p class="card-text">@Model.restaurant[i].restaurant_intro</p>
