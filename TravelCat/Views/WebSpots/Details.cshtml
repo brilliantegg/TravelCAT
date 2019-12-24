@@ -244,162 +244,164 @@
     @{ double totalCommentNum = @Model.comment.Count(); }
     <section>
 
-
-        <div class="filter_comment row col-7 offset-1">
-            <input type="hidden" name="tourismId" value="@ViewBag.tourismId" />
-            <div class="col-12 mt-3">
-                <div class="row">
-                    <h3 class="col-9">評論 (@Model.comment.Count())</h3>
-                    <div class="new_comment col-3 justify-content-end">
-                        <form action="/web_comments/Create" Method="GET">
-                            <input type="hidden" name="tourismID" value=@Model.spot.spot_id />
-                            <input type="hidden" name="mem_id" value="@Session["memberID"]" />
-                            <button type="submit" class="add_comment btn btn-outline-dark btn-lg  ">新增評論</button>
-                        </form>
+        <div class="d-flex">
+            <div class="filter_comment row col-7 offset-1">
+                <input type="hidden" name="tourismId" value="@ViewBag.tourismId" />
+                <div class="col-12 mt-3">
+                    <div class="row">
+                        <h3 class="col-9">評論 (@Model.comment.Count())</h3>
+                        <div class="new_comment col-3 justify-content-end">
+                            <form action="/web_comments/Create" Method="GET">
+                                <input type="hidden" name="tourismID" value=@Model.spot.spot_id />
+                                <input type="hidden" name="mem_id" value="@Session["memberID"]" />
+                                <button type="submit" class="add_comment btn btn-outline-dark btn-lg  ">新增評論</button>
+                            </form>
+                        </div>
                     </div>
+                    <hr />
                 </div>
-                <hr />
-            </div>
-            <div class="fliter_set col-4">
-                <div class="fliter_set">
-                    <h4>旅客評等</h4><br />
-                    <label class="filter_container">
-                        很棒
-                        <input type="checkbox" value="5" name="comment_rating" />
-                        <span class="checkmark"></span>
-                    </label>
-                    <div class="progress">
+                <div class="fliter_set col-4">
+                    <div class="fliter_set">
+                        <h4>旅客評等</h4><br />
+                        <label class="filter_container">
+                            很棒
+                            <input type="checkbox" value="5" name="comment_rating" />
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="progress">
 
-                        <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width:@((double)(@Model.comment.Where(m => m.comment_rating == 5 ).Count() / totalCommentNum)*100)%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <label class="filter_container">
-                        非常好
-                        <input type="checkbox" value="4" name="comment_rating" />
-                        <span class="checkmark"></span>
-                    </label>
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: @((double)(@Model.comment.Where(m => m.comment_rating == 4).Count() / totalCommentNum)*100)%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <label class="filter_container">
-                        一般
-                        <input type="checkbox" value="3" name="comment_rating" />
-                        <span class="checkmark"></span>
-                    </label>
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: @((double)(@Model.comment.Where(m => m.comment_rating == 3).Count() / totalCommentNum)*100)%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <label class="filter_container">
-                        差
-                        <input type="checkbox" value="2" name="comment_rating" />
-                        <span class="checkmark"></span>
-                    </label>
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: @((double)(@Model.comment.Where(m => m.comment_rating == 2).Count() / totalCommentNum)*100)%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <label class="filter_container">
-                        糟透了
-                        <input type="checkbox" value="1" name="comment_rating" />
-                        <span class="checkmark"></span>
-                    </label>
+                            <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width:@((double)(@Model.comment.Where(m => m.comment_rating == 5 ).Count() / totalCommentNum)*100)%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <label class="filter_container">
+                            非常好
+                            <input type="checkbox" value="4" name="comment_rating" />
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: @((double)(@Model.comment.Where(m => m.comment_rating == 4).Count() / totalCommentNum)*100)%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <label class="filter_container">
+                            一般
+                            <input type="checkbox" value="3" name="comment_rating" />
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: @((double)(@Model.comment.Where(m => m.comment_rating == 3).Count() / totalCommentNum)*100)%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <label class="filter_container">
+                            差
+                            <input type="checkbox" value="2" name="comment_rating" />
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: @((double)(@Model.comment.Where(m => m.comment_rating == 2).Count() / totalCommentNum)*100)%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <label class="filter_container">
+                            糟透了
+                            <input type="checkbox" value="1" name="comment_rating" />
+                            <span class="checkmark"></span>
+                        </label>
 
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: @((double)(@Model.comment.Where(m => m.comment_rating == 1).Count() / totalCommentNum)*100)%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: @((double)(@Model.comment.Where(m => m.comment_rating == 1).Count() / totalCommentNum)*100)%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
                     </div>
+                    <!--新增-->
                 </div>
-                <!--新增-->
-            </div>
-            <div class="fliter_set col-4">
-                <div class="fliter_set">
-                    <h4>旅客類型</h4><br />
-                    <label class="filter_container">
-                        蜜月
-                        <input type="checkbox" value="蜜月" name="travel_partner" />
-                        <span class="checkmark"></span>
-                    </label>
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: @((double)(@Model.comment.Where(m => m.travel_partner == "蜜月").Count() / totalCommentNum)*100)%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <label class="filter_container">
-                        伴侶
-                        <input type="checkbox" value="伴侶" name="travel_partner" />
-                        <span class="checkmark"></span>
-                    </label>
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: @((double)(@Model.comment.Where(m => m.travel_partner == "伴侶").Count() / totalCommentNum)*100)%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <label class="filter_container">
-                        家庭
-                        <input type="checkbox" value="家庭" name="travel_partner" />
-                        <span class="checkmark"></span>
-                    </label>
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: @((double)(@Model.comment.Where(m => m.travel_partner == "家庭").Count() / totalCommentNum)*100)%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <label class="filter_container">
-                        朋友
-                        <input type="checkbox" value="朋友" name="travel_partner" />
-                        <span class="checkmark"></span>
-                    </label>
+                <div class="fliter_set col-4">
+                    <div class="fliter_set">
+                        <h4>旅客類型</h4><br />
+                        <label class="filter_container">
+                            蜜月
+                            <input type="checkbox" value="蜜月" name="travel_partner" />
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: @((double)(@Model.comment.Where(m => m.travel_partner == "蜜月").Count() / totalCommentNum)*100)%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <label class="filter_container">
+                            伴侶
+                            <input type="checkbox" value="伴侶" name="travel_partner" />
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: @((double)(@Model.comment.Where(m => m.travel_partner == "伴侶").Count() / totalCommentNum)*100)%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <label class="filter_container">
+                            家庭
+                            <input type="checkbox" value="家庭" name="travel_partner" />
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: @((double)(@Model.comment.Where(m => m.travel_partner == "家庭").Count() / totalCommentNum)*100)%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <label class="filter_container">
+                            朋友
+                            <input type="checkbox" value="朋友" name="travel_partner" />
+                            <span class="checkmark"></span>
+                        </label>
 
 
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: @((double)(@Model.comment.Where(m => m.travel_partner == "朋友").Count() / totalCommentNum)*100)%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: @((double)(@Model.comment.Where(m => m.travel_partner == "朋友").Count() / totalCommentNum)*100)%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <label class="filter_container">
+                            商務
+                            <input type="checkbox" value="商務" name="travel_partner" />
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: @((double)(@Model.comment.Where(m => m.travel_partner == "商務").Count() / totalCommentNum)*100)%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
                     </div>
-                    <label class="filter_container">
-                        商務
-                        <input type="checkbox" value="商務" name="travel_partner" />
-                        <span class="checkmark"></span>
-                    </label>
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: @((double)(@Model.comment.Where(m => m.travel_partner == "商務").Count() / totalCommentNum)*100)%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+
+                </div>
+                <div class="fliter_set col-4">
+                    <div class="fliter_set">
+                        <h4>月份</h4><br />
+                        <label class="filter_container">
+                            3 月到 5 月
+                            <input type="checkbox" value="3-5" name="travel_month" />
+                            <span class="checkmark"></span>
+                        </label>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: @((double)(@Model.comment.Where(m => m.travel_month == "3" || m.travel_month == "4" || m.travel_month == "5" ).Count() / totalCommentNum)*100)%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <label class="filter_container">
+                            6 月到 8 月
+                            <input type="checkbox" value="6-8" name="travel_month" />
+                            <span class="checkmark"></span>
+                        </label>
+
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: @((double)(@Model.comment.Where(m => m.travel_month == "6" || m.travel_month == "7" || m.travel_month == "8" ).Count() / totalCommentNum)*100)%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <label class="filter_container">
+                            9 月到 11 月
+                            <input type="checkbox" value="9-11" name="travel_month" />
+                            <span class="checkmark"></span>
+                        </label>
+
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: @((double)(@Model.comment.Where(m => m.travel_month == "9" || m.travel_month == "10" || m.travel_month == "11" ).Count() / totalCommentNum)*100)%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <label class="filter_container">
+                            12 月到 2 月
+                            <input type="checkbox" value="12-2" name="travel_month" />
+                            <span class="checkmark"></span>
+                        </label>
+
+
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: @((double)(@Model.comment.Where(m => m.travel_month == "12" || m.travel_month == "1" || m.travel_month == "2" ).Count() / totalCommentNum)*100)%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
                     </div>
+
                 </div>
 
-            </div>
-            <div class="fliter_set col-4">
-                <div class="fliter_set">
-                    <h4>月份</h4><br />
-                    <label class="filter_container">
-                        3 月到 5 月
-                        <input type="checkbox" value="3-5" name="travel_month" />
-                        <span class="checkmark"></span>
-                    </label>
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: @((double)(@Model.comment.Where(m => m.travel_month == "3" || m.travel_month == "4" || m.travel_month == "5" ).Count() / totalCommentNum)*100)%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <label class="filter_container">
-                        6 月到 8 月
-                        <input type="checkbox" value="6-8" name="travel_month" />
-                        <span class="checkmark"></span>
-                    </label>
-
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: @((double)(@Model.comment.Where(m => m.travel_month == "6" || m.travel_month == "7" || m.travel_month == "8" ).Count() / totalCommentNum)*100)%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <label class="filter_container">
-                        9 月到 11 月
-                        <input type="checkbox" value="9-11" name="travel_month" />
-                        <span class="checkmark"></span>
-                    </label>
-
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: @((double)(@Model.comment.Where(m => m.travel_month == "9" || m.travel_month == "10" || m.travel_month == "11" ).Count() / totalCommentNum)*100)%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <label class="filter_container">
-                        12 月到 2 月
-                        <input type="checkbox" value="12-2" name="travel_month" />
-                        <span class="checkmark"></span>
-                    </label>
-
-
-                    <div class="progress">
-                        <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: @((double)(@Model.comment.Where(m => m.travel_month == "12" || m.travel_month == "1" || m.travel_month == "2" ).Count() / totalCommentNum)*100)%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                </div>
 
             </div>
-
-
+            <div class="col-3"  id="tb1"></div>
         </div>
     </section>
 
@@ -410,18 +412,6 @@
 
 </div>
 
-<!--FB-->
-<script>
-    window.fbAsyncInit = function () {
-        FB.init({
-            appId: '562137197876777',
-            autoLogAppEvents: true,
-            xfbml: true,
-            version: 'v5.0'
-        });
-    };
-</script>
-<script async defer src="https://connect.facebook.net/en_US/sdk.js"></script>
 
 
 <!--google-->
@@ -673,10 +663,41 @@
       title:'@Model.spot.spot_title'//說明文字(選擇性填寫)
     })
     }
-     var a = '123';
+     
 
 </script>
 <script>
+    var city ="@Model.spot.city"
+    //天氣預報
+    $(function () {
+  $.ajax({
+    type: "GET",
+    url: "https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-C0032-001?Authorization=CWB-AE3C8417-3E7C-4F1D-A604-A621FBAD2F1C&locationName="+city,
+    error: function (e) {
+      console.log('oh no');
+    },
+      success: function (data) {
+          $('#tb1').append(data.records.location[0].locationName)
+              $('#tb1').append(data.records.location[0].weatherElement[0].time[0].parameter.parameterName)
+          $('#tb1').append(data.records.location[0].weatherElement[1].time[0].parameter.parameterName)
+          $('#tb1').append(data.records.location[0].weatherElement[2].time[0].parameter.parameterName)
+          $('#tb1').append(data.records.location[0].weatherElement[3].time[0].parameter.parameterName)
+          $('#tb1').append(data.records.location[0].weatherElement[4].time[0].parameter.parameterName)
+         
+        @*for (i = 0; i < data.records.location.length; i++){
+            //$('#tb1').append("<tr><td>" + data.records.locations[0].location[i].locationName + "</td><td>" + data.records.locations[0].location[i].weatherElement[6].time[0].startTime + "</td><td>" + data.records.locations[0].location[i].weatherElement[6].time[0].endTime + "</td><td>" + data.records.locations[0].location[0].weatherElement[6].time[0].elementValue[0].value + "</td><td>" + data.records.locations[0].location[0].weatherElement[6].time[0].elementValue[0].value + "</td></tr>");
+            $('#tb1').append(data.records.locations[0].location[i].locationName)
+                 $('#tb1').append(data.records.locations[0].location[i].weatherElement[6].time[0].elementValue[0].value)
+            if (data.records.locations[0].location[i].locationName == '@Model.spot.district') {
+                $('#tb1').append(data.records.locations[0].location[i].locationName)
+                 $('#tb1').append(data.records.locations[0].location[i].weatherElement[6].time[0].elementValue[0].value)
+            }
+        }*@
+    }
+  });
+});
+    //篩選評論
+
     $(`.filter_comment`).on("change", function () {
         var comment_rating_values = [];
         var travel_partner_values = [];
@@ -687,7 +708,7 @@
         $.each($("input[name='travel_partner']:checked"), function () {
             travel_partner_values.push($(this).val());
                 });
-        $.each($("input[name='travel_month']:checked"), function () {            
+        $.each($("input[name='travel_month']:checked"), function () {
             if ($(this).val() == '3-5') {
                 travel_month_values.push(3,4,5);
             }else if ($(this).val() == '6-8') {
@@ -697,7 +718,7 @@
             }else if($(this).val() == '12-2') {
                 travel_month_values.push(12,1,2);
             }
-            
+
         });
         console.log(comment_rating_values)
         console.log(travel_partner_values)
@@ -719,6 +740,6 @@
                 }
             });
     });
-    
+
 </script>
 
