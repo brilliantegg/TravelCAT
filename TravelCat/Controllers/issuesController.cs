@@ -25,7 +25,7 @@ namespace TravelCat.Controllers
 
         //問題PartialView
         [ChildActionOnly]
-        public PartialViewResult _Problem(int type_id, int page = 1, string id = null)
+        public PartialViewResult _Problem(int type_id, int page = 1, string Problem_id = null)
         {
             var issue = db.issue.Where(m => m.issue_id == type_id).OrderBy(m => m.issue_status).ThenByDescending(m => m.resolve_date).ToList();
 
@@ -35,9 +35,9 @@ namespace TravelCat.Controllers
 
             ViewBag.issueId = type_id;
 
-            if (!String.IsNullOrEmpty(id))
+            if (!String.IsNullOrEmpty(Problem_id))
             {
-                var search = db.issue.Where(m => m.issue_content.Contains(id) || m.problem_id.Contains(id) || m.member_id.Contains(id));
+                var search = db.issue.Where(m => m.issue_content.Contains(Problem_id) || m.problem_id.Contains(Problem_id) || m.member_id.Contains(Problem_id));
                 return PartialView(search.OrderBy(m => m.report_date).ToPagedList(pagecurrent, pagesize));
             }
             else
@@ -108,7 +108,7 @@ namespace TravelCat.Controllers
                 gs.sender = "旅途貓 <travelcat.service@gmail.com>";
                 gs.receiver = $"{email}";
                 gs.subject = "系統問題回覆";
-                gs.messageBody = "關於您的問題:<br>" + content + "<br>" + "以下是本網站針對此問題做出的回覆:<br>" + result+ "<br>感謝您寶貴的建議，全體人員在此感謝。";
+                gs.messageBody = "<div><h3>關於您的問題:</h3><p>" + content + "</p><br></div>" + "<div><h3>以下是本網站針對此問題做出的回覆:</h3><p>" + result+ "</p></div><br><footer>感謝您寶貴的建議，全體人員在此感謝。</footer>";
                 gs.IsHtml = true;
                 gs.Send();
             }

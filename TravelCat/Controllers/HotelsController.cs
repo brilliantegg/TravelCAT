@@ -50,6 +50,7 @@ namespace TravelCat.Controllers
         {
             string h_id = db.Database.SqlQuery<string>("Select dbo.GethotelId()").FirstOrDefault();
             hotel.hotel_id = h_id;
+            hotel.page_status = false;
 
             //圖片
             string fileName = "";

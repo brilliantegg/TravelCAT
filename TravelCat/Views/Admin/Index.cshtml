@@ -6,9 +6,9 @@
 
 <h2>管理員</h2>
 
-<p>
+@*<p>
     @Html.ActionLink("新增管理員", "Create")
-</p>
+</p>*@
 <table class="table">
     <tr>
         <th>
@@ -44,7 +44,7 @@
         <td>
             @Html.ActionLink("修改個人資料", "Edit", new { id = item.admin_id }, new { @class = "btn btn-primary" }) 
             @Html.ActionLink("修改密碼", "Editpwd", new { id = item.admin_id }, new { @class = "btn btn-primary" }) 
-            @Html.ActionLink("刪除", "Delete", new { id = item.admin_id }, new { @class = "btn btn-danger" })
+            @*@Html.ActionLink("刪除", "Delete", new { id = item.admin_id }, new { @class = "btn btn-danger" })*@
         </td>
     </tr>
 }

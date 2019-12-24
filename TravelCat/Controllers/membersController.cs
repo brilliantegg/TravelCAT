@@ -69,7 +69,7 @@ namespace TravelCat.Controllers
                 gs.sender = "旅途貓 <travelcat.service@gmail.com>";
                 gs.receiver = $"{email}";
                 gs.subject = "會員通知";
-                gs.messageBody = "親愛的會員您好:<br />因您已違反本網站規定，本站將取消您的會員，如有任何疑問請與本站客服人員聯絡。";
+                gs.messageBody = "<h3>親愛的會員您好:</h3><br /><p>因您已違反本網站規定，本站將取消您的會員，如有任何疑問請與本站客服人員聯絡。</p>";
                 gs.IsHtml = true;
                 gs.Send();
             }

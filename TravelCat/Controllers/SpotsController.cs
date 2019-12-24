@@ -51,6 +51,7 @@ namespace TravelCat.Controllers
             string act_id = db.Database.SqlQuery<string>("Select dbo.GetspotId()").FirstOrDefault();
             spot.spot_id = act_id;
             spot.update_date = DateTime.Now;
+            spot.page_status = false;
 
             //圖片
             string fileName = "";

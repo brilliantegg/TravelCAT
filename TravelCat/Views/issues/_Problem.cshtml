@@ -5,9 +5,10 @@
 @model IPagedList<TravelCat.Models.issue>
 
 <form action="@Url.Action("Index")" method="get" class="text-right search m-2">
-    @Html.TextBox("id", "", new { @class = "border", @placeholder = "請輸入被檢舉編號" })
+    @Html.TextBox("Problem_id", "", new { @class = "border", @placeholder = "請輸入被檢舉編號" })
     <input class="btn btn-secondary" type="submit" value="查詢" />
 </form>
+
 
 <table class="table">
     <tr>
