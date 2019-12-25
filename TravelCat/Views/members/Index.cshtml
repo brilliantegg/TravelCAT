@@ -11,7 +11,6 @@
 
 <h2 class="mt-3 text-center">管理會員</h2>
 
-
 <div class="row">
     <div class="col-md-12">
         <div class="list-group m-3" id="list-tab" role="tablist">
@@ -24,7 +23,7 @@
             <div class="tab-pane fade show active" id="member" role="tabpanel">
 
                 <form action="@Url.Action("Index")" method="get" class="text-right search m-2">
-                    @Html.TextBox("search_member", "", new { @class = "border", @placeholder = "請輸入會員編號" })
+                    @Html.TextBox("id", "", new { @class = "border", @placeholder = "請輸入會員編號" })
                     <input class="btn btn-secondary" type="submit" value="查詢" />
                 </form>
 
@@ -68,6 +67,7 @@
                         </tr>
                     }
                 </table>
+                
                 <div>
                     @Html.PagedListPager(Model, page => Url.Action("Index", new { page, id = ViewBag.id }),
                    new PagedListRenderOptions

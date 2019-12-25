@@ -176,40 +176,40 @@
                             {
                                 <h2 class="font-weight-bold ">
                                     @*我們為您找出 @if (ViewBag.count != null)
-                                    {@ViewBag.count} 筆*@" @ViewBag.q " 的搜尋結果
-                                </h2>
+                                        {@ViewBag.count} 筆*@" @ViewBag.q " 的搜尋結果
+                                    </h2>
 
 
 
-                                <div class="query_condition">
-                                    @{
-                                        if (!String.IsNullOrEmpty(ViewBag.city))
-                                        {
-                                            <span id="query_city">@ViewBag.city &times;</span>
+                                    <div class="query_condition">
+                                        @{
+                                            if (!String.IsNullOrEmpty(ViewBag.city))
+                                            {
+                                                <span id="query_city">@ViewBag.city &times;</span>
+                                            }
+                                            if (!String.IsNullOrEmpty(ViewBag.rating))
+                                            {
+                                                <span id="query_rating">大於 @ViewBag.rating 分 &times;</span>
+                                            }
+                                            if (!String.IsNullOrEmpty(ViewBag.stay))
+                                            {
+                                                <span id="query_stay">@ViewBag.stay &times;</span>
+                                            }
+                                            if (ViewBag.partner != null)
+                                            {
+                                                <span id="query_partner">@ViewBag.partner &times;</span>
+                                            }
+                                            if (!String.IsNullOrEmpty(ViewBag.month))
+                                            {
+                                                <span id="query_month">@ViewBag.month &times;</span>
+                                            }
                                         }
-                                        if (!String.IsNullOrEmpty(ViewBag.rating))
-                                        {
-                                            <span id="query_rating">大於 @ViewBag.rating 分 &times;</span>
-                                        }
-                                        if (!String.IsNullOrEmpty(ViewBag.stay))
-                                        {
-                                            <span id="query_stay">@ViewBag.stay &times;</span>
-                                        }
-                                        if (ViewBag.partner != null)
-                                        {
-                                            <span id="query_partner">@ViewBag.partner &times;</span>
-                                        }
-                                        if (!String.IsNullOrEmpty(ViewBag.month))
-                                        {
-                                            <span id="query_month">@ViewBag.month &times;</span>
-                                        }
-                                    }
-                                </div>
+                                    </div>
 
 
-                            }
-                            else
-                            { <h2>        請於上方搜尋欄輸入條件開始進行搜尋</h2>}
+                                }
+                                else
+                                { <h2>        請於上方搜尋欄輸入條件開始進行搜尋</h2>}
                         </div>
 
 
@@ -257,22 +257,25 @@
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane active show" id="spot" role="tabpanel" aria-labelledby="spot-tab">
                                 <!--內容-->
-                                @Html.Action("_Spot", "Search", new { q = ViewBag.q })
+                                @*@Html.Action("_Spot", "Search", new { q = ViewBag.q })*@
+                                @*@{ Html.RenderAction("_Spot", "Search", new { q = ViewBag.q });}*@
                             </div>
 
                             <div class="tab-pane fade " id="activity" role="tabpanel" aria-labelledby="activity-tab">
                                 <!--內容-->
-                                @Html.Action("_Activity", "Search", new { q = ViewBag.q })
+                                @*@Html.Action("_Activity", "Search", new { q = ViewBag.q })*@
+                                @*@{Html.RenderAction("_Activity", "Search", new { q = ViewBag.q });}*@
                             </div>
 
                             <div class="tab-pane fade" id="restaurant" role="tabpanel" aria-labelledby="restaurant-tab">
                                 <!--內容-->
-                                @Html.Action("_Restaurant", "Search", new { q = ViewBag.q })
+                                @*@{Html.RenderAction("_Restaurant", "Search", new { q = ViewBag.q }); }*@
                             </div>
 
                             <div class="tab-pane fade" id="hotel" role="tabpanel" aria-labelledby="hotel-tab">
                                 <!--內容-->
-                                @Html.Action("_Hotel", "Search", new { q = ViewBag.q })
+                                @*@Html.Action("_Hotel", "Search", new { q = ViewBag.q })*@
+                                @*@{Html.RenderAction("_Hotel", "Search", new { q = ViewBag.q }); }*@
                             </div>
 
 
@@ -292,7 +295,6 @@
 
 @section scripts{
     <script>
-
 
         $('#Sortby').change(function () {
             $('#form_right').submit();
@@ -338,6 +340,97 @@
         });
 
     </script>
+
+    <script async>
+        content_load();
+        function content_load() {
+         $.ajax({
+                url: '@Url.Action("_Spot", "Search")',
+                type: 'post',
+                data: {
+                    'q': "@ViewBag.q",
+                    'page' : "@ViewBag.page",
+                    'comment_stay_total' : "@ViewBag.stay",
+                    'city': "@ViewBag.city",
+                    'travel_partner': "@ViewBag.partner",
+                    'comment_rating' : "@ViewBag.rating",
+                    'travel_month': "@ViewBag.month",
+                    'Sortby': "@ViewBag.sort"
+             },
+             success: function (a) {
+                 $('#spot').html(a);
+                 $('#load_test').fadeOut();
+             },
+                beforeSend: function () {
+                 $('#load_test').show();
+             },
+                error: function () {
+                    $('#spot').html("no result");
+                }
+            });
+            $.ajax({
+                url: '@Url.Action("_Hotel", "Search")',
+                type: 'post',
+                data: {
+                    'q': "@ViewBag.q",
+                    'page' : "@ViewBag.page",
+                    'comment_stay_total' : "@ViewBag.stay",
+                    'city': "@ViewBag.city",
+                    'travel_partner': "@ViewBag.partner",
+                    'comment_rating' : "@ViewBag.rating",
+                    'travel_month': "@ViewBag.month",
+                    'Sortby': "@ViewBag.sort"
+                },
+                success: function (a) {
+                    $('#hotel').html(a)
+                },
+                error: function () {
+                    $('#hotel').html("no result");
+                }
+            });
+            $.ajax({
+                url: '@Url.Action("_Activity", "Search")',
+                type: 'post',
+                data: {
+                    'q': "@ViewBag.q",
+                    'page' : "@ViewBag.page",
+                    'comment_stay_total' : "@ViewBag.stay",
+                    'city': "@ViewBag.city",
+                    'travel_partner': "@ViewBag.partner",
+                    'comment_rating' : "@ViewBag.rating",
+                    'travel_month': "@ViewBag.month",
+                    'Sortby': "@ViewBag.sort"
+                },
+                success: function (a) {
+                    $('#activity').html(a)
+                },
+                error: function () {
+                    $('#activity').html("no result");
+                }
+            });
+            $.ajax({
+                url: '@Url.Action("_Restaurant", "Search")',
+                type: 'post',
+                data: {
+                    'q': "@ViewBag.q",
+                    'page' : "@ViewBag.page",
+                    'comment_stay_total' : "@ViewBag.stay",
+                    'city': "@ViewBag.city",
+                    'travel_partner': "@ViewBag.partner",
+                    'comment_rating' : "@ViewBag.rating",
+                    'travel_month': "@ViewBag.month",
+                    'Sortby': "@ViewBag.sort"
+                },
+                success: function (a) {
+                    $('#restaurant').html(a)
+                },
+                error: function () {
+                    $('#restaurant').html("no result");
+                }
+            });
+        }
+    </script>
+
     <script>
 
         var id ;

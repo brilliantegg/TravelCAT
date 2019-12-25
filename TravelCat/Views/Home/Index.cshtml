@@ -97,7 +97,7 @@
                     <!--景點card-->
                     @for (int i = 0; i < 8; i++)
                     {
-                        img_num = random.Next(0, 27);
+                        img_num = random.Next(1, 27);
                         <div class="card ">
                             <img src="~/images/spot/S (@img_num).jpg" class="card-img-top " alt="...">
                             <div class="card-body">
@@ -117,7 +117,7 @@
                     <!--Card-->
                     @for (int i = 0; i < 8; i++)
                     {
-                        img_num = random.Next(0, 27);
+                        img_num = random.Next(1, 27);
                         <div class="card">
                             <img src="~/images/activity/A (@img_num).jpg" class="card-img-top" alt="...">
                             <div class="card-body">
@@ -136,8 +136,9 @@
                     <!--Card-->
                     @for (int i = 0; i < 8; i++)
                     {
+                        img_num = random.Next(1, 42);
                         <div class="card">
-                            <img src="https://source.unsplash.com/collection/9243935/random?sig=@(i.ToString())" class="card-img-top" alt="...">
+                            <img src="~/images/hotel/H (@img_num).jpg" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title">@Model.hotel[i].hotel_title</h5>
                                 <p class="card-text">@Model.hotel[i].hotel_intro</p>
@@ -154,7 +155,7 @@
                     <!--Card-->
                     @for (int i = 0; i < 8; i++)
                     {
-                        img_num = random.Next(0, 26);
+                        img_num = random.Next(1, 26);
                         <div class="card">
                             <img src="~/images/restaurant/R (@img_num).jpg" class="card-img-top" alt="...">
                             <div class="card-body">

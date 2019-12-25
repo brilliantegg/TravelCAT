@@ -48,6 +48,7 @@ namespace TravelCat.Controllers
         {
             string act_id = db.Database.SqlQuery<string>("Select dbo.GetactivityId()").FirstOrDefault();
             activity.activity_id = act_id;
+            activity.page_status = false;
 
             //圖片
             string fileName = "";

@@ -72,7 +72,7 @@ else
     }
 
     <div>
-        @Html.PagedListPager(Model.show_ratings, page => Url.Action("Index", new { page = page, q = ViewBag.q, comment_stay_total = ViewBag.stay, city = ViewBag.city, travel_partner = ViewBag.partner, comment_rating = ViewBag.rating, travel_month = ViewBag.month }),
+        @Html.PagedListPager(Model.show_ratings, page => Url.Action("Index", new { page = page, q = ViewBag.q, comment_stay_total = ViewBag.stay, city = ViewBag.city, travel_partner = ViewBag.partner, comment_rating = ViewBag.rating, travel_month = ViewBag.month , Sortby = ViewBag.sort }),
         new PagedListRenderOptions
         {
             ContainerDivClasses = new[] { "" },

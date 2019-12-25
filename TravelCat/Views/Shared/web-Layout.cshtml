@@ -9,10 +9,13 @@
     <link href="~/Content/fontawesome-free-5.11.2-web/css/all.css" rel="stylesheet" />
     <link href="~/Content/web-Layout.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC&display=swap" rel="stylesheet">
-
-
 </head>
 <body>
+    <div id="load_test" style="display:none;" class="loading">
+        <div class="spinner-border text-danger  h2" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
     @{ string mem_id;
         string returnUrl = Request.Url.AbsoluteUri;
         if (Session["memberID"] == null || string.IsNullOrWhiteSpace(Session["memberID"].ToString()))
@@ -26,32 +29,33 @@
 
     }
     <header>
-        <div class="header">
-            <div class="header-bar">
-                <a href="/Home/Index" class="logo">
-                    <img src="~/images/cat-face-with-wry-smile_1f63c.png " width="50" />
-                    旅途貓
-                </a>
+            
+            <div class="header">
+                <div class="header-bar">
+                    <a href="/Home/Index" class="logo">
+                        <img src="~/images/cat-face-with-wry-smile_1f63c.png " width="50" />
+                        旅途貓
+                    </a>
 
-                @if (Request.IsAuthenticated && Session["memberID"] != null)
-                {
-            <div>
-                <a href="@Url.Action("Collections","web_Member_Index" ,new { id = mem_id })">
-                    <i class="far fa-heart" style="color:red"></i>
-                </a>
-                @Html.ActionLink(@User.Identity.GetUserName(), "Index", "web_Member_Index", new { id = mem_id }, new { @class = "  memberId aTag_style" })
+                    @if (Request.IsAuthenticated && Session["memberID"] != null)
+                    {
+                        <div>
+                            <a href="@Url.Action("Collections","web_Member_Index" ,new { id = mem_id })">
+                                <i class="far fa-heart" style="color:red"></i>
+                            </a>
+                            @Html.ActionLink(@User.Identity.GetUserName(), "Index", "web_Member_Index", new { id = mem_id }, new { @class = "  memberId aTag_style" })
 
-                        @Html.ActionLink("登出", "LogOut", "Home", null, new { @class = " aTag_style" })
-                    </div>
-                }
-                else
-                {
-                    <div>
-                        @Html.ActionLink("登入", "LogIn", "Home", new { returnUrl = returnUrl }, new { @class = "  aTag_style" })
-                    </div>
-                }
+                            @Html.ActionLink("登出", "LogOut", "Home", null, new { @class = " aTag_style" })
+                        </div>
+                    }
+                    else
+                    {
+                        <div>
+                            @Html.ActionLink("登入", "LogIn", "Home", new { returnUrl = returnUrl }, new { @class = "  aTag_style" })
+                        </div>
+                    }
+                </div>
             </div>
-        </div>
     </header>
     <div class="top-bar">
         <ul class="body-menu">

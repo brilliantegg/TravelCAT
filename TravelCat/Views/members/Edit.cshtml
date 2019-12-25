@@ -21,15 +21,15 @@
         <div class="row">
             <div class="co col-6">
                 @Html.LabelFor(model => model.member_status, htmlAttributes: new { @class = "txt" })
-                
-                    @*@Html.EditorFor(model => model.member_status)*@
-                    <select id="Select1" name="member_status" class="form-control">
-                        <option value="True">隱藏</option>
-                        <option value="False">顯示</option>
 
-                    </select>
-                    @Html.ValidationMessageFor(model => model.member_status, "", new { @class = "text-danger" })
-                
+                @*@Html.EditorFor(model => model.member_status)*@
+                <select id="Select1" name="member_status" class="form-control">
+                    <option value="True">隱藏</option>
+                    <option value="False">顯示</option>
+
+                </select>
+                @Html.ValidationMessageFor(model => model.member_status, "", new { @class = "text-danger" })
+
             </div>
         </div>
 
@@ -61,18 +61,31 @@
 @section scripts{
     <script>
         $('#Select1 option[value=@Model.member_status]').attr('selected', 'selected');
+
         $('#submit').click(function () {
-            var member = confirm("確定要封鎖此會員嗎?");
-            if (member == true) {
-                return true;
+            if ($('#Select1 option[value=@Model.member_status]').val() == "False") {
+                var member = confirm("確定要封鎖此會員嗎?");
+                if (member == true) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
             }
-            else {
-                return false;
+            else if ($('#Select1 option[value=@Model.member_status]').val() == "True") {
+                var member = confirm("確定要解鎖此會員嗎?");
+                if (member == true) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
             }
-
-
         });
+
+
+
     </script>
-    
-    }
+
+}
 

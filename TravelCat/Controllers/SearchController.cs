@@ -26,11 +26,12 @@ namespace TravelCat.Controllers
             ViewBag.rating = comment_rating;
             ViewBag.stay = comment_stay_total;
             ViewBag.sort = Sortby;
+            ViewBag.page = page;
             //int? count = (int?)TempData["counta"]+ (int?)TempData["counth"] + (int?)TempData["counts"] + (int?)TempData["countr"];
             //ViewBag.count = count;
             return View();
         }
-        [ChildActionOnly]
+
         public ActionResult _Activity(int page = 1, string q = null, string Sortby = null, string city = null, string comment_rating = null, string travel_partner = null, string travel_month = null, string comment_stay_total = null)
         {
             ViewBag.q = q;
@@ -166,7 +167,6 @@ namespace TravelCat.Controllers
             model.show_ratings = model.result_ratings.ToPagedList(page, pageSize);
             return View(model);
         }
-        [ChildActionOnly]
         public ActionResult _Hotel(int page = 1, string q = null, string Sortby = null, string city = null, string comment_rating = null, string travel_partner = null, string travel_month = null, string comment_stay_total = null)
         {
             ViewBag.q = q;
@@ -244,7 +244,6 @@ namespace TravelCat.Controllers
             return View(model);
 
         }
-        [ChildActionOnly]
         public ActionResult _Restaurant(int page = 1, string q = null, string Sortby = null, string city = null, string comment_rating = null, string travel_partner = null, string travel_month = null, string comment_stay_total = null)
         {
             ViewBag.q = q;
@@ -321,7 +320,7 @@ namespace TravelCat.Controllers
             model.show_ratings = model.result_ratings.ToPagedList(page, pageSize);
             return View(model);
         }
-        [ChildActionOnly]
+
         public ActionResult _Spot(int page = 1, string q = null, string Sortby = null, string city = null, string comment_rating = null, string travel_partner = null, string travel_month = null, string comment_stay_total = null)
         {
             ViewBag.q = q;
