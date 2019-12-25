@@ -105,7 +105,7 @@
                                 <p class="card-text">@Model.spot[i].spot_intro</p>
                                 <p class="card-city" style="color: #128566; font-weight: 900; padding-top: 5px;">@Model.spot[i].city</p>
 
-                                @Html.ActionLink("more", "Details", "WebSpots", new { id = @Model.spot[i].spot_id }, new { @class = "btn btn-primary btn-sm" })
+                                @Html.ActionLink("看更多", "Details", "WebSpots", new { id = @Model.spot[i].spot_id }, new { @class = "btn btn-primary btn-sm" })
                             </div>
                         </div>
                     }
@@ -124,7 +124,7 @@
                                 <h5 class="card-title">@Model.activity[i].activity_title</h5>
                                 <p class="card-text">@Model.activity[i].activity_intro</p>
                                 <p class="card-city" style="color: #128566; font-weight: 900; padding-top: 5px;">@Model.spot[i].city</p>
-                                @Html.ActionLink("more", "Details", "Web_activities", new { id = @Model.activity[i].activity_id }, new { @class = "btn btn-primary btn-sm" })
+                                @Html.ActionLink("看更多", "Details", "Web_activities", new { id = @Model.activity[i].activity_id }, new { @class = "btn btn-primary btn-sm" })
                             </div>
                         </div>
                     }
@@ -143,7 +143,7 @@
                                 <h5 class="card-title">@Model.hotel[i].hotel_title</h5>
                                 <p class="card-text">@Model.hotel[i].hotel_intro</p>
                                 <p class="card-city" style="color: #128566; font-weight: 900; padding-top: 5px;">@Model.spot[i].city</p>
-                                @Html.ActionLink("more", "Details", "WebHotels", new { id = @Model.hotel[i].hotel_id }, new { @class = "btn btn-primary btn-sm" })
+                                @Html.ActionLink("看更多", "Details", "WebHotels", new { id = @Model.hotel[i].hotel_id }, new { @class = "btn btn-primary btn-sm" })
                             </div>
                         </div>
                     }
@@ -162,7 +162,7 @@
                                 <h5 class="card-title">@Model.restaurant[i].restaurant_title</h5>
                                 <p class="card-text">@Model.restaurant[i].restaurant_intro</p>
                                 <p class="card-city" style="color: #128566; font-weight: 900; padding-top: 5px;">@Model.spot[i].city</p>
-                                @Html.ActionLink("more", "Details", "WebRestaurants", new { id = @Model.restaurant[i].restaurant_id }, new { @class = "btn btn-primary btn-sm" })
+                                @Html.ActionLink("看更多", "Details", "WebRestaurants", new { id = @Model.restaurant[i].restaurant_id }, new { @class = "btn btn-primary btn-sm" })
                             </div>
                         </div>
                     }
