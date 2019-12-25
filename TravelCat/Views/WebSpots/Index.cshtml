@@ -3,6 +3,8 @@
 ﻿@model TravelCat.ViewModels.TaiwanViewModel
 @using TravelCat.ViewModels
 @{
+    Random random = new Random();
+    int img_num = 0;
     Layout = "~/Views/Shared/web-Layout.cshtml";
     string memberId;
     if (Session["memberID"] == null || string.IsNullOrWhiteSpace(Session["memberID"].ToString()))
@@ -34,6 +36,7 @@
 
             @foreach (var item in Model.north)
             {
+                img_num = random.Next(1, 26);
                 <div class="col-4 mb-3">
                     <div class="card">
                         <span class="fa">
@@ -54,7 +57,7 @@
 
                         </span>
                         <div class="img">
-                            <img src="https://source.unsplash.com/collection/388793/random?sig=@(Guid.NewGuid())" title="@item.spot_title" onclick=" window.location.href='@Url.Action("Details","WebSpots",new {id=item.spot_id })'" />
+                            <img src="~/images/spot/S (@img_num).jpg" title="@item.spot_title" onclick=" window.location.href='@Url.Action("Details","WebSpots",new {id=item.spot_id })'" />
                         </div>
                         <div class="card-body">
                             <h2 class="card-title" onclick=" window.location.href='@Url.Action("Details","WebSpots",new {id=item.spot_id })'">@item.spot_title </h2>
@@ -82,7 +85,7 @@
 
             @foreach (var item in Model.middle)
             {
-
+                img_num = random.Next(1, 26);
                 <div class="col-4 mb-3">
                     <div class="card">
                         <span class="fa">
@@ -102,7 +105,7 @@
                             }
                         </span>
                         <div class="img">
-                            <img src="https://source.unsplash.com/collection/388793/random?sig=@(Guid.NewGuid())" title="@item.spot_title" onclick=" window.location.href='@Url.Action("Details","WebSpots",new {id=item.spot_id })'" />
+                            <img src="~/images/spot/S (@img_num).jpg" title="@item.spot_title" onclick=" window.location.href='@Url.Action("Details","WebSpots",new {id=item.spot_id })'" />
                         </div>
                             <div class="card-body">
                             <h2 class="card-title" onclick=" window.location.href='@Url.Action("Details","WebSpots",new {id=item.spot_id })'">@item.spot_title </h2>

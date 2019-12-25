@@ -26,6 +26,7 @@
 
     <div class="wrapper d-flex  ">
 
+
         @if (@Model.member_profile.profile_photo != null)
         {
             if (@memberId == @Model.member.member_id)
@@ -351,19 +352,29 @@
                         <div>
                             @if (Model.followed.Count() > 10)
                             {
-                                <img src="~/images/badges/friend.png" class="photo" title="好朋友 -追蹤人數超過10 位" />
+                                <img src="~/images/badges/friend.png" class="photo" title="好朋友- 追蹤人數超過10 位" />
 
                             }
-
-                            @*<img src="~/images/badges/nirvana.png" class="photo" title="狂放不羈- 曾經有被檢舉的紀錄"/>
-                                <img src="~/images/badges/chick.png" />
-                                <img src="~/images/badges/sword.png" />
-                                <img src="~/images/badges/weed.png" />
-                                <img src="~/images/badges/cup.png" class="photo" />*@
+                            @if (Model.member.member_status == true)
+                            {
+                                <img src="~/images/badges/nirvana.png" class="photo" title="狂放不羈- 被檢舉的會員" />
+                            }
+                            @*
+        <img src="~/images/badges/chick.png" />
+        <img src="~/images/badges/sword.png" />
+        <img src="~/images/badges/weed.png" />
+        <img src="~/images/badges/cup.png" class="photo" />*@
                         </div>
                         <div>
+                            @{
+                                TimeSpan ts1 = DateTime.Now - Model.member_profile.create_time;
+                                var day = ts1.Days;
+                            }
+                            @if (day > 3650)
+                            {
+                                <img src="~/images/badges/dinosaur.png" class="photo" title="遠古化石- 創立超過10 年的帳號" />
+                            }
 
-                            @*<img src="~/images/badges/dinosaur.png" class="photo" title="遠古化石- 創立超過10 年的帳號"/>*@
 
 
 
@@ -380,7 +391,7 @@
                     </div>
                     <div class="col-md-6">
                         <div>
-                            @if (Model.comment.Where(m => m.member_id == memberId && m.tourism_id.StartsWith("A")).Count() > 20)
+                            @if (Model.comment.Where(m => m.member_id == Model.member.member_id && m.tourism_id.StartsWith("A")).Count() > 20)
                             {
                                 <img src="~/images/badges/happydog.png" class="photo" title="玩樂達人- 發表 20 篇活動評論" />
                             }
@@ -390,12 +401,12 @@
                         </div>
                         <div>
                             @*<img src="~/images/badges/pineapple.png" class="photo" />*@
-                            @if (Model.comment.Where(m => m.member_id == memberId && m.tourism_id.StartsWith("R")).Count() > 20)
+                            @if (Model.comment.Where(m => m.member_id == Model.member.member_id && m.tourism_id.StartsWith("R")).Count() > 20)
                             {
                                 <img src="~/images/badges/pizza.png" class="photo" title="美食評論家- 發表 20 篇餐廳評論" />
                             }
 
-                            @if (Model.comment.Where(m => m.member_id == memberId).Count() > 1000)
+                            @if (Model.comment.Where(m => m.member_id == Model.member.member_id).Count() > 1000)
                             {
                                 <img src="~/images/badges/rainbow.png" class="photo" title="超級新星- 評論超過 1000則" />
                             }
