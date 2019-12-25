@@ -27,9 +27,9 @@ else
 {
     foreach (var item in Model.show_ratings)
     {
-        img_num = random.Next(1, 36);
+        img_num = random.Next(1, 42);
             <div class="media mt-3  pl-3 mb-2 border-dark">
-                <img src="https://source.unsplash.com/collection/388793/random?sig=@(Guid.NewGuid())" width="250" height="150" class="mr-3 ml-3" alt="...">
+                <img src="~/images/hotel/H (@img_num).jpg" width="250" height="150" class="mr-3 ml-3" alt="...">
                 <div class="media-body ">
                     <h3 class="col-md-11 font-weight-bold border-bottom pb-2">@Html.ActionLink(item.title, "Details", "WebHotels", new { id = item.id }, null)</h3>
                     <div class="row">
@@ -70,7 +70,7 @@ else
     }
 
     <div>
-        @Html.PagedListPager(Model.show_ratings, page => Url.Action("Index", new { page = page, q = ViewBag.q, comment_stay_total = ViewBag.stay, city = ViewBag.city, travel_partner = ViewBag.partner, comment_rating = ViewBag.rating, travel_month = ViewBag.month }),
+        @Html.PagedListPager(Model.show_ratings, page => Url.Action("Index", new { page = page, q = ViewBag.q, comment_stay_total = ViewBag.stay, city = ViewBag.city, travel_partner = ViewBag.partner, comment_rating = ViewBag.rating, travel_month = ViewBag.month, Sortby = ViewBag.sort  }),
                                                  new PagedListRenderOptions
                                                  {
                                                      ContainerDivClasses = new[] { "" },
