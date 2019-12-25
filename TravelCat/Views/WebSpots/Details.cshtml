@@ -244,8 +244,8 @@
     @{ double totalCommentNum = @Model.comment.Count(); }
     <section>
 
-        <div class="d-flex">
-            <div class="filter_comment row col-7 offset-1">
+        <div class="d-flex ">
+            <div class="filter_comment row col-6 offset-1">
                 <input type="hidden" name="tourismId" value="@ViewBag.tourismId" />
                 <div class="col-12 mt-3">
                     <div class="row">
@@ -401,7 +401,7 @@
 
 
             </div>
-            <div class="col-3"  id="tb1"></div>
+            <div class="col-3 offset-1"  id="tb1"></div>
         </div>
     </section>
 
@@ -677,22 +677,26 @@
       console.log('oh no');
     },
       success: function (data) {
-          $('#tb1').append(data.records.location[0].locationName)
-              $('#tb1').append(data.records.location[0].weatherElement[0].time[0].parameter.parameterName)
-          $('#tb1').append(data.records.location[0].weatherElement[1].time[0].parameter.parameterName)
-          $('#tb1').append(data.records.location[0].weatherElement[2].time[0].parameter.parameterName)
-          $('#tb1').append(data.records.location[0].weatherElement[3].time[0].parameter.parameterName)
-          $('#tb1').append(data.records.location[0].weatherElement[4].time[0].parameter.parameterName)
-         
-        @*for (i = 0; i < data.records.location.length; i++){
-            //$('#tb1').append("<tr><td>" + data.records.locations[0].location[i].locationName + "</td><td>" + data.records.locations[0].location[i].weatherElement[6].time[0].startTime + "</td><td>" + data.records.locations[0].location[i].weatherElement[6].time[0].endTime + "</td><td>" + data.records.locations[0].location[0].weatherElement[6].time[0].elementValue[0].value + "</td><td>" + data.records.locations[0].location[0].weatherElement[6].time[0].elementValue[0].value + "</td></tr>");
-            $('#tb1').append(data.records.locations[0].location[i].locationName)
-                 $('#tb1').append(data.records.locations[0].location[i].weatherElement[6].time[0].elementValue[0].value)
-            if (data.records.locations[0].location[i].locationName == '@Model.spot.district') {
-                $('#tb1').append(data.records.locations[0].location[i].locationName)
-                 $('#tb1').append(data.records.locations[0].location[i].weatherElement[6].time[0].elementValue[0].value)
-            }
-        }*@
+          $('#tb1').append(`
+              <h1>${data.records.location[0].locationName}</h1>
+              <h1> ${ data.records.location[0].weatherElement[0].time[0].parameter.parameterName }</h1 >`)
+
+          if (data.records.location[0].weatherElement[0].time[0].parameter.parameterName.match('多雲')) {
+              $('#tb1').append('<img class="weather_img" src="http://localhost:54678/images/weather/cloudy.png" style="width:200px;"/>')
+
+          } else if(data.records.location[0].weatherElement[0].time[0].parameter.parameterName.match('雨')){
+              $('#tb1').append('<img class="weather_img" src="http://localhost:54678/images/weather/rain.png" style="width:200px;"/>')
+          }
+          $('#tb1').append(`
+            <div class="d-flex justify-content-around">
+            <h1>${data.records.location[0].weatherElement[2].time[0].parameter.parameterName}&deg;C</h1>
+            <h1>${data.records.location[0].weatherElement[4].time[0].parameter.parameterName}&deg;C</h1>
+
+            </div>
+            <h1>${data.records.location[0].weatherElement[3].time[0].parameter.parameterName}</h1>
+            `)
+               
+
     }
   });
 });

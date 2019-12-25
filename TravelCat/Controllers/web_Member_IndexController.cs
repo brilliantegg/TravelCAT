@@ -39,20 +39,20 @@ namespace TravelCat.Controllers
             };
 
             var follow_score = (from a in db.follow_list
-                           group a by a.member_id into b
-                           orderby b.Count() descending
-                           select new { id = b.Key, score = b.Count()*5 }).ToList();
+                                group a by a.member_id into b
+                                orderby b.Count() descending
+                                select new { id = b.Key, score = b.Count() * 5 }).ToList();
 
 
             var comment_score = (from a in db.comment
-                           group a by a.member_id into b
-                           orderby b.Count() descending
-                           select new { id = b.Key, score = b.Count()*5 }).ToList();
+                                 group a by a.member_id into b
+                                 orderby b.Count() descending
+                                 select new { id = b.Key, score = b.Count() * 5 }).ToList();
 
 
-            var totoal_score = (follow_score).Union(comment_score).GroupBy(m=>m.id).Select(m=>new { id=m.Key,total=m.Sum(x=>x.score) }).OrderByDescending(m=>m.total).Take(3).ToList();
+            var totoal_score = (follow_score).Union(comment_score).GroupBy(m => m.id).Select(m => new { id = m.Key, total = m.Sum(x => x.score) }).OrderByDescending(m => m.total).Take(3).ToList();
 
-            
+
 
             ViewBag.memberId = id;
             ViewBag.member_profile = db.member_profile.ToList();
@@ -62,6 +62,34 @@ namespace TravelCat.Controllers
 
             return View(model);
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Index(string id, HttpPostedFileBase photo)
+        {
+            member member = db.member.Find(id);
+
+            string fileName = "";
+            if (photo != null)
+            {
+                if (photo.ContentLength > 0)
+                {
+                    string t = photo.FileName;
+                    fileName = member.member_profile.member_id + "_" + DateTime.Now.ToString().Replace("/", "").Replace(":", "").Replace(" ", "") + Path.GetExtension(t);
+                    System.IO.File.Delete(Server.MapPath("~/images/member/" + member.member_profile.profile_photo));
+                    photo.SaveAs(Server.MapPath("~/images/member/" + fileName));
+                    member.member_profile.profile_photo = fileName;
+                }
+            }
+            if (ModelState.IsValid)
+            {
+                db.Entry(member.member_profile).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index", "web_Member_Index", new { id = member.member_id });
+            }
+
+            return View(member);
+        }
+
         public ActionResult EditMemberProfile(string id)
         {
             if (id == null)
@@ -77,7 +105,7 @@ namespace TravelCat.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditMemberProfile(string id, string newnickname, string newnation, string newcity, string newaddress_detail, string newphone, HttpPostedFileBase photo)
+        public ActionResult EditMemberProfile(string id, string newnickname, string newnation, string newcity, string newaddress_detail, string newphone, string newwebsite, string newbrief)
         {
             member member = db.member.Find(id);
 
@@ -86,19 +114,21 @@ namespace TravelCat.Controllers
             member.member_profile.city = newcity;
             member.member_profile.address_detail = newaddress_detail;
             member.member_profile.phone = newphone;
+            member.member_profile.website_link = newwebsite;
+            member.member_profile.brief_intro = newbrief;
 
-            string fileName = "";
-            if (photo != null)
-            {
-                if (photo.ContentLength > 0)
-                {
-                    string t = photo.FileName;
-                    fileName = member.member_profile.member_id + "_" + DateTime.Now.ToString().Replace("/", "").Replace(":", "").Replace(" ", "") + Path.GetExtension(t);
-                    System.IO.File.Delete(Server.MapPath("~/images/member/" + member.member_profile.profile_photo));
-                    photo.SaveAs(Server.MapPath("~/images/member/" + fileName));
-                    member.member_profile.profile_photo = fileName;
-                }
-            }
+            //string fileName = "";
+            //if (photo != null)
+            //{
+            //    if (photo.ContentLength > 0)
+            //    {
+            //        string t = photo.FileName;
+            //        fileName = member.member_profile.member_id + "_" + DateTime.Now.ToString().Replace("/", "").Replace(":", "").Replace(" ", "") + Path.GetExtension(t);
+            //        System.IO.File.Delete(Server.MapPath("~/images/member/" + member.member_profile.profile_photo));
+            //        photo.SaveAs(Server.MapPath("~/images/member/" + fileName));
+            //        member.member_profile.profile_photo = fileName;
+            //    }
+            //}
             if (ModelState.IsValid)
             {
                 db.Entry(member.member_profile).State = EntityState.Modified;
@@ -128,7 +158,7 @@ namespace TravelCat.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Editpassword(string id,string oldpassword, string newpassword)
+        public ActionResult Editpassword(string id, string oldpassword, string newpassword)
         {
             member member = db.member.Find(id);
 
@@ -204,7 +234,7 @@ namespace TravelCat.Controllers
             }
             return View(member);
         }
-      
+
         public ActionResult Confirm(string account)
         {
             var check = db.member_profile.Where(m => m.member_id == account).FirstOrDefault();
@@ -242,12 +272,12 @@ namespace TravelCat.Controllers
         public string Unfollowed(string member_id, string followed_id)
         {
             string response = "取消追蹤";
-            follow_list follower = db.follow_list.Where(m=>m.member_id== member_id&& m.followed_id== followed_id).FirstOrDefault();
+            follow_list follower = db.follow_list.Where(m => m.member_id == member_id && m.followed_id == followed_id).FirstOrDefault();
             db.follow_list.Remove(follower);
             db.SaveChanges();
             return response;
         }
-        public ActionResult Collections(string id= "M000003")
+        public ActionResult Collections(string id = "M000003")
         {
             ViewBag.id = id;
             CollectionViewModels model = new CollectionViewModels()
@@ -261,11 +291,11 @@ namespace TravelCat.Controllers
                 spot = db.spot.ToList(),
 
             };
-            
+
             var data = new[] { new { title = "", longitude = "", latitude = "" } }.ToList();
             data.RemoveAt(0);
             var member = db.member.Find(id);
-            
+
 
             foreach (var c in member.collections_detail)
             {
@@ -310,10 +340,10 @@ namespace TravelCat.Controllers
                         break;
                     default:
                         break;
-                }                          
-                
+                }
+
             }
-            
+
             string json = JsonConvert.SerializeObject(data);
             ViewBag.data = json;
 
