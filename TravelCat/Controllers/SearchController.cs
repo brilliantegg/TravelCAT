@@ -49,7 +49,7 @@ namespace TravelCat.Controllers
 
             if (!String.IsNullOrEmpty(q))
             {
-                model.activity = db.activity.Where(s => s.activity_intro.Contains(q) || s.activity_title.Contains(q) || s.city.Contains(q) || s.district.Contains(q)).ToList();
+                model.activity = db.activity.Where(s => s.activity_title.Contains(q) || s.city.Contains(q) || s.district.Contains(q)).ToList();
                 //model.restaurant = db.restaurant.Where(s => s.restaurant_intro.Contains(q) || s.restaurant_title.Contains(q) || s.city.Contains(q) || s.district.Contains(q)).ToList();
                 //model.hotel = db.hotel.Where(s => s.hotel_intro.Contains(q) || s.hotel_title.Contains(q) || s.city.Contains(q) || s.district.Contains(q)).ToList();
                 //model.spot = db.spot.Where(s => s.spot_intro.Contains(q) || s.spot_title.Contains(q) || s.city.Contains(q) || s.district.Contains(q)).ToList();
@@ -180,7 +180,7 @@ namespace TravelCat.Controllers
 
             if (!String.IsNullOrEmpty(q))
             {
-                model.hotel = db.hotel.Where(s => s.hotel_intro.Contains(q) || s.hotel_title.Contains(q) || s.city.Contains(q) || s.district.Contains(q)).ToList();
+                model.hotel = db.hotel.Where(s => s.hotel_title.Contains(q) || s.city.Contains(q) || s.district.Contains(q)).ToList();
             }
             //找地區
             if (!String.IsNullOrEmpty(city))
@@ -257,7 +257,7 @@ namespace TravelCat.Controllers
 
             if (!String.IsNullOrEmpty(q))
             {
-                model.restaurant = db.restaurant.Where(s => s.restaurant_intro.Contains(q) || s.restaurant_title.Contains(q) || s.city.Contains(q) || s.district.Contains(q)).ToList();
+                model.restaurant = db.restaurant.Where(s => s.restaurant_title.Contains(q) || s.city.Contains(q) || s.district.Contains(q)).ToList();
             }
             //找地區
             if (!String.IsNullOrEmpty(city))
@@ -334,7 +334,7 @@ namespace TravelCat.Controllers
 
             if (!String.IsNullOrEmpty(q))
             {
-                model.spot = db.spot.Where(s => s.spot_intro.Contains(q) || s.spot_title.Contains(q) || s.city.Contains(q) || s.district.Contains(q)).ToList();
+                model.spot = db.spot.Where(s => s.spot_title.Contains(q) || s.city.Contains(q) || s.district.Contains(q)).ToList();
             }
             //找地區
             if (!String.IsNullOrEmpty(city))
