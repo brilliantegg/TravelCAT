@@ -604,3 +604,6 @@ section{
     width:200px;
 
 }
+.card__info{
+    min-height:22px
+}

@@ -210,7 +210,10 @@
                                 }
                                 else
                                 {
+                                <div class="card__info">
                                     <p class="card__text">@item.spot_intro</p>
+                                </div>
+                                    
                                 }
 
                                 <button class="btn btn--block card__btn" onclick="window.location.href='@Url.Action("Details","WebSpots",new {id=item.spot_id })'">前往頁面</button>
@@ -394,19 +397,6 @@
     </div>
 
 </div>
-
-<!--FB-->
-<script>
-    window.fbAsyncInit = function () {
-        FB.init({
-            appId: '562137197876777',
-            autoLogAppEvents: true,
-            xfbml: true,
-            version: 'v5.0'
-        });
-    };
-</script>
-<script async defer src="https://connect.facebook.net/en_US/sdk.js"></script>
 
 
 <!--google-->
