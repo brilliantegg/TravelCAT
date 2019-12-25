@@ -301,8 +301,10 @@
         });
 
         $(function () {
-                    $('#travel_partner input[value="@ViewBag.partner"]').parent('label').addClass('active');
-                    $('#travel_month input[value="@ViewBag.month"]').parent('label').addClass('active');
+            $('#travel_partner input[value="@ViewBag.partner"]').parent('label').addClass('active');
+            $('#travel_partner input[value="@ViewBag.partner"]').attr("checked", "checked");
+            $('#travel_month input[value="@ViewBag.month"]').parent('label').addClass('active');
+            $('#travel_month input[value="@ViewBag.month"]').attr("checked", "checked");
                     $('#city option[value="@ViewBag.city"]').attr("selected", "selected");
                     $('#comment_rating option[value="@ViewBag.rating"]').attr("selected", "selected")
             $('#comment_stay_total option[value="@ViewBag.stay"]').attr("selected", "selected");

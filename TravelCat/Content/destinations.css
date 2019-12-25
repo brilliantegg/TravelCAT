@@ -179,8 +179,8 @@ height: 70vh;
 }
 .comment_photo img {
     display: block;
-    object-fit:cover;
-    max-height:450px
+    object-fit: cover;
+    max-height: 450px
 }
 
 textarea {
@@ -357,7 +357,6 @@ textarea:focus {
 }
 .member_name {
     margin:auto 0;
-    align-self: center;
     font-weight: 700;
     color:black;
 }
