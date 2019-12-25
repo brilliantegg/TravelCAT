@@ -46,6 +46,7 @@ namespace TravelCat.Controllers
         {
             string act_id = db.Database.SqlQuery<string>("Select dbo.GetrestId()").FirstOrDefault();
             restaurant.restaurant_id = act_id;
+            restaurant.page_status = false;
 
             string fileName = "";
             for (int i = 0; i < tourism_photo.Length; i++)

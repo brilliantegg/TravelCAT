@@ -15,21 +15,10 @@
 
     <div class="form-horizontal">
 
+        @Html.HiddenFor(model=>model.spot.page_status)
         <hr />
 
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-
-        <!--頁面狀態-->
-        <div class="row">
-            <div class="co col-6">
-                @Html.LabelFor(model => model.spot.page_status, htmlAttributes: new { @class = "txt" })
-                <span class="checkbox ml-3">
-                    @Html.EditorFor(model => model.spot.page_status)
-                    @Html.ValidationMessageFor(model => model.spot.page_status, "", new { @class = "text-danger" })
-                </span>
-            </div>
-        </div>
 
         <!--名稱-->
         <div class="row">
