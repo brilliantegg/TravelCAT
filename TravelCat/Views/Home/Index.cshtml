@@ -326,7 +326,8 @@
                 2
             </div>
             @foreach (var item in ViewBag.score2)
-            {<a href="@Url.Action("Index","web_Member_Index",new {id=item.GetType().GetProperty("id").GetValue(item)})">
+            {
+                <a href="@Url.Action("Index","web_Member_Index",new {id=item.GetType().GetProperty("id").GetValue(item)})">
     <div class="pic" style="background-image: url(http://localhost:54678/images/member/@Model.member_profile.Where(m=>m.member_id ==  item.GetType().GetProperty("id").GetValue(item)).FirstOrDefault().profile_photo)"></div>
 </a>
                     <div class="name">
@@ -346,51 +347,54 @@
             </div>
             @foreach (var item in ViewBag.score1)
             {
-                <div class="pic" style="background-image: url(http://localhost:54678/images/member/@Model.member_profile.Where(m=>m.member_id ==  item.GetType().GetProperty("id").GetValue(item)).FirstOrDefault().profile_photo)"></div>
-
-                <div class="name">
-                    @Model.member_profile.Where(m => m.member_id == item.GetType().GetProperty("id").GetValue(item)).FirstOrDefault().nickname
-                </div>
-                <div class="score">
-                    @(item.GetType().GetProperty("total").GetValue(item))
-                </div>
-            }
-        </div>
+                <a href="@Url.Action("Index","web_Member_Index",new {id=item.GetType().GetProperty("id").GetValue(item)})">
+                    <div class="pic" style="background-image: url(http://localhost:54678/images/member/@Model.member_profile.Where(m=>m.member_id ==  item.GetType().GetProperty("id").GetValue(item)).FirstOrDefault().profile_photo)"></div>
+                    </a>
+                    <div class="name">
+                        @Model.member_profile.Where(m => m.member_id == item.GetType().GetProperty("id").GetValue(item)).FirstOrDefault().nickname
+                    </div>
+                    <div class="score">
+                        @(item.GetType().GetProperty("total").GetValue(item))
+                    </div>
+                    }
+            </div>
         <div class="three item">
             <div class="pos">
                 3
             </div>
             @foreach (var item in ViewBag.score3)
             {
-                <div class="pic" style="background-image: url(http://localhost:54678/images/member/@Model.member_profile.Where(m=>m.member_id ==  item.GetType().GetProperty("id").GetValue(item)).FirstOrDefault().profile_photo)"></div>
-
-                <div class="name">
-                    @Model.member_profile.Where(m => m.member_id == item.GetType().GetProperty("id").GetValue(item)).FirstOrDefault().nickname
-                </div>
-                <div class="score">
-                    @(item.GetType().GetProperty("total").GetValue(item))
-                </div>
-            }
-        </div>
+                <a href="@Url.Action("Index","web_Member_Index",new {id=item.GetType().GetProperty("id").GetValue(item)})">
+                    <div class="pic" style="background-image: url(http://localhost:54678/images/member/@Model.member_profile.Where(m=>m.member_id ==  item.GetType().GetProperty("id").GetValue(item)).FirstOrDefault().profile_photo)"></div>
+                    </a>
+                    <div class="name">
+                        @Model.member_profile.Where(m => m.member_id == item.GetType().GetProperty("id").GetValue(item)).FirstOrDefault().nickname
+                    </div>
+                    <div class="score">
+                        @(item.GetType().GetProperty("total").GetValue(item))
+                    </div>
+                    }
+            </div>
     </div>
     <div class="list col-4 offset-4">
 
 
         @foreach (var item in ViewBag.score4)
         {
-            <div class="item">
-                <div class="pos">
-                    4
-                </div>
+        <div class="item">
+            <div class="pos">
+                4
+            </div>
+            <a href="@Url.Action("Index","web_Member_Index",new {id=item.GetType().GetProperty("id").GetValue(item)})">
                 <div class="pic" style="background-image: url(http://localhost:54678/images/member/@Model.member_profile.Where(m=>m.member_id ==  item.GetType().GetProperty("id").GetValue(item)).FirstOrDefault().profile_photo)"></div>
-
+                </a>
                 <div class="name">
                     @Model.member_profile.Where(m => m.member_id == item.GetType().GetProperty("id").GetValue(item)).FirstOrDefault().nickname
                 </div>
                 <div class="score">
                     @(item.GetType().GetProperty("total").GetValue(item))
                 </div>
-            </div>
+        </div>
                 }
 
 
