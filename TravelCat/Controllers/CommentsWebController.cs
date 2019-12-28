@@ -25,7 +25,7 @@ namespace TravelCat.Controllers
                 spot_list = db.spot.ToList(),
                 restaurant_list = db.restaurant.ToList(),
                 hotel_list = db.hotel.ToList(),
-                comment = db.comment.Where(m => m.tourism_id == tourismId).OrderByDescending(m=>m.comment_date).ToList(),
+                comment = db.comment.Where(m => m.tourism_id == tourismId && m.comment_status==true).OrderByDescending(m=>m.comment_date).ToList(),
                 message = db.message.Where(m => m.tourism_id == tourismId).ToList(),
                 comment_emoji_details = db.comment_emoji_details.Where(m => m.tourism_id == tourismId).ToList(),
                 message_emoji_details = db.message_emoji_details.Where(m => m.tourism_id == tourismId).ToList(),
@@ -121,7 +121,7 @@ namespace TravelCat.Controllers
             int currentPage = page < 1 ? 1 : page;
             destinationsViewModel model = new destinationsViewModel()
             {            
-                comment = db.comment.Where(m => m.member_id == memId).OrderByDescending(m=>m.comment_date).ToList(),
+                comment = db.comment.Where(m => m.member_id == memId && m.comment_status == true).OrderByDescending(m=>m.comment_date).ToList(),
                 message = db.message.Where(m => m.member_id == memId).ToList(),
                 comment_emoji_details = db.comment_emoji_details.ToList(),
                 message_emoji_details = db.message_emoji_details.ToList(),
@@ -141,7 +141,7 @@ namespace TravelCat.Controllers
             ViewBag.memId = memId;
             int currentPage = page < 1 ? 1 : page;
             List<member> member = db.member.ToList();
-            List<comment> comment = db.comment.ToList();
+            List<comment> comment = db.comment.Where(m=>m.comment_status == true).ToList();
             List<follow_list> follw = db.follow_list.Where(m => m.member_id == memId).ToList();
             List<member> members = new List<member>();
             List<comment> comments = new List<comment>();

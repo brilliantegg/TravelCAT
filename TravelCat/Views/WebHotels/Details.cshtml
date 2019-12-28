@@ -79,7 +79,7 @@
             <!-- 收藏Modal -->
             <div class="modal fade" id="collectModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
+                    <div class="modal-content ">
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLongTitle">請選擇收藏分類</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -120,7 +120,7 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <input type="submit" name="add_to_bucket_list" class="add_to_bucket_list bucket_list btn btn-outline-info" value="加入收藏" />
+                                <input type="submit" name="add_to_bucket_list" class="add_to_bucket_list bucket_list btn btn-outline-dark" value="加入收藏" />
                             </div>
                         </form>
                     </div>
@@ -210,7 +210,10 @@
                                 }
                                 else
                                 {
+                                <div class="card__info">
                                     <p class="card__text">@item.spot_intro</p>
+                                </div>
+                                    
                                 }
 
                                 <button class="btn btn--block card__btn" onclick="window.location.href='@Url.Action("Details","WebSpots",new {id=item.spot_id })'">前往頁面</button>
@@ -394,19 +397,6 @@
     </div>
 
 </div>
-
-<!--FB-->
-<script>
-    window.fbAsyncInit = function () {
-        FB.init({
-            appId: '562137197876777',
-            autoLogAppEvents: true,
-            xfbml: true,
-            version: 'v5.0'
-        });
-    };
-</script>
-<script async defer src="https://connect.facebook.net/en_US/sdk.js"></script>
 
 
 <!--google-->

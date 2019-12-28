@@ -75,7 +75,10 @@ namespace TravelCat.Controllers
                 {
                     string t = photo.FileName;
                     fileName = member.member_profile.member_id + "_" + DateTime.Now.ToString().Replace("/", "").Replace(":", "").Replace(" ", "") + Path.GetExtension(t);
-                    System.IO.File.Delete(Server.MapPath("~/images/member/" + member.member_profile.profile_photo));
+                    if(member.member_profile.profile_photo != null)
+                    {
+                        System.IO.File.Delete(Server.MapPath("~/images/member/" + member.member_profile.profile_photo));
+                    }                    
                     photo.SaveAs(Server.MapPath("~/images/member/" + fileName));
                     member.member_profile.profile_photo = fileName;
                 }

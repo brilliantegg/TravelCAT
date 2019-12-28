@@ -210,7 +210,7 @@
             <div class=" card-sm">
                 <div class="card-body d-flex row justify-content-center">
                     @Html.ActionLink(@Model.activity.Where(s => s.activity_id == ViewBag.comment_id).FirstOrDefault().activity_title, "Details", "web_activities", new { id = @ViewBag.comment_id }, null)
-                    <img src="~/images/comment/@Model.comment.Where(c => c.comment_id == ViewBag.most_like).FirstOrDefault().comment_photo" class="comment_photo">
+                    <img src="~/images/comment/@Model.comment.Where(c => c.comment_id == ViewBag.most_like).FirstOrDefault().comment_photo" class="comment_photo" onerror="this.src='/images/comment/0_2019129下午090757.jpg';">
                     <div class="like d-flex justify-content-center">
                         <p><i class="far fa-thumbs-up"></i> @ViewBag.like</p>
                         <p><i class="far fa-comment ml-5"></i> @ViewBag.comment_count</p>
@@ -239,7 +239,7 @@
                             break;
 
                     }
-                    <img src="~/images/comment/@Model.comment.Where(s => s.tourism_id == Model.comment[0].tourism_id).FirstOrDefault().comment_photo" class="comment_photo">
+                    <img src="~/images/comment/@Model.comment.Where(s => s.tourism_id == Model.comment[0].tourism_id).FirstOrDefault().comment_photo" class="comment_photo" onerror="this.src='/images/comment/0_2019129下午090757.jpg';">
                     <div class="like d-flex justify-content-center">
                         <p><i class="far fa-thumbs-up"></i> @ViewBag.liken</p>
                         <p><i class="far fa-comment ml-5"></i> @Model.comment.Where(s => s.tourism_id == Model.comment[0].tourism_id).Count()</p>
@@ -326,7 +326,8 @@
                 2
             </div>
             @foreach (var item in ViewBag.score2)
-            {<a href="@Url.Action("Index","web_Member_Index",new {id=item.GetType().GetProperty("id").GetValue(item)})">
+            {
+                <a href="@Url.Action("Index","web_Member_Index",new {id=item.GetType().GetProperty("id").GetValue(item)})">
     <div class="pic" style="background-image: url(http://localhost:54678/images/member/@Model.member_profile.Where(m=>m.member_id ==  item.GetType().GetProperty("id").GetValue(item)).FirstOrDefault().profile_photo)"></div>
 </a>
                     <div class="name">
@@ -346,57 +347,61 @@
             </div>
             @foreach (var item in ViewBag.score1)
             {
-                <div class="pic" style="background-image: url(http://localhost:54678/images/member/@Model.member_profile.Where(m=>m.member_id ==  item.GetType().GetProperty("id").GetValue(item)).FirstOrDefault().profile_photo)"></div>
-
-                <div class="name">
-                    @Model.member_profile.Where(m => m.member_id == item.GetType().GetProperty("id").GetValue(item)).FirstOrDefault().nickname
-                </div>
-                <div class="score">
-                    @(item.GetType().GetProperty("total").GetValue(item))
-                </div>
-            }
-        </div>
+                <a href="@Url.Action("Index","web_Member_Index",new {id=item.GetType().GetProperty("id").GetValue(item)})">
+                    <div class="pic" style="background-image: url(http://localhost:54678/images/member/@Model.member_profile.Where(m=>m.member_id ==  item.GetType().GetProperty("id").GetValue(item)).FirstOrDefault().profile_photo)"></div>
+                    </a>
+                    <div class="name">
+                        @Model.member_profile.Where(m => m.member_id == item.GetType().GetProperty("id").GetValue(item)).FirstOrDefault().nickname
+                    </div>
+                    <div class="score">
+                        @(item.GetType().GetProperty("total").GetValue(item))
+                    </div>
+                    }
+            </div>
         <div class="three item">
             <div class="pos">
                 3
             </div>
             @foreach (var item in ViewBag.score3)
             {
-                <div class="pic" style="background-image: url(http://localhost:54678/images/member/@Model.member_profile.Where(m=>m.member_id ==  item.GetType().GetProperty("id").GetValue(item)).FirstOrDefault().profile_photo)"></div>
-
-                <div class="name">
-                    @Model.member_profile.Where(m => m.member_id == item.GetType().GetProperty("id").GetValue(item)).FirstOrDefault().nickname
-                </div>
-                <div class="score">
-                    @(item.GetType().GetProperty("total").GetValue(item))
-                </div>
-            }
-        </div>
+                <a href="@Url.Action("Index","web_Member_Index",new {id=item.GetType().GetProperty("id").GetValue(item)})">
+                    <div class="pic" style="background-image: url(http://localhost:54678/images/member/@Model.member_profile.Where(m=>m.member_id ==  item.GetType().GetProperty("id").GetValue(item)).FirstOrDefault().profile_photo)"></div>
+                    </a>
+                    <div class="name">
+                        @Model.member_profile.Where(m => m.member_id == item.GetType().GetProperty("id").GetValue(item)).FirstOrDefault().nickname
+                    </div>
+                    <div class="score">
+                        @(item.GetType().GetProperty("total").GetValue(item))
+                    </div>
+                    }
+            </div>
     </div>
     <div class="list col-4 offset-4">
 
 
         @foreach (var item in ViewBag.score4)
         {
-            <div class="item">
-                <div class="pos">
-                    4
-                </div>
+        <div class="item">
+            <div class="pos">
+                4
+            </div>
+            <a href="@Url.Action("Index","web_Member_Index",new {id=item.GetType().GetProperty("id").GetValue(item)})">
                 <div class="pic" style="background-image: url(http://localhost:54678/images/member/@Model.member_profile.Where(m=>m.member_id ==  item.GetType().GetProperty("id").GetValue(item)).FirstOrDefault().profile_photo)"></div>
-
+                </a>
                 <div class="name">
                     @Model.member_profile.Where(m => m.member_id == item.GetType().GetProperty("id").GetValue(item)).FirstOrDefault().nickname
                 </div>
                 <div class="score">
                     @(item.GetType().GetProperty("total").GetValue(item))
                 </div>
-            </div>
+        </div>
                 }
 
 
 
         </div>
 </div>
+
 <footer class="footer">
 
     <ul>
@@ -410,6 +415,7 @@
         </li>
     </ul>
     <button type="button" class="btn btn-btn-dark" data-toggle="modal" data-target="#exampleModal" data-whatever="">回報問題 </button>
+    
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">

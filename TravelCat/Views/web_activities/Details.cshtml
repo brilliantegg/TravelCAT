@@ -26,17 +26,17 @@
                 <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
             </ol>
             <div class="carousel-inner text-center ">
-                <div class="carousel-item header-carousel-item bg-cover active " style="background-image:url( https://www.blacktomato.com/wp-content/uploads/2016/02/Amalfi-coast_Shutterstock-9.jpg)">
+                <div class="carousel-item header-carousel-item bg-cover active " style="background-image:url( ../../images/activity/2cc79f48-4c41-4619-9e04-5b743ad3f554.jpg)">
                     <div class="carousel-caption offset-2 col-4 ">
                         <h5>@Model.activity.activity_title</h5>
                     </div>
                 </div>
-                <div class="carousel-item header-carousel-item bg-cover " style="background-image:url(https://www.blacktomato.com/wp-content/uploads/2016/02/Positano-italy.jpg)">
+                <div class="carousel-item header-carousel-item bg-cover " style="background-image:url(../../images/activity/6291cd8c-db0c-4c02-b9a2-daa8eb70f351.jpg)">
                     <div class="carousel-caption offset-2 col-4">
                         <h5>@Model.activity.activity_title</h5>
                     </div>
                 </div>
-                <div class="carousel-item header-carousel-item bg-cover " style="background-image:url(https://www.blacktomato.com/wp-content/uploads/2016/02/Amazing-Amalfi-coast.jpg)">
+                <div class="carousel-item header-carousel-item bg-cover " style="background-image:url(../../images/activity/c9810517-ad09-4e21-8407-4e0564659ca6.jpg)">
                     <div class="carousel-caption offset-2 col-4">
                         <h5>@Model.activity.activity_title</h5>
                     </div>
@@ -79,7 +79,7 @@
             <!-- 收藏Modal -->
             <div class="modal fade" id="collectModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
+                    <div class="modal-content ">
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLongTitle">請選擇收藏分類</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -94,32 +94,33 @@
                                 <input type="hidden" name="privacy" value="True" />
                                 <input type="hidden" name="tourism_id" value="@ViewBag.tourismId" />
 
-                                <div class="radio-button">
-
-                                    <div class="radio-button">
-                                        <input id="radio-1" name="radio" type="radio" value="1">
-                                        <label for="radio-1" class="radio-label">收藏</label>
-                                    </div>
-
-                                    <div class="radio-button">
-                                        <input id="radio-2" name="radio" type="radio" value="2">
-                                        <label for="radio-2" class="radio-label">已經去過</label>
-                                    </div>
-
-                                    <div class="radio-button">
-                                        <input id="radio-3" name="radio" type="radio" value="3">
-                                        <label for="radio-3" class="radio-label">已經去過</label>
-                                    </div>
-
-                                    <div class="radio-button">
-                                        <input id="radio-4" name="radio" type="radio" value="4">
-                                        <label for="radio-4" class="radio-label">非去不可</label>
-                                    </div>
-
+                                <div class="collection_type">
+                                    <ul>
+                                        <li>
+                                            <input type="radio" id="f-option" name="collection_type_id" value="1">
+                                            <label for="f-option">收藏</label>
+                                            <div class="check"></div>
+                                        </li>
+                                        <li>
+                                            <input type="radio" id="2-option" name="collection_type_id" value="2">
+                                            <label for="2-option">已經去過</label>
+                                            <div class="check"></div>
+                                        </li>
+                                        <li>
+                                            <input type="radio" id="3-option" name="collection_type_id" value="3">
+                                            <label for="3-option">想要去</label>
+                                            <div class="check"></div>
+                                        </li>
+                                        <li>
+                                            <input type="radio" id="4-option" name="collection_type_id" value="4">
+                                            <label for="4-option">非去不可</label>
+                                            <div class="check"></div>
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <input type="submit" name="add_to_bucket_list" class="add_to_bucket_list bucket_list btn btn-outline-info" value="加入收藏" />
+                                <input type="submit" name="add_to_bucket_list" class="add_to_bucket_list bucket_list btn btn-outline-dark" value="加入收藏" />
                             </div>
                         </form>
                     </div>
@@ -238,11 +239,11 @@
 
     <!--篩選評論-->
 
-    @{ double totalCommentNum=0;
+    @{ double totalCommentNum = 0;
         if (@Model.comment.Count() > 0) { totalCommentNum = @Model.comment.Count(); }
     }
     <section>
-
+        <div class="d-flex">
 
         <div class="filter_comment row col-6 offset-1 ">
 
@@ -365,7 +366,7 @@
                     <h4>月份</h4><br />
                     <label class="filter_container">
                         3 月到 5 月
-                        <input type="checkbox" value="3to5" name="travel_month" />
+                        <input type="checkbox" value="3-5" name="travel_month" />
                         <span class="checkmark"></span>
                     </label>
                     <div class="progress">
@@ -373,7 +374,7 @@
                     </div>
                     <label class="filter_container">
                         6 月到 8 月
-                        <input type="checkbox" value="6to8" name="travel_month" />
+                        <input type="checkbox" value="6-8" name="travel_month" />
                         <span class="checkmark"></span>
                     </label>
 
@@ -382,7 +383,7 @@
                     </div>
                     <label class="filter_container">
                         9 月到 11 月
-                        <input type="checkbox" value="9to11" name="travel_month" />
+                        <input type="checkbox" value="9-11" name="travel_month" />
                         <span class="checkmark"></span>
                     </label>
 
@@ -391,7 +392,7 @@
                     </div>
                     <label class="filter_container">
                         12 月到 2 月
-                        <input type="checkbox" value="12to2" name="travel_month" />
+                        <input type="checkbox" value="12-2" name="travel_month" />
                         <span class="checkmark"></span>
                     </label>
 
@@ -405,27 +406,18 @@
 
 
         </div>
-    </section>
+        <div class="col-3 offset-1" id="tb1"></div>
+</div>
+</section>
 
-    <!--渲染評論-->
-    <div id="render_comment">
-        @Html.Action("_CommentsForDestination", "CommentsWeb", new { tourismId = @ViewBag.tourismId })
-    </div>
+<!--渲染評論-->
+<div id="render_comment">
+    @Html.Action("_CommentsForDestination", "CommentsWeb", new { tourismId = @ViewBag.tourismId })
+</div>
 
 </div>
 
-<!--FB-->
-<script>
-    window.fbAsyncInit = function () {
-        FB.init({
-            appId: '562137197876777',
-            autoLogAppEvents: true,
-            xfbml: true,
-            version: 'v5.0'
-        });
-    };
-</script>
-<script async defer src="https://connect.facebook.net/en_US/sdk.js"></script>
+
 
 
 <!--google-->
@@ -681,7 +673,39 @@
 
 </script>
 <script>
+    var city ="@Model.activity.city"
+    //天氣預報
+    $(function () {
+  $.ajax({
+    type: "GET",
+    url: "https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-C0032-001?Authorization=CWB-AE3C8417-3E7C-4F1D-A604-A621FBAD2F1C&locationName="+city,
+    error: function (e) {
+      console.log('oh no');
+    },
+      success: function (data) {
+          $('#tb1').append(`
+              <h1>${data.records.location[0].locationName}</h1>
+              <h1> ${ data.records.location[0].weatherElement[0].time[0].parameter.parameterName }</h1 >`)
 
+          if (data.records.location[0].weatherElement[0].time[0].parameter.parameterName.match('多雲')) {
+              $('#tb1').append('<img class="weather_img" src="http://localhost:54678/images/weather/cloudy.png" style="width:200px;"/>')
+
+          } else if(data.records.location[0].weatherElement[0].time[0].parameter.parameterName.match('雨')){
+              $('#tb1').append('<img class="weather_img" src="http://localhost:54678/images/weather/rain.png" style="width:200px;"/>')
+          }
+          $('#tb1').append(`
+            <div class="d-flex justify-content-around">
+            <h1>${data.records.location[0].weatherElement[2].time[0].parameter.parameterName}&deg;C</h1>
+            <h1>${data.records.location[0].weatherElement[4].time[0].parameter.parameterName}&deg;C</h1>
+
+            </div>
+            <h1>${data.records.location[0].weatherElement[3].time[0].parameter.parameterName}</h1>
+            `)
+
+
+    }
+  });
+});
     $(`.filter_comment`).on("change", function () {
         var comment_rating_values = [];
         var travel_partner_values = [];

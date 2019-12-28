@@ -395,6 +395,9 @@
     <Content Include="bin\TravelCat.dll" />
     <Content Include="bin\TravelCat.pdb" />
     <Content Include="bin\WebGrease.dll" />
+    <Content Include="bin\X.PagedList.dll" />
+    <Content Include="bin\X.PagedList.Mvc.dll" />
+    <Content Include="bin\X.PagedList.Web.Common.dll" />
     <Content Include="bin\zh-Hant\EntityFramework.resources.dll" />
     <Content Include="bin\zh-Hant\EntityFramework.SqlServer.resources.dll" />
     <Content Include="bin\zh-Hant\Microsoft.AspNet.Identity.Owin.resources.dll" />

@@ -314,8 +314,12 @@
 
 
         $('#rating input[value=@Model.comment_rating]').parent('label').addClass('active');
+
+        $('#rating input[value=@Model.comment_rating]').attr("checked","checked");
  
         $('#partner input[value=@Model.travel_partner]').parent('label').addClass('active');
+
+        $('#partner input[value=@Model.travel_partner]').attr("checked", "checked");
 
         $('#inputGroupSelect01 option[value=@Model.travel_month]').attr("selected","selected")
 
