@@ -11,7 +11,7 @@ using TravelCat.Models;
 
 namespace TravelCat.Controllers
 {
-    [LoginCheck]
+    
     public class AdminController : Controller
     {
         private dbTravelCat db = new dbTravelCat();
