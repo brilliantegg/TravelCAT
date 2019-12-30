@@ -36,21 +36,37 @@ namespace TravelCat.Controllers
                 restaurant = db.restaurant.OrderByDescending(m => db.comment.Where(s => s.tourism_id == m.restaurant_id).Count()).ToList(),
                 spot = db.spot.OrderByDescending(m => db.comment.Where(s => s.tourism_id == m.spot_id).Count()).ToList(),
                 member = db.member.Where(m => m.member_account == account).FirstOrDefault(),
-                comment = db.comment.OrderByDescending(m => m.comment_date).ToList()
+                comment = db.comment.OrderByDescending(m => m.comment_date).ToList(),
+                member_profile = db.member_profile.ToList()
             };
             //最多評論觀光物件
-            //select tourism_id,count(*) as total from comment group by tourism_id order by total desc
             var result = (from i in db.comment
                           group i by i.tourism_id into g
                           orderby g.Count() descending
                           select new { id = g.Key, count = g.Count() }).FirstOrDefault();
+            var top_destination = result.id;
+            var comment_list = db.comment.Where(m => m.tourism_id == top_destination).ToList();
             var result1 = (from i in db.comment_emoji_details
                            group i by i.comment_id into g
                            orderby g.Count() descending
                            select new { id = g.Key, count = g.Count() }).FirstOrDefault();
 
+            //最多評論觀光物件 裡面最多讚的
+            var data = new[] { new { comment = "", like = 0 } }.ToList();
+            data.RemoveAt(0);          
+            
+            foreach(var item in comment_list)
+            {
+                int like_count = db.comment_emoji_details.Where(m => m.comment_id == item.comment_id).Count();
+                data.Add(new
+                {
+                    comment = item.comment_id.ToString(),
+                    like = like_count,
+                });
+            }
+            var top_id = data.OrderByDescending(m => m.like).FirstOrDefault().comment;
             ViewBag.comment_id = result.id;
-            ViewBag.ccc = result1.id;
+            ViewBag.most_like = long.Parse(top_id);
             ViewBag.comment_count = result.count;
             //找讚數
             int like = db.collections_detail.Where(s => s.tourism_id == result.id).Count();
@@ -59,6 +75,24 @@ namespace TravelCat.Controllers
             int like_new = db.collections_detail.Where(s => s.tourism_id == temp).Count();
             ViewBag.liken = like_new;
 
+            //排行榜
+            var follow_score = (from a in db.follow_list
+                                group a by a.member_id into b
+                                orderby b.Count() descending
+                                select new { id = b.Key, score = b.Count() * 5 }).ToList();
+
+
+            var comment_score = (from a in db.comment
+                                 group a by a.member_id into b
+                                 orderby b.Count() descending
+                                 select new { id = b.Key, score = b.Count() * 5 }).ToList();
+
+
+            var totoal_score = (follow_score).Union(comment_score).GroupBy(m => m.id).Select(m => new { id = m.Key, total = m.Sum(x => x.score) }).OrderByDescending(m => m.total).ToList();
+            ViewBag.score1 = totoal_score.Take(1).ToList();
+            ViewBag.score2 = totoal_score.Skip(1).Take(1).ToList();
+            ViewBag.score3 = totoal_score.Skip(2).Take(1).ToList();
+            ViewBag.score4= totoal_score.Skip(3).Take(7).ToList();
             return View(model);
         }
 

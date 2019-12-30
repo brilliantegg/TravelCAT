@@ -1,32 +1,22 @@
 ﻿@model TravelCat.ViewModels.ActivityPhotoViewModel
-    
+
 
 @{
     ViewBag.Title = "新增活動";
 }
 
-    <link href="~/Content/back-end-Create.css" rel="stylesheet" />
+<link href="~/Content/back-end-Create.css" rel="stylesheet" />
 <h2 class="ml-3 mt-3 text-danger text-center">新增活動</h2>
 
 <form action="/Activities/Create" method="post" enctype="multipart/form-data">
 
-        @Html.AntiForgeryToken()
+    @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
 
+        @Html.HiddenFor(model => model.activity.page_status)
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-        <!--頁面狀態-->
-        <div class="row">
-            <div class="co col-6">
-                @Html.LabelFor(model => model.activity.page_status, htmlAttributes: new { @class = "txt" })
-                <span class="checkbox ml-3">
-                    @Html.EditorFor(model => model.activity.page_status)
-                    @Html.ValidationMessageFor(model => model.activity.page_status, "", new { @class = "text-danger" })
-                </span>
-            </div>
-        </div>
 
         <!--名稱-->
         <div class="row">
@@ -158,18 +148,18 @@
             </div>
         </div>
 
-        <div class="row footer">
+        <div class="row text-center m-3">
             <div class="col-1">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="新增" class="btn btn-primary" />
             </div>
             <div class="col-2">
-                @Html.ActionLink("回到活動列表", "Index",new { page=Session["pg"]}, new { @class = "btn btn-primary" })
+                @Html.ActionLink("回到活動列表", "Index", new { page = Session["pg"] }, new { @class = "btn btn-primary" })
             </div>
         </div>
     </div>
-    </form>
+</form>
 
-
-    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+@section scripts{
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+}

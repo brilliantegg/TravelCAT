@@ -1,35 +1,44 @@
-﻿@model IEnumerable<TravelCat.Models.issue>
+﻿@using X.PagedList.Mvc
+@using X.PagedList
+@using X.PagedList.Mvc.Common
+
+@model IPagedList<TravelCat.Models.issue>
+
+<form action="@Url.Action("Index")" method="get" class="text-right search m-2">
+    @Html.TextBox("Problem_id", "", new { @class = "border", @placeholder = "請輸入被檢舉編號" })
+    <input class="btn btn-secondary" type="submit" value="查詢" />
+</form>
 
 
 <table class="table">
     <tr>
         <th></th>
         <th>
-            @Html.DisplayNameFor(model => model.issue_type.issue_name)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().issue_type.issue_name)
         </th>
         <th>
-            被檢舉ID
+            被檢舉編號
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.issue_content)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().issue_content)
         </th>
         <th>
             檢舉人ID
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.report_date)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().report_date)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.issue_result)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().issue_result)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.issue_status)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().issue_status)
         </th>
         <th>
             管理員帳號
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.resolve_date)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().resolve_date)
         </th>
         <th></th>
     </tr>
@@ -78,3 +87,12 @@
     }
 
 </table>
+<div>
+    @Html.PagedListPager(Model, page => Url.Action("_Problem", "issues", new { page, id = ViewBag.id }),
+   new PagedListRenderOptions
+   {
+       ContainerDivClasses = new[] { "" },
+            LiElementClasses = new[] { "page-item" },
+            PageClasses = new[] { "page-link" },
+   })
+</div>

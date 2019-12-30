@@ -1,8 +1,31 @@
-﻿
-
-body {
-    margin-top: 130px
+﻿.row1 {
+    display: flex;
+    flex-wrap: wrap;
 }
+
+.searchbox1 {
+    position: sticky;
+    top: 2rem;
+    bottom: 2rem;
+    z-index: 0;
+    height: calc(100vh - 4rem);
+    padding-bottom: 100px;
+    /*padding-top: 100px;*/
+}
+
+
+.searchbox2 {
+    position: sticky;
+    top: 8rem;
+    bottom: 2rem;
+    z-index: 1000;
+    height: calc(100vh - 4rem);
+    overflow-y: scroll;
+    padding-bottom: 200px;
+}
+
+
+
 
 .btn {
     border-width: 3px;
@@ -46,4 +69,102 @@ body {
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
+}
+
+.query_condition span{
+    background-color: #f5f5f5;
+    border-radius: 50px;
+    padding: 0 11.25px;
+    line-height: 50px;
+    opacity: 1;
+    -webkit-transition: opacity .25s;
+    transition: opacity .25s;
+    cursor: pointer;
+    font-size:1.2rem
+}
+.nav-item a {
+    text-decoration: none;
+    color: black
+}
+    .nav-item a:hover {
+        text-decoration: none;
+        color: black
+    }
+.media a {
+    text-decoration:none;
+    color:black
+}
+.media a:hover {
+    text-decoration: none;
+    color: black
+}
+.media {
+    position: relative;
+}
+
+    .media .fa {
+        position: absolute;
+        top: 8px;
+        right: 32px;
+        color: #fff;
+        cursor: pointer;
+    }
+
+    .media .fa span {
+        position: relative;
+        top: 0;
+        right: 0;
+        z-index: 2;
+    }
+
+        .media .fa span .fas {
+            color: #2c2c2c;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+.media .fa span .far {
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: #fff;
+    background-color: transparent;
+    text-shadow: 0 2px 4px #888;
+}
+
+        .media .fa span:hover .fas {
+            color: red;
+            transition: .3s;
+        }
+
+.progress-bar{
+    background-color:darkolivegreen
+}
+
+.searchbox2::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+    background-color: #F5F5F5;
+}
+
+.searchbox2::-webkit-scrollbar {
+    width: 12px;
+    background-color: #F5F5F5;
+}
+
+.searchbox2::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #555;
+}
+
+.page-item.active .page-link {
+    z-index: 1;
+    color: #fff;
+    background-color: darkolivegreen;
+    border-color: darkolivegreen;
+}
+.page-link {
+    color: darkolivegreen;
 }

@@ -1,8 +1,10 @@
-﻿@using PagedList;
-@using PagedList.Mvc;
-@model PagedList.IPagedList<TravelCat.Models.spot>
+﻿@using X.PagedList.Mvc
+@using X.PagedList
+@using X.PagedList.Mvc.Common
 
+@model IPagedList<TravelCat.Models.spot>
 @{
+
     ViewBag.Title = "景點列表";
 }
 
@@ -14,8 +16,8 @@
 
         @*@Html.TextBox("id", "", new { @class = " border", @placeholder = "編號,名稱,城市,行政區" })
 
-        @Html.ActionLink("查詢", "contentQuery", new { id = "id" }, new{@class="btn btn-default"})*@
-        <form action="@Url.Action("Index","Spot")" method="get">
+            @Html.ActionLink("查詢", "contentQuery", new { id = "id" }, new{@class="btn btn-default"})*@
+        <form action="@Url.Action("Index","Spots")" method="get">
             @Html.TextBox("id", "", new { @class = " border", @placeholder = "編號,名稱,城市,行政區" })
             <input class="btn btn-secondary" type="submit" value="查詢" />
         </form>
@@ -57,41 +59,54 @@
 
     @foreach (var item in Model)
     {
-<tr class="row">
-    <td class="col-1 text-center">
-        @Html.ActionLink("檢視/修改", "Edit", new { id = item.spot_id }, new { @class = "btn btn-sm btn-outline-primary" })
-    </td>
-    <td class="col-1">
-        @Html.DisplayFor(modelItem => item.spot_id)
-    </td>
-    <td class="col-2 text-truncate">
-        @Html.DisplayFor(modelItem => item.spot_title)
-    </td>
-    <td class="col-2 text-truncate">
-        @Html.DisplayFor(modelItem => item.spot_tel)
-    </td>
-    <td class="col-1">
-        @Html.DisplayFor(modelItem => item.city)
-    </td>
-    <td class="col-1">
-        @Html.DisplayFor(modelItem => item.district)
-    </td>
-    <td class="col-1 text-truncate">
-        @Html.DisplayFor(modelItem => item.open_time)
-    </td>
-    <td class="col-2">
-        @Html.DisplayFor(modelItem => item.update_date)
-    </td>
-    <td class="col-1">
-        @Html.DisplayFor(modelItem => item.page_status)
-    </td>
-</tr>
+        <tr class="row">
+            <td class="col-1 text-center">
+                @Html.ActionLink("檢視/修改", "Edit", new { id = item.spot_id }, new { @class = "btn btn-sm btn-outline-primary" })
+            </td>
+            <td class="col-1">
+                @Html.DisplayFor(modelItem => item.spot_id)
+            </td>
+            <td class="col-2 text-truncate">
+                @Html.DisplayFor(modelItem => item.spot_title)
+            </td>
+            <td class="col-2 text-truncate">
+                @Html.DisplayFor(modelItem => item.spot_tel)
+            </td>
+            <td class="col-1">
+                @Html.DisplayFor(modelItem => item.city)
+            </td>
+            <td class="col-1">
+                @Html.DisplayFor(modelItem => item.district)
+            </td>
+            <td class="col-1 text-truncate">
+                @Html.DisplayFor(modelItem => item.open_time)
+            </td>
+            <td class="col-2">
+                @Html.DisplayFor(modelItem => item.update_date)
+            </td>
+            <td class="col-1">
+                @if (item.page_status == false)
+                {
+                    <span class="badge badge-success">顯示</span>
+                }
+                else
+                {
+                    <span class="badge badge-danger">隱藏</span>
+                }
+            </td>
+        </tr>
     }
 
 </table>
 
 <!--分頁-->
 <div class="text-center">
-    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, id = ViewBag.id }))
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, id = ViewBag.id }),
+                  new PagedListRenderOptions
+                  {
+                      ContainerDivClasses = new[] { "" },
+                           LiElementClasses = new[] { "page-item" },
+                           PageClasses = new[] { "page-link" },
+                  })
 </div>
 

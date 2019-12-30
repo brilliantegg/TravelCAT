@@ -6,11 +6,12 @@ using System.Web;
 using System.Web.Mvc;
 using TravelCat.Models;
 using TravelCat.ViewModels;
-using PagedList;
+using X.PagedList;
 using System.IO;
 
 namespace TravelCat.Controllers
 {
+    [LoginCheck]
     public class RestaurantsController : Controller
     {
         dbTravelCat db = new dbTravelCat();
@@ -45,6 +46,7 @@ namespace TravelCat.Controllers
         {
             string act_id = db.Database.SqlQuery<string>("Select dbo.GetrestId()").FirstOrDefault();
             restaurant.restaurant_id = act_id;
+            restaurant.page_status = false;
 
             string fileName = "";
             for (int i = 0; i < tourism_photo.Length; i++)

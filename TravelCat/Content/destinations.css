@@ -179,8 +179,8 @@ height: 70vh;
 }
 .comment_photo img {
     display: block;
-    object-fit:cover;
-    max-height:450px
+    object-fit: cover;
+    max-height: 450px
 }
 
 textarea {
@@ -292,15 +292,25 @@ textarea:focus {
     padding-right:30px
 }
 
-.filter_comment {
-    text-align:left;
+/*天氣預報*/
+#tb1 {
+    text-align: center;
     background: #ffffff;
     transition: opacity 0.35s ease-in;
     border: 1px solid #d6d6d6;
     box-shadow: 1px 1px 0px #c2c2c2;
     border-radius: 3px;
     cursor: pointer;
-    width: 60%;
+
+}
+.filter_comment {
+    text-align: left;
+    background: #ffffff;
+    transition: opacity 0.35s ease-in;
+    border: 1px solid #d6d6d6;
+    box-shadow: 1px 1px 0px #c2c2c2;
+    border-radius: 3px;
+    cursor: pointer;
 
 }
 
@@ -347,7 +357,6 @@ textarea:focus {
 }
 .member_name {
     margin:auto 0;
-    align-self: center;
     font-weight: 700;
     color:black;
 }
@@ -577,4 +586,23 @@ section{
     position: absolute;
     right: 1rem;
 
+}
+
+.page-item.active .page-link {
+    z-index: 1;
+    color: #fff;
+    background-color: darkolivegreen;
+    border-color: darkolivegreen;
+}
+
+.page-link {
+    color: darkolivegreen;
+}
+
+.weather_img{
+    width:200px;
+
+}
+.card__info{
+    min-height:22px
 }

@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using TravelCat.Models;
 using TravelCat.ViewModels;
+using X.PagedList;
 
 namespace TravelCat.Controllers
 {
@@ -16,10 +17,25 @@ namespace TravelCat.Controllers
         private dbTravelCat db = new dbTravelCat();
 
         // GET: members1
-        public ActionResult Index()
+        public ActionResult Index(string id = null, int page = 1,int tab =1)
         {
-            return View(db.member.ToList());
-        }            
+            ViewBag.id = id;
+            ViewBag.tab = tab;
+            var member = db.member.OrderBy(m => m.member_id).ToList();
+            int pagesize = 10;
+            int pagecurrent = page < 1 ? 1 : page;
+            var pagedlist = member.ToPagedList(pagecurrent, pagesize);
+
+            if (!String.IsNullOrEmpty(id))
+            {
+                var search = db.member.Where(m => m.member_id == id).ToList();
+                return View(search.ToPagedList(page, pagesize));
+            }
+            else
+            {
+                return View("Index", pagedlist);
+            }
+        }
 
         // GET: members1/Edit/5
         public ActionResult Edit(string id)
@@ -43,7 +59,21 @@ namespace TravelCat.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "member_id,member_account,member_password,member_status")] member member)
         {
-            
+            string email = db.member_profile.Where(m => m.member_id == member.member_id).FirstOrDefault().email;
+
+            if (member.member_status == true)
+            {
+                GmailSender gs = new GmailSender();
+                gs.account = "travelcat.service@gmail.com";
+                gs.password = "lqleyzcbmrmttloe";
+                gs.sender = "旅途貓 <travelcat.service@gmail.com>";
+                gs.receiver = $"{email}";
+                gs.subject = "會員通知";
+                gs.messageBody = "<h3>親愛的會員您好:</h3><br /><p>因您已違反本網站規定，本站將取消您的會員，如有任何疑問請與本站客服人員聯絡。</p>";
+                gs.IsHtml = true;
+                gs.Send();
+            }
+
             if (ModelState.IsValid)
             {
                 db.Entry(member).State = EntityState.Modified;
@@ -53,6 +83,6 @@ namespace TravelCat.Controllers
             return View(member);
         }
 
-        
+
     }
 }

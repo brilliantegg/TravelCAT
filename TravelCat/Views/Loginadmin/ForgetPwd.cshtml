@@ -1,46 +1,49 @@
 ﻿@model TravelCat.Models.admin
-
 @{
     ViewBag.Title = "ForgetPwd";
+    Layout = "~/Views/Shared/_Layout 1.cshtml";
 }
-
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        <h3>重設密碼</h3>
-        <p>請填入申辦時的帳號跟信箱</p>
-        <p>我們會將重設密碼的連結寄送至您的信箱</p>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.admin_account, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <input id="account" name="account" type="text" class="form-control" required="required" />
-                @Html.ValidationMessageFor(model => model.admin_account, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.admin_email, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <input id="email" name="email" type="text" class="form-control" required="required" />
-                @Html.ValidationMessageFor(model => model.admin_email, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <p class="text-danger">@ViewBag.PwdErr</p>
-
-        <div class="form-group mt-2">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" id="submit" value="送出" class="btn btn-primary" />
-            </div>
-        </div>
+<link href="~/Content/Login-index.css" rel="stylesheet" />
+<div class="warp container">
+    <div class="txt text-center">
+        <h2 class="text-warning">重設密碼</h2>
+        <p class="text-white">請填入申辦時的帳號跟信箱</p>
+        <p class="text-white">我們會將重設密碼的連結寄送至您的信箱</p>
     </div>
-}
+    <div class="login">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
 
-<div>
-    @Html.ActionLink("返回登入頁", "Index", "Loginadmin")
+            <div class="form-horizontal">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.admin_account, htmlAttributes: new { @class = "control-label text-center" })
+
+                    <input id="account" name="account" type="text" class="form-control" required="required" placeholder="請輸入帳號" />
+                    @Html.ValidationMessageFor(model => model.admin_account, "", new { @class = "text-danger" })
+
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.admin_email, htmlAttributes: new { @class = "control-label" })
+
+                    <input id="email" name="email" type="text" class="form-control" required="required" placeholder="請輸入信箱" />
+                    @Html.ValidationMessageFor(model => model.admin_email, "", new { @class = "text-danger" })
+                </div>
+
+                <p class="text-danger">@ViewBag.PwdErr</p>
+
+                <div class="form-group mt-2 text-center">
+                    <div class="col-md-offset-2 col-md-12">
+                        <input type="submit" id="submit" value="送出" class="btn btn-primary" />
+                        @Html.ActionLink("返回登入頁", "Index", "Loginadmin", new { @class = "btn btn-primary" })
+                    </div>
+                </div>
+            </div>
+
+        }
+    </div>
+
 </div>

@@ -1,11 +1,15 @@
 ﻿<link href="~/Content/destinations.css" rel="stylesheet" />
 @using Microsoft.AspNet.Identity
+@using X.PagedList.Mvc
+@using X.PagedList
+@using X.PagedList.Mvc.Common
 @model TravelCat.ViewModels.destinationsViewModel
 @{
     ViewBag.Title = "Details";
     Layout = null;
 
     string memberId;
+
     if (Session["memberID"] == null || string.IsNullOrWhiteSpace(Session["memberID"].ToString()))
     {
         memberId = null;
@@ -16,22 +20,28 @@
     }
     string firstChar = ViewBag.tourismId.Substring(0, 1);
     string destinatations;
+    string controller;
     switch (firstChar)
     {
         case "A":
             destinatations = "A";
+            controller = "web_activities";
             break;
         case "H":
             destinatations = "H";
+            controller = "WebHotels";
             break;
         case "R":
             destinatations = "R";
+            controller = "WebRestaurants";
             break;
         case "S":
             destinatations = "S";
+            controller = "WebSpots";
             break;
         default:
             destinatations = "A";
+            controller = "";
             break;
     }
 }
@@ -39,7 +49,7 @@
 <!--1則 評論-->
 <div class=" justify-content-center align-items-center">
 
-    @foreach (var item in Model.comment)
+    @foreach (var item in Model.comment_page)
     {
         if (item.comment_status)
         {
@@ -52,7 +62,7 @@
                         <div class="d-flex">
                             @if (item.member.member_profile.profile_photo != null)
                             {
-                                <a href="@Url.Action("Index","web_Member_Index",new { id=item.member_id})">
+                                <a href="@Url.Action("Index", "web_Member_Index", new { id = item.member_id })">
                                     <img class="member_avatar"
                                          src="~/images/member/@item.member.member_profile.profile_photo"
                                          alt="..." onerror="this.src='/images/member/avatar.png';" />
@@ -60,11 +70,11 @@
                             }
                             else
                             {
-                                <a href="@Url.Action("Index","web_Member_Index",new { id=item.member_id})">
+                                <a href="@Url.Action("Index", "web_Member_Index", new { id = item.member_id })">
                                     <img class="member_avatar" src="~/images/member/avatar.png" alt="...">
                                 </a>
                             }
-                            <a href="@Url.Action("Index","web_Member_Index",new { id=item.member_id})" style="margin:auto">
+                            <a href="@Url.Action("Index", "web_Member_Index", new { id = item.member_id })" style="margin:auto">
                                 <h5 class="member_name">@item.member.member_profile.nickname</h5>
                             </a>
                         </div>
@@ -76,9 +86,6 @@
                                     <img class="icon" src="~/images/emoji/more.png" />
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMore">
-                                    <a class="dropdown-item" href="#">分享到 facebook</a>
-                                    <a class="dropdown-item" href="#">分享到 line</a>
-                                    <a class="dropdown-item" href="#">分享到 google</a>
                                     <a class="dropdown-item report_comment" data-toggle="modal" data-target="#reportModel"> 檢舉此評論</a>
                                 </div>
                             </div>
@@ -91,7 +98,7 @@
                         <div class="modal-dialog modal-dialog-scrollable" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" >檢舉評論</h5>
+                                    <h5 class="modal-title">檢舉評論</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -130,19 +137,19 @@
                         </div>
                         @if (destinatations == "A")
                         {
-                            <a href="" class="hashtag "> #@Model.activity.activity_title #@item.travel_partner #@item.travel_month 月</a>
+                            <a href="" class="hashtag "> #@Model.activity_list.Where(m => m.activity_id == @ViewBag.tourismId).FirstOrDefault().activity_title #@item.travel_partner #@item.travel_month 月</a>
                         }
                         else if (destinatations == "S")
                         {
-                            <a href="" class="hashtag "> #@Model.spot.spot_title #@item.travel_partner #@item.travel_month 月</a>
+                            <a href="" class="hashtag "> #@Model.spot_list.Where(m => m.spot_id == @ViewBag.tourismId).FirstOrDefault().spot_title #@item.travel_partner #@item.travel_month 月</a>
                         }
                         else if (destinatations == "R")
                         {
-                            <a href="" class="hashtag "> #@Model.restaurant.restaurant_title #@item.travel_partner #@item.travel_month 月</a>
+                            <a href="" class="hashtag "> #@Model.restaurant_list.Where(m => m.restaurant_id == @ViewBag.tourismId).FirstOrDefault().restaurant_title #@item.travel_partner #@item.travel_month 月</a>
                         }
                         else if (destinatations == "H")
                         {
-                            <a href="" class="hashtag "> #@Model.hotel.hotel_title #@item.travel_partner #@item.travel_month 月</a>
+                            <a href="" class="hashtag "> #@Model.hotel_list.Where(m => m.hotel_id == @ViewBag.tourismId).FirstOrDefault().hotel_title #@item.travel_partner #@item.travel_month 月</a>
                         }
 
                     </div>
@@ -282,39 +289,53 @@
                         <div class="render_msg"></div>
                         <!--回覆留言-->
 
-                    <div class="add_message single_message">
-                        <button class="submit_msg" value="submit_msg">submit_msg</button>
-                        @if (@memberId != null)
-                        {
-                            <form action="/web_comments/createMessage" method="post">
-                                @Html.AntiForgeryToken()
-                                <input type="hidden" name="comment_id" value="@item.comment_id" />
-                                <input type="hidden" name="msg_time" value="@DateTime.Now" />
-                                <input type="hidden" name="member_id" value="@Session["memberID"]" />
-                                <input type="hidden" name="msg_status" value="True" />
-                                <input type="hidden" name="tourism_id" value="@item.tourism_id" />
-                                <textarea class="msg_content" rows="2" cols="20" name="msg_content" placeholder="@User.Identity.GetUserName(),想說說甚麼..."></textarea>
-                                <br />
-                                <div class="add_message_Submit_area text-right">
-                                    <input id="add_message_Submit" class="btn btn-outline-dark" type="submit" value="submit" />
-                                </div>
-                            </form>
-                        }
-                        else
-                        {
-                            <textarea class="msg_content" rows="2" cols="20" name="msg_content" placeholder="請先登入後留言"></textarea>
-                        }
-                    </div>
+                        <div class="add_message single_message">
+                            
+                            @if (@memberId != null)
+                            {
+                                <form id="msg_form" action="/web_comments/createMessage" method="post">
+                                    @Html.AntiForgeryToken()
+                                    <input type="hidden" name="comment_id" value="@item.comment_id" />
+                                    <input type="hidden" name="msg_time" value="@DateTime.Now" />
+                                    <input type="hidden" name="member_id" value="@Session["memberID"]" />
+                                    <input type="hidden" name="msg_status" value="True" />
+                                    <input type="hidden" name="tourism_id" value="@item.tourism_id" />
+                                    <textarea class="msg_content" rows="2" cols="20" name="msg_content" placeholder="@User.Identity.GetUserName(),想說說甚麼..."></textarea>
+                                    <br />
+                                    <div class="add_message_Submit_area text-right">
+                                        <button class="submit_msg btn btn-outline-dark" value="送出" data-id="@item.comment_id">送出</button>
+                                        @*<input class="add_message_Submit btn btn-outline-dark" type="submit" value="送出" />*@
+                                    </div>
+                                </form>
+                            }
+                            else
+                            {
+                                <textarea class="msg_content" rows="2" cols="20" name="msg_content" placeholder="請先登入後留言"></textarea>
+                            }
+                        </div>
 
 
-                        
+
 
                     </div>
                 </div>
+
             </div>
-        }
-    }
+
+                                }
+                            }
+    <div class="col-4 offset-4">
+        @Html.PagedListPager(Model.comment_page, page => Url.Action("Details", controller, new { id = @ViewBag.tourismId, page = page }),
+     new PagedListRenderOptions
+     {
+         ContainerDivClasses = new[] { "" },
+         LiElementClasses = new[] { "page-item" },
+         PageClasses = new[] { "page-link" },
+     })
+    </div>
 </div>
+
+
 
 
 <script>
@@ -330,41 +351,78 @@
 
         }
         console.log(id)
-        console.log(tourismId)
-    @{  var member = Model.member.Where(m => m.member_id == memberId).FirstOrDefault();  }
-    //新增留言
-    $(".submit_msg").click(function () {
+    console.log(tourismId)
+        //新增留言
+    @{var member =Model.member.FirstOrDefault();
+        if (memberId != null)
+        {
+            member = Model.member.Where(m => m.member_id == memberId).FirstOrDefault();
+        }
+       }
+        function add_msg(object) {
+    
+        var url = "@Url.Action("createMessage","web_comments")"
+
+            $.ajax({
+            type: "POST",
+            url: url,
+                data: {
+                    comment_id: object.data('id'),
+                msg_time:"@DateTime.Now",
+                member_id: "@Session["memberID"]",
+                msg_status: true,
+                tourism_id:tourismId,
+                msg_content: $('.msg_content').val()
+            },
+           success:function()
+           {
+               alert('add')
+           }
+         });
+        }
+    if (id != null) {
+        $(".submit_msg").click(function (e) {
         $(".render_msg").append(`<div class=" single_message py-3">
-                                <div class="media mt-3">
-                                    <img src="http://localhost:54678/images/member/@member.member_profile.profile_photo" class="mr-3 ml-3 member_avatar" alt="..." onerror="this.src='/images/member/avatar.png';">
+        <div class="media mt-3">
+            <img src='http://localhost:54678/images/member/@(member.member_profile.profile_photo)' class="mr-3 ml-3 member_avatar" alt="..." onerror="this.src='/images/member/avatar.png';">
 
-                                    <div class="media-body ">
+            <div class="media-body ">
 
-                                        <div class="d-flex message_body">
-                                            <h5 class="member_name">
-                                                @member.member_profile.nickname
-                                            </h5>                                           
-                                        <br>
-                                        <span class="create_time">
-                                            @DateTime.Now.ToString("yyyy MM dd")
-                                        </span>
-<br>
-                                        <div class="response_content">
-                                            ${$('.msg_content').val()}
-                                        </div>
-<br>
-                                        <hr />
-                                        <div class="emoji">
-                                                <img class="icon msg_emoji_heart" src="http://localhost:54678/images/emoji/talk.png" data-value="0" data-msgid="0" data-emojiid=1 />
-                                                <span class="msg_emoji_heart_num">0</span>                                            
+                <div class="d-flex message_body flex-column">
+                    <h5 class="member_name text-left">
+                        @(member.member_profile.nickname)
+                    </h5>
 
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>`);
-        $('.msg_content').val("")
+                    <span class="create_time">
+                        @(DateTime.Now.ToString("yyyy MM dd"))
+                    </span>
+
+                    <div class="response_content">
+                        ${$('.msg_content').val()}
+                    </div>
+
+                    <hr />
+                    <div class="emoji">
+                        <img class="icon msg_emoji_heart" src="http://localhost:54678/images/emoji/talk.png" data-value="0" data-msgid="0" data-emojiid=1 />
+                        <span class="msg_emoji_heart_num">0</span>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>`);
+        e.preventDefault();
+        //$('#msg_form').submit();
+        add_msg($(this))
+        $('.msg_content').val("");
+
+
 
         })
+    }
+
+    
         //顯示文章
         $(".readmore").click(function () {
             $(".intro").toggleClass('showMore');
@@ -488,7 +546,7 @@
             } else {
                 emoji.attr('disabled', true);
                 emoji.addClass('click_button')
-    
+
             $.ajax({
                 type: 'POST',
                 url: "http://localhost:54678/api/api_message_emoji_details",

@@ -16,7 +16,7 @@ namespace TravelCat.Controllers
     public class LoginadminController : Controller
     {
 
-        SqlConnection Conn = new SqlConnection("data source=MCSDD108214;initial catalog=travel_cat_v1;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework&quot");
+        SqlConnection Conn = new SqlConnection("data source=MCSDD108214;initial catalog=travel_cat_v1;persist security info=True;user id=test;password=travelcat123;multipleactiveresultsets=True;application name=EntityFramework&quot;");
         dbTravelCat db = new dbTravelCat();
 
         public ActionResult Index()

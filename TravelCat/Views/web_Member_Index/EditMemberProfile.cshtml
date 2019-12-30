@@ -28,15 +28,11 @@
         @using (Html.BeginForm("EditMemberProfile", "web_Member_Index", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
             @Html.AntiForgeryToken()
-
             <div class="form-horizontal ">
                 <h2 class="pt-4">個人資料</h2>
-
                 <div class="container">
                     <div class="row">
                         <div class="offset-2 col-md-8">
-
-
 
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                             @Html.HiddenFor(model => model.member_profile.member_id)
@@ -85,7 +81,7 @@
                             <div class="form-group">
                                 @Html.LabelFor(model => model.member_profile.nickname, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
-                                    <input id="newnickname" type="text" value="@Model.member_profile.nickname" name="newnickname" class="form-control" />
+                                    <input id="member_profile.nickname" type="text" value="@Model.member_profile.nickname" name="newnickname" class="form-control"  required/>
                                     @Html.ValidationMessageFor(model => model.member_profile.nickname, "", new { @class = "text-danger" })
                                 </div>
                             </div>
@@ -152,7 +148,7 @@
                                     @Html.ValidationMessageFor(model => model.member_profile.phone, "", new { @class = "text-danger" })
                                 </div>
                             </div>
-                            <div class="form-group">
+                            @*<div class="form-group">
                                 @Html.LabelFor(model => model.member_profile.profile_photo, htmlAttributes: new { @class = "control-label col-md-2" })
                                 <div class="col-md-10">
 
@@ -168,8 +164,21 @@
 
                                     @Html.ValidationMessageFor(model => model.member_profile.profile_photo, "", new { @class = "text-danger" })
                                 </div>
+                            </div>*@
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.member_profile.website_link, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    <input id="newwebsite" type="text" value="@Model.member_profile.website_link" name="newwebsite" class="form-control" />
+                                    @Html.ValidationMessageFor(model => model.member_profile.website_link, "", new { @class = "text-danger" })
+                                </div>
                             </div>
-
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.member_profile.brief_intro, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    <input id="newbrief" type="text" value="@Model.member_profile.brief_intro" name="newbrief" class="form-control" />
+                                    @Html.ValidationMessageFor(model => model.member_profile.brief_intro, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
 
                             <div class="form-group">
                                 <div class="col-md-offset-2 col-md-10 row justify-content-end">

@@ -1,12 +1,14 @@
-﻿@using PagedList;
-@using PagedList.Mvc;
-@model PagedList.IPagedList<TravelCat.Models.restaurant>
+﻿@using X.PagedList.Mvc
+@using X.PagedList
+@using X.PagedList.Mvc.Common
+
+@model IPagedList<TravelCat.Models.restaurant>
 
 @{
     ViewBag.Title = "餐廳列表";
 }
 
-    <link href="~/Content/back-end-index.css" rel="stylesheet" />
+<link href="~/Content/back-end-index.css" rel="stylesheet" />
 <h2 class="mt-3 text-center">餐廳</h2>
 
 <div class="header ml-3">
@@ -17,8 +19,8 @@
             <input class="btn btn-secondary" type="submit" value="查詢" />
         </form>
     </div>
- 
-    </div>
+
+</div>
 
 
 <table class="table">
@@ -78,12 +80,25 @@
                 @Html.DisplayFor(modelItem => item.open_time)
             </td>
             <td class="col-1">
-                @Html.DisplayFor(modelItem => item.page_status)
+                @if (item.page_status == false)
+                {
+                    <span class="badge badge-success">顯示</span>
+                }
+                else
+                {
+                    <span class="badge badge-danger">隱藏</span>
+                }
             </td>
         </tr>
     }
 </table>
 
 <div class="text-center">
-    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, id = ViewBag.id }))
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, id = ViewBag.id }),
+                      new PagedListRenderOptions
+                      {
+                          ContainerDivClasses = new[] { "" },
+                               LiElementClasses = new[] { "page-item" },
+                               PageClasses = new[] { "page-link" },
+                      })
 </div>

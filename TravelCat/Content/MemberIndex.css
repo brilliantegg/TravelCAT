@@ -113,14 +113,14 @@ img {
     box-shadow: 5px 6px 0px #551029;
     position: relative;
     overflow: hidden;
-    max-width: 80%;
+    max-width: 70%;
     margin: 136px auto 20px;
     background: #fff;
     border-radius: 3px;
 }
 .content_body {
     margin: 0px auto 20px;
-    max-width: 80%;
+    max-width: 70%;
 }
 .brief {
     font-style: italic

@@ -1,50 +1,45 @@
-﻿@using PagedList.Mvc
-@using PagedList
+﻿@using X.PagedList.Mvc
+@using X.PagedList
+@using X.PagedList.Mvc.Common
 
 @model IPagedList<TravelCat.Models.comment>
 
 @{
     ViewBag.Title = "管理評論";
 }
-
+<br />
 <link href="~/Content/back-end-index.css" rel="stylesheet" />
 <h2 class="mt-3 text-center">管理評論</h2>
-
-<div class="header ml-3">
-    @*@Html.TextBox("id", "", new { @class = " border", @placeholder = "編號,名稱,城市,行政區" })
-        @Html.ActionLink("查詢", "contentQuery", new { id = "id" }, new{@class="btn btn-default"})*@
-    <div class="mr-1"></div>
-    <form action="/Spot/Index" method="get" class="search">
-        @Html.TextBox("id", "", new { @class = " border", @placeholder = "編號,名稱,城市,行政區" })
-        <input class="btn btn-secondary" type="submit" value="查詢" />
-    </form>
-</div>
 
 <div class="row">
     <div class="col-md-12">
         <div class="list-group" id="list-tab" role="tablist">
-            <a id="1" class="list-group-item active" data-toggle="list" href="#comment1">被檢舉評論</a>
-            <a id="2" class="list-group-item" data-toggle="list" href="#comment2">所有評論</a>
+            <a id="comment_link" class="list-group-item active" data-toggle="list" href="#comment">所有評論</a>
+            <a id="issue_comment_link" class="list-group-item" data-toggle="list" href="#issue_comment">被檢舉評論</a>
         </div>
     </div>
 
     <div class="col-md-12">
+
         <div class="tab-content" id="nav-tabContent">
-            <div class="tab-pane fade show active" id="comment1">
-                @Html.Action("_Problem", "issues", new { type_id = 3 })
-            </div>
-            <div class="tab-pane fade" id="comment2">
+            <div class="tab-pane fade show active" id="comment">
+
+                <form action="@Url.Action("Index")" method="get" class="text-right search m-2">
+                    @Html.TextBox("id", "", new { @class = "border", @placeholder = "請輸入評論編號" })
+                    <input class="btn btn-secondary" type="submit" value="查詢" />
+                </form>
+
                 <table class="table">
                     <tr class="row">
                         <th class="col-1"></th>
+                        <th class="col-1">
+                            @Html.DisplayNameFor(model => model.FirstOrDefault().comment_id)
+                        </th>
                         <th class="col-1">
                             @Html.DisplayNameFor(model => model.FirstOrDefault().member.member_account)
                         </th>
                         <th class="col-1">
                             @Html.DisplayNameFor(model => model.FirstOrDefault().tourism_id)
-                        </th>
-                        <th class="col-1">
-                            @Html.DisplayNameFor(model => model.FirstOrDefault().comment_id)
                         </th>
                         <th class="col-2 text-truncate">
                             @Html.DisplayNameFor(model => model.FirstOrDefault().comment_title)
@@ -67,13 +62,13 @@
                                 @Html.ActionLink("管理", "Edit", new { id = item.comment_id }, new { @class = "btn btn-sm btn-outline-primary" })
                             </td>
                             <td class="col-1">
+                                @Html.DisplayFor(modelItem => item.comment_id)
+                            </td>
+                            <td class="col-1">
                                 @Html.DisplayFor(modelItem => item.member.member_account)
                             </td>
                             <td class="col-1">
                                 @Html.DisplayFor(modelItem => item.tourism_id)
-                            </td>
-                            <td class="col-1">
-                                @Html.DisplayFor(modelItem => item.comment_id)
                             </td>
                             <td class="col-2 text-truncate">
                                 @Html.DisplayFor(modelItem => item.comment_title)
@@ -98,12 +93,39 @@
                     }
 
                 </table>
-                <div class="text-center">
-                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+                <div>
+                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, id = ViewBag.id }),
+                   new PagedListRenderOptions
+                   {
+                       ContainerDivClasses = new[] { "" },
+                            LiElementClasses = new[] { "page-item" },
+                            PageClasses = new[] { "page-link" },
+                   })
                 </div>
+            </div>
+            <div class="tab-pane fade" id="issue_comment">
+                @Html.Action("_Problem", "issues", new { type_id = 3 })
+
             </div>
 
         </div>
     </div>
 </div>
 
+
+@section scripts{
+    <script>
+        var invoke_make_blank = true;
+        var tab = "@ViewBag.tab";
+    if (invoke_make_blank)
+    {
+           if (tab == '2') {
+        $('#comment_link').removeClass('active')
+        $('#issue_comment_link').addClass('active')
+        $('#comment').removeClass('active show')
+        $('#issue_comment').addClass('active show')
+    }
+        invoke_make_blank = false;
+    }
+    </script>
+}

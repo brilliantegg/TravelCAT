@@ -1,4 +1,8 @@
-﻿@model IEnumerable<TravelCat.Models.message>
+﻿@using X.PagedList.Mvc
+@using X.PagedList
+@using X.PagedList.Mvc.Common
+
+@model IPagedList<TravelCat.Models.message>
 
 @{
     ViewBag.Title = "Index";
@@ -7,51 +11,46 @@
 <link href="~/Content/back-end-index.css" rel="stylesheet" />
 <h2 class="mt-3 text-center">管理留言</h2>
 
-<div class="header ml-3">
-    @*@Html.TextBox("id", "", new { @class = " border", @placeholder = "編號,名稱,城市,行政區" })
-        @Html.ActionLink("查詢", "contentQuery", new { id = "id" }, new{@class="btn btn-default"})*@
-    <div class="mr-1"></div>
-    <form action="/Spot/Index" method="get" class="search">
-        @Html.TextBox("id", "", new { @class = " border", @placeholder = "編號,名稱,城市,行政區" })
-        <input class="btn btn-secondary" type="submit" value="查詢" />
-    </form>
-</div>
+
 <div class="row">
     <div class="col-md-12">
         <div class="list-group" id="list-tab" role="tablist">
-            <a class="list-group-item active" data-toggle="list" href="#message1">被檢舉留言</a>
-            <a class="list-group-item" data-toggle="list" href="#message2">所有留言</a>
+            <a id="message_link"class="list-group-item active" data-toggle="list" href="#message">所有留言</a>
+            <a id="issue_message_link"class="list-group-item" data-toggle="list" href="#issue_message">被檢舉留言</a>
         </div>
     </div>
     <div class="col-md-12">
         <div class="tab-content" id="nav-tabContent">
-            <div class="tab-pane fade show active" id="message1">
-                @Html.Action("_Problem", "issues", new { type_id = 4 })
-            </div>
-            <div class="tab-pane fade" id="message2">
+            <div class="tab-pane fade show active" id="message">
+
+                <form action="@Url.Action("Index")" method="get" class="text-right search m-2">
+                    @Html.TextBox("id", "", new { @class = "border", @placeholder = "請輸入留言編號" })
+                    <input class="btn btn-secondary" type="submit" value="查詢" />
+                </form>
+
                 <table class="table">
                     <tr class="row">
                         <th class="col-1"></th>
                         <th class="col-1">
-                            @Html.DisplayNameFor(model => model.msg_id)
+                            @Html.DisplayNameFor(model => model.FirstOrDefault().msg_id)
                         </th>
                         <th class="col-1">
-                            @Html.DisplayNameFor(model => model.comment.tourism_id)
+                            @Html.DisplayNameFor(model => model.FirstOrDefault().comment.tourism_id)
                         </th>
                         <th class="col-2">
-                            @Html.DisplayNameFor(model => model.member.member_account)
+                            @Html.DisplayNameFor(model => model.FirstOrDefault().member.member_account)
                         </th>
                         <th class="col-1">
-                            @Html.DisplayNameFor(model => model.comment_id)
+                            @Html.DisplayNameFor(model => model.FirstOrDefault().comment_id)
                         </th>
                         <th class="col-2">
-                            @Html.DisplayNameFor(model => model.msg_time)
+                            @Html.DisplayNameFor(model => model.FirstOrDefault().msg_time)
                         </th>
                         <th class="col-2 text-truncate">
-                            @Html.DisplayNameFor(model => model.msg_content)
+                            @Html.DisplayNameFor(model => model.FirstOrDefault().msg_content)
                         </th>
                         <th class="col-2">
-                            @Html.DisplayNameFor(model => model.msg_status)
+                            @Html.DisplayNameFor(model => model.FirstOrDefault().msg_status)
                         </th>
                     </tr>
 
@@ -93,11 +92,39 @@
                     }
 
                 </table>
+                <div>
+                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, id = ViewBag.id }),
+                   new PagedListRenderOptions
+                   {
+                       ContainerDivClasses = new[] { "" },
+                            LiElementClasses = new[] { "page-item" },
+                            PageClasses = new[] { "page-link" },
+                   })
+                </div>
+
             </div>
-
-
+            <div class="tab-pane fade" id="issue_message">
+                @Html.Action("_Problem", "issues", new { type_id = 4 })
+            </div>
 
         </div>
     </div>
 </div>
 <script src="~/Scripts/bootstrap.js"></script>
+
+@section scripts{
+    <script>
+        var invoke_make_blank = true;
+        var tab = "@ViewBag.tab";
+    if (invoke_make_blank)
+    {
+           if (tab == '2') {
+        $('#message_link').removeClass('active')
+        $('#issue_message_link').addClass('active')
+        $('#message').removeClass('active show')
+        $('#issue_message').addClass('active show')
+    }
+        invoke_make_blank = false;
+    }
+    </script>
+}

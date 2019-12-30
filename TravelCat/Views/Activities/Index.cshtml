@@ -1,6 +1,8 @@
-﻿@using PagedList;
-@using PagedList.Mvc;
-@model PagedList.IPagedList<TravelCat.Models.activity>
+﻿@using X.PagedList;
+@using X.PagedList.Mvc;
+@using X.PagedList.Mvc.Common
+
+@model IPagedList<TravelCat.Models.activity>
 
 @{
     ViewBag.Title = "活動";
@@ -24,22 +26,22 @@
     <tr class="row ">
         <th class="col-1"></th>
         <th class="col-1">
-            @Html.DisplayNameFor(model => model.First().activity_id)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().activity_id)
         </th>
         <th class="col-4 text-truncate">
-            @Html.DisplayNameFor(model => model.First().activity_title)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().activity_title)
         </th>
         <th class="col-1">
-            @Html.DisplayNameFor(model => model.First().city)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().city)
         </th>
         <th class="col-1">
-            @Html.DisplayNameFor(model => model.First().district)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().district)
         </th>
         <th class="col-3 text-truncate">
-            @Html.DisplayNameFor(model => model.First().organizer)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().organizer)
         </th>
         <th class="col-1">
-            @Html.DisplayNameFor(model => model.First().page_status)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().page_status)
         </th>
     </tr>
 
@@ -65,7 +67,14 @@
                 @Html.DisplayFor(modelItem => item.organizer)
             </td>
             <td class="col-1">
-                @Html.DisplayFor(modelItem => item.page_status)
+                @if (item.page_status == false)
+                {
+                    <span class="badge badge-success">顯示</span>
+                }
+                else
+                {
+                    <span class="badge badge-danger">隱藏</span>
+                }
             </td>
         </tr>
     }
@@ -73,6 +82,12 @@
 </table>
 
 <div class="text-center">
-    @Html.PagedListPager(Model, page => Url.Action("Index", new { page , id = ViewBag.id }))
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, id = ViewBag.id }),
+                   new PagedListRenderOptions
+                   {
+                       ContainerDivClasses = new[] { "" },
+                            LiElementClasses = new[] { "page-item" },
+                            PageClasses = new[] { "page-link" },
+                   })
 </div>
 

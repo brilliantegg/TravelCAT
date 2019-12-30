@@ -16,47 +16,121 @@
 }
 <style>
     .photo {
-    position:relative;
-    transform:scale(2,1.5);
-    
-   
+        position: relative;
+        transform: scale(2,1.5);
     }
-   
+
 </style>
 
 <div class="user_profile_header ">
 
     <div class="wrapper d-flex  ">
 
+
         @if (@Model.member_profile.profile_photo != null)
         {
-            <img class="profile_avatar" src="~/images/member/@Model.member_profile.profile_photo" alt="..." onError="this.onerror=null;this.src='/images/member/avatar.png';">
+            if (@memberId == @Model.member.member_id)
+            {
+                <a class="" data-toggle="modal" data-target="#edit_photo">
+                    <img class="profile_avatar" src="~/images/member/@Model.member_profile.profile_photo" alt="..." onError="this.onerror=null;this.src='/images/member/avatar.png';">
+                </a>
+            }
+            else
+            {
+
+                <img class="profile_avatar" src="~/images/member/@Model.member_profile.profile_photo" alt="..." onError="this.onerror=null;this.src='/images/member/avatar.png';">
+
+            }
         }
         else
         {
-            <img class="profile_avatar" src="~/images/member/avatar.png" alt="...">
+            if (@memberId == @Model.member.member_id)
+            {
+                <a class="" data-toggle="modal" data-target="#edit_photo">
+                    <img class="profile_avatar" src="~/images/member/avatar.png" alt="...">
+                </a>
+            }
+            else
+            {
+
+                <img class="profile_avatar" src="~/images/member/avatar.png" alt="...">
+
+            }
+            
         }
 
-            
+        <div id="edit_photo" class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">變更圖片</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    @using (Html.BeginForm("Index", "web_Member_Index", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        <div class="modal-body">
+
+                            @Html.AntiForgeryToken()
+                            @Html.HiddenFor(m => m.member.member_id)
+
+                            <div class="form-group">
+
+                                <div class="col-md-10">
+                                    <label class="btn darkolivegreen-cat">
+
+                                        <input type="file" id="imgInp" name="photo" style="display:none;" accept="image/gif, image/jpeg, image/png">
+                                        <i class="fa fa-photo"></i> 更換圖片
+
+                                    </label>
+
+
+                                    @if (Model.member_profile.profile_photo != null)
+                                    {
+                                        <img id="preview_img" src="/images/member/@Model.member_profile.profile_photo" width="150" />
+                                    }
+                                    else
+                                    {
+                                        <h3>無圖示</h3>
+                                    }
+                                    @*<input name="photo" id="photo" type="file" class="form-control" />*@
+
+                                    @Html.ValidationMessageFor(model => model.member_profile.profile_photo, "", new { @class = "text-danger" })
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                        <div class="modal-footer">
+                            <input type="submit" value="修改" class="btn darkolivegreen-cat  btn-lg" />
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+
         <div class="member_header">
             <div class="personal_info col-8 col-md-5">
-                <h1>@Model.member_profile.nickname</h1>
+                <h1 class="text-black-50">@Model.member_profile.nickname</h1>
                 <p class="brief">@Model.member_profile.brief_intro</p>
 
                 <!--編輯會員 or 追蹤會員-->
                 @if (@memberId == @Model.member.member_id)
                 {
                     <button type="button" class="btn  btn-outline-dark " data-toggle="modal" data-target="#exampleModalCenter">
-                        + 編輯資料
+                        編輯資料
                     </button>
                 }
                 else if (@Model.follow_list.Where(m => m.followed_id == @Model.member.member_id && m.member_id == @memberId).Count() > 0)
                 {
-                    <button class="follwered_btn btn btn-outline-dark " value="@Model.member.member_id">-追蹤</button>
+                    <button class="follwered_btn btn btn-outline-dark " value="@Model.member.member_id">取消追蹤</button>
                 }
                 else if (@memberId != null && @memberId != @Model.member.member_id)
                 {
-                    <button class="follwered_btn btn btn-outline-dark " value="@Model.member.member_id">+追蹤</button>
+                    <button class="follwered_btn btn btn-outline-dark " value="@Model.member.member_id">加入追蹤</button>
 
                 }
 
@@ -124,11 +198,16 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    @Html.ActionLink("+編輯個人資料", "EditMemberProfile", "web_Member_Index", new { id = Model.member.member_id }, new { @class = "btn btn-outline-dark mt-2" })<br />
-                    @Html.ActionLink("+修改密碼", "Editpassword", "web_Member_Index", new { id = Model.member.member_id }, new { @class = "btn btn-outline-dark mt-2" })<br />
-                    @Html.ActionLink("+更改信箱", "Editemail", "web_Member_Index", new { id = Model.member.member_id }, new { @class = "btn btn-outline-dark mt-2 mb-5" })<br />
-                </div>
+
+                    <div class="list-group">
+                        @Html.ActionLink("+編輯個人資料", "EditMemberProfile", "web_Member_Index", new { id = Model.member.member_id }, new { @class = "list-group-item list-group-item-action" })
+                        @Html.ActionLink("+修改密碼", "Editpassword", "web_Member_Index", new { id = Model.member.member_id }, new { @class = "list-group-item list-group-item-action" })
+                        @Html.ActionLink("+更改信箱", "Editemail", "web_Member_Index", new { id = Model.member.member_id }, new { @class = "list-group-item list-group-item-action" })
+                    </div>
+                    @*@Html.ActionLink("+編輯個人資料", "EditMemberProfile", "web_Member_Index", new { id = Model.member.member_id }, new { @class = "btn btn-outline-dark mt-2" })
+                    @Html.ActionLink("+修改密碼", "Editpassword", "web_Member_Index", new { id = Model.member.member_id }, new { @class = "btn btn-outline-dark mt-2" })
+                    @Html.ActionLink("+更改信箱", "Editemail", "web_Member_Index", new { id = Model.member.member_id }, new { @class = "btn btn-outline-dark mt-2 mb-5" })*@
+
             </div>
         </div>
     </div>
@@ -164,20 +243,7 @@
                                         @score
                                     </li>
                                 </ul>
-                                <!--RANK-->
-                                <ul>
-                                    <li>排行榜</li>
-                                    @foreach (var item in ViewBag.score)
-                                    {
 
-                                        <li>
-                                            @(item.GetType().GetProperty("id").GetValue(item))
-                                        </li>
-                                        <li>
-                                            @(item.GetType().GetProperty("total").GetValue(item))
-                                        </li>
-                                    }
-                                </ul>
                                 <div class="modal fade " id="follow" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered" role="document">
                                         <div class="modal-content">
@@ -250,9 +316,30 @@
                 </ul>
                 <!--會員評論-->
                 <div class="tab-content" id="pills-tabContent ">
-                    <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">@Html.Action("_CommentsFromMember", "CommentsWeb", new { memId = @Model.member.member_id }) </div>
+                    <div class="tab-pane fade show active text-center" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                        @if (Model.member.comment.Count() == 0)
+                        {
+                        <h1>發表你的第一篇評論吧!</h1>
 
-                    <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">@Html.Action("_CommentsForFollwers", "CommentsWeb", new { memId = @Model.member.member_id })</div>
+                        }
+                        else
+                        {
+                            @Html.Action("_CommentsFromMember", "CommentsWeb", new { memId = @Model.member.member_id })
+                        }
+                    </div>
+
+                    <div class="tab-pane fade text-center" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                        @if (Model.followed.Count() == 0)
+                        {
+                            <h1>開始追蹤一些有趣的人吧!</h1>
+
+                        }
+                        else
+                        {
+                            @Html.Action("_CommentsForFollwers", "CommentsWeb", new { memId = @Model.member.member_id })
+                        }
+                       
+                    </div>
 
                 </div>
             </div>
@@ -263,19 +350,31 @@
                 <div class="row pt-5 pagebox">
                     <div class="col-md-6 ">
                         <div>
-                            @if (Model.followed.Count()>10)
+                            @if (Model.followed.Count() > 10)
                             {
-                                <img src="~/images/badges/AD7sqjR.png" class="photo" title="好朋友 -追蹤人數超過10 位"/>
+                                <img src="~/images/badges/friend.png" class="photo" title="好朋友- 追蹤人數超過10 位" />
 
                             }
-                            
-                                <img src="~/images/badges/band-sticker-printing-designs-nirvana-png-logo-11.png" class="photo" title="狂放不羈- 曾經有被檢舉的紀錄"/>
-
-                                <img src="~/images/badges/cup.png" class="photo" />
-                            </div>
+                            @if (Model.member.member_status == true)
+                            {
+                                <img src="~/images/badges/nirvana.png" class="photo" title="狂放不羈- 被檢舉的會員" />
+                            }
+                            @*
+        <img src="~/images/badges/chick.png" />
+        <img src="~/images/badges/sword.png" />
+        <img src="~/images/badges/weed.png" />
+        <img src="~/images/badges/cup.png" class="photo" />*@
+                        </div>
                         <div>
+                            @{
+                                TimeSpan ts1 = DateTime.Now - Model.member_profile.create_time;
+                                var day = ts1.Days;
+                            }
+                            @if (day > 3650)
+                            {
+                                <img src="~/images/badges/dinosaur.png" class="photo" title="遠古化石- 創立超過10 年的帳號" />
+                            }
 
-                                <img src="~/images/badges/dinosaur.png" class="photo" title="遠古化石- 創立超過10 年的帳號"/>
 
 
 
@@ -292,23 +391,26 @@
                     </div>
                     <div class="col-md-6">
                         <div>
-                            @if (Model.comment.Where(m => m.member_id == memberId && m.tourism_id.StartsWith("A")).Count() > 20)
+                            @if (Model.comment.Where(m => m.member_id == Model.member.member_id && m.tourism_id.StartsWith("A")).Count() > 20)
                             {
-                                <img src="~/images/badges/happydog.png" class="photo" title="玩樂達人- 發表 20 篇活動評論"/>
+                                <img src="~/images/badges/happydog.png" class="photo" title="玩樂達人- 發表 20 篇活動評論" />
                             }
 
 
-                                <img src="~/images/badges/NBAGE.png" class="photo" />
-                            </div>
+                            @*<img src="~/images/badges/NBAGE.png" class="photo" />*@
+                        </div>
                         <div>
-                            <img src="~/images/badges/pineapple.png" class="photo" />
-                            @if (Model.comment.Where(m => m.member_id == memberId && m.tourism_id.StartsWith("R")).Count() > 20)
+                            @*<img src="~/images/badges/pineapple.png" class="photo" />*@
+                            @if (Model.comment.Where(m => m.member_id == Model.member.member_id && m.tourism_id.StartsWith("R")).Count() > 20)
                             {
                                 <img src="~/images/badges/pizza.png" class="photo" title="美食評論家- 發表 20 篇餐廳評論" />
                             }
 
+                            @if (Model.comment.Where(m => m.member_id == Model.member.member_id).Count() > 1000)
+                            {
+                                <img src="~/images/badges/rainbow.png" class="photo" title="超級新星- 評論超過 1000則" />
+                            }
 
-                            <img src="~/images/badges/rainbow.png" class="photo" />
 
 
 
@@ -331,6 +433,20 @@
 
 
 <script>
+            function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $("#preview_img").attr('src', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        $("#imgInp").change(function () {
+            //當檔案改變後，做一些事
+            readURL(this);   // this代表<input id="imgInp">
+        });
+
 
     var id ;
         var tourismId = "@ViewBag.tourismId";
@@ -373,9 +489,9 @@
 
 
     $(".follwered_btn").click(function () {
-        if ($(".follwered_btn").text()=="-追蹤"){
+        if ($(".follwered_btn").text()=="取消追蹤"){
             Unfollowed()
-        } else if($(".follwered_btn").text()=="+追蹤"){
+        } else if($(".follwered_btn").text()=="加入追蹤"){
             getfollowed();
         }
 
@@ -388,7 +504,7 @@
             })
             .done(function (response) {
                 alert(response);
-                $(".follwered_btn").text("-追蹤");
+                $(".follwered_btn").text("取消追蹤");
             })
             .fail(function() {
                 alert( `追蹤失敗` );
@@ -403,7 +519,7 @@
             })
             .done(function (response) {
                 alert(response);
-                $(".follwered_btn").text("+追蹤")
+                $(".follwered_btn").text("加入追蹤")
             })
             .fail(function() {
                 alert( `取消追蹤失敗` );
@@ -422,8 +538,8 @@
         $(this).css('top',  a + 'px')
         $(this).css('left',  a + 'px')
         $(this).css('right', a + 'px')
-       
-   
+
+
 
     });
 

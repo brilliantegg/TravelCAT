@@ -92,7 +92,6 @@ namespace TravelCat.Controllers
         }
         //新增留言
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult createMessage(message message)
         {
             
@@ -121,12 +120,12 @@ namespace TravelCat.Controllers
             {
                 db.message.Add(message);
                 db.SaveChanges();
-
-                return RedirectToRoute(new { controller = controller, action = "Details", id = message.tourism_id });
+                return new EmptyResult();
+                //return RedirectToRoute(new { controller = controller, action = "Details", id = message.tourism_id });
 
             }
-
-            return RedirectToRoute(new { controller = controller, action = "Details", id = message.tourism_id });
+            return new EmptyResult();
+            //return RedirectToRoute(new { controller = controller, action = "Details", id = message.tourism_id });
         }
 
         // GET 新增評論

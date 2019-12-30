@@ -3,7 +3,7 @@
 @model TravelCat.ViewModels.WebIndexViewModel
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "首頁";
     Layout = "~/Views/Shared/web-Layout.cshtml";
     string mem_id;
 
@@ -15,6 +15,8 @@
     {
         mem_id = Session["memberID"].ToString();
     }
+    Random random = new Random();
+    int img_num = 0;
 }
 <link href="~/Content/web-Home.css" rel="stylesheet" />
 
@@ -28,25 +30,23 @@
     </ol>
     <div class="carousel-inner">
         <div class="carousel-item active">
-            @*<div class="embed-responsive embed-responsive-16by9">
-                    <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/AhAJ6J01R7w" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-                </div>*@
-
-            <img src="~/images/buildings-1846728_1920.jpg" class=" w-100" title="台北101">
+            <a href="/WebSpots/Details/S005292"><img src="~/images/buildings-1846728_1920.jpg" class=" w-100" title="台北101"></a>
             <div class="carousel-caption">
                 台北101
             </div>
 
         </div>
         <div class="carousel-item">
-            <img src="~/images/taiwan-2696156_1920.jpg" class=" w-100" title="阿里山雲海">
+            <a href="/WebSpots/Details/S000419"><img src="~/images/taiwan-2696156_1920.jpg" class=" w-100" title="阿里山雲海"></a> 
             <div class="carousel-caption">
-                阿里山雲海
+                五奇之雲海
             </div>
         </div>
         <div class="carousel-item">
-            <img src="~/images/taiwan-667563_1920.jpg" class=" w-100" title="橘貓so cute!!!!!!">
+            <a href="/WebSpots/Details/S003979"><img src="~/images/taiwan-667563_1920.jpg" class=" w-100" title="橘貓so cute!!!!!!"></a>　
+            <div class="carousel-caption">
+                猴硐貓村
+            </div>
         </div>
     </div>
     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -97,14 +97,15 @@
                     <!--景點card-->
                     @for (int i = 0; i < 8; i++)
                     {
+                        img_num = random.Next(1, 27);
                         <div class="card ">
-                            <img src="https://source.unsplash.com/collection/9243920/random?sig=@(i.ToString())" class="card-img-top " alt="...">
+                            <img src="~/images/spot/S (@img_num).jpg" class="card-img-top " alt="...">
                             <div class="card-body">
                                 <h5 class="card-title">@Model.spot[i].spot_title</h5>
                                 <p class="card-text">@Model.spot[i].spot_intro</p>
                                 <p class="card-city" style="color: #128566; font-weight: 900; padding-top: 5px;">@Model.spot[i].city</p>
 
-                                @Html.ActionLink("more", "Details", "WebSpots", new { id = @Model.spot[i].spot_id }, new { @class = "btn btn-primary btn-sm" })
+                                @Html.ActionLink("看更多", "Details", "WebSpots", new { id = @Model.spot[i].spot_id }, new { @class = "btn btn-primary btn-sm" })
                             </div>
                         </div>
                     }
@@ -116,13 +117,14 @@
                     <!--Card-->
                     @for (int i = 0; i < 8; i++)
                     {
+                        img_num = random.Next(1, 27);
                         <div class="card">
-                            <img src="https://source.unsplash.com/collection/9243928/random?sig=@(i.ToString())" class="card-img-top" alt="...">
+                            <img src="~/images/activity/A (@img_num).jpg" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title">@Model.activity[i].activity_title</h5>
                                 <p class="card-text">@Model.activity[i].activity_intro</p>
                                 <p class="card-city" style="color: #128566; font-weight: 900; padding-top: 5px;">@Model.spot[i].city</p>
-                                @Html.ActionLink("more", "Details", "Web_activities", new { id = @Model.activity[i].activity_id }, new { @class = "btn btn-primary btn-sm" })
+                                @Html.ActionLink("看更多", "Details", "Web_activities", new { id = @Model.activity[i].activity_id }, new { @class = "btn btn-primary btn-sm" })
                             </div>
                         </div>
                     }
@@ -134,13 +136,14 @@
                     <!--Card-->
                     @for (int i = 0; i < 8; i++)
                     {
+                        img_num = random.Next(1, 42);
                         <div class="card">
-                            <img src="https://source.unsplash.com/collection/9243935/random?sig=@(i.ToString())" class="card-img-top" alt="...">
+                            <img src="~/images/hotel/H (@img_num).jpg" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title">@Model.hotel[i].hotel_title</h5>
                                 <p class="card-text">@Model.hotel[i].hotel_intro</p>
                                 <p class="card-city" style="color: #128566; font-weight: 900; padding-top: 5px;">@Model.spot[i].city</p>
-                                @Html.ActionLink("more", "Details", "WebHotels", new { id = @Model.hotel[i].hotel_id }, new { @class = "btn btn-primary btn-sm" })
+                                @Html.ActionLink("看更多", "Details", "WebHotels", new { id = @Model.hotel[i].hotel_id }, new { @class = "btn btn-primary btn-sm" })
                             </div>
                         </div>
                     }
@@ -152,13 +155,14 @@
                     <!--Card-->
                     @for (int i = 0; i < 8; i++)
                     {
+                        img_num = random.Next(1, 26);
                         <div class="card">
-                            <img src="https://source.unsplash.com/collection/9243930/random?sig=@(i.ToString())" class="card-img-top" alt="...">
+                            <img src="~/images/restaurant/R (@img_num).jpg" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title">@Model.restaurant[i].restaurant_title</h5>
                                 <p class="card-text">@Model.restaurant[i].restaurant_intro</p>
                                 <p class="card-city" style="color: #128566; font-weight: 900; padding-top: 5px;">@Model.spot[i].city</p>
-                                @Html.ActionLink("more", "Details", "WebRestaurants", new { id = @Model.restaurant[i].restaurant_id }, new { @class = "btn btn-primary btn-sm" })
+                                @Html.ActionLink("看更多", "Details", "WebRestaurants", new { id = @Model.restaurant[i].restaurant_id }, new { @class = "btn btn-primary btn-sm" })
                             </div>
                         </div>
                     }
@@ -185,51 +189,40 @@
     <div class="comment-main row">
 
         <div class="comment mb-2 col-12">
-
             <!--留言卡-->
             <div class="card-lg">
                 <div class="card-body">
                     <div class="card-title mem">最多人喜歡的評論</div>
                     @*<div class="mem-comment">畢業於台灣第一學府－國立台灣大學，精通多國語言，連續四年獲得學生最高榮譽－書卷獎，打破創校以來最佳紀錄。外貌全身皆有細短絨毛，皮黃，身高可達29尺，生有鐵皮，長有獠牙，生性暴躁，口大可吞人，一次可進食數萬人類！平時穴居洞中，捕食路過之旅人，一年下山一次，每次下山皆造成當地大範圍傷害。傳聞此獸喜歡一種名為bmo的玩物，常為了此物與各方妖怪打鬥。</div>*@
-                <div class="mem-comment">
-                    <p><b>@Model.comment.Where(c => c.comment_id == ViewBag.ccc).FirstOrDefault().comment_title</b>
-                    <br>留言人： @Model.comment.Where(c => c.comment_id == ViewBag.ccc).FirstOrDefault().member_id</p>
-                    @Model.comment.Where(c => c.comment_id == ViewBag.ccc).FirstOrDefault().comment_content
-                </div>
-                    <a href="#" class="btn  btn-sm">前去觀看</a>
+                    <div class="mem-comment">
+                        <p>
+                            <b>@Model.comment.Where(c => c.comment_id == ViewBag.most_like).FirstOrDefault().comment_title</b>
+                            <br>留言人 @Model.comment.Where(c => c.comment_id == ViewBag.most_like).FirstOrDefault().member_id
+                        </p>
+                        @Model.comment.Where(c => c.comment_id == ViewBag.most_like).FirstOrDefault().comment_content
+                    </div>
+
+                    <a href="@Url.Action("Details", "web_activities", new { id = @ViewBag.comment_id })" class="btn  btn-sm">前去觀看</a>
+
                 </div>
             </div>
             <!--介紹卡-->
             <div class=" card-sm">
-                <div class="card-body">
+                <div class="card-body d-flex row justify-content-center">
                     @Html.ActionLink(@Model.activity.Where(s => s.activity_id == ViewBag.comment_id).FirstOrDefault().activity_title, "Details", "web_activities", new { id = @ViewBag.comment_id }, null)
-                    <img src="~/images/bmo-02.jpg" class="mb-2">
-                    <div class="like">
-                        <i class="far fa-thumbs-up">@ViewBag.like</i>
-                        <i class="far fa-comment ml-5">@ViewBag.comment_count</i>
+                    <img src="~/images/comment/@Model.comment.Where(c => c.comment_id == ViewBag.most_like).FirstOrDefault().comment_photo" class="comment_photo" onerror="this.src='/images/comment/0_2019129下午090757.jpg';">
+                    <div class="like d-flex justify-content-center">
+                        <p><i class="far fa-thumbs-up"></i> @ViewBag.like</p>
+                        <p><i class="far fa-comment ml-5"></i> @ViewBag.comment_count</p>
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="comment col-12">
-
-            <!--留言卡-->
-            <div class="card-lg">
-                <div class="card-body">
-                    <div class="card-title mem">最新評論</div>
-                    @*<div class="mem-comment">畢業於台灣第一學府－國立台灣大學，精通多國語言，連續四年獲得學生最高榮譽－書卷獎，打破創校以來最佳紀錄。外貌全身皆有細短絨毛，皮黃，身高可達29尺，生有鐵皮，長有獠牙，生性暴躁，口大可吞人，一次可進食數萬人類！平時穴居洞中，捕食路過之旅人，一年下山一次，每次下山皆造成當地大範圍傷害。傳聞此獸喜歡一種名為bmo的玩物，常為了此物與各方妖怪打鬥。</div>*@
-                    <div class="mem-comment">
-                        <p><b>@Model.comment[0].comment_title</b>
-                        <br>留言人： @Model.comment[0].member_id</p>
-                        @Model.comment[0].comment_content
-                    </div>
-                    <a href="#" class="btn  btn-sm">前去觀看</a>
-                </div>
-            </div>
             <!--介紹卡-->
             <div class=" card-sm">
-                <div class="card-body">
+                <div class="card-body d-flex row justify-content-center">
                     @switch (Model.comment[0].tourism_id[0].ToString())
                     {
                         case "A":
@@ -246,13 +239,29 @@
                             break;
 
                     }
-                    <img src="~/images/bmo-02.jpg" class="mb-2">
-                    <div class="like">
-                        <i class="far fa-thumbs-up">@ViewBag.liken</i>
-                        <i class="far fa-comment ml-5">@Model.comment.Where(s => s.tourism_id == Model.comment[0].tourism_id).Count()</i>
+                    <img src="~/images/comment/@Model.comment.Where(s => s.tourism_id == Model.comment[0].tourism_id).FirstOrDefault().comment_photo" class="comment_photo" onerror="this.src='/images/comment/0_2019129下午090757.jpg';">
+                    <div class="like d-flex justify-content-center">
+                        <p><i class="far fa-thumbs-up"></i> @ViewBag.liken</p>
+                        <p><i class="far fa-comment ml-5"></i> @Model.comment.Where(s => s.tourism_id == Model.comment[0].tourism_id).Count()</p>
                     </div>
                 </div>
             </div>
+            <!--留言卡-->
+            <div class="card-lg">
+                <div class="card-body">
+                    <div class="card-title mem">最新評論</div>
+                    @*<div class="mem-comment">畢業於台灣第一學府－國立台灣大學，精通多國語言，連續四年獲得學生最高榮譽－書卷獎，打破創校以來最佳紀錄。外貌全身皆有細短絨毛，皮黃，身高可達29尺，生有鐵皮，長有獠牙，生性暴躁，口大可吞人，一次可進食數萬人類！平時穴居洞中，捕食路過之旅人，一年下山一次，每次下山皆造成當地大範圍傷害。傳聞此獸喜歡一種名為bmo的玩物，常為了此物與各方妖怪打鬥。</div>*@
+                    <div class="mem-comment">
+                        <p>
+                            <b>@Model.comment[0].comment_title</b>
+                            <br>留言人： @Model.comment[0].member_id
+                        </p>
+                        @Html.Raw(Model.comment[0].comment_content)
+                    </div>
+                    <a href="#" class="btn  btn-sm">前去觀看</a>
+                </div>
+            </div>
+
         </div>
 
     </div>
@@ -306,6 +315,92 @@
 
 
 </div>
+<!--排行榜-->
+<!--RANK-->
+
+
+<div class="center">
+    <div class="top3">
+        <div class="two item">
+            <div class="pos">
+                2
+            </div>
+            @foreach (var item in ViewBag.score2)
+            {
+                <a href="@Url.Action("Index","web_Member_Index",new {id=item.GetType().GetProperty("id").GetValue(item)})">
+    <div class="pic" style="background-image: url(http://localhost:54678/images/member/@Model.member_profile.Where(m=>m.member_id ==  item.GetType().GetProperty("id").GetValue(item)).FirstOrDefault().profile_photo)"></div>
+</a>
+                    <div class="name">
+
+                        @Model.member_profile.Where(m => m.member_id == item.GetType().GetProperty("id").GetValue(item)).FirstOrDefault().nickname
+
+            </div>
+                <div class="score">
+                    @(item.GetType().GetProperty("total").GetValue(item))
+                </div>
+            }
+
+        </div>
+        <div class="one item">
+            <div class="pos">
+                1
+            </div>
+            @foreach (var item in ViewBag.score1)
+            {
+                <a href="@Url.Action("Index","web_Member_Index",new {id=item.GetType().GetProperty("id").GetValue(item)})">
+                    <div class="pic" style="background-image: url(http://localhost:54678/images/member/@Model.member_profile.Where(m=>m.member_id ==  item.GetType().GetProperty("id").GetValue(item)).FirstOrDefault().profile_photo)"></div>
+                    </a>
+                    <div class="name">
+                        @Model.member_profile.Where(m => m.member_id == item.GetType().GetProperty("id").GetValue(item)).FirstOrDefault().nickname
+                    </div>
+                    <div class="score">
+                        @(item.GetType().GetProperty("total").GetValue(item))
+                    </div>
+                    }
+            </div>
+        <div class="three item">
+            <div class="pos">
+                3
+            </div>
+            @foreach (var item in ViewBag.score3)
+            {
+                <a href="@Url.Action("Index","web_Member_Index",new {id=item.GetType().GetProperty("id").GetValue(item)})">
+                    <div class="pic" style="background-image: url(http://localhost:54678/images/member/@Model.member_profile.Where(m=>m.member_id ==  item.GetType().GetProperty("id").GetValue(item)).FirstOrDefault().profile_photo)"></div>
+                    </a>
+                    <div class="name">
+                        @Model.member_profile.Where(m => m.member_id == item.GetType().GetProperty("id").GetValue(item)).FirstOrDefault().nickname
+                    </div>
+                    <div class="score">
+                        @(item.GetType().GetProperty("total").GetValue(item))
+                    </div>
+                    }
+            </div>
+    </div>
+    <div class="list col-4 offset-4">
+
+
+        @foreach (var item in ViewBag.score4)
+        {
+        <div class="item">
+            <div class="pos">
+                4
+            </div>
+            <a href="@Url.Action("Index","web_Member_Index",new {id=item.GetType().GetProperty("id").GetValue(item)})">
+                <div class="pic" style="background-image: url(http://localhost:54678/images/member/@Model.member_profile.Where(m=>m.member_id ==  item.GetType().GetProperty("id").GetValue(item)).FirstOrDefault().profile_photo)"></div>
+                </a>
+                <div class="name">
+                    @Model.member_profile.Where(m => m.member_id == item.GetType().GetProperty("id").GetValue(item)).FirstOrDefault().nickname
+                </div>
+                <div class="score">
+                    @(item.GetType().GetProperty("total").GetValue(item))
+                </div>
+        </div>
+                }
+
+
+
+        </div>
+</div>
 
 <footer class="footer">
 
@@ -320,6 +415,7 @@
         </li>
     </ul>
     <button type="button" class="btn btn-btn-dark" data-toggle="modal" data-target="#exampleModal" data-whatever="">回報問題 </button>
+    
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -345,41 +441,11 @@
             </div>
         </div>
     </div>
-    <p><button onclick="geoFindMe()">Show my location</button></p>
-    <div id="out"></div>
+
 </footer>
 
 <script>
-    // 抓取用戶地址
-      function geoFindMe() {
-  var output = document.getElementById("out");
 
-  if (!navigator.geolocation){
-    output.innerHTML = "<p>Geolocation is not supported by your browser</p>";
-    return;
-  }
-
-  function success(position) {
-    var latitude  = position.coords.latitude;
-    var longitude = position.coords.longitude;
-
-    output.innerHTML = '<p>Latitude is ' + latitude + '° <br>Longitude is ' + longitude + '°</p>';
-
-
-  };
-
-  function error() {
-    output.innerHTML = "Unable to retrieve your location";
-  };
-
-  output.innerHTML = "<p>Locating…</p>";
-
-  navigator.geolocation.getCurrentPosition(success, error);
-}
-    ////停止carousel
-    //$('.carousel').carousel({
-    //    interval: false
-    //})
     //檢舉評論
         var id ;
         var tourismId = "@ViewBag.tourismId";

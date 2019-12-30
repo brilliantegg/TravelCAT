@@ -6,11 +6,12 @@ using System.Web;
 using System.Web.Mvc;
 using TravelCat.Models;
 using TravelCat.ViewModels;
-using PagedList;
+using X.PagedList;
 using System.IO;
 
 namespace TravelCat.Controllers
 {
+    [LoginCheck]
     public class SpotsController : Controller
     {
         // GET: Spot
@@ -50,6 +51,7 @@ namespace TravelCat.Controllers
             string act_id = db.Database.SqlQuery<string>("Select dbo.GetspotId()").FirstOrDefault();
             spot.spot_id = act_id;
             spot.update_date = DateTime.Now;
+            spot.page_status = false;
 
             //圖片
             string fileName = "";

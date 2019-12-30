@@ -79,14 +79,14 @@
             <!-- 收藏Modal -->
             <div class="modal fade" id="collectModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
+                    <div class="modal-content ">
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLongTitle">請選擇收藏分類</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <form  id="bucket_form" action="/web_comments/Postcollections_detail" method="post">
+                        <form action="/web_comments/Postcollections_detail" method="post">
                             <div class="modal-body">
 
                                 @Html.AntiForgeryToken()
@@ -120,7 +120,7 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <input type="submit" name="add_to_bucket_list" class="add_to_bucket_list bucket_list btn btn-outline-info" value="加入收藏" />
+                                <input type="submit" name="add_to_bucket_list" class="add_to_bucket_list bucket_list btn btn-outline-dark" value="加入收藏" />
                             </div>
                         </form>
                     </div>
@@ -228,12 +228,27 @@
 
 
     <!--篩選評論-->
-    @{ double totalCommentNum = @Model.comment.Count(); }
+    @{ double totalCommentNum = 0;
+        if (@Model.comment.Count() > 0) { totalCommentNum = @Model.comment.Count(); }
+    }
     <section>
 
 
         <div class="filter_comment row row col-7 offset-1">
             <input type="hidden" name="tourismId" value="@ViewBag.tourismId" />
+            <div class="col-12 mt-3">
+                <div class="row">
+                    <h3 class="col-9">評論 (@Model.comment.Count())</h3>
+                    <div class="new_comment col-3 justify-content-end">
+                        <form action="/web_comments/Create" Method="GET">
+                            <input type="hidden" name="tourismID" value=@Model.restaurant.restaurant_id />
+                            <input type="hidden" name="mem_id" value="@Session["memberID"]" />
+                            <button type="submit" class="add_comment btn btn-outline-dark btn-lg  ">新增評論</button>
+                        </form>
+                    </div>
+                </div>
+                <hr />
+            </div>
             <div class="fliter_set col-4">
                 <div class="fliter_set">
                     <h4>旅客評等</h4><br />
@@ -373,13 +388,7 @@
 
             </div>
 
-            <div class="new_comment container">
-                <form action="/web_comments/Create" Method="GET">
-                    <input type="hidden" name="tourismID" value=@ViewBag.tourismId />
-                    <input type="hidden" name="mem_id" value="@Session["memberID"]" />
-                    <button type="submit" class="add_comment btn btn-outline-dark  ">新增評論</button>
-                </form>
-            </div>
+
         </div>
     </section>
 
@@ -668,7 +677,15 @@
             travel_partner_values.push($(this).val());
                 });
         $.each($("input[name='travel_month']:checked"), function () {
-            travel_month_values.push($(this).val());
+            if ($(this).val() == '3-5') {
+                travel_month_values.push(3,4,5);
+            }else if ($(this).val() == '6-8') {
+                travel_month_values.push(6,7,8);
+            }else if ($(this).val() == '9-11') {
+                travel_month_values.push(9,10,11);
+            }else if($(this).val() == '12-2') {
+                travel_month_values.push(12,1,2);
+            }
         });
         console.log(comment_rating_values)
         console.log(travel_partner_values)
@@ -702,10 +719,10 @@
            data: $("#bucket_form").serialize(),// serializes the form's elements.
            success:function()
            {
-             
+
            }
          });
      $('#collectModal').modal('toggle');
-    
+
 });*@
 </script>

@@ -3,6 +3,8 @@
 ﻿@model TravelCat.ViewModels.TaiwanViewModel
 @using TravelCat.ViewModels
 @{
+    Random random = new Random();
+    int img_num = 0;
     Layout = "~/Views/Shared/web-Layout.cshtml";
     string memberId;
     if (Session["memberID"] == null || string.IsNullOrWhiteSpace(Session["memberID"].ToString()))
@@ -23,7 +25,7 @@
             <li><a href="#S" id="s">南部地區</a></li>
             <li><a href="#E" id="e">東部地區</a></li>
             <li><a href="#O" id="o">離島地區</a></li>
-            <li id="Gotop">回到頂部</li>
+            <li id="Gotop"><a href="#">回到頂部</a> </li>
         </ul>
         <!--北部-->
         <div class="card-top mb-3" id="N">
@@ -34,6 +36,7 @@
 
             @foreach (var item in Model.north)
             {
+                img_num = random.Next(1, 26);
                 <div class="col-4 mb-3">
                     <div class="card">
                         <span class="fa">
@@ -54,7 +57,7 @@
 
                         </span>
                         <div class="img">
-                            <img src="https://source.unsplash.com/collection/388793/random?sig=@(Guid.NewGuid())" title="@item.spot_title" onclick=" window.location.href='@Url.Action("Details","WebSpots",new {id=item.spot_id })'" />
+                            <img src="~/images/spot/S (@img_num).jpg" title="@item.spot_title" onclick=" window.location.href='@Url.Action("Details","WebSpots",new {id=item.spot_id })'" />
                         </div>
                         <div class="card-body">
                             <h2 class="card-title" onclick=" window.location.href='@Url.Action("Details","WebSpots",new {id=item.spot_id })'">@item.spot_title </h2>
@@ -82,7 +85,7 @@
 
             @foreach (var item in Model.middle)
             {
-
+                img_num = random.Next(1, 26);
                 <div class="col-4 mb-3">
                     <div class="card">
                         <span class="fa">
@@ -102,7 +105,7 @@
                             }
                         </span>
                         <div class="img">
-                            <img src="https://source.unsplash.com/collection/388793/random?sig=@(Guid.NewGuid())" title="@item.spot_title" onclick=" window.location.href='@Url.Action("Details","WebSpots",new {id=item.spot_id })'" />
+                            <img src="~/images/spot/S (@img_num).jpg" title="@item.spot_title" onclick=" window.location.href='@Url.Action("Details","WebSpots",new {id=item.spot_id })'" />
                         </div>
                             <div class="card-body">
                             <h2 class="card-title" onclick=" window.location.href='@Url.Action("Details","WebSpots",new {id=item.spot_id })'">@item.spot_title </h2>
@@ -135,6 +138,7 @@
             @foreach (var item in Model.south)
             {
 
+                img_num = random.Next(1, 26);
                 <div class="col-4 mb-3">
                     <div class="card">
                         <span class="fa">
@@ -153,7 +157,9 @@
                                 </span>
                             }
                         </span>
-                        <img src="https://source.unsplash.com/collection/388793/random?sig=@(Guid.NewGuid())" title="@item.spot_title" onclick=" window.location.href='@Url.Action("Details","WebSpots",new {id=item.spot_id })'" />
+                        <div class="img">
+                            <img src="~/images/spot/S (@img_num).jpg" title="@item.spot_title" onclick=" window.location.href='@Url.Action("Details","WebSpots",new {id=item.spot_id })'" />
+                        </div>
                         <div class="card-body">
                             <h2 class="card-title" onclick=" window.location.href='@Url.Action("Details","WebSpots",new {id=item.spot_id })'">@item.spot_title </h2>
                             <span>評分數</span>
@@ -185,6 +191,7 @@
             @foreach (var item in Model.East)
             {
 
+                img_num = random.Next(1, 26);
                 <div class="col-4 mb-3">
                     <div class="card">
                         <span class="fa">
@@ -203,7 +210,9 @@
                                 </span>
                             }
                         </span>
-                        <img src="https://source.unsplash.com/collection/388793/random?sig=@(Guid.NewGuid())" title="@item.spot_title" onclick=" window.location.href='@Url.Action("Details","WebSpots",new {id=item.spot_id })'" />
+                        <div class="img">
+                            <img src="~/images/spot/S (@img_num).jpg" title="@item.spot_title" onclick=" window.location.href='@Url.Action("Details","WebSpots",new {id=item.spot_id })'" />
+                        </div>
                         <div class="card-body">
                             <h2 class="card-title" onclick=" window.location.href='@Url.Action("Details","WebSpots",new {id=item.spot_id })'">@item.spot_title </h2>
                             <span>評分數</span>
@@ -236,6 +245,7 @@
             @foreach (var item in Model.island)
             {
 
+                img_num = random.Next(1, 26);
                 <div class="col-4 mb-3">
                     <div class="card">
                         <span class="fa">
@@ -255,7 +265,7 @@
                             }
                         </span>
                         <div class="img">
-                            <img src="https://source.unsplash.com/collection/388793/random?sig=@(Guid.NewGuid())" title="@item.spot_title" onclick=" window.location.href='@Url.Action("Details","WebSpots",new {id=item.spot_id })'" />
+                            <img src="~/images/spot/S (@img_num).jpg" title="@item.spot_title" onclick=" window.location.href='@Url.Action("Details","WebSpots",new {id=item.spot_id })'" />
                         </div>
                         <div class="card-body">
                             <h2 class="card-title" onclick=" window.location.href='@Url.Action("Details","WebSpots",new {id=item.spot_id })'">@item.spot_title </h2>
@@ -284,7 +294,7 @@
     <script>
     $(function () {
         $("#Gotop").click(function () {
-            $("html,body").animate({ scrollTop:0 }, 500);
+            $("html,body").animate({ scrollTop:0 }, 700);
         });
     });
     $(function () {
