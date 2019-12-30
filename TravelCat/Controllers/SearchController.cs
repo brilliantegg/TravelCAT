@@ -594,8 +594,8 @@ namespace TravelCat.Controllers
         {
             //List<spot> spots = db.spot.OrderBy(m => Guid.NewGuid()).ToList();
             //List<activity> activitys = db.activity.OrderBy(m => Guid.NewGuid()).ToList();
-            //List<hotel> hotels = db.hotel.OrderBy(m => Guid.NewGuid()).ToList();
-            List<restaurant> restaurants = db.restaurant.OrderBy(m => Guid.NewGuid()).ToList();
+            List<hotel> hotels = db.hotel.OrderBy(m => Guid.NewGuid()).ToList();
+            //List<restaurant> restaurants = db.restaurant.OrderBy(m => Guid.NewGuid()).ToList();
             //string id = "";
             string[] title = { "東京旅遊觀落櫻","吳敦義最愛的旅遊景點","爬山看風景","最美的風景","台中文昌廟","全家一日遊","超健康行程","招喚師峽谷","吃喝玩樂"};
             string[] content = {"人 人 人 人 人 人 人 人 人人人人人 人 人 人 人 人人人 人 人 八 八 人人人人人 人人人人人 人 人 人 人 人 人 人人人人人 人 人 人 人 人 人 人 人 人 嘛",
@@ -607,21 +607,21 @@ namespace TravelCat.Controllers
 
             Random random = new Random();
 
-            for (int i = 0; i < 2000; i++)
+            for (int i = 0; i < 200; i++)
             {
                 comment cmt = new comment();
                 DateTime parsedDate = DateTime.Parse(date[random.Next(0, 18)]);
 
                 //cmt.tourism_id = spots[i].spot_id;
                 //cmt.tourism_id = activitys[i].activity_id;
-                //cmt.tourism_id = hotels[i].hotel_id;
-                cmt.tourism_id = restaurants[i].restaurant_id;
+                cmt.tourism_id = hotels[i].hotel_id;
+                //cmt.tourism_id = restaurants[i].restaurant_id;
                 cmt.comment_title = title[random.Next(0, 9)];
                 cmt.comment_content = content[random.Next(0, 6)];
                 cmt.comment_date = parsedDate;
                 cmt.comment_photo = photo[random.Next(0, 44)];
                 cmt.comment_stay_total = random.Next(1, 5);
-                cmt.comment_rating = Convert.ToInt16(random.Next(1, 6));
+                cmt.comment_rating = Convert.ToInt16(random.Next(3, 6));
                 cmt.travel_month = random.Next(1, 13).ToString();
                 cmt.comment_status = true;
                 cmt.member_id = memberID[random.Next(0, 29)];
