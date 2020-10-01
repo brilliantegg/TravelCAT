@@ -74,6 +74,8 @@ namespace TravelCat.Controllers
             }
             db.spot.Add(spot);
             db.SaveChanges();
+            
+            
 
 
             return RedirectToAction("Index",new { page=Session["pg"] });
