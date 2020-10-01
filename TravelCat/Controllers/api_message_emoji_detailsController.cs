@@ -52,6 +52,8 @@ namespace TravelCat.Controllers
             db.Entry(message_emoji_details).State = EntityState.Modified;
 
             try
+            
+            
             {
                 db.SaveChanges();
             }
