@@ -32,6 +32,8 @@ namespace TravelCat.Controllers
             return View(model);
         }
 
+
+
         // GET: web_activities/Details/5
         public ActionResult Details(string id,int page =1)
         {
