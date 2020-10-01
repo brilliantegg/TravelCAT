@@ -254,6 +254,8 @@ namespace TravelCat.Controllers
                     comment.comment_photo = rename_filename;
                 }
             }
+            
+            
             else
             {
                 comment.comment_photo = oldImg;
