@@ -121,6 +121,7 @@ namespace TravelCat.Controllers
             int currentPage = page < 1 ? 1 : page;
             destinationsViewModel model = new destinationsViewModel()
             {            
+            
                 comment = db.comment.Where(m => m.member_id == memId && m.comment_status == true).OrderByDescending(m=>m.comment_date).ToList(),
                 message = db.message.Where(m => m.member_id == memId).ToList(),
                 comment_emoji_details = db.comment_emoji_details.ToList(),
