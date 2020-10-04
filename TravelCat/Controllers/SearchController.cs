@@ -41,18 +41,12 @@ namespace TravelCat.Controllers
                 comment = db.comment.ToList(),
                 collections_detail = db.collections_detail.ToList(),
                 activity = db.activity.Take(10).ToList(),
-                //hotel = db.hotel.ToList(),
-                //restaurant = db.restaurant.ToList(),
-                //spot = db.spot.ToList(),
                 result_ratings = null
             };
 
             if (!String.IsNullOrEmpty(q))
             {
                 model.activity = db.activity.Where(s => s.activity_title.Contains(q) || s.city.Contains(q) || s.district.Contains(q)).ToList();
-                //model.restaurant = db.restaurant.Where(s => s.restaurant_intro.Contains(q) || s.restaurant_title.Contains(q) || s.city.Contains(q) || s.district.Contains(q)).ToList();
-                //model.hotel = db.hotel.Where(s => s.hotel_intro.Contains(q) || s.hotel_title.Contains(q) || s.city.Contains(q) || s.district.Contains(q)).ToList();
-                //model.spot = db.spot.Where(s => s.spot_intro.Contains(q) || s.spot_title.Contains(q) || s.city.Contains(q) || s.district.Contains(q)).ToList();
             }
             //找地區
             if (!String.IsNullOrEmpty(city))
@@ -123,23 +117,6 @@ namespace TravelCat.Controllers
                 ViewBag.rating = comment_rating;
                 double rating = Double.Parse(comment_rating); //查詢條件轉型
                 model.result_ratings = model.result_ratings.Where(x => !String.IsNullOrEmpty(x.rating) && Double.Parse(x.rating) >= rating).ToList();
-                //for (int i = 0; i < model.result_ratings.Count; i++)
-                //{
-                //    if (String.IsNullOrEmpty(model.result_ratings[i].rating))
-                //    {
-                //        model.result_ratings.RemoveAt(i);
-                //        i = i - 1;
-                //    }
-                //    else
-                //    {
-                //        double rating_avg = Double.Parse(model.result_ratings[i].rating);
-                //        if (rating_avg < rating)
-                //        {
-                //            model.result_ratings.RemoveAt(i);
-                //            i = i - 1;
-                //        }
-                //    }
-                //}
             }
             //找平均時間
             if (!String.IsNullOrEmpty(comment_stay_total))
@@ -210,6 +187,7 @@ namespace TravelCat.Controllers
                                                                         intro = a.hotel_intro,
                                                                         rating = b.rating
                                                                     }).ToList();
+
             //找評分
             if (!String.IsNullOrEmpty(comment_rating))
             {
@@ -320,10 +298,9 @@ namespace TravelCat.Controllers
             model.show_ratings = model.result_ratings.ToPagedList(page, pageSize);
             return View(model);
         }
-
+        //新寫法測試
         public ActionResult _Spot(int page = 1, string q = null, string Sortby = null, string city = null, string comment_rating = null, string travel_partner = null, string travel_month = null, string comment_stay_total = null)
-        {
-            ViewBag.q = q;
+        {            
             SearchViewModel model = new SearchViewModel()
             {
                 comment = db.comment.ToList(),
@@ -334,6 +311,7 @@ namespace TravelCat.Controllers
 
             if (!String.IsNullOrEmpty(q))
             {
+                ViewBag.q = q;
                 model.spot = db.spot.Where(s => s.spot_title.Contains(q) || s.city.Contains(q) || s.district.Contains(q)).ToList();
             }
             //找地區
@@ -342,29 +320,17 @@ namespace TravelCat.Controllers
                 string type = "spot";
                 search_city(type, city, model);
             }
-            //有評論分數的
-            var rating_result = (from b in db.comment
-                                 group b by b.tourism_id into g
-                                 orderby g.Average(s => s.comment_rating)
-                                 select new result_rating { id = g.Key, rating = g.Average(s => s.comment_rating).ToString() }).ToList();
-            //沒有評論分數的
-            var spot_null_result = (from a in db.spot
-                                    join b in db.comment on a.spot_id equals b.tourism_id into x
-                                    from b in x.DefaultIfEmpty()
-                                    where b.tourism_id == null
-                                    select new result_rating { id = a.spot_id, rating = b.tourism_id }).ToList();
-
-            List<result_rating> result = rating_result.Union(spot_null_result).OrderByDescending(s => s.id).ToList();
-
-            model.result_ratings = model.spot.Join(result, a => a.spot_id, b => b.id,
-                                                                    (a, b) => new result_rating
-                                                                    {
-                                                                        id = a.spot_id,
-                                                                        title = a.spot_title,
-                                                                        intro = a.spot_intro,
-                                                                        rating = b.rating
-                                                                    }).ToList();
-            //找評分
+            //產生有分數的list
+            model.result_ratings = model.spot.Select(x => new result_rating
+            {
+                id = x.spot_id,
+                title = x.spot_title,
+                //city = x.city,
+                //district = x.district,
+                //intro = x.spot_intro,
+                rating = db.comment.Where(a => a.tourism_id == x.spot_id).Select(b => b.comment_rating).DefaultIfEmpty().Average(c => c).ToString(),
+                //count = db.comment.Where(a => a.tourism_id == x.spot_id).Count()
+            }).ToList();
             if (!String.IsNullOrEmpty(comment_rating))
             {
                 ViewBag.rating = comment_rating;
@@ -391,15 +357,12 @@ namespace TravelCat.Controllers
             {
                 search_sort(Sortby, model);
             }
-
-
             model.show_ratings = model.result_ratings.ToPagedList(page, pageSize);
             return View(model);
         }
 
         private SearchViewModel search_sort(string Sortby, SearchViewModel model)
         {
-
             ViewBag.sort = Sortby;
             if (Sortby == "htol")
             {
@@ -409,7 +372,6 @@ namespace TravelCat.Controllers
             {
                 model.result_ratings = model.result_ratings.OrderBy(s => s.rating).ToList();
             }
-
             return model;
         }
         private SearchViewModel search_city(string type, string city, SearchViewModel model)
@@ -486,7 +448,6 @@ namespace TravelCat.Controllers
         }
         private SearchViewModel search_month(string travel_month, SearchViewModel model)
         {
-
             ViewBag.month = travel_month;
             string id;
             string[] month = new string[3];
@@ -513,12 +474,11 @@ namespace TravelCat.Controllers
                     month[2] = "2";
                     break;
             }
-
             for (int i = 0; i < model.result_ratings.Count; i++)
-            {
-                bool is_exist = false;
+            {                
                 id = model.result_ratings[i].id;
                 model.comment = db.comment.Where(s => s.tourism_id == id).ToList();
+                bool is_exist = false;
                 for (int j = 0; j < model.comment.Count; j++)   //某個活動內的某個留言
                 {
                     for (int x = 0; x < month.Length; x++) //找這個留言內有沒有我們要的月份
@@ -541,42 +501,30 @@ namespace TravelCat.Controllers
         }
         private SearchViewModel search_partner(string travel_partner, SearchViewModel model)
         {
-
             ViewBag.partner = travel_partner;
             string id;
             for (int i = 0; i < model.result_ratings.Count; i++)
-            {
-                bool is_exist = false;
+            {                
                 id = model.result_ratings[i].id;
                 model.comment = db.comment.Where(s => s.tourism_id == id).ToList();
-                for (int j = 0; j < model.comment.Count; j++)   //找對於單個活動的所有評論內是否有含搜尋選項
-                {
-                    int result = model.comment.Where(s => s.travel_partner == travel_partner).Count();
-                    if (result != 0)
-                    {
-                        is_exist = true;  //只要有一項就代表活動符合資格
-                    }
-                }
+                bool is_exist = model.comment.Where(s => s.travel_partner == travel_partner).Any();
                 if (!is_exist)
                 {
                     model.result_ratings.RemoveAt(i);     //不符合資格的移除
                     i = i - 1;
                 }
             }
-
-
             return model;
         }
         private SearchViewModel search_stay(string comment_stay_total, SearchViewModel model)
         {
-
             string id;
             ViewBag.stay = comment_stay_total;
             for (int i = 0; i < model.result_ratings.Count; i++)
             {
                 id = model.result_ratings[i].id;
-                int cmt_count = db.comment.Where(s => s.tourism_id == id).Count();
-                if (cmt_count == 0)
+                bool cmt_count = db.comment.Where(s => s.tourism_id == id).Any();
+                if (!cmt_count)
                 {
                     model.result_ratings.RemoveAt(i);
                     i = i - 1;
@@ -584,7 +532,7 @@ namespace TravelCat.Controllers
                 else
                 {
                     //找每個活動的平均
-                    double time_avg = db.comment.Where(s => s.tourism_id == id).Average(r => r.comment_rating);
+                    double time_avg = db.comment.Where(s => s.tourism_id == id).Average(r => r.comment_stay_total);
                     switch (comment_stay_total)
                     {
                         case "三到四小時":
@@ -620,9 +568,6 @@ namespace TravelCat.Controllers
             }
             return model;
         }
-
-
-
 
         //水軍遊樂場
         public ActionResult generate_comment()

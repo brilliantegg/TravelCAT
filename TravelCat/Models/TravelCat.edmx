@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="travel_cat_v1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="TravelCatModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="activity">
           <Key>
             <PropertyRef Name="activity_id" />
@@ -104,7 +104,7 @@
           <Key>
             <PropertyRef Name="emoji_id" />
           </Key>
-          <Property Name="emoji_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="emoji_id" Type="int" Nullable="false" />
           <Property Name="emoji_title" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="emoji_pic" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
@@ -474,7 +474,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="travel_cat_v1ModelStoreContainer">
+        <EntityContainer Name="TravelCatModelStoreContainer">
           <EntitySet Name="activity" EntityType="Self.activity" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="admin" EntityType="Self.admin" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="badge" EntityType="Self.badge" Schema="dbo" store:Type="Tables" />
@@ -568,10 +568,11 @@
             <End Role="message_emoji_details" EntitySet="message_emoji_details" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="travel_cat_v1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="TravelCatModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="activity">
           <Key>
             <PropertyRef Name="activity_id" />
@@ -601,7 +602,7 @@
           <Property Name="admin_password" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="admin_email" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="emailConfirmed" Type="Boolean" />
-          <NavigationProperty Name="issue" Relationship="travel_cat_v1Model.FK__issue__admin_id__534D60F1" FromRole="admin" ToRole="issue" />
+          <NavigationProperty Name="issue" Relationship="Self.FK__issue__admin_id__534D60F1" FromRole="admin" ToRole="issue" />
         </EntityType>
         <EntityType Name="badge">
           <Key>
@@ -623,6 +624,27 @@
           <Property Name="badge_id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="badge" Relationship="Self.FK__badge_det__badge__5441852A" FromRole="badge_details" ToRole="badge" />
           <NavigationProperty Name="member" Relationship="Self.FK__badge_det__membe__4CA06362" FromRole="badge_details" ToRole="member" />
+        </EntityType>
+        <EntityType Name="collection_type">
+          <Key>
+            <PropertyRef Name="collection_type_id" />
+          </Key>
+          <Property Name="collection_type_id" Type="Int32" Nullable="false" />
+          <Property Name="collection_type_title" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="collections_detail" Relationship="Self.FK__collectio__colle__5535A963" FromRole="collection_type" ToRole="collections_detail" />
+        </EntityType>
+        <EntityType Name="collections_detail">
+          <Key>
+            <PropertyRef Name="collection_id" />
+            <PropertyRef Name="member_id" />
+          </Key>
+          <Property Name="collection_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="member_id" Type="String" MaxLength="7" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="tourism_id" Type="String" MaxLength="7" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="privacy" Type="Boolean" Nullable="false" />
+          <Property Name="collection_type_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="collection_type" Relationship="Self.FK__collectio__colle__5535A963" FromRole="collections_detail" ToRole="collection_type" />
+          <NavigationProperty Name="member" Relationship="Self.FK__collectio__membe__4E88ABD4" FromRole="collections_detail" ToRole="member" />
         </EntityType>
         <EntityType Name="comment">
           <Key>
@@ -654,16 +676,16 @@
           <Property Name="member_id" Type="String" MaxLength="7" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="comment_id" Type="Int64" Nullable="false" />
           <Property Name="emoji_id" Type="Int32" Nullable="false" />
+          <Property Name="tourism_id" Type="String" MaxLength="7" FixedLength="true" Unicode="false" />
           <NavigationProperty Name="comment" Relationship="Self.FK__comment_e__comme__5165187F" FromRole="comment_emoji_details" ToRole="comment" />
           <NavigationProperty Name="emoji" Relationship="Self.FK__comment_e__emoji__571DF1D5" FromRole="comment_emoji_details" ToRole="emoji" />
           <NavigationProperty Name="member" Relationship="Self.FK__comment_e__membe__4AB81AF0" FromRole="comment_emoji_details" ToRole="member" />
-          <Property Name="tourism_id" Type="String" MaxLength="7" FixedLength="true" Unicode="false" />
         </EntityType>
         <EntityType Name="emoji">
           <Key>
             <PropertyRef Name="emoji_id" />
           </Key>
-          <Property Name="emoji_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="emoji_id" Type="Int32" Nullable="false" />
           <Property Name="emoji_title" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="emoji_pic" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="comment_emoji_details" Relationship="Self.FK__comment_e__emoji__571DF1D5" FromRole="emoji" ToRole="comment_emoji_details" />
@@ -696,13 +718,34 @@
           <Property Name="address_detail" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="page_status" Type="Boolean" Nullable="false" />
         </EntityType>
+        <EntityType Name="issue">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="member_id" />
+            <PropertyRef Name="admin_id" />
+            <PropertyRef Name="issue_id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="member_id" Type="String" MaxLength="7" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="admin_id" Type="Int32" Nullable="false" />
+          <Property Name="issue_id" Type="Int32" Nullable="false" />
+          <Property Name="report_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="issue_content" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="issue_result" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="issue_status" Type="Boolean" />
+          <Property Name="resolve_date" Type="DateTime" Precision="3" />
+          <Property Name="problem_id" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="admin" Relationship="Self.FK__issue__admin_id__534D60F1" FromRole="issue" ToRole="admin" />
+          <NavigationProperty Name="issue_type" Relationship="Self.FK__issue__issue_id__5812160E" FromRole="issue" ToRole="issue_type" />
+          <NavigationProperty Name="member" Relationship="Self.FK__issue__member_id__4D94879B" FromRole="issue" ToRole="member" />
+        </EntityType>
         <EntityType Name="issue_type">
           <Key>
             <PropertyRef Name="issue_id" />
           </Key>
           <Property Name="issue_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="issue_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="issue" Relationship="travel_cat_v1Model.FK__issue__issue_id__5812160E" FromRole="issue_type" ToRole="issue" />
+          <NavigationProperty Name="issue" Relationship="Self.FK__issue__issue_id__5812160E" FromRole="issue_type" ToRole="issue" />
         </EntityType>
         <EntityType Name="member">
           <Key>
@@ -713,14 +756,14 @@
           <Property Name="member_password" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="member_status" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="badge_details" Relationship="Self.FK__badge_det__membe__4CA06362" FromRole="member" ToRole="badge_details" />
+          <NavigationProperty Name="collections_detail" Relationship="Self.FK__collectio__membe__4E88ABD4" FromRole="member" ToRole="collections_detail" />
           <NavigationProperty Name="comment" Relationship="Self.FK__comment__member___48CFD27E" FromRole="member" ToRole="comment" />
           <NavigationProperty Name="comment_emoji_details" Relationship="Self.FK__comment_e__membe__4AB81AF0" FromRole="member" ToRole="comment_emoji_details" />
           <NavigationProperty Name="follow_list" Relationship="Self.FK__follow_li__membe__4F7CD00D" FromRole="member" ToRole="follow_list" />
+          <NavigationProperty Name="issue" Relationship="Self.FK__issue__member_id__4D94879B" FromRole="member" ToRole="issue" />
           <NavigationProperty Name="member_profile" Relationship="Self.FK__member_pr__membe__47DBAE45" FromRole="member" ToRole="member_profile" />
           <NavigationProperty Name="message" Relationship="Self.FK__message__member___4BAC3F29" FromRole="member" ToRole="message" />
           <NavigationProperty Name="message_emoji_details" Relationship="Self.FK__message_e__membe__49C3F6B7" FromRole="member" ToRole="message_emoji_details" />
-          <NavigationProperty Name="collections_detail" Relationship="travel_cat_v1Model.FK__collectio__membe__4E88ABD4" FromRole="member" ToRole="collections_detail" />
-          <NavigationProperty Name="issue" Relationship="travel_cat_v1Model.FK__issue__member_id__4D94879B" FromRole="member" ToRole="issue" />
         </EntityType>
         <EntityType Name="member_profile">
           <Key>
@@ -770,10 +813,10 @@
           <Property Name="member_id" Type="String" MaxLength="7" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="msg_id" Type="Int64" Nullable="false" />
           <Property Name="emoji_id" Type="Int32" Nullable="false" />
+          <Property Name="tourism_id" Type="String" MaxLength="7" FixedLength="true" Unicode="false" />
           <NavigationProperty Name="emoji" Relationship="Self.FK__message_e__emoji__5629CD9C" FromRole="message_emoji_details" ToRole="emoji" />
           <NavigationProperty Name="member" Relationship="Self.FK__message_e__membe__49C3F6B7" FromRole="message_emoji_details" ToRole="member" />
           <NavigationProperty Name="message" Relationship="Self.FK__message_e__msg_i__52593CB8" FromRole="message_emoji_details" ToRole="message" />
-          <Property Name="tourism_id" Type="String" MaxLength="7" FixedLength="true" Unicode="false" />
         </EntityType>
         <EntityType Name="restaurant">
           <Key>
@@ -819,6 +862,18 @@
           <Property Name="tourism_id" Type="String" MaxLength="7" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="tourism_photo1" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
         </EntityType>
+        <Association Name="FK__issue__admin_id__534D60F1">
+          <End Role="admin" Type="Self.admin" Multiplicity="1" />
+          <End Role="issue" Type="Self.issue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="admin">
+              <PropertyRef Name="admin_id" />
+            </Principal>
+            <Dependent Role="issue">
+              <PropertyRef Name="admin_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__badge_det__badge__5441852A">
           <End Role="badge" Type="Self.badge" Multiplicity="1" />
           <End Role="badge_details" Type="Self.badge_details" Multiplicity="*" />
@@ -839,6 +894,30 @@
               <PropertyRef Name="member_id" />
             </Principal>
             <Dependent Role="badge_details">
+              <PropertyRef Name="member_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__collectio__colle__5535A963">
+          <End Role="collection_type" Type="Self.collection_type" Multiplicity="1" />
+          <End Role="collections_detail" Type="Self.collections_detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="collection_type">
+              <PropertyRef Name="collection_type_id" />
+            </Principal>
+            <Dependent Role="collections_detail">
+              <PropertyRef Name="collection_type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__collectio__membe__4E88ABD4">
+          <End Role="member" Type="Self.member" Multiplicity="1" />
+          <End Role="collections_detail" Type="Self.collections_detail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="member">
+              <PropertyRef Name="member_id" />
+            </Principal>
+            <Dependent Role="collections_detail">
               <PropertyRef Name="member_id" />
             </Dependent>
           </ReferentialConstraint>
@@ -927,6 +1006,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__issue__issue_id__5812160E">
+          <End Role="issue_type" Type="Self.issue_type" Multiplicity="1" />
+          <End Role="issue" Type="Self.issue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="issue_type">
+              <PropertyRef Name="issue_id" />
+            </Principal>
+            <Dependent Role="issue">
+              <PropertyRef Name="issue_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__issue__member_id__4D94879B">
+          <End Role="member" Type="Self.member" Multiplicity="1" />
+          <End Role="issue" Type="Self.issue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="member">
+              <PropertyRef Name="member_id" />
+            </Principal>
+            <Dependent Role="issue">
+              <PropertyRef Name="member_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__member_pr__membe__47DBAE45">
           <End Role="member" Type="Self.member" Multiplicity="1" />
           <End Role="member_profile" Type="Self.member_profile" Multiplicity="0..1" />
@@ -980,11 +1083,14 @@
           <EntitySet Name="admin" EntityType="Self.admin" />
           <EntitySet Name="badge" EntityType="Self.badge" />
           <EntitySet Name="badge_details" EntityType="Self.badge_details" />
+          <EntitySet Name="collection_type" EntityType="Self.collection_type" />
+          <EntitySet Name="collections_detail" EntityType="Self.collections_detail" />
           <EntitySet Name="comment" EntityType="Self.comment" />
           <EntitySet Name="comment_emoji_details" EntityType="Self.comment_emoji_details" />
           <EntitySet Name="emoji" EntityType="Self.emoji" />
           <EntitySet Name="follow_list" EntityType="Self.follow_list" />
           <EntitySet Name="hotel" EntityType="Self.hotel" />
+          <EntitySet Name="issue" EntityType="Self.issue" />
           <EntitySet Name="issue_type" EntityType="Self.issue_type" />
           <EntitySet Name="member" EntityType="Self.member" />
           <EntitySet Name="member_profile" EntityType="Self.member_profile" />
@@ -993,6 +1099,10 @@
           <EntitySet Name="restaurant" EntityType="Self.restaurant" />
           <EntitySet Name="spot" EntityType="Self.spot" />
           <EntitySet Name="tourism_photo" EntityType="Self.tourism_photo" />
+          <AssociationSet Name="FK__issue__admin_id__534D60F1" Association="Self.FK__issue__admin_id__534D60F1">
+            <End Role="admin" EntitySet="admin" />
+            <End Role="issue" EntitySet="issue" />
+          </AssociationSet>
           <AssociationSet Name="FK__badge_det__badge__5441852A" Association="Self.FK__badge_det__badge__5441852A">
             <End Role="badge" EntitySet="badge" />
             <End Role="badge_details" EntitySet="badge_details" />
@@ -1000,6 +1110,14 @@
           <AssociationSet Name="FK__badge_det__membe__4CA06362" Association="Self.FK__badge_det__membe__4CA06362">
             <End Role="member" EntitySet="member" />
             <End Role="badge_details" EntitySet="badge_details" />
+          </AssociationSet>
+          <AssociationSet Name="FK__collectio__colle__5535A963" Association="Self.FK__collectio__colle__5535A963">
+            <End Role="collection_type" EntitySet="collection_type" />
+            <End Role="collections_detail" EntitySet="collections_detail" />
+          </AssociationSet>
+          <AssociationSet Name="FK__collectio__membe__4E88ABD4" Association="Self.FK__collectio__membe__4E88ABD4">
+            <End Role="member" EntitySet="member" />
+            <End Role="collections_detail" EntitySet="collections_detail" />
           </AssociationSet>
           <AssociationSet Name="FK__comment__member___48CFD27E" Association="Self.FK__comment__member___48CFD27E">
             <End Role="member" EntitySet="member" />
@@ -1029,6 +1147,14 @@
             <End Role="member" EntitySet="member" />
             <End Role="follow_list" EntitySet="follow_list" />
           </AssociationSet>
+          <AssociationSet Name="FK__issue__issue_id__5812160E" Association="Self.FK__issue__issue_id__5812160E">
+            <End Role="issue_type" EntitySet="issue_type" />
+            <End Role="issue" EntitySet="issue" />
+          </AssociationSet>
+          <AssociationSet Name="FK__issue__member_id__4D94879B" Association="Self.FK__issue__member_id__4D94879B">
+            <End Role="member" EntitySet="member" />
+            <End Role="issue" EntitySet="issue" />
+          </AssociationSet>
           <AssociationSet Name="FK__member_pr__membe__47DBAE45" Association="Self.FK__member_pr__membe__47DBAE45">
             <End Role="member" EntitySet="member" />
             <End Role="member_profile" EntitySet="member_profile" />
@@ -1045,140 +1171,15 @@
             <End Role="message" EntitySet="message" />
             <End Role="message_emoji_details" EntitySet="message_emoji_details" />
           </AssociationSet>
-          <EntitySet Name="collection_type" EntityType="travel_cat_v1Model.collection_type" />
-          <EntitySet Name="collections_detail" EntityType="travel_cat_v1Model.collections_detail" />
-          <AssociationSet Name="FK__collectio__colle__5535A963" Association="travel_cat_v1Model.FK__collectio__colle__5535A963">
-            <End Role="collection_type" EntitySet="collection_type" />
-            <End Role="collections_detail" EntitySet="collections_detail" />
-          </AssociationSet>
-          <AssociationSet Name="FK__collectio__membe__4E88ABD4" Association="travel_cat_v1Model.FK__collectio__membe__4E88ABD4">
-            <End Role="member" EntitySet="member" />
-            <End Role="collections_detail" EntitySet="collections_detail" />
-          </AssociationSet>
-          <EntitySet Name="issue" EntityType="travel_cat_v1Model.issue" />
-          <AssociationSet Name="FK__issue__admin_id__534D60F1" Association="travel_cat_v1Model.FK__issue__admin_id__534D60F1">
-            <End Role="admin" EntitySet="admin" />
-            <End Role="issue" EntitySet="issue" />
-          </AssociationSet>
-          <AssociationSet Name="FK__issue__issue_id__5812160E" Association="travel_cat_v1Model.FK__issue__issue_id__5812160E">
-            <End Role="issue_type" EntitySet="issue_type" />
-            <End Role="issue" EntitySet="issue" />
-          </AssociationSet>
-          <AssociationSet Name="FK__issue__member_id__4D94879B" Association="travel_cat_v1Model.FK__issue__member_id__4D94879B">
-            <End Role="member" EntitySet="member" />
-            <End Role="issue" EntitySet="issue" />
-          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="collection_type">
-          <Key>
-            <PropertyRef Name="collection_type_id" />
-          </Key>
-          <Property Name="collection_type_id" Type="Int32" Nullable="false" />
-          <Property Name="collection_type_title" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="collections_detail" Relationship="travel_cat_v1Model.FK__collectio__colle__5535A963" FromRole="collection_type" ToRole="collections_detail" />
-        </EntityType>
-        <EntityType Name="collections_detail">
-          <Key>
-            <PropertyRef Name="collection_id" />
-            <PropertyRef Name="member_id" />
-          </Key>
-          <Property Name="collection_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="member_id" Type="String" Nullable="false" MaxLength="7" FixedLength="true" Unicode="false" />
-          <Property Name="tourism_id" Type="String" Nullable="false" MaxLength="7" FixedLength="true" Unicode="false" />
-          <Property Name="privacy" Type="Boolean" Nullable="false" />
-          <Property Name="collection_type_id" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="collection_type" Relationship="travel_cat_v1Model.FK__collectio__colle__5535A963" FromRole="collections_detail" ToRole="collection_type" />
-          <NavigationProperty Name="member" Relationship="travel_cat_v1Model.FK__collectio__membe__4E88ABD4" FromRole="collections_detail" ToRole="member" />
-        </EntityType>
-        <Association Name="FK__collectio__colle__5535A963">
-          <End Type="travel_cat_v1Model.collection_type" Role="collection_type" Multiplicity="1" />
-          <End Type="travel_cat_v1Model.collections_detail" Role="collections_detail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="collection_type">
-              <PropertyRef Name="collection_type_id" />
-            </Principal>
-            <Dependent Role="collections_detail">
-              <PropertyRef Name="collection_type_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__collectio__membe__4E88ABD4">
-          <End Type="travel_cat_v1Model.member" Role="member" Multiplicity="1" />
-          <End Type="travel_cat_v1Model.collections_detail" Role="collections_detail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="member">
-              <PropertyRef Name="member_id" />
-            </Principal>
-            <Dependent Role="collections_detail">
-              <PropertyRef Name="member_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="issue">
-          <Key>
-            <PropertyRef Name="id" />
-            <PropertyRef Name="member_id" />
-            <PropertyRef Name="admin_id" />
-            <PropertyRef Name="issue_id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="member_id" Type="String" Nullable="false" MaxLength="7" FixedLength="true" Unicode="false" />
-          <Property Name="admin_id" Type="Int32" Nullable="false" />
-          <Property Name="issue_id" Type="Int32" Nullable="false" />
-          <Property Name="report_date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="issue_content" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="issue_result" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="issue_status" Type="Boolean" />
-          <Property Name="resolve_date" Type="DateTime" Precision="3" />
-          <Property Name="problem_id" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="admin" Relationship="travel_cat_v1Model.FK__issue__admin_id__534D60F1" FromRole="issue" ToRole="admin" />
-          <NavigationProperty Name="issue_type" Relationship="travel_cat_v1Model.FK__issue__issue_id__5812160E" FromRole="issue" ToRole="issue_type" />
-          <NavigationProperty Name="member" Relationship="travel_cat_v1Model.FK__issue__member_id__4D94879B" FromRole="issue" ToRole="member" />
-        </EntityType>
-        <Association Name="FK__issue__admin_id__534D60F1">
-          <End Type="travel_cat_v1Model.admin" Role="admin" Multiplicity="1" />
-          <End Type="travel_cat_v1Model.issue" Role="issue" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="admin">
-              <PropertyRef Name="admin_id" />
-            </Principal>
-            <Dependent Role="issue">
-              <PropertyRef Name="admin_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__issue__issue_id__5812160E">
-          <End Type="travel_cat_v1Model.issue_type" Role="issue_type" Multiplicity="1" />
-          <End Type="travel_cat_v1Model.issue" Role="issue" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="issue_type">
-              <PropertyRef Name="issue_id" />
-            </Principal>
-            <Dependent Role="issue">
-              <PropertyRef Name="issue_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__issue__member_id__4D94879B">
-          <End Type="travel_cat_v1Model.member" Role="member" Multiplicity="1" />
-          <End Type="travel_cat_v1Model.issue" Role="issue" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="member">
-              <PropertyRef Name="member_id" />
-            </Principal>
-            <Dependent Role="issue">
-              <PropertyRef Name="member_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="travel_cat_v1ModelStoreContainer" CdmEntityContainer="dbTravelCat">
+        <EntityContainerMapping StorageEntityContainer="TravelCatModelStoreContainer" CdmEntityContainer="dbTravelCat">
           <EntitySetMapping Name="activity">
-            <EntityTypeMapping TypeName="travel_cat_v1Model.activity">
+            <EntityTypeMapping TypeName="TravelCatModel.activity">
               <MappingFragment StoreEntitySet="activity">
                 <ScalarProperty Name="activity_id" ColumnName="activity_id" />
                 <ScalarProperty Name="activity_title" ColumnName="activity_title" />
@@ -1199,7 +1200,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="admin">
-            <EntityTypeMapping TypeName="travel_cat_v1Model.admin">
+            <EntityTypeMapping TypeName="TravelCatModel.admin">
               <MappingFragment StoreEntitySet="admin">
                 <ScalarProperty Name="admin_id" ColumnName="admin_id" />
                 <ScalarProperty Name="admin_account" ColumnName="admin_account" />
@@ -1210,7 +1211,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="badge">
-            <EntityTypeMapping TypeName="travel_cat_v1Model.badge">
+            <EntityTypeMapping TypeName="TravelCatModel.badge">
               <MappingFragment StoreEntitySet="badge">
                 <ScalarProperty Name="badge_id" ColumnName="badge_id" />
                 <ScalarProperty Name="badge_title" ColumnName="badge_title" />
@@ -1219,7 +1220,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="badge_details">
-            <EntityTypeMapping TypeName="travel_cat_v1Model.badge_details">
+            <EntityTypeMapping TypeName="TravelCatModel.badge_details">
               <MappingFragment StoreEntitySet="badge_details">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="member_id" ColumnName="member_id" />
@@ -1227,8 +1228,27 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="collection_type">
+            <EntityTypeMapping TypeName="TravelCatModel.collection_type">
+              <MappingFragment StoreEntitySet="collection_type">
+                <ScalarProperty Name="collection_type_id" ColumnName="collection_type_id" />
+                <ScalarProperty Name="collection_type_title" ColumnName="collection_type_title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="collections_detail">
+            <EntityTypeMapping TypeName="TravelCatModel.collections_detail">
+              <MappingFragment StoreEntitySet="collections_detail">
+                <ScalarProperty Name="collection_id" ColumnName="collection_id" />
+                <ScalarProperty Name="member_id" ColumnName="member_id" />
+                <ScalarProperty Name="tourism_id" ColumnName="tourism_id" />
+                <ScalarProperty Name="privacy" ColumnName="privacy" />
+                <ScalarProperty Name="collection_type_id" ColumnName="collection_type_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="comment">
-            <EntityTypeMapping TypeName="travel_cat_v1Model.comment">
+            <EntityTypeMapping TypeName="TravelCatModel.comment">
               <MappingFragment StoreEntitySet="comment">
                 <ScalarProperty Name="comment_id" ColumnName="comment_id" />
                 <ScalarProperty Name="tourism_id" ColumnName="tourism_id" />
@@ -1246,18 +1266,18 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="comment_emoji_details">
-            <EntityTypeMapping TypeName="travel_cat_v1Model.comment_emoji_details">
+            <EntityTypeMapping TypeName="TravelCatModel.comment_emoji_details">
               <MappingFragment StoreEntitySet="comment_emoji_details">
-                <ScalarProperty Name="tourism_id" ColumnName="tourism_id" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="member_id" ColumnName="member_id" />
                 <ScalarProperty Name="comment_id" ColumnName="comment_id" />
                 <ScalarProperty Name="emoji_id" ColumnName="emoji_id" />
+                <ScalarProperty Name="tourism_id" ColumnName="tourism_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="emoji">
-            <EntityTypeMapping TypeName="travel_cat_v1Model.emoji">
+            <EntityTypeMapping TypeName="TravelCatModel.emoji">
               <MappingFragment StoreEntitySet="emoji">
                 <ScalarProperty Name="emoji_id" ColumnName="emoji_id" />
                 <ScalarProperty Name="emoji_title" ColumnName="emoji_title" />
@@ -1266,7 +1286,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="follow_list">
-            <EntityTypeMapping TypeName="travel_cat_v1Model.follow_list">
+            <EntityTypeMapping TypeName="TravelCatModel.follow_list">
               <MappingFragment StoreEntitySet="follow_list">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="member_id" ColumnName="member_id" />
@@ -1276,7 +1296,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="hotel">
-            <EntityTypeMapping TypeName="travel_cat_v1Model.hotel">
+            <EntityTypeMapping TypeName="TravelCatModel.hotel">
               <MappingFragment StoreEntitySet="hotel">
                 <ScalarProperty Name="hotel_id" ColumnName="hotel_id" />
                 <ScalarProperty Name="hotel_title" ColumnName="hotel_title" />
@@ -1292,8 +1312,24 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="issue">
+            <EntityTypeMapping TypeName="TravelCatModel.issue">
+              <MappingFragment StoreEntitySet="issue">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="member_id" ColumnName="member_id" />
+                <ScalarProperty Name="admin_id" ColumnName="admin_id" />
+                <ScalarProperty Name="issue_id" ColumnName="issue_id" />
+                <ScalarProperty Name="report_date" ColumnName="report_date" />
+                <ScalarProperty Name="issue_content" ColumnName="issue_content" />
+                <ScalarProperty Name="issue_result" ColumnName="issue_result" />
+                <ScalarProperty Name="issue_status" ColumnName="issue_status" />
+                <ScalarProperty Name="resolve_date" ColumnName="resolve_date" />
+                <ScalarProperty Name="problem_id" ColumnName="problem_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="issue_type">
-            <EntityTypeMapping TypeName="travel_cat_v1Model.issue_type">
+            <EntityTypeMapping TypeName="TravelCatModel.issue_type">
               <MappingFragment StoreEntitySet="issue_type">
                 <ScalarProperty Name="issue_id" ColumnName="issue_id" />
                 <ScalarProperty Name="issue_name" ColumnName="issue_name" />
@@ -1301,7 +1337,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="member">
-            <EntityTypeMapping TypeName="travel_cat_v1Model.member">
+            <EntityTypeMapping TypeName="TravelCatModel.member">
               <MappingFragment StoreEntitySet="member">
                 <ScalarProperty Name="member_id" ColumnName="member_id" />
                 <ScalarProperty Name="member_account" ColumnName="member_account" />
@@ -1311,7 +1347,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="member_profile">
-            <EntityTypeMapping TypeName="travel_cat_v1Model.member_profile">
+            <EntityTypeMapping TypeName="TravelCatModel.member_profile">
               <MappingFragment StoreEntitySet="member_profile">
                 <ScalarProperty Name="member_id" ColumnName="member_id" />
                 <ScalarProperty Name="member_name" ColumnName="member_name" />
@@ -1334,7 +1370,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="message">
-            <EntityTypeMapping TypeName="travel_cat_v1Model.message">
+            <EntityTypeMapping TypeName="TravelCatModel.message">
               <MappingFragment StoreEntitySet="message">
                 <ScalarProperty Name="msg_id" ColumnName="msg_id" />
                 <ScalarProperty Name="msg_time" ColumnName="msg_time" />
@@ -1347,18 +1383,18 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="message_emoji_details">
-            <EntityTypeMapping TypeName="travel_cat_v1Model.message_emoji_details">
+            <EntityTypeMapping TypeName="TravelCatModel.message_emoji_details">
               <MappingFragment StoreEntitySet="message_emoji_details">
-                <ScalarProperty Name="tourism_id" ColumnName="tourism_id" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="member_id" ColumnName="member_id" />
                 <ScalarProperty Name="msg_id" ColumnName="msg_id" />
                 <ScalarProperty Name="emoji_id" ColumnName="emoji_id" />
+                <ScalarProperty Name="tourism_id" ColumnName="tourism_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="restaurant">
-            <EntityTypeMapping TypeName="travel_cat_v1Model.restaurant">
+            <EntityTypeMapping TypeName="TravelCatModel.restaurant">
               <MappingFragment StoreEntitySet="restaurant">
                 <ScalarProperty Name="restaurant_id" ColumnName="restaurant_id" />
                 <ScalarProperty Name="restaurant_title" ColumnName="restaurant_title" />
@@ -1375,7 +1411,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="spot">
-            <EntityTypeMapping TypeName="travel_cat_v1Model.spot">
+            <EntityTypeMapping TypeName="TravelCatModel.spot">
               <MappingFragment StoreEntitySet="spot">
                 <ScalarProperty Name="spot_id" ColumnName="spot_id" />
                 <ScalarProperty Name="spot_title" ColumnName="spot_title" />
@@ -1396,46 +1432,11 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tourism_photo">
-            <EntityTypeMapping TypeName="travel_cat_v1Model.tourism_photo">
+            <EntityTypeMapping TypeName="TravelCatModel.tourism_photo">
               <MappingFragment StoreEntitySet="tourism_photo">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="tourism_id" ColumnName="tourism_id" />
                 <ScalarProperty Name="tourism_photo1" ColumnName="tourism_photo" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="collection_type">
-            <EntityTypeMapping TypeName="travel_cat_v1Model.collection_type">
-              <MappingFragment StoreEntitySet="collection_type">
-                <ScalarProperty Name="collection_type_title" ColumnName="collection_type_title" />
-                <ScalarProperty Name="collection_type_id" ColumnName="collection_type_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="collections_detail">
-            <EntityTypeMapping TypeName="travel_cat_v1Model.collections_detail">
-              <MappingFragment StoreEntitySet="collections_detail">
-                <ScalarProperty Name="collection_type_id" ColumnName="collection_type_id" />
-                <ScalarProperty Name="privacy" ColumnName="privacy" />
-                <ScalarProperty Name="tourism_id" ColumnName="tourism_id" />
-                <ScalarProperty Name="member_id" ColumnName="member_id" />
-                <ScalarProperty Name="collection_id" ColumnName="collection_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="issue">
-            <EntityTypeMapping TypeName="travel_cat_v1Model.issue">
-              <MappingFragment StoreEntitySet="issue">
-                <ScalarProperty Name="problem_id" ColumnName="problem_id" />
-                <ScalarProperty Name="resolve_date" ColumnName="resolve_date" />
-                <ScalarProperty Name="issue_status" ColumnName="issue_status" />
-                <ScalarProperty Name="issue_result" ColumnName="issue_result" />
-                <ScalarProperty Name="issue_content" ColumnName="issue_content" />
-                <ScalarProperty Name="report_date" ColumnName="report_date" />
-                <ScalarProperty Name="issue_id" ColumnName="issue_id" />
-                <ScalarProperty Name="admin_id" ColumnName="admin_id" />
-                <ScalarProperty Name="member_id" ColumnName="member_id" />
-                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -14,6 +14,7 @@ namespace TravelCat.ViewModels
         public List<hotel> hotel { get; set; }
         public List<restaurant> restaurant { get; set; }
         public List<spot> spot { get; set; }
+        public IPagedList<spot> show_spot { get; set; }
         public List<member_profile> member { get; set; }
         public List<comment> comment { get; set; }
         public List<collections_detail> collections_detail { get; set; }
@@ -24,8 +25,11 @@ namespace TravelCat.ViewModels
     {
         public string id { get; set; }
         public string title { get; set; }
+        public string city { get; set; }
+        public string district { get; set; }
         public string intro { get; set; }
         public string rating { get; set; }
+        //public int count { get; set; }
     }
 
 }
