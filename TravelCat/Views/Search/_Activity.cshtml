@@ -34,7 +34,7 @@ else
                 <h3 class="col-md-11 font-weight-bold border-bottom pb-2">@Html.ActionLink(item.title, "Details", "web_activities", new { id = item.id }, null)</h3>
                 <div class="row">
                     <div class="col-md-12 col-sm-12 font-weight-bold">@Model.activity.Where(s => s.activity_id == item.id).FirstOrDefault().city @Model.activity.Where(s => s.activity_id == item.id).FirstOrDefault().district</div>
-                    <div class="col-md-12 col-sm-12 intro_content">@item.intro</div>
+                    <div class="col-md-12 col-sm-12 intro_content">@Model.activity.Where(s => s.activity_id == item.id).FirstOrDefault().activity_intro</div>
                     @if (Model.comment.Where(s => s.tourism_id == item.id).Count() > 0) { num = Model.comment.Where(s => s.tourism_id == item.id).Count(); }
                     <div class="col-md-6 col-sm-12">有 @num 則評論</div>
                     <div class="col-md-4 col-sm-12">
