@@ -168,29 +168,39 @@ namespace TravelCat.Controllers
       }
 
       //新版本
-      //var new_rating_result =db.hotel.;
+      model.result_ratings = db.hotel.Select(x =>
+      new result_rating
+      {
+        id = x.hotel_id,
+        title = x.hotel_title,
+        intro = x.hotel_intro,
+        city = x.city,
+        district = x.district,
+        rating = (db.comment.Any(t => t.tourism_id.Equals(x.hotel_id))) ?
+        db.comment.Where(t => t.tourism_id.Equals(x.hotel_id)).Average(r=>r.comment_rating).ToString() : "0",
+      }).ToList();
 
-      //有評論分數的
-      var rating_result = (from b in db.comment
-                           group b by b.tourism_id into g
-                           orderby g.Average(s => s.comment_rating)
-                           select new result_rating { id = g.Key, rating = g.Average(s => s.comment_rating).ToString() }).ToList();
-      //沒有評論分數的
-      var hotel_null_result = (from a in db.hotel
-                               join b in db.comment on a.hotel_id equals b.tourism_id into x
-                               from b in x.DefaultIfEmpty()
-                               where b.tourism_id == null
-                               select new result_rating { id = a.hotel_id, rating = b.tourism_id }).ToList();
-      List<result_rating> result = rating_result.Union(hotel_null_result).OrderByDescending(s => s.rating).ToList();
+      ////有評論分數的
+      //var rating_result = (from b in db.comment
+      //                     group b by b.tourism_id into g
+      //                     orderby g.Average(s => s.comment_rating)
+      //                     select new result_rating { id = g.Key, rating = g.Average(s => s.comment_rating).ToString() }).ToList();
+      ////沒有評論分數的
+      //var hotel_null_result = (from a in db.hotel
+      //                         join b in db.comment on a.hotel_id equals b.tourism_id into x
+      //                         from b in x.DefaultIfEmpty()
+      //                         where b.tourism_id == null
+      //                         select new result_rating { id = a.hotel_id, rating = b.tourism_id }).ToList();
+      //List<result_rating> result = rating_result.Union(hotel_null_result).OrderByDescending(s => s.rating).ToList();
 
-      model.result_ratings = model.hotel.Join(result, a => a.hotel_id, b => b.id,
-                                                              (a, b) => new result_rating
-                                                              {
-                                                                id = a.hotel_id,
-                                                                title = a.hotel_title,
-                                                                intro = a.hotel_intro,
-                                                                rating = b.rating
-                                                              }).ToList();
+      //model.result_ratings = model.hotel.Join(result, a => a.hotel_id, b => b.id,
+      //                                                        (a, b) => new result_rating
+      //                                                        {
+      //                                                          id = a.hotel_id,
+      //                                                          title = a.hotel_title,
+      //                                                          intro = a.hotel_intro,
+      //                                                          rating = b.rating
+      //                                                        }).ToList();
 
       //找評分
       if (!String.IsNullOrEmpty(comment_rating))
