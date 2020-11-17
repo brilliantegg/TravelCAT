@@ -116,6 +116,9 @@ namespace TravelCat.Controllers
                     //    Console.WriteLine(exceptionMessage.ToString());
 
                     //}
+                      
+                      
+                      
 
                     if (String.IsNullOrEmpty(rt[i].Picture1) != true)
                     {

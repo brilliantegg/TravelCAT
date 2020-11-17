@@ -31,6 +31,8 @@ namespace TravelCat.Controllers
                 message_emoji_details = db.message_emoji_details.Where(m => m.tourism_id == tourismId).ToList(),
                 member_profile = db.member_profile.ToList(),
                 member = db.member.ToList(),
+                
+                
             };
             string firstChar = tourismId.Substring(0, 1);            
             switch (firstChar)
